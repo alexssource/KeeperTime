@@ -10,13 +10,13 @@
 
 #include <string>
 #include <stdlib.h>
+#include "BaseRecord.h"
 
 using namespace std;
 
-class Comment
+class Comment: public BaseRecord
 {
 protected:
-    int id;     // readonly field
     User user;
     Comment* parent;
     string comment;
@@ -24,7 +24,6 @@ protected:
     
 public:
     // Properties:
-    int GetId() const { return this->id; }
     void SetUser(User user) { this->user = user; }
     User GetUser() const { return this->user; }
     void SetParent(Comment* parent) { this->parent = parent; }
@@ -50,8 +49,13 @@ public:
      * @param comment - new user's comment
      * @param datetime - the instance of DateTime object
      */
-    Comment(User user, Comment* parent = NULL, string comment, DateTime datetime);
+    Comment(int id);
     
+    
+    /**
+     * Virtual destructor
+     */
+    virtual ~Comment();
     
     
     /**
