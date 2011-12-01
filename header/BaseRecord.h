@@ -35,9 +35,9 @@ public:
      * @param id - the identifier of record (default is 0 for create a new record)
      * @return result - true if result is success
      */
-    virtual bool Save(int id = 0)
+    virtual bool Save(const SqlConnector& conn)
     {
-        return (id == 0) ? this->CreateRecord() : this->UpdateRecord(id);
+        return (this->id == 0) ? this->CreateRecord(conn) : this->UpdateRecord(conn);
     }
     
     
@@ -46,7 +46,7 @@ public:
      * @param id - the identifier of record
      * @return record - finding record
      */
-    virtual BaseRecord Retrieve(int id) = 0;
+    virtual BaseRecord Retrieve(SqlConnector conn, int id) = 0;
     
     
     /**
@@ -54,14 +54,14 @@ public:
      * @param id - the identifier of record
      * @return result - the result of update operation
      */
-    virtual bool UpdateRecord(int id) = 0;
+    virtual bool UpdateRecord(SqlConnector conn) = 0;
     
     
     /**
      * Creates a new record
      * @return result - the result of create operation
      */
-    virtual bool CreateRecord() = 0;
+    virtual bool CreateRecord(SqlConnector conn) = 0;
 };
 
 #endif	/* BASERECORD_H */

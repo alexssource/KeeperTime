@@ -57,21 +57,6 @@ public:
      */
     virtual ~Comment();
     
-    
-    /**
-     * Virtual Abstract method for create new comment and sumbit it to database
-     * @param parent_id - the parent of current comment, default is 0
-     * @return bool - true if success
-     */
-    virtual bool CreateComment(int parent_id = 0) = 0;
-    
-    
-    /**
-     * Virtual Abstract method for retrieve the comment from database by its id
-     * @param comment_id - the identifier of comment
-     * @return Comment - the instance of Comment
-     */
-    virtual Comment RetrieveComment(int comment_id) = 0;
 };
 
 #endif	/* COMMENT_H */
