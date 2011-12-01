@@ -23,6 +23,11 @@ public:
     virtual CommentStatus Retrieve(int id);
     virtual bool UpdateRecord();
     virtual bool CreateRecord();
+    
+    
+    // Properties:
+    Status GetStatus() { return this->status; }
+    void SetStatus(Status status) { this->status = status; }
 };
 
 #endif	/* COMMENTSTATUS_H */

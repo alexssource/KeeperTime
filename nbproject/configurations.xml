@@ -6,6 +6,12 @@
                    projectFiles="true">
       <itemPath>header/BaseRecord.h</itemPath>
       <itemPath>header/Comment.h</itemPath>
+      <itemPath>header/CommentNews.h</itemPath>
+      <itemPath>header/CommentReport.h</itemPath>
+      <itemPath>header/CommentStatus.h</itemPath>
+      <itemPath>header/CommentTask.h</itemPath>
+      <itemPath>header/Group.h</itemPath>
+      <itemPath>header/User.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -15,7 +21,13 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>resource/BaseRecord.cpp</itemPath>
       <itemPath>source/Comment.cpp</itemPath>
+      <itemPath>source/CommentNews.cpp</itemPath>
+      <itemPath>source/CommentReport.cpp</itemPath>
+      <itemPath>source/CommentStatus.cpp</itemPath>
+      <itemPath>source/CommentTask.cpp</itemPath>
+      <itemPath>source/Group.cpp</itemPath>
       <itemPath>source/main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"

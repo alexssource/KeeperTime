@@ -4,18 +4,18 @@ CommentStatus::CommentStatus(): Comment() { }
 CommentStatus::CommentStatus(int id): Comment(id) { }
 CommentStatus::~CommentStatus() { }
 
-CommentStatus CommentStatus::Retrieve(int id)
+CommentStatus CommentStatus::Retrieve(SqlConnector conn)
 {
     std::cout << "Cap for Retrieve" << std::endl;
     return this;
 }
 
-bool CommentStatus::CreateRecord()
+bool CommentStatus::CreateRecord(SqlConnector conn)
 {
     std::cout << "Cap for CreateRecord" << std::endl;
 }
 
-bool CommentStatus::UpdateRecord()
+bool CommentStatus::UpdateRecord(SqlConnector conn)
 {
     std::cout << "Cap for UpdateRecord" << std::endl;
 }

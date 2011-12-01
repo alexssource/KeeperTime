@@ -23,6 +23,11 @@ public:
     virtual CommentReport Retrieve(int id);
     virtual bool UpdateRecord();
     virtual bool CreateRecord();
+    
+    
+    // Properties:
+    Report GetReport() { return this->report; }
+    void SetReport(Report report) { this->report = report; }
 };
 
 #endif	/* COMMENTREPORT_H */
