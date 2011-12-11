@@ -8,14 +8,29 @@
 /**
  * Console Presentation
  */
+
 #include <iostream>
+#include "../header/ERROR_CODES.h"
+#include "../header/SqlConnector.h"
 
 using namespace std;
 
 int main()
 {
+    SqlConnector* SqlConn;
+    
+    try {
+        SqlConn = new SqlConnector("localhost", "keepertime", "KeeperTime", "KeeperTime");
+    }
+    catch(string e) {
+        cout << e << endl;
+        delete SqlConn;
+        return ERROR_MYSQL_CONNECT;
+    }
+    
     cout << "Hi, its console!" << endl;
     
+    delete SqlConn;
     return 0;
 }
 

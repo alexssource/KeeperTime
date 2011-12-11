@@ -48,6 +48,7 @@
 MKDIR=mkdir
 CP=cp
 CCADMIN=CCadmin
+CXXFLAGS=-I/usr/include/mysql -I/usr/local/include/mysql++
 
 
 # build

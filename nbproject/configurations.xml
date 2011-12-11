@@ -10,8 +10,20 @@
       <itemPath>header/CommentReport.h</itemPath>
       <itemPath>header/CommentStatus.h</itemPath>
       <itemPath>header/CommentTask.h</itemPath>
+      <itemPath>header/DateTime.h</itemPath>
+      <itemPath>header/ERROR_CODES.h</itemPath>
+      <itemPath>header/Exception.h</itemPath>
       <itemPath>header/Group.h</itemPath>
+      <itemPath>header/News.h</itemPath>
+      <itemPath>header/Project.h</itemPath>
+      <itemPath>header/Report.h</itemPath>
+      <itemPath>header/SqlConnector.h</itemPath>
+      <itemPath>header/Status.h</itemPath>
+      <itemPath>header/Task.h</itemPath>
+      <itemPath>header/Team.h</itemPath>
       <itemPath>header/User.h</itemPath>
+      <itemPath>header/Wages.h</itemPath>
+      <itemPath>header/WorkTime.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -27,7 +39,19 @@
       <itemPath>source/CommentReport.cpp</itemPath>
       <itemPath>source/CommentStatus.cpp</itemPath>
       <itemPath>source/CommentTask.cpp</itemPath>
+      <itemPath>source/DateTime.cpp</itemPath>
+      <itemPath>source/Exception.cpp</itemPath>
       <itemPath>source/Group.cpp</itemPath>
+      <itemPath>source/News.cpp</itemPath>
+      <itemPath>source/Project.cpp</itemPath>
+      <itemPath>source/Report.cpp</itemPath>
+      <itemPath>source/SqlConnector.cpp</itemPath>
+      <itemPath>source/Status.cpp</itemPath>
+      <itemPath>source/Task.cpp</itemPath>
+      <itemPath>source/Team.cpp</itemPath>
+      <itemPath>source/User.cpp</itemPath>
+      <itemPath>source/Wages.cpp</itemPath>
+      <itemPath>source/WorkTime.cpp</itemPath>
       <itemPath>source/main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -53,6 +77,26 @@
         <modules>core gui</modules>
       </qt>
       <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>/usr/local/include</pElem>
+            <pElem>/usr/lib</pElem>
+            <pElem>/usr/include</pElem>
+            <pElem>/usr/local/lib</pElem>
+            <pElem>/usr/lib32</pElem>
+            <pElem>/usr/share</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <linkerDynSerch>
+            <pElem>/usr/local/lib</pElem>
+            <pElem>/usr/include</pElem>
+            <pElem>/usr/lib</pElem>
+          </linkerDynSerch>
+          <linkerLibItems>
+            <linkerLibLibItem>mysqlclient</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
     </conf>
     <conf name="Release" type="4">
