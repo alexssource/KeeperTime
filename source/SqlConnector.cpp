@@ -13,7 +13,7 @@ SqlConnector::SqlConnector(string host, string user, string pass, string databas
     if(!this->Connect()) {
         string error = "MySQL ERROR: ";
         error.append(mysql_error(&this->connection));
-        throw new Exception(ERROR_MYSQL_CONNECT, ERROR_MYSQL_TYPE, error);
+        throw new Exception(ERROR_MYSQL_CONNECT, ERROR_TYPE_MYSQL, error);
     }
 }
 
@@ -36,4 +36,13 @@ bool SqlConnector::Connect()
 
     return mysql_real_connect(&this->connection, this->host.c_str(), this->user.c_str(), 
             this->pass.c_str(), this->database.c_str(), 0, NULL, 0);
+}
+
+
+MYSQL_RES* SqlConnector::Query(string sql, MYSQL_QUERY_TYPE type)
+{
+    int result;
+    
+    result = mysql_query(&this->connection, sql.c_str());
+    if(result != 0) throw new Exception();
 }

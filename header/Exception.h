@@ -84,5 +84,18 @@ public:
     string Message() const { return this->message; }
 };
 
-#endif	/* EXCEPTION_H */
 
+class MySQLRecordNotFound: public Exception
+{
+    MySQLRecordNotFound(): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, "No Records Found") { }
+    virtual ~MySQLRecordNotFound() { };
+};
+
+
+class MySQLQueryException: public Exception
+{
+    MySQLQueryException(string sql): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, 
+        "Error Send Query: " + sql) { };
+};
+
+#endif	/* EXCEPTION_H */
