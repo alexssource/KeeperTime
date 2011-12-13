@@ -1,9 +1,13 @@
 #include "../header/Exception.h"
 
-Exception::Exception(int c, string msg): code(c), message(msg) { }
-Exception::Exception(int c, string t, string msg): code(c), message(msg), type(t) { }
+Exception::Exception(int c, string msg) { this->Initialize(c, msg); }
 
-const char* what() const throw()
+Exception::Exception(int c, string t, string msg) { this->Initialize(c, msg, t); }
+
+const char* Exception::what() const throw()
 {
-    return "_" + code + ". " + type + ": " + message;
+    string result = "_";
+
+    result += this->Code() + ". " + this->Type() + ": " + this->Message();
+    return result.c_str();
 }

@@ -13,7 +13,7 @@ SqlConnector::SqlConnector(string host, string user, string pass, string databas
     if(!this->Connect()) {
         string error = "MySQL ERROR: ";
         error.append(mysql_error(&this->connection));
-        throw error;
+        throw new Exception(ERROR_MYSQL_CONNECT, ERROR_MYSQL_TYPE, error);
     }
 }
 

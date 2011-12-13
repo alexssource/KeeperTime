@@ -10,6 +10,7 @@
 
 #include <string>
 #include <exception>
+#include "ERROR_CODES.h"
 
 using namespace std;
 
@@ -19,6 +20,13 @@ private:
     int code;
     string type;
     string message;
+    
+    void Initialize(int c, string msg, string t = "")
+    {
+        this->code = c;
+        this->message = msg;
+        this->type = t;
+    }
     
 public:
     /**
@@ -43,7 +51,7 @@ public:
     /**
      * Remove the instance of current exception
      */
-    virtual ~Exception() throw();
+    virtual ~Exception() throw() { };
     
     
     /**

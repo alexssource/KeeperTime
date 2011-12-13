@@ -12,6 +12,7 @@
 #include <string>
 #include "mysql/mysql.h"
 #include "ERROR_CODES.h"
+#include "Exception.h"
 
 using namespace std;
 
@@ -23,8 +24,6 @@ private:
     string pass;
     string host;
     string database;
-    string table;
-    string query;
     
 protected:
     bool Connect();
@@ -33,13 +32,7 @@ protected:
 public:
     SqlConnector(string host, string user, string pass, string database);
     virtual ~SqlConnector();
-    
-    
-    // Properties
-    string GetTable() const { return this->table; }
-    void SetTable(string t) { this->table = t; }
-    string GetQuery() const { return this->query; }
-    void SetQuery(string sql) { this->query = sql; }
+    MYSQL_RES* Query(string sql, MYSQL_QUERY_TYPE type);
 };
 
 #endif	/* SQLCONNECTOR_H */

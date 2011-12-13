@@ -22,10 +22,10 @@ int main()
     try {
         SqlConn = new SqlConnector("localhost", "keepertime", "KeeperTime", "KeeperTime");
     }
-    catch(string e) {
-        cout << e << endl;
+    catch(Exception* e) {
+        cout << e->what() << endl;
         delete SqlConn;
-        return ERROR_MYSQL_CONNECT;
+        return e->Code();
     }
     
     cout << "Hi, its console!" << endl;
