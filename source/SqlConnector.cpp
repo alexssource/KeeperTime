@@ -42,7 +42,16 @@ bool SqlConnector::Connect()
 MYSQL_RES* SqlConnector::Query(string sql, MYSQL_QUERY_TYPE type)
 {
     int result;
+    MYSQL_RES* res = NULL; 
     
     result = mysql_query(&this->connection, sql.c_str());
-    if(result != 0) throw new Exception();
+    if(result != 0) throw new MySQLQueryException(sql);
+    
+    res = mysql_use_result(&this->connection);
+    
+    if(!res && type == SELECT) {
+        throw new MySQLRecordNotFound();
+    }
+    
+    return res;
 }

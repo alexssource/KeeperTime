@@ -10,6 +10,7 @@
  */
 
 #include <iostream>
+#include <string>
 #include "../header/ERROR_CODES.h"
 #include "../header/SqlConnector.h"
 
@@ -17,6 +18,9 @@ using namespace std;
 
 int main()
 {
+    string sql;
+    MYSQL_RES* mysql_result = NULL;
+    MYSQL_ROW sqlrow;
     SqlConnector* SqlConn;
     
     try {
@@ -26,6 +30,26 @@ int main()
         cout << e->what() << endl;
         delete SqlConn;
         return e->Code();
+    }
+    
+    sql = "SELECT * FROM `Group`";
+    
+    try {
+        mysql_result = SqlConn->Query(sql, SELECT);
+    }
+    
+    catch(MySQLRecordNotFound* rnf) {
+        cout << rnf->what() << endl;
+    }
+    
+    /*
+    while(sqlrow = mysql_fetch_row(mysql_result)) {
+        cout << sqlrow << " ";
+    } */
+    
+    MYSQL* conn = &(SqlConn->GetConnectoin());
+    for(int count = 0; count < mysql_field_count(conn); count++) {
+        cout << sqlrow[count] << " ";
     }
     
     cout << "Hi, its console!" << endl;

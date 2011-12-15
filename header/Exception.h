@@ -87,15 +87,26 @@ public:
 
 class MySQLRecordNotFound: public Exception
 {
+public:
     MySQLRecordNotFound(): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, "No Records Found") { }
-    virtual ~MySQLRecordNotFound() { };
+    virtual ~MySQLRecordNotFound() throw() { };
+};
+
+
+class MySQLNoUpdateRecord: public Exception
+{
+public:
+    MySQLNoUpdateRecord(): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, "No Updated Records Found") { }
+    virtual ~MySQLNoUpdateRecord() throw() { };
 };
 
 
 class MySQLQueryException: public Exception
 {
+public:
     MySQLQueryException(string sql): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, 
         "Error Send Query: " + sql) { };
+        virtual ~MySQLQueryException() throw() { }
 };
 
 #endif	/* EXCEPTION_H */

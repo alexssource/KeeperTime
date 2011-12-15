@@ -73,9 +73,9 @@ public:
     
     /**
      * Creates a new record
-     * @return result - the result of create operation
+     * @return <int> id - the identifier of inserted record
      */
-    virtual bool CreateRecord(SqlConnector conn);
+    virtual int CreateRecord(SqlConnector conn);
 };
 
 #endif	/* BASERECORD_H */
