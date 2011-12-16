@@ -55,3 +55,20 @@ MYSQL_RES* SqlConnector::Query(string sql, MYSQL_QUERY_TYPE type)
     
     return res;
 }
+
+
+int SqlConnector::GetLastInsertedId() const
+{
+    MYSQL_RES* res;
+    MYSQL_ROW sqlrow;
+    
+    try {
+        res = this->Query("SELECT LAST_INSERT_ID()", SELECT);
+    }
+    catch(MySQLQueryException* qexc) {
+        std::cout << qexc->what() << std::endl;
+    }
+    
+    sqlrow = mysql_fetch_row(res);
+    return (int)sqlrow;
+}

@@ -34,6 +34,7 @@ public:
     virtual ~SqlConnector();
     MYSQL_RES* Query(string sql, MYSQL_QUERY_TYPE type);
     MYSQL GetConnection() const { return this->connection; }
+    int GetLastInsertedId() const;
 };
 
 #endif	/* SQLCONNECTOR_H */

@@ -9,6 +9,9 @@
 #define	BASERECORD_H
 
 #include "SqlConnector.h"
+#include <vector>
+
+using namespace std;
 
 class BaseRecord
 {
@@ -25,16 +28,65 @@ protected:
      */
     string table;
     
+    /**
+     * The pointer to sql-connector for calling to database
+     */
+    const SqlConnector* const connector;
     
-    void Initialize(string table, int id = 0)
+    /**
+     * Initialize the begins parameters
+     * @param table - the name of table
+     * @param id - record id
+     */
+    void Initialize(const SqlConnector* const conn, string table, int id = 0)
     {
+        this->connector = conn;
         this->table = table;
         this->id = id;
     }
     
+    
+    /**
+     * Created the new record and assign them the unique identifier
+     * @return bool result
+     */
+    virtual bool Create()
+    {
+        if(this->CreateRecord()) {
+            this->id = this->connector->GetLastInsertedId();
+            return true;
+        }
+        else return false;
+    }
+    
+
+    /**
+     * Updates the current record by its identifier
+     * @param id - the identifier of record
+     * @return result - the result of update operation
+     */
+    virtual bool UpdateRecord() = 0;
+    
+    
+    /**
+     * Creates a new record
+     * @return <int> id - the identifier of inserted record
+     */
+    virtual int CreateRecord() = 0;
+    
+    
+    
+    /**
+     * Retrieves the rows from current table with limit
+     * @param where - the string of condition
+     * @param limit - the string of limit
+     * @return vector<MYSQL_ROW> - the vector of table rows
+     */
+    virtual vector<MYSQL_ROW> RetrieveTableRows(string where = "", string limit = "");
+    
 public:
-    BaseRecord(string table) { this->Initialize(table); }
-    BaseRecord(string table, int id) { this->Initialize(table, id); }
+    BaseRecord(const SqlConnector* const conn, string table) { this->Initialize(conn, table); }
+    BaseRecord(const SqlConnector* const conn, string table, int id) { this->Initialize(conn, table, id); }
     virtual ~BaseRecord() { }
     
     /**
@@ -49,9 +101,9 @@ public:
      * @param id - the identifier of record (default is 0 for create a new record)
      * @return result - true if result is success
      */
-    virtual bool Save(const SqlConnector& conn)
+    virtual bool Save()
     {
-        return (this->id == 0) ? this->CreateRecord(conn) : this->UpdateRecord(conn);
+        return (this->id == 0) ? this->Create() : this->UpdateRecord();
     }
     
     
@@ -60,22 +112,7 @@ public:
      * @param id - the identifier of record
      * @return record - finding record
      */
-    virtual BaseRecord Retrieve(SqlConnector conn, int id);
-    
-    
-    /**
-     * Updates the current record by its identifier
-     * @param id - the identifier of record
-     * @return result - the result of update operation
-     */
-    virtual bool UpdateRecord(SqlConnector conn);
-    
-    
-    /**
-     * Creates a new record
-     * @return <int> id - the identifier of inserted record
-     */
-    virtual int CreateRecord(SqlConnector conn);
+    virtual BaseRecord Retrieve(int id);
 };
 
 #endif	/* BASERECORD_H */

@@ -42,14 +42,15 @@ int main()
         cout << rnf->what() << endl;
     }
     
-    /*
-    while(sqlrow = mysql_fetch_row(mysql_result)) {
-        cout << sqlrow << " ";
-    } */
+    catch(MySQLQueryException* qexc) {
+        cout << qexc->what() << endl;
+    }
     
-    MYSQL* conn = &(SqlConn->GetConnectoin());
-    for(int count = 0; count < mysql_field_count(conn); count++) {
-        cout << sqlrow[count] << " ";
+    while(sqlrow = mysql_fetch_row(mysql_result)) {
+        cout << sqlrow[0] << ": ";
+        cout << sqlrow[1] << "\t";
+        cout << sqlrow[2] << " ";
+        cout << sqlrow[3] << endl;
     }
     
     cout << "Hi, its console!" << endl;
