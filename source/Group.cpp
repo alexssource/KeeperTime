@@ -7,8 +7,8 @@
 
 #include "../header/Group.h"
 
-Group::Group(SqlConnector* const conn): BaseRecord(conn, "Group") { this->Initialize(); }
-Group::Group(SqlConnector* conn, int id): BaseRecord(conn, "Group", id) { this->Initialize(); this->Retrieve(); }
+Group::Group(SqlConnector* const conn): BaseRecord(conn, "Group") { }
+Group::Group(SqlConnector* conn, int id): BaseRecord(conn, "Group", id) { }
 
 Group::Group(const Group& orig): BaseRecord(orig.connector, orig.table)
 {
@@ -79,6 +79,12 @@ bool Group::DeleteRecord() const
     return true;
 }
 
+
+void Group::InitializeRecord()
+{
+    this->is_admin = false;
+    this->is_manager= false;
+}
 
 bool Group::Retrieve()
 {

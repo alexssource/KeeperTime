@@ -20,11 +20,6 @@ private:
     bool is_manager;
     bool is_admin;
     
-    void Initialize() {
-        this->is_admin = false;
-        this->is_manager= false;
-    }
-    
 public:
     // Constructors and Destructors
     Group(SqlConnector* const conn);
@@ -49,6 +44,7 @@ protected:
     virtual bool UpdateRecord() const;
     virtual bool CreateRecord() const;
     virtual bool DeleteRecord() const;
+    virtual void InitializeRecord();
     
 public:
     virtual bool Retrieve();

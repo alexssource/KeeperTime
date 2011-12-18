@@ -106,9 +106,25 @@ protected:
         this->id = 0;
     }
     
+    
+    /**
+     * Used in the derived class for in begin initialization
+     * (called in current's class constructor)
+     */
+    virtual void InitializeRecord() { };
+    
 public:
-    BaseRecord(SqlConnector* const conn, string table): connector(conn) { this->Initialize(table); }
-    BaseRecord(SqlConnector* const conn, string table, int id): connector(conn) { this->Initialize(table, id); }
+    BaseRecord(SqlConnector* const conn, string table): connector(conn) {
+        this->Initialize(table);
+        this->InitializeRecord();
+    }
+    
+    BaseRecord(SqlConnector* const conn, string table, int id): connector(conn) {
+        this->Initialize(table, id);
+        this->InitializeRecord();
+        this->Retrieve();
+    }
+    
     virtual ~BaseRecord() { }
     
     /**
