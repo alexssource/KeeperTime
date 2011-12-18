@@ -1,16 +1,24 @@
 #include "../header/BaseRecord.h"
 
-vector<MYSQL_ROW> BaseRecord::RetrieveTableRows(string where = "", string limit = "")
+vector<string *> BaseRecord::RetrieveTableRows(string where, string limit)
 {
     MYSQL_RES* res;
     MYSQL_ROW sqlrow;
     string sql = "SELECT * FROM `" + this->table + "` " + where + " " + limit;
-    vector<MYSQL_ROW> records = new vector<MYSQL_ROW>();
-    
-    res = this->connector->Query(sql, SELECT);
-    while(sqlrow = mysql_fetch_row(res)) {
-        records.push_back(sqlrow);
+    vector<string *> records;
+
+    try {
+        res = this->connector->Query(sql, SELECT);
     }
-    
+    catch(Exception e) {
+        std::cout << "Exception: " << e.what() << endl;
+    }
+    while(sqlrow = mysql_fetch_row(res)) {
+        string* srow = new string[sizeof(sqlrow)];
+        for(int i = 0; i < sizeof(sqlrow); i++) {
+            srow[i] = (string)sqlrow[i];
+        }
+        records.push_back(srow);
+    }
     return records;
 }

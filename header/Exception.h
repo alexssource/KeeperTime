@@ -96,16 +96,29 @@ public:
 class MySQLNoUpdateRecord: public Exception
 {
 public:
-    MySQLNoUpdateRecord(): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, "No Updated Records Found") { }
+    MySQLNoUpdateRecord(string mysql_error = ""): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, "No Updated Records Found: " + mysql_error) { }
     virtual ~MySQLNoUpdateRecord() throw() { };
 };
 
+class MySQLNoInsertRecord: public Exception
+{
+public:
+    MySQLNoInsertRecord(string mysql_error = ""): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, "Can\'t insert the records: " + mysql_error) { }
+    virtual ~MySQLNoInsertRecord() throw() { }
+};
+
+class MySQLNoDeleteRecord: public Exception
+{
+public:
+    MySQLNoDeleteRecord(string mysql_error = ""): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, "Can\'t delete the record: " + mysql_error) { }
+    virtual ~MySQLNoDeleteRecord() throw() { }
+};
 
 class MySQLQueryException: public Exception
 {
 public:
-    MySQLQueryException(string sql): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, 
-        "Error Send Query: " + sql) { };
+    MySQLQueryException(string sql, string mysql_say = ""): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, 
+        "Error Send Query: " + sql + "\nMysql Say: " + mysql_say) { };
         virtual ~MySQLQueryException() throw() { }
 };
 

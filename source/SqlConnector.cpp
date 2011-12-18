@@ -45,19 +45,35 @@ MYSQL_RES* SqlConnector::Query(string sql, MYSQL_QUERY_TYPE type)
     MYSQL_RES* res = NULL; 
     
     result = mysql_query(&this->connection, sql.c_str());
-    if(result != 0) throw new MySQLQueryException(sql);
+    if(result != 0) throw new MySQLQueryException(sql, mysql_error(&this->connection));
     
-    res = mysql_use_result(&this->connection);
+    res = mysql_store_result(&this->connection);
     
     if(!res && type == SELECT) {
         throw new MySQLRecordNotFound();
+        return res;
+    }
+    
+    if(!mysql_affected_rows(&this->connection)) {
+        switch(type) {
+            case UPDATE:
+                throw new MySQLNoUpdateRecord(mysql_error(&this->connection));
+                break;
+                
+            case INSERT:
+                throw new MySQLNoInsertRecord(mysql_error(&this->connection));
+                break;
+                
+            case DELETE:
+                throw new MySQLNoDeleteRecord(mysql_error(&this->connection));
+                break;
+        }
     }
     
     return res;
 }
 
-
-int SqlConnector::GetLastInsertedId() const
+int SqlConnector::GetLastInsertedId()
 {
     MYSQL_RES* res;
     MYSQL_ROW sqlrow;
@@ -70,5 +86,5 @@ int SqlConnector::GetLastInsertedId() const
     }
     
     sqlrow = mysql_fetch_row(res);
-    return (int)sqlrow;
+    return (int)sqlrow[0];
 }

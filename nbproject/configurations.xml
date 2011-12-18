@@ -65,6 +65,8 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>KeeperTime-Makefile.mk</itemPath>
     </logicalFolder>
+    <itemPath>source/NumberToStringConverter.cpp</itemPath>
+    <itemPath>header/NumberToStringConverter.h</itemPath>
   </logicalFolder>
   <projectmakefile>KeeperTime-Makefile.mk</projectmakefile>
   <confs>

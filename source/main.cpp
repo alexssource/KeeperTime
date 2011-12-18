@@ -13,14 +13,15 @@
 #include <string>
 #include "../header/ERROR_CODES.h"
 #include "../header/SqlConnector.h"
+#include "../header/Group.h"
+#include "../header/BaseRecord.h"
+#include <vector>
 
 using namespace std;
 
 int main()
 {
-    string sql;
-    MYSQL_RES* mysql_result = NULL;
-    MYSQL_ROW sqlrow;
+    vector<BaseRecord *> groups;
     SqlConnector* SqlConn;
     
     try {
@@ -32,27 +33,12 @@ int main()
         return e->Code();
     }
     
-    sql = "SELECT * FROM `Group`";
-    
-    try {
-        mysql_result = SqlConn->Query(sql, SELECT);
+    Group* group = new Group(SqlConn);
+    groups = group->RetrieveTableRecords();
+    for(int i = 0; i < groups.size(); i++) {
+        cout << "Group: " << ((Group*)groups[i])->Name() << endl;
     }
-    
-    catch(MySQLRecordNotFound* rnf) {
-        cout << rnf->what() << endl;
-    }
-    
-    catch(MySQLQueryException* qexc) {
-        cout << qexc->what() << endl;
-    }
-    
-    while(sqlrow = mysql_fetch_row(mysql_result)) {
-        cout << sqlrow[0] << ": ";
-        cout << sqlrow[1] << "\t";
-        cout << sqlrow[2] << " ";
-        cout << sqlrow[3] << endl;
-    }
-    
+  
     cout << "Hi, its console!" << endl;
     
     delete SqlConn;
@@ -76,3 +62,21 @@ int main(int argc, char *argv[]) {
     return app.exec();
 }
 */
+
+
+
+
+
+/** Testing Classes
+ 
+    group = new Group(SqlConn);
+    groups = group->RetrieveTableRows();
+    
+
+    for(int i = 0; i < groups.size(); i++) {
+        cout << groups[i][0] << ": " << groups[i][1] << " " 
+                << groups[i][2] << " " << groups[i][3] << endl;
+    }    
+    delete group;
+ 
+ */

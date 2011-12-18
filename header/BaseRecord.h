@@ -8,8 +8,11 @@
 #ifndef BASERECORD_H
 #define	BASERECORD_H
 
-#include "SqlConnector.h"
+#include <stdlib.h>
+#include <string>
 #include <vector>
+#include "SqlConnector.h"
+#include "NumberToStringConverter.h"
 
 using namespace std;
 
@@ -31,16 +34,15 @@ protected:
     /**
      * The pointer to sql-connector for calling to database
      */
-    const SqlConnector* const connector;
+    SqlConnector* const connector;      // константный указатель на не константные данные
     
     /**
      * Initialize the begins parameters
      * @param table - the name of table
      * @param id - record id
      */
-    void Initialize(const SqlConnector* const conn, string table, int id = 0)
+    void Initialize(string table, int id = 0)
     {
-        this->connector = conn;
         this->table = table;
         this->id = id;
     }
@@ -65,28 +67,48 @@ protected:
      * @param id - the identifier of record
      * @return result - the result of update operation
      */
-    virtual bool UpdateRecord() = 0;
+    virtual bool UpdateRecord() const { };
     
     
     /**
      * Creates a new record
-     * @return <int> id - the identifier of inserted record
+     * @return <bool> res - the result of insert record process
      */
-    virtual int CreateRecord() = 0;
-    
+    virtual bool CreateRecord() const { };
     
     
     /**
-     * Retrieves the rows from current table with limit
-     * @param where - the string of condition
-     * @param limit - the string of limit
-     * @return vector<MYSQL_ROW> - the vector of table rows
+     * Delete the current record from database
+     * @return <bool> res
      */
-    virtual vector<MYSQL_ROW> RetrieveTableRows(string where = "", string limit = "");
+    virtual bool DeleteRecord() const { }
+    
+    /**
+     * Retrieve the record from database by it's id
+     * All fields, which will be find in database must contain current object
+     */
+    virtual bool Retrieve() { };
+    
+    
+    /**
+     * Obtaining records from an arbitrary identifier
+     * @param id - the identifier of record
+     * @return BaseRecord* - pointer to result object
+     */
+    virtual BaseRecord* RetrieveRecord(int id) { };
+    
+    
+    /**
+     * Reset all field to their begin status
+     */
+    virtual void Reset() {
+        this->table = "";
+        this->id = 0;
+    }
     
 public:
-    BaseRecord(const SqlConnector* const conn, string table) { this->Initialize(conn, table); }
-    BaseRecord(const SqlConnector* const conn, string table, int id) { this->Initialize(conn, table, id); }
+    BaseRecord(SqlConnector* const conn, string table): connector(conn) { this->Initialize(table); }
+    BaseRecord(SqlConnector* const conn, string table, int id): connector(conn) { this->Initialize(table, id); }
     virtual ~BaseRecord() { }
     
     /**
@@ -108,11 +130,35 @@ public:
     
     
     /**
-     * Retrieve the record from database by it's id
-     * @param id - the identifier of record
-     * @return record - finding record
+     * Delete the current record
+     * Need to override the method DeleteRecord in the derived type
+     * @return <bool> result
      */
-    virtual BaseRecord Retrieve(int id);
+    virtual bool Delete()
+    {
+        bool result;
+        
+        result = this->DeleteRecord();
+        this->Reset();
+        return result;
+    }
+    
+    /**
+     * Retrieves the rows from current table with limit
+     * @param where - the string of condition
+     * @param limit - the string of limit
+     * @return vector<MYSQL_ROW> - the vector of table rows
+     */
+    virtual vector<string *> RetrieveTableRows(string where = "", string limit = "");
+    
+    
+    /**
+     * Retrieves the records from current table with various condition and limit
+     * @param where - the string of condition
+     * @param limit - the string of limit
+     * @return vector&lt;BaseRecord *&rt; - the vector of table rows
+     */
+    virtual vector<BaseRecord *> RetrieveTableRecords(string where = "", string limit = "") { };
 };
 
 #endif	/* BASERECORD_H */
