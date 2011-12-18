@@ -115,7 +115,7 @@ BaseRecord* Group::RetrieveRecord(int pid)
 }
 
 
-vector<BaseRecord *> Group::RetrieveTableRecords(string where, string limit)
+vector<BaseRecord *> Group::RetrieveTableRecords(string where, string limit) const
 {
     vector<BaseRecord *> groups;
     BaseRecord* baseRecord;

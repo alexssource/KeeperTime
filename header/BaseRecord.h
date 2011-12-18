@@ -149,7 +149,7 @@ public:
      * @param limit - the string of limit
      * @return vector<MYSQL_ROW> - the vector of table rows
      */
-    virtual vector<string *> RetrieveTableRows(string where = "", string limit = "");
+    virtual vector<string *> RetrieveTableRows(string where = "", string limit = "") const ;
     
     
     /**
@@ -158,7 +158,7 @@ public:
      * @param limit - the string of limit
      * @return vector&lt;BaseRecord *&rt; - the vector of table rows
      */
-    virtual vector<BaseRecord *> RetrieveTableRecords(string where = "", string limit = "") { };
+    virtual vector<BaseRecord *> RetrieveTableRecords(string where = "", string limit = "") const { };
 };
 
 #endif	/* BASERECORD_H */

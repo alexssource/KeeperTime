@@ -55,12 +55,12 @@ public:
     virtual BaseRecord* RetrieveRecord(int id);
     
     /**
-     * Static Retrieves the records from current table with various condition and limit
+     * Retrieves the records from current table with various condition and limit
      * @param where - the string of condition
      * @param limit - the string of limit
      * @return vector&lt;BaseRecord *&rt; - the vector of table rows
      */
-    virtual vector<BaseRecord *> RetrieveTableRecords(string where = "", string limit = "");
+    virtual vector<BaseRecord *> RetrieveTableRecords(string where = "", string limit = "") const;
 };
 
 #endif	/* GROUP_H */

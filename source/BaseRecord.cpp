@@ -1,6 +1,6 @@
 #include "../header/BaseRecord.h"
 
-vector<string *> BaseRecord::RetrieveTableRows(string where, string limit)
+vector<string *> BaseRecord::RetrieveTableRows(string where, string limit) const
 {
     MYSQL_RES* res;
     MYSQL_ROW sqlrow;
