@@ -21,7 +21,18 @@ Group::Group(const Group& orig): BaseRecord(orig.connector, orig.table)
 Group::~Group() { }
 
 
-bool Group::UpdateRecord() const
+string Group::GetSqlCreate() const
+{
+    string sql;
+    
+    sql = "INSERT INTO `" + this->table + "` (`name`, `is_admin`, `is_manager`) "
+            + "VALUE ('" + this->name + "', " + ((this->is_admin) ? "1" : "0") + ", "
+            + ((this->is_manager) ? "1" : "0") + ")";
+
+    return sql;
+}
+
+string Group::GetSqlUpdate() const
 {
     string sql;
     
@@ -29,54 +40,18 @@ bool Group::UpdateRecord() const
             + "`is_admin` = " + ((this->is_admin) ? "1" : "0") + ", "
             + "`is_manager` = " + ((this->is_manager) ? "1" : "0") + " "
             + "WHERE `id` = " + NumberToStringConverter<int>::Convert(this->id);
-    try {
-        this->connector->Query(sql, UPDATE);
-    }
-    catch(MySQLNoUpdateRecord* nur) {
-        std::cout << "Error when trying to update record:" << std::endl;
-        std::cout << "\t" << nur->what() << std::endl;
-        return false;
-    }
     
-    return true;
+    return sql;
 }
 
-bool Group::CreateRecord() const
-{
-    string sql;
-    
-    sql = "INSERT INTO `" + this->table + "` (`name`, `is_admin`, `is_manager`) "
-            + "VALUE ('" + this->name + "', " + ((this->is_admin) ? "1" : "0") + ", "
-            + ((this->is_manager) ? "1" : "0") + ")";
-    
-    try {
-        this->connector->Query(sql, INSERT);
-    }
-    catch(MySQLNoInsertRecord* nir) {
-        std::cout << "Error when trying to update record:" << std::endl;
-        std::cout << "\t" << nir->what() << std::endl;
-        return false;
-    }
-    
-    return true;
-}
-
-bool Group::DeleteRecord() const
+string Group::GetSqlDelete() const
 {
     string sql;
     
     sql = "DELETE FROM `" + this->table + "` WHERE `id` = " 
             + NumberToStringConverter<int>::Convert(this->id);
     
-    try {
-        this->connector->Query(sql, DELETE);
-    }
-    catch(MySQLNoDeleteRecord* ndr) {
-        std::cout << ndr->Message() << std::endl;
-        return false;
-    }
-
-    return true;
+    return sql;
 }
 
 

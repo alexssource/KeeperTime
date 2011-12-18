@@ -22,3 +22,64 @@ vector<string *> BaseRecord::RetrieveTableRows(string where, string limit) const
     }
     return records;
 }
+
+
+bool BaseRecord::CreateRecord() const
+{
+    string sql = this->GetSqlCreate();
+    
+    try {
+        this->connector->Query(sql, INSERT);
+    }
+    catch(MySQLNoInsertRecord* nir) {
+        std::cout << "Error when trying to update record:" << std::endl;
+        std::cout << "\t" << nir->what() << std::endl;
+        return false;
+    }
+    
+    return true;
+}
+
+
+bool BaseRecord::UpdateRecord() const
+{
+    string sql = this->GetSqlUpdate();
+    
+    try {
+        this->connector->Query(sql, UPDATE);
+    }
+    catch(MySQLNoUpdateRecord* nur) {
+        std::cout << "Error when trying to update record:" << std::endl;
+        std::cout << "\t" << nur->what() << std::endl;
+        return false;
+    }
+    
+    return true;
+}
+
+
+bool BaseRecord::DeleteRecord() const
+{
+    string sql = this->GetSqlDelete();
+    
+    try {
+        this->connector->Query(sql, DELETE);
+    }
+    catch(MySQLNoDeleteRecord* ndr) {
+        std::cout << ndr->Message() << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
+
+string BaseRecord::GetSqlDelete() const
+{
+    string sql;
+    
+    sql = "DELETE FROM `" + this->table + "` WHERE `id` = " 
+            + NumberToStringConverter<int>::Convert(this->id);
+    
+    return sql;
+}

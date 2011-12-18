@@ -11,6 +11,8 @@
 #include <stdlib.h>
 #include <string>
 #include <vector>
+#include "ERROR_CODES.h"
+#include "Exception.h"
 #include "SqlConnector.h"
 #include "NumberToStringConverter.h"
 
@@ -67,21 +69,21 @@ protected:
      * @param id - the identifier of record
      * @return result - the result of update operation
      */
-    virtual bool UpdateRecord() const { };
+    virtual bool UpdateRecord() const;
     
     
     /**
      * Creates a new record
      * @return <bool> res - the result of insert record process
      */
-    virtual bool CreateRecord() const { };
+    virtual bool CreateRecord() const;
     
     
     /**
      * Delete the current record from database
      * @return <bool> res
      */
-    virtual bool DeleteRecord() const { }
+    virtual bool DeleteRecord() const;
     
     /**
      * Retrieve the record from database by it's id
@@ -112,6 +114,11 @@ protected:
      * (called in current's class constructor)
      */
     virtual void InitializeRecord() { };
+    
+    
+    virtual string GetSqlCreate() const { };
+    virtual string GetSqlUpdate() const { };
+    virtual string GetSqlDelete() const;
     
 public:
     BaseRecord(SqlConnector* const conn, string table): connector(conn) {

@@ -41,9 +41,9 @@ public:
     // Section for overrides methods
     
 protected:
-    virtual bool UpdateRecord() const;
-    virtual bool CreateRecord() const;
-    virtual bool DeleteRecord() const;
+    virtual string GetSqlCreate() const;
+    virtual string GetSqlUpdate() const;
+    virtual string GetSqlDelete() const;
     virtual void InitializeRecord();
     
 public:
