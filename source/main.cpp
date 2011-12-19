@@ -11,11 +11,12 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include "../header/ERROR_CODES.h"
 #include "../header/SqlConnector.h"
 #include "../header/Group.h"
 #include "../header/BaseRecord.h"
-#include <vector>
+#include "../header/DateTime.h"
 
 using namespace std;
 
@@ -33,11 +34,8 @@ int main()
         return e->Code();
     }
     
-    Group* group = new Group(SqlConn);
-    groups = group->RetrieveTableRecords();
-    for(int i = 0; i < groups.size(); i++) {
-        cout << "Group: " << ((Group*)groups[i])->Name() << endl;
-    }
+    DateTime dt;
+    cout << dt.ToString() << endl;
   
     cout << "Hi, its console!" << endl;
     
@@ -79,4 +77,12 @@ int main(int argc, char *argv[]) {
     }    
     delete group;
  
+ */
+
+/**
+     Group* group = new Group(SqlConn);
+    groups = group->RetrieveTableRecords();
+    for(int i = 0; i < groups.size(); i++) {
+        cout << "Group: " << ((Group*)groups[i])->Name() << endl;
+    }
  */

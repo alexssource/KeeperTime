@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MyTasks.ui'
 **
-** Created: Sat Dec 17 23:12:32 2011
+** Created: Mon Dec 19 01:11:42 2011
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
