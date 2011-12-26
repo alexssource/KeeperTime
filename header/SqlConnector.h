@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include "mysql/mysql.h"
 #include "ERROR_CODES.h"
 #include "Exception.h"
@@ -28,6 +29,7 @@ private:
 protected:
     bool Connect();
     void Initialize(string host, string user, string pass, string database);
+    void SetCharset();
     
 public:
     SqlConnector(string host, string user, string pass, string database);

@@ -15,6 +15,7 @@ SqlConnector::SqlConnector(string host, string user, string pass, string databas
         error.append(mysql_error(&this->connection));
         throw new Exception(ERROR_MYSQL_CONNECT, ERROR_TYPE_MYSQL, error);
     }
+    this->SetCharset();
 }
 
 SqlConnector::~SqlConnector()
@@ -28,6 +29,11 @@ void SqlConnector::Initialize(string host, string user, string pass, string data
     this->user = user;
     this->pass = pass;
     this->database = database;
+}
+
+void SqlConnector::SetCharset()
+{
+    this->Query("SET NAMES `UTF8`", OTHER);
 }
 
 bool SqlConnector::Connect()
@@ -86,5 +92,5 @@ int SqlConnector::GetLastInsertedId()
     }
     
     sqlrow = mysql_fetch_row(res);
-    return (int)sqlrow[0];
+    return atoi(sqlrow[0]);
 }

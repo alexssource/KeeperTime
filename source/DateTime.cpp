@@ -19,18 +19,6 @@ void DateTime::Initialize(int d, int m, int y, int h, int mins, int s)
 
 DateTime::DateTime()
 {
-    /*
-    time_t timestamp;
-    tm* stime;
-    
-    timestamp = time(NULL);
-    stime = localtime(&timestamp);
-    
-    this->Initialize(stime->tm_mday, stime->tm_mon + 1, stime->tm_year + 1900,
-            stime->tm_hour, stime->tm_min, stime->tm_sec);
-            
-    this->Timestamp(timestamp);
-     * */
     this->Timestamp(time(NULL));
     this->TimestampToDate();
 }
@@ -92,4 +80,11 @@ void DateTime::DateToTimestamp()
     
     timestamp = mktime(stime);
     this->Timestamp(timestamp);
+}
+
+
+void DateTime::AddSomeDays(int days)
+{
+    this->Timestamp(this->Timestamp() + days*24*60*60);
+    this->TimestampToDate();
 }

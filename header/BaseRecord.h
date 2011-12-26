@@ -56,6 +56,11 @@ protected:
      */
     virtual bool Create()
     {
+        if(this->IsSet()) {
+            throw new MySQLRecordNotUnique();
+            return false;
+        }
+        
         if(this->CreateRecord()) {
             this->id = this->connector->GetLastInsertedId();
             return true;
@@ -115,6 +120,11 @@ protected:
      */
     virtual void InitializeRecord() { };
     
+    /**
+     * Check if set current record
+     * @return true if record is set
+     */
+    virtual bool IsSet() const { return false; }
     
     virtual string GetSqlCreate() const { };
     virtual string GetSqlUpdate() const { };
@@ -127,9 +137,9 @@ public:
     }
     
     BaseRecord(SqlConnector* const conn, string table, int id): connector(conn) {
-        this->Initialize(table, id);
-        this->InitializeRecord();
-        this->Retrieve();
+        Initialize(table, id);
+        InitializeRecord();
+        Retrieve();
     }
     
     virtual ~BaseRecord() { }

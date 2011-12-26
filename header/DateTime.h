@@ -37,8 +37,8 @@ public:
     
     string GetDMY() const;
     string ToString() const;
+    void AddSomeDays(int days);
 
-protected:
     void TimestampToDate();
     void DateToTimestamp();
     

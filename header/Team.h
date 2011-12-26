@@ -9,13 +9,14 @@
 #define	TEAM_H
 
 #include "BaseRecord.h"
+#include "DateTime.h"
+
 
 class Team: public BaseRecord
 {
 private:
     string name;
-    User* manager;
-    DateTime created_at;
+    DateTime* created_at;
     
 public:
     Team(SqlConnector* const conn);
@@ -27,21 +28,17 @@ public:
     string Name() const { return this->name; }
     void Name(string name) { this->name = name; }
     
-    User* Manager() const { return this->manager; }
-    int Manager() const { std::cout << "Получить id юзера в Team.h: 31" << endl; return 1; }
-    void Manager(User* manager) { this->manager = manager; }
-    void Manager(int manager_id) { std::cout << "Получить объект юзера в Team.h: 33" << endl; }
-    
-    DateTime CreatedAt() const { return this->created_at; }
-    void CreatedAt(DateTime created_at) { this->created_at = created_at; }
-    void CreatedAt(string created_at) { std::cout << "Сделать преобразование из string в DateTime в Team.h: 37"; }
-    
+    DateTime* CreatedAt() const { return this->created_at; }
+    void CreatedAt(DateTime* created_at) { this->created_at = created_at; }
+    void CreatedAt(int timestamp) { this->created_at = new DateTime(timestamp); }
+    void CreatedAt(int year, int month, int day = 1, int hour = 0, int minute = 0, int seconds = 0) {
+        this->created_at = new DateTime(year, month, day, hour, minute, seconds);
+    }
     
     // Oveerided methods
 protected:
     virtual string GetSqlCreate() const;
     virtual string GetSqlUpdate() const;
-    virtual void InitializeRecord();
     
 public:
     virtual bool Retrieve();

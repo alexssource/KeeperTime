@@ -8,7 +8,7 @@
 #include "../header/Group.h"
 
 Group::Group(SqlConnector* const conn): BaseRecord(conn, "Group") { }
-Group::Group(SqlConnector* conn, int id): BaseRecord(conn, "Group", id) { }
+Group::Group(SqlConnector* conn, int id): BaseRecord(conn, "Group", id) { this->Retrieve(); }
 
 Group::Group(const Group& orig): BaseRecord(orig.connector, orig.table)
 {

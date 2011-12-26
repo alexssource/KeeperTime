@@ -122,4 +122,12 @@ public:
         virtual ~MySQLQueryException() throw() { }
 };
 
+class MySQLRecordNotUnique: public Exception
+{
+public:
+    MySQLRecordNotUnique(): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, 
+        "Can't Create a record: MySQL Record Is Set (Not Unique)") { };
+        virtual ~MySQLRecordNotUnique() throw() { }
+};
+
 #endif	/* EXCEPTION_H */
