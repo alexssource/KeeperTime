@@ -130,4 +130,12 @@ public:
         virtual ~MySQLRecordNotUnique() throw() { }
 };
 
+class MySQLAuthorizationException: public Exception
+{
+public:
+    MySQLAuthorizationException(string login, string pass): Exception(ERROR_MYSQL_QUERY, ERROR_TYPE_MYSQL, 
+        "Пользователя с логином `"+login+"` и паролем `"+pass+"` не существует") { };
+        virtual ~MySQLAuthorizationException() throw() { }
+};
+
 #endif	/* EXCEPTION_H */

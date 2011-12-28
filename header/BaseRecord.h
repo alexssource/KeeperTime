@@ -132,11 +132,13 @@ protected:
     
 public:
     BaseRecord(SqlConnector* const conn, string table): connector(conn) {
+        this->id = 0;
         this->Initialize(table);
         this->InitializeRecord();
     }
     
     BaseRecord(SqlConnector* const conn, string table, int id): connector(conn) {
+        this->id = 0;
         Initialize(table, id);
         InitializeRecord();
         Retrieve();

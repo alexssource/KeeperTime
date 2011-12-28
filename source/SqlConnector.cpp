@@ -55,6 +55,8 @@ MYSQL_RES* SqlConnector::Query(string sql, MYSQL_QUERY_TYPE type)
     
     res = mysql_store_result(&this->connection);
     
+//    cout << mysql_num_rows(res) << endl;
+    
     if(!res && type == SELECT) {
         throw new MySQLRecordNotFound();
         return res;

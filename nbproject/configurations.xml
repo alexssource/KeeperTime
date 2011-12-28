@@ -67,6 +67,8 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>KeeperTime-Makefile.mk</itemPath>
     </logicalFolder>
+    <itemPath>source/Menu.cpp</itemPath>
+    <itemPath>header/Menu.h</itemPath>
   </logicalFolder>
   <projectmakefile>KeeperTime-Makefile.mk</projectmakefile>
   <confs>

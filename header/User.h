@@ -63,6 +63,8 @@ public:
         this->created_at = new DateTime(year, month, day, hour, minute, seconds);
     }
     
+
+    bool RetrieveByLoginPass();
     
     // Section for overrides methods
     

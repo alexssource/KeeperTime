@@ -24,6 +24,7 @@
 #include "header/WorkTime.h"
 #include "header/Report.h"
 #include "header/Wages.h"
+#include "header/Menu.h"
 
 using namespace std;
 
@@ -42,7 +43,9 @@ int main()
     }
 
     ////// Logic For MyProgram //////
+    Menu* menu = new Menu(SqlConn);
     
+    delete menu;
     ////// End Logic MyProgram //////
     cout << "Hi, its console!" << endl;
     

@@ -122,7 +122,7 @@ vector<BaseRecord *> User::RetrieveTableRecords(string where, string limit) cons
     User* user;
     string sql;
     
-    sql = "SELECT `id`, `name`, `surname`, login`, `password`, `email`, `group`, `team`, `created_at`, `wage` FROM `" 
+    sql = "SELECT `id`, `name`, `surname`, `login`, `password`, `email`, `group`, `team`, `created_at`, `wage` FROM `" 
             + this->table + "` "
             + where + " " + limit;
     
@@ -169,4 +169,35 @@ bool User::IsSet() const
     else {
         return false;
     }
+}
+
+bool User::RetrieveByLoginPass()
+{
+    MYSQL_RES* res;
+    MYSQL_ROW row;
+    string sql;
+    
+    sql = "SELECT `id`, `name`, `surname`, `login`, `password`, `email`, `group`, `team`, `created_at`, `wage` FROM `" 
+            + this->table + "` "
+            + "WHERE `login` = '" + this->Login() + "' "
+            + "AND `password` = '" + this->Password() + "' "
+            + "LIMIT 0, 1";
+    
+    res = this->connector->Query(sql, SELECT);
+    if(mysql_num_rows(res) == 0) {
+        throw new MySQLAuthorizationException(this->Login(), this->Password());
+    }
+    row = mysql_fetch_row(res);
+    
+    this->id = atoi(row[0]);
+    this->Name(row[1]);
+    this->Surname(row[2]);
+    this->Password(row[4]);
+    this->Email(row[5]);
+    this->SetGroup(atoi(row[6]));
+    this->SetTeam(atoi(row[7]));
+    this->CreatedAt(atoi(row[8]));
+    this->Wage(atof(row[9]));
+    
+    return true;
 }
