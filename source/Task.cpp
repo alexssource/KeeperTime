@@ -122,8 +122,8 @@ vector<BaseRecord *> Task::RetrieveTableRecords(string where, string limit) cons
     Task* task;
     string sql;
     
-    sql = "SELECT `id`, `name`, `title`, `description`, `timming_plan`, `project`, `user`, `status`, `created_at`, `priority` "
-            + this->table + "` " + where + " " + limit;
+    sql = "SELECT t.`id`, t.`name`, t.`title`, t.`description`, t.`timming_plan`, t.`project`, t.`user`, t.`status`, t.`created_at`, t.`priority` FROM `"
+            + this->table + "` t " + where + " " + limit;
     
     try {
         res = this->connector->Query(sql, SELECT);

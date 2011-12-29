@@ -14,6 +14,7 @@
       <itemPath>header/ERROR_CODES.h</itemPath>
       <itemPath>header/Exception.h</itemPath>
       <itemPath>header/Group.h</itemPath>
+      <itemPath>header/Menu.h</itemPath>
       <itemPath>header/News.h</itemPath>
       <itemPath>header/NumberToStringConverter.h</itemPath>
       <itemPath>header/Project.h</itemPath>
@@ -43,6 +44,7 @@
       <itemPath>source/DateTime.cpp</itemPath>
       <itemPath>source/Exception.cpp</itemPath>
       <itemPath>source/Group.cpp</itemPath>
+      <itemPath>source/Menu.cpp</itemPath>
       <itemPath>source/News.cpp</itemPath>
       <itemPath>source/NumberToStringConverter.cpp</itemPath>
       <itemPath>source/Project.cpp</itemPath>
@@ -67,8 +69,6 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>KeeperTime-Makefile.mk</itemPath>
     </logicalFolder>
-    <itemPath>source/Menu.cpp</itemPath>
-    <itemPath>header/Menu.h</itemPath>
   </logicalFolder>
   <projectmakefile>KeeperTime-Makefile.mk</projectmakefile>
   <confs>

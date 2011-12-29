@@ -51,7 +51,7 @@ public:
     void Priority(int p) { this->priority = p; }
     DateTime* CreatedAt() const { return this->created_at; }
     void CreatedAt(DateTime* ca) { this->created_at = ca; }
-    DateTime* ExpiredAt() const { return this->created_at; }
+    DateTime* ExpiredAt() const { return this->expired_at; }
     void ExpiredAt(DateTime* ea) { this->expired_at = ea; }
     DateTime* Deadline() const { return this->deadline; }
     void Deadline(DateTime* dl) { this->deadline = dl; }
