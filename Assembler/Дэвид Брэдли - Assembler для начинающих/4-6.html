@@ -1,0 +1,796 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="4-6">Логические операции</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Следующий класс команд - логические
+команды.<span style="mso-spacerun: yes">  </span>Эти команды, точно
+
+<p><span
+style="mso-spacerun: yes">    </span>так же, как и арифметические команды,
+преобразуют данные, но делают
+
+<p><span
+style="mso-spacerun: yes">    </span>это не арифметически.<span
+style="mso-spacerun: yes">  </span>В то время как команды сложения и вычитания
+
+<p><span
+style="mso-spacerun: yes">    </span>связаны со школьной арифметикой,
+логические команды работают со
+
+<p><span
+style="mso-spacerun: yes">    </span>значениями 0 и 1, которые использует
+ЭВМ.<span style="mso-spacerun: yes">  </span>В общем случае, эти
+
+<p><span
+style="mso-spacerun: yes">    </span>команды позволяют программе выполнять
+битовые операции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Четырьмя основными логическими командами
+являются AND (и), OR
+
+<p><span
+style="mso-spacerun: yes">    </span>(или), XOR (исключающее или), NOT (не).
+Существуют и другие
+
+<p><span
+style="mso-spacerun: yes">    </span>логические функции, состоящие из этих
+четырех функций, но в
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессоре 8088 для них нет
+соответствующих команд. Эти четыре
+
+<p><span
+style="mso-spacerun: yes">    </span>команды работают непосредственно с нулями
+и единицами двоичного
+
+<p><span
+style="mso-spacerun: yes">    </span>кода.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Простейшая функция выполняется командой
+NOT. Эта команда
+
+<p><span
+style="mso-spacerun: yes">    </span>основывается на определении единицы и
+нуля, как истины (TRUE) и лжи
+
+<p><span
+style="mso-spacerun: yes">    </span>(FALSE) соответственно. Предложение NOT
+TRUE (не истина) - это
+
+<p><span
+style="mso-spacerun: yes">    </span>FALSE (ложь), а предложение NOT FALSE (не
+ложь) - это TRUE
+
+<p><span
+style="mso-spacerun: yes">    </span>(истина). Команда NOT инвертирует все биты
+числа данных. Иначе
+
+<p><span
+style="mso-spacerun: yes">    </span>говоря, команда NOT эквивалентна вычитанию
+данных из величины,
+
+<p><span
+style="mso-spacerun: yes">    </span>состоящей из всех единиц. Фиг. 4.17
+показывает, как оператор NOT
+
+<p><span
+style="mso-spacerun: yes">    </span>действует на единственный бит.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>Значение<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">   </span>NOT(Значение)
+
+<p><span
+style="mso-spacerun: yes">       </span>-------------------------------------
+
+
+<p><span style='mso-tab-count:1'>      </span><span
+style='mso-fareast-font-family:"MS Mincho"'><span style="mso-spacerun:
+yes">       </span>0<span style='mso-tab-count:2'>          </span> 1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>1<span style='mso-tab-count:2'>          </span> 0
+
+<p><span
+style="mso-spacerun: yes">       </span>-------------------------------------
+Фиг. 4.17 Операция NOT
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Остальные три логические функции имеют два
+операнда.<span style="mso-spacerun: yes">  </span>На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг.4.18 показаны результаты действий,
+произведенных каждой
+
+<p><span
+style="mso-spacerun: yes">    </span>функцией над парой бит.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>X<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">    </span>Y<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">    </span>X
+AND Y<span style="mso-spacerun: yes">    </span>X OR Y<span style='mso-tab-count:
+1'>   </span><span style="mso-spacerun: yes">  </span>X XOR Y
+
+<p><span
+style="mso-spacerun: yes">      
+</span>-----------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>0<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">    </span>0<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">       </span>0<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">  </span>0<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>0<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">    </span>1<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">       </span>0<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">  </span>1<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>1<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">    </span>0<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">       </span>0<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">  </span>1<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>1<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">    </span>1<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">       </span>1<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">  </span>1<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>0
+
+<p><span
+style="mso-spacerun: yes">       </span>-----------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>Фиг. 4.18 Логические операции
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку микропроцессор 8088 работает с
+байтами или словами,
+
+<p><span
+style="mso-spacerun: yes">    </span>он повторяет результаты таблицы с каждым
+битом операнда.<span style="mso-spacerun: yes">  </span>Например,
+
+<p><span
+style="mso-spacerun: yes">    </span>байтовая команда выполняет логическое И со
+значениями нулевого бита
+
+<p><span
+style="mso-spacerun: yes">    </span>обеих операндов а помещает результат в бит
+0 результата.<span style="mso-spacerun: yes">  </span>Затем эта
+
+<p><span
+style="mso-spacerun: yes">    </span>команда повторяет функцию И с битами от
+первого до седьмого.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>результате получается побитовая функция И
+над отдельными битами
+
+<p><span
+style="mso-spacerun: yes">    </span>операндов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Функция AND равна 1 только тогда, когда
+оба операнда равны 1. В
+
+<p><span
+style="mso-spacerun: yes">    </span>терминах истинности, результат есть истина
+только тогда, когда и X,
+
+<p><span
+style="mso-spacerun: yes">    </span>и Y истинны. Функция OR дает 1, если хотя
+бы один из операндов
+
+<p><span
+style="mso-spacerun: yes">    </span>равен 1. Результат есть истина, если либо
+X, либо Y являются
+
+<p><span
+style="mso-spacerun: yes">    </span>истинными. Результат функции XOR равен 1,
+только если один из
+
+<p><span
+style="mso-spacerun: yes">    </span>операндов равен 1, а другой равен 0. Если
+же оба операнда равны 0,
+
+<p><span
+style="mso-spacerun: yes">    </span>или оба равны 1, то результат равен 0.
+Функция исключающее ИЛИ в
+
+<p><span
+style="mso-spacerun: yes">    </span>точности соответствует сложению, у
+которого игнорируется перенос.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 4.19 иллюстрирует логические команды
+микропроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8088. Команде NOT требуется один операнд,
+а ее форма идентична
+
+<p><span
+style="mso-spacerun: yes">    </span>команде NEG. Остальные логические команды
+копируют синтаксис команд
+
+<p><span
+style="mso-spacerun: yes">    </span>сложения и вычитания.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда микропроцессор 8088 делает
+логическую операцию, он
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает флаги в соответствии с
+результатом. Так как операция
+
+<p><span
+style="mso-spacerun: yes">    </span>не арифметическая, флаги переноса и
+переполнения всегда
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливаются равными 0. Флаг дополнительного
+переноса после
+
+<p><span
+style="mso-spacerun: yes">    </span>логических операций остается
+неопределенным, в то время как другие
+
+<p><span
+style="mso-spacerun: yes">    </span>флаги (знак, нуль) правильно отражают
+результат операции.
+
+<p><span
+style="mso-spacerun: yes">    </span>Исключение представляет команда NOT,
+которая не изменяет ни одного
+
+<p><span
+style="mso-spacerun: yes">    </span>флага.
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>1/1/80 04:01:15
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 4.19 Логические команды<span style='mso-tab-count:4'>                      </span>Page<span
+style='mso-tab-count:1'>  </span> 1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.19 Логические команды
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>CODE<span style="mso-spacerun: yes">    </span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>EXBYTE<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>BYTE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>EXWORD<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>22 06 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>AND<span style="mso-spacerun: yes">     </span>AL, EXBYTE<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">   
+</span>; AL &lt;- AL and [EXBYTE]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0004<span style="mso-spacerun: yes">  </span>81 E3 9FEF<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">    </span>AND<span style="mso-spacerun: yes">     </span>BX,
+1001111111101111B<span style="mso-spacerun: yes">   </span>; BX &lt;- BX and
+9FEFH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0008<span style="mso-spacerun: yes">  </span>80 26 0000 R 03<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">   
+</span>AND<span style="mso-spacerun: yes">     </span>EXBYTE, 00000011B<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">    </span>;
+[EXBYTE] &lt;- [EXBYTE] and 3
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000D<span style="mso-spacerun: yes">  </span>08 2E 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>OR<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>EXBYTE, CH<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>; [EXBYTE] &lt;- [EXBYTE] or CH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0011<span style="mso-spacerun: yes">  </span>0B 16 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>OR<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun: yes">  </span>DX,
+EXWORD<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">      </span>; DX &lt;- DX or [EXWORD]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0015<span style="mso-spacerun: yes">  </span>0D FFF9<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>OR<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>AX, 0FFF9H<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>; AX &lt;- AX or 0FFF9H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0018<span style="mso-spacerun: yes">  </span>33 1E 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>XOR<span style="mso-spacerun: yes">     </span>BX, EXWORD<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">      </span>;
+BX &lt;- BX xor [EXWORD]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001C<span style="mso-spacerun: yes">  </span>30 1E 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>XOR<span style="mso-spacerun: yes">     </span>EXBYTE, BL<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">      </span>;
+[EXBYTE] &lt;- [EXBYTE] xor BL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0020<span style="mso-spacerun: yes">  </span>34 EF<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>XOR<span style="mso-spacerun: yes">     </span>AL, 0EFH<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>; AL &lt;- AL xor 0EFH
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0022<span style="mso-spacerun: yes">  </span>F7 D1<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>NOT<span style="mso-spacerun: yes">     </span>CX<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">     
+</span>; CX &lt;- not CX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0024<span style="mso-spacerun: yes">  </span>F6 16 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>NOT<span style="mso-spacerun: yes">     </span>EXBYTE<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>; [EXBYTE] &lt;- not [EXBYTE]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0028<span style="mso-spacerun: yes">  </span>F7 06 0000 R 0003<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">   
+</span>TEST<span style="mso-spacerun: yes">    </span>EXWORD, 0003H<span
+style="mso-spacerun: yes">     </span>; Установка флагов по [EXWORD] and 3
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>002E<span style="mso-spacerun: yes">  </span>84 E0<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>TEST<span style="mso-spacerun: yes">    </span>AH, AL<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>; Установка флагов по (AH and AL)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0030<span style="mso-spacerun: yes">  </span>A9 0002<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>TEST<span style="mso-spacerun: yes">    </span>AX, 02H<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>; Установка флагов по (AX and 2)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0033<span style="mso-spacerun: yes">  </span>D1 C1<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>ROL<span style="mso-spacerun: yes">     </span>CX, 1<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">      </span>;
+Циклический сдвиг влево на 1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0035<span style="mso-spacerun: yes">  </span>D3 0E 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>ROR<span style="mso-spacerun: yes">     </span>EXWORD, CL<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">      </span>;
+Циклический сдвиг вправо на CL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0039<span style="mso-spacerun: yes">  </span>D0 16 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>RCL<span style="mso-spacerun: yes">     </span>EXBYTE, 1<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Циклический сдвиг с переносом
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">     </span>;
+влево на 1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>003D<span style="mso-spacerun: yes">  </span>D3 DB<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>RCR<span style="mso-spacerun: yes">     </span>BX, CL<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>; Циклический сдвиг с переносом
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">      </span>; вправо на CL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>003F<span style="mso-spacerun: yes">  </span>D1 E0<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>SHL<span style="mso-spacerun: yes">     </span>AX, 1<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">      </span>;
+Сдвиг логический влево на 1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0041<span style="mso-spacerun: yes">  </span>D1 E0<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>SAL<span style="mso-spacerun: yes">     </span>AX, 1<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">      </span>;
+Сдвиг арифметический влево на 1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0043<span style="mso-spacerun: yes">  </span>D3 EB<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>SHR<span style="mso-spacerun: yes">     </span>BX, CL<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>; Сдвиг логический вправо на CL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0045<span style="mso-spacerun: yes">  </span>D0 3E 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>SAR<span style="mso-spacerun: yes">     </span>EXBYTE, 1<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Сдвиг арифметический вправо на 1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0049<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>Фиг. 4.19 Логические команды
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первоочередное назначение логических
+операций в микропроцессоре
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 - работа с битами. Самой малой
+единицей данных, с которой
+
+<p><span
+style="mso-spacerun: yes">    </span>может работать этот микропроцессор,
+является байт. Ни одна из
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметических команд не может
+непосредственно выделить или
+
+<p><span
+style="mso-spacerun: yes">    </span>изменить единственный бит, а логические
+команды позволяют программе
+
+<p><span
+style="mso-spacerun: yes">    </span>обрабатывать отдельные биты.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Почему интересны однобитовые операции? Во
+многих случаях
+<p><span
+style="mso-spacerun: yes">    </span>программа должна хранить значение
+индикатора - истина - ложь. Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>бит может означать, что печатающее
+устройство занято, что нажата
+
+<p><span
+style="mso-spacerun: yes">    </span>регистровая клавиша, или что инициализация
+программы выполнена. В
+
+<p><span
+style="mso-spacerun: yes">    </span>таких случаях расточительно отводить байт
+для хранения
+
+<p><span
+style="mso-spacerun: yes">    </span>единственного бита информации. Программа
+может объединить несколько
+
+<p><span
+style="mso-spacerun: yes">    </span>таких битов в одном байте, если у нее есть
+способ выделения
+
+<p><span
+style="mso-spacerun: yes">    </span>отдельных битов для их проверки и
+установки. Такое объединение
+
+<p><span
+style="mso-spacerun: yes">    </span>однобитовых флагов очень широко
+используется в устройствах
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода=вывода, которые имеют различные
+адреса. Устройству
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода=вывода гораздо проще работать с
+разными битами по одному
+
+<p><span
+style="mso-spacerun: yes">    </span>адресу, чем распознавать многие адреса.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Логические команды могут выделить
+отдельные биты в байте или
+
+<p><span
+style="mso-spacerun: yes">    </span>слове так, что они могут быть установлены,
+сброшены, проверены. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>выделения битов эти команды используют
+маску. Значение маски
+
+<p><span
+style="mso-spacerun: yes">    </span>используется командой побитно. Чтобы
+установить какой=либо один
+
+<p><span
+style="mso-spacerun: yes">    </span>бит, нужно использовать команду OR. В этом
+случае все значения
+
+<p><span
+style="mso-spacerun: yes">    </span>маски - нули, кроме единицы на месте
+устанавливаемого бита. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>OR над маской и другим операндом
+устанавливает 1 в выбранном бите,
+
+<p><span
+style="mso-spacerun: yes">    </span>а другие биты результата оставляют
+неизменными. Аналогично,
+
+<p><span
+style="mso-spacerun: yes">    </span>оператор AND может сбросить единственный
+бит. В маске все разряды
+
+<p><span
+style="mso-spacerun: yes">    </span>единичные, кроме сбрасываемого бита. Этот
+бит сбросится в 0, а
+
+<p><span
+style="mso-spacerun: yes">    </span>остальные останутся без изменений.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программисты не используют функцию
+исключающее или столь же
+
+<p><span
+style="mso-spacerun: yes">    </span>часто, как команды AND и OR, но она тоже
+бывает полезна. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>может выполнить взаимное дополнение одного
+бита с данными. Запишите
+
+<p><span
+style="mso-spacerun: yes">    </span>маску для команды XOR так, чтобы на месте
+инвертируемого бита была
+
+<p><span
+style="mso-spacerun: yes">    </span>1, а на всех других местах 0. Когда
+команда XOR выполнится, биты,
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствовавшие нулям, останутся без
+изменений, а биты,
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствовавшие единицам маски,
+инвертируются. Если начальное
+
+<p><span
+style="mso-spacerun: yes">    </span>значение бита было 0, 1 XOR 0 дает 1,
+дополнение к 0, а если
+
+<p><span
+style="mso-spacerun: yes">    </span>начальное значение было 1, 1 XOR 1 дает 0,
+дополнение к 1.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Последняя логическая команда - TEST
+(проверка). Эта команда
+
+<p><span
+style="mso-spacerun: yes">    </span>идентична команде AND, за исключением
+того, что она не записывает
+
+<p><span
+style="mso-spacerun: yes">    </span>результат, но устанавливает флаги в
+соответствии с ним, т.е.
+
+<p><span
+style="mso-spacerun: yes">    </span>команда TEST соответствует команде AND,
+как команда CMP
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствует команде SUB. Эта команда
+проверяет заданный бит, или
+
+<p><span
+style="mso-spacerun: yes">    </span>набор битов внутри байта или слова.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как работает команда проверки?
+Предположим, программа хочет
+
+<p><span
+style="mso-spacerun: yes">    </span>проверить младший значащий бит байта, бит
+0. Программа порождает
+
+<p><span
+style="mso-spacerun: yes">    </span>маску 01H либо в регистре, либо как
+непосредственное значение.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда TEST (или AND) дает результат с
+гарантированными нулями по
+
+<p><span
+style="mso-spacerun: yes">    </span>всем позициям, за исключением бита 0;
+значение бита 0 отражает
+
+<p><span
+style="mso-spacerun: yes">    </span>значение оригинала. Если нулевой бит
+оригинала содержит 0, то бит
+
+<p><span
+style="mso-spacerun: yes">    </span>остается нулевым. Если он сначала
+единичен, результат ненулевой, и
+
+<p><span
+style="mso-spacerun: yes">    </span>флаг нуля сбрасывается; если же бит 0,
+результат нулевой, и флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>нуля устанавливается. Таким образом,
+программа может проверить
+
+<p><span
+style="mso-spacerun: yes">    </span>единственный бит, выполняя команды TEST и
+AND с маской, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>имеет единственную единицу на месте
+проверяемого бита; регистр
+
+<p><span
+style="mso-spacerun: yes">    </span>флагов отразит состояние этого
+единственного бита. Команда TEST
+
+<p><span
+style="mso-spacerun: yes">    </span>проверяет заданный бит без разрушения
+других битов, поскольку эта
+
+<p><span
+style="mso-spacerun: yes">    </span>команда не изменяет поле результата.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

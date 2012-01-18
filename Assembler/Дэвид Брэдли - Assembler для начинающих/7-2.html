@@ -1,0 +1,1250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="7-2">Типы данных 8087</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Микросхема 8087 имеет расширенный набор
+типов данных,
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимых для поддержки ее расширенных
+арифметических
+
+<p><span
+style="mso-spacerun: yes">    </span>возможностей.<span style="mso-spacerun:
+yes">  </span>В то время как микропроцессор 8088 может
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно работать только с байтами
+и словами, микросхема
+
+<p><span
+style="mso-spacerun: yes">    </span>8087 имеет семь типов данных.<span
+style="mso-spacerun: yes">  </span>Шесть из них присущи лишь микросхеме
+
+<p><span
+style="mso-spacerun: yes">    </span>8087.<span style="mso-spacerun: yes"> 
+</span>На Фиг. 7.1 показаны все семь типов данных, с которыми
+
+<p><span
+style="mso-spacerun: yes">    </span>работает микросхема 8087.<span
+style="mso-spacerun: yes">  </span>Четыре формата представляют целые числа,
+
+<p><span
+style="mso-spacerun: yes">    </span>а три формата - вещественные, или числа с
+плавающей точкой.<span style="mso-spacerun: yes">  </span>Один
+
+<p><span
+style="mso-spacerun: yes">    </span>формат представляет упакованные десятичные
+числа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Рисунок 7.2 иллюстрирует способы, которыми
+микросхема хранит
+
+<p><span
+style="mso-spacerun: yes">    </span>эти числа в памяти.<span
+style="mso-spacerun: yes">  </span>Как и в случае данных микропроцессора 8088,
+
+<p><span
+style="mso-spacerun: yes">    </span>все данные хранятся с младшей частью
+операнда, записанной в младших
+
+<p><span
+style="mso-spacerun: yes">    </span>адресах.<span style="mso-spacerun: yes"> 
+</span>Бит знака всегда оказывается в байте по старшему адресу
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.<span style="mso-spacerun: yes"> 
+</span>Мы будем обсуждать назначение различных полей по мере
+
+<p><span
+style="mso-spacerun: yes">    </span>того, как будем рассматривать разные типы
+данных.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сопроцессор 8087 работает с тремя типами
+целых чисел:<span style="mso-spacerun: yes">  </span>словом,
+
+<p><span
+style="mso-spacerun: yes">    </span>которое имеет длину 16 бит и идентично
+слову микропроцессора 8088;
+
+<p><span
+style="mso-spacerun: yes">    </span>коротким целым числом, имеющим длину 32
+бита; длинным целым числом,
+
+<p><span
+style="mso-spacerun: yes">    </span>64-значением.<span style="mso-spacerun:
+yes">  </span>Все эти числа являются числами, представленными в
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичном дополнительном коде.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В программе целое слово определяется с
+помощью оператора DW.
+
+<p><span
+style="mso-spacerun: yes">    </span>Такое целое слово может иметь значение в
+диапазоне от - 32768 до
+
+<p><span
+style="mso-spacerun: yes">    </span>32767.<span style="mso-spacerun: yes"> 
+</span>Этот целый формат уже использовался в наборе команд
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088.<span
+style="mso-spacerun: yes">  </span>Это - единственный формат данных, общий для
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088 и арифметического
+сопроцессора 8087.<span style="mso-spacerun: yes">  </span>Короткий
+
+<p><span
+style="mso-spacerun: yes">    </span>целый формат требуется в операторе
+описания данных длиной 32 бита.
+
+<p><span
+style="mso-spacerun: yes">    </span>Такое описание двойного слова выполняет
+оператор DD, определяющий
+
+<p><span
+style="mso-spacerun: yes">    </span>целые числа, лежащие в диапазоне от -232
+до 232-1.<span style='mso-tab-count:1'>      </span>Напоминаем, что
+
+<p><span
+style="mso-spacerun: yes">    </span>с помощью оператора DD можно также
+определить пару
+
+<p><span
+style="mso-spacerun: yes">    </span>СЕГМЕНТ:СМЕЩЕНИЕ.<span
+style="mso-spacerun: yes">  </span>Ассемблер решает сам, какую именно форму
+
+<p><span
+style="mso-spacerun: yes">    </span>сгенерировать, основываясь на
+операнде.<span style="mso-spacerun: yes">  </span>Если операнд - адрес,
+
+<p><span
+style="mso-spacerun: yes">    </span>порождается пара СЕГМЕНТ:СМЕЩЕНИЕ; если же
+операнд - просто число,
+
+<p><span
+style="mso-spacerun: yes">    </span>соответственно порождается длинное целое
+число.<span style="mso-spacerun: yes">  </span>Для описания
+
+<p><span
+style="mso-spacerun: yes">    </span>длинных 64-битовых целых чисел
+используется оператор определения
+
+<p><span
+style="mso-spacerun: yes">    </span>счетверенного слова DQ.<span
+style="mso-spacerun: yes">  </span>Эта директива вынуждает ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>сформировать поле данных, состоящее их
+четырех слов (восьми байт).
+
+<p><span
+style="mso-spacerun: yes">    </span>Такой тип целого может иметь значения в
+диапазоне от -264 до 264-1.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этот оператор ассемблера, так же как и
+операторы DB, DW и DD, может
+
+<p><span
+style="mso-spacerun: yes">    </span>определить константу, неопределенное поле
+(если задан операнд &quot;?&quot;),
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                 </span>&lt;ДДДД ВОЗРАСТАНИЕ ЗНАЧЕНИЯ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>ЪДВДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span>СЛОВА ЦЕЛЫЕ<span
+style="mso-spacerun: yes">  </span>іSі<span style="mso-spacerun: yes"> 
+</span>ВЕЛИЧИНА<span style="mso-spacerun: yes">     </span>і(ДВОИЧНОЕ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>АДБДДДДДДДДДДДДДДДЩ ДОПОЛНЕНИЕ)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>15<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">       </span>0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>ЪДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>КОРОТКОЕ ЦЕЛОЕ іSі<span style="mso-spacerun: yes">      </span>ВЕЛИЧИНА<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">     
+</span>і(ДВОИЧНОЕ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>АДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЩ ДОПОЛНЕНИЕ)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>31<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">      </span>0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    
+</span>ЪДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ДЛИННОЕ ЦЕЛОЕ<span style="mso-spacerun: yes">  </span>іSі<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>ВЕЛИЧИНА<span style='mso-tab-count:4'>                       </span><span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    
+</span>АДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>63
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    
+</span>ЪДВДДДДДДДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">      </span>УПАКОВАННОЕ ДЕСЯТИЧНОЕ іSі<span
+style="mso-spacerun: yes">   </span>X<span style="mso-spacerun: yes">  
+</span>і<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>ВЕЛИЧИНА<span style='mso-tab-count:4'>                       </span><span
+style="mso-spacerun: yes">       </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    
+</span>АДБДДДДДДДБd17Бd16Бd15Бd14Бd13Бd12Бd11Бd10Бd9ДБd8ДБd7ДБd6ДБd5ДБd4ДБd3ДБd2ДБd1ДБd0ДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span><span style="mso-spacerun: yes">  </span>79<span
+style="mso-spacerun: yes">      </span>72<span style='mso-tab-count:8'>                                            </span><span
+style="mso-spacerun: yes">       </span>0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>ЪДВДДДДДДДДДДВДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">       </span>КОРОТКОЕ ВЕЩЕСТВЕННОЕ іSіПОРЯДОК<span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>МАНТИССА<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>АДБДДДДДДДДДДБДДДДДДДДДДДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>31<span style='mso-tab-count:1'>    </span> 23<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    
+</span>ЪДВДДДДДДДДДДДДДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span>ДЛИННОЕ ВЕЩЕСТВЕННОЕ іSі<span
+style="mso-spacerun: yes">  </span>ПОРЯДОК<span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">     </span>МАНТИССА<span style='mso-tab-count:3'>                 </span><span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    
+</span>АДБДДДДДДДДДДДДДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>63<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>52<span style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>ЪДВДДДДДДДДДДДДДДДДДДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">      </span>ВРЕМЕННОЕ ВЕЩЕСТВЕННОЕ іSі<span
+style="mso-spacerun: yes">     </span>ПОРЯДОК<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>ГДДї<span style='mso-tab-count:3'>                  </span>МАНТИССА<span
+style='mso-tab-count:2'>          </span><span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    
+</span>АДБДДДДДДДДДДДДДДДДДДБДДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>79<span style='mso-tab-count:2'>          </span> 64 63<span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">   </span>0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>КОММЕНТАРИИ:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>S - бит знака (0 - плюс, 1 - минус)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>dn - Десятичная цифра (по две на бит)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>X - Незначащие биты; 8087 их игнорирует при загрузке и обнуляет при
+сохранении
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>- Позиция подразумеваемой двомичной точки
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>I - Целый бит мантиссы; сохраняется для временных действительных,
+подразумевается - для коротких и длинных
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ПОРЯДОК (нормализованные значения):
+
+<p><span
+style='mso-tab-count:3'>                  </span>Короткие действительные: 127
+(7FH)
+
+<p><span
+style='mso-tab-count:3'>                  </span>Длинные действительные: 1023
+(3FFH)
+
+<p><span
+style='mso-tab-count:3'>                  </span>Временные действительные:
+16383 (3FFFH) &#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 7.1 Форматы данных 8087 (Copyright
+Intel 1980)
+
+<p><span
+style="mso-spacerun: yes">    </span>а также несколько восьмибайтовых полей с
+помощью команды DUP.
+
+<p><span
+style='mso-tab-count:1'>      </span>Оставшийся целый тип данных - упакованный
+десятичный формат.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этот тип данных представляет целое число в
+упакованном десяточном
+
+<p><span
+style="mso-spacerun: yes">    </span>формате.<span style="mso-spacerun: yes"> 
+</span>Такие данные занимают десять байт.<span style="mso-spacerun: yes"> 
+</span>Один байт
+
+<p><span
+style="mso-spacerun: yes">    </span>резервируется для знака, а оставшиеся
+девять байт содержат 18
+
+<p><span
+style="mso-spacerun: yes">    </span>десяточных цифр.<span style="mso-spacerun:
+yes">  </span>Такое упакованное представление десятичных чисел
+
+<p><span
+style="mso-spacerun: yes">    </span>идентично представлению десятичных
+операндов микропроцессора 8088,
+
+<p><span
+style="mso-spacerun: yes">    </span>но при этом представлении одновременно
+обрабатывается 18 цифр.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команды десятичной коррекции упакованных
+десятичных чисел
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088 допускают
+одновременно только две десятичные
+
+<p><span
+style="mso-spacerun: yes">    </span>цифры.<span style="mso-spacerun: yes"> 
+</span>Кроме того, упакованные десятичгые числа микропроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 требуют, чтобы программист определил
+метод обработки знака
+
+<p><span
+style="mso-spacerun: yes">    </span>числа, если используются отрицательные
+числа.<span style="mso-spacerun: yes">  </span>Упакованные
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичные числа сопроцессора 8087 имеют
+бит знака в старешм байте.
+
+<p><span
+style="mso-spacerun: yes">    </span>Упакованное десятичное число хранится в
+десятичном коде, причем
+
+<p><span
+style="mso-spacerun: yes">    </span>старший бит 10-байтного поля содержит знак
+(0 - положительно, 1 -
+
+<p><span
+style="mso-spacerun: yes">    </span>отрицательно).
+
+<p><span
+style='mso-tab-count:1'>      </span>Для описания упакованного десяточного
+числа используется
+
+<p><span
+style="mso-spacerun: yes">    </span>оператор определения десятибайтового поля
+DT.<span style="mso-spacerun: yes">  </span>Чтобы задать
+
+<p><span
+style="mso-spacerun: yes">    </span>уракованное десятичное число в этом поле,
+необходимо использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>шестнадцатеричную запись.<span
+style="mso-spacerun: yes">  </span>Если в поле операнда окажется целое
+
+<p><span
+style="mso-spacerun: yes">    </span>число, ассемблер преобразует его в
+дополнительный двоичный код, а
+
+<p><span
+style="mso-spacerun: yes">    </span>не в упакованное десятичное число.<span
+style='mso-tab-count:1'>    </span>К счастью, преобразовать
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичное число в необходимую
+шестнадцатеричную форму легко.
+
+<p>A&#8;
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>ЪДВДВДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і |M|<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>+3іS|S|<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і |B|<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>ГДБДБДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>+2і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>ЪДВДВДДДДДДДДДДДї<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">    </span>ГДДДДДДДДДДДДДДДґ<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>ЪДВДВДДДДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">     </span>і |M|<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і |M|<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">   </span>+1іS|S|<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>+1і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span>
++3іS|S|<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і |B|<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і |E|<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>ГДБДБДДДДДДДДДВДґ<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">    </span>ГДДДДДДДДДДДДДВДґ<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>ГДЕДЕДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>|Lі<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">  </span>|Lі<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>іL|M|<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">   </span>+0і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>|Sі<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>+0і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">  </span>|Sі<span style='mso-tab-count:2'>       </span>
++2іS|S|<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>|Bі<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">  </span>|Bі<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>іE|F|<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>АДДДДДДДДДДДДДБДЩ<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">    </span>АДДДДДДДДДДДДДБДЩ<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>ГДБДБДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">     </span>7<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>0<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>7<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>0<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>ЦЕЛЫЕ СЛОВА<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">     </span>КОРОТКИЕ ЦЕЛЫЕ<span
+style='mso-tab-count:2'>           </span> +1і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>і<span style="mso-spacerun: yes">   
+</span>ЪДВДДДДДДДДДДДДДї<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>ГДДДДДДДДДДДДДВДґ<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">   </span>ЪДВДВДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>і<span style="mso-spacerun: yes">    </span>і | <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    </span>і<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">  
+</span>і<span style='mso-tab-count:2'>        </span> |Lі<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">   </span>і
+|M|<span style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>і<span style="mso-spacerun: yes">  </span>+9іS|<span
+style="mso-spacerun: yes">    </span>(X)<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span>
++0і<span style='mso-tab-count:2'>        </span> |Sі<span style='mso-tab-count:
+1'>  </span> +9іS|S|<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>і<span style="mso-spacerun: yes">    </span>і | <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    </span>і<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">  
+</span>і<span style='mso-tab-count:2'>        </span> |Fі<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">   </span>і
+|E|<span style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>і<span style="mso-spacerun: yes">   
+</span>ГДБДДДДДВДДДДДДДґ<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>АДДДДДДДДДДДДДБДЩ<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">   </span>ГДБДБДДДДДДДДДВДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>і<span style="mso-spacerun: yes">    </span>і<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">   
+</span>|<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>7<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">  </span>0<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>
+|Lі
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>Р<span style="mso-spacerun: yes">  </span>+8і<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">   
+</span>|<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>КОРОТКИЕ ВЕЩЕСТВ.<span style='mso-tab-count:
+1'>    </span> +8і<span style='mso-tab-count:2'>        </span> |Sі
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>О<span style="mso-spacerun: yes">    </span>і<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">   
+</span>|<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:5'>                         </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>
+|Eі
+
+<p><span
+style="mso-spacerun: yes">     </span>ЪДВДВДДДДДДДДДДДї С<span
+style="mso-spacerun: yes">    </span>ГДДДДДДДЕДДДДДДДґ<span style='mso-tab-count:
+2'>         </span><span style="mso-spacerun: yes">   </span>ЪДВДВДДДДДДДДДДДї<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">  
+</span>ГДВДВДДДДДДДДДБДґ
+
+<p><span
+style="mso-spacerun: yes">     </span>і |M|<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>і Т<span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і |M|<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>і |M|<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">   </span>+7іS|S|<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>+7і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span>
++7іS|S|<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">   </span>і і<span style='mso-tab-count:1'>      </span> +7іI|S|<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і |B|<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>і А<span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і |E|<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>і |F|<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>ГДБДБДДДДДДДДДДДґ Д<span
+style="mso-spacerun: yes">    </span>ГДДДДДДДЕДДДДДДДґ<span style='mso-tab-count:
+2'>         </span><span style="mso-spacerun: yes">   </span>ГДБДБДДВДВДВДДДДґ
+і<span style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">  
+</span>ГДБДБДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і Р<span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>|L|M|<span style="mso-spacerun: yes">   
+</span>і і<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">   </span>+6і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і Е<span style="mso-spacerun: yes"> 
+</span>+6і<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span>
++6і<span style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes"> 
+</span>|S|S|<span style="mso-spacerun: yes">    </span>і і<span
+style='mso-tab-count:1'>    </span> +6і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і С<span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>|E|F|<span style="mso-spacerun: yes">   
+</span>і Р<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>ГДДДДДДДДДДДДДДДґ О<span
+style="mso-spacerun: yes">    </span>ГДДДДДДДЕДДДДДДДґ<span style='mso-tab-count:
+2'>         </span><span style="mso-spacerun: yes">   </span>ГДДДДДДБДБДБДДДДґ
+О<span style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">  
+</span>ГДДДДДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і В<span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і С<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">   </span>+5і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>+5і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span>
++5і<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">   </span>і Т<span style='mso-tab-count:1'>      </span> +5і<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>ГДДДДДДДДДДДДДДДґ<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">    </span>ГДДДДДДДЕДДДДДДДґ<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>ГДДДДДДДДДДДДДДДґ А<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>ГДДДДДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і Д<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">   </span>+4і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>+4і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span>
++4і<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">   </span>і Р<span style='mso-tab-count:1'>      </span> +4і<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і Е<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>ГДДДДДДДДДДДДДДДґ<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">    </span>ГДДДДДДДЕДДДДДДДґ<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>ГДДДДДДДДДДДДДДДґ С<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>ГДДДДДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і О<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">   </span>+3і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>+3і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span>
++3і<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">   </span>і В<span style='mso-tab-count:1'>      </span> +3і<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>ГДДДДДДДДДДДДДДДґ<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">    </span>ГДДДДДДДЕДДДДДДДґ<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>ГДДДДДДДДДДДДДДДґ<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>ГДДДДДДДДДДДДДВДґ
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>
+| і
+
+<p><span
+style="mso-spacerun: yes">   </span>+2і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>+2і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span>
++2і<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">   </span>і<span style='mso-tab-count:1'>  </span> +2і<span
+style='mso-tab-count:2'>        </span> | і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>
+| і
+
+<p><span
+style="mso-spacerun: yes">     </span>ГДДДДДДДДДДДДДДДґ<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">    </span>ГДДДДДДДЕДДДДДДДґ<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>ГДДДДДДДДДДДДДДДґ<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>ГДДДДДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">   </span>+1і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>+1і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span>
++1і<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">   </span>і<span style='mso-tab-count:1'>  </span> +1і<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>ГДДДДДДДДДДДДДВДґ<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">    </span>ГДДДДДДДЕДДДДДДДґ<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>ГДДДДДДДДДДДДДВДґ<span style='mso-tab-count:1'>    </span> <span
+style="mso-spacerun: yes">  </span>ГДДДДДДДДДДДДДВДґ
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>|Lі<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>
+|Lі<span style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">  
+</span>і<span style='mso-tab-count:2'>        </span> |Lі
+
+<p><span
+style="mso-spacerun: yes">   </span>+0і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>|Sі<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>+0і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span>
++0і<span style='mso-tab-count:2'>        </span> |Sі<span style='mso-tab-count:
+1'>  </span> +0і<span style='mso-tab-count:2'>        </span> |Sі
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>|Bі<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>|<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>
+|Fі<span style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">  
+</span>і<span style='mso-tab-count:2'>        </span> |Fі
+
+<p><span
+style="mso-spacerun: yes">     </span>АДДДДДДДДДДДДДБДЩ<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">    </span>АДДДДДДДБДДДДДДДЩ<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>АДДДДДДДДДДДДДБДЩ<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>АДДДДДДДДДДДДДБДЩ
+
+<p><span
+style="mso-spacerun: yes">     </span>7<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>0<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>7<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>0<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">    </span>7<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">   </span>0<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>7<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">  </span>0
+
+<p><span
+style="mso-spacerun: yes">     </span>ДЛИННЫЕ ЦЕЛЫЕ<span style='mso-tab-count:
+1'>      </span><span style="mso-spacerun: yes">    </span>УПАКОВАННЫЕ ДЕС.<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">   
+</span>ДЛИННЫЕ ВЕЩЕСТВ.<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>ВРЕМЕННЫЕ ВЕЩЕСТВ.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>S:
+Бит знака<span style='mso-tab-count:6'>                                   </span>
+S: Бит знака
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>MSB/LSB: Старший/младший бит<span style='mso-tab-count:4'>                   </span>
+MSE/LSE: Старший/младший бит порядка
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>MSD/LSD: Старшая/младшая десятичная цифра<span style='mso-tab-count:
+2'>            </span> MSF/LSF: Старший/младший бит дробной части
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>(X): Биты не имеют значения<span style='mso-tab-count:4'>                    </span>
+I: Целый бит мантиссы
+
+<p>&#18;A
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 7.2 Структура хранения данных в 8087
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>1/1/80 04:03:56
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 7.3 Целочисленные форматы данных сопроцессора 8087<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes"> 
+</span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 7.3 Целочисленные форматы данных сопроцессора 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>04D2<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">      </span>WORD<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     
+</span>DW<span style="mso-spacerun: yes">      </span>1234
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>7_3.ASM(6): warning A4016: Reserved word used as symbol: WORD
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0002<span style="mso-spacerun: yes">  </span>FB2E<span style='mso-tab-count:
+4'>                   </span><span style="mso-spacerun: yes">     
+</span>DW<span style="mso-spacerun: yes">      </span>-1234
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0004<span style="mso-spacerun: yes">  </span>40E20100<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>SHORT_INTEGER<span style="mso-spacerun: yes">   </span>DD<span
+style="mso-spacerun: yes">      </span>123456
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0008<span style="mso-spacerun: yes">  </span>C01DFEFF<span
+style='mso-tab-count:4'>                     </span><span style="mso-spacerun:
+yes">      </span>DD<span style="mso-spacerun: yes">      </span>-123456
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000C<span style="mso-spacerun: yes">  </span>D202964900000000<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">     
+</span>LONG_INTEGER<span style="mso-spacerun: yes">    </span>DQ<span
+style="mso-spacerun: yes">      </span>1234567890
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0014<span style="mso-spacerun: yes">  </span>2EFD69B6FFFFFFFF<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">      </span>DQ<span style="mso-spacerun: yes">      </span>-1234567890
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001C<span style="mso-spacerun: yes">  </span>????????????????<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">      </span>DQ<span style="mso-spacerun: yes">      </span>?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">     </span>0024<span style="mso-spacerun: yes"> 
+</span>78563412907856341200<span style="mso-spacerun: yes">    
+</span>PACKED_BCD<span style="mso-spacerun: yes">      </span>DT<span
+style="mso-spacerun: yes">      </span>00123456789012345678H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002E<span style="mso-spacerun: yes">  </span>78563412907856341280<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>DT<span style="mso-spacerun: yes">      </span>80123456789012345678H ;
+Отрицательное от предыдущего
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0038<span style="mso-spacerun: yes">  </span>0002[<span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>DT<span style="mso-spacerun: yes">     
+</span>2 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>???????????????
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>?????
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">       </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>004C<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 7.3 Целочисленные форматы данных сопроцессора 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Просто запишите нужное число в десятичной
+форме, а затем добавьте
+
+<p><span
+style="mso-spacerun: yes">    </span>букву H, показывающую, что это - шестнадцатеричное
+число.
+
+<p><span
+style="mso-spacerun: yes">    </span>Изобразить отрицательное число
+труднее.<span style="mso-spacerun: yes">  </span>Если вы напишите перед
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичным числом знак &quot;-&quot;,
+ассемблер преобразует его в двоичный
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительный код, даже если есть буква
+H.<span style="mso-spacerun: yes">  </span>Поэтому в этом случае
+
+<p><span
+style="mso-spacerun: yes">    </span>нужно подсчитать десятичные цифры и
+удлинить число до 20 цифр.
+
+<p><span
+style="mso-spacerun: yes">    </span>первые две цифры должны быть 80, чтобы
+показать, что число
+
+<p><span
+style="mso-spacerun: yes">    </span>отрицательно.<span style="mso-spacerun:
+yes">  </span>То есть, чтобы изобразить -1234 в упакованном
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичном формате, надо записать:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DT 80000000000000001234H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 7.3 изображен листинг ассемблера,
+иллюстрирующий
+
+<p><span
+style="mso-spacerun: yes">    </span>сформированные ассемблером значения в
+случае четырех типов целых
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-9-3">Безусловные переходы
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Безусловные переход - это такой переход,
+который передает
+
+<p><span
+style="mso-spacerun: yes">    </span>управление всякий раз, когда он
+выполняется.<span style="mso-spacerun: yes">  </span>Наоборот, услловный
+
+<p><span
+style="mso-spacerun: yes">    </span>переход проверяет текущее состояние
+машины, чтобы определить,
+
+<p><span
+style="mso-spacerun: yes">    </span>передавать управление или нет.<span
+style="mso-spacerun: yes">  </span>Существует два вида команд
+
+<p><span
+style="mso-spacerun: yes">    </span>безусловной передачи управления - команды
+переходов и вызовов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Все команды вызова CALL - безусловны.
+Различные команды CALL
+
+<p><span
+style="mso-spacerun: yes">    </span>показаны на Фиг. 4.27. Близкий вызов CALL,
+или NEAR CALL, указывает
+
+<p><span
+style="mso-spacerun: yes">    </span>новое значение регистра IP и сохраняет
+старое значение регистра IP
+
+<p><span
+style="mso-spacerun: yes">    </span>в стеке в качестве адреса возврата.
+Далекий вызов CALL, или FAR
+
+<p><span
+style="mso-spacerun: yes">    </span>CALL, задает новые значения сегмента и
+смещения для дальнейшего
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения программы и сохраняет в стеке как
+регистр IP, так и
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр CS. Близкий непосредственный вызов
+CALL - это относительный
+
+<p><span
+style="mso-spacerun: yes">    </span>переход, использующий двухбайтовое поле
+смещения. Все остальные
+
+<p><span
+style="mso-spacerun: yes">    </span>команды вызова - абсолютные переходы.
+Непосредственный вызов FAR
+
+<p><span
+style="mso-spacerun: yes">    </span>CALL требует четырехбайтовое поле операнда
+для указания новых
+
+<p><span
+style="mso-spacerun: yes">    </span>значений для регистров CS и IP. Косвенные
+переходы используют байт
+
+<p><span
+style="mso-spacerun: yes">    </span>адресации mod=r/m для указания
+операнда=регистра или памяти; этот
+
+<p><span
+style="mso-spacerun: yes">    </span>операнд содержит адрес подпрограммы.
+Косвенные вызовы типа NEAR
+
+<p><span
+style="mso-spacerun: yes">    </span>загружают однословный операнд в регистр
+IP. Вызовы типа FAR
+
+<p><span
+style="mso-spacerun: yes">    </span>загружают двойное слово из памяти в пару
+регистров CS:IP; первое
+
+<p><span
+style="mso-spacerun: yes">    </span>слово загружается в регистр IP, а второе -
+в регистр CS. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>команда указывает регистр в качестве
+операнда косвенного далекого
+
+<p><span
+style="mso-spacerun: yes">    </span>вызова, результат непредсказуем;
+микропроцессор 8088 берет новое
+
+<p><span
+style="mso-spacerun: yes">    </span>значение регистра CS неизвестно откуда. Ни
+в коем случае нельзя
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать эту модификацию команды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Командам CALL соответствуют команды
+возврата RET. Все возвраты
+
+<p><span
+style="mso-spacerun: yes">    </span>- косвенные переходы, поскольку они
+извлекают адрес перехода из
+
+<p><span
+style="mso-spacerun: yes">    </span>вершины стека. Близкий возврат извлекает
+из стека одно слово и
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает его в регистр IP, а далекий
+возврат извлекает два слова,
+
+<p><span
+style="mso-spacerun: yes">    </span>помещая слово из меньшего адреса в регистр
+IP, а слово из большего
+
+<p><span
+style="mso-spacerun: yes">    </span>адреса в регистр CS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программы могут модифицировать возвраты
+как типа NEAR, так и
+
+<p><span
+style="mso-spacerun: yes">    </span>типа FAR, указывая параметр счетчика
+байтов. Команда возврата
+
+<p><span
+style="mso-spacerun: yes">    </span>прибавляет его значение к указателю стека
+после извлечения из него
+
+<p><span
+style="mso-spacerun: yes">    </span>адреса (адресов) возврата. Такая команда
+позволяет программе
+
+<p><span
+style="mso-spacerun: yes">    </span>удалять параметры из стека без
+использования специальных команд
+
+<p><span
+style="mso-spacerun: yes">    </span>POP; тем самым подчеркивается, что стек -
+носитель передаваемых
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмме параметров. Такой стиль
+работы со стеком мы уже
+
+<p><span
+style="mso-spacerun: yes">    </span>обсуждали во всех подробностях ранее в
+разделе &quot;Работа со стеком&quot;.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команды безусловного перехода JMP
+идентичны командам CALL по их
+
+<p><span
+style="mso-spacerun: yes">    </span>возможностям адресации. Однако существует
+дополнительная команда
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода, указывающая однобайтовое
+смещение для близкого
+
+<p><span
+style="mso-spacerun: yes">    </span>относительного перехода (команда короткого
+перехода).
+
+<p><span
+style="mso-spacerun: yes">    </span>Соответствующей ей команды CALL не
+существует, так как вызовы
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмм, расположенных поблизости,
+происходят очень редко.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команды переходов используют те же методы
+генерации адреса, что и
+
+<p><span
+style="mso-spacerun: yes">    </span>команды вызова.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сделаем сдесь замечание об оптимизации
+кода и о том, как
+
+<p><span
+style="mso-spacerun: yes">    </span>работает ассемблер. По мере того, как
+ассемблер делает первый
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>переход по тексту программы и назначает адреса командам, он должен
+
+<p><span
+style="mso-spacerun: yes">    </span>решить, использовать двух= или
+трехбайтовую разновидность команды
+
+<p><span
+style="mso-spacerun: yes">    </span>JMP. Если это переход назад, т.е. на
+место, уже известное
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблеру, он может определить правильное
+смещение; тем самым
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер знает, находится ли переход в
+диапазоне короткого
+
+<p><span
+style="mso-spacerun: yes">    </span>смещения. Однако, если переход делается
+вперед, на метку, о которой
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер еще не знает, он должен
+предположить, что метка находится
+
+<p><span
+style="mso-spacerun: yes">    </span>далее, чем 128 байт от текущего места.
+Затем ассемблер порождает
+
+<p><span
+style="mso-spacerun: yes">    </span>длинную форму команды перехода. Худший
+случай ассемблер обязан
+
+<p><span
+style="mso-spacerun: yes">    </span>выбирать потому, что потом уже не может
+возвратиться назад и
+
+<p><span
+style="mso-spacerun: yes">    </span>увеличить размер команды. Затем ассемблер
+заместит трехбайтовую
+
+<p><span
+style="mso-spacerun: yes">    </span>команду перехода двухбайтовой командой JMP
+и однобайтовой командой
+
+<p><span
+style="mso-spacerun: yes">    </span>NOP, если обнаружит, что переход делается
+ближе 128 байт от
+
+<p><span
+style="mso-spacerun: yes">    </span>текущего места. Так как такой переход
+выполняется несколько
+
+<p><span
+style="mso-spacerun: yes">    </span>быстрее, время выполнения в этом случае
+сокращается, но объектный
+
+<p><span
+style="mso-spacerun: yes">    </span>код остается больше необходимого.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если программисту заранее известно, что
+переход вперед делается
+
+<p><span
+style="mso-spacerun: yes">    </span>на место, лежащее в диапазоне 128 байт от
+текущего места, он может
+
+<p><span
+style="mso-spacerun: yes">    </span>об этом сообщить ассемблеру с помощью
+следующей строки:
+
+<p><span
+style='mso-tab-count:1'>      </span>JMP SHORT LABEL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Аттрибут SHORT заставляет ассемблер
+сформировать короткую форму
+
+<p><span
+style="mso-spacerun: yes">    </span>SHORT команды перехода, даже если он еще
+не встречал метку. Если же
+
+<p><span
+style="mso-spacerun: yes">    </span>программист сделал ошибку и переход в
+действительности не может
+
+<p><span
+style="mso-spacerun: yes">    </span>быть коротким, ассемблер выдает сообщение
+об ошибке. На Фиг. 4.26
+
+<p><span
+style="mso-spacerun: yes">    </span>дан пример оператора SHORT.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 4.28 показывает, как можно устроить
+таблицу переходов
+
+<p><span
+style="mso-spacerun: yes">    </span>с помощью команды косвенного перехода. В
+этом примере делается
+
+<p><span
+style="mso-spacerun: yes">    </span>выбор среди нескольких программ,
+основываясь на значении аргумента
+
+<p><span
+style="mso-spacerun: yes">    </span>в регистре AL. Аналогичная программа могла
+бы вызвать подпрограмму
+
+<p><span
+style="mso-spacerun: yes">    </span>по индексу. Это - реализация на языке
+ассемблера оператора CASE,
+
+<p><span
+style="mso-spacerun: yes">    </span>который существует в некоторых языках
+высокого уровня.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

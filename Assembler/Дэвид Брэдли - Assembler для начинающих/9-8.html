@@ -1,0 +1,524 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-8">Принтер и асинхронные коммуникации</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Программы входящие в BIOS обслуживающие
+печатающее устройство и
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательный канал очень похожи.<span
+style="mso-spacerun: yes">  </span>Основная разница -
+
+<p><span
+style="mso-spacerun: yes">    </span>возможность чтения символов из
+асинхронного адаптера.<span style="mso-spacerun: yes">  </span>Обе
+
+<p><span
+style="mso-spacerun: yes">    </span>программы имеют функции инициализации
+адаптера, вывода символа, и
+
+<p><span
+style="mso-spacerun: yes">    </span>чтения состояния адаптера.<span
+style='mso-tab-count:1'>      </span>На Фиг.9.2 приведен список функций,
+
+<p><span
+style="mso-spacerun: yes">    </span>реализуемых этими программами BIOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как видно из рисунка, эти две программы
+BIOS не совпадают.
+
+<p><span
+style="mso-spacerun: yes">    </span>Значение регистра AH, необходимое для
+задания конкретного действия,
+
+<p><span
+style="mso-spacerun: yes">    </span>разное для обеих программ и нам приходится
+с этим мириться.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эти программы BIOS могут обслуживать более
+одного адаптера. В
+
+<p><span
+style="mso-spacerun: yes">    </span>поле данных BIOS по адресу 40:0H имеется
+областть из восьми слов.
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS использует эту область для хранения
+адресов адаптеров
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающих устройств и последовательных
+каналов. Четыре слова со
+
+<p><span
+style="mso-spacerun: yes">    </span>смещением 0, которые помечены RS_232_BASE,
+являются местом для
+
+<p><span
+style="mso-spacerun: yes">    </span>хранения адресов портов четырех адаптеров
+последовательных каналов.
+
+<p><span
+style="mso-spacerun: yes">    </span>По смещению 8, помеченного PRINT_BASE,
+находится соответствующая
+
+<p><span
+style="mso-spacerun: yes">    </span>область для адаптеров печатающих
+устройств. Процедура POST
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализирует эту область данных в
+зависимости от того, какие
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства она обнаружит в системе. При
+поиске печатающих устройств
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура POST сначала ищет черно-белую
+плату, затем адаптер
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающего устройства по адресу
+ввода-вывода 378H и, наконец
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптер печатающего устройства по адресу
+278H. Если процедура POST
+
+<p><span
+style="mso-spacerun: yes">    </span>находит адаптер печатающего устройства по
+любому из этих адресов,
+
+<p><span
+style="mso-spacerun: yes">    </span>она помещает значение его базового адреса
+в область данных.
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогичную работу процедура POST делает с
+адаптерами
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательного канала, сначала она ищет
+плату по адресу
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода-вывода 3F8H, а затем по адресу 2F8H.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программы BIOS написаны независимо от
+адресов ввода-вывода
+
+<p><span
+style="mso-spacerun: yes">    </span>конкретных плат адаптеров. В регистр DX
+помещается входной
+
+<p><span
+style="mso-spacerun: yes">    </span>параметр, указывающий, какую из имеющихся
+плат должна использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>программа входящая в BIOS. Например, если
+у вас есть монохромная
+
+<p><span
+style="mso-spacerun: yes">    </span>плата, имеющая порт печатающего устройства
+по адресу ввода-вывода
+
+<p><span
+style="mso-spacerun: yes">    </span>3BCH, то этот адрес появится первым в
+таблице PRINT_BASE. Если вы
+
+<p><span
+style="mso-spacerun: yes">    </span>вызовете программу печати BIOS и загрузите
+в регистр DX 0,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа BIOS направит ввод-вывод в этот
+адаптер. Если вы также
+
+<p><span
+style="mso-spacerun: yes">    </span>имеете отдельный адаптер печатающего
+устройства, расположенный по
+
+<p><span
+style="mso-spacerun: yes">    </span>адресу ввода-вывода 378H, установка
+регистра DX в 1 позволит
+
+<p><span
+style="mso-spacerun: yes">    </span>программисту работать с этим адаптером.
+Посмотрев в текст программы
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживания печатающего устройства и
+последовательного канала,
+
+<p><span
+style="mso-spacerun: yes">    </span>можно увидеть, что она использует регистр
+DX для выбора
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующего значения из таблицы
+базовых адресов в сегменте
+
+<p><span
+style="mso-spacerun: yes">    </span>DATA используемого BIOS. После того, как
+BIOS определит это
+
+<p><span
+style="mso-spacerun: yes">    </span>значение, весь ввод-вывод она будет
+делать, используя модификации
+
+<p><span
+style="mso-spacerun: yes">    </span>этого базового адреса. В программах есть
+некоторое количество
+
+<p><span
+style="mso-spacerun: yes">    </span>команд увеличения или уменьшения,
+работающих с регистром DX. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет BIOS работать с разными
+регистрами адаптера ввода-вывода
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>Иден.(Значение AH)<span
+style="mso-spacerun: yes">  </span>Функция печати<span style="mso-spacerun:
+yes">   </span>Функция коммуникаций
+
+<p><span
+style="mso-spacerun: yes">     
+</span>-------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>0<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">  </span>Печать символа<span style="mso-spacerun: yes">   
+</span>Инициализация адаптера
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>1<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">  </span>Инициализация<span style="mso-spacerun: yes">     </span>Посылка
+символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>2<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">  </span>Чтение состояния<span style="mso-spacerun: yes"> 
+</span>Получение символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>3<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">    </span>-<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>Чтение состояния
+
+<p><span
+style="mso-spacerun: yes">     
+</span>-------------------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 9.2 Печать и асинхронные
+коммуникации
+
+<p><span
+style="mso-spacerun: yes">   </span>без использования абсолютных значений. Все
+ссылки ввода-вывода
+
+<p><span
+style="mso-spacerun: yes">    </span>делаются относительно первоначального
+адреса, взятого из таблицы
+
+<p><span
+style="mso-spacerun: yes">    </span>базовых адресов.
+
+<p><span
+style='mso-tab-count:1'>      </span>Функции инициализации печати не требуется
+от пользователя
+
+<p><span
+style="mso-spacerun: yes">    </span>никаких входных параметров. Программа
+инициализации сбрасывает
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающее устройство и подготавливает
+порт управления адаптера
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающего устройства для дальнейшей
+работы. Но с другой стороны,
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализация интерфейса RS232 требует от
+пользователя информации о
+
+<p><span
+style="mso-spacerun: yes">    </span>параметрах линии связи. Детали кода
+инициализации, передаваемого
+
+<p><span
+style="mso-spacerun: yes">    </span>программе с помощью регистра AL, показаны
+в прологе к программе
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживания последовательного канала.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Другие функции BIOS поддержки печати и
+последовательного канала
+
+<p><span
+style="mso-spacerun: yes">    </span>дают возможность записывать (для
+последовательной связи также
+
+<p><span
+style="mso-spacerun: yes">    </span>читать) данные в устройство. Особенно
+важно то, что ввод-вывод
+
+<p><span
+style="mso-spacerun: yes">    </span>делается синхронно. Это означает, что
+когда программа передает
+
+<p><span
+style="mso-spacerun: yes">    </span>управление BIOS, чтобы она выполнила
+нужную функцию, управление не
+
+<p><span
+style="mso-spacerun: yes">    </span>возвращается до тех пор, пока работа не
+будет завершена. Когда
+
+<p><span
+style="mso-spacerun: yes">    </span>символ печатается, управление остается в
+программе печати до тех
+
+<p><span
+style="mso-spacerun: yes">    </span>пор, пока она не передаст символ в
+устройство печати. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающее устройство занято, BIOS
+образует цикл, ожидая конца
+
+<p><span
+style="mso-spacerun: yes">    </span>работы печатающего устройства. Когда
+символ передается по каналу
+
+<p><span
+style="mso-spacerun: yes">    </span>асинхронной связи, программа BIOS ждет,
+пока аппаратура разрешит
+
+<p><span
+style="mso-spacerun: yes">    </span>передачу следующего символа. Аналогично программа
+приема
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательного канала ждет до тех пор,
+пока адаптер не принял
+
+<p><span
+style="mso-spacerun: yes">    </span>символ. Если внешнее устройство никогда не
+пришлет символ,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа, вызвавшая функцию BIOS, никогда
+не получит управление
+
+<p><span
+style="mso-spacerun: yes">    </span>назад.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>По этой причине обе программы содержат
+функцию состояния. Она
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет программе решить, может ли BIOS
+выполнить операцию в
+
+<p><span
+style="mso-spacerun: yes">    </span>текущий момент времени. Функция состояния
+печати сообщает, занято
+
+<p><span
+style="mso-spacerun: yes">    </span>ли печатающее устройство в данный момент.
+Программа состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательного канала показывает, может
+ли символ быть передан
+
+<p><span
+style="mso-spacerun: yes">    </span>или принят в данный момент. Программа
+может использовать эти
+
+<p><span
+style="mso-spacerun: yes">    </span>программы состояния, чтобы определить,
+можно ли непосредственно
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнить операцию. Вы можете решить
+сделать в вашей программе
+
+<p><span
+style="mso-spacerun: yes">    </span>что-либо еще в то время, пока операция
+ввода-вывода не может
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняться. Если вы проверяете появление
+некоторого внешнего
+
+<p><span
+style="mso-spacerun: yes">    </span>события, например приема символа
+адаптером, программа состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>позволит не останавливать программу до тех
+пор, пока символ не
+
+<p><span
+style="mso-spacerun: yes">    </span>принят. Проверка появления символа
+позволит вам продолжить работу с
+
+<p><span
+style="mso-spacerun: yes">    </span>ним при условии, что до этого программа
+выполняла другие действия.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Важно отметить также способ обработки
+ошибок программ BIOS.
+
+<p><span
+style="mso-spacerun: yes">    </span>Используя программы BIOS, очень трудно
+&quot;подвесить&quot; систему. За
+
+<p><span
+style="mso-spacerun: yes">    </span>исключеннием того случая, когда вы
+ожидаете символ из
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательного канала, BIOS всегда
+возвращают управление
+
+<p><span
+style="mso-spacerun: yes">    </span>вызвавшей программе, даже если возникла
+ошибка внешнего устройства.
+
+<p><span
+style="mso-spacerun: yes">    </span>В каждом цикле, который ожидает выполнения
+некоторого действия
+
+<p><span
+style="mso-spacerun: yes">    </span>внешним устройством, BIOS использует
+счетчик. Например, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>программа печати ожидает завершения работы
+печатающего устройства,
+
+<p><span
+style="mso-spacerun: yes">    </span>в регистрах BL и CX находится счетчик.
+Если значение счетчика в
+
+<p><span
+style="mso-spacerun: yes">    </span>этих регистрах становится нулевым до того,
+как печатающее
+
+<p><span
+style="mso-spacerun: yes">    </span>устройство освободится, BIOS возвращает
+управление с ошибкой
+
+<p><span
+style="mso-spacerun: yes">    </span>исчерпания времени. Это означает, что
+выключение печатающего
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства до того, как оно закончило
+печать, не вызовет
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;зависания&quot; системы. BIOS в
+конце концов вернет управление
+
+<p><span
+style="mso-spacerun: yes">    </span>программе, указывая, что произошла ошибка
+устройства печати.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В BIOS возникают небольшие трудности в
+связи с исчерпанием
+
+<p><span
+style="mso-spacerun: yes">    </span>времени. Когда в печатающее устройство
+попадает символ перевода
+
+<p><span
+style="mso-spacerun: yes">    </span>страницы 0CH, бумага пропускается до
+начала очередной страницы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если на текущей странице более 51 строки,
+печатающее устройство
+
+<p><span
+style="mso-spacerun: yes">    </span>будет двигать бумагу долго, и возникнет
+ошибка по исчерпанию
+
+<p><span
+style="mso-spacerun: yes">    </span>времени. То есть можно получить индикацию
+ошибки даже тогда, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>печать работает правильно. Величина,
+задающая интервал времени, в
+
+<p><span
+style="mso-spacerun: yes">    </span>течение которого контролируется печатающее
+устройство,
+
+<p><span
+style="mso-spacerun: yes">    </span>скорректировано во второй версии программы
+BIOS и устраняет эту
+
+<p><span
+style="mso-spacerun: yes">    </span>проблему. Если вы имеете первую версию, вы
+можете заново повторить
+
+<p><span
+style="mso-spacerun: yes">    </span>операцию печати, вызвавшую ошибку
+исчерпания времени. Получение
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибки вновь гарантирует, что это не
+ошибка программы BIOS.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

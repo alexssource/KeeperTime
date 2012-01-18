@@ -1,0 +1,875 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="7-7-4">Команды сравнения
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как и в наборе команд микропроцессора
+8088, у сопроцессора 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>есть команды, сравнивающие два числа.<span
+style="mso-spacerun: yes">  </span>Сопроцессор 8087 отбрасывает
+
+<p><span
+style="mso-spacerun: yes">    </span>результат сравнения, но устанавливает в
+соответствии с ним флаги
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния.<span style='mso-tab-count:1'>    </span>Перед
+тем как опросить флаги состояния, программа
+
+<p><span
+style="mso-spacerun: yes">    </span>должна считать слово состояния в
+память.<span style="mso-spacerun: yes">  </span>Далее проще всего
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузить флаги состояния в регистр AH, а
+затем, для легкости
+
+<p><span
+style="mso-spacerun: yes">    </span>проверки условия, - в регистр флагов
+макропроцессора 8088.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 7.18 показан листинг ассемблера
+команд сравнения
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087.<span style='mso-tab-count:
+1'>  </span>Так как в операции всегда участвует вершина
+
+<p><span
+style="mso-spacerun: yes">    </span>стека, в программе надо указать только
+один регистр или операнд в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.<span style="mso-spacerun: yes"> 
+</span>После сравнения в слове состояния содержится информация о
+
+<p><span
+style="mso-spacerun: yes">    </span>соотношении двух чисел.<span
+style="mso-spacerun: yes">  </span>Таблица на Фиг. 7.19 показывает возможные
+
+<p><span
+style="mso-spacerun: yes">    </span>варианты соотношений.<span
+style="mso-spacerun: yes">  </span>Для отражения результата сравнения
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимы только два бита состояния - C3
+и C0; расположение C3 и
+
+<p><span
+style="mso-spacerun: yes">    </span>C0 в слове состояния показано на Фиг. 7.8.
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 7.20 приведен фрагмент программы,
+которая сравнивает
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое вершины стека и слово в памяти.<span
+style='mso-tab-count:1'>  </span>Переходы в этой
+
+<p><span
+style="mso-spacerun: yes">    </span>программе выполняются на основе результата
+сравнения.<span style="mso-spacerun: yes">  </span>В одном из
+
+<p><span
+style="mso-spacerun: yes">    </span>четырех случаев числа нельзя
+сравнить.<span style="mso-spacerun: yes">  </span>Это происходит тогда, когда
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>одно из чисел есть NAN (не число) или одна из форм бесконечности.
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun:
+yes"> </span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">     </span>1/1/80
+04:04:18
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 7.18 Команды сравнения
+сопроцессора 8087<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">    </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span>PAGE<span
+style='mso-tab-count:1'>  </span>,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span>TITLE<span
+style='mso-tab-count:1'> </span>Фиг. 7.18 Команды сравнения сопроцессора 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>CODE<span
+style='mso-tab-count:1'>  </span>SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span>ASSUME<span
+style='mso-tab-count:1'>      </span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>WORD_INTEGER<span
+style='mso-tab-count:1'>      </span>LABEL<span style='mso-tab-count:1'> </span>WORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>SHORT_INTEGER<span
+style='mso-tab-count:1'>     </span>LABEL<span style='mso-tab-count:1'> </span>DWORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>SHORT_REAL<span
+style='mso-tab-count:1'>  </span>LABEL<span style='mso-tab-count:1'> </span>DWORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>LONG_REAL<span
+style='mso-tab-count:1'>   </span>LABEL<span style='mso-tab-count:1'> </span>QWORD
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style="mso-spacerun: yes">  </span>9B D8 D1 <span
+style='mso-tab-count:3'>              </span>FCOM
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0003<span style="mso-spacerun: yes">  </span>9B D8 D2 <span
+style='mso-tab-count:3'>              </span>FCOM<span style='mso-tab-count:
+1'>  </span>ST(2)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0006<span style="mso-spacerun: yes">  </span>9B DE 16 0000 R<span
+style='mso-tab-count:3'>              </span>FICOM<span style='mso-tab-count:
+1'> </span>WORD_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>000B<span style="mso-spacerun: yes">  </span>9B D8 16 0000 R<span
+style='mso-tab-count:3'>              </span>FCOM<span style='mso-tab-count:
+1'>  </span>SHORT_REAL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0010<span style="mso-spacerun: yes">  </span>9B D8 D9 <span
+style='mso-tab-count:3'>              </span>FCOMP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0013<span style="mso-spacerun: yes">  </span>9B DA 1E 0000 R<span
+style='mso-tab-count:3'>              </span>FICOMP<span style='mso-tab-count:
+1'>      </span>SHORT_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0018<span style="mso-spacerun: yes">  </span>9B DC 1E 0000 R<span
+style='mso-tab-count:3'>              </span>FCOMP<span style='mso-tab-count:
+1'> </span>LONG_REAL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>001D<span style="mso-spacerun: yes">  </span>9B DE D9 <span
+style='mso-tab-count:3'>              </span>FCOMPP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0020<span style="mso-spacerun: yes">  </span>9B D9 E4 <span
+style='mso-tab-count:3'>              </span>FTST
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0023<span style="mso-spacerun: yes">  </span>9B D9 E5 <span
+style='mso-tab-count:3'>              </span>FXAM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0026<span style='mso-tab-count:4'>                   </span>CODE<span
+style='mso-tab-count:1'>  </span>ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 7.18 Команды сравнения
+сопроцессора 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Сопроцессор 8087 помещает флаги состояния
+C3 и C0 в точности на те
+
+<p><span
+style="mso-spacerun: yes">    </span>же места, которые в регистре флагов
+микропроцессора 8088 занимают
+
+<p><span
+style="mso-spacerun: yes">    </span>флаги нуля C3 и переноса C0.<span
+style="mso-spacerun: yes">  </span>Как показано на рисунке, если
+
+<p><span
+style="mso-spacerun: yes">    </span>программа переслала старший байт слова
+состояния сопроцессора 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>в регистр флагов микропроцессора 8088, она
+может выполнить условный
+
+<p><span
+style="mso-spacerun: yes">    </span>переход с помощью непосредственной
+проверки состояния флагов с
+
+<p><span
+style="mso-spacerun: yes">    </span>использованием команды условного перехода,
+и не нужно выделять и
+
+<p><span
+style="mso-spacerun: yes">    </span>проверять отдельные биты слова состояния.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>С3<span style='mso-tab-count:1'>    </span>С0<span
+style='mso-tab-count:2'>          </span>Порядок
+
+<p><span
+style="mso-spacerun: yes">    
+</span>--------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style='mso-tab-count:1'>     </span>0<span
+style='mso-tab-count:1'>     </span>ST &gt; источник
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style='mso-tab-count:1'>     </span>1<span
+style='mso-tab-count:1'>     </span>ST &lt; источник
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style='mso-tab-count:1'>     </span>0<span
+style='mso-tab-count:1'>     </span>ST = источник
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style='mso-tab-count:1'>     </span>1<span
+style='mso-tab-count:1'>     </span>ST и источник несравнимы
+
+<p><span
+style="mso-spacerun: yes">    
+</span>--------------------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 7.19 Порядок сравнения
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 7.18 демонстрируется, что
+существуют и другие варианты
+
+<p><span
+style="mso-spacerun: yes">    </span>команды FCOM, в том числе и то, что для
+команды FCOM существует
+
+<p><span
+style="mso-spacerun: yes">    </span>версия FICOM необходимая для ставнения
+целых чисел.<span style="mso-spacerun: yes">  </span>Команды FCOMP
+
+<p><span
+style="mso-spacerun: yes">    </span>и FICOMP идентичны командам FCOM и FICOM,
+за исключением того, что
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессор 8087 извлекает из стека
+содержимое вершины после
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения операции.<span
+style="mso-spacerun: yes">  </span>Это позволяет сравнить два числа с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087, не беспокоясь о том,
+что нужно удалить из стека
+
+<p><span
+style="mso-spacerun: yes">    </span>первый операнд после операции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>1/1/80 04:04:23
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 7.20 Условный переход<span style='mso-tab-count:4'>                      </span><span
+style="mso-spacerun: yes">  </span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 7.20 Условный переход
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>WORD_INTEGER<span style="mso-spacerun:
+yes">    </span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>????<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">      </span>STATUS_WORD<span
+style="mso-spacerun: yes">     </span>DW<span style="mso-spacerun: yes">     
+</span>?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Сравнивается WORD_PTR со словом на вершине стека сопроцессора 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0002<span style="mso-spacerun: yes">  </span>9B DE 16 0000 R<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>FICOM<span style="mso-spacerun: yes">   </span>WORD_INTEGER<span
+style="mso-spacerun: yes">    </span>; Сравнение слова с ST
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0007<span style="mso-spacerun: yes">  </span>9B DD 3E 0000 R<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>FSTSW<span style="mso-spacerun: yes">   </span>STATUS_WORD<span
+style="mso-spacerun: yes">     </span>; Сохранение слова состояния 8087
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000C<span style="mso-spacerun: yes">  </span>9B <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">    </span>FWAIT<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">      </span>; Синхронизация процессора с
+сопроцессором
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000D<span style="mso-spacerun: yes">  </span>8A 26 0001 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>MOV<span style="mso-spacerun: yes">     </span>AH,BYTE PTR STATUS_WORD+1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0011<span style="mso-spacerun: yes">  </span>9E <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>SAHF<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>; Занесение флагов (C0=CF,C3=ZF)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0012<span style="mso-spacerun: yes">  </span>72 02<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JB<span style="mso-spacerun: yes">      </span>CONTINUE<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">      </span>;
+Проверка флага C0,переход если 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0014<span style="mso-spacerun: yes">  </span>75 00<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JNE<span style="mso-spacerun: yes">    
+</span>ST_GREATER<span style="mso-spacerun: yes">      </span>; Проверка флага
+C3
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0016<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>ST_EQUAL: <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">      </span>; Попадаем
+сюда,если C3=1,C0=0 -
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>; ...<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>значения равны
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0016<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>ST_GREATER:<span style='mso-tab-count:
+1'> </span><span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>; Попадаем сюда,если C3=0,C0=0 - число
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>; ...<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>на вершине стека 8087 больше WORD_PTR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0016<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CONTINUE:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0016<span style="mso-spacerun: yes">  </span>75 00<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JNE<span style="mso-spacerun: yes">     </span>ST_LESS<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Проверка флага C3
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0018<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>UNORDERED:<span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">      </span>; Попадаем
+сюда,если C3=1,C0=1 - невоз-
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>; ...<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>можно определить какое из чисел больше
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0018<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>ST_LESS:<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">      </span>; Попадаем сюда,если C3=0,C0=1 - число
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>; ...<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>на вершине стека 8087 меньше WORD_PTR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0018<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 7.20 Условный переход
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>У команды FCOMPP программист не указывает
+никаких операндов.
+
+<p><span
+style="mso-spacerun: yes">    </span>Эта команда всегда сравнивает верхние два
+элемента стека.<span style="mso-spacerun: yes">  </span>После
+
+<p><span
+style="mso-spacerun: yes">    </span>сравнения они оба исчезают из стека.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команды сравнения с извлечением из стека
+обеспечивают удобный
+
+<p><span
+style="mso-spacerun: yes">    </span>способ очистки стека.<span
+style="mso-spacerun: yes">  </span>Поскольку у сопроцессора 8087 нет команды,
+
+<p><span
+style="mso-spacerun: yes">    </span>удобно извлекающей операнд из стека,
+вместо нее можно использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>команды сравнения с извлечением из стека.<span
+style="mso-spacerun: yes">  </span>Эти команды также
+
+<p><span
+style="mso-spacerun: yes">    </span>изменяют и регистр состояния, и их нельзя
+использовать, если биты
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния имеют значение для дальнейшей
+работы, но в большинстве
+
+<p><span
+style="mso-spacerun: yes">    </span>случаев эти команды позволяют быстро
+извлечь из стека один или два
+
+<p><span
+style="mso-spacerun: yes">    </span>операнда.<span style="mso-spacerun: yes"> 
+</span>Так как сопроцессор 8087 регистрирует ошибку при
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнении стека, необходимо удалить все
+операнды из стека при
+
+<p><span
+style="mso-spacerun: yes">    </span>окончании вычислений.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существуют две специальные команды
+сравнения.<span style="mso-spacerun: yes">  </span>Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>сравнения содержимого вершины стека с
+нулем FTST, с помощью которой
+
+<p><span
+style="mso-spacerun: yes">    </span>можно быстро определить знак содержимого
+вершины стека.<span style="mso-spacerun: yes">  </span>(Результат
+
+<p><span
+style="mso-spacerun: yes">    </span>сравнения иллюстрируется таблицей на Фиг.
+7.19, нужно только всюду в
+
+<p><span
+style="mso-spacerun: yes">    </span>таблице слово &quot;источник&quot;
+заменить на слово &quot;нуль&quot;).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда FXAM, строго говоря, не является
+командой сравнения.
+
+<p><span
+style="mso-spacerun: yes">    </span>Хотя она и работает с содержимым вершины
+стека, но не сравнивает
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое вершины ни с одним другим
+числом.<span style="mso-spacerun: yes">  </span>Скорее команда FXAM
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает все четыре флага регистра
+состояния (от C3 до C0
+
+<p><span
+style="mso-spacerun: yes">    </span>включительно), показывая, какого типа
+число находится в вершине
+
+<p><span
+style="mso-spacerun: yes">    </span>стека.<span style="mso-spacerun: yes"> 
+</span>Так как сопроцессор 8087 может обрабатывать любые формы
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел, а не только нормализованные числа с
+плавающей точкой,
+
+<p><span
+style="mso-spacerun: yes">    </span>команда FXAM определит, что же находится в
+вершине стека.<span style="mso-spacerun: yes">  </span>На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 7.21 показаны значения битов
+состояния в каждом случае.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если при арифметической обработке вы не
+делаете что=либо из
+
+<p><span
+style="mso-spacerun: yes">    </span>ряда вон выходящее и не работаете на
+пределе разрядной сетки
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087, то не нужно
+рассматривать никакие из приведенных
+
+<p><span
+style="mso-spacerun: yes">    </span>выше результатов команды FXAM; вы должны
+ожидать увидеть лишь
+
+<p><span
+style="mso-spacerun: yes">    </span>положительные либо отрицательные
+нормализованные числа или нули.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если выясняется, что вершина стека пустая,
+то обычно выдается
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибка.<span style="mso-spacerun: yes"> 
+</span>Программа может сделать такую проверку для контроля
+
+<p><span
+style="mso-spacerun: yes">    </span>параметра, переданного в вершине стека.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Остальные значения - это реакция
+микросхемы 8087 на ошибку.
+
+<p><span
+style="mso-spacerun: yes">    </span>Когда сопроцессор 8087 обнаруживает
+ошибку, он пытается возбудить
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание по особой ситуации,
+устанавливая соответствующие биты в
+
+<p><span
+style="mso-spacerun: yes">    </span>слове состояния.<span style="mso-spacerun:
+yes">  </span>Однако если ситуация замаскирована с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>управляющего слова, сопроцессор 8087 сам
+реагирует на нее.<span style='mso-tab-count:1'>    </span>Он
+
+<p><span
+style="mso-spacerun: yes">    </span>решает, какая реакция соответствует данной
+ошибке и возбуждает
+
+<p><span
+style="mso-spacerun: yes">    </span>появление специфического числа в регистре.<span
+style='mso-tab-count:1'>  </span>Например, результат NAN
+
+<p><span
+style="mso-spacerun: yes">    </span>возникает, если операция некорректна, как
+в случае извлечения
+
+<p><span
+style="mso-spacerun: yes">    </span>квадратного корня из отрицательного числа.<span
+style='mso-tab-count:1'>  </span>Бесконечность
+
+<p><span
+style="mso-spacerun: yes">    </span>появляется, если результат операции
+слишком велик для представления
+
+<p><span
+style="mso-spacerun: yes">    </span>с плавающей точкой.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span>C3<span style='mso-tab-count:1'>    </span>C2<span
+style='mso-tab-count:1'>    </span>C1<span style='mso-tab-count:1'>    </span>C0<span
+style='mso-tab-count:1'>    </span>Значение<span style='mso-tab-count:2'>          </span>С3<span
+style='mso-tab-count:1'>    </span>С2<span style='mso-tab-count:1'>    </span>С1<span
+style='mso-tab-count:1'>    </span>С0<span style='mso-tab-count:1'>    </span>Значение
+
+<p><span
+style="mso-spacerun: yes">     
+</span>---------------------------------------------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>0<span
+style='mso-tab-count:1'>    </span> 0<span style='mso-tab-count:1'>    </span>0<span
+style='mso-tab-count:1'>     </span>0<span style='mso-tab-count:1'>     </span>+
+Ненормально<span style='mso-tab-count:2'>           </span> 1<span
+style='mso-tab-count:1'>    </span>0<span style='mso-tab-count:1'>     </span>0<span
+style='mso-tab-count:1'>     </span>0<span style='mso-tab-count:1'>     </span>+
+0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>0<span
+style='mso-tab-count:1'>    </span> 0<span style='mso-tab-count:1'>    </span>0<span
+style='mso-tab-count:1'>     </span>1<span style='mso-tab-count:1'>     </span>+
+NAN<span style='mso-tab-count:3'>             </span> 1<span style='mso-tab-count:
+1'>    </span>0<span style='mso-tab-count:1'>     </span>0<span
+style='mso-tab-count:1'>     </span>1<span style='mso-tab-count:1'>     </span>Пусто
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>0<span
+style='mso-tab-count:1'>    </span> 0<span style='mso-tab-count:1'>    </span>1<span
+style='mso-tab-count:1'>     </span>0<span style='mso-tab-count:1'>     </span>-
+Ненормально<span style='mso-tab-count:2'>           </span> 1<span
+style='mso-tab-count:1'>    </span>0<span style='mso-tab-count:1'>     </span>1<span
+style='mso-tab-count:1'>     </span>0<span style='mso-tab-count:1'>     </span>-
+0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>0<span
+style='mso-tab-count:1'>    </span> 0<span style='mso-tab-count:1'>    </span>1<span
+style='mso-tab-count:1'>     </span>1<span style='mso-tab-count:1'>     </span>-
+NAN<span style='mso-tab-count:3'>             </span> 1<span style='mso-tab-count:
+1'>    </span>0<span style='mso-tab-count:1'>     </span>1<span
+style='mso-tab-count:1'>     </span>1<span style='mso-tab-count:1'>     </span>Пусто
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>0<span
+style='mso-tab-count:1'>    </span> 1<span style='mso-tab-count:1'>    </span>0<span
+style='mso-tab-count:1'>     </span>0<span style='mso-tab-count:1'>     </span>+
+Нормально<span style='mso-tab-count:2'>       </span> 1<span style='mso-tab-count:
+1'>    </span>1<span style='mso-tab-count:1'>     </span>0<span
+style='mso-tab-count:1'>     </span>0<span style='mso-tab-count:1'>     </span>+
+Ненормальное
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>0<span
+style='mso-tab-count:1'>    </span> 1<span style='mso-tab-count:1'>    </span>0<span
+style='mso-tab-count:1'>     </span>1<span style='mso-tab-count:1'>     </span>+
+Бесконечность <span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes"> </span>1<span style='mso-tab-count:1'>    </span>1<span style='mso-tab-count:
+1'>     </span>0<span style='mso-tab-count:1'>     </span>1<span
+style='mso-tab-count:1'>     </span>Пусто
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>0<span
+style='mso-tab-count:1'>    </span> 1<span style='mso-tab-count:1'>    </span>1<span
+style='mso-tab-count:1'>     </span>0<span style='mso-tab-count:1'>     </span>-
+Нормально<span style='mso-tab-count:2'>       </span> 1<span style='mso-tab-count:
+1'>    </span>1<span style='mso-tab-count:1'>     </span>1<span
+style='mso-tab-count:1'>     </span>0<span style='mso-tab-count:1'>     </span>-
+Ненормальное
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>0<span
+style='mso-tab-count:1'>    </span> 1<span style='mso-tab-count:1'>    </span>1<span
+style='mso-tab-count:1'>     </span>1<span style='mso-tab-count:1'>     </span>-
+Бесконечность <span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes"> </span>1<span style='mso-tab-count:1'>    </span>1<span style='mso-tab-count:
+1'>     </span>1<span style='mso-tab-count:1'>     </span>1<span
+style='mso-tab-count:1'>     </span>Пусто
+
+<p><span
+style="mso-spacerun: yes">     
+</span>---------------------------------------------------------------------------------------------------
+
+<p>&#18;
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>Фиг. 7.21 Пример интерпретации кодов состояний
+
+
+
+
+<p>Денормализованные и
+ненормализованные числа возникают при
+
+<p><span
+style="mso-spacerun: yes">    </span>достижении другого предела представления
+чисел с плавающей точкой.
+
+<p><span
+style="mso-spacerun: yes">    </span>Когда число становится настолько
+маленьким, что у него уже нет
+
+<p><span
+style="mso-spacerun: yes">    </span>смещенного порядка, оно становится
+денормализованным.<span style="mso-spacerun: yes">  </span>Вместо того,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы заменить число нулем, процессор 8087
+записывает наименьшее
+
+<p><span
+style="mso-spacerun: yes">    </span>значение порядка и ненормализованную
+мантиссу.<span style="mso-spacerun: yes">  </span>Это означает, что
+
+<p><span
+style="mso-spacerun: yes">    </span>число теряет точность, так как у его мантиссы
+появляются незначащие
+
+<p><span
+style="mso-spacerun: yes">    </span>нули.<span style="mso-spacerun: yes"> 
+</span>Но денормализованный результат все же точнее, чем просто
+
+<p><span
+style="mso-spacerun: yes">    </span>нуль.<span style="mso-spacerun: yes"> 
+</span>И это тот случай, при котором сопроцессор 8087, продолжая
+
+<p><span
+style="mso-spacerun: yes">    </span>работу, наилучшим образом реагирует на
+плохие условия.<span style="mso-spacerun: yes">  </span>Пометка
+
+<p><span
+style="mso-spacerun: yes">    </span>числа, как денормализованного, должна
+насторожить вас.<span style="mso-spacerun: yes">  </span>При этом
+
+<p><span
+style="mso-spacerun: yes">    </span>также устанавливается бит денормализации в
+регистре особых
+
+<p><span
+style="mso-spacerun: yes">    </span>ситуаций, и остается установленным до тех
+пор, пока команда FCLEX
+
+<p><span
+style="mso-spacerun: yes">    </span>не сбросит биты особых ситуаций.<span
+style="mso-spacerun: yes">  </span>С помощью анализа флагов
+
+<p><span
+style="mso-spacerun: yes">    </span>программа может зарегистрировать
+возникновение ошибки и отнестись к
+
+<p><span
+style="mso-spacerun: yes">    </span>результатам с подозрением.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

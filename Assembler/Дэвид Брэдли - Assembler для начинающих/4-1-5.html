@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-1-5">Загрузка указателя</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку механизм адресации
+микропроцессора 8088 требует
+
+<p><span
+style="mso-spacerun: yes">    </span>определения как сегмента, так и смещения
+каждой переменной,
+
+<p><span
+style="mso-spacerun: yes">    </span>желательно загрузить всю эту адресную
+информацию единственной
+
+<p><span
+style="mso-spacerun: yes">    </span>командой.<span style="mso-spacerun: yes"> 
+</span>Эту работу выполняют команды LDS и LES.<span style='mso-tab-count:1'>      </span>Команда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>LDS SI, EXDWORD
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>загружает регистровую пару DS:SI
+значениями сегмента и
+
+<p><span
+style="mso-spacerun: yes">    </span>смещения, содержащимися в переменной
+EXDWORD. Команда LDS загружает
+
+<p><span
+style="mso-spacerun: yes">    </span>в регистр SI значение смещения,
+расположенное по адресу EXDWORD, а
+
+<p><span
+style="mso-spacerun: yes">    </span>в регистр DS - значение сегмента,
+расположенное по адресу
+
+<p><span
+style="mso-spacerun: yes">    </span>EXDWORD+2. Команда LDS одна загружает два
+16=битовых регистра
+
+<p><span
+style="mso-spacerun: yes">    </span>значением указателя, взятого из некоторой
+ячейки памяти. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>эта команда устанавливает и сегментный
+регистр, и регистр смещения,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа может сразу адресоваться к
+объекту, на который этот адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает. Программа может организовать
+указатель из сегмента и
+
+<p><span
+style="mso-spacerun: yes">    </span>смещения во время ассемблирования с
+помощью оператора DD, который
+
+<p><span
+style="mso-spacerun: yes">    </span>порождает 32=битовое поле данных. Если
+операндом DD является
+
+<p><span
+style="mso-spacerun: yes">    </span>адресное выражение, двухсловное поле будет
+содержать сегмент и
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение адресного значения в том же самом
+формате, который
+
+<p><span
+style="mso-spacerun: yes">    </span>используется в командах LDS и LES.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда LES идентична LDS, за исключением
+того, что она
+
+<p><span
+style="mso-spacerun: yes">    </span>загружает регистр ES. С помощью одной
+команды записать значения
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента и смещения нельзя. Программа
+должна записывать значение
+
+<p><span
+style="mso-spacerun: yes">    </span>указателя двумя командами пересылки слов,
+а не одной командой
+
+<p><span
+style="mso-spacerun: yes">    </span>записи указателя. Это приемлемо, так как
+программа обычно читает
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель гораздо чаще, чем записывает
+его. Обычно программа
+
+<p><span
+style="mso-spacerun: yes">    </span>записывает указатель один раз, во время
+инициализации, и может
+
+<p><span
+style="mso-spacerun: yes">    </span>быть, иногда меняет его во время смены
+режимов работы системы. А
+
+<p><span
+style="mso-spacerun: yes">    </span>вот читается указатель, вероятно,
+достаточно часто. В последующих
+
+<p><span
+style="mso-spacerun: yes">    </span>главах есть примеры, в которых значения
+указателей и читаются, и
+
+<p><span
+style="mso-spacerun: yes">    </span>записываются.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

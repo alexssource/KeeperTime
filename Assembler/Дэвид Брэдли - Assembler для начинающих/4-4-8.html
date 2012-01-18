@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="4-4-8">Символьная коррекция: умножение
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Когда в программе перемножаются два
+неупакованных десятичных числа,
+
+<p><span
+style="mso-spacerun: yes">    </span>результат в регистре AL является двоичным
+числом. Поскольку
+
+<p><span
+style="mso-spacerun: yes">    </span>наибольшее неупакованное десятичное в
+двоичном представлении число
+
+<p><span
+style="mso-spacerun: yes">    </span>равно 9, то максимальный результат при
+BCD-умножении без упаковки
+
+<p><span
+style="mso-spacerun: yes">    </span>равен 81. Однако, этот результат не
+является значимым неупакованным
+
+<p><span
+style="mso-spacerun: yes">    </span>BCD-представлением этого числа. Команда
+символьной коррекции для
+
+<p><span
+style="mso-spacerun: yes">    </span>умножения (AAM - от ASCII Adjust for
+Multiply) переводит такой
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичный результат в неупакованный
+десятичный. Командой AAM старшая
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичная цифра результата помещается в
+регистр AH, а в AL
+
+<p><span
+style="mso-spacerun: yes">    </span>остается младшая десятичная цифра.
+Например, если программа
+
+<p><span
+style="mso-spacerun: yes">    </span>перемножает значения 6 и 7 и результат в
+AL равен 2AH, то команда
+
+<p><span
+style="mso-spacerun: yes">    </span>AAM преобразует результат, помещая в AH
+04H, а в AL - 02H, что
+
+<p><span
+style="mso-spacerun: yes">    </span>соответсвует неупакованному десятичному
+числу 42 в регистрах AH:AL.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда AAM вычисляет распакованный
+десятичный результат с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью деления числа в регистре AL на 10.
+Она помещает частное в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AH, оставляя остаток в регистре
+AL. Команда AAM
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает флаги нуля и знака в
+соответствии с результатом в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AL. Так как результат -
+распакованное десятичное число,
+
+<p><span
+style="mso-spacerun: yes">    </span>знак всегда положителен, а знак нуля
+устанавливается равным 1,
+
+<p><span
+style="mso-spacerun: yes">    </span>только если исходное число кратно 10 -
+т.е. если младшая значащая
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичная цифра равна 0. Остальные флаги
+после команды AAM
+
+<p><span
+style="mso-spacerun: yes">    </span>остаются неопределенными. Флаг переноса
+теперь не имеет смысла,
+
+<p><span
+style="mso-spacerun: yes">    </span>потому что умножение двух распакованных
+десятичных чисел никогда не
+
+<p><span
+style="mso-spacerun: yes">    </span>дает результата, превосходящего число,
+представимое двумя
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичными цифрами.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа также всегда может использовать
+команду AAM для
+
+<p><span
+style="mso-spacerun: yes">    </span>деления двоичного числа в регистре AL на
+10. В таком виде она может
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматриваться, как специальный случай
+команды деления, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>делит однобайтовое число в регистре AL на
+10. Частное помещается в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AH, остаток - в регистр AL.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

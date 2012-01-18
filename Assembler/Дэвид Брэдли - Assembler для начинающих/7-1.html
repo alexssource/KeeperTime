@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="7-1">Работа 8087</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сопроцессор 8087 обрабатывает команды с
+плавающей точкой,
+
+<p><span
+style="mso-spacerun: yes">    </span>контролируя команды, выполняемые
+процессором 8088.<span style='mso-tab-count:1'>      </span>Арифметический
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессор &quot;смотрит&quot; на
+команды, выполняемые процессором 8088.
+
+<p><span
+style="mso-spacerun: yes">    </span>Когда сопроцессор 8087 &quot;видит&quot;
+команду, котрую он должен выполнить,
+
+<p><span
+style="mso-spacerun: yes">    </span>он начинает ее обработку.<span
+style="mso-spacerun: yes">  </span>Микросхема 8087 выполняет свои числовые
+
+<p><span
+style="mso-spacerun: yes">    </span>операции параллельно с микропроцессором
+8088.<span style="mso-spacerun: yes">  </span>То есть, пока
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхема 8087 выполняет арифметическую
+команду, микропроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 может продолжать выполнять свои
+команды.<span style="mso-spacerun: yes">  </span>Тем самым возникает
+
+<p><span
+style="mso-spacerun: yes">    </span>истинная параллельность работы;
+микропроцесоор 8088 может выполнять
+
+<p><span
+style="mso-spacerun: yes">    </span>команду, пока сопроцессор 8087 выполняет
+другую команду.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>частности, это имеет значение в случае,
+когда команда сопроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8087 занимает много времени, что
+характерно для некоторых команд с
+
+<p><span
+style="mso-spacerun: yes">    </span>плавающей точкой.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку два процессора могут работать
+параллельно, необходима
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторая синхронизация межлу ними.<span
+style="mso-spacerun: yes">  </span>Эту работу выполняет команда
+
+<p><span
+style="mso-spacerun: yes">    </span>WAIT микропроцессора 8088.<span
+style='mso-tab-count:1'>      </span>Микросхема 8087 подключена к
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессору 8088 таким образом, что
+когда процессор числовой
+
+<p><span
+style="mso-spacerun: yes">    </span>обработки занят (выполняет команду
+плавающей точки), вход TEST
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088 неактивен.<span
+style="mso-spacerun: yes">  </span>Команда WAIT останавливает
+
+<p><span
+style="mso-spacerun: yes">    </span>обработку команд в микропроцессоре 8088 до
+тех пор, пока вход TEST
+
+<p><span
+style="mso-spacerun: yes">    </span>не станет активен, сигнализуя о завершении
+команды сопроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8087.<span style="mso-spacerun: yes"> 
+</span>Таким образом, при работе микропроцессора 8088 можно
+
+<p><span
+style="mso-spacerun: yes">    </span>гарантировать, что микросхема 8087
+завершит свою работу до того,
+
+<p><span
+style="mso-spacerun: yes">    </span>как микропроцессор 8088 выберет на
+выполнение следующую команду.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это также предотвращает выборку данных до
+завершения исполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>команды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Процессор и сопроцессор связаны только по
+внешним линиям
+
+<p><span
+style="mso-spacerun: yes">    </span>управления, таким как вход TEST.<span
+style="mso-spacerun: yes">  </span>Микропроцессор 8088 не может
+
+<p><span
+style="mso-spacerun: yes">    </span>читать внутренние регистры микросхемы
+8087, и наоборот.<span style="mso-spacerun: yes">  </span>Все
+
+<p><span
+style="mso-spacerun: yes">    </span>данные, передаваемые между ними, должны
+быть помещены в память, к
+
+<p><span
+style="mso-spacerun: yes">    </span>которой оба процессора имеют доступ.<span
+style="mso-spacerun: yes">  </span>Но из-за того, что регистры
+
+<p><span
+style="mso-spacerun: yes">    </span>адресации находятся в микропроцессоре
+8088, микросхеме 8087 трудно
+
+<p><span
+style="mso-spacerun: yes">    </span>эффективно адресовать память, используя те
+же способы адресации,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые используют микропроцессор
+8088.<span style="mso-spacerun: yes">  </span>Чтобы позволить микросхеме
+
+<p><span
+style="mso-spacerun: yes">    </span>8087 адресовать память с помощью способов
+адресации микропроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8088, существует взаимодействие двух
+процессоров при выполнении
+
+<p><span
+style="mso-spacerun: yes">    </span>команд плавающей точки.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Набор команд микропроцессора 8088 содержит
+команду ESC, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>сама по себе не выполняется в
+микропроцессоре 8088.<span style="mso-spacerun: yes">  </span>В системах без
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087 команда ESC идентична
+команде NOP - за
+
+<p><span
+style="mso-spacerun: yes">    </span>исключением того что для ее выполнения
+требуется большн времени.
+
+<p><span
+style="mso-spacerun: yes">    </span>Все команды ESC имеют встроенную адресную
+информацию, а именно, для
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисления адреса, они используют байт
+mod=r/m.<span style="mso-spacerun: yes">  </span>Несмотря на то,
+
+<p><span
+style="mso-spacerun: yes">    </span>что команда ESC действует как команда NOP,
+микропроцессор 8088
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняет вычисление исполнительного
+адреса, а заетм выполняет
+
+<p><span
+style="mso-spacerun: yes">    </span>чтение памяти по результирующему адресу,
+хотя и не производит
+
+<p><span
+style="mso-spacerun: yes">    </span>никаких действий с данными.<span
+style="mso-spacerun: yes">  </span>Если байт mod=r/m определяет регистр,
+
+<p><span
+style="mso-spacerun: yes">    </span>а не память микропроцессора 8088, никакого
+чтения памяти не
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Тем временем микросхема 8087
+&quot;наблюдает&quot; за последовательностью
+
+<p><span
+style="mso-spacerun: yes">    </span>команд, выполняемых микропроцессором 8088.<span
+style='mso-tab-count:1'>  </span>Когда микропроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняет команду ESC, микросхема 8087
+распознает эту команду, как
+
+<p><span
+style="mso-spacerun: yes">    </span>свою собственную.<span
+style="mso-spacerun: yes">  </span>Затем микросхема 8087 ждет, пока
+микропроцесоор
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 выполнить фиктивное чтение
+памяти.<span style="mso-spacerun: yes">  </span>Когда адрес памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>оказывается на системной шине, микросхема
+8087 &quot;захватывает&quot; его, и
+
+<p><span
+style="mso-spacerun: yes">    </span>начиная с этого момента знает, где
+находятся данные в памяти, не
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисляя при этом адреса.<span
+style="mso-spacerun: yes">  </span>Микропроцессор 8088 вычисляет адрес, а
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхема 8087 выполняет остальную часть
+команд.<span style="mso-spacerun: yes">  </span>Теперь
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>микросхема 8087 может &quot;похищать&quot; некоторые циклы памяти
+для чтения
+
+<p><span
+style="mso-spacerun: yes">    </span>или записи данных, а микропроцесоор 8088 в
+это время продолжает
+
+<p><span
+style="mso-spacerun: yes">    </span>работу.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Микросхема 8087 добавляет арифметические
+возможности в систему,
+
+<p><span
+style="mso-spacerun: yes">    </span>но не замещает ни одну команду
+микропроцессора 8088.<span style="mso-spacerun: yes">  </span>Команды ADD,
+
+<p><span
+style="mso-spacerun: yes">    </span>SUB, MUL и DIV, описанные в гл.4,
+выполняются микропроцессором
+
+<p><span
+style="mso-spacerun: yes">    </span>8088, а арифметический сопро- цессор 8087
+выполняет дополнительные,
+
+<p><span
+style="mso-spacerun: yes">    </span>более эффективные команды арифметической
+обработки.<span style="mso-spacerun: yes">  </span>С точки зрения
+
+<p><span
+style="mso-spacerun: yes">    </span>программиста, система с установленной в
+ней микросхемой 8087 должна
+
+<p><span
+style="mso-spacerun: yes">    </span>выглядеть, как единый процессор с большим
+набором команд, чем
+
+<p><span
+style="mso-spacerun: yes">    </span>простой микропроцессор 8088.<span
+style="mso-spacerun: yes">  </span>Лишь в немногих местах надо помнить,
+
+<p><span
+style="mso-spacerun: yes">    </span>какой процессор какую команду
+выполняет.<span style="mso-spacerun: yes">  </span>Только тогда, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор 8088 должен непосредственно
+использовать результат
+
+<p><span
+style="mso-spacerun: yes">    </span>работы микросхемы 8087 и требуется
+синхронизирующая команда WAIT,
+
+<p><span
+style="mso-spacerun: yes">    </span>различать процессоры становится
+необходимо.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда вы используете Макроассемблер фирмы
+IBM, возникает
+
+<p><span
+style="mso-spacerun: yes">    </span>проблема при написании программ,
+использующих набор команд
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхемы 8087.<span style="mso-spacerun:
+yes">  </span>Чтобы использовать эту микросхему, нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>сформировать ее команды, используя коды
+операций WAIT и ESC.
+
+<p><span
+style="mso-spacerun: yes">    </span>Наилучший способ сделать это - написать
+набор макрокоманд, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяют писать команды микросхемы
+8087.<span style="mso-spacerun: yes">  </span>В гл.6 были приведены
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторые макрокоманды, необходимые для
+написания команд
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087.<span style='mso-tab-count:
+1'>  </span>Если вы собираетесь программировать микросхему
+
+<p><span
+style="mso-spacerun: yes">    </span>8087, вам нужно дописать примеры гл.6 для
+полного набора команд
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

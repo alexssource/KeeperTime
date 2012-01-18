@@ -1,0 +1,480 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><a name="4-4-5">Десятичная коррекция
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Те же самые команды, что и для чисел в
+двоичном дополнительном
+
+<p><span
+style="mso-spacerun: yes">    </span>коде, используются в программе для работы
+с числами в
+
+<p><span
+style="mso-spacerun: yes">    </span>двоично=десятичном коде BCD.<span
+style="mso-spacerun: yes">  </span>Однако результат арифметических
+
+<p><span
+style="mso-spacerun: yes">    </span>операций может оказаться неправильным для
+двоично=десятичного
+
+<p><span
+style="mso-spacerun: yes">    </span>представления.<span style="mso-spacerun:
+yes">  </span>Команды десятичной коррекции корректируют
+
+<p><span
+style="mso-spacerun: yes">    </span>результат, полученный после действий
+двоичной арифметики.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Десятичная коррекция для сложения DAA и
+десятичная коррекция
+
+<p><span
+style="mso-spacerun: yes">    </span>для вычитания DAS используются для работы
+только с упакованными
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичными числами. В упакованном
+десятичном числе каждый байт
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит две десятичные цифры. Команды DAA
+и DAS работают только с
+
+<p><span
+style="mso-spacerun: yes">    </span>байтом данных, содержащимся в регистре AL.
+В связи с этими
+
+<p><span
+style="mso-spacerun: yes">    </span>присущими командам ограничени- ями, ни у
+DAA, ни у DAS операндов
+
+<p><span
+style="mso-spacerun: yes">    </span>нет.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 4.12 показаны два примера. В
+первом примере
+
+<p><span
+style="mso-spacerun: yes">    </span>складываются два упакованных десятичных
+числа. Оба числа состоят из
+
+<p><span
+style="mso-spacerun: yes">    </span>двух десятичных цифр, поэтому они
+представлены единственными
+
+<p><span
+style="mso-spacerun: yes">    </span>байтами. В примере складываются эти числа,
+оставляя результат в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AL. Непосредственно за этим
+следует команда DAA, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>корректирует результат сложения,
+преобразуя его в упакованную
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичную форму. После команды DAA в
+регистре AL остается
+
+<p><span
+style="mso-spacerun: yes">    </span>правильное упакованное десятичное число в
+диапазоне 0 - 99. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>результат меньше 100, регистр содержит
+ответ, а флаг переноса
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит 0. Если результат находится в
+диапазоне 100 - 198, то в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AL остаются две младшие
+десятичные цифры, а флаг переноса
+
+<p><span
+style="mso-spacerun: yes">    </span>установлен равным 1, показывая, что был
+перенос.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>1/1/80 04:01:04
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 4.12 Пример двоично-десятичной арифметики<span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">  </span>Page<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.12 Пример двоично-десятичной арифметики
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>?? <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">      </span>BCD1<span
+style="mso-spacerun: yes">    </span>DB<span style="mso-spacerun: yes">     
+</span>?<span style="mso-spacerun: yes">       </span>; Две десятичные цифры
+упакованного числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">     </span>0001<span style="mso-spacerun: yes"> 
+</span>?? <span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">      </span>BCD2<span style="mso-spacerun: yes">   
+</span>DB<span style="mso-spacerun: yes">      </span>?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0002<span style="mso-spacerun: yes">  </span>????<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">      </span>BCD1L<span
+style="mso-spacerun: yes">   </span>DW<span style="mso-spacerun: yes">     
+</span>?<span style="mso-spacerun: yes">       </span>; Четыре десятичные цифры
+упакованного числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0004<span style="mso-spacerun: yes">  </span>????<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">      </span>BCD2L<span
+style="mso-spacerun: yes">   </span>DW<span style="mso-spacerun: yes">     
+</span>?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0006<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>FIG4_12 PROC<span style="mso-spacerun:
+yes">    </span>NEAR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Сложение двух упакованных чисел
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0006<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>DAA_EXAMPLE:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0006<span style="mso-spacerun: yes">  </span>A0 0000 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL, BCD1 ;
+Взять первое упакованное число
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0009<span style="mso-spacerun: yes">  </span>02 06 0001 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>ADD<span style="mso-spacerun: yes">     </span>AL, BCD2 ; Добавить
+второе
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000D<span style="mso-spacerun: yes">  </span>27 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>DAA<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">      
+</span>; Преобразование упакованного числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000E<span style="mso-spacerun: yes">  </span>C3 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>RET
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Сложение двух упакованных чисел размером по 4 цифры (2 байта)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000F<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>DAA_LONG:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000F<span style="mso-spacerun: yes">  </span>A0 0002 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL, BYTE PTR
+BCD1L
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0012<span style="mso-spacerun: yes">  </span>02 06 0004 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>ADD<span style="mso-spacerun: yes">     </span>AL, BYTE PTR BCD2L<span
+style="mso-spacerun: yes">      </span>; Добавление младшей части числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0016<span style="mso-spacerun: yes">  </span>27 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>DAA<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>; Коррекция упакованного числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0017<span style="mso-spacerun: yes">  </span>A2 0004 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>BYTE PTR
+BCD2L, AL<span style="mso-spacerun: yes">      </span>; Сохранение младшей
+части
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span><span style="mso-spacerun: yes">  </span>001A<span style="mso-spacerun:
+yes">  </span>A0 0003 R<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">      </span>MOV<span style="mso-spacerun: yes">    
+</span>AL, BYTE PTR BCD1L+1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.12 Примеры вычислений с BCD
+(начало)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001D<span style="mso-spacerun: yes">  </span>12 06 0005 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>ADC<span style="mso-spacerun: yes">     </span>AL, BYTE PTR BCD2L+1<span
+style="mso-spacerun: yes">    </span>; Добавление старшей части числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0021<span style="mso-spacerun: yes">  </span>27 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>DAA<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>; Коррекция упакованного числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0022<span style="mso-spacerun: yes">  </span>A2 0005 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>BYTE PTR
+BCD2L+1, AL<span style="mso-spacerun: yes">    </span>; Сохранение старшей
+части
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0025<span style="mso-spacerun: yes">  </span>C3 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>RET
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Сложение двух упакованных чисел
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">     </span>0026<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>DAS_EXAMPLE:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0026<span style="mso-spacerun: yes">  </span>A0 0000 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL, BCD1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0029<span style="mso-spacerun: yes">  </span>2A 06 0001 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>SUB<span style="mso-spacerun: yes">     </span>AL, BCD2<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>; Вычитание значений
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002D<span style="mso-spacerun: yes">  </span>2F <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>DAS<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>; Коррекция упакованного числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002E<span style="mso-spacerun: yes">  </span>C3 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>RET
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002F<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>FIG4_12 ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002F<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.12 Примеры вычислений с BCD
+(продоложение)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда DAA правильно устанавливает
+регистр флагов. Если в
+
+<p><span
+style="mso-spacerun: yes">    </span>результате сложения получилось значение в
+диапазоне 100 - 198, флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>переноса показывает перенос из старшей
+десятичной позиции.
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогично, нулевой результат оставляет
+установленным в 1 флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>нуля. В случае операций с упакованными
+десятичными числами флаги
+
+<p><span
+style="mso-spacerun: yes">    </span>знака и переполнения не имеют значения,
+хотя флаг знака
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливается, если установлен старший
+бит регистра AL. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>DAA использует флаг дополнительного
+переноса для определения вида
+
+<p><span
+style="mso-spacerun: yes">    </span>коррекции, но после выполнения этой
+команды флаг дополнительного
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>переноса неопределен.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Второй пример на Фиг. 4.12 демонстрирует
+десятичное сложение
+
+<p><span
+style="mso-spacerun: yes">    </span>повышенной точности. Оно весьма похоже на
+двоичную арифметику с
+
+<p><span
+style="mso-spacerun: yes">    </span>повышенной точностью, за исключением того,
+что после сложения
+
+<p><span
+style="mso-spacerun: yes">    </span>каждого байта появляется команда DAA.
+Из=за ограничений, присущих
+
+<p><span
+style="mso-spacerun: yes">    </span>команде DAA, в примере нельзя было сложить
+два упакованных
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичных слова, как слова, а затем
+применить коррекцию. С
+
+<p><span
+style="mso-spacerun: yes">    </span>упакованными десятичными числами разрешена
+только байтовая
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметика.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Наконец, на Фиг. 4.12 показано, как
+использовать команду DAS.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это делается так же, как и при сложении,
+но команда DAS должна
+
+<p><span
+style="mso-spacerun: yes">    </span>следовать за вычитанием. Здесь тоже
+допустимы только байтовые
+
+<p><span
+style="mso-spacerun: yes">    </span>операции.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

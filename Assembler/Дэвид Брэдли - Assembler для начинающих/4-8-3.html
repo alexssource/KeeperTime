@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-8-3">Пересылка строки
+</a></b></div></p>
+<p><span
+style="mso-spacerun: yes">    </span>Может показаться удобным использовать
+команды LODS и STOS для
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылки данных из одного места в другое,
+но для этой цели
+
+<p><span
+style="mso-spacerun: yes">    </span>существует другая команда, пересылка
+строки MOVS.<span style="mso-spacerun: yes">  </span>Эта команда
+
+<p><span
+style="mso-spacerun: yes">    </span>подобна комбинации команд LODS и
+STOS.<span style="mso-spacerun: yes">  </span>Она берет данные из пары
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров [DS:SI], помещает их в пару
+регистров [ES:DI], и изменяет
+
+<p><span
+style="mso-spacerun: yes">    </span>как регистр SI, так и регистр DI, чтобы
+они указывали на следующую
+
+<p><span
+style="mso-spacerun: yes">    </span>ячейку в каждой строке.<span
+style="mso-spacerun: yes">  </span>Команда MOVS делает это одна, и не
+
+<p><span
+style="mso-spacerun: yes">    </span>загружает аккумулятор во время
+пересылки.<span style="mso-spacerun: yes">  </span>Команда MOVS делает
+
+<p><span
+style="mso-spacerun: yes">    </span>сочетание LODS и STOS более быстрым и
+дающим меньше побочных
+
+<p><span
+style="mso-spacerun: yes">    </span>эффектов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда MOVS указывает два операнда
+памяти. Только MOVS и еще
+
+<p><span
+style="mso-spacerun: yes">    </span>одна строковая команда CMPS работают с
+двумя операндами памяти. Все
+
+<p><span
+style="mso-spacerun: yes">    </span>остальные команды требуют, чтобы один или
+оба операнда находились в
+<p><span
+style="mso-spacerun: yes">    </span>регистре микропроцессора. Как и команды
+LODS и STOS, команда MOVS
+
+<p><span
+style="mso-spacerun: yes">    </span>работает как с байтами, так и со словами.
+Поскольку строковые
+
+<p><span
+style="mso-spacerun: yes">    </span>команды имеют дело с жестко заданными
+адресами, для определения
+
+<p><span
+style="mso-spacerun: yes">    </span>типов служат только операнды, написанные
+программистом. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>должна иметь оба операнда, и оба они
+должны быть одинаковых типов,
+
+<p><span
+style="mso-spacerun: yes">    </span>иначе программист может указать тип
+пересылки частью кода операции,
+
+<p><span
+style="mso-spacerun: yes">    </span>т.е. команда MOVSB и случае байтовых строк
+или команда MOVSW для
+
+<p><span
+style="mso-spacerun: yes">    </span>строк, состоящих из слов. Если в программе
+используется основная
+
+<p><span
+style="mso-spacerun: yes">    </span>форма, команда MOVS, ассемблер проверяет
+переменные на правильность
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментной адресации, а также проверяет их
+типы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Комбинация команды MOVS с префиксом REP
+дает эффективную
+
+<p><span
+style="mso-spacerun: yes">    </span>команду пересылки блока. Имея счетчик в
+регистре CX и показывающий
+
+<p><span
+style="mso-spacerun: yes">    </span>направление пересылки флаг направления,
+команда REP MOVS пересылает
+
+<p><span
+style="mso-spacerun: yes">    </span>данные из одного места памяти в другое
+очень быстро.
+
+<p><span
+style="mso-spacerun: yes">    </span>Микропроцессор, выполняющий команду REP
+MOVS, пересылает данные с
+
+<p><span
+style="mso-spacerun: yes">    </span>максимально возможной скоростью. Он больше
+не выбирает никакие
+
+<p><span
+style="mso-spacerun: yes">    </span>команды, поскольку единственное, что
+делается во время такой
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылки - это пересылка.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Установка флага направления критична для
+правильной работы
+
+<p><span
+style="mso-spacerun: yes">    </span>команды REP MOVS. Различные виды установки
+флага направления
+
+<p><span
+style="mso-spacerun: yes">    </span>обсуждались в гл.3 именно на примере
+команды пересылки, и в
+
+<p><span
+style="mso-spacerun: yes">    </span>программе необходимо придерживаться
+рекомендаций, данных в этой
+
+<p><span
+style="mso-spacerun: yes">    </span>главе, особенно, если поля источника и
+результата перекрываются.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

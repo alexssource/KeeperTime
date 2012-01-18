@@ -1,0 +1,693 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="10-7"> Компилируемые языки высокого уровня</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>В предыдущих примерах рассматривалась
+программа на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера, используемая совместно с
+интерпретатором Бейсика.
+
+<p><span
+style="mso-spacerun: yes">    </span>Версия языка Бейсик, входящая в поставку
+IBM PC, является
+
+<p><span
+style="mso-spacerun: yes">    </span>интерпретируемым языком.<span
+style="mso-spacerun: yes">  </span>Это означает, что программа хранится в
+
+<p><span
+style="mso-spacerun: yes">    </span>ЭВМ в виде, очень похожем на исходный
+текст.<span style="mso-spacerun: yes">  </span>Интерпретатор не
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразует операторы языка Бейсик в
+команды машинного языка.
+
+<p><span
+style="mso-spacerun: yes">    </span>Интерпретатор Бейсика во время выполнения
+просматривает каждый
+
+<p><span
+style="mso-spacerun: yes">    </span>оператор программы и делает все, что
+необходимо для выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>этого оператора.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>По-другому работает компилятор.<span
+style="mso-spacerun: yes">  </span>Он преобразует операторы языка
+
+<p><span
+style="mso-spacerun: yes">    </span>высокого уровня в команды машинного языка.<span
+style='mso-tab-count:1'>  </span>Фирма IBM предлагает
+
+<p><span
+style="mso-spacerun: yes">    </span>компиляторы для персональной ЭВМ с языков
+Бейсик, Паскаль, Фортран
+
+<p><span
+style="mso-spacerun: yes">    </span>и Кобол.<span style="mso-spacerun: yes"> 
+</span>Выходом компилятора является программа на машинном языке
+
+<p><span
+style="mso-spacerun: yes">    </span>(файл *.OBJ), т.е.<span style='mso-tab-count:
+1'>  </span>он во многом аналогичен выходу ассемблера.
+
+<p><span
+style="mso-spacerun: yes">    </span>Запуск программы, написанной на
+компилируемом языке высокого уровня
+
+<p><span
+style="mso-spacerun: yes">    </span>состоит из двух этапов.<span
+style="mso-spacerun: yes">  </span>Сначала программа должна быть
+
+<p><span
+style="mso-spacerun: yes">    </span>скомпилирована, и должны быть
+отредактированы связи.<span style="mso-spacerun: yes">  </span>Затем она
+
+<p><span
+style="mso-spacerun: yes">    </span>может быть выполнена.<span
+style="mso-spacerun: yes">  </span>Интерпретируемая программа может выполняться
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно, минуя этап компиляции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Компилируемые языки на персональной ЭВМ
+аналогичны языку Бейсик
+
+<p><span
+style="mso-spacerun: yes">    </span>в том смысле, что не дают возможности
+делать с техническим
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечением все, что вздумается.<span
+style="mso-spacerun: yes">  </span>На самом деле интерпретатор
+
+<p><span
+style="mso-spacerun: yes">    </span>Бейсика еще позволяет программисту при
+помощи операторов программы
+
+<p><span
+style="mso-spacerun: yes">    </span>считывать и записывать информацию с портов
+ввода-вывода и ячеек
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.<span style="mso-spacerun: yes"> 
+</span>Другие языки не всегда предоставляют даже эту возможность.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поэтому применение подпрограмм на языке
+ассемблера в программе на
+
+<p><span
+style="mso-spacerun: yes">    </span>Паскале или Фортране может оказаться даже
+более необходимым.
+
+<p><span
+style="mso-spacerun: yes">    </span>Возможно, вам придется заняться этим, если
+вы захотите
+
+<p><span
+style="mso-spacerun: yes">    </span>воспользоваться всеми возможностями
+технического обеспечения.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>К счастью, включить процедуру на языке
+ассемблера в программу
+
+<p><span
+style="mso-spacerun: yes">    </span>на компилируемом языке высокого уровня
+довольно просто, так как
+
+<p><span
+style="mso-spacerun: yes">    </span>выходом компилятора является объектный
+файл, готовый к
+
+<p><span
+style="mso-spacerun: yes">    </span>редактированию связей.<span
+style="mso-spacerun: yes">  </span>Выход ассемблера - тоже объектный файл.
+
+<p><span
+style="mso-spacerun: yes">    </span>Следовательно, достаточно лишь связать
+программу на языке высокого
+
+<p><span
+style="mso-spacerun: yes">    </span>уровня и программу на языке ассемблера при
+помощи редактора связей
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS.<span style="mso-spacerun: yes"> 
+</span>Нет необходимости соединять программы в процессе выполнения,
+
+<p><span
+style="mso-spacerun: yes">    </span>как это делалось для интерпретатора
+Бейсика.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Построим пример на языке Фортран (Фиг.<span
+style='mso-tab-count:1'>    </span>10.11).<span style="mso-spacerun: yes"> 
+</span>Для языка
+
+<p><span
+style="mso-spacerun: yes">    </span>Паскаль все очень похоже.<span
+style="mso-spacerun: yes">  </span>Подобный пример приведен в приложении D
+
+<p><span
+style="mso-spacerun: yes">    </span>справочника к компилятору Фортрана.<span
+style="mso-spacerun: yes">  </span>В примере головная программа,
+
+<p><span
+style="mso-spacerun: yes">    </span>написанная на Фортране, объединена с
+программой на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера, которая считывает текущее
+время, используя программное
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>прерывание базовой системы ввода-вывода.<span style="mso-spacerun:
+yes">  </span>Подпрограмма на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера обращается к BIOS для
+определения текущего времени и
+
+<p><span
+style="mso-spacerun: yes">    </span>возвращает соответствующее значение в
+программу на Фортране.
+
+<p><span
+style="mso-spacerun: yes">    </span>Головная программа преобразует кванты
+таймера, в текущее время,
+
+<p><span
+style="mso-spacerun: yes">    </span>выраженное в часах, минутах и секундах.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.<span style="mso-spacerun: yes"> 
+</span>10.11 представлена головная программа на Фортране.
+
+<p><span
+style="mso-spacerun: yes">    </span>Эта программа вызывает внешнюю процедуру
+TIMER, имеющую один
+
+<p><span
+style="mso-spacerun: yes">    </span>параметр A - четырехбайтовое целое
+значение.<span style="mso-spacerun: yes">  </span>Возрващаемое
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>процедурой TIMER значение представляет собой текущее время,
+
+<p><span
+style="mso-spacerun: yes">    </span>выраженное в квантах таймера и
+отсчитываемое от полуночи.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа на Фортране по полученному из
+процедуры TIMER значению
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисляет время в часах(HOURS),
+минутах(MINS), секундах(SECS) и
+
+<p><span
+style="mso-spacerun: yes">    </span>сотых долях секунды(HSECS).<span
+style="mso-spacerun: yes">  </span>Отметим, насколько проще реализовать
+
+<p><span
+style="mso-spacerun: yes">    </span>умножение и деление на языке Фортран, чем
+на языке ассемблера.
+
+<p><span
+style="mso-spacerun: yes">    </span>Можно убедиться, что выполнение всех
+подобных операций на Фортране
+
+<p><span
+style="mso-spacerun: yes">    </span>существенно упрощает
+программирование.<span style="mso-spacerun: yes">  </span>Чрезвычайно удобен и
+способ
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразования целых переменных в
+выдаваемые на печать символы при
+
+<p><span
+style="mso-spacerun: yes">    </span>помощи операторов Фортрана WRITE и FORMAT.<span
+style='mso-tab-count:1'>  </span>На языке ассемблера для
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения тех же самых действий
+потребовалось бы несколько сот
+
+<p><span
+style="mso-spacerun: yes">    </span>строк.<span style="mso-spacerun: yes"> 
+</span>Вспомним пример для сопроцессора 8087, где программа
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразовывала число с плавающей точкой в
+код ASCII.<span style="mso-spacerun: yes">  </span>В этой
+
+<p><span
+style="mso-spacerun: yes">    </span>программе содержалось значительное число
+команд, и, кроме того,
+
+<p><span
+style="mso-spacerun: yes">    </span>использовался сопроцессор 8087.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>$STORAGE=4
+
+<p><span
+style='mso-tab-count:2'>            </span>INTEGER A,HOURS,MINS,SECS,HSECS
+
+<p><span
+style='mso-tab-count:2'>            </span>CALL TIMER(A)
+
+<p><span
+style='mso-tab-count:2'>            </span>HOURS=A/65543
+
+<p><span
+style='mso-tab-count:2'>            </span>A=A-HOURS*65543
+
+<p><span
+style='mso-tab-count:2'>            </span>MINS=A/1092
+
+<p><span
+style='mso-tab-count:2'>            </span>A=A-MINS*1092
+
+<p><span
+style='mso-tab-count:2'>            </span>SECS=A/18
+
+<p><span
+style='mso-tab-count:2'>            </span>HSECS=(100*(A-SECS*18))/18
+
+<p><span
+style='mso-tab-count:2'>            </span>WRITE(*,10)HOURS,MINS,SECS,HSECS
+
+<p><span
+style='mso-tab-count:1'>      </span>10<span style='mso-tab-count:1'>    </span>FORMAT(1X,'THE
+TIME IS: ',I2,':',I2,':',I2,'.',I2)
+
+<p><span
+style='mso-tab-count:2'>            </span>END
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 10.11 Программа определения времени
+дня на Фортране
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes"> 
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">      </span>4/2/89
+16:07:35
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 10.12 Подпрограмма для программы на ФОРТРАНе<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    
+</span>Page<span style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 10.12 Подпрограмма для программы на ФОРТРАНе
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>FRAME<span style='mso-tab-count:1'>      </span>
+STRUC
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>????<span
+style='mso-tab-count:3'>              </span> SAVEBP<span style="mso-spacerun:
+yes">  </span>DW<span style='mso-tab-count:1'> </span> ?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0002<span style='mso-tab-count:1'>      </span>????????<span
+style='mso-tab-count:2'>          </span> SAVERET DD<span style='mso-tab-count:
+1'> </span> ?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0006<span style='mso-tab-count:1'>      </span>????????<span
+style='mso-tab-count:2'>          </span> A<span style='mso-tab-count:1'>    </span>
+DD<span style='mso-tab-count:1'>   </span> ?<span style='mso-tab-count:2'>          </span>
+; Указатель на параметр
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000A<span style='mso-tab-count:4'>                        </span> FRAME<span
+style='mso-tab-count:1'>      </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT 'CODE'
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>DGROUP<span style="mso-spacerun: yes"> 
+</span>GROUP<span style='mso-tab-count:1'>    </span> DATA
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:DGROUP,ES:DGROUP,SS:DGROUP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> TIMER<span
+style='mso-tab-count:1'>      </span> PROC<span style='mso-tab-count:1'> </span>
+FAR
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PUBLIC<span style="mso-spacerun: yes"> 
+</span>TIMER<span style='mso-tab-count:2'>          </span> ; Указание
+программе LINK на расположение
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes"> </span>;<span style="mso-spacerun: yes"> 
+</span>программы TIMER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>55<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> BP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0001<span style='mso-tab-count:1'>      </span>8B EC<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> BP,SP<span style='mso-tab-count:2'>            </span>; Загрузка
+адреса стека
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0003<span style='mso-tab-count:1'>      </span>B4 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH,0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0005<span style='mso-tab-count:1'>      </span>CD 1A<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 1Ah<span style='mso-tab-count:2'>        </span> ; Вызов BIOS для
+получения даты и времени
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0007<span style='mso-tab-count:1'>      </span>C4 5E 06<span
+style='mso-tab-count:3'>                </span> LES<span style='mso-tab-count:
+1'>  </span> BX,[BP].A<span style='mso-tab-count:1'>  </span>; Загрузка адреса
+поля параметров
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000A<span style='mso-tab-count:1'>      </span>26: 89 17<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> ES:[BX],DX<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>; Сохранение младшей части времени
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000D<span style='mso-tab-count:1'>      </span>26: 89 4F 02<span
+style='mso-tab-count:3'>                  </span> MOV<span style='mso-tab-count:
+1'>  </span> ES:[BX+2],CX<span style='mso-tab-count:1'>     </span>; Сохранение
+старшей части времени
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0011<span style='mso-tab-count:1'>      </span>5D<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> BP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0012<span style='mso-tab-count:1'>      </span>CA 0004 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>RET<span style='mso-tab-count:1'>  </span> 4<span
+style='mso-tab-count:2'>          </span> ; Возврат с удалением параметров из
+стека
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span><span style="mso-spacerun: yes"> </span>0015<span
+style='mso-tab-count:4'>                        </span> TIMER<span
+style='mso-tab-count:1'>      </span> ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0015<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 10.12 Ассемблерная процедура для
+программы на Фортране
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.<span style="mso-spacerun: yes"> 
+</span>10.12 представлена подпрограмма на языке ассемблера -
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура TIMER.<span style="mso-spacerun:
+yes">  </span>В этой несложной программе для считывания
+
+<p><span
+style="mso-spacerun: yes">    </span>текущего времени и сохранения полученного
+значения в двойном слове
+
+<p><span
+style="mso-spacerun: yes">    </span>используется обращение к BIOS.<span
+style="mso-spacerun: yes">  </span>Здесь нам необходимо рассмотреть
+
+<p><span
+style="mso-spacerun: yes">    </span>способ передачи параметров из программы на
+Фортране в подпрограмму
+
+<p><span
+style="mso-spacerun: yes">    </span>на языке ассемблера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.10.13 показано содержимое стека в
+начальный момент
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения подпрограммы на языке
+ассемблера.<span style="mso-spacerun: yes">  </span>Точно так же, как
+
+<p><span
+style="mso-spacerun: yes">    </span>интерпретатор Бейсика, программа на
+Фортране помещает адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>параметра в стек.<span
+style="mso-spacerun: yes">  </span>Однако компиляторы Фортрана и Паскаля
+передают
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель длиной в два слова, а не одно
+только смещение параметра.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это означает, что программа на языке
+ассемблера, прежде чем
+
+<p><span
+style="mso-spacerun: yes">    </span>получить доступ к параметру, должна
+установить как сегментный
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>регистр, так и адрес смещения.<span style="mso-spacerun: yes"> 
+</span>Если бы параметров было более
+
+<p><span
+style="mso-spacerun: yes">    </span>одного, то программа на Фортране перед
+вызовом поместила бы в стек
+
+<p><span
+style="mso-spacerun: yes">    </span>значения адресов и остальных параметров.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>ГДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>SPДДДД&gt;і Смещение<span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>і возврата<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>ГДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>і Сегмент<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>і возврата<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>ГДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>і Смещение<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>і аргумента<span style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>ГДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>і Сегмент<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>і аргумента<span style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>ГДДДДДДДДДДДДґ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 10.13 Стек для вызова процедуры в
+Фортране
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Подпрограмма TIMER на Фиг.<span
+style="mso-spacerun: yes">  </span>10.12 адресует стек, помещая в него
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр BP и устанавливая его на вершину
+стека.Структура FRAME
+
+<p><span
+style="mso-spacerun: yes">    </span>помогает идентифицировать разные значения
+в стеке после того как
+
+<p><span
+style="mso-spacerun: yes">    </span>программа сохранит в нем значение BP.<span
+style="mso-spacerun: yes">  </span>Команда LES BX,[BP]+A
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает адрес параметра в пару регистров
+ES:BX.<span style="mso-spacerun: yes">  </span>Используя этот
+
+<p><span
+style="mso-spacerun: yes">    </span>адрес, программа помещает четырехбайтовое
+значение текущего времени
+
+<p><span
+style="mso-spacerun: yes">    </span>в четырехбайтовую целую переменную.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Заметим, что процедура TIMER извлекает
+адрес параметра из стека
+
+<p><span
+style="mso-spacerun: yes">    </span>при выполнении команды возврата точно так
+же, как это делалось в
+
+<p><span
+style="mso-spacerun: yes">    </span>программах на языке Бейсик.<span
+style="mso-spacerun: yes">  </span>Заметим также, что в этой ассемблерной
+
+<p><span
+style="mso-spacerun: yes">    </span>программе для идентификации имени TIMER
+используется оператор
+
+<p><span
+style="mso-spacerun: yes">    </span>PUBLIC.<span style="mso-spacerun: yes"> 
+</span>Делается это для того, чтобы редактор связей мог найти
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмму и правильно связать ее с
+программой на Фортране.<span style="mso-spacerun: yes">  </span>Для
+
+<p><span
+style="mso-spacerun: yes">    </span>интерпретатора Бейсика такой необходимости
+не было, поскольку
+
+<p><span
+style="mso-spacerun: yes">    </span>программа на Бейсике не редактировалась
+совместно с программой на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке ассемблера.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

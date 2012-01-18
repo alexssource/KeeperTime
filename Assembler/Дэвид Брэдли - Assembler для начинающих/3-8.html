@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-8">Байт MOD R-M</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Как<span style="mso-spacerun: yes"> 
+</span>же адресная<span style="mso-spacerun: yes">  </span>информация
+передается<span style="mso-spacerun: yes">  </span>микропроцессору в машинном
+
+<p><span
+style="mso-spacerun: yes">    </span>языке?<span style="mso-spacerun: yes"> 
+</span>8088<span style="mso-spacerun: yes">  </span>использует<span
+style="mso-spacerun: yes">  </span>почти<span style="mso-spacerun: yes"> 
+</span>для<span style="mso-spacerun: yes">  </span>всех<span style='mso-tab-count:
+1'>  </span>операций адресации байт
+
+<p><span
+style="mso-spacerun: yes">    </span>MOD-R/M<span style="mso-spacerun: yes"> 
+</span>(байт<span style="mso-spacerun: yes">  </span>режима<span
+style="mso-spacerun: yes">  </span>адресации<span style="mso-spacerun: yes"> 
+</span>и<span style="mso-spacerun: yes">  </span>регистра/модификатора - прим.
+
+<p><span
+style="mso-spacerun: yes">    </span>перев.).<span style="mso-spacerun: yes"> 
+</span>Фиг.3.4<span style="mso-spacerun: yes">  </span>показывает<span
+style="mso-spacerun: yes">  </span>формат<span style="mso-spacerun: yes"> 
+</span>этого<span style="mso-spacerun: yes">  </span>байта<span
+style="mso-spacerun: yes">  </span>команды.<span style="mso-spacerun: yes"> 
+</span>Байт
+
+<p><span
+style="mso-spacerun: yes">    </span>MOD-R/M следует<span style="mso-spacerun:
+yes">  </span>за байтом кода операции<span style="mso-spacerun: yes">  </span>и
+определяет один операнд
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти команды 8088. Этот байт может
+вместо ячейки памяти указывать
+
+<p><span
+style="mso-spacerun: yes">    </span>и регистр.<span style='mso-tab-count:1'>    </span>Такое<span
+style="mso-spacerun: yes">  </span>единство<span style="mso-spacerun: yes"> 
+</span>структуры<span style="mso-spacerun: yes">  </span>позволяет<span
+style="mso-spacerun: yes">  </span>реализовать<span style="mso-spacerun: yes"> 
+</span>все
+
+<p><span
+style="mso-spacerun: yes">    </span>возможности адресации операндов.
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>ЪДДДДДДДВДДДДДДДДДДДВДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>і <span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>АДДДБДДДБДДДБДДДБДДДБДДДБДДДБДДДЩ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Режим<span style="mso-spacerun: yes">   </span>Заданная<span
+style='mso-tab-count:1'>    </span>Регистр-
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>команда<span style='mso-tab-count:1'> </span>модификатор
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>Режим<span style='mso-tab-count:2'>       </span>Смещение
+
+<p><span
+style="mso-spacerun: yes">    
+</span>-------------------------------------------------
+
+<p><span
+style="mso-spacerun: yes">      </span>00<span style="mso-spacerun: yes">    
+</span>DISP=0, нет байтов смещения
+
+<p><span
+style="mso-spacerun: yes">      </span>01<span style="mso-spacerun: yes">    
+</span>-128&lt;DISP&lt;127, однобайтовое смещение
+
+<p><span
+style="mso-spacerun: yes">      </span>10<span style="mso-spacerun: yes">    
+</span>-32768&lt;DISP&lt;32767, двухбайтовое смещение
+
+<p><span
+style="mso-spacerun: yes">      </span>11<span style="mso-spacerun: yes">    
+</span>В поле r/m - регистр, а не адрес
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 3.4 Байт режима адресации и
+регистра-модификатора
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первые два<span style="mso-spacerun:
+yes">  </span>бита байта MOD-R/M определяют<span style="mso-spacerun: yes"> 
+</span>выбранный способ ад-
+
+<p><span
+style="mso-spacerun: yes">    </span>ресации.<span style="mso-spacerun: yes"> 
+</span>Эти<span style="mso-spacerun: yes">  </span>два<span style='mso-tab-count:
+1'>  </span>бита<span style="mso-spacerun: yes">  </span>определяют<span
+style="mso-spacerun: yes">  </span>число<span style="mso-spacerun: yes"> 
+</span>байт смещения, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>следуют за<span style='mso-tab-count:1'>    </span>байтом
+MOD-R/M - ни<span style="mso-spacerun: yes">  </span>одного, один или два.<span
+style="mso-spacerun: yes">  </span>Последние 3
+
+<p><span
+style="mso-spacerun: yes">    </span>бита байта MOD-R/M определяют вид<span
+style="mso-spacerun: yes">  </span>адреса - одну из восьми комбина-
+
+<p><span
+style="mso-spacerun: yes">    </span>ций базисных и индексных регистров. Это
+поле называется полем R/M -
+
+<p><span
+style="mso-spacerun: yes">    </span>полем регистра/модификатора. Это те
+самые<span style="mso-spacerun: yes">  </span>3 бита из колноки R/M на
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг.3.3, где показаны возможные<span
+style="mso-spacerun: yes">  </span>комбинации при адресации. Значение
+
+<p><span
+style="mso-spacerun: yes">    </span>оставшихся 3-х<span style="mso-spacerun:
+yes">  </span>бит в середине байта<span style="mso-spacerun: yes"> 
+</span>MOD-R/M зависят от конкретной
+
+<p><span
+style="mso-spacerun: yes">    </span>команды.<span style="mso-spacerun: yes"> 
+</span>Для<span style="mso-spacerun: yes">  </span>команды<span
+style="mso-spacerun: yes">  </span>с<span style="mso-spacerun: yes"> 
+</span>двумя<span style="mso-spacerun: yes">  </span>операндами,<span
+style="mso-spacerun: yes">  </span>вроде<span style="mso-spacerun: yes"> 
+</span>ADD, это поле
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает регистр, являющийся вторым
+операндом. Для команды с одним
+
+<p><span
+style="mso-spacerun: yes">    </span>операндом,<span style='mso-tab-count:1'>    </span>как
+INC,<span style="mso-spacerun: yes">  </span>эти три<span style="mso-spacerun:
+yes">  </span>бита обычно<span style='mso-tab-count:1'>      </span>составляют
+часть самого
+
+<p><span
+style="mso-spacerun: yes">    </span>кода операции. 8088<span
+style="mso-spacerun: yes">  </span>не знает, что имеет дело<span
+style="mso-spacerun: yes">  </span>с командой INC, пока
+
+<p><span
+style="mso-spacerun: yes">    </span>не расшифрует средние три бита байта
+MOD-R/M.
+
+<p><span
+style='mso-tab-count:1'>      </span>Этот же байт используется еще<span
+style="mso-spacerun: yes">  </span>в паре специальных случаев. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>в команде определен<span
+style="mso-spacerun: yes">  </span>регистр, а не<span style='mso-tab-count:
+1'>    </span>адрес памяти, то<span style="mso-spacerun: yes">  </span>в поле
+режима
+
+<p><span
+style="mso-spacerun: yes">    </span>помещается код<span style="mso-spacerun:
+yes">  </span>11B, чтобы сообщить<span style="mso-spacerun: yes"> 
+</span>микропроцессору, что поле<span style="mso-spacerun: yes">  </span>R/M
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит<span style="mso-spacerun: yes"> 
+</span>код регистра,<span style="mso-spacerun: yes">  </span>а не<span
+style="mso-spacerun: yes">  </span>адрес памяти.<span style="mso-spacerun:
+yes">  </span>Наконец, вы<span style="mso-spacerun: yes">  </span>возможно
+
+<p><span
+style="mso-spacerun: yes">    </span>заметили, что в механизме работы<span
+style="mso-spacerun: yes">  </span>с байтом MOD-R/M не предусмотрена
+
+<p><span
+style="mso-spacerun: yes">    </span>прямая<span style="mso-spacerun: yes"> 
+</span>адресация. 8088<span style="mso-spacerun: yes">  </span>рассматривает
+как<span style='mso-tab-count:1'>  </span>прямую адресацию случай
+
+<p><span
+style="mso-spacerun: yes">    </span>типа<span style="mso-spacerun: yes"> 
+</span>[BP +<span style="mso-spacerun: yes">  </span>СМЕЩЕНИЕ] при<span
+style='mso-tab-count:1'>      </span> нулевом смещении.<span
+style="mso-spacerun: yes">  </span>В этом<span style="mso-spacerun: yes"> 
+</span>случае поле
+
+<p><span
+style="mso-spacerun: yes">    </span>смещения имеет длину два байта,<span
+style="mso-spacerun: yes">  </span>и в вычислении адреса не участвует
+
+<p><span
+style="mso-spacerun: yes">    </span>ни один регистр. Из-за этого особого
+случая доступ к ячейке памяти,
+
+<p><span
+style="mso-spacerun: yes">    </span>на<span style='mso-tab-count:1'>      </span>которую<span
+style="mso-spacerun: yes">  </span>указывает<span style="mso-spacerun: yes"> 
+</span>регистр<span style="mso-spacerun: yes">   </span>BP,<span
+style="mso-spacerun: yes">  </span>в<span style="mso-spacerun: yes"> 
+</span>машинном<span style='mso-tab-count:1'>  </span>коде<span
+style="mso-spacerun: yes">  </span>требуется
+
+<p><span
+style="mso-spacerun: yes">    </span>однобайтовое поле смещения с нулевым
+значением. Использование в той
+
+<p><span
+style="mso-spacerun: yes">    </span>же<span style='mso-tab-count:1'>      </span>ситуации
+регистров<span style="mso-spacerun: yes">  </span>BX, SI<span
+style="mso-spacerun: yes">  </span>и DI<span style="mso-spacerun: yes"> 
+</span>не требует<span style="mso-spacerun: yes">  </span>байта смещения. В
+
+<p><span
+style="mso-spacerun: yes">    </span>следующем пункте будет показано<span
+style="mso-spacerun: yes">  </span>еще одно различие между адресацией
+
+
+<p><span
+style="mso-spacerun: yes">    </span>через регистры BP и BX.
+
+<p><div align="center"><b><font size="+1" face="Arial"> </font></b></div></p>
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

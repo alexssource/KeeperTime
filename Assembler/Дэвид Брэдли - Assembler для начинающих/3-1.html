@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-1">Модель программирования 8088</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Для<span style="mso-spacerun: yes"> 
+</span>того,<span style='mso-tab-count:1'>    </span>чтобы понять 8088 и
+научиться программировать для него,
+
+<p><span
+style="mso-spacerun: yes">    </span>мы начнем<span style="mso-spacerun: yes"> 
+</span>с его внутреннего устройства.<span style="mso-spacerun: yes"> 
+</span>Внутри процессора имеются
+
+<p><span
+style="mso-spacerun: yes">    </span>специальные ячейки памяти, называемые
+регистрами. В регистрах можно
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ЪДДДДДДДДДДДДДВДДДДДДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">      </span>AX<span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">   </span>AH<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span> AL<span
+style='mso-tab-count:1'>   </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>
+і
+
+<p><span
+style="mso-spacerun: yes">      </span>BX<span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">   </span>BH<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span> BL<span
+style='mso-tab-count:1'>   </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>
+і<span style='mso-tab-count:1'>    </span> Регистры общего
+
+<p><span
+style="mso-spacerun: yes">      </span>CX<span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">   </span>CH<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span> CL<span
+style='mso-tab-count:1'>   </span> і<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>назанчения
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>
+і
+
+<p><span
+style="mso-spacerun: yes">      </span>DX<span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">   </span>DH<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span> DL<span
+style='mso-tab-count:1'>   </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>АДДДДДДДДДДДДДБДДДДДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ЪДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span> SI<span
+style='mso-tab-count:2'>         </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span> DI<span
+style='mso-tab-count:2'>         </span> і<span style='mso-tab-count:1'>    </span>
+Адресные регистры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span> BP<span
+style='mso-tab-count:2'>         </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>АДДДДДДДДДДДДДДДДДДДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ЪДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span> SP<span
+style='mso-tab-count:2'>         </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span> IP<span
+style='mso-tab-count:2'>         </span> і<span style='mso-tab-count:1'>    </span>
+Регистры управления
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span>FLAGS<span
+style='mso-tab-count:2'>       </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>АДДДДДДДДДДДДДДДДДДДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ЪДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span> CS<span
+style='mso-tab-count:2'>         </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span> DS<span
+style='mso-tab-count:2'>         </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДґ<span style='mso-tab-count:1'>  </span>
+Сегментные регистры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span> ES<span
+style='mso-tab-count:2'>         </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:2'>            </span> SS<span
+style='mso-tab-count:2'>         </span> і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>АДДДДДДДДДДДДДДДДДДДДДДДДДДДЩ<span style="mso-spacerun: yes">   
+</span>Фиг. 3.1 Регистры 8088
+
+<p><span
+style="mso-spacerun: yes">      </span>сохранять данные-операнды<span
+style="mso-spacerun: yes">  </span>или адреса памяти.<span style="mso-spacerun:
+yes">  </span>Поскольку регистры
+
+<p><span
+style="mso-spacerun: yes">    </span>расположены внутри самого процессора, он
+имеет очень быстрый доступ
+
+<p><span
+style="mso-spacerun: yes">    </span>к находящимся в них<span
+style="mso-spacerun: yes">  </span>данным, намного более быстрый, чем<span
+style="mso-spacerun: yes">  </span>к данным в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.<span style="mso-spacerun: yes"> 
+</span>Если в<span style="mso-spacerun: yes">  </span>программе требуется<span
+style="mso-spacerun: yes">  </span>быстрыый доступ<span style="mso-spacerun:
+yes">  </span>к какой-либо
+
+<p><span
+style="mso-spacerun: yes">    </span>переменной, то хранение ее значения в
+регистре ускоряет выполнение.
+
+<p><span
+style='mso-tab-count:1'>      </span>Набор<span style="mso-spacerun: yes"> 
+</span>регистров 8088 состоит из нескольких групп. Все регистры
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 показаны по группам на Фиг 3.1.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+
+</body>
+</html>

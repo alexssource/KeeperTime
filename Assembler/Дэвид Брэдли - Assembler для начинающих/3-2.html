@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-2">Регистры общего назначения</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>В первую группу<span style="mso-spacerun:
+yes">  </span>входят регистры, используемые<span style="mso-spacerun: yes"> 
+</span>в основном для<span style="mso-spacerun: yes">  </span>вы-
+
+<p><span
+style="mso-spacerun: yes">    </span>числений. Все эти общие регистры<span
+style="mso-spacerun: yes">  </span>имеют размер 16 бит, но программа
+
+<p><span
+style="mso-spacerun: yes">    </span>может работать и со старшими или младшими
+8-ю битами каждого регис-
+
+<p><span
+style="mso-spacerun: yes">    </span>тра отдельно. Например. регистр AX состоит
+из 16 бит. Программа мо-
+
+<p><span
+style="mso-spacerun: yes">    </span>жет обратиться к старшим 8 битам AX<span
+style="mso-spacerun: yes">  </span>как к регистру AH, а младшие 8
+
+<p><span
+style="mso-spacerun: yes">    </span>бит образуют регистр<span
+style="mso-spacerun: yes">  </span>AL. То же самое верно для<span
+style="mso-spacerun: yes">  </span>регистров BX, CX и
+
+<p><span
+style="mso-spacerun: yes">    </span>DX. Программа может рассмматривать<span
+style='mso-tab-count:1'>    </span>эту группу регистров как четыре
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовых, восемь 8-битовых или некоторую
+комбинацию 8- и 16-бито-
+
+<p><span
+style="mso-spacerun: yes">    </span>вых регистров.
+
+<p><span
+style='mso-tab-count:1'>      </span>Основное назначение группы общих<span
+style="mso-spacerun: yes">  </span>регистров - хранить операнды.
+
+<p><span
+style="mso-spacerun: yes">    </span>Общие регистры характерны
+способностью<span style="mso-spacerun: yes">  </span>хранить как слово, так
+байт
+
+<p><span
+style="mso-spacerun: yes">    </span>данных.<span style="mso-spacerun: yes"> 
+</span>Однако эти<span style="mso-spacerun: yes">  </span>регистры при<span
+style="mso-spacerun: yes">  </span>выполнении определенных операций
+
+<p><span
+style="mso-spacerun: yes">    </span>имеют<span style="mso-spacerun: yes">  
+</span>специальное<span style="mso-spacerun: yes">  </span>назначение,<span
+style="mso-spacerun: yes">   </span>либо<span style="mso-spacerun: yes"> 
+</span>они<span style="mso-spacerun: yes">   </span>могут<span
+style="mso-spacerun: yes">  </span>иметь<span style="mso-spacerun: yes"> 
+</span>особые
+
+<p><span
+style="mso-spacerun: yes">    </span>возможности помимо тех, которые<span
+style="mso-spacerun: yes">  </span>имеются у остальных регистров этой
+
+<p><span
+style="mso-spacerun: yes">    </span>группы.<span style="mso-spacerun: yes"> 
+</span>В<span style='mso-tab-count:1'>    </span>следующих<span
+style="mso-spacerun: yes">  </span>разделах<span style="mso-spacerun: yes"> 
+</span>отмечены<span style="mso-spacerun: yes">  </span>некоторые из
+специальных
+
+<p><span
+style="mso-spacerun: yes">    </span>функций этих регистров.
+
+<p><span
+style='mso-tab-count:1'>      </span>Регистр<span style="mso-spacerun: yes"> 
+</span>AX соответствует<span style="mso-spacerun: yes">  </span>сумматору
+более<span style="mso-spacerun: yes">  </span>ранних процессоров.
+
+<p><span
+style="mso-spacerun: yes">    </span>Хотя<span style="mso-spacerun: yes"> 
+</span>8088<span style='mso-tab-count:1'>    </span> значительно<span
+style="mso-spacerun: yes">  </span>более<span style="mso-spacerun: yes"> 
+</span>универсален,<span style="mso-spacerun: yes">   </span>например,<span
+style="mso-spacerun: yes">  </span>в<span style="mso-spacerun: yes"> 
+</span>части
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметических операций,<span
+style="mso-spacerun: yes">  </span>чем ранние машины<span style="mso-spacerun:
+yes">  </span>вроде процессора 8080,
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр<span style="mso-spacerun: yes"> 
+</span>AX<span style="mso-spacerun: yes">  </span>имеет<span style='mso-tab-count:
+1'>  </span>несколько<span style="mso-spacerun: yes">   </span>специальных<span
+style="mso-spacerun: yes">  </span>функций.<span style="mso-spacerun: yes"> 
+</span>Фирма<span style="mso-spacerun: yes">  </span>Intel
+
+<p><span
+style="mso-spacerun: yes">    </span>оптимизировала набор команд 8088,<span
+style="mso-spacerun: yes">  </span>привлекая к выполнению некоторых
+
+<p><span
+style="mso-spacerun: yes">    </span>операций<span style="mso-spacerun: yes">  
+</span>регистр<span style='mso-tab-count:1'>  </span> AX.<span
+style="mso-spacerun: yes">   </span>Например,<span style="mso-spacerun: yes">  
+</span>существуют<span style="mso-spacerun: yes">  </span>непосредственные
+
+<p><span
+style="mso-spacerun: yes">    </span>операции,<span style="mso-spacerun: yes"> 
+</span>в<span style="mso-spacerun: yes">  </span>которых<span
+style="mso-spacerun: yes">  </span>один<span style="mso-spacerun: yes">  
+</span>из<span style="mso-spacerun: yes">  </span>операндов<span
+style="mso-spacerun: yes">  </span>подразумевается<span style="mso-spacerun:
+yes">  </span>самой
+
+<p><span
+style="mso-spacerun: yes">    </span>командой.<span style="mso-spacerun: yes"> 
+</span>Непосредственные операции<span style="mso-spacerun: yes">  </span>с
+регистрами<span style='mso-tab-count:1'>      </span>AX и<span
+style="mso-spacerun: yes">  </span>AL (16- и
+
+<p><span
+style="mso-spacerun: yes">    </span>8-битовый сумматоры<span
+style="mso-spacerun: yes">  </span>соответственно) обычно требуют<span
+style="mso-spacerun: yes">  </span>более короткой
+
+<p><span
+style="mso-spacerun: yes">    </span>команды, чем<span style="mso-spacerun:
+yes">  </span>аналогичные операции с<span style="mso-spacerun: yes"> 
+</span>привлечением других регистров
+
+<p><span
+style="mso-spacerun: yes">    </span>общего<span style="mso-spacerun: yes"> 
+</span>назначения.<span style="mso-spacerun: yes">  </span>А<span
+style="mso-spacerun: yes">  </span>меньший<span style="mso-spacerun: yes"> 
+</span>размер<span style="mso-spacerun: yes">  </span>команды позволяет
+получать
+
+<p><span
+style="mso-spacerun: yes">    </span>более компактные и быстродействующие
+программы.
+
+<p><span
+style='mso-tab-count:1'>      </span>Регистр<span style="mso-spacerun: yes"> 
+</span>BX служит как регистром для вычислений, так и адресным
+
+<p><span
+style="mso-spacerun: yes">    </span>регистром. При использовании в качестве
+16-битового регистра он мо-
+
+<p><span
+style="mso-spacerun: yes">    </span>жет служить для определения<span
+style="mso-spacerun: yes">  </span>адреса операнда. Способы адресации для
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088 выделены в следующий
+пункт.
+
+<p><span
+style='mso-tab-count:1'>      </span>Набор команд<span style="mso-spacerun:
+yes">  </span>8088 использует регистр CX<span style="mso-spacerun: yes"> 
+</span>в качестве счетчика к
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторым иструкциям. Эти команды<span
+style="mso-spacerun: yes">  </span>используют находящееся в CX зна-
+
+<p><span
+style="mso-spacerun: yes">    </span>чение как указатель числа итераций команды
+или фрагмента программы.
+
+<p><span
+style='mso-tab-count:1'>      </span>Регистр<span style="mso-spacerun: yes">  
+</span>DX<span style='mso-tab-count:1'>      </span>служит<span
+style='mso-tab-count:1'>      </span> как<span style="mso-spacerun: yes">  
+</span>расширение<span style="mso-spacerun: yes">    </span>аккумулятора<span
+style="mso-spacerun: yes">   </span>для
+
+<p><span
+style="mso-spacerun: yes">    </span>многоразрядных<span style="mso-spacerun:
+yes">  </span>операций<span style="mso-spacerun: yes">  </span>умножения<span
+style="mso-spacerun: yes">  </span>и<span style="mso-spacerun: yes"> 
+</span>деления.<span style="mso-spacerun: yes">  </span>В этих 32-битовых
+
+<p><span
+style="mso-spacerun: yes">    </span>операциях участвут одновременно регистры AX
+и DX.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

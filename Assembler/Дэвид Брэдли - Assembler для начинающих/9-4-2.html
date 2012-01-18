@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<b><p><div align="center"><a name="9-4-2">Блоки параметров
+</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Блоки параметров придают гибкость
+аппаратным программам ПЗУ.
+
+<p><span
+style="mso-spacerun: yes">    </span>Векторы прерываний блоков параметров
+указывают на таблицы,
+
+<p><span
+style="mso-spacerun: yes">    </span>используемые BIOS.<span style='mso-tab-count:
+1'>  </span>Блок параметров дисковода содержит данные,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые BIOS использует при управлении
+дисководом.<span style='mso-tab-count:1'>      </span>Поскольку
+
+<p><span
+style="mso-spacerun: yes">    </span>различные типы дисководов имеют разные
+характеристики, BIOS имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>таблицу для всех типов дисководов
+поставляемых фирмой IBM.<span style='mso-tab-count:1'>    </span>Если вы
+
+<p><span
+style="mso-spacerun: yes">    </span>захотели использовать другой тип дисковода
+вы можете модифицировать
+
+<p><span
+style="mso-spacerun: yes">    </span>таблицу параметров и использовать это
+устройство.
+
+<p><span
+style='mso-tab-count:1'>      </span>Существует также таблица параметров для
+задания режима работы
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея. Если ваш дисплей нуждается в
+некоторых других временных
+
+<p><span
+style="mso-spacerun: yes">    </span>соотношениях, можно модифицировать эту
+таблицу. Например, многие
+
+<p><span
+style="mso-spacerun: yes">    </span>телевизоры не могут показывать полную
+ширину 40-символьного
+
+<p><span
+style="mso-spacerun: yes">    </span>изображения. Один из параметров
+видеотаблицы управляет сдвигом
+
+<p><span
+style="mso-spacerun: yes">    </span>изображения на экране дисплея
+по-горизонтальным. Команда MODE в DOS
+
+<p><span
+style="mso-spacerun: yes">    </span>может сдвигать изображение на дисплее,
+модифицируя таблицу
+
+<p><span
+style="mso-spacerun: yes">    </span>параметров.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Последний блок параметров, использующий
+вектор прерываний BIOS,
+
+<p><span
+style="mso-spacerun: yes">    </span>на самом деле является таблицей образов
+символов. BIOS обеспечивает
+
+<p><span
+style="mso-spacerun: yes">    </span>вывод символов на дисплей во всех режимах
+работы дисплея. В
+
+<p><span
+style="mso-spacerun: yes">    </span>графических режимах BIOS изображает
+символы, составляя их из
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующих конфигураций точек.
+Таблица для первых 128 символов
+
+<p><span
+style="mso-spacerun: yes">    </span>находится в ПЗУ, она расположена, начиная
+со смещения 0FA6EH в
+
+<p><span
+style="mso-spacerun: yes">    </span>сегменте CODE. Вектор прерывания 01FH
+указывет на таблицу,
+
+<p><span
+style="mso-spacerun: yes">    </span>используемую для оставщихся 128 символов.
+В ПЗУ для этой таблицы не
+
+<p><span
+style="mso-spacerun: yes">    </span>нашлось места, так что ее должен
+организовать пользователь. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет вам заменить набор символов,
+выбранный фирмой IBM для
+
+<p><span
+style="mso-spacerun: yes">    </span>старших 128 символов, своим собственным
+набором. Для этого нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>только сконструировать точечные образы
+символов, загрузить
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель на эту таблицу в вектор
+прерывания 01FH, и использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>для вывода символов графический режим
+работы дисплея. Эта
+
+<p><span
+style="mso-spacerun: yes">    </span>возможность может оказаться очень
+полезной, так как позволяет
+
+<p><span
+style="mso-spacerun: yes">    </span>конструировать и использовать свой
+собственный набор символов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для того, чтобы изменить параметры, вам
+нужно изменить только
+
+<p><span
+style="mso-spacerun: yes">    </span>вектор прерывания указывающий на блок
+параметров. Где-нибудь в
+
+<p><span
+style="mso-spacerun: yes">    </span>своей программе вы составляете таблицу
+параметров, а затем
+
+<p><span
+style="mso-spacerun: yes">    </span>модифицируете вектор прерывания так, чтобы
+он указывал на эту
+
+<p><span
+style="mso-spacerun: yes">    </span>таблицу. Когда вы используете BIOS и ей
+требуется параметр, она
+
+<p><span
+style="mso-spacerun: yes">    </span>обращается в вашу, а не в стандартную
+таблицу параметров,
+
+<p><span
+style="mso-spacerun: yes">    </span>организованную в ПЗУ. Такие таблицы
+параметров делают BIOS очень
+
+<p><span
+style="mso-spacerun: yes">    </span>гибкой. Хотя команды и находятся в ПЗУ, вы
+можете изменить действие
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS, не заменяя ПЗУ на новое и не
+подменивая ни одной из программ,
+
+<p><span
+style="mso-spacerun: yes">    </span>вхолдящих в BIOS.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

@@ -1,0 +1,2386 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="10-3">Загрузка в верхнюю часть памяти</a></i></font></b></div></p>
+<p><span
+style="mso-spacerun: yes">    </span>Применение<span style='mso-tab-count:1'>    </span>прерывания
+DOS INT 27H является предпочтительным
+
+<p><span
+style="mso-spacerun: yes">    </span>способом включения в систему постоянных
+функций типа драйверов
+
+<p><span
+style="mso-spacerun: yes">    </span>устройств. Это - удобный способ сделать
+программу постоянной частью
+
+<p><span
+style="mso-spacerun: yes">    </span>системы. Пользователь может включить
+программу в файл AUTOEXEC.BAT,
+
+<p><span
+style="mso-spacerun: yes">    </span>тогда она будет загружаться автоматически.
+Такую автоматическую
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузку можно использовать, когда в вашей
+системе имеется
+
+<p><span
+style="mso-spacerun: yes">    </span>специальное устройство ввода-вывода. DOS
+будет загружать драйвер
+
+<p><span
+style="mso-spacerun: yes">    </span>этого устройства при каждой загрузке
+системы. Вы можете даже
+
+<p><span
+style="mso-spacerun: yes">    </span>предпочесть собственную версию процедуры
+буферизации печати,
+
+<p><span
+style="mso-spacerun: yes">    </span>поскольку вы хотите, чтобы она постоянно
+загружалась в систему.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Однако выход в DOS с фиксацией программы в
+ОЗУ работает не
+
+<p><span
+style="mso-spacerun: yes">    </span>всегда. Фирма IBM предлагает три
+операционные системы для
+
+<p><span
+style="mso-spacerun: yes">    </span>персональных ЭВМ: DOS, которая и
+рассматривается в данной книге,
+
+<p><span
+style="mso-spacerun: yes">    </span>CP/M-86 фирмы Digital Research и UCSD
+p-System фирмы SofTech
+
+<p><span
+style="mso-spacerun: yes">    </span>Microsystems. Кроме указанных систем,
+предлагаемых фирмой IBM,
+
+<p><span
+style="mso-spacerun: yes">    </span>несколько независимых разработчиков
+распространяют свои системы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Чтобы создать драйвер устройства, который
+работал бы со всеми этими
+
+<p><span
+style="mso-spacerun: yes">    </span>системами, нужно использовать нечто
+отличного от метода,
+
+<p><span
+style="mso-spacerun: yes">    </span>применяемого для DOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Допустим, у вас имеется специализированное
+устройство печати,
+
+<p><span
+style="mso-spacerun: yes">    </span>которое вы хотите продавать как
+приспособление к IBM PC.<span style="mso-spacerun: yes">  </span>Поскольку
+
+<p><span
+style="mso-spacerun: yes">    </span>ваш<span style="mso-spacerun: yes"> 
+</span>принтер - отноительно дешевое устройство, для него потребуется
+
+<p><span
+style="mso-spacerun: yes">    </span>больше управления со стороны BIOS, чем для
+принтера фирмы IBM.<span style="mso-spacerun: yes">  </span>Вы
+
+<p><span
+style="mso-spacerun: yes">    </span>конструируете принтер и устройство
+подсоединения и пишете BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>программу для поддержки его работы.<span
+style="mso-spacerun: yes">  </span>Если вы пользуетесь
+
+<p><span
+style="mso-spacerun: yes">    </span>прерыванием INT 27H, то ваше устройство
+можно передавать только
+
+<p><span
+style="mso-spacerun: yes">    </span>пользователям, имеющим на своей
+персональной ЭВМ DOS.<span style="mso-spacerun: yes">  </span>Необходим
+
+<p><span
+style="mso-spacerun: yes">    </span>такой способ загрузки драйвера устройства,
+который бы работал во
+
+<p><span
+style="mso-spacerun: yes">    </span>всех операционных системах.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Способ загрузки, годный не только для DOS,
+называется загрузкой
+
+<p><span
+style="mso-spacerun: yes">    </span>в верхние адреса оперативной памяти. При
+этом управление системой
+
+<p><span
+style="mso-spacerun: yes">    </span>перехватывается непосредственно после
+процедуры самоконтроля при
+
+<p><span
+style="mso-spacerun: yes">    </span>включении питания. Это может быть
+реализовано при помощи
+
+<p><span
+style="mso-spacerun: yes">    </span>специальной дискеты загрузки. Программа
+будет записана на дискету,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая вставляется в дисковод перед
+включением питания.
+
+<p><span
+style="mso-spacerun: yes">    </span>Подпрограмма загрузки, входящая в BIOS,
+загружает драйвер
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства с дискеты в верхнюю часть
+оперативной памяти. Затем
+
+<p><span
+style="mso-spacerun: yes">   </span>можно изменить размер области данных
+сообщаемый BIOS в соответствии
+
+<p><span
+style="mso-spacerun: yes">    </span>с имеющимся объемом оперативной памяти.
+При загрузке программы в
+
+<p><span
+style="mso-spacerun: yes">    </span>верхние адреса размер доступной
+оперативной памяти уменьшается.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если после этого загрузить стандартную
+операционную систему, будет
+
+<p><span
+style="mso-spacerun: yes">    </span>восстановлено нормальное функционирование
+ЭВМ. Все операционные
+
+<p><span
+style="mso-spacerun: yes">    </span>системы фирмы IBM учитывают объем памяти
+BIOS при определении
+
+<p><span
+style="mso-spacerun: yes">    </span>границ оперативной памяти. Указанные
+системы не затрагивают
+
+<p><span
+style="mso-spacerun: yes">    </span>программ, загруженных в верхние адреса.
+Если система удовлетворяет
+
+<p><span
+style="mso-spacerun: yes">    </span>указанным требованиям, то можно
+пользоваться загрузкой в верхние
+
+<p><span
+style="mso-spacerun: yes">    </span>адреса оперативной памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Приведем пример для иллюстрации описанного
+приема. На Фиг. 10.2
+
+<p><span
+style="mso-spacerun: yes">    </span>представлен листинг ассемблирования двух
+подпрограмм. Первая
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмма осуществляет инициализацию и
+загрузку драйвера
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства. Вторая подпрограмма является
+собственно драйвером
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства. Позже станет ясным, почему
+удобнее было разделить эту
+
+<p><span
+style="mso-spacerun: yes">    </span>программу на две части.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p>A<br>
+<span style='mso-tab-count:2'>           </span><span style="mso-spacerun:
+yes">     </span>Microsoft (R) Macro Assembler Version 5.00 <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>1/1/80 01:21:50
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 10.2(а) Загрузчик для создания псевдо-диска<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>Page<span style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 10.2(а) Загрузчик для создания псевдо-диска
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span>
+NEW_DISK<span style='mso-tab-count:1'>   </span> SEGMENT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span>
+DISK_BIOS<span style='mso-tab-count:1'>  </span> LABEL<span style='mso-tab-count:
+1'>      </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0003<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 3
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0003<span style='mso-tab-count:4'>                        </span>
+OLD_VECTOR<span style='mso-tab-count:1'> </span> LABEL<span style='mso-tab-count:
+1'>      </span> WORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0003<span style='mso-tab-count:4'>                        </span>
+NEW_DISK<span style='mso-tab-count:1'>   </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> ABS0<span
+style='mso-tab-count:1'> </span> SEGMENT AT 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004C<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 13H*4
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004C<span style='mso-tab-count:4'>                        </span>
+DISK_VECTOR<span style='mso-tab-count:1'>      </span> LABEL<span
+style='mso-tab-count:1'>      </span> WORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0410<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 410H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0410<span style='mso-tab-count:4'>                        </span>
+EQUIPMENT<span style='mso-tab-count:1'>  </span> LABEL<span style='mso-tab-count:
+1'>      </span> WORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0413<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 413H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0413<span style='mso-tab-count:4'>                        </span>
+MEMORY_SIZE<span style='mso-tab-count:1'>      </span> LABEL<span
+style='mso-tab-count:1'>      </span> WORD
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>= 00A0<span style='mso-tab-count:3'>                </span> DISK_SIZE<span
+style='mso-tab-count:1'>  </span> EQU<span style='mso-tab-count:1'>  </span>
+160
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C00<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 7C00H<span style='mso-tab-count:
+2'>            </span> ; Место,в которое заносится загрузчик ДОС
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C00<span style='mso-tab-count:4'>                        </span>
+BOOT_RECORD<span style='mso-tab-count:1'>      </span> LABEL<span
+style='mso-tab-count:1'>      </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C00<span style='mso-tab-count:4'>                        </span> ABS0<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:ABS0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C00<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 7C00H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C00<span style='mso-tab-count:1'>      </span>8C C8<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AX,CS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C02<span style='mso-tab-count:1'>      </span>8E D8<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> DS,AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C04<span style='mso-tab-count:1'>      </span>8E C0<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> ES,AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C06<span style='mso-tab-count:1'>      </span>8D 36 7C00 R<span
+style='mso-tab-count:3'>                  </span> LEA<span style='mso-tab-count:
+1'>  </span> SI,BOOT_RECORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C0A<span style='mso-tab-count:1'>      </span>8D 3E 7A00 R<span
+style='mso-tab-count:3'>                  </span> LEA<span style='mso-tab-count:
+1'>  </span> DI,BOOT_RECORD-200H<span style='mso-tab-count:1'>    </span>;
+Место,на которое переносится
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C0E<span style='mso-tab-count:1'>      </span>B9 0200 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> CX,512 <span
+style='mso-tab-count:2'>          </span>;<span style="mso-spacerun: yes"> 
+</span>загрузчик ДОС
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C11<span style='mso-tab-count:1'>      </span>F3/ A4<span
+style='mso-tab-count:4'>                        </span> REP<span
+style='mso-tab-count:1'>  </span> MOVSB<span style='mso-tab-count:2'>            </span>
+; Перенесение загрузчика
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C13<span style='mso-tab-count:1'>      </span>E9 7A16 R<span
+style='mso-tab-count:3'>               </span> JMP<span style='mso-tab-count:
+1'>  </span> NEXT_LOCATION-200H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C16<span style='mso-tab-count:4'>                        </span>
+NEXT_LOCATION:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 10.2 программа создания псевдо-диска<span
+style="mso-spacerun: yes">  </span>(начало)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C16<span style='mso-tab-count:1'>      </span>83 06 0410 R 40 <span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes"> </span>ADD<span style='mso-tab-count:1'>  </span> EQUIPMENT,40H<span
+style='mso-tab-count:1'>    </span>; Увеличение числа дисководов
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C1B<span style='mso-tab-count:1'>      </span>A1 0413 R<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> AX,MEMORY_SIZE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C1E<span style='mso-tab-count:1'>      </span>2D 00A0 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>SUB<span style='mso-tab-count:1'>  </span> AX,DISK_SIZE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C21<span style='mso-tab-count:1'>      </span>A3 0413 R<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> MEMORY_SIZE,AX ; Уменьшение доступной ДОС памяти,необхо-
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C24<span style='mso-tab-count:1'>      </span>B1 06<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CL,6<span style='mso-tab-count:2'>       </span>;<span
+style="mso-spacerun: yes">  </span>димое для размещения псевдо-диска
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C26<span style='mso-tab-count:1'>      </span>D3 E0<span
+style='mso-tab-count:4'>                   </span> SHL<span style='mso-tab-count:
+1'>  </span> AX,CL<span style='mso-tab-count:2'>            </span>; Умножение
+на 1024/16
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C28<span style='mso-tab-count:1'>      </span>8E C0<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> ES,AX<span style='mso-tab-count:2'>            </span>; Сегментная
+часть адреса нового диска
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C2A<span style='mso-tab-count:1'>      </span>B8 0201 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> AX,201H<span
+style='mso-tab-count:1'>    </span>; Чтение сектора в эту область
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C2D<span style='mso-tab-count:1'>      </span>BB 0000 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> BX,0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C30<span style='mso-tab-count:1'>      </span>B9 0002 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> CX,2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C33<span style='mso-tab-count:1'>      </span>BA 0000 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C36<span style='mso-tab-count:1'>      </span>CD 13<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 13H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C38<span style='mso-tab-count:1'>      </span>72 1A<span
+style='mso-tab-count:4'>                   </span> JC<span style='mso-tab-count:
+1'>   </span> BOOT_ERROR
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>ES:NEW_DISK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C3A<span style='mso-tab-count:1'>      </span>A1 004C R<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> AX,DISK_VECTOR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C3D<span style='mso-tab-count:1'>      </span>26: A3 0003 R<span
+style='mso-tab-count:3'>                 </span> MOV<span style='mso-tab-count:
+1'>  </span> OLD_VECTOR,AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C41<span style='mso-tab-count:1'>      </span>A1 004E R<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> AX,DISK_VECTOR+2<span style='mso-tab-count:1'> </span>; Сохранение
+старого вектора пре-
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C44<span style='mso-tab-count:1'>      </span>26: A3 0005 R<span
+style='mso-tab-count:3'>                 </span> MOV<span style='mso-tab-count:
+1'>  </span> OLD_VECTOR+2,AX<span style='mso-tab-count:1'>  </span>;<span
+style="mso-spacerun: yes">  </span>рывания 13h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C48<span style='mso-tab-count:1'>      </span>C7 06 004C R 0000<span
+style='mso-tab-count:2'>       </span> MOV<span style='mso-tab-count:1'>  </span>
+DISK_VECTOR,0<span style='mso-tab-count:2'>          </span>; Установка вектора
+прерывания 17h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C4E<span style='mso-tab-count:1'>      </span>8C 06 004E R<span
+style='mso-tab-count:3'>                  </span> MOV<span style='mso-tab-count:
+1'>  </span> DISK_VECTOR+2,ES<span style='mso-tab-count:1'> </span>;<span
+style="mso-spacerun: yes">  </span>на новое место
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C52<span style='mso-tab-count:1'>      </span>EB 07<span
+style='mso-tab-count:4'>                   </span> JMP<span style='mso-tab-count:
+1'>  </span> SHORT REBOOT<span style='mso-tab-count:2'>           </span> ;
+Чтение загрузчика с другой дискеты
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C54<span style='mso-tab-count:4'>                        </span>
+BOOT_ERROR:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C54<span style='mso-tab-count:1'>      </span>8D 36 7A93 R<span
+style='mso-tab-count:3'>                  </span> LEA<span style='mso-tab-count:
+1'>  </span> SI,ERROR_MSG-200H<span style='mso-tab-count:1'>      </span>;
+Печать сообщения об ошибке
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C58<span style='mso-tab-count:1'>      </span>E8 7C81 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT_MSG
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C5B<span style='mso-tab-count:4'>                        </span>
+REBOOT:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C5B<span style='mso-tab-count:1'>      </span>8D 36 7AA5 R<span
+style='mso-tab-count:3'>                  </span> LEA<span style='mso-tab-count:
+1'>  </span> SI,BOOT_MSG-200H<span style='mso-tab-count:1'> </span>; Печать
+сообщения о загрузке ДОС
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C5F<span style='mso-tab-count:1'>      </span>E8 7C81 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT_MSG
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C62<span style='mso-tab-count:4'>                        </span>
+WAIT_BOOT:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C62<span style='mso-tab-count:1'>      </span>B4 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH,0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C64<span style='mso-tab-count:1'>      </span>CD 16<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 16H<span style='mso-tab-count:2'>        </span> ; Ожидание ввода
+с клавиатуры
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C66<span style='mso-tab-count:1'>      </span>3C 20<span
+style='mso-tab-count:4'>                   </span> CMP<span style='mso-tab-count:
+1'>  </span> AL,' '<span style="mso-spacerun: yes">         </span>; Ожидается
+ввод пробела
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C68<span style='mso-tab-count:1'>      </span>75 F8<span
+style='mso-tab-count:4'>                   </span> JNE<span style='mso-tab-count:
+1'>  </span> WAIT_BOOT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C6A<span style='mso-tab-count:1'>      </span>B8 0201 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> AX,201H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C6D<span style='mso-tab-count:1'>      </span>BB 7C00 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> BX,7C00H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C70<span style='mso-tab-count:1'>      </span>B9 0001 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> CX,1
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C73<span style='mso-tab-count:1'>      </span>BA 0000 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C76<span style='mso-tab-count:1'>      </span>8E C2<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> ES,DX<span style='mso-tab-count:2'>            </span>; Ввод на
+стандартное место загрузчика
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C78<span style='mso-tab-count:1'>      </span>CD 13<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 13H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C7A<span style='mso-tab-count:1'>      </span>72 D8<span
+style='mso-tab-count:4'>                   </span> JC<span style='mso-tab-count:
+1'>   </span> BOOT_ERROR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C7C<span style='mso-tab-count:1'>      </span>EA 7C00 ---- R<span
+style='mso-tab-count:3'>                </span> JMP<span style='mso-tab-count:
+1'>  </span> BOOT_RECORD
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C81<span style='mso-tab-count:4'>                        </span>
+PRINT_MSG<span style='mso-tab-count:1'>  </span> PROC<span style='mso-tab-count:
+1'> </span> NEAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C81<span style='mso-tab-count:1'>      </span>2E: 8A 04<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,CS:[SI]<span style='mso-tab-count:1'> </span>; Взять символ для
+печати
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C84<span style='mso-tab-count:1'>      </span>46<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> SI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C85<span style='mso-tab-count:1'>      </span>3C 24<span
+style='mso-tab-count:4'>                   </span> CMP<span style='mso-tab-count:
+1'>  </span> AL,'$'<span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">       </span>; Проверка на символ конца вывода
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C87<span style='mso-tab-count:1'>      </span>75 01<span
+style='mso-tab-count:4'>                   </span> JNE<span style='mso-tab-count:
+1'>  </span> OUTPUT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C89<span style='mso-tab-count:1'>      </span>C3<span style='mso-tab-count:
+4'>                      </span> RET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C8A<span style='mso-tab-count:4'>                        </span>
+OUTPUT:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C8A<span style='mso-tab-count:1'>      </span>B4 0E<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH,14
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C8C<span style='mso-tab-count:1'>      </span>BB 0000 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> BX,0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C8F<span style='mso-tab-count:1'>      </span>CD 10<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 10H<span style='mso-tab-count:2'>        </span> ; Вывод на
+дисплей через BIOS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C91<span style='mso-tab-count:1'>      </span>EB EE<span
+style='mso-tab-count:4'>                   </span> JMP<span style='mso-tab-count:
+1'>  </span> PRINT_MSG
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7C93<span style='mso-tab-count:1'>      </span>8E E8 A8 A1 AA A0 20<span
+style='mso-tab-count:1'>    </span> ERROR_MSG<span style='mso-tab-count:1'>  </span>
+DB<span style='mso-tab-count:1'>   </span> 'Ошибка загрузки',13,10,'$'
+
+<p><span
+style='mso-tab-count:3'>                  </span>A7 A0 A3 E0 E3 A7 AA
+
+<p><span
+style='mso-tab-count:3'>                  </span>A8 0D 0A 24
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">       </span>Фиг. 10.2 программа создания псевдо-диска (продолжение)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7CA5<span style='mso-tab-count:1'>      </span>82 E1 E2 A0 A2 EC E2<span
+style='mso-tab-count:1'>    </span> BOOT_MSG<span style='mso-tab-count:1'>   </span>
+DB<span style='mso-tab-count:1'>   </span> 'Вставьте новую дискету с ДОС',13,10
+
+<p><span
+style='mso-tab-count:3'>                  </span>A5 20 AD AE A2 E3 EE
+
+<p><span
+style='mso-tab-count:3'>                  </span>20 A4 A8 E1 AA A5 E2
+
+<p><span
+style='mso-tab-count:3'>                  </span>E3 20 E1 20 84 8E 91
+
+<p><span
+style='mso-tab-count:3'>                  </span>0D 0A
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7CC3<span style='mso-tab-count:1'>      </span>A8 20 AD A0 A6 AC A8<span
+style='mso-tab-count:3'>                </span> DB<span style='mso-tab-count:
+1'>   </span> 'и нажмите на пробел',10,13,'$'
+
+<p><span
+style='mso-tab-count:3'>                  </span>E2 A5 20 AD A0 20 AF
+
+<p><span
+style='mso-tab-count:3'>                  </span>E0 AE A1 A5 AB 0A 0D
+
+<p><span
+style='mso-tab-count:3'>                  </span>24
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7CD9<span style='mso-tab-count:4'>                        </span>
+PRINT_MSG<span style='mso-tab-count:1'>  </span> ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>7CD9<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes"> 
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">      </span>1/1/80
+04:06:49
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 10.2(б) Программа обслуживания псевдо-диска<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>Page<span style="mso-spacerun: yes">     </span>1-1
+
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]><span
+style='mso-fareast-font-family:"MS Mincho"'>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 10.2(б) Программа обслуживания псевдо-диска
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;--------------------------------------------
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>; Эта программа находится в секторе 1 трека 0
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;<span style="mso-spacerun: yes"> 
+</span>псевдо-диска. Чтение и запись на устройство 2
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;<span style="mso-spacerun: yes"> 
+</span>переадресуется на эту программу
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;--------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> DISK<span
+style='mso-tab-count:1'> </span> PROC<span style='mso-tab-count:1'> </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>= 0140<span style='mso-tab-count:3'>                </span> DISK_SIZE<span
+style='mso-tab-count:1'>  </span> EQU<span style='mso-tab-count:1'>  </span>
+320<span style='mso-tab-count:1'>  </span> ; Размер псевдо-диска в сектрах
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>EB 05 90<span
+style='mso-tab-count:3'>                </span> JMP<span style='mso-tab-count:
+1'>  </span> START_BIOS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0003<span style='mso-tab-count:1'>      </span>????????<span
+style='mso-tab-count:2'>          </span> ORIGINAL_VECTOR DD<span
+style='mso-tab-count:1'>     </span> ?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0007<span style='mso-tab-count:4'>                        </span>
+START_BIOS:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0007<span style='mso-tab-count:1'>      </span>80 FA 02<span
+style='mso-tab-count:3'>                </span> CMP<span style='mso-tab-count:
+1'>  </span> DL, 2<span style='mso-tab-count:2'>            </span> ; Программа
+обрабатывает только обращения
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000A<span style='mso-tab-count:1'>      </span>74 05<span
+style='mso-tab-count:4'>                   </span> JE<span style='mso-tab-count:
+1'>   </span> L1<span style='mso-tab-count:2'>         </span> ;<span
+style="mso-spacerun: yes">  </span>к устройству (дисководу) 2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000C<span style='mso-tab-count:4'>                        </span>
+OLD_BIOS:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000C<span style='mso-tab-count:1'>      </span>2E: FF 2E 0003 R<span
+style='mso-tab-count:2'>        </span> JMP<span style='mso-tab-count:1'>  </span>
+ORIGINAL_VECTOR ; Переход на стандартную программу
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0011<span style='mso-tab-count:4'>                        </span> L1:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0011<span style='mso-tab-count:1'>      </span>3C 01<span
+style='mso-tab-count:4'>                   </span> CMP<span style='mso-tab-count:
+1'>  </span> AL, 1
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0013<span style='mso-tab-count:1'>      </span>76 F7<span
+style='mso-tab-count:4'>                   </span> JBE<span style='mso-tab-count:
+1'>  </span> OLD_BIOS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0015<span style='mso-tab-count:1'>      </span>80 FC 04<span
+style='mso-tab-count:3'>                </span> CMP<span style='mso-tab-count:
+1'>  </span> AH, 4
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0018<span style='mso-tab-count:1'>      </span>72 06<span
+style='mso-tab-count:4'>                   </span> JB<span style='mso-tab-count:
+1'>   </span> READ_WRITE<span style='mso-tab-count:1'> </span> ; Обрабатываются
+только команду чтения и
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes"> </span>;<span style="mso-spacerun: yes"> 
+</span>записи
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001A<span style='mso-tab-count:4'>                        </span>
+OK_RETURN:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001A<span style='mso-tab-count:1'>      </span>B4 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH, 0<span style='mso-tab-count:2'>            </span> ; Код
+возврата - 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001C<span style='mso-tab-count:1'>      </span>F8<span style='mso-tab-count:
+4'>                      </span> CLC<span style='mso-tab-count:3'>              </span>
+; Сброс C-флага - нет ошибки
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001D<span style='mso-tab-count:1'>      </span>CA 0002 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>RET<span style='mso-tab-count:1'>  </span> 2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0020<span style='mso-tab-count:4'>                        </span>
+READ_WRITE:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0020<span style='mso-tab-count:1'>      </span>53<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> BX<span
+style='mso-tab-count:2'>         </span> ; Сохранение регистров
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0021<span style='mso-tab-count:1'>      </span>51<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> CX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0022<span style='mso-tab-count:1'>      </span>52<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0023<span style='mso-tab-count:1'>      </span>56<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> SI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0024<span style='mso-tab-count:1'>      </span>57<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0025<span style='mso-tab-count:1'>      </span>1E<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0026<span style='mso-tab-count:1'>      </span>06<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> ES
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">   </span>Фиг. 10.2 программа создания псевдо-диска (продолжение)
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Вычисление адреса расположения требуемой записи в псевдо-диске
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0027<span style='mso-tab-count:1'>      </span>50<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> AX<span
+style='mso-tab-count:2'>         </span> ; Сохранение кода требуемой операции
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0028<span style='mso-tab-count:1'>      </span>B0 08<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 8<span style='mso-tab-count:2'>            </span> ; Число
+секторов на треке
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002A<span style='mso-tab-count:1'>      </span>F6 E5<span
+style='mso-tab-count:4'>                   </span> MUL<span style='mso-tab-count:
+1'>  </span> CH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002C<span style='mso-tab-count:1'>      </span>B5 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CH, 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002E<span style='mso-tab-count:1'>      </span>03 C1<span
+style='mso-tab-count:4'>                   </span> ADD<span style='mso-tab-count:
+1'>  </span> AX, CX <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Прибавление номера сектора
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0030<span style='mso-tab-count:1'>      </span>80 FE 00<span
+style='mso-tab-count:3'>                </span> CMP<span style='mso-tab-count:
+1'>  </span> DH, 0<span style='mso-tab-count:2'>            </span> ; Проверка
+на номера стороны
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0033<span style='mso-tab-count:1'>      </span>74 03<span
+style='mso-tab-count:4'>                   </span> JE<span style='mso-tab-count:
+1'>   </span> HEAD_0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0035<span style='mso-tab-count:1'>      </span>05 0140 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>ADD<span style='mso-tab-count:1'>  </span> AX, 320<span
+style='mso-tab-count:1'>    </span> ; Переключение на второю сторону
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0038<span style='mso-tab-count:4'>                        </span>
+HEAD_0:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0038<span style='mso-tab-count:1'>      </span>48<span style='mso-tab-count:
+4'>                      </span> DEC<span style='mso-tab-count:1'>  </span> AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0039<span style='mso-tab-count:1'>      </span>3D 0140 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>CMP<span style='mso-tab-count:1'>  </span> AX, DISK_SIZE<span
+style='mso-tab-count:1'>    </span> ; Вычисленное значение правильно?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003C<span style='mso-tab-count:1'>      </span>76 0E<span
+style='mso-tab-count:4'>                   </span> JBE<span style='mso-tab-count:
+1'>  </span> DISK_OK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003E<span style='mso-tab-count:4'>                        </span>
+RECORD_NOT_FOUND:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003E<span style='mso-tab-count:1'>      </span>58<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> AX<span
+style='mso-tab-count:2'>         </span> ; Восстановление регистров
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003F<span style='mso-tab-count:1'>      </span>07<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> ES
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0040<span style='mso-tab-count:1'>      </span>1F<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0041<span style='mso-tab-count:1'>      </span>5F<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0042<span style='mso-tab-count:1'>      </span>5E<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> SI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0043<span style='mso-tab-count:1'>      </span>5A<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0044<span style='mso-tab-count:1'>      </span>59<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> CX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0045<span style='mso-tab-count:1'>      </span>5B<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0046<span style='mso-tab-count:1'>      </span>B4 04<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH, 4<span style='mso-tab-count:2'>            </span> ; Ошибка:
+сектор не найден
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0048<span style='mso-tab-count:1'>      </span>F9<span style='mso-tab-count:
+4'>                      </span> STC
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0049<span style='mso-tab-count:1'>      </span>CA 0002 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>RET<span style='mso-tab-count:1'>  </span> 2<span
+style='mso-tab-count:2'>          </span> ; Возврат с указанием об ошибке
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004C<span style='mso-tab-count:4'>                        </span>
+DISK_OK:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004C<span style='mso-tab-count:1'>      </span>B1 05<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CL, 5
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004E<span style='mso-tab-count:1'>      </span>D3 E0<span
+style='mso-tab-count:4'>                   </span> SHL<span style='mso-tab-count:
+1'>  </span> AX, CL <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Определение расположения данных на
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0050<span style='mso-tab-count:1'>      </span>8C C9<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CX, CS <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>;<span style="mso-spacerun: yes"> 
+</span>псевдо-диске
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0052<span style='mso-tab-count:1'>      </span>03 C8<span
+style='mso-tab-count:4'>                   </span> ADD<span style='mso-tab-count:
+1'>  </span> CX, AX <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; В регистре CX сегментная часть адреса
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes"> </span>;<span style="mso-spacerun: yes"> 
+</span>данных на диске
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0054<span style='mso-tab-count:1'>      </span>51<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> CX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0055<span style='mso-tab-count:1'>      </span>8B D3<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> DX, BX <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; В регистре DX адрес передачи
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0057<span style='mso-tab-count:1'>      </span>B1 04<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CL, 4
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0059<span style='mso-tab-count:1'>      </span>D3 EA<span
+style='mso-tab-count:4'>                   </span> SHR<span style='mso-tab-count:
+1'>  </span> DX, CL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>005B<span style='mso-tab-count:1'>      </span>8C C1<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CX, ES
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>005D<span style='mso-tab-count:1'>      </span>03 D1<span
+style='mso-tab-count:4'>                   </span> ADD<span style='mso-tab-count:
+1'>  </span> DX, CX <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; В регистре DX сегментная часть адреса
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes"> </span>;<span style="mso-spacerun: yes"> 
+</span>передаваемых данных
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>005F<span style='mso-tab-count:1'>      </span>59<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> CX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0060<span style='mso-tab-count:1'>      </span>83 E3 0F<span
+style='mso-tab-count:3'>                </span> AND<span style='mso-tab-count:
+1'>  </span> BX, 0Fh<span style='mso-tab-count:1'>    </span> ; Выделение
+младших 4 разрядов
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0063<span style='mso-tab-count:1'>      </span>58<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> AX<span
+style='mso-tab-count:2'>         </span> ; Восстановление код требуемой
+операции
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0064<span style='mso-tab-count:1'>      </span>80 FC 02<span
+style='mso-tab-count:3'>                </span> CMP<span style='mso-tab-count:
+1'>  </span> AH, 2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0067<span style='mso-tab-count:1'>      </span>74 11<span
+style='mso-tab-count:4'>                   </span> JE<span style='mso-tab-count:
+1'>   </span> READ_OPN
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0069<span style='mso-tab-count:4'>                        </span>
+WRITE_OPN:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0069<span style='mso-tab-count:1'>      </span>8C CE<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> SI, CS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>006B<span style='mso-tab-count:1'>      </span>3B CE<span
+style='mso-tab-count:4'>                   </span> CMP<span style='mso-tab-count:
+1'>  </span> CX, SI <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Проверка на запись поверх этой программы
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>006D<span style='mso-tab-count:1'>      </span>74 1B<span
+style='mso-tab-count:4'>                   </span> JE<span style='mso-tab-count:
+1'>   </span> ALL_DONE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>006F<span style='mso-tab-count:1'>      </span>8E C1<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> ES, CX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0071<span style='mso-tab-count:1'>      </span>BF 0000 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DI, 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0074<span style='mso-tab-count:1'>      </span>8E DA<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> DS, DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0076<span style='mso-tab-count:1'>      </span>8B F3<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> SI, BX <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Установка параметров передачи
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0078<span style='mso-tab-count:1'>      </span>EB 09<span
+style='mso-tab-count:4'>                   </span> JMP<span style='mso-tab-count:
+1'>  </span> SHORT DO_MOVE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>007A<span style='mso-tab-count:4'>                        </span>
+READ_OPN:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>007A<span style='mso-tab-count:1'>      </span>8E D9<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> DS, CX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">   </span>Фиг. 10.2 программа создания псевдо-диска (продолжение)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>007C<span style='mso-tab-count:1'>      </span>BE 0000 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> SI, 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>007F<span style='mso-tab-count:1'>      </span>8E C2<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> ES, DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0081<span style='mso-tab-count:1'>      </span>8B FB<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> DI, BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0083<span style='mso-tab-count:4'>                        </span> DO_MOVE:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0083<span style='mso-tab-count:1'>      </span>8A E8<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CH, AL <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Число слов в секторе
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0085<span style='mso-tab-count:1'>      </span>B1 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CL, 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0087<span style='mso-tab-count:1'>      </span>FC<span style='mso-tab-count:
+4'>                      </span> CLD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0088<span style='mso-tab-count:1'>      </span>F3/ A5<span
+style='mso-tab-count:4'>                        </span> REP<span
+style='mso-tab-count:1'>  </span> MOVSW<span style='mso-tab-count:2'>            </span>
+; Пересылка данных
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>008A<span style='mso-tab-count:4'>                        </span>
+ALL_DONE:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>008A<span style='mso-tab-count:1'>      </span>07<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> ES<span
+style='mso-tab-count:2'>         </span> ; Восстановление регистров
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>008B<span style='mso-tab-count:1'>      </span>1F<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>008C<span style='mso-tab-count:1'>      </span>5F<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>008D<span style='mso-tab-count:1'>      </span>5E<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> SI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>008E<span style='mso-tab-count:1'>      </span>5A<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>008F<span style='mso-tab-count:1'>      </span>59<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> CX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0090<span style='mso-tab-count:1'>      </span>5B<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0091<span style='mso-tab-count:1'>      </span>B4 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH, 0<span style='mso-tab-count:2'>            </span> ;
+Нормальное окончание
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0093<span style='mso-tab-count:1'>      </span>F8<span style='mso-tab-count:
+4'>                      </span> CLC
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0094<span style='mso-tab-count:1'>      </span>CA 0002 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>RET<span style='mso-tab-count:1'>  </span> 2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0097<span style='mso-tab-count:3'>                  </span><span
+style='mso-tab-count:1'>      </span> DISK<span style='mso-tab-count:1'> </span>
+ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0097<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END&#18;
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 10.2 (а) Процедура загрузки для
+виртуального диска;
+
+<p><span
+style='mso-tab-count:2'>            </span>(b) Программа драйвера виртуального
+диска.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Драйвер устройства, приведенный в
+рассматриваемом примере,
+
+<p><span
+style="mso-spacerun: yes">    </span>реализует модель диска в оперативной
+памяти. Мы возьмем 160К
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти системы и будем исполльзовать ее не
+как оперативную
+
+<p><span
+style="mso-spacerun: yes">    </span>память, а как дискету. Мы выбрали именно
+160К потому, что это
+
+<p><span
+style="mso-spacerun: yes">    </span>минимальный объем дискеты фирмы IBM.
+Очевидно, при большем объеме
+
+<p><span
+style="mso-spacerun: yes">    </span>оперативной памяти можно моделировать
+дискету большего объема.
+
+<p><span
+style="mso-spacerun: yes">    </span>Подпрограмму псевдо-диска можно
+использовать для повышения
+
+<p><span
+style="mso-spacerun: yes">    </span>производительности программ, производящих
+интенсивный обмен с
+
+<p><span
+style="mso-spacerun: yes">    </span>диском.<span style="mso-spacerun: yes"> 
+</span>Например, если поместить на псевдо-диск ассемблер и
+
+<p><span
+style="mso-spacerun: yes">    </span>исходный код программы, ассемблирование
+будет произведено не за
+
+<p><span
+style="mso-spacerun: yes">    </span>минуты, а за секунды. Производительность
+некоторых программ может
+
+<p><span
+style="mso-spacerun: yes">    </span>быть повышена более чем на порядок. Платой
+за такое повышение
+
+<p><span
+style="mso-spacerun: yes">    </span>производительности являются 160K байт
+оперативной памяти, отводимые
+
+<p><span
+style="mso-spacerun: yes">    </span>под псевдо-диск. Если в системе, которая в
+основном используется
+
+<p><span
+style="mso-spacerun: yes">    </span>для редактирования и ассемблирования,
+имеется 256 кбайт памяти, то
+
+<p><span
+style="mso-spacerun: yes">    </span>в действительности для ассемблера
+достаточно всего лишь 96 кбайт.
+
+<p><span
+style="mso-spacerun: yes">    </span>Оставшиеся 160 кбайт можно использовать
+для моделирования диска в
+
+<p><span
+style="mso-spacerun: yes">    </span>оперативной памяти.<span
+style="mso-spacerun: yes">  </span>Следует помнить, что содержимое такого диска
+
+<p><span
+style="mso-spacerun: yes">    </span>теряется при отключении питания, поэтому,
+прежде чем окончить
+
+<p><span
+style="mso-spacerun: yes">    </span>работу, убедитесь, что информация
+скопирована на настоящую
+
+<p><span
+style="mso-spacerun: yes">    </span>дискету.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первая подпрограмма на Фиг. 10.2 -
+процедура загрузки. Ее
+
+<p><span
+style="mso-spacerun: yes">    </span>код находится в секторе 1 дорожки 0
+загрузочной дискеты. Как
+
+<p><span
+style="mso-spacerun: yes">    </span>поместить программу туда, будет объяснено
+позже. Подпрограмма POST
+
+<p><span
+style="mso-spacerun: yes">    </span>при завершении считывает содержимое сетора
+1 дорожки 0 в память,
+
+<p><span
+style="mso-spacerun: yes">    </span>по адресу 0:7C00H. Затем POST передает
+управление по первому
+
+<p><span
+style="mso-spacerun: yes">    </span>адресу этой записи. Таким образом система
+фирмы IBM загружает в
+
+<p><span
+style="mso-spacerun: yes">    </span>память DOS или любую другую операционную
+систему. А мы как раз и
+
+<p><span
+style="mso-spacerun: yes">    </span>собираемся, загружать свою собственную
+простую операционную
+
+<p><span
+style="mso-spacerun: yes">    </span>систему.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сегмент NEW_DISK определяет адрес
+подпрограммы-драйвера
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства, также представленной на втором
+листинге (см. Фиг.
+
+<p><span
+style="mso-spacerun: yes">    </span>10.2).<span style="mso-spacerun: yes"> 
+</span>Поскольку наши подпрограммы ассемблируются отдельно, этот
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмент для связи процедуры загрузки и
+драйвера устройства во время
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения. Сегмент ABS0 локализует
+векторы прерываний, заменяемые
+
+<p><span
+style="mso-spacerun: yes">    </span>в процедуре загрузки. В сегменте CODE,
+содержатся команды,
+
+<p><span
+style="mso-spacerun: yes">    </span>загружаемые с дискеты. Сегмент CODE -
+единственная часть
+
+<p><span
+style="mso-spacerun: yes">    </span>приведенной программы, находящаяся на
+загрузочной дискете.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первое, что делает программа инициализации
+- пересылает себя по
+
+<p><span
+style="mso-spacerun: yes">    </span>адресу 0:7A00H. Затем, в процессе
+инициализации, процедура
+
+<p><span
+style="mso-spacerun: yes">    </span>перезагружает систему, чтобы загрузить
+настоящую операционную
+
+<p><span
+style="mso-spacerun: yes">    </span>систему. Эта загрузка производится по
+адресу 0:7C00H. Если бы
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура инициализации не переносила себя
+на другое место, она бы
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>считывала следующую запись загрузки в ту область памяти, где
+
+<p><span
+style="mso-spacerun: yes">    </span>находится сама.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>С адреса NEXT_LOCATION процедура
+инициализации инсталирует
+
+<p><span
+style="mso-spacerun: yes">    </span>драйвер устройства. Она изменяют флаги
+оборудования для указания на
+
+<p><span
+style="mso-spacerun: yes">    </span>наличие дополнительного дисковода по
+сравнению с установкой внешних
+
+<p><span
+style="mso-spacerun: yes">    </span>переключателей. Это &quot;убеждает&quot;
+операционную систему, что диск в
+
+<p><span
+style="mso-spacerun: yes">    </span>оперативной памяти является частью
+технического обеспечения.<span style="mso-spacerun: yes">  </span>При
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализации значение MEMORY_SIZE
+уменьшается на 160 кбайт,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые резервируются для моделирования
+диска.<span style="mso-spacerun: yes">  </span>Это предотвращает
+
+<p><span
+style="mso-spacerun: yes">    </span>использование предназначенной для него
+памяти.<span style="mso-spacerun: yes">  </span>Кроме того,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа подсчитывает значение сегмента
+для этой области в 160
+
+<p><span
+style="mso-spacerun: yes">    </span>кбайт, чтобы знать, куда загружать драйвер
+устройства. Когда это
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнено, подпрограмма инициализации
+загружает в зарезервиро-
+
+<p><span
+style="mso-spacerun: yes">    </span>ванную память содержимое сектора 2 дорожки
+0 загрузочной дискеты.
+
+<p><span
+style="mso-spacerun: yes">    </span>Как поместить драйвер устройства в сектор
+2 будет описано при
+
+<p><span
+style="mso-spacerun: yes">    </span>размещении программы загрузки в секторе 1.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>После чтения процедуры драйвера
+устройства, подпрограмма
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализации изменяет вектор прерывания
+BIOS дискеты BIOS (INT
+
+<p><span
+style="mso-spacerun: yes">    </span>13H), чтобы он указывал на новый драйвер
+устройства. Как и в
+
+<p><span
+style="mso-spacerun: yes">    </span>предыдущем примере, эта процедура
+сохраняет старый вектор. Новому
+
+<p><span
+style="mso-spacerun: yes">    </span>драйверу этот вектор нужен чтобы при
+необходимости считывать данные
+
+<p><span
+style="mso-spacerun: yes">    </span>с настоящей дискеты, а не с ее модели.
+Наконец, наша программа
+
+<p><span
+style="mso-spacerun: yes">    </span>загружает систему. Она предлагает
+пользователю вставить системную
+
+<p><span
+style="mso-spacerun: yes">    </span>дискету, ждет утвердительного ответа и
+считывает запись загрузки.
+
+<p><span
+style="mso-spacerun: yes">    </span>(Если бы процедура предварительно не
+произвела пересылку программы,
+
+<p><span
+style="mso-spacerun: yes">    </span>то сейчас она была бы испорчена). Если все
+идет нормально, то
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура осуществляет переход по первому
+адресу записи загрузки, в
+
+<p><span
+style="mso-spacerun: yes">    </span>результате чего управление получает
+стандартная операционная
+
+<p><span
+style="mso-spacerun: yes">    </span>система.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прежде чем двинуться дальше, рассмотрим,
+как поместить
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуру загрузки на новую загрузочную
+дискету. Во-первых,
+
+<p><span
+style="mso-spacerun: yes">    </span>необходима пустая отформатированная
+дискета. Она и станет
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузочной. Листинг на Фиг. 10.3
+показывает, что ассемблирование и
+
+<p><span
+style="mso-spacerun: yes">    </span>редактирование связей процедуры загрузки
+происходят, как обычно.
+
+<p><span
+style="mso-spacerun: yes">    </span>Вызовите программу DOS DEBUG и загрузите
+процедуру инициации.
+
+<p><span
+style="mso-spacerun: yes">    </span>Она загружается со смещением 7C00H,
+установленным программой DEBUG.
+
+<p><span
+style="mso-spacerun: yes">    </span>Регистры устанавливаются таким образом,
+чтобы использовать BIOS для
+
+<p><span
+style="mso-spacerun: yes">    </span>записи одного сектора дискеты.<span
+style="mso-spacerun: yes">  </span>Это выполняет трехбайтовая
+
+<p><span
+style="mso-spacerun: yes">    </span>программа, находящаяся по адресу
+200H.<span style="mso-spacerun: yes">  </span>Если после записи нет
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния ошибки, то запись инициализации
+уже на дискете.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для записи драйвера устройства в сектор 2
+выполните следующие
+
+<p><span
+style="mso-spacerun: yes">    </span>шаги, показанные на Фиг. 10.3.<span
+style="mso-spacerun: yes">  </span>С помощью программы DEBUG мы
+
+<p><span
+style="mso-spacerun: yes">    </span>загружаем в память драйвер псевдодиска.
+Команда записи программы
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG помещает код драйвера в сектор с
+относительным номером 1
+
+<p><span
+style="mso-spacerun: yes">    </span>(сектор 2 дорожки 0) дискеты, находящейся
+на дисководе A:.
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогичный способ можно было бы применить
+и для занесения на
+
+<p><span
+style="mso-spacerun: yes">    </span>дискету записи инициализации.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Такой способ формирования вызова BIOS в
+программе DEBUG
+
+<p><span
+style="mso-spacerun: yes">    </span>для записи на дискету может использоваться
+почти для всех функций
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS. Проследить, что именно происходит
+при вызове BIOS, можно с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью программы DEBUG. Можно установить
+регистры для вызова и
+
+<p><span
+style="mso-spacerun: yes">    </span>написать несложную трехбайтовую программу,
+осуществляющую
+
+<p><span
+style="mso-spacerun: yes">    </span>программное прерывание и производящую
+возврат в DEBUG.<span style="mso-spacerun: yes">  </span>Этот прием
+
+<p><span
+style="mso-spacerun: yes">    </span>удобен также для тестирования собственного
+драйвера устройства.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вернемся к процедуре драйвера псевдо-диска
+во второй части Фиг.
+
+<p><span
+style="mso-spacerun: yes">    </span>10.2.<span style="mso-spacerun: yes"> 
+</span>Заметим, что процедура загрузки сохранила исходный вектор
+
+<p><span
+style="mso-spacerun: yes">    </span>дискеты (INT 13H) в этом сегменте со
+смещением 3.<span style="mso-spacerun: yes">  </span>Подпрограммы-
+
+<p><span
+style="mso-spacerun: yes">    </span>драйвера используют этот вектор для
+реализации всех функций
+
+<p><span
+style="mso-spacerun: yes">    </span>дискеты, которые не реализуются
+псевдо-диском. В приведенной
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмме предполагается, что
+псевдо-диск находится на дисководе
+
+<p><span
+style="mso-spacerun: yes">    </span>2. На запрос любого другого дисковода
+процедура передает управление
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS, используя приэтом сохраненный в
+ORIGINAL_VECTOR исходный
+
+<p><span
+style="mso-spacerun: yes">    </span>вектор. Аналогично и запрос на смену
+дискеты передается BIOS. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>функция, запрашиваемая для
+псевдо-дисковода, не считывание и не
+
+<p><span
+style="mso-spacerun: yes">    </span>запись, то драйвер псевдо-диска не
+производит никаких действий, и
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит возврат с нормальным кодом
+завершения. Псевдо-диск
+
+<p><span
+style="mso-spacerun: yes">    </span>не требует форматирования, а поскольку у
+нас нет контроля ошибок,
+
+<p><span
+style="mso-spacerun: yes">    </span>то не остается ничего проверять.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если запрашиваемой операцией является
+считывание или запись,
+
+<p><span
+style="mso-spacerun: yes">    </span>драйвер вычисляет адрес соответствующего
+псевдо-сектора в памяти.
+
+<p><span
+style="mso-spacerun: yes">    </span>При обращении за границу диска поцедура
+возвращает запись об ошибке
+
+<p><span
+style="mso-spacerun: yes">    </span>отсуствия адреса. Код драйвера
+устанавливает регистры источника и
+
+<p><span
+style="mso-spacerun: yes">    </span>назначения в соответствии с направлением
+операции.<span style='mso-tab-count:1'>      </span>Наконец,
+
+<p><span
+style="mso-spacerun: yes">    </span>команда REP MOVSW передает данные между
+псевдо-диском и буфером
+
+<p><span
+style="mso-spacerun: yes">    </span>пользователя.<span style="mso-spacerun:
+yes">  </span>Рассматриваемая программа всегда устанавливает
+
+<p><span
+style="mso-spacerun: yes">    </span>нормальный код завершения и производит
+возврат в вызывающую
+
+<p><span
+style="mso-spacerun: yes">    </span>программу.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Данный пример показывает, как реализовать
+моделирование диска,
+
+<p><span
+style="mso-spacerun: yes">    </span>однако он не готов для продуктивного
+использования. Для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>стать утилитой общего назначения, эта
+программа должна быть
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразована для обеспечения работы с
+любым прсевдоустройством, а
+
+<p><span
+style="mso-spacerun: yes">    </span>не только со вторым. Программу можно было
+бы изменить для работы с
+
+<p><span
+style="mso-spacerun: yes">    </span>сектором любой длины, хотя обычно этого не
+требуется.<span style="mso-spacerun: yes">  </span>Фактически,
+
+<p><span
+style="mso-spacerun: yes">    </span>если моделирование диска применяется
+только при работе с DOS,
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура инициализации должна
+форматировать дискету, записав
+
+
+<p>A
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;MASM BOOT,,,;
+
+<p><span
+style='mso-tab-count:1'>      </span>The IBM Personal Computer MACRO Assembler
+
+<p><span
+style='mso-tab-count:1'>      </span>Version 1.00 (C)Copyroght IBM Corp 1981
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Warning Severe
+
+<p><span
+style='mso-tab-count:1'>      </span>Errors<span style='mso-tab-count:1'>      </span>Errors
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style='mso-tab-count:1'>     </span>0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;B:LINK BOOT,,,;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>IBM Personal Computer Linker
+
+<p><span
+style='mso-tab-count:1'>      </span>Version 1.00 (C)Copyroght IBM Corp 1981
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Warning: No STACK segment
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Therhe was 1 error detected
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;MASM DISK,,,;
+
+<p><span
+style='mso-tab-count:1'>      </span>The IBM Personal Computer MACRO Assembler
+
+<p><span
+style='mso-tab-count:1'>      </span>Version 1.00 (C)Copyroght IBM Corp 1981
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Warning Severe
+
+<p><span
+style='mso-tab-count:1'>      </span>Errors<span style='mso-tab-count:1'>      </span>Errors
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style='mso-tab-count:1'>     </span>0
+
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]><span
+style='mso-fareast-font-family:"MS Mincho"'>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;B:LINK DISK,,,;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>IBM Personal Computer Linker
+
+<p><span
+style='mso-tab-count:1'>      </span>Version 1.00 (C)Copyroght IBM Corp 1981
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Warning: No STACK segment
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Therhe was 1 error detected
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;DEBUG BOOT.EXE
+
+<p><span
+style='mso-tab-count:1'>      </span>-R
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>AX=0000<span style="mso-spacerun: yes"> 
+</span>BX=0000<span style="mso-spacerun: yes">  </span>CX=7CD3<span
+style="mso-spacerun: yes">  </span>DX=0000<span style="mso-spacerun: yes"> 
+</span>SP=0000<span style="mso-spacerun: yes">  </span>BP=0000<span
+style="mso-spacerun: yes">  </span>SI=0000<span style="mso-spacerun: yes"> 
+</span>DI=0000
+
+<p><span
+style='mso-tab-count:1'>      </span>DS=06D7<span style="mso-spacerun: yes"> 
+</span>ES=06D7<span style="mso-spacerun: yes">  </span>SS=06E7<span
+style="mso-spacerun: yes">  </span>CS=06E7<span style="mso-spacerun: yes"> 
+</span>IP=0000<span style="mso-spacerun: yes">   </span>NV<span
+style="mso-spacerun: yes">  </span>UP DI PL NZ NA PO NC
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:0000<span style="mso-spacerun: yes"> 
+</span>0000 <span style='mso-tab-count:1'>  </span>ADD<span style='mso-tab-count:
+1'>   </span>[BX+SI],AL<span style='mso-tab-count:2'>        </span> DS:0000=CD
+
+<p><span
+style='mso-tab-count:1'>      </span>-U7C00<span style='mso-tab-count:1'>      </span>7C05
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:7C00 8CC8<span style='mso-tab-count:
+2'>          </span>MOV<span style='mso-tab-count:1'>   </span>AX,CS
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:7C00 8CD8<span style='mso-tab-count:
+2'>          </span>MOV<span style='mso-tab-count:1'>   </span>DS,AX
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:7C00 8CC0<span style='mso-tab-count:
+2'>          </span>MOV<span style='mso-tab-count:1'>   </span>ES,AX
+
+<p><span
+style='mso-tab-count:1'>      </span>-RAX
+
+<p><span
+style='mso-tab-count:1'>      </span>AX 0000
+
+<p><span
+style='mso-tab-count:1'>      </span>:301
+
+<p><span
+style='mso-tab-count:1'>      </span>-RBX
+
+<p><span
+style='mso-tab-count:1'>      </span>BX 0000
+
+<p><span
+style='mso-tab-count:1'>      </span>:7C00
+
+<p><span
+style='mso-tab-count:1'>      </span>-RCX
+
+<p><span
+style='mso-tab-count:1'>      </span>CX 7CD3
+
+<p><span
+style='mso-tab-count:1'>      </span>:1
+
+<p><span
+style='mso-tab-count:1'>      </span>-RDX
+
+<p><span
+style='mso-tab-count:1'>      </span>DX 0000
+
+<p><span
+style='mso-tab-count:1'>      </span>:
+
+<p><span
+style='mso-tab-count:1'>      </span>-RES
+
+<p><span
+style='mso-tab-count:1'>      </span>ES 06D7
+
+<p><span
+style='mso-tab-count:1'>      </span>:6E7
+
+<p><span
+style='mso-tab-count:1'>      </span>-E200
+
+<p><span
+style='mso-tab-count:1'>      </span>O6D7:0200<span style="mso-spacerun:
+yes">   </span>OO.CD<span style="mso-spacerun: yes">   </span>00.13<span
+style="mso-spacerun: yes">   </span>00.CC<span style='mso-tab-count:1'>   </span>
+;*** Здесь вставьте загрузочную дискету
+
+<p><span
+style='mso-tab-count:1'>      </span>-g=100
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>AX=0000<span style="mso-spacerun: yes"> 
+</span>BX=7C00<span style="mso-spacerun: yes">  </span>CX=0001<span
+style="mso-spacerun: yes">  </span>DX=0000<span style="mso-spacerun: yes"> 
+</span>SP=0000<span style="mso-spacerun: yes">  </span>BP=0000<span
+style="mso-spacerun: yes">  </span>SI=0000<span style="mso-spacerun: yes"> 
+</span>DI=0000
+
+<p><span
+style='mso-tab-count:1'>      </span>DS=06D7<span style="mso-spacerun: yes"> 
+</span>ES=06D7<span style="mso-spacerun: yes">  </span>SS=06E7<span
+style="mso-spacerun: yes">  </span>CS=06E7<span style="mso-spacerun: yes"> 
+</span>IP=0102<span style="mso-spacerun: yes">   </span>NV<span
+style="mso-spacerun: yes">  </span>UP EI PL NZ NA PE NC
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:0102<span style="mso-spacerun: yes"> 
+</span>CC<span style='mso-tab-count:2'>           </span>INT<span
+style='mso-tab-count:1'>   </span>3
+
+<p><span
+style='mso-tab-count:1'>      </span>-NDISK.EXE<span style='mso-tab-count:4'>                    </span>
+;*** Здесь вставьте программную дискету
+
+<p><span
+style='mso-tab-count:1'>      </span>-L
+
+<p><span
+style='mso-tab-count:1'>      </span>-UD 10
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:0000 EB05<span style='mso-tab-count:
+2'>          </span>JMPS<span style='mso-tab-count:1'>  </span>0007
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:0002 90<span style='mso-tab-count:
+2'>            </span>NOP
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:0003<span style="mso-spacerun: yes"> 
+</span>0000 <span style='mso-tab-count:1'>  </span>ADD<span style='mso-tab-count:
+1'>   </span>[BX+SI],AL
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:0005<span style="mso-spacerun: yes"> 
+</span>0000 <span style='mso-tab-count:1'>  </span>ADD<span style='mso-tab-count:
+1'>   </span>[BX+SI],AL
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:0007<span style="mso-spacerun: yes"> 
+</span>80FA02<span style='mso-tab-count:1'> </span>CMP<span style='mso-tab-count:
+1'>   </span>DL,02
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:000A<span style="mso-spacerun: yes"> 
+</span>7405 <span style='mso-tab-count:1'>  </span>CMP<span style='mso-tab-count:
+1'>   </span>0011
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:000C<span style="mso-spacerun: yes"> 
+</span>2E<span style='mso-tab-count:2'>           </span>SEG<span
+style='mso-tab-count:1'>   </span>CS
+
+<p><span
+style='mso-tab-count:1'>      </span>06E7:000D<span style="mso-spacerun: yes"> 
+</span>FF2E0300<span style='mso-tab-count:1'>     </span>JMP<span
+style='mso-tab-count:1'>   </span>L,[0003]<span style="mso-spacerun: yes"> 
+</span>;*** Здесь вставьте загрузочную дискету
+
+<p><span
+style='mso-tab-count:1'>      </span>-W0 0 1 1
+
+<p><span
+style='mso-tab-count:1'>      </span>-Q
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;
+
+<p>A
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>Фиг. 10.3 Шаги подготовки загрузки в верхние
+
+<p><span
+style='mso-tab-count:2'>            </span>адреса памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>справочник и таблицу размещения файлов
+FAT. При нынешнем виде этой
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуры после загрузки DOS вы должны
+&quot;форматировать&quot; диск C:. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>псевдо-диска не требуеися физического
+форматирования, но утилита
+
+<p><span
+style="mso-spacerun: yes">    </span>FORMAT записывает таблицу FAT и каталог,
+необходимые для
+
+<p><span
+style="mso-spacerun: yes">    </span>функционирования DOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта процедура обеспечивает также
+сохранение процедуры-драйвера
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства в псевдо-секторе 1 на дорожке
+0. Система DOS не
+
+<p><span
+style="mso-spacerun: yes">    </span>использует указанный сектор дисковода C:,
+однако другие системы
+
+<p><span
+style="mso-spacerun: yes">    </span>могут это делать. Вы вооозможно, заметили,
+что программа псевдо-
+
+<p><span
+style="mso-spacerun: yes">    </span>диска предотвращает запись в
+смоделированный сектор дорожки 0, так
+
+<p><span
+style="mso-spacerun: yes">    </span>что программа по крайней мере не уничтожит
+саму себя.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вообще говоря, метод загрузки в верхние
+адреса оперативной
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти довольно сложен. Необходима
+загрузка с двух дискет, что
+
+<p><span
+style="mso-spacerun: yes">    </span>требует от оператора дополнительных
+манипуляций. Если не
+
+<p><span
+style="mso-spacerun: yes">    </span>предполагается использование программы в
+каких-либо других
+
+<p><span
+style="mso-spacerun: yes">    </span>системах, кроме DOS, то гораздо удобнее
+использовать прерывание INT
+
+<p><span
+style="mso-spacerun: yes">    </span>27H. В противном случае загрузка в верхние
+адреса оперативной
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти может оказаться единственно
+возможным способом.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

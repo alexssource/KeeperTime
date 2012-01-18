@@ -1,0 +1,562 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="8-11">Прямой доступ у памяти</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Плата адаптера дисковода устроена фирмой
+IBM так, что она
+
+<p><span
+style="mso-spacerun: yes">    </span>использует возможность прямого доступа в
+память системы (ПДП).
+
+<p><span
+style="mso-spacerun: yes">    </span>Прямой доступ в память позволяет устройству
+ввода-вывода передавать
+
+<p><span
+style="mso-spacerun: yes">    </span>данные непосредственно в память или из
+нее. При этом микропроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>не &quot;касается&quot; данных. Принтер,
+например, требует передачи каждого
+
+<p><span
+style="mso-spacerun: yes">    </span>печатаемого символа самим
+микропроцессором. В случае же обмена с
+
+<p><span
+style="mso-spacerun: yes">    </span>дискетой микропроцессор был бы тяжелой
+обузой для достаточно
+
+<p><span
+style="mso-spacerun: yes">    </span>быстрой передачи данных. Программа
+микропроцессора для передачи
+
+<p><span
+style="mso-spacerun: yes">    </span>данных дисковода была бы очень похожа на
+программу Фиг. 8.15, где
+
+<p><span
+style="mso-spacerun: yes">    </span>символы посылались в принтер. То есть
+программа должна была бы
+
+<p><span
+style="mso-spacerun: yes">    </span>читать бит RQM, в цикле, чтобы проверить
+наличие очередного байта
+
+<p><span
+style="mso-spacerun: yes">    </span>данных. Тем не менее, если микропроцессор
+не ответит дисководу
+
+<p><span
+style="mso-spacerun: yes">    </span>достаточно быстро, то данные будут
+потеряны.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В случае передачи данных с помощью ПДП
+микропроцессор должен
+
+<p><span
+style="mso-spacerun: yes">    </span>только инициировать операцию. Все
+остальное выполняет контроллер
+
+<p><span
+style="mso-spacerun: yes">    </span>ПДП 8237 фирмы Intel, расположенный на
+системной плате. В случае
+
+<p><span
+style="mso-spacerun: yes">    </span>чтения с дискеты программа инициализирует
+ПДП для обслуживания
+
+<p><span
+style="mso-spacerun: yes">    </span>передачи данных. Затем программа посылает
+команду в контроллер
+
+<p><span
+style="mso-spacerun: yes">    </span>дисковода, чтобы он выполнил чтение. Во
+время выполнения программа
+
+<p><span
+style="mso-spacerun: yes">    </span>не должна передавать данные, так как эту
+работу выполняет
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер ПДП. Когда операция
+завершается, программа выполняет
+
+<p><span
+style="mso-spacerun: yes">    </span>фазу обработки результата, как и раньше.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Давайте посмотрим, как нужно настраивать
+ПДП на операцию чтения
+
+<p><span
+style="mso-spacerun: yes">    </span>с дискеты. На Фиг. 8.21 показана
+программа, предназначенная для
+
+<p><span
+style="mso-spacerun: yes">    </span>этой цели. ПДП имеет четыре канала.
+Дисковод подключен к каналу 2
+
+<p><span
+style="mso-spacerun: yes">    </span>ПДП. Каналы 1 и 3 доступны через системный
+канал ввода-вывода для
+
+<p><span
+style="mso-spacerun: yes">    </span>других устройств ввода-вывода, а канал 0
+используется для очень
+
+<p><span
+style="mso-spacerun: yes">    </span>важной аппаратной функции - поддерживания
+регенерации памяти. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>вы вмешаетесь в работу канала 0 ПДП,
+содержимое всей памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>системы, вероятнее всего, изменится.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Каждый канал ПДП имеет два регистра:
+адресный регистр и регистр
+
+<p><span
+style="mso-spacerun: yes">    </span>счетчика. Регистр адреса задает область
+памяти, куда передаются
+
+<p><span
+style="mso-spacerun: yes">    </span>данные. В нашем случае операции чтения,
+значение в регистре адреса
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает начало буфера данных. Когда
+контроллер дисковода читает
+
+<p><span
+style="mso-spacerun: yes">    </span>байт с дискеты, контроллер ПДП помещает
+этот байт в память по
+
+<p><span
+style="mso-spacerun: yes">    </span>адресу, определяемому регистром адреса.
+После каждого байта
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер ПДП увеличивает адресный
+регистр так, что он указывает
+
+<p><span
+style="mso-spacerun: yes">    </span>на следующий байт буфера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 8.21 BUFFER - имя области данных.
+Программа определяет
+
+<p><span
+style="mso-spacerun: yes">    </span>абсолютный адрес буфера BUFFER в системе.
+Для этого она прибавляет
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение BUFFER к сдвинутому (умноженному
+на 16) значению регистра
+
+<p><span
+style="mso-spacerun: yes">    </span>CS, который содержит значение сегмента
+буфера. Затем программа
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает младшие 16 бит адреса в регистр
+адреса ПДП канала 2.
+
+<p><span
+style="mso-spacerun: yes">    </span>Старшие 4 бита адреса помещаются в
+специальный регистр &quot;страницы&quot;.
+
+<p><span
+style="mso-spacerun: yes">    </span>В<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>действительности контроллер ПДП 8237
+работает только с
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовым адресом. В IBM PC этот регистр
+страницы добавлен для
+
+<p><span
+style="mso-spacerun: yes">    </span>того, чтобы программа могла читать данные
+в любое место памяти.
+
+<p><span
+style="mso-spacerun: yes">    </span>Имеется три регистра страницы, по одному
+для каналов 1, 2 и 3.
+
+<p><span
+style="mso-spacerun: yes">    </span>Регистр страницы имеет размер всего 4
+бита, и поэтому старшие биты
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра AL не играют роли при
+формировании физического адреса
+
+<p><span
+style="mso-spacerun: yes">    </span>буфера данных.
+
+<p>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">     </span>1/1/80
+04:06:09
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 8.21 Настройка прямого доступа в память<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>Page<span style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 8.21 Настройка прямого доступа в память
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> SEGMENT STACK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>0040[<span
+style='mso-tab-count:4'>                   </span> DW<span style='mso-tab-count:
+1'>   </span> 64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0080<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>= 0000<span style='mso-tab-count:3'>                </span> DMA<span
+style='mso-tab-count:1'>  </span> EQU<span style='mso-tab-count:1'>  </span> 0<span
+style='mso-tab-count:2'>          </span> ; Адрес порта DMA
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span>
+DMA_SET PROC<span style='mso-tab-count:1'>     </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>1E<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DS<span
+style='mso-tab-count:2'>         </span> ; Адрес возврата
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0001<span style='mso-tab-count:1'>      </span>2B C0<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> AX, AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0003<span style='mso-tab-count:1'>      </span>50<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0004<span style='mso-tab-count:1'>      </span>B0 46<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 46H<span style='mso-tab-count:1'>    </span> ; Установка DMA в
+режим чтения с дискеты
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0006<span style='mso-tab-count:1'>      </span>E6 0B<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> DMA+11, AL<span style='mso-tab-count:1'> </span> ;<span
+style="mso-spacerun: yes">  </span>в память
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0008<span style='mso-tab-count:1'>      </span>E6 0C<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> DMA+12, AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000A<span style='mso-tab-count:1'>      </span>8C C8<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AX, CS <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Текущий адрес сегмента
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000C<span style='mso-tab-count:1'>      </span>B1 04<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CL, 4
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000E<span style='mso-tab-count:1'>      </span>D3 C0<span
+style='mso-tab-count:4'>                   </span> ROL<span style='mso-tab-count:
+1'>  </span> AX, CL <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Умножение на 16
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0010<span style='mso-tab-count:1'>      </span>8A E8<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CH, AL <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Старшие 4 разряда в регистре CH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0012<span style='mso-tab-count:1'>      </span>24 F0<span
+style='mso-tab-count:4'>                   </span> AND<span style='mso-tab-count:
+1'>  </span> AL, 0F0H<span style='mso-tab-count:1'>   </span> ; Очистка младших
+разрядов
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0014<span style='mso-tab-count:1'>      </span>05 0032 R<span
+style='mso-tab-count:3'>               </span> ADD<span style='mso-tab-count:
+1'>  </span> AX, offset BUFFER<span style='mso-tab-count:1'>      </span> ;
+Прибавление адреса буфера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0017<span style='mso-tab-count:1'>      </span>80 D5 00<span
+style='mso-tab-count:3'>                </span> ADC<span style='mso-tab-count:
+1'>  </span> CH, 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001A<span style='mso-tab-count:1'>      </span>E6 04<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> DMA+4, AL<span style='mso-tab-count:1'>  </span> ; Вывод младшего
+байта адреса
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001C<span style='mso-tab-count:1'>      </span>8A C4<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, AH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001E<span style='mso-tab-count:1'>      </span>E6 04<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> DMA+4, AL<span style='mso-tab-count:1'>  </span> ; Вывод старшего
+байта адреса
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0020<span style='mso-tab-count:1'>      </span>8A C5<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, CH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0022<span style='mso-tab-count:1'>      </span>E6 81<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> 081H, AL<span style='mso-tab-count:1'>   </span> ; Установка регистра
+страницы
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0024<span style='mso-tab-count:1'>      </span>B8 01FF <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> AX, 511<span
+style='mso-tab-count:1'>    </span> ; Счетчик на один сектор
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0027<span style='mso-tab-count:1'>      </span>E6 05<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> DMA+5, AL<span style='mso-tab-count:1'>  </span> ; Младший байт
+счетчика
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0029<span style='mso-tab-count:1'>      </span>8A C4<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, AH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002B<span style='mso-tab-count:1'>      </span>E6 05<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> DMA+5, AL<span style='mso-tab-count:1'>  </span> ; Старший байт
+счетчика
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002D<span style='mso-tab-count:1'>      </span>B0 02<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 2<span style='mso-tab-count:2'>            </span> ; Открыть
+для прямого доступа канал 2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002F<span style='mso-tab-count:1'>      </span>E6 0A<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> DMA+10, AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0031<span style='mso-tab-count:1'>      </span>CB<span style='mso-tab-count:
+4'>                      </span> RET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0032<span style='mso-tab-count:4'>                        </span>
+DMA_SET ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0032<span style='mso-tab-count:1'>      </span>0200[<span
+style='mso-tab-count:3'>             </span> BUFFER<span style="mso-spacerun:
+yes">  </span>DB<span style='mso-tab-count:1'> </span> 512 DUP (?)<span
+style='mso-tab-count:1'>      </span> ; Буфер для чтения с диска
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>??
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0232<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 8.21 Настройка прямого доступа в память
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа также посылает в контроллер ПДП
+число передаваемых
+
+<p><span
+style="mso-spacerun: yes">    </span>байт данных. Контроллер дисковода
+использует это значение,
+
+<p><span
+style="mso-spacerun: yes">    </span>записанное в регистр счетчика канала 2,
+для завершения операции
+
+<p><span
+style="mso-spacerun: yes">    </span>чтения данных. ПДП посылает устройству
+специальный управляющий
+
+<p><span
+style="mso-spacerun: yes">    </span>сигнал, называемый завершением счета,
+когда оно записывает в память
+
+<p><span
+style="mso-spacerun: yes">    </span>последний байт. Последняя команда,
+выдаваемая ПДП - разрешение
+
+<p><span
+style="mso-spacerun: yes">    </span>работы канала 2. Теперь программа может
+войти в командную фазу
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллера дисковода.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Адаптер дисковода соединяет множество
+компонентов программного
+
+<p><span
+style="mso-spacerun: yes">    </span>и аппаратного обеспечение компьютера.
+Адаптер дисковода использует
+
+<p><span
+style="mso-spacerun: yes">    </span>и ПДП, и прерывания для обслуживания
+работы дисковода. Сам по себе
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер дисковода - сложное,
+&quot;интеллектуальное&quot; устройство
+
+<p><span
+style="mso-spacerun: yes">    </span>управления, требующее получения
+&quot;программы&quot; перед началом работы. В
+
+<p><span
+style="mso-spacerun: yes">    </span>следующей главе при обсуждении управления
+механизмом дисковода с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью программы BIOS все это будет
+рассмотрено в комплексе.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

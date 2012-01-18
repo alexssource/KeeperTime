@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-3">Регистры адресации</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>В<span style="mso-spacerun: yes"> 
+</span>процессоре 8088 имеется четыре 16-битовых регистров, которые мо-
+
+<p><span
+style="mso-spacerun: yes">    </span>гут принимать<span style="mso-spacerun:
+yes">  </span>участие в адресации операндов.<span style="mso-spacerun: yes"> 
+</span>Один из них является
+
+<p><span
+style="mso-spacerun: yes">    </span>одновременно регистром общего
+назначения<span style="mso-spacerun: yes">  </span>- регистр базы BX. Другие
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>11/17/88 21:42:25
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг 3.2 Адресация операндов<span style='mso-tab-count:4'>                      </span>
+Page<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг 3.2 Адресация операндов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME <span style="mso-spacerun:
+yes"> </span>CS:CODE,DS:CODE,SS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0123<span style='mso-tab-count:4'>                    </span><span
+style="mso-spacerun: yes">     </span>ORG<span style="mso-spacerun: yes">    
+</span>123H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0123<span style="mso-spacerun: yes">  </span>????<span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">     </span>OPND<span
+style="mso-spacerun: yes">    </span>DW<span style="mso-spacerun: yes">     
+</span>?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0200<span style='mso-tab-count:4'>                    </span><span
+style="mso-spacerun: yes">     </span>ORG<span style="mso-spacerun: yes">    
+</span>200H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0200<span style="mso-spacerun: yes">  </span>43<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>BX <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Увеличение регистра
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0201<span style="mso-spacerun: yes">  </span>FF 06 0123 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>OPND<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">     </span>;
+Увеличение ячейки памяти
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0205<span style="mso-spacerun: yes">  </span>FF 07<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INC<span style="mso-spacerun: yes">     </span>WORD PTR
+[BX]<span style="mso-spacerun: yes">   </span>; Увеличение слова памяти
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0207<span style="mso-spacerun: yes">  </span>FF 87 0123 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>[OPND+BX]<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Смещение плюс индекс
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>020B<span style="mso-spacerun: yes">  </span>FF 84 0123 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>[OPND+SI]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>020F<span style="mso-spacerun: yes">  </span>FF 84 0123 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>OPND[SI]<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Другой способ - тот же результат
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0213<span style="mso-spacerun: yes">  </span>FF 85 0123 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>OPND + [DI]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0217<span style="mso-spacerun: yes">  </span>FF 86 0123 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>[OPND] + [BP]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>021B<span style="mso-spacerun: yes">  </span>FF 00<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INC<span style="mso-spacerun: yes">     </span>WORD PTR [BX +
+SI]<span style="mso-spacerun: yes">      </span>; База плюс индекс
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>021D<span style="mso-spacerun: yes">  </span>FF 03<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INC<span style="mso-spacerun: yes">     </span>WORD PTR [BP] +
+[DI]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>021F<span style="mso-spacerun: yes">  </span>FF 81 0123 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>[OPND + BX + DI] ; База +
+индекс + смещение
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0223<span style="mso-spacerun: yes">  </span>FF 82 0123 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>OPND[BP][SI]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0227<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">    </span>Фиг 3.2 Адресация операндов&#18;
+
+
+<p><span
+style="mso-spacerun: yes">    </span>три<span style="mso-spacerun: yes"> 
+</span>- это<span style='mso-tab-count:1'>    </span>указатель базы<span
+style='mso-tab-count:1'>    </span> (Base Poiner<span style="mso-spacerun:
+yes">  </span>- BP),<span style="mso-spacerun: yes">  </span>индекс источника
+
+<p><span
+style="mso-spacerun: yes">    </span>(Source Index -<span style="mso-spacerun:
+yes">  </span>SI) и индекс назначения (Destination<span style="mso-spacerun:
+yes">  </span>Index - DI).
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа<span style="mso-spacerun: yes"> 
+</span>может<span style="mso-spacerun: yes">  </span>использовать<span
+style="mso-spacerun: yes">  </span>регистры<span style="mso-spacerun: yes"> 
+</span>BP,<span style="mso-spacerun: yes">  </span>SI<span style="mso-spacerun:
+yes">  </span>и<span style="mso-spacerun: yes">  </span>DI в качестве
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовых операндов, но отдельные байты в
+них недоступны. Основное
+
+<p><span
+style="mso-spacerun: yes">    </span>назначение<span style='mso-tab-count:1'>    </span>этих<span
+style="mso-spacerun: yes">   </span>регистров<span style="mso-spacerun: yes"> 
+</span>-<span style="mso-spacerun: yes">  </span>поставлять<span
+style="mso-spacerun: yes">   </span>16-битовые<span style="mso-spacerun: yes"> 
+</span>значения,
+
+<p><span
+style="mso-spacerun: yes">    </span>используемые в формировании адресов
+операндов.
+
+<p><span
+style='mso-tab-count:1'>      </span>Каждая команда в 8088 задает для
+выполнения некоторую операцию.
+
+<p><span
+style="mso-spacerun: yes">    </span>Разные операции<span style="mso-spacerun:
+yes">  </span>могут иметь от<span style="mso-spacerun: yes">  </span>нуля до
+двух<span style="mso-spacerun: yes">  </span>операндов. Например,
+
+<p><span
+style="mso-spacerun: yes">    </span>команде<span style="mso-spacerun: yes"> 
+</span>разрешения<span style="mso-spacerun: yes">  </span>прерываний<span
+style="mso-spacerun: yes">  </span>Set<span style="mso-spacerun: yes"> 
+</span>Interrupt<span style="mso-spacerun: yes">  </span>(STI)<span
+style="mso-spacerun: yes">  </span>операнды не
+
+<p><span
+style="mso-spacerun: yes">    </span>нужны. Команда увеличения (INC)<span
+style="mso-spacerun: yes">  </span>требует, чтобы программист опреде-
+
+<p><span
+style="mso-spacerun: yes">    </span>лил<span style="mso-spacerun: yes"> 
+</span>один операнд,<span style='mso-tab-count:1'>  </span>- регистр<span
+style="mso-spacerun: yes">  </span>или ячейку<span style="mso-spacerun: yes"> 
+</span>памяти, - который должен
+
+<p><span
+style="mso-spacerun: yes">    </span>быть увеличен<span style="mso-spacerun:
+yes">  </span>на еденицу. Команда ADD<span style="mso-spacerun: yes"> 
+</span>(сложение) должна иметь два
+
+<p><span
+style="mso-spacerun: yes">    </span>операнда -<span style='mso-tab-count:1'>    </span>складываемые
+величины. Некоторые<span style="mso-spacerun: yes">  </span>команды неявно
+задают
+
+<p><span
+style="mso-spacerun: yes">    </span>расположение операнда, но большинство
+команд позволяют программисту
+
+<p><span
+style="mso-spacerun: yes">    </span>выбирать<span style="mso-spacerun: yes"> 
+</span>в качестве<span style="mso-spacerun: yes">  </span>операнда регистр<span
+style="mso-spacerun: yes">  </span>или ячейку<span style='mso-tab-count:1'>      </span>памяти.
+Если<span style="mso-spacerun: yes">  </span>в
+
+<p><span
+style="mso-spacerun: yes">    </span>качестве операнда<span
+style="mso-spacerun: yes">  </span>выбран регистр, то<span style="mso-spacerun:
+yes">  </span>программисту остается только
+
+<p><span
+style="mso-spacerun: yes">    </span>указать его имя. Для указания же в
+качестве операнда участка памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>у вас есть много различных способов.
+
+<p><span
+style='mso-tab-count:1'>      </span>Хорошим<span style="mso-spacerun: yes"> 
+</span>примером служит<span style="mso-spacerun: yes">  </span>команда INC.<span
+style='mso-tab-count:1'>    </span>Она имеет<span style="mso-spacerun: yes"> 
+</span>единственный
+
+<p><span
+style="mso-spacerun: yes">    </span>операнд.<span style="mso-spacerun: yes"> 
+</span>На Фиг.<span style="mso-spacerun: yes">  </span>3.2 изображен<span
+style="mso-spacerun: yes">  </span>листинг ассемблера<span style="mso-spacerun:
+yes">  </span>с несколькими
+
+<p><span
+style="mso-spacerun: yes">    </span>различными вариантами<span
+style="mso-spacerun: yes">  </span>команды INC. Первая<span style='mso-tab-count:
+1'>  </span>команда INC называет<span style="mso-spacerun: yes">  </span>в
+
+<p><span
+style="mso-spacerun: yes">    </span>качестве операнда регистр BX.
+Заметим,<span style="mso-spacerun: yes">  </span>что в поле операндов в этом
+
+<p><span
+style="mso-spacerun: yes">    </span>случае кроме BX ничего нет. Остальные
+команды в примере указывают в
+
+<p><span
+style="mso-spacerun: yes">    </span>качестве операнда ячеку памяти. И<span
+style="mso-spacerun: yes">  </span>хотя в них иногда появляется имя
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра BX,<span style="mso-spacerun:
+yes">  </span>он не является здесь<span style='mso-tab-count:1'>    </span>самим
+операндом, а используется
+
+<p><span
+style="mso-spacerun: yes">    </span>для определения его адреса.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-7">База + индекс + смещение</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа<span style="mso-spacerun: yes"> 
+</span>может<span style="mso-spacerun: yes">  </span>также<span
+style="mso-spacerun: yes">  </span>комбинировать<span style="mso-spacerun:
+yes">  </span>вычисляемый<span style="mso-spacerun: yes">  </span>адрес<span
+style='mso-tab-count:1'>    </span>базы<span style="mso-spacerun: yes"> 
+</span>с
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисляемым<span style="mso-spacerun:
+yes">  </span>индексом.<span style="mso-spacerun: yes">  </span>Как<span
+style="mso-spacerun: yes">  </span>показано<span style="mso-spacerun: yes"> 
+</span>на<span style="mso-spacerun: yes">  </span>Фиг.3.2, программа может
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать режим адресации с<span
+style="mso-spacerun: yes">  </span>двумя разными адресными регистрами.
+
+<p><span
+style="mso-spacerun: yes">    </span>Для формирования исполнительного
+адреса<span style="mso-spacerun: yes">  </span>в команде могут сочетаться
+
+<p><span
+style="mso-spacerun: yes">    </span>любой из<span style="mso-spacerun: yes"> 
+</span>регистров базы (BX и<span style="mso-spacerun: yes">  </span>BP) с любым
+из<span style="mso-spacerun: yes">  </span>индексных регистров
+
+<p><span
+style="mso-spacerun: yes">    </span>(SI<span style="mso-spacerun: yes"> 
+</span>и<span style="mso-spacerun: yes">  </span>DI).<span style="mso-spacerun:
+yes">  </span>В<span style="mso-spacerun: yes">  </span>программе<span
+style='mso-tab-count:1'>      </span> может<span style='mso-tab-count:1'>      </span>быть<span
+style="mso-spacerun: yes">  </span>также<span style="mso-spacerun: yes"> 
+</span>указано<span style="mso-spacerun: yes">  </span>смещение,
+
+<p><span
+style="mso-spacerun: yes">    </span>добавляемое<span style="mso-spacerun:
+yes">  </span>к<span style="mso-spacerun: yes">  </span>сумме<span
+style="mso-spacerun: yes">  </span>значений<span style="mso-spacerun: yes"> 
+</span>этих<span style="mso-spacerun: yes">  </span>двух<span
+style="mso-spacerun: yes">  </span>регистров. Этот способ
+
+<p><span
+style="mso-spacerun: yes">    </span>адресации<span style="mso-spacerun: yes"> 
+</span>обладает<span style="mso-spacerun: yes">  </span>максимальной<span
+style='mso-tab-count:1'>     </span>гибкостью,<span style="mso-spacerun: yes"> 
+</span>так<span style="mso-spacerun: yes">  </span>как<span
+style="mso-spacerun: yes">  </span>позволяет
+
+<p><span
+style="mso-spacerun: yes">    </span>вычислять во<span style="mso-spacerun:
+yes">  </span>время выполнения программы и<span style='mso-tab-count:1'>  </span>адрес
+базы, и индексное
+
+<p><span
+style="mso-spacerun: yes">    </span>значение.<span style="mso-spacerun: yes"> 
+</span>Такая возможность<span style="mso-spacerun: yes">  </span>не<span
+style="mso-spacerun: yes">  </span>всегда<span style="mso-spacerun: yes"> 
+</span>требуется, но<span style="mso-spacerun: yes">  </span>доступна в
+
+<p><span
+style="mso-spacerun: yes">    </span>любой момент.
+
+<p><span
+style='mso-tab-count:1'>      </span>Пример с классным журналом демонстрирует
+случай, когда програм-
+
+<p><span
+style="mso-spacerun: yes">    </span>ма может вычислять и адрес базы,<span
+style="mso-spacerun: yes">  </span>и индекс вектора. Для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>определить отметку<span style='mso-tab-count:
+1'>  </span>I-го ученика за<span style="mso-spacerun: yes">  </span>J-ю
+контрольную, потребовалось
+
+<p><span
+style="mso-spacerun: yes">    </span>бы установить адрес базы на J-й<span
+style="mso-spacerun: yes">  </span>вектор и индексировать его по I-му
+
+<p><span
+style="mso-spacerun: yes">    </span>элементу.
+
+<p><span
+style='mso-tab-count:1'>      </span>На<span style="mso-spacerun: yes">  
+</span>рис.3.3<span style="mso-spacerun: yes">   </span>приведена<span
+style="mso-spacerun: yes">   </span>сводка<span style="mso-spacerun: yes">  
+</span>восьми<span style="mso-spacerun: yes">  </span>различных<span
+style="mso-spacerun: yes">  </span>способов
+
+<p><span
+style="mso-spacerun: yes">    </span>адресации,<span style='mso-tab-count:1'>    </span>возможных<span
+style="mso-spacerun: yes">  </span>в<span style="mso-spacerun: yes"> 
+</span>микропроцессоре<span style="mso-spacerun: yes">  </span>8088.<span
+style="mso-spacerun: yes">  </span>В<span style="mso-spacerun: yes"> 
+</span>команде<span style="mso-spacerun: yes">  </span>могут
+
+<p><span
+style="mso-spacerun: yes">    </span>использоваться любые из четырех<span
+style="mso-spacerun: yes">  </span>адресных регистров и смещение либо
+
+<p><span
+style="mso-spacerun: yes">    </span>комбинация<span style='mso-tab-count:1'>    </span>базисного
+регистра<span style="mso-spacerun: yes">  </span>и индексного<span
+style="mso-spacerun: yes">  </span>вместе со<span style="mso-spacerun: yes"> 
+</span>смещением.
+
+<p><span
+style="mso-spacerun: yes">    </span>Смысл колонки, обозначенной R/M, будет
+объяснен позже.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>R/M<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">    </span>Адрес операнда
+
+<p><span
+style='mso-tab-count:1'>      </span>-----------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>000<span style='mso-tab-count:1'>   </span>[BX
++ SI + СМЕЩЕНИЕ]
+
+<p><span
+style='mso-tab-count:1'>      </span>001<span style='mso-tab-count:1'>   </span>[BX
++ DI + СМЕЩЕНИЕ]
+
+<p><span
+style='mso-tab-count:1'>      </span>010<span style='mso-tab-count:1'>   </span>[BP
++ SI + СМЕЩЕНИЕ]
+
+<p><span
+style='mso-tab-count:1'>      </span>011<span style='mso-tab-count:1'>   </span>[BP
++ DI + СМЕЩЕНИЕ]
+
+<p><span
+style='mso-tab-count:1'>      </span>100<span style='mso-tab-count:1'>   </span>[SI
++ СМЕЩЕНИЕ]
+
+<p><span
+style='mso-tab-count:1'>      </span>101<span style='mso-tab-count:1'>   </span>[DI
++ СМЕЩЕНИЕ]
+
+<p><span
+style='mso-tab-count:1'>      </span>110<span style='mso-tab-count:1'>   </span>[BP
++ СМЕЩЕНИЕ]
+
+<p><span
+style='mso-tab-count:1'>      </span>111<span style='mso-tab-count:1'>   </span>[BX
++ СМЕЩЕНИЕ]
+
+<p><span
+style='mso-tab-count:1'>      </span>----------------------------- Фиг. 3.3
+Способы адресации 8088
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В наборе команд 8088<span
+style="mso-spacerun: yes">  </span>поле смещения для адресации оптимизирова-
+
+<p><span
+style="mso-spacerun: yes">    </span>но таким образом, чтобы минимизировать
+кличество треуемых байт. Ко-
+
+<p><span
+style="mso-spacerun: yes">    </span>манда может не содержать поле<span
+style="mso-spacerun: yes">  </span>смещения, когда смещение равно нулю.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если смещение<span style="mso-spacerun:
+yes">  </span>находится в диапазоне<span style="mso-spacerun: yes">  </span>от
+-127 до<span style="mso-spacerun: yes">  </span>127, то для<span
+style="mso-spacerun: yes">  </span>него
+
+<p><span
+style="mso-spacerun: yes">    </span>достаточно<span style='mso-tab-count:1'>    </span>одного
+байта.<span style="mso-spacerun: yes">  </span>Когда же<span
+style="mso-spacerun: yes">  </span>для его<span style="mso-spacerun: yes"> 
+</span>обозначения требуется
+
+<p><span
+style="mso-spacerun: yes">    </span>полное 16-битовое поле адреса, то<span
+style="mso-spacerun: yes">  </span>поле смещения будет занимать два
+
+<p><span
+style="mso-spacerun: yes">    </span>байта. Таким<span style="mso-spacerun:
+yes">  </span>образом, поле смещения<span style="mso-spacerun: yes"> 
+</span>может по необходимости<span style="mso-spacerun: yes">  </span>иметь
+
+<p><span
+style="mso-spacerun: yes">    </span>длину 0, 1<span style='mso-tab-count:1'>    </span>или
+2 байта. Когда оно имеет<span style="mso-spacerun: yes">  </span>длину один
+байт, двоичное
+
+<p><span
+style="mso-spacerun: yes">    </span>число перед форимроваием адереса получает
+распостранение знака. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что процессор перед выполнением
+сложения помещает старший
+
+<p><span
+style="mso-spacerun: yes">    </span>бит смещения<span style="mso-spacerun:
+yes">  </span>в старшие 8<span style="mso-spacerun: yes">  </span>бит
+16-битового значения.<span style="mso-spacerun: yes">  </span>Это позволяет
+
+<p><span
+style="mso-spacerun: yes">    </span>представлять<span style="mso-spacerun:
+yes">  </span>отрицательные смещения<span style="mso-spacerun: yes">  </span>в
+одном<span style="mso-spacerun: yes">  </span>байте. Самое<span
+style="mso-spacerun: yes">  </span>лучшее
+
+<p><span
+style="mso-spacerun: yes">    </span>здесь<span style="mso-spacerun: yes"> 
+</span>то, что<span style="mso-spacerun: yes">  </span>ассемблер сам<span
+style="mso-spacerun: yes">  </span>определяет нужную<span style="mso-spacerun:
+yes">  </span>длину и<span style="mso-spacerun: yes">  </span>выбирает
+
+<p><span
+style="mso-spacerun: yes">    </span>правильную и наиболее короткую команду для
+выполнения этой работы.
+
+<p><span
+style='mso-tab-count:1'>      </span>Но<span style="mso-spacerun: yes"> 
+</span>не<span style='mso-tab-count:1'>      </span>смотря<span
+style='mso-tab-count:1'>      </span>даже<span style="mso-spacerun: yes"> 
+</span>на<span style="mso-spacerun: yes">  </span>все<span style="mso-spacerun:
+yes">  </span>эти возможности адресации, набор
+
+<p><span
+style="mso-spacerun: yes">    </span>команд<span style="mso-spacerun: yes"> 
+</span>8088 допускает<span style="mso-spacerun: yes">  </span>только по<span
+style="mso-spacerun: yes">  </span>одному операнду<span style='mso-tab-count:
+1'>      </span>памяти в<span style="mso-spacerun: yes">  </span>одной
+
+<p><span
+style="mso-spacerun: yes">    </span>команде.<span style="mso-spacerun: yes"> 
+</span>Двухоперандная<span style="mso-spacerun: yes">  </span>команда<span
+style="mso-spacerun: yes">  </span>ADD<span style="mso-spacerun: yes"> 
+</span>позволяет<span style="mso-spacerun: yes">  </span>складывать<span
+style="mso-spacerun: yes">  </span>либо
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр с ячейкой памяти, либо два
+регистра. В одной команде нельзя
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>сложить<span style="mso-spacerun: yes">  </span>две ячейки<span
+style="mso-spacerun: yes">  </span>памяти. Это<span style="mso-spacerun: yes"> 
+</span>и означает,<span style="mso-spacerun: yes">  </span>что команда содержит
+
+<p><span
+style="mso-spacerun: yes">    </span>только один адрес памяти.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

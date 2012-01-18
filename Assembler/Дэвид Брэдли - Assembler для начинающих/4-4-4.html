@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-4-4">Сравнение
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда сравнения CMP сравнивает два
+числа, вычитая одно из
+
+<p><span
+style="mso-spacerun: yes">    </span>другого.<span style="mso-spacerun: yes"> 
+</span>Она не записывает результат, но флаги состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает в соответствии с
+результатом.<span style="mso-spacerun: yes">  </span>Эта команда изменяет
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>только флаги.<span style="mso-spacerun: yes">  </span>В программе
+команда сравнения используется так же,
+
+<p><span
+style="mso-spacerun: yes">    </span>как и команда вычитания; однако команды
+сравнения с заемом не
+
+<p><span
+style="mso-spacerun: yes">    </span>существует.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сравнение с повышенной точностью требует
+чуть больше усилий,
+
+<p><span
+style="mso-spacerun: yes">    </span>чем сравнение байтов или слов. Фактически
+в этих случаях много
+
+<p><span
+style="mso-spacerun: yes">    </span>проще использовать команду вычитания
+вместо команды сравнения. На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 4.11 показано сравнение пары
+32=битовых чисел в памяти с
+
+<p><span
+style="mso-spacerun: yes">    </span>использованием регистра AX в качестве
+области временного хранения.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это сравнение определяет, какое из чисел
+больше. Программа в
+
+<p><span
+style="mso-spacerun: yes">    </span>результате своего выполнения устанавливает
+коды условия. Флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>переноса определяет, какое из чисел
+больше: если флаг равен 1,
+
+<p><span
+style="mso-spacerun: yes">    </span>число VALUE больше.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вторая программа на Фиг. 4.11 проверяет
+два 32=битовых числа на
+
+<p><span
+style="mso-spacerun: yes">    </span>равенство. Программа сохраняет младший
+результат, а затем
+
+<p><span
+style="mso-spacerun: yes">    </span>комбинирует его со старшим, и таким
+образом выясняет
+
+<p><span
+style="mso-spacerun: yes">    </span>эквивалентность результата нулю. Команда
+OR описана в следующем
+
+<p><span
+style="mso-spacerun: yes">    </span>разделе, а здесь существенно то, что она
+комбинирует два значения
+
+<p><span
+style="mso-spacerun: yes">    </span>так, что окончательное значение равно 0
+тогда и только тогда, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>оба исходных значения равны 0. Результат
+этой подпрограммы
+
+<p><span
+style="mso-spacerun: yes">    </span>сравнения - значение флага нуля; если он
+равен 1, числа равны.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+3'>              </span>1/1/80 04:00:59
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 4.11 Сравнение чисел заданных с повышенной точностью<span
+style='mso-tab-count:1'>     </span>Page<span style='mso-tab-count:1'>  </span>
+1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.11 Сравнение чисел заданных с повышенной точностью
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>????????<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">   
+</span>VALUE1<span style="mso-spacerun: yes">  </span>DD<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">    </span>?<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">    </span>;
+Область данных размером 32 разряда
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0004<span style="mso-spacerun: yes">  </span>????????<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">   
+</span>VALUE2<span style="mso-spacerun: yes">  </span>DD<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">    </span>?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0008<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>FIG4_11 PROC<span style="mso-spacerun:
+yes">    </span>NEAR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>;-----<span style="mso-spacerun: yes"> 
+</span>Сравниваются по неравенству два 32-разрядных числа
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0008<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>COMPARE_UNEQUAL:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0008<span style="mso-spacerun: yes">  </span>A1 0000 R<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>AX, WORD PTR
+VALUE1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000B<span style="mso-spacerun: yes">  </span>2B 06 0004 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>SUB<span style="mso-spacerun: yes">     </span>AX, WORD PTR
+VALUE2<span style="mso-spacerun: yes">     </span>; Вычитание младшей части
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000F<span style="mso-spacerun: yes">  </span>A1 0002 R<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>AX, WORD PTR
+VALUE1+2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0012<span style="mso-spacerun: yes">  </span>1B 06 0006 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>SBB<span style="mso-spacerun: yes">     </span>AX, WORD PTR
+VALUE2+2<span style="mso-spacerun: yes">   </span>; Вычитание старшей части
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0016<span style="mso-spacerun: yes">  </span>C3<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">    </span>RET
+<span style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">    </span>; Возврат с установленными флагами
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>;-----<span style="mso-spacerun: yes"> 
+</span>Сравниваются по равенству два 32-разрядных числа
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0017<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>COMPARE_EQUAL:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0017<span style="mso-spacerun: yes">  </span>A1 0000 R<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>AX, WORD PTR
+VALUE1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001A<span style="mso-spacerun: yes">  </span>2B 06 0004 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>SUB<span style="mso-spacerun: yes">     </span>AX, WORD PTR
+VALUE2<span style="mso-spacerun: yes">     </span>; Вычитание младшей части
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001E<span style="mso-spacerun: yes">  </span>8B D8<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>BX, AX<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>; В BX младшая часть результата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0020<span style="mso-spacerun: yes">  </span>A1 0002 R<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>AX, WORD PTR
+VALUE1+2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0023<span style="mso-spacerun: yes">  </span>1B 06 0006 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>SBB<span style="mso-spacerun: yes">     </span>AX, WORD PTR
+VALUE2+2<span style="mso-spacerun: yes">   </span>; Вычитание старшей части
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0027<span style="mso-spacerun: yes">  </span>0B C3<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>OR<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>AX, BX<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">    </span>; Объединение результатов
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0029<span style="mso-spacerun: yes">  </span>C3<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">    </span>RET
+<span style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">    </span>; Флаг Z показывает равенство
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>002A<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>FIG4_11 ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>002A<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.11 Сравнение с повышенной
+точностью
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

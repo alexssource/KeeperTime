@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-14">Управляющие рагистры</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Для<span style="mso-spacerun: yes"> 
+</span>операций<span style="mso-spacerun: yes">  </span>управления<span
+style="mso-spacerun: yes">  </span>в<span style="mso-spacerun: yes"> 
+</span>процессоре<span style="mso-spacerun: yes">  </span>8088 используются
+главным
+
+<p><span
+style="mso-spacerun: yes">    </span>образом три<span style="mso-spacerun:
+yes">  </span>16-битовых регистра. Это указатель<span style="mso-spacerun:
+yes">  </span>стека (SP), указа-
+
+<p><span
+style="mso-spacerun: yes">    </span>тель команды (IP) и<span
+style="mso-spacerun: yes">  </span>регистр флагов. Два регистра-указателя
+процес-
+
+<p><span
+style="mso-spacerun: yes">    </span>сор использует для необходимой при
+выполнении программы адресации в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти. Регистр<span style="mso-spacerun:
+yes">  </span>флагов содержит коды<span style="mso-spacerun: yes"> 
+</span>состояний, которые программа
+
+<p><span
+style="mso-spacerun: yes">    </span>может использовать для управления своим
+выполнением.
+<div align="center"><b><a name="3-14-1">Указатель команд</a></b></div>
+
+
+<p><span
+style="mso-spacerun: yes">    </span>Указатель команд - это<span
+style="mso-spacerun: yes">  </span>16-битовый регистр, который содержит смеще-
+
+<p><span
+style="mso-spacerun: yes">    </span>ние очередной команды. Как<span
+style='mso-tab-count:1'>      </span>показано в предыдущем пункте, Процессор
+
+<p><span
+style="mso-spacerun: yes">    </span>использует регистр CS совместно с
+регистром IP для формирования 20-
+
+<p><span
+style="mso-spacerun: yes">    </span>битового физического адреса. Регистр CS
+определяет сегмент выполня-
+
+<p><span
+style="mso-spacerun: yes">    </span>емой программы, а IP задает смещение.
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку<span style="mso-spacerun: yes"> 
+</span>в<span style="mso-spacerun: yes">  </span>задании<span
+style="mso-spacerun: yes">  </span>адреса<span style="mso-spacerun: yes"> 
+</span>очередной<span style="mso-spacerun: yes">  </span>команды участвует два
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра,<span style="mso-spacerun: yes"> 
+</span>существует<span style="mso-spacerun: yes">  </span>несколько<span
+style="mso-spacerun: yes">  </span>способов<span style='mso-tab-count:1'>  </span>задать<span
+style='mso-tab-count:1'>      </span>ход<span style="mso-spacerun: yes"> 
+</span>выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>программы.<span style='mso-tab-count:1'>    </span>Наиболее
+обычный<span style="mso-spacerun: yes">  </span>из этих<span
+style="mso-spacerun: yes">  </span>способов осуществляется<span
+style="mso-spacerun: yes">  </span>при
+
+<p><span
+style="mso-spacerun: yes">    </span>нормальном выполнении программы. При
+извлечении процессором команды
+
+<p><span
+style="mso-spacerun: yes">    </span>из<span style='mso-tab-count:1'>      </span>памяти
+и<span style="mso-spacerun: yes">  </span>ее выполнении<span
+style="mso-spacerun: yes">  </span>значение регистра<span style="mso-spacerun:
+yes">  </span>IP увеличивается на
+
+<p><span
+style="mso-spacerun: yes">    </span>размер команды<span style="mso-spacerun:
+yes">  </span>в байтах. Тепер<span style="mso-spacerun: yes">  </span>пара
+CS:IP указывает<span style="mso-spacerun: yes">  </span>на следующую
+
+<p><span
+style="mso-spacerun: yes">    </span>команду.
+
+<p><span
+style='mso-tab-count:1'>      </span>Для<span style="mso-spacerun: yes"> 
+</span>изменения порядка<span style='mso-tab-count:1'>  </span>выполнения
+команд<span style="mso-spacerun: yes">  </span>используются команды
+
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода. Команда перехода одного вида
+изменяет только регистр IP и
+
+<p><span
+style="mso-spacerun: yes">    </span>дает переход<span style="mso-spacerun:
+yes">  </span>внутри одного сегмента. Этот<span style='mso-tab-count:1'>  </span>тип
+перехода называется
+
+<p><span
+style="mso-spacerun: yes">    </span>внутрисегментным<span style="mso-spacerun:
+yes">  </span>или<span style="mso-spacerun: yes">  </span>близким<span
+style="mso-spacerun: yes">  </span>(NEAR)<span style="mso-spacerun: yes"> 
+</span>переходом. Спецификация для
+
+<p><span
+style="mso-spacerun: yes">    </span>него<span style="mso-spacerun: yes"> 
+</span>требует<span style="mso-spacerun: yes">  </span>лишь<span
+style="mso-spacerun: yes">  </span>новое<span style='mso-tab-count:1'>      </span>значение<span
+style="mso-spacerun: yes">  </span>для<span style="mso-spacerun: yes"> 
+</span>регистра<span style="mso-spacerun: yes">  </span>IP. Регистр CS
+
+<p><span
+style="mso-spacerun: yes">    </span>остается без изменений. Близкий переход
+может передавать управление
+
+<p><span
+style="mso-spacerun: yes">    </span>только<span style="mso-spacerun: yes"> 
+</span>внутри<span style="mso-spacerun: yes">   </span>текущего<span
+style="mso-spacerun: yes">  </span>сегмента,<span style="mso-spacerun: yes"> 
+</span>поэтому<span style="mso-spacerun: yes">   </span>дальность<span
+style="mso-spacerun: yes">  </span>перехода
+
+<p><span
+style="mso-spacerun: yes">    </span>ограничена сверху 64K байт. Для перехода к
+боле отдаленному участку
+
+<p><span
+style="mso-spacerun: yes">    </span>программы требуется переход другого типа.
+
+<p><span
+style='mso-tab-count:1'>      </span>Переход второго типа называется
+межсегментным или далеким (FAR)
+
+<p><span
+style="mso-spacerun: yes">    </span>переходом. При этом переходе процессор
+назначает новые значения как
+
+<p><span
+style="mso-spacerun: yes">    </span>для IP так<span style='mso-tab-count:1'>    </span>и
+для CS. Этот переход<span style='mso-tab-count:1'>  </span>позволяет выполнять
+новую прог-
+
+<p><span
+style="mso-spacerun: yes">    </span>рамму расположенную<span
+style="mso-spacerun: yes">  </span>в любом месте адресного<span
+style="mso-spacerun: yes">  </span>пространства 8088. Но
+
+<p><span
+style="mso-spacerun: yes">    </span>для<span style="mso-spacerun: yes"> 
+</span>выполнения<span style="mso-spacerun: yes">  </span>такого<span
+style="mso-spacerun: yes">  </span>перехода<span style="mso-spacerun: yes"> 
+</span>команда<span style='mso-tab-count:1'>  </span>должна определить новые
+
+<p><span
+style="mso-spacerun: yes">    </span>значения для<span style="mso-spacerun:
+yes">  </span>обоих регистров -<span style="mso-spacerun: yes">  </span>CS и
+IP.<span style="mso-spacerun: yes">  </span>При прямом переходе<span
+style="mso-spacerun: yes">  </span>это
+
+<p><span
+style="mso-spacerun: yes">    </span>требует пяти-байтовой команды : один
+байт<span style="mso-spacerun: yes">  </span>на код операции и по два
+байта для регистров CS и IP.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="8-7">Адаптер параллельного принтера</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Чтобы подключить печатающее устройство
+фирмы IBM или любое другое,
+
+<p><span
+style="mso-spacerun: yes">    </span>которое подключается через параллельный
+интерфейса, вам нужен
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптер параллельного печатающего
+устройства (принтера). Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптер встроен в адаптер монохромного
+дисплея и принтера. Если вы
+
+<p><span
+style="mso-spacerun: yes">    </span>используете адаптер цветного графического
+монитора, то нужен
+
+<p><span
+style="mso-spacerun: yes">    </span>отдельный адаптер принтера. С точки зрения
+интерфейса с печатающим
+
+<p><span
+style="mso-spacerun: yes">    </span>устройством, эти два адаптера идентичны,
+за исключением адресов
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода-вывода. Порты принтера на
+монохромной плате имеют адреса от
+
+<p><span
+style="mso-spacerun: yes">    </span>3BCH до 3BEH, а отдельная плата принтера
+имеет адреса от 378H до
+
+<p><span
+style="mso-spacerun: yes">    </span>37AH.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Адаптер принтера имеет два выводных порта
+и один порт ввода.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этот адаптер очень похож на микросхему
+8255, используемую для
+
+<p><span
+style="mso-spacerun: yes">    </span>интерфейса клавиатуры. Фактически, сначала
+в конструкции платы
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающего устройства использовалась
+микросхема 8255. Но фирма IBM
+
+<p><span
+style="mso-spacerun: yes">    </span>решила лучше делать адаптеры с раздельными
+компонентами.
+
+<p><span
+style='mso-tab-count:1'>      </span>Выводной 8-битовый порт данных по адресу
+3BCH или 378H передает
+
+<p><span
+style="mso-spacerun: yes">    </span>данные принтеру. Адаптер посылает
+символьный код ASCII, помещаемый
+
+<p><span
+style="mso-spacerun: yes">    </span>в<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>этот порт, прямо в принтер. Второй порт
+вывода, расположенный
+
+<p><span
+style="mso-spacerun: yes">    </span>по адресам 3BEH или 37AH, имеет 5 выводных
+бит. В нем содержатся
+
+<p><span
+style="mso-spacerun: yes">    </span>управляющие сигналы для принтера; эти
+линии управляют его работой и
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализацией. В частности, бит 0
+инициирует передачу данных в
+
+<p><span
+style="mso-spacerun: yes">    </span>принтер. Простая запись данных в порт
+вывода данных не означает
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылку символа на принтер. Для того,
+чтобы в него поступил
+
+<p><span
+style="mso-spacerun: yes">    </span>символ, нужно установить бит строба (бит 0
+порта 3BEH или 37AH)
+
+<p><span
+style="mso-spacerun: yes">    </span>равным 1, а затем снова сбросить на 0. На
+Фиг. 8.15 показана
+
+<p><span
+style="mso-spacerun: yes">    </span>короткая программа, передающая печатающему
+устройству строку
+
+<p><span
+style="mso-spacerun: yes">    </span>символов. Подпрограмма с именем PRINT
+обеспечивает сам процесс
+
+<p><span
+style="mso-spacerun: yes">    </span>передачи данных в принтер.
+
+<p><span
+style='mso-tab-count:1'>      </span>Обратите внимание, что процедура PRINT
+читает код из вводного
+
+<p><span
+style="mso-spacerun: yes">    </span>порта (3BCH или 379H). Этот порт
+возвращает информацию состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающего устройства программе. В данном
+примере программа
+
+<p><span
+style="mso-spacerun: yes">    </span>проверяет состояние, чтобы выводить
+следующий символ именно тогда,
+
+<p><span
+style="mso-spacerun: yes">    </span>когда принтер готов его принять. Бит 7
+состояния порта ввода
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает занятость принтера. Если этот
+бит содержит 1, печатающее
+
+<p><span
+style="mso-spacerun: yes">    </span>устройство готово принимать следующий
+символ для печати. В
+
+<p><span
+style="mso-spacerun: yes">    </span>противном случае программа должна
+подождать. Остальные 4 вводных
+
+<p><span
+style="mso-spacerun: yes">    </span>бита этого порта отражают возможные ошибки
+на печатающем
+
+<p><span
+style="mso-spacerun: yes">    </span>устройстве, например, отсутствие бумаги.
+Наш пример не контролирует
+
+<p><span
+style="mso-spacerun: yes">    </span>эти ситуации. Техническое описание
+содержит структуры вводных и
+
+<p><span
+style="mso-spacerun: yes">    </span>выводных портов платы адаптера печатающего
+устройства.
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes"> 
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">      </span>1/1/80
+04:05:39
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 8.15 Вывод на принтер<span style='mso-tab-count:4'>                     </span><span
+style="mso-spacerun: yes">     </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 8.15 Вывод на принтер
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> SEGMENT STACK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>0040[<span
+style='mso-tab-count:4'>                   </span> DW<span style='mso-tab-count:
+1'>   </span> 64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0080<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>= 0378<span style='mso-tab-count:3'>                </span> BASE<span
+style='mso-tab-count:1'> </span> EQU<span style='mso-tab-count:1'>  </span>
+378H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>94 A8 A3 2E 20 38 2E<span
+style='mso-tab-count:1'>    </span> MSG<span style='mso-tab-count:1'>  </span>
+DB<span style='mso-tab-count:1'>   </span> 'Фиг. 8.15', 13, 10, '$'
+
+<p><span
+style='mso-tab-count:3'>                  </span>31 35 0D 0A 24
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000C<span style='mso-tab-count:4'>                        </span> MAIN<span
+style='mso-tab-count:1'> </span> PROC<span style='mso-tab-count:1'> </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000C<span style='mso-tab-count:1'>      </span>1E<span style='mso-tab-count:
+1'>    </span><span style='mso-tab-count:3'>                  </span> PUSH<span
+style='mso-tab-count:1'> </span> DS<span style='mso-tab-count:2'>         </span>
+; Адрес возврата
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000D<span style='mso-tab-count:1'>      </span>2B C0<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> AX, AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000F<span style='mso-tab-count:1'>      </span>50<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0010<span style='mso-tab-count:1'>      </span>8D 1E 0000 R<span
+style='mso-tab-count:3'>                  </span> LEA<span style='mso-tab-count:
+1'>  </span> BX, MSG
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0014<span style='mso-tab-count:4'>                        </span>
+PRINT_LOOP:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0014<span style='mso-tab-count:1'>      </span>2E: 8A 07<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, CS:[BX]<span style='mso-tab-count:1'>      </span> ; Выбор
+символа из строки для вывода
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0017<span style='mso-tab-count:1'>      </span>3C 24<span
+style='mso-tab-count:4'>                   </span> CMP<span style='mso-tab-count:
+1'>  </span> AL, '$'<span style="mso-spacerun: yes">         </span>; Конец
+строки?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0019<span style='mso-tab-count:1'>      </span>74 06<span
+style='mso-tab-count:4'>                   </span> JE<span style='mso-tab-count:
+1'>   </span> MAIN_RETURN
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001B<span style='mso-tab-count:1'>      </span>E8 0022 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT<span style='mso-tab-count:2'>            </span> ; Печать
+символа
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001E<span style='mso-tab-count:1'>      </span>43<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001F<span style='mso-tab-count:1'>      </span>EB F3<span
+style='mso-tab-count:4'>                   </span> JMP<span style='mso-tab-count:
+1'>  </span> PRINT_LOOP<span style='mso-tab-count:1'> </span> ; Переход к
+следующему символу
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0021<span style='mso-tab-count:4'>                        </span>
+MAIN_RETURN:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0021<span style='mso-tab-count:1'>      </span>CB<span style='mso-tab-count:
+4'>                      </span> RET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0022<span style='mso-tab-count:4'>                        </span> MAIN<span
+style='mso-tab-count:1'> </span> ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Эта подпрограмма печатает символ в регистр AL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0022<span style='mso-tab-count:4'>                        </span> PRINT<span
+style='mso-tab-count:1'>      </span> PROC<span style='mso-tab-count:1'> </span>
+NEAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0022<span style='mso-tab-count:1'>      </span>BA 0378 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX, BASE<span
+style='mso-tab-count:1'>   </span> ; Порт вывода данных на принтер
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0025<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span> DX,
+AL <span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes"> </span>; Занесение символа в порт вывода на принтер
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0026<span style='mso-tab-count:1'>      </span>42<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> DX<span
+style='mso-tab-count:2'>         </span> ; Адрес порта состояния принтера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0027<span style='mso-tab-count:4'>                        </span>
+WAIT_BUSY:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0027<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span> AL,
+DX <span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes"> </span>; Опрос состояния принтера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0028<span style='mso-tab-count:1'>      </span>A8 80<span
+style='mso-tab-count:4'>                   </span> TEST<span style='mso-tab-count:
+1'> </span> AL, 80H<span style='mso-tab-count:1'>    </span> ; Проверка разряда
+занятости принтера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002A<span style='mso-tab-count:1'>      </span>74 FB<span
+style='mso-tab-count:3'>             </span><span style='mso-tab-count:1'>      </span>
+JZ<span style='mso-tab-count:1'>   </span> WAIT_BUSY<span style='mso-tab-count:
+1'>  </span> ; Цикл до освобождения принтера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002C<span style='mso-tab-count:1'>      </span>42<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002D<span style='mso-tab-count:1'>      </span>B0 0D<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 0DH<span style='mso-tab-count:1'>    </span> ; Установка
+разряда готовности данных
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002F<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span> DX,
+AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0030<span style='mso-tab-count:1'>      </span>B0 0C<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 0CH<span style='mso-tab-count:1'>    </span> ; Сброс разряда
+готовности данных
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0032<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span> DX,
+AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0033<span style='mso-tab-count:1'>      </span>C3<span style='mso-tab-count:
+4'>                      </span> RET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0034<span style='mso-tab-count:4'>                        </span> PRINT<span
+style='mso-tab-count:1'>      </span> ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0034<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END<span style='mso-tab-count:1'>  </span>
+MAIN&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>Фиг. 8.15 Вывод на принтер
+
+<p><span
+style='mso-tab-count:1'>      </span>Один из управляющих битов порта 3BEH (или
+37AH) управляет
+
+
+<p><span
+style="mso-spacerun: yes">    </span>линией прерывания от печатающего
+устройства. Для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающее устройство могло посылать свой
+сигнал прерывания в
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер 8259, этот бит нужно установить
+равным 1. Однако адаптер
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающего устройства выдает неверный
+сигнал прерывания, т.е.
+
+<p><span
+style="mso-spacerun: yes">    </span>выбранный для этой цели сигнал не вызывает
+правильного прерывания.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поэтому не стоит и пытаться писать
+программу, которая бы
+
+<p><span
+style="mso-spacerun: yes">    </span>использовала возможности прерывания от
+адаптера печатающего
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства (если вы не захотите физически
+изменить плату
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающего устройства). Далее мы приведем
+пример, который обходит
+
+<p><span
+style="mso-spacerun: yes">    </span>эту проблему с помощью системного таймера.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+
+</body>
+</html>

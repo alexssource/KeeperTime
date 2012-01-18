@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-7">Системный сервис</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Два драйвера в BIOS дают самый простой
+системный сервис.<span style="mso-spacerun: yes">  </span>Они
+
+<p><span
+style="mso-spacerun: yes">    </span>предназначены для определения объема
+памяти ЭВМ и конфигурации
+
+<p><span
+style="mso-spacerun: yes">    </span>внешних устройств.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа определения объема памяти не
+имеет параметров. BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>возвращает в регистре AX объем памяти
+системы, измеренный в
+
+<p><span
+style="mso-spacerun: yes">    </span>килобайтах (1024 байт). Если система имеет
+память 64K байт, в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AX возвратится число 64. Любая
+программа, использующая всю
+
+<p><span
+style="mso-spacerun: yes">    </span>память системы, должна запрашивать у BIOS
+объем памяти, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>определить, где находится ее конец.
+Программа могла бы определить
+
+<p><span
+style="mso-spacerun: yes">    </span>объем памяти, записав и прочитав подряд
+ячейки памяти, сравнивая
+
+<p><span
+style="mso-spacerun: yes">    </span>записанное и прочитанное значение. Но, как
+покажет пример в
+
+<p><span
+style="mso-spacerun: yes">    </span>следующей главе, важно писать все
+прикладные программы так, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>они использовали для определения объема
+памяти подпрограмму,
+
+<p><span
+style="mso-spacerun: yes">    </span>возвращающую этот объем. Изменяя значение
+верхнего предела памяти,
+
+<p><span
+style="mso-spacerun: yes">    </span>можно зарезервировать участок в верхних
+адресах памяти. После того,
+
+<p><span
+style="mso-spacerun: yes">    </span>как программа изменит значение общего
+объема памяти, корректно
+
+<p><span
+style="mso-spacerun: yes">    </span>написанная прикладная программа не нарушит
+границу памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа проверки конфигурации внешних
+устройств не имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>входных параметров. Эта программа
+возвращает в регистре AX
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовый код, показывающий, какие
+устройства подключены к
+
+<p><span
+style="mso-spacerun: yes">    </span>конкретной системе. В прологе распечатки
+этой программы в
+
+<p><span
+style="mso-spacerun: yes">    </span>техническом руководстве по IBM PC
+указывается, что означает каждый
+
+<p><span
+style="mso-spacerun: yes">    </span>бит. Эта функция BIOS - простейший способ
+определения, существует
+
+<p><span
+style="mso-spacerun: yes">    </span>ли конкретное устройство в системе, или
+нет.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Последняя системная сервисная программа
+проверяет время суток.
+
+<p><span
+style="mso-spacerun: yes">    </span>У этой программы есть две функции: чтение
+времени и установка
+
+<p><span
+style="mso-spacerun: yes">    </span>времени. Время измеряется в квантах
+таймера, начиная с того
+
+<p><span
+style="mso-spacerun: yes">    </span>момента, когда машина включается, и
+отсчитывается от полуночи. BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>не преобразует это значение в часы, минуты
+и секунды. Но в листинге
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS показаны нужные для преобразования
+константы. Чтобы определить
+
+<p><span
+style="mso-spacerun: yes">    </span>время в часах, разделите 24-битовое
+значение таймера на 65543,
+
+<p><span
+style="mso-spacerun: yes">    </span>число квантов таймера в часе. Чтобы
+определить минуты, разделите
+
+<p><span
+style="mso-spacerun: yes">    </span>остаток от предыдущего деления на 1092,
+количество квантов в
+
+<p><span
+style="mso-spacerun: yes">    </span>минуте, и так далее.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если точность преобразования значения
+времени не очень критична
+
+<p><span
+style="mso-spacerun: yes">    </span>для вас, можно воспользоваться более
+простым методом. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>количество квантов, соответствующее 24
+часам не помещается в одно
+
+<p><span
+style="mso-spacerun: yes">    </span>слово, значение таймера представляется
+трехбайтовым целым числом.
+
+<p><span
+style="mso-spacerun: yes">    </span>Значение старшего байта отличается не
+более, чем на 1% от времени в
+
+<p><span
+style="mso-spacerun: yes">    </span>часах. Младшее слово можно разделить на
+1092, чтобы определить
+
+<p><span
+style="mso-spacerun: yes">    </span>число минут, а деление остатка на 18 дает
+число секунд.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Функция времени дня использует аппаратное
+прерывание,
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>прерывание по кванту таймера. Это прерывание имеет уровень 0 в
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллере прерываний 8259, и имеет
+вектор прерывания 8 в
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессоре 8088. Эта программа
+получает управление каждые 55
+
+<p><span
+style="mso-spacerun: yes">    </span>миллисекунд. Основное назначение этой
+программы - увеличение
+
+<p><span
+style="mso-spacerun: yes">    </span>счетчика квантов таймера программы времени
+дня. Если программа
+
+<p><span
+style="mso-spacerun: yes">    </span>выключит прерывания на значительный
+промежуток времени, то весьма
+
+<p><span
+style="mso-spacerun: yes">    </span>вероятно, что время суток перестанет быть
+правильным.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прерывание от таймера используется также
+программой
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживания дисковода. Двигатели
+дисковода включены не постоянно;
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS включает двигатели только на время
+доступа к дискете. Но BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>не выключает двигатель сразу же после
+выполнения операции. Есть
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторый интервал времени между
+включением двигателя и тем
+
+<p><span
+style="mso-spacerun: yes">    </span>моментом, когда он разгонится и будет
+вращаться достаточно быстро,
+
+<p><span
+style="mso-spacerun: yes">    </span>для того, чтобы можно было читать данные.
+Если программа обращается
+
+<p><span
+style="mso-spacerun: yes">    </span>к дисководу почти сразу после предыдущего
+обращения, лучше оставить
+
+<p><span
+style="mso-spacerun: yes">    </span>двигатель включенным, а не выключать и
+включать его. Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>обработки аппаратного прерывания от
+таймера учитывает это.
+
+<p><span
+style="mso-spacerun: yes">    </span>Обработчик дискового прерывания загружает
+число в переменную,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая называется MOTOR_COUNT, когда
+завершается операция обмена с
+
+<p><span
+style="mso-spacerun: yes">    </span>дискеттой. Прерывание от таймера уменьшает
+значение этого счетчика.
+
+<p><span
+style="mso-spacerun: yes">    </span>Когда значение переменной MOTOR_COUNT
+достигает 0, выключается
+
+<p><span
+style="mso-spacerun: yes">    </span>двигатель дисковода. Программа
+обслуживания дисковода проверяет
+
+<p><span
+style="mso-spacerun: yes">    </span>этот счетчик, перед обращением к дискете.
+Если двигатель еще не
+
+<p><span
+style="mso-spacerun: yes">    </span>включен, нужна задержка, пока двигатель не
+разгонится. Обычно
+
+<p><span
+style="mso-spacerun: yes">    </span>двигатель дисковода продолжает работать
+две секунды после
+
+<p><span
+style="mso-spacerun: yes">    </span>завершения предыдущей операции. Это время
+- один из параметров
+
+<p><span
+style="mso-spacerun: yes">    </span>дисковода, и вы можете изменить его
+значение. Выбор этого значения
+
+<p><span
+style="mso-spacerun: yes">    </span>поддерживает балланс между повышением
+производительности и
+
+<p><span
+style="mso-spacerun: yes">    </span>снижением износа поверхности дискеты.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Все эти три сервисные программы BIOS
+передают числа из ячеек
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти в вызывающую программу. Можно
+избежать использования BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>путем непосредственного чтения этих ячеек.
+Но зачастую проще
+
+<p><span
+style="mso-spacerun: yes">    </span>вызвать BIOS, чем организовывать адресацию
+к сегменту DATA
+
+<p><span
+style="mso-spacerun: yes">    </span>используемому в BIOS. С
+&quot;наивной&quot; точки зрения, проще использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>программу BIOS.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

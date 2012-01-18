@@ -1,0 +1,1868 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="8-6-3">Текстовый режим
+</a></b></div></p>
+<p><span
+style='mso-tab-count:1'>      </span>Два текстовых режима цветного графического
+адаптера дают
+
+<p><span
+style="mso-spacerun: yes">    </span>простой способ вывода символов на экран. В
+текстовых режимах
+
+<p><span
+style="mso-spacerun: yes">    </span>цветная плата аналогична монохромному
+адаптеру, но она позволяет
+
+<p><span
+style="mso-spacerun: yes">    </span>указать цвет каждого символа. Так же, как
+и в монохромной плате,
+
+<p><span
+style="mso-spacerun: yes">    </span>каждая символьная позиция цветной платы
+имеет байт атрибутов. Этот
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Номер бита<span style="mso-spacerun:
+yes">  </span>7<span style="mso-spacerun: yes">  </span>6<span
+style="mso-spacerun: yes">  </span>5<span style="mso-spacerun: yes">  </span>4<span
+style='mso-tab-count:1'>  </span>3<span style="mso-spacerun: yes"> 
+</span>2<span style="mso-spacerun: yes">  </span>1<span style="mso-spacerun:
+yes">  </span>0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>ЪДДВДДДДДДДДВДДВДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>і Мі Ф<span style="mso-spacerun: yes">  </span>О<span
+style="mso-spacerun: yes">  </span>Ні Яі СИМВОЛ і Фиг. 8.9 Байт атрибута
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>АДДБДДБДДБДДБДДБДДБДДБДДЩ<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>для ЦГА
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<span style='font-size:10.0pt;font-family:"Courier New";mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:RU;mso-fareast-language:RU;mso-bidi-language:
+AR-SA'><br clear=all style='page-break-before:always'>
+</span>
+
+<p><span
+style="mso-spacerun: yes">                                </span>- 289 -<span
+style="mso-spacerun: yes">     </span>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>байт атрибутов определяет цвета символов и
+фона каждой позиции.
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.8.9 показана структура байта
+атрибутов в цветном
+
+<p><span
+style="mso-spacerun: yes">    </span>текстовом режиме. Три бита, помеченных Ф О
+Н, определяют один из
+
+<p><span
+style="mso-spacerun: yes">    </span>восьми возможных цветов фона. Три бита
+СИМВОЛ определяют цвет
+
+<p><span
+style="mso-spacerun: yes">    </span>символа. Бит Я также влияет на цвет
+символа: его установка делает
+
+<p><span
+style="mso-spacerun: yes">    </span>цвет символа более ярким. Тем самым
+обеспечивается выбор одного из
+
+<p><span
+style="mso-spacerun: yes">    </span>16 цветов символа. Байт атрибута управляет
+единственным символом,
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяя выбрать любую комбинацию цветов
+фона и символа каждой
+
+<p><span
+style="mso-spacerun: yes">    </span>позиции. Старший бит, помеченный буквой М,
+обычно вызывает мигание
+
+<p><span
+style="mso-spacerun: yes">    </span>символа. Установка бита мигания равным 1
+заставляет контроллер
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея переключать цвет символа между его
+цветом и цветом фона со
+
+<p><span
+style="mso-spacerun: yes">    </span>скоростью примерно четыре раза в секунду.
+Так как символ,
+
+<p><span
+style="mso-spacerun: yes">    </span>изображенный в цвете фона, невидим, то
+получается эффект мигания.
+
+<p><span
+style="mso-spacerun: yes">    </span>Можно заменить бит мигания четвертым битом
+цвета фона, разрешив при
+
+<p><span
+style="mso-spacerun: yes">    </span>этом 16 цветов фона и 16 цветов символа.
+Это делает один из битов
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра выбора цветов. Еще надо обратить
+внимание на то, что
+
+<p><span
+style="mso-spacerun: yes">    </span>одинаковая установка цветов символа и фона
+означает, что вы не
+
+<p><span
+style="mso-spacerun: yes">    </span>видите символ. Символ есть, но это все
+равно что пытаться увидеть
+
+<p><span
+style="mso-spacerun: yes">    </span>северного медведя в пургу - все одного
+цвета. На Фиг. 8.10 показаны
+
+<p><span
+style="mso-spacerun: yes">    </span>все 16 цветов, возможных в текстовом
+режиме.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>I<span style="mso-spacerun: yes">   
+</span>R<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>G<span style="mso-spacerun: yes">    </span>B<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes"> 
+</span>Цвет
+
+<p><span
+style="mso-spacerun: yes">      </span>-------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>0<span style="mso-spacerun: yes">    </span>0<span
+style="mso-spacerun: yes">       </span>черный
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>0<span style="mso-spacerun: yes">    </span>1<span
+style="mso-spacerun: yes">       </span>синий
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>1<span style="mso-spacerun: yes">    </span>0<span
+style="mso-spacerun: yes">       </span>зеленый
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>1<span style="mso-spacerun: yes">    </span>1<span
+style="mso-spacerun: yes">       </span>морской волны
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>0<span style="mso-spacerun: yes">    </span>0<span
+style="mso-spacerun: yes">       </span>красный
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>0<span style="mso-spacerun: yes">    </span>1<span
+style="mso-spacerun: yes">       </span>магента
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>1<span style="mso-spacerun: yes">    </span>0<span
+style="mso-spacerun: yes">     </span><span style="mso-spacerun:
+yes">  </span>коричневый
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>1<span style="mso-spacerun: yes">    </span>1<span
+style="mso-spacerun: yes">       </span>светло-серый
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>0<span style="mso-spacerun: yes">    </span>0<span
+style="mso-spacerun: yes">       </span>темно-серый
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>0<span style="mso-spacerun: yes">    </span>1<span
+style="mso-spacerun: yes">       </span>голубой
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>1<span style="mso-spacerun: yes">    </span>0<span
+style="mso-spacerun: yes">       </span>светло-зеленый
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>1<span style="mso-spacerun: yes">    </span>1<span
+style="mso-spacerun: yes">       </span>светлый морской
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>0<span style="mso-spacerun: yes">    </span>0<span
+style="mso-spacerun: yes">       </span>розовый
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>0<span style="mso-spacerun: yes">    </span>1<span
+style="mso-spacerun: yes">       </span>светлый магента
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>1<span style="mso-spacerun: yes">    </span>0<span
+style="mso-spacerun: yes">       </span>желтый
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>1<span style="mso-spacerun: yes">    </span>1<span
+style="mso-spacerun: yes">       </span>белый
+
+<p><span
+style="mso-spacerun: yes">     
+</span>------------------------------------------- Фиг. 8.10 Цвета
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">       </span>(Фирма IBM, приоритет 1981 г.)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если вы сравните байт атрибута для ЦГА с
+атрибутами для
+
+<p><span
+style="mso-spacerun: yes">    </span>монохромного адаптера на Фиг. 8.7, то
+увидите, что они аналогичны.
+
+<p><span
+style="mso-spacerun: yes">    </span>Конечно, вы не можете указать цвета
+монхромному адаптеру, но все
+
+<p><span
+style="mso-spacerun: yes">    </span>остальное совпадает. Поскольку цветная
+плата не поддерживает
+
+<p><span
+style="mso-spacerun: yes">    </span>атрибут подчеркивания, то установка
+монохромного атрибута
+
+<p><span
+style="mso-spacerun: yes">    </span>подчеркивания соответствует голубому
+символу на черном фоне.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Такая организация байта атрибутов является
+попыткой сделать два
+
+<p><span
+style="mso-spacerun: yes">    </span>видео адаптера по-возможности
+совпадающими. Каждый символ в буфере
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея находится по четному адресу, а байт
+атрибутов - по
+
+<p><span
+style="mso-spacerun: yes">    </span>нечетному. Память цветного дисплея
+находится на видео адаптере, но
+
+<p><span
+style="mso-spacerun: yes">    </span>по другому адресу: у монохромного дисплея
+она имеет адрес 0B0000H,
+
+
+
+<p><span
+style="mso-spacerun: yes">   </span>а у цветного - 0B8000H. О сходстве дисплеев
+говорит то, что если
+
+<p><span
+style="mso-spacerun: yes">    </span>при модификации программы для монохромного
+дисплея на Фиг. 8.8,
+
+<p><span
+style="mso-spacerun: yes">    </span>изменить содержимое указателя AT сегмента
+на значение 0B800H,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа будет верно работать и на
+цветной плате. То есть одна и
+
+<p><span
+style="mso-spacerun: yes">    </span>та же программа работает на любом видео
+адаптере при минимуме
+
+<p><span
+style="mso-spacerun: yes">    </span>изменений.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для управления адаптером на цветной плате
+также используется
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер ЭЛТ 6845 фирмы Motorola. Два
+порта ввода-вывода этого
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллера имеют адреса ввода-вывода 3D4H
+и 3D5H. На самом деле
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер 6845 имеет 18 внутренних
+регистров. Доступ ко всем
+
+<p><span
+style="mso-spacerun: yes">    </span>регистрам осуществляется с помощью двух
+портов ввода-вывода и
+
+<p><span
+style="mso-spacerun: yes">    </span>косвенной адресации. Для обращения к
+регистру микросхемы 6845,
+
+<p><span
+style="mso-spacerun: yes">    </span>нужно сначала загрузить индекс регистра в
+порт 3D4H, а затем читать
+
+<p><span
+style="mso-spacerun: yes">    </span>этот регистр или записать в него данные
+через порт 3D5H.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Приведем пример, чтобы пояснить, как
+работает контроллер. На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 8.11 перечислены все 18 регистров
+микросхемы 6845. В примере
+
+<p><span
+style="mso-spacerun: yes">    </span>мы используем только регистры R10 и R11.
+Эти регистры определяют
+
+<p><span
+style="mso-spacerun: yes">    </span>начальную и конечную строки растра одного
+знакоместа для курсора.
+
+<p><span
+style="mso-spacerun: yes">    </span>Каждый символ, порождаемый цветной платой,
+состоит из восьми строк
+
+<p><span
+style="mso-spacerun: yes">    </span>растра, имеющих номера от 0 до 7. Вы
+можете поместить курсор в
+
+<p><span
+style="mso-spacerun: yes">    </span>любых из этих восьми строк. Регистр R10
+сообщает микросхеме 6845,
+
+<p><span
+style="mso-spacerun: yes">    </span>на какой строке начинается курсор, а
+регистр R11 определяет
+
+<p><span
+style="mso-spacerun: yes">    </span>последнюю строку курсора. ROM BIOS
+инициализирует курсор,
+
+<p><span
+style="mso-spacerun: yes">    </span>находящийся на строках 6 и 7; это делается
+загрузкой числа 6 в R10
+
+<p><span
+style="mso-spacerun: yes">    </span>и числа 7 в R11.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прогамма на Фиг.8.12(а) модифицирует
+курсор цветной графической
+
+<p><span
+style="mso-spacerun: yes">    </span>платы. Она смещает курсор так, что он
+оказывается на верхних пяти
+
+<p><span
+style="mso-spacerun: yes">    </span>строках растра вместо нижних двух. Сначала
+программа загружает в
+
+<p><span
+style="mso-spacerun: yes">    </span>индексный регистр контроллера 6845 (3D4H)
+число 10, а затем
+
+<p><span
+style="mso-spacerun: yes">    </span>записывает номер начальной строки, равный
+0, в регистр данных
+
+<p><span
+style="mso-spacerun: yes">    </span>(3D5H). Затем, поместив 11 в индексный регистр,
+она устанавливает
+
+<p><span
+style="mso-spacerun: yes">    </span>номер конечной строки равным 4. Теперь
+курсор имеет вид мигающего
+
+<p><span
+style="mso-spacerun: yes">    </span>блока в верхней части позиции символа, а
+не митающего
+
+<p><span
+style="mso-spacerun: yes">    </span>подчеркивания. Подобный этому способ
+модификации курсора
+
+<p><span
+style="mso-spacerun: yes">    </span>используется несколькими редактирующими
+программами (редакторами)
+
+<p><span
+style="mso-spacerun: yes">    </span>персональной ЭВМ, включая встроенный
+редактор интерпретатор языка
+
+<p><span
+style="mso-spacerun: yes">    </span>Бейсик. При установке режима вставки во
+время редактирования,
+
+<p><span
+style="mso-spacerun: yes">    </span>курсор становится жирнее; интерпретатор
+Бейсика делает это, меняя
+
+<p><span
+style="mso-spacerun: yes">    </span>параметры в микросхеме 6845.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вернувшись к Фиг. 8.11, можно увидеть, что
+в микросхеме 6845
+
+<p><span
+style="mso-spacerun: yes">    </span>есть и другие регистры. Большинство из них
+управляет сигналами
+
+<p><span
+style="mso-spacerun: yes">    </span>горизонтальной и вертикальной
+синхронизации телевизионного растра.
+
+<p><span
+style="mso-spacerun: yes">    </span>Вы можете модифицировать коды в этих
+регистрах для каких-либо
+
+<p><span
+style="mso-spacerun: yes">    </span>действий дисплеем. Например, команда MODE
+системы DOS, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>может сдвигать катринку на экране влево и
+вправо, модифицирует
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр R2, задающий положение строчного
+синхроимпульса.
+
+<p><span
+style='mso-tab-count:1'>      </span>Если вы захотите поэкспериментировать с
+этими регистрами, вам
+
+<p><span
+style="mso-spacerun: yes">    </span>придется писать короткие программы,
+делающие требуемые изменения.
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun:
+yes"> </span>ЪДДДДДДДДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДВДДДДДДДДДДДВДДДДДДДДВДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span>іРегистр і<span style='mso-tab-count:
+4'>                    </span>і Объект в<span style="mso-spacerun: yes"> 
+</span>і<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">     </span>і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes">  
+</span>#<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">    </span>Регистр хранит<span style='mso-tab-count:2'>          </span>і
+программе і чтение і запись і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R0<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">  </span>Гориз. сумма<span style='mso-tab-count:2'>        </span>і
+Символ<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>     </span>Нет<span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>      </span> Да<span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R1<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">  </span>Выводимая горизонталь<span style='mso-tab-count:1'>     </span>і
+Символ<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>     </span>Нет<span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>      </span> Да<span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R2<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">  </span>Гориз. поз. синхронизации<span style='mso-tab-count:1'> </span>і
+Символ<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>     </span>Нет<span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>      </span> Да<span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R3<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">  </span>Гориз. ширина синхронизации і Символ<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>   </span>Нет<span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>      </span>
+Да<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R4<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">  </span>Вертикальный итог<span style='mso-tab-count:2'>         </span>і
+Симв. ряд і<span style='mso-tab-count:1'>     </span>Нет<span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>      </span>
+Да<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R5<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">  </span>Общая вертикальн.коррекция<span style='mso-tab-count:1'>      </span>іСкан.строкиі<span
+style='mso-tab-count:1'>     </span>Нет<span style="mso-spacerun: yes"> 
+</span>і<span style='mso-tab-count:1'>      </span> Да<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R6<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">  </span>Выводимая вертикаль <span style='mso-tab-count:1'>      </span>і
+Симв. ряд і<span style='mso-tab-count:1'>     </span>Нет<span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>      </span>
+Да<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R7<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">  </span>Поз. вертикальной синхрон.<span style='mso-tab-count:1'>      </span>і
+Симв. ряд і<span style='mso-tab-count:1'>     </span>Нет<span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>      </span>
+Да<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R8<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">  </span>Режим совмещения<span style='mso-tab-count:2'>          </span>і<span
+style="mso-spacerun: yes">     </span>-<span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:1'>     </span>Нет<span style="mso-spacerun:
+yes">  </span>і<span style='mso-tab-count:1'>      </span> Да<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R9<span style='mso-tab-count:1'> </span> і<span style="mso-spacerun:
+yes">  </span>Макс.адрес скан. строки<span style='mso-tab-count:1'>   </span>іСкан.строкиі<span
+style='mso-tab-count:1'>     </span>Нет<span style="mso-spacerun: yes"> 
+</span>і<span style='mso-tab-count:1'>      </span> Да<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R10<span style='mso-tab-count:1'>      </span> і<span
+style="mso-spacerun: yes">  </span>Начало курсора<span style='mso-tab-count:
+2'>            </span>іСкан.строкиі<span style='mso-tab-count:1'>     </span>Нет<span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>      </span>
+Да<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R11<span style='mso-tab-count:1'>      </span> і<span
+style="mso-spacerun: yes">  </span>Конец курсора<span style='mso-tab-count:
+2'>       </span>іСкан.строкиі<span style='mso-tab-count:1'>     </span>Нет<span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>      </span>
+Да<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R12<span style='mso-tab-count:1'>      </span> і<span
+style="mso-spacerun: yes">  </span>Начальный адрес (гориз.)<span
+style='mso-tab-count:1'>  </span>і<span style="mso-spacerun: yes">    
+</span>-<span style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:
+1'>     </span>Нет<span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>      </span> Да<span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R13<span style='mso-tab-count:1'>      </span> і<span
+style="mso-spacerun: yes">  </span>Начальный адрес (строка)<span
+style='mso-tab-count:1'>  </span>і<span style="mso-spacerun: yes">    
+</span>-<span style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:
+1'>     </span>Нет<span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>      </span> Да<span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R14<span style='mso-tab-count:1'>      </span> і<span
+style="mso-spacerun: yes">  </span>Курсор (Гориз.)<span style='mso-tab-count:
+2'>           </span>і<span style="mso-spacerun: yes">     </span>-<span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>     </span>Да<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>      </span>Да<span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R15<span style='mso-tab-count:1'>      </span> і<span
+style="mso-spacerun: yes">  </span>Курсор (Строка)<span style='mso-tab-count:
+2'>           </span>і<span style="mso-spacerun: yes">     </span>-<span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>     </span>Да<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>      </span>Да<span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R16<span style='mso-tab-count:1'>      </span> і<span
+style="mso-spacerun: yes">  </span>Световое перо (гориз.)<span
+style='mso-tab-count:1'>    </span>і<span style="mso-spacerun: yes">    
+</span>-<span style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:
+1'>     </span>Да<span style="mso-spacerun: yes">   </span>і<span
+style='mso-tab-count:1'>      </span>Нет<span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЕДДДДДДДДДДДЕДДДДДДДДЕДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes"> 
+</span>R17<span style='mso-tab-count:1'>      </span> і<span
+style="mso-spacerun: yes">  </span>Световое перо(строка)<span style='mso-tab-count:
+1'>     </span>і<span style="mso-spacerun: yes">     </span>-<span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>     </span>Да<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>      </span>Нет<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>АДДДДДДДДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДБДДДДДДДДДДДБДДДДДДДДБДДДДДДДДЩ
+
+<p>&#18;
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 8.11 Регистры микросхемы 6845
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>(с разрешения фирмы Motorola)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Если попытаться изменять регистры с
+помощью утилиты DEBUG, то это
+
+<p><span
+style="mso-spacerun: yes">    </span>может не сработать. Регистры R14 и R15
+управляют позицией курсора,
+
+<p><span
+style="mso-spacerun: yes">    </span>и если утилита DEBUG переместит курсор
+между вашими обращениями к
+
+<p><span
+style="mso-spacerun: yes">    </span>индексному регистру и к регистру данных,
+изменения не произойдет.
+
+<p><span
+style="mso-spacerun: yes">    </span>Так получилось потому, что утилита DEBUG
+изменила содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>индексного регистра микросхемы 6845, и он
+уже больше не указывает
+
+<p><span
+style="mso-spacerun: yes">    </span>на тот внутренний регистр, который вы
+хотели изменить.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Другая интересная регистровая пара
+микросхемы 6845 - пара
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров начального адреса R12 и R13.
+Адаптер цветного
+
+<p><span
+style="mso-spacerun: yes">    </span>графического дисплея имеет 16K байт
+памяти, а монохромная плата 4K
+
+<p><span
+style="mso-spacerun: yes">    </span>байта. Дополнительная память в цветной
+плате используется для
+
+<p><span
+style="mso-spacerun: yes">    </span>графических режимов, но она целиком в
+вашем распоряжении и в
+
+<p><span
+style="mso-spacerun: yes">    </span>текстовых режимах. Для текстового режима
+80*25 требуется 4K байта
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, так что в буфере есть место для
+четырех разных страниц
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти. Сдвигать данные на экране можно
+переносом данных с одного
+
+<p><span
+style="mso-spacerun: yes">    </span>места на другое, как это делалось на Фиг.
+8.8. В случае же
+
+<p><span
+style="mso-spacerun: yes">    </span>вертикального сдвига нужно лишь изменить
+начальный адрес в
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхеме 6845. Обычно начальный адрес
+равен 0. Если вы измените
+
+<p><span
+style="mso-spacerun: yes">    </span>его на 80 (число символов в строке),
+отображение будет начинаться
+
+<p><span
+style="mso-spacerun: yes">    </span>со второй строки. Это даст немедленный
+эффект сдвига всех данных
+
+<p><span
+style="mso-spacerun: yes">    </span>экрана вверх на одну строку.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На самом деле вы не изменяли данные, а
+сдвинули начало
+
+<p><span
+style="mso-spacerun: yes">    </span>сканирования памяти дисплея. Можно
+рассматривать дисплей как окно
+
+<p><span
+style="mso-spacerun: yes">    </span>80*25, через которое мы смотрим в
+8192-символьный буфер дисплея.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При использовании начального адреса для
+сдвига данных возникают
+
+<p><span
+style="mso-spacerun: yes">    </span>сложности, когда вы приближаетесь к
+границе 16K байт. В этой точке
+
+<p><span
+style="mso-spacerun: yes">    </span>отображение &quot;заворачивается&quot;.
+Верхние строки извлекаются из конца
+
+<p><span
+style="mso-spacerun: yes">    </span>буфера, а нижние строки - из его начала.
+Вы, конечно, сможете
+
+<p><span
+style="mso-spacerun: yes">    </span>решить эту проблему, но для этого
+потребуются некоторые размышления
+
+<p><span
+style="mso-spacerun: yes">    </span>и эксперименты.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>[Прим. перев.: стр. 252 текста оригинала в
+моей копии отсутствует.
+
+<p><span
+style="mso-spacerun: yes">    </span>Очевидно, на ней находится только начало
+Фиг. 8.12]
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>1/1/80 04:05:31
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 8.12 Программа управления цветным дисплеем<span style='mso-tab-count:
+2'>        </span> Page<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 8.12 Программа управления цветным дисплеем
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>STACK<span style="mso-spacerun: yes">  
+</span>SEGMENT STACK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>0040[<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>DW<span style="mso-spacerun: yes">      </span>64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span>????
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0080<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>STACK<span style="mso-spacerun: yes">  
+</span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>DISPLAY_BUFFER<span style="mso-spacerun:
+yes">  </span>SEGMENT AT 0B800H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>DISPLAY_START<span style="mso-spacerun:
+yes">   </span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>DISPLAY_BUFFER<span style="mso-spacerun:
+yes">  </span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>= 03D4<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">     </span>CRT_INDEX<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">     </span>EQU<span style="mso-spacerun: yes">    
+</span>03D4H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>= 03D5<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">     </span>CRT_DATA<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>EQU<span style="mso-spacerun: yes">    
+</span>03D5H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>= 03DA<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">     </span>CRT_STATUS<span style="mso-spacerun:
+yes">      </span>EQU<span style="mso-spacerun: yes">     </span>03DAH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>= 000A<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">     </span>CURSOR_START<span style="mso-spacerun:
+yes">    </span>EQU<span style="mso-spacerun: yes">     </span>10 <span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">     </span>; Регистры управления курсором
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>= 000B<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">     </span>CURSOR_END<span style="mso-spacerun:
+yes">      </span>EQU<span style="mso-spacerun: yes">     </span>11 <span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">     </span>;<span style='mso-tab-count:1'>      </span>в контроллере
+дисплея 6845
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>COLOR_GRAPHICS<span style="mso-spacerun:
+yes">  </span>PROC<span style="mso-spacerun: yes">    </span>FAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>1E<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>DS <span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">     </span>; Адрес возврата в ДОС
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0001<span style="mso-spacerun: yes">  </span>2B C0<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>SUB<span style="mso-spacerun: yes">     </span>AX, AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0003<span style="mso-spacerun: yes">  </span>50<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>Фиг. 8.12 Программа управления цветным дисплеем (начало)
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;-----<span style="mso-spacerun: yes"> 
+</span>Фиг. 8.12 (а) Изменение курсора
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0004<span style="mso-spacerun: yes">  </span>BA 03D4<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>DX, CRT_INDEX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0007<span style="mso-spacerun: yes">  </span>B0 0A<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AL,
+CURSOR_START<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>; Установка индексного регистра
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0009<span style="mso-spacerun: yes">  </span>EE<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>OUT<span style="mso-spacerun: yes">     </span>DX, AL<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>;<span style='mso-tab-count:1'>      </span>6845 на регистр начала
+курсора
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000A<span style="mso-spacerun: yes">  </span>42<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>DX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000B<span style="mso-spacerun: yes">  </span>B0 00<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AL, 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000D<span style="mso-spacerun: yes">  </span>EE<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>OUT<span style="mso-spacerun: yes">     </span>DX, AL<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>; Установка начала курсора
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000E<span style="mso-spacerun: yes">  </span>4A<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>DEC<span style="mso-spacerun: yes">     </span>DX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000F<span style="mso-spacerun: yes">  </span>B0 0B<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AL, CURSOR_END
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0011<span style="mso-spacerun: yes">  </span>EE<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>OUT<span style="mso-spacerun: yes">     </span>DX, AL<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>; Выбор регистра конца курсора
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0012<span style="mso-spacerun: yes">  </span>42<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>DX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0013<span style="mso-spacerun: yes">  </span>B0 04<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AL, 4
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0015<span style="mso-spacerun: yes">  </span>EE<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>OUT<span style="mso-spacerun: yes">     </span>DX, AL<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>; Установка конца курсора
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;-----<span style="mso-spacerun: yes"> 
+</span>Фиг. 8.12 (б) Использование регистра состояния 6845
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0016<span style="mso-spacerun: yes">  </span>B8 0002<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX, 2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0019<span style="mso-spacerun: yes">  </span>CD 10<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INT<span style="mso-spacerun: yes">     </span>10H<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">    
+</span>; Выбор символьного режима 80*25
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001B<span style="mso-spacerun: yes">  </span>B8 ---- R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX,
+DISPLAY_BUFFER
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001E<span style="mso-spacerun: yes">  </span>8E C0<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>ES, AX<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>; Адрес буфера дисплейной памяти
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0020<span style="mso-spacerun: yes">  </span>B8 0720<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX, 0720H<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">    
+</span>; Вывод начинается с пробела
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0023<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>NEXT_CHAR:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0023<span style="mso-spacerun: yes">  </span>BF 0000<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>DI, 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0026<span style="mso-spacerun: yes">  </span>B9 0050<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>CX, 80
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0029 <span style="mso-spacerun: yes"> </span>F3/ AB<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>REP<span style="mso-spacerun: yes">     </span>STOSW<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>; Вывод строки из 80 символов
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>002B<span style="mso-spacerun: yes">  </span>FE C0<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INC<span style="mso-spacerun: yes">     </span>AL <span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">     </span>; Следующий символ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>002D<span style="mso-spacerun: yes">  </span>75 F4<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>JNZ<span style="mso-spacerun: yes">     </span>NEXT_CHAR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>002F<span style="mso-spacerun: yes">  </span>BB 0720<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>BX, 0720H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0032<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>NEXT_CHAR_1:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0032<span style="mso-spacerun: yes">  </span>B9 0050<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>CX, 80
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0035<span style="mso-spacerun: yes">  </span>BF 0000<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>DI, 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0038<span style="mso-spacerun: yes">  </span>BA 03DA<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>DX, CRT_STATUS<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Порт состояния для адаптера
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes">     </span>; цветного дисплея
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003B<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>WAIT_NO_RETRACE:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003B<span style="mso-spacerun: yes">  </span>EC<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>IN<span style="mso-spacerun: yes">      </span>AL, DX<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>; Проверка на обратный ход луча
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003C<span style="mso-spacerun: yes">  </span>A8 01<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>TEST<span style="mso-spacerun: yes">    </span>AL, 1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003E<span style="mso-spacerun: yes">  </span>75 FB<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>JNZ<span style="mso-spacerun: yes">     </span>WAIT_NO_RETRACE<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Запрещение прерываний
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0040<span style="mso-spacerun: yes">  </span>FA<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>CLI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0041<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>WAIT_RETRACE:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0041<span style="mso-spacerun: yes">  </span>EC<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>IN<span style="mso-spacerun: yes">      </span>AL, DX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0042<span style="mso-spacerun: yes">  </span>A8 01<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>TEST<span style="mso-spacerun: yes">    </span>AL, 1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0044<span style="mso-spacerun: yes">  </span>74 FB<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>JZ<span style="mso-spacerun: yes">      </span>WAIT_RETRACE<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Ожидание обратного хода луча
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0046<span style="mso-spacerun: yes">  </span>8B C3<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX, BX<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>; Выборка символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0048<span style="mso-spacerun: yes">  </span>AB<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>STOSW<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>; Занесение в дисплейный буфер
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0049<span style="mso-spacerun: yes">  </span>FB<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>STI<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>; Разрешение прерываний
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>004A<span style="mso-spacerun: yes">  </span>E2 EF<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>LOOP<span style="mso-spacerun: yes">    </span>WAIT_NO_RETRACE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>004C<span style="mso-spacerun: yes">  </span>FE C3<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INC<span style="mso-spacerun: yes">     </span>BL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>004E<span style="mso-spacerun: yes">  </span>75 E2<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>JNZ<span style="mso-spacerun: yes">     </span>NEXT_CHAR_1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;-----<span style="mso-spacerun: yes"> 
+</span>Фиг. 8.12 (в) Вывод линии по диагонали
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>Фиг. 8.12 Программа управления цветным дисплеем (продолжение)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0050<span style="mso-spacerun: yes">  </span>B8 0004<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX, 4
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0053<span style="mso-spacerun: yes">  </span>CD 10<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INT<span style="mso-spacerun: yes">     </span>10H<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">    
+</span>; Установка графического
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes">     </span>;<span style='mso-tab-count:1'>      </span>режима
+320*200
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0055<span style="mso-spacerun: yes">  </span>06<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>ES
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0056<span style="mso-spacerun: yes">  </span>1F<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>POP<span style="mso-spacerun: yes">     </span>DS
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0057<span style="mso-spacerun: yes">  </span>B3 32<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>BL, 50<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>; Число групп строк
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0059<span style="mso-spacerun: yes">  </span>B1 02<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>CL, 2<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>; Счетчик сдвига
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>005B<span style="mso-spacerun: yes">  </span>BF 0000<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>DI, 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>005E<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>DOT_LOOP:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>005E<span style="mso-spacerun: yes">  </span>B0 C0<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AL, 0C0H<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>; В AL маска первой точки в байте
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0060<span style="mso-spacerun: yes">  </span>88 05<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>[DI], AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0062<span style="mso-spacerun: yes">  </span>81 C7 2000<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">     </span>ADD<span style="mso-spacerun: yes">     </span>DI, 2000H<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">    
+</span>; Переключение на нечетную строку
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0066<span style="mso-spacerun: yes">  </span>D2 E8<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>SHR<span style="mso-spacerun: yes">     </span>AL, CL<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>; Сдвиг до следующей точки в байте
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0068<span style="mso-spacerun: yes">  </span>88 05<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>[DI], AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>006A<span style="mso-spacerun: yes">  </span>81 EF 1FB0<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">     </span>SUB<span style="mso-spacerun: yes">     </span>DI, 2000H-80<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Переключение на четную строку
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>006E<span style="mso-spacerun: yes">  </span>D2 E8<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>SHR<span style="mso-spacerun: yes">     </span>AL, CL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0070<span style="mso-spacerun: yes">  </span>88 05<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>[DI], AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0072<span style="mso-spacerun: yes">  </span>81 C7 2000<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">     </span>ADD<span style="mso-spacerun: yes">     </span>DI, 2000H<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">    
+</span>; Переключение на нечетную строку
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0076<span style="mso-spacerun: yes">  </span>D2 E8<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>SHR<span style="mso-spacerun: yes">     </span>AL, CL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0078<span style="mso-spacerun: yes">  </span>88 05<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>[DI], AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>007A<span style="mso-spacerun: yes">  </span>81 EF 1FAF<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">     </span>SUB<span style="mso-spacerun: yes">     </span>DI, 2000H-81<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Переключение на четную строку,
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>007E<span style="mso-spacerun: yes">  </span>FE CB<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>DEC<span style="mso-spacerun: yes">     </span>BL <span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">     </span>;<span style='mso-tab-count:1'>      </span>следующий байт
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0080<span style="mso-spacerun: yes">  </span>75 DC<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>JNZ<span style="mso-spacerun: yes">     </span>DOT_LOOP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;-----<span style="mso-spacerun: yes"> 
+</span>Возврат к символьному режиму 80*25
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0082<span style="mso-spacerun: yes">  </span>B8 0002<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX, 2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0085<span style="mso-spacerun: yes">  </span>CD 10<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INT<span style="mso-spacerun: yes">     </span>10H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0087<span style="mso-spacerun: yes">  </span>CB<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0088<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>COLOR_GRAPHICS<span style="mso-spacerun:
+yes">  </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0088<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 8.12 Программа управления цветным дисплеем (продолжение)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Цветной графический адаптер имеет еще три
+регистра ввода-
+
+<p><span
+style="mso-spacerun: yes">    </span>вывода. Регистр режима находится по адресу
+ввода-вывода 03D8H. Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр устанавливает аппаратные
+переключатели различных режимов
+
+<p><span
+style="mso-spacerun: yes">    </span>отображения. Например, вы можете
+установить бит 5 этого регистра в
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;0&quot; и получить 16 цветов фона в
+текстовых режимах, а установка бита
+
+<p><span
+style="mso-spacerun: yes">    </span>5 в &quot;1&quot; переключает 7-й бит
+атрибута на функцию мигания. Полное
+
+<p><span
+style="mso-spacerun: yes">    </span>описание структуры этого регистра, и всех
+других, дано в
+
+<p><span
+style="mso-spacerun: yes">    </span>техническом описании.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Регистр выбора цвета находится по адресу
+ввода-вывода 03D8H.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этот регистр устанавливает цвет окаймления
+в текстовых режимах.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку сам по себе текст не занимает
+весь экран, текст можно
+
+<p><span
+style="mso-spacerun: yes">    </span>окружить каким-либо выбираемым цветом.
+Кроме того, регистр выбора
+
+<p><span
+style="mso-spacerun: yes">    </span>цвета может управлять выбором палитр в
+графических режимов, как мы
+
+<p><span
+style="mso-spacerun: yes">    </span>увидим в следующем разделе. Младшие 4 бита
+этого регистра
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливают для окаймления один из 16
+цветов, перечисленных на
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 8.10.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>И наконец, регистр состояния по адресу
+ввода-вывода 3DAH
+
+<p><span
+style="mso-spacerun: yes">    </span>организует информационную обратную связь
+между цветной платой и
+
+<p><span
+style="mso-spacerun: yes">    </span>программой. Например, программа может
+использовать этот регистр для
+
+<p><span
+style="mso-spacerun: yes">    </span>определения текущего состояния светового
+пера, если оно подключено
+
+<p><span
+style="mso-spacerun: yes">    </span>к системе. Более важным является то, что
+регистр состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>сообщает, когда безопасно читать или
+записывать данные в дисплейный
+
+<p><span
+style="mso-spacerun: yes">    </span>буфер.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Не вдаваясь в технические детали, заметим,
+что чтение или
+
+<p><span
+style="mso-spacerun: yes">    </span>запись данных в буфер дисплея цветной
+платы может вызвать &quot;снег&quot; на
+
+<p><span
+style="mso-spacerun: yes">    </span>экране, если вы будете это делать в
+неподходящие моменты времени.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это случается только в текстовом режиме с
+высоким разрешением
+
+<p><span
+style="mso-spacerun: yes">    </span>80*25. Вспомните, что ранее приводился
+пример на Фиг. 8.12, в
+
+<p><span
+style="mso-spacerun: yes">    </span>котором постоянно записывались данные в
+буфер дисплея. Если для
+
+<p><span
+style="mso-spacerun: yes">    </span>этого примера использовать цветную плату,
+на экране появится масса
+
+<p><span
+style="mso-spacerun: yes">    </span>помех. Чтобы избежать этого, можно
+использовать регистр
+
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существуют моменты, когда можно безопасно
+работать с данными в
+
+<p><span
+style="mso-spacerun: yes">    </span>буфере дисплея. В такие моменты бит 0
+регистра состояния равен 1.
+
+<p><span
+style="mso-spacerun: yes">    </span>Нужно подождать, когда бит 0 станет равным
+1, а затем читать или
+
+<p><span
+style="mso-spacerun: yes">    </span>записывать данные. На Фиг. 8.12б
+изображена программа, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>записывает символ на экран дисплея. Первые
+строки этой программы
+
+<p><span
+style="mso-spacerun: yes">    </span>записывают данные в буфер, не используя
+регистр состояния. Эта
+
+<p><span
+style="mso-spacerun: yes">    </span>часть программы 224 раза записывает 80
+симвлов в первую строку
+
+<p><span
+style="mso-spacerun: yes">    </span>буфера, что эквивалентно заполнению экрана
+около девяти раз. Когда
+
+<p><span
+style="mso-spacerun: yes">    </span>вы запустите программу, то увидите
+короткую вспышку помех в тот
+
+<p><span
+style="mso-spacerun: yes">    </span>момент, когда будут записываться данные.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вторая часть программы на Фиг. 8.12б
+повторяет те же действия,
+
+<p><span
+style="mso-spacerun: yes">    </span>но на этот раз проверяя бит состояния.
+Обратите внимание, что эта
+
+<p><span
+style="mso-spacerun: yes">    </span>часть программы проверяет бит состояния
+двумя различными способами.
+
+<p><span
+style="mso-spacerun: yes">    </span>Сначала она ждет, пока бит состояния не
+станет равным 0. Затем, как
+
+<p><span
+style="mso-spacerun: yes">    </span>только он станет равен 1, программа
+записывает данные. Так сделано
+
+<p><span
+style="mso-spacerun: yes">    </span>потому, что интервал, в течение которого
+можно записывать данные,
+
+<p><span
+style="mso-spacerun: yes">    </span>очень мал, и если бы программа делала
+проверку только на равенство
+
+<p><span
+style="mso-spacerun: yes">    </span>1, она могла бы захватить бит состояния
+непосредственно перед его
+
+<p><span
+style="mso-spacerun: yes">    </span>обращением в 0. В этом случае, чтобы
+избежать помех, микропроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>уже не может записывать данные достаточно
+быстро, но такая
+
+<p><span
+style="mso-spacerun: yes">    </span>организация цикла гарантирует, что бит
+состояния захватывается в
+
+<p><span
+style="mso-spacerun: yes">    </span>первый же момент, когда он становится
+равным 1.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Используя бит состояния, вы уже не увидите
+на экране никаких
+
+<p><span
+style="mso-spacerun: yes">    </span>помех, но и заметите, что выполнение
+программы стало гораздо
+
+<p><span
+style="mso-spacerun: yes">    </span>медленнее. Выполняться медленнее программу
+заставляет
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительное время, затрачиваемое на
+ожидание бита состояния.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если вам нужно записать на экране много
+данных - например,
+
+<p><span
+style="mso-spacerun: yes">    </span>организовать горизонтальный сдвиг, как на
+Фиг. 8.8, то потребуется
+
+<p><span
+style="mso-spacerun: yes">    </span>другой способ. Простейший способ -
+сбросить в нуль разряд
+
+<p><span
+style="mso-spacerun: yes">    </span>отображения в регистре режима. Бит 3
+регистра режима (3D8H)
+
+<p><span
+style="mso-spacerun: yes">    </span>управляет отображением на дисплее. Если
+сбросить этот бит в 0,
+
+<p><span
+style="mso-spacerun: yes">    </span>экран погаснет. Чтобы переслать много
+данных в буфер цветного
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея, вы можете выключить отображение и
+переслать данные без
+
+<p><span
+style="mso-spacerun: yes">    </span>проверки бита состояния. Поскольку
+отображение выключено, на экране
+
+<p><span
+style="mso-spacerun: yes">    </span>не возникнут помехи. Когда пересылка блока
+закончится, включите
+
+<p><span
+style="mso-spacerun: yes">    </span>отображение. Вы заметите короткое мигание
+изображения в момент его
+
+<p><span
+style="mso-spacerun: yes">    </span>выключения и включения. Фирма IBM
+использует этот метод для
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживания вертикального сдвига цветного
+дисплея.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

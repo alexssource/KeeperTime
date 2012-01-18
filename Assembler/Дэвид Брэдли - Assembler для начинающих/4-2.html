@@ -1,0 +1,640 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="4-2">Операции со стеком</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>В гл.3 обсуждалось, как реализован стек в
+микропроцессоре 8088.
+
+<p><span
+style="mso-spacerun: yes">    </span>Микропроцессор 8088 адресует стек с
+помощью регистровой пары SS:SP.
+
+<p><span
+style="mso-spacerun: yes">    </span>Помещение объектов в стек приводит к тому,
+что он растет в сторону
+
+<p><span
+style="mso-spacerun: yes">    </span>меньших адресов памяти.<span
+style="mso-spacerun: yes">  </span>Стек, кроме всего прочего, служит и для
+
+<p><span
+style="mso-spacerun: yes">    </span>запоминания адресов возврата из
+подпрограмм.<span style="mso-spacerun: yes">  </span>В этом разделе
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматриваются некоторые команды, которые
+непосредственно работают
+
+<p><span
+style="mso-spacerun: yes">    </span>со стеком.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг.4.7 иллюстрирует ассемблированные
+стековые команды.
+
+<p><span
+style="mso-spacerun: yes">    </span>Мнемоника команд очевидна; за кодами
+операций PUSH и POP следует
+
+<p><span
+style="mso-spacerun: yes">    </span>имя регистра для указания операнда.
+Единственным исключением
+
+<p><span
+style="mso-spacerun: yes">    </span>является помещение и извлечение из стека
+регистра флагов, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>используют мнемонику PUSHF и POPF
+соответственно. Содержимое любой
+
+<p><span
+style="mso-spacerun: yes">    </span>ячейки памяти, которую программа может
+адресовать, используя
+
+<p><span
+style="mso-spacerun: yes">    </span>возможные способы адресации, также может
+быть помещено или
+
+<p><span
+style="mso-spacerun: yes">    </span>извлечено из стека.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При любых действиях со стеком в
+микропроцессоре 8088 базовой
+
+<p><span
+style="mso-spacerun: yes">    </span>единицей информации является 16=битовое
+слово. Длина любого
+
+<p><span
+style="mso-spacerun: yes">    </span>объекта, помещаемого в стек либо
+извлекаемого из стека, составляет
+
+<p><span
+style="mso-spacerun: yes">    </span>одно или несколько слов. Байтовых команд,
+связанных с засылкой
+
+<p><span
+style="mso-spacerun: yes">    </span>данных или извлечением их из стека, не
+существует. Если, например,
+
+<p><span
+style="mso-spacerun: yes">    </span>программе необходимо сохранить содержимое
+регистра AL а стеке, она
+
+<p><span
+style="mso-spacerun: yes">    </span>должна поместить содержимое регистра AX,
+так как не существует
+
+<p><span
+style="mso-spacerun: yes">    </span>способа сохранения только содержимого
+регистра AL.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Основное назначение стека - временное
+хранение информации. Как
+
+<p><span
+style="mso-spacerun: yes">    </span>мы уже видели, стек используется для
+сохранения адреса возврата;
+
+<p><span
+style="mso-spacerun: yes">    </span>программа также может сохранять данные.
+Если программа хочет
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать регистр, пусть даже сохранить
+текущие данные, она
+
+<p><span
+style="mso-spacerun: yes">    </span>может послать значение этого регистра в
+стек. Эти данные
+
+<p><span
+style="mso-spacerun: yes">    </span>сохраняются в стеке и позже могут быть
+восстановлены. Например,
+
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>1/1/80 04:00:43
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 4.7 Операции со стеком<span style='mso-tab-count:4'>                      </span>
+Page<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.7 Операции со стеком
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>EXWORD<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>50<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>AX <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Поместить регистр в стек
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0001<span style="mso-spacerun: yes">  </span>56<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>SI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0002<span style="mso-spacerun: yes">  </span>0E<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>CS <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Можно поместить в стек сегментный регистр
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0003<span style="mso-spacerun: yes">  </span>FF 36 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>EXWORD<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Можно также поместить в стек ячейку памяти
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0007<span style="mso-spacerun: yes">  </span>8F 06 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>POP<span style="mso-spacerun: yes">     </span>EXWORD<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Можно извлечь то, что в помещено в стек
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000B<span style="mso-spacerun: yes">  </span>07<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>POP<span style="mso-spacerun: yes">     </span>ES <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Можно извлечь в другое место
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000C<span style="mso-spacerun: yes">  </span>5F<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>POP<span style="mso-spacerun: yes">     </span>DI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000D<span style="mso-spacerun: yes">  </span>5B<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>POP<span style="mso-spacerun: yes">     </span>BX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000E<span style="mso-spacerun: yes">  </span>9C<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSHF<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">     </span>; Другая мнемоника для флагов
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000F<span style="mso-spacerun: yes">  </span>9D<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>POPF
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;-----<span style="mso-spacerun: yes"> 
+</span>Пример, демонстрирующий передачу параметров
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0010<span style="mso-spacerun: yes">  </span>50<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0011<span style="mso-spacerun: yes">  </span>53<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>BX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0012<span style="mso-spacerun: yes">  </span>51<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>CX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0013<span style="mso-spacerun: yes">  </span>52<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>DX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0014<span style="mso-spacerun: yes">  </span>E8 0017 R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>CALL<span style="mso-spacerun: yes">    </span>SUBROUTINE<span
+style="mso-spacerun: yes">      </span>; Передача управления
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">     </span>...<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">     </span>; Продолжение программы
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0017<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>SUBROUTINE<span style="mso-spacerun:
+yes">      </span>PROC<span style="mso-spacerun: yes">    </span>NEAR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0017<span style="mso-spacerun: yes">  </span>8B EC<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>BP, SP<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Занесение в BP адреса стека
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0019<span style="mso-spacerun: yes">  </span>8B 46 02<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX, [BP+2]<span
+style="mso-spacerun: yes">      </span>; Выборка последнего параметра (DX)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001C<span style="mso-spacerun: yes">  </span>8B 5E 04<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>BX, [BP+4]<span
+style="mso-spacerun: yes">      </span>; Выборка третьего параметра (CX)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001F<span style="mso-spacerun: yes">  </span>8B 4E 06<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>CX, [BP+6]<span
+style="mso-spacerun: yes">      </span>; Выборка второго параметра (BX)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0022<span style="mso-spacerun: yes">  </span>8B 56 08<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>DX, [BP+8]<span
+style="mso-spacerun: yes">      </span>; Выборка первого параметра (AX)
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">     </span>...
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0025<span style="mso-spacerun: yes">  </span>C2 0008<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>RET<span style="mso-spacerun: yes">     </span>8<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>; Возврат с уничтожением поля параметров
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0028<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>SUBROUTINE<span style="mso-spacerun:
+yes">      </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0028<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>Фиг. 4.7 Операции со стеком
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>программе нужно ввести код из порта
+ввода=вывода 3DAH, а в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>DX находятся важные данные. Следующая
+последовательность команд
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>PUSH<span style='mso-tab-count:1'>  </span>DX
+
+<p><span
+style="mso-spacerun: yes">      </span>MOV DX,<span style='mso-tab-count:6'>                                   </span><span
+style="mso-spacerun: yes">      </span>3DAH
+
+<p><span
+style="mso-spacerun: yes">      </span>IN<span style="mso-spacerun: yes"> 
+</span>AL,<span style='mso-tab-count:7'>                                         </span>DX
+
+<p><span
+style="mso-spacerun: yes">      </span>POP DX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>сохраняет регистр DX в стеке на то время,
+пока он нужен в
+
+<p><span
+style="mso-spacerun: yes">    </span>программе для выполнения команды IN.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Операции сохранения регистров в стеке
+обычно используется в
+
+<p><span
+style="mso-spacerun: yes">    </span>начале программы. В большинстве случаев
+подпрограмма старается
+
+<p><span
+style="mso-spacerun: yes">    </span>избегать изменения содержимого любого
+регистра. Поэтому
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмма, которой нужны регистры для
+вычислений и для хранения
+
+<p><span
+style="mso-spacerun: yes">    </span>адресов, помещает все необходимые ей
+регистры в стек до выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>команд обработки. Затем, после выполнения,
+подпрограмма
+
+<p><span
+style="mso-spacerun: yes">    </span>восстанавливает регистры из стека с
+помощью команд POP.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Помните о том, что стек - это структура
+типа LIFO. Если в вашей
+
+<p><span
+style="mso-spacerun: yes">    </span>программе выполняется последовательность
+команд
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>PUSH<span style='mso-tab-count:1'>  </span>BX
+
+<p><span
+style="mso-spacerun: yes">      </span>PUSH CX
+
+<p><span
+style="mso-spacerun: yes">      </span>POP BX
+
+<p><span
+style="mso-spacerun: yes">      </span>POP CX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>то результирующим эффектом будет обмен
+значений в регистрах BX
+
+<p><span
+style="mso-spacerun: yes">    </span>и CX. Только тот факт, что в команде PUSH
+был указан регистр BX, не
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что команда POP, указывающая на
+тот же регистр,
+
+<p><span
+style="mso-spacerun: yes">    </span>восстанавливает первоначальное содержимое
+регистра BX. Еще одним
+
+<p><span
+style="mso-spacerun: yes">    </span>важным моментом является то, что команды
+PUSH и POP должны быть
+
+<p><span
+style="mso-spacerun: yes">    </span>сбалансированы, т.е. каждой команде PUSH
+должна соответствовать
+
+<p><span
+style="mso-spacerun: yes">    </span>команда POP. Точно так же, как и в случае
+скобок в арифметическом
+
+<p><span
+style="mso-spacerun: yes">    </span>выражении, если посылки и извлечения из
+стека не сбалансированы,
+
+<p><span
+style="mso-spacerun: yes">    </span>результаты будут неверны. Более того,
+несбалансированные команды
+
+<p><span
+style="mso-spacerun: yes">    </span>PUSH/POP обычно приводят к возврату из
+подпрограмм по адресу
+
+<p><span
+style="mso-spacerun: yes">    </span>значения данных, а не значения указателя
+команд из=за того, что
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор 8088 записывает в стек
+адрес возврата. Обычно это
+
+<p><span
+style="mso-spacerun: yes">    </span>вынуждает микропроцессор выполнять
+программу, которую программист
+
+<p><span
+style="mso-spacerun: yes">    </span>никогда не писал. Поэтому баланс стековых
+команд обязателен. Будьте
+
+<p><span
+style="mso-spacerun: yes">    </span>особенно внимательны в тех случаях, когда
+в программе есть условный
+
+<p><span
+style="mso-spacerun: yes">    </span>переход вокруг стековых операций; можно
+легко выпустить из виду
+
+<p><span
+style="mso-spacerun: yes">    </span>один из вариантов выполнения, что оставит
+стек несбалансированным.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Наряду с сохранением данных, программа
+может использовать стек
+
+<p><span
+style="mso-spacerun: yes">    </span>в качестве буфера при некоторых
+пересылках; в частности, не
+
+<p><span
+style="mso-spacerun: yes">    </span>существует команды пересылки, которая бы
+переносила данные из
+
+<p><span
+style="mso-spacerun: yes">    </span>одного сегментного регистра в другой. В
+обычном случае загрузка
+
+<p><span
+style="mso-spacerun: yes">    </span>одного сегментного регистра из другого
+требует сначала загрузки его
+
+<p><span
+style="mso-spacerun: yes">    </span>значения а промежуточный регистр. Это
+достигается следующей
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательностью из двух команд:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV<span style='mso-tab-count:1'>   </span>AX,CS<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>;переслать значение регистра
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>;CS в регистр AX
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV<span style='mso-tab-count:1'>   </span>DS,AX<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>;загрузить это значение в
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>; регистр DS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Каждая из этих команд имеет длину
+несколько байт, и эта
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательность разрушает содержимое
+регистра AX. Альтернативным
+
+<p><span
+style="mso-spacerun: yes">    </span>подходом может быть
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>PUSH<span style='mso-tab-count:1'>  </span>CS<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">  </span>;
+регистр CS поместить в стек
+
+<p><span
+style='mso-tab-count:1'>      </span>POP<span style='mso-tab-count:1'>   </span>DS<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">  </span>;
+поместить это значение в регистр DS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Результирующий эффект этой
+последовательности команд тот же,
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр DS загружается из регистра CS.
+Здесь длина программы -
+
+<p><span
+style="mso-spacerun: yes">    </span>всего два байта, и к тому же не требуется
+промежуточный регистр.
+
+<p><span
+style="mso-spacerun: yes">    </span>Однако эти две команды занимают больше
+времени, так как нужны
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительные циклы чтения и записи в
+стек. Это - метод потери в
+
+<p><span
+style="mso-spacerun: yes">    </span>скорости выполнения ради уменьшения
+размера объектного кода.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

@@ -1,0 +1,644 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="6-2">Аргументы макрокоманд</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>В обработке макрокоманд применяется одно
+из ценных свойств
+
+<p><span
+style="mso-spacerun: yes">    </span>процедур: в генерацию макрокоманды можно
+вносить изменения с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью параметров. Точно так же, как
+параметры подпрограммы могут
+
+<p><span
+style="mso-spacerun: yes">    </span>влиять на ее выполнение, параметры
+макрокоманды определяют
+
+<p><span
+style="mso-spacerun: yes">    </span>фактически генерируемые команды. И так же,
+как и процедуры,
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды без параметров встречаются
+относительно редко.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Рассмотрим еще один простой пример. Мы
+составили программу так,
+
+<p><span
+style="mso-spacerun: yes">    </span>что во многих ее местах содержимое
+определенной ячейки памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>складывается с различными константами.
+Вместо того, чтобы много раз
+
+<p><span
+style="mso-spacerun: yes">    </span>писать команду
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>ADD MEMORY_BYTE,5
+
+<p><span
+style='mso-tab-count:1'>      </span>или
+
+<p><span
+style='mso-tab-count:1'>      </span>ADD MEMORY_BYTE,7
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>нам хотелось бы воспользоваться для нее
+соответствующей
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокомандой. Однако во всех приведенных
+командах константы
+
+<p><span
+style="mso-spacerun: yes">    </span>разные. Поэтому мы сделаем константу
+параметром макрокоманды. На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 6.2 показаны определение и применение
+макрокоманды ADDBYTE. В
+
+<p><span
+style="mso-spacerun: yes">    </span>этом примере в качестве параметра в
+определении макрокоманды
+
+<p><span
+style="mso-spacerun: yes">    </span>используется символическое имя CONSTANT.
+Любые символичесике имена,
+
+<p><span
+style="mso-spacerun: yes">    </span>появляющиеся в поле операнда оператора
+MACRO, интерпретируются как
+
+<p><span
+style="mso-spacerun: yes">    </span>параметры. В момент определения
+макрокоманды у имени CONSTANT нет
+
+<p><span
+style="mso-spacerun: yes">    </span>никакого значения: оно просто резервирует
+место в тексте
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды. Позднее, при вызове и
+обработке текста макрокоманды,
+
+<p><span
+style="mso-spacerun: yes">    </span>вместо символического имени в определении
+макрокоманды
+
+<p><span
+style="mso-spacerun: yes">    </span>подставляется определенное значение
+параметра.
+
+<p><span
+style='mso-tab-count:1'>      </span>Важно отметить, что параметр макрокоманды
+- это текстовый
+
+<p><span
+style="mso-spacerun: yes">    </span>параметр. Так как макропроцессор
+фактически является текстовым
+
+<p><span
+style="mso-spacerun: yes">    </span>процессорорм, то он не отличает цифры от
+букв и наоборот. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет при вызове макрокоманды
+использовать вместо чисел
+
+<p><span
+style="mso-spacerun: yes">    </span>символические имена. Любой смысл
+приписывается символьной строке не
+
+<p><span
+style="mso-spacerun: yes">    </span>макропроцессором, а ассемблером.
+Макропроцессор подставляет
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>1/1/80 04:02:43
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 6.2 Макрокоманда с аргументом<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">  </span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 6.2 Макрокоманда с аргументом
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>ADDBYTE MACRO<span style="mso-spacerun:
+yes">   </span>CONSTANT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ADD<span style="mso-spacerun: yes">    
+</span>MEMORY_BYTE, CONSTANT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>?? <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">      </span>MEMORY_BYTE<span
+style="mso-spacerun: yes">     </span>DB<span style="mso-spacerun: yes">     
+</span>?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>= 0004<span style='mso-tab-count:3'>                 </span><span
+style="mso-spacerun: yes">      </span>FOUR<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>EQU<span style="mso-spacerun: yes">    
+</span>4 <span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">      </span>; Симвользое изображение константы
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ADDBYTE<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">      </span>2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0001<span style="mso-spacerun: yes">  </span>2E: 80 06 0000 R 02<span
+style="mso-spacerun: yes">   </span>1<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>ADD<span style="mso-spacerun: yes">    
+</span>MEMORY_BYTE, 2
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ADDBYTE<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">      </span>4
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0007<span style="mso-spacerun: yes">  </span>2E: 80 06 0000 R 04<span
+style="mso-spacerun: yes">   </span>1<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>ADD<span style="mso-spacerun: yes">    
+</span>MEMORY_BYTE, 4
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ADDBYTE<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">      </span>FOUR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000D<span style="mso-spacerun: yes">  </span>2E: 80 06 0000 R 04<span
+style="mso-spacerun: yes">   </span>1<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>ADD<span style="mso-spacerun: yes">    
+</span>MEMORY_BYTE, FOUR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0013<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 6.2 Аргументы макрокоманды
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>текстовую строку из вызова макрокоманды на
+место символического
+
+<p><span
+style="mso-spacerun: yes">    </span>имени в определении макрокоманды. Таким
+образом программа может
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать константное значение
+&quot;FOUR&quot; с тем же успехом, что и
+
+<p><span
+style="mso-spacerun: yes">    </span>константу &quot;4&quot;.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Возможность использовать символические
+имена в качестве
+
+<p><span
+style="mso-spacerun: yes">    </span>параметров макрокоманд принципиально важна
+для следующего примера
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды. Этой макрокоманда, одной из
+команд сопроцессора 8087,
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется параметр, который при обычном ее
+использовании почти
+
+<p><span
+style="mso-spacerun: yes">    </span>всегда бывает символическим именем.
+Макрокоманда FLDCW - это
+
+<p><span
+style="mso-spacerun: yes">    </span>команда сопроцессора 8087, которая задает
+ячейку памяти. Так как в
+
+<p><span
+style="mso-spacerun: yes">    </span>программах на языке ассемблера в
+большинстве случаев обращаются к
+
+<p><span
+style="mso-spacerun: yes">    </span>ячейкам памяти с помощью символических
+имен, то желательно
+
+<p><span
+style="mso-spacerun: yes">    </span>сохранить этот способ и для
+программирования сопроцессора 8087.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.6.3 приводится макрокоманда FLDCW и
+несколько обрашений
+
+<p><span
+style="mso-spacerun: yes">    </span>к ней. Заметьте, что макрокоманда FLDCW
+использует в качестве
+
+<p><span
+style="mso-spacerun: yes">    </span>параметра символическое имя
+&quot;SOURCE&quot;. Параметр SOURCE является
+
+<p><span
+style="mso-spacerun: yes">    </span>адресом, с которого сопроцессор 8087
+загружает управляющее слово.
+
+<p><span
+style="mso-spacerun: yes">    </span>Для генерации требуемого машинного кода
+макрокоманда FLDCW
+
+<p><span
+style="mso-spacerun: yes">    </span>использует команду 8088 ESC. Однако для
+того, чтобы определить байт
+
+<p><span
+style="mso-spacerun: yes">    </span>mod=r/m команды, команде ESC требуется
+значение адреса. Как раз для
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">   </span>1/1/80 04:02:47
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Фиг. 6.3 Макрокоманда для команды FLDCW<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">   </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 6.3 Макрокоманда для команды FLDCW
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">       </span>FLDCW<span style="mso-spacerun: yes">  
+</span>MACRO<span style="mso-spacerun: yes">   </span>SOURCE
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>DB<span style="mso-spacerun: yes">     
+</span>09BH
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ESC<span style="mso-spacerun: yes">    
+</span>0DH, SOURCE
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style="mso-spacerun:
+yes">  </span>????<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">       </span>MEMORY_LOCATION DW<span
+style="mso-spacerun: yes">      </span>?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>FLDCW<span style="mso-spacerun: yes">  
+</span>MEMORY_LOCATION
+
+<p><span
+style='mso-tab-count:2'>            </span>0002<span style="mso-spacerun:
+yes">  </span>9B<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>DB<span style="mso-spacerun: yes">     
+</span>09BH
+
+<p><span
+style='mso-tab-count:2'>            </span>0003<span style="mso-spacerun:
+yes">  </span>2E: D9 2E 0000 R<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ESC<span style="mso-spacerun: yes">    
+</span>0DH, MEMORY_LOCATION
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>FLDCW<span style="mso-spacerun: yes">  
+</span>ES:[DI]
+
+<p><span
+style='mso-tab-count:2'>            </span>0008<span style="mso-spacerun:
+yes">  </span>9B<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>DB<span style="mso-spacerun: yes">     
+</span>09BH
+
+<p><span
+style='mso-tab-count:2'>            </span>0009<span style="mso-spacerun:
+yes">  </span>26: D9 2D <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ESC<span style="mso-spacerun: yes">    
+</span>0DH, ES:[DI]
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>FLDCW<span style="mso-spacerun: yes">  
+</span>MEMORY_LOCATION[BX+SI]
+
+<p><span
+style='mso-tab-count:2'>            </span>000C<span style="mso-spacerun:
+yes">  </span>9B<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>DB<span style="mso-spacerun: yes">     
+</span>09BH
+
+<p><span
+style='mso-tab-count:2'>            </span>000D<span style="mso-spacerun:
+yes">  </span>2E: D9 A8 0000 R<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ESC<span style="mso-spacerun: yes">    
+</span>0DH, MEMORY_LOCATION[BX+SI]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0012<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 6.3. Макрокомнда FLDCW
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>этого макрокоманда и использует параметр
+SOURCE. Такая организация
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды FLDCW позволяет
+программировать весьма естественным
+
+<p><span
+style="mso-spacerun: yes">    </span>способом. Точно так же как пишется
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>INC MEMORY_LOCATION
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>вы можно написать команду для сопроцессора
+8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FLDCW MEMORY_LOCATION
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Это справедливыо не только для адресов,
+заданных символическими
+
+<p><span
+style="mso-spacerun: yes">    </span>именами, но и для других способов
+адресации. На Фиг. 6.3 показано
+
+<p><span
+style="mso-spacerun: yes">    </span>несколько примеров задания операнда с
+помощью адресации по базе и
+
+<p><span
+style="mso-spacerun: yes">    </span>индексу. Так как макропроцессор
+воспринимает параметр как какой-то
+
+<p><span
+style="mso-spacerun: yes">    </span>фрагмент текста, то параметр может быть
+образован любой символьной
+
+<p><span
+style="mso-spacerun: yes">    </span>строкой, какую вы пожелаете.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Можно задать макрокоманду и с несколькими
+параметрами.
+
+<p><span
+style="mso-spacerun: yes">    </span>Единственное, что ограничивает число
+параметров макрокоманды, это
+
+<p><span
+style="mso-spacerun: yes">    </span>длина ассемблерной строки. Все, что
+следует за оператором MACRO
+
+<p><span
+style="mso-spacerun: yes">    </span>интерпретируется макропроцессором как
+параметр. Для разделения
+
+<p><span
+style="mso-spacerun: yes">    </span>символических имен в определении
+макрокоманды пользуются запятыми.
+
+<p><span
+style="mso-spacerun: yes">    </span>Оператор MACRO с тремя параметрами будет
+выглядеть следующим
+
+<p><span
+style="mso-spacerun: yes">    </span>образом:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>EXAMPLE MACRO ARG1, ARG2, ARG3
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогично, при вызове макрокоманды вы
+должны задать значение
+
+<p><span
+style="mso-spacerun: yes">    </span>каждого из параметров. Если вы хотите
+пропустить какой-то параметр,
+
+<p><span
+style="mso-spacerun: yes">    </span>то ассемблер подставит вместо него
+символьную строку нулевой длины.
+
+<p><span
+style="mso-spacerun: yes">    </span>Иногда это полезно, но часто приводит к
+неправильной трансляции.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если макрокоманда имеет более одного
+параметра, то при вызове
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды относящийся к параметрам
+текст разделяется запятыми.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это в точности совпадает со способом
+задания нескольких параметров
+
+<p><span
+style="mso-spacerun: yes">    </span>к любой из команд микропроцессора 8088,
+поэтому будет вполне
+
+<p><span
+style="mso-spacerun: yes">    </span>естественным для вас. Вызов макрокоманды с
+тремя параметрами может
+
+<p><span
+style="mso-spacerun: yes">    </span>выглядеть так:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>EXAMPLE 5, [BX], MEMORY_BYTE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>В<span style='mso-tab-count:1'> </span>следующем
+примере вы увидите некоторые возможности множествен-
+
+<p><span
+style="mso-spacerun: yes">    </span>ности параметров.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

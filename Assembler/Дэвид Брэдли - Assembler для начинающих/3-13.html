@@ -1,0 +1,638 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-13">Оператор Assume</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>После того<span style='mso-tab-count:1'>    </span>как
+сегменты в<span style='mso-tab-count:1'>    </span>программе определены,
+ассемблер<span style="mso-spacerun: yes">  </span>должен
+
+<p><span
+style="mso-spacerun: yes">    </span>узнать,<span style="mso-spacerun: yes"> 
+</span>как<span style="mso-spacerun: yes">   </span>будут<span
+style="mso-spacerun: yes">  </span>установлены<span style="mso-spacerun: yes"> 
+</span>сегментные<span style="mso-spacerun: yes">   </span>регистры<span
+style="mso-spacerun: yes">  </span>во<span style="mso-spacerun: yes"> 
+</span>время
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения программы. В примере на<span
+style='mso-tab-count:1'>    </span>Фиг. 3.9 всего три сегмента, но
+
+<p><span
+style="mso-spacerun: yes">    </span>болшая<span style="mso-spacerun: yes"> 
+</span>программа<span style="mso-spacerun: yes">  </span>может<span
+style="mso-spacerun: yes">  </span>иметь<span style="mso-spacerun: yes"> 
+</span>намного<span style="mso-spacerun: yes">  </span>больше.<span
+style="mso-spacerun: yes">  </span>Располагая всего
+
+<p><span
+style="mso-spacerun: yes">    </span>четырьмя<span style="mso-spacerun: yes"> 
+</span>сегментными регистрами,<span style="mso-spacerun: yes">  </span>большая
+программа<span style="mso-spacerun: yes">  </span>может адресо-
+
+<p><span
+style="mso-spacerun: yes">    </span>ваться одновременно только к части
+доступных сегмментов. Ассемблеру
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимо сообщить, к каким<span
+style="mso-spacerun: yes">  </span>именно сегментам происходит адресация
+
+<p><span
+style="mso-spacerun: yes">    </span>во<span style='mso-tab-count:1'>      </span>время<span
+style="mso-spacerun: yes">  </span>выполнения.<span style="mso-spacerun: yes"> 
+</span>Это<span style="mso-spacerun: yes">  </span>делается<span
+style="mso-spacerun: yes">  </span>с<span style="mso-spacerun: yes"> 
+</span>помощью<span style="mso-spacerun: yes">  </span>оператора ASSUME
+
+<p><span
+style="mso-spacerun: yes">    </span>который<span style="mso-spacerun: yes"> 
+</span>описывает для<span style="mso-spacerun: yes">  </span>ассемблера
+установки<span style="mso-spacerun: yes">  </span>сегментных регистров.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программист<span style="mso-spacerun:
+yes">  </span>должен<span style="mso-spacerun: yes">   </span>связать<span
+style="mso-spacerun: yes">  </span>каждый<span style="mso-spacerun: yes"> 
+</span>сегментный<span style='mso-tab-count:1'> </span>регистр<span
+style="mso-spacerun: yes">  </span>с<span style="mso-spacerun: yes"> 
+</span>тем
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментом, на который тот в данный момент
+указывает.
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 3.9 иллюстрирует такие сегментные
+операции. В этом примере
+
+<p><span
+style="mso-spacerun: yes">    </span>имеется три<span style="mso-spacerun:
+yes">  </span>сегмента: DATA, BUFFER<span style="mso-spacerun: yes">  </span>и
+CODE. Имена<span style='mso-tab-count:1'>      </span>для них выбраны
+
+<p><span
+style="mso-spacerun: yes">    </span>произвольно. Их выбирает программист, а
+для ассемблера они не имеют
+
+<p><span
+style="mso-spacerun: yes">    </span>значения.<span style="mso-spacerun: yes"> 
+</span>Например,<span style="mso-spacerun: yes">  </span>вы<span
+style="mso-spacerun: yes">  </span>можете<span style="mso-spacerun: yes"> 
+</span>назвать<span style="mso-spacerun: yes">  </span>сегмент<span
+style='mso-tab-count:1'>      </span>именем<span style='mso-tab-count:1'>      </span>CODE,
+а
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать его только для данных и
+наооборот. Лучше всего, конеч-
+
+<p><span
+style="mso-spacerun: yes">    </span>но, называть<span style="mso-spacerun:
+yes">  </span>сегменты так, чтобы<span style="mso-spacerun: yes">  </span>их
+имена имели<span style="mso-spacerun: yes">  </span>какой-то смысл в
+
+<p><span
+style="mso-spacerun: yes">    </span>данной программе. В нашем примере<span
+style="mso-spacerun: yes">  </span>сегменты DATA и BUFFER оба имеют
+
+<p><span
+style="mso-spacerun: yes">    </span>внутри<span style="mso-spacerun: yes"> 
+</span>ячейку данных.<span style="mso-spacerun: yes">  </span>Вряд ли<span
+style="mso-spacerun: yes">  </span>реальная программа<span style="mso-spacerun:
+yes">  </span>будет задавать
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмент<span style="mso-spacerun: yes"> 
+</span>лишь с<span style="mso-spacerun: yes">  </span>одной ячейкой<span
+style="mso-spacerun: yes">   </span>памяти, но<span style="mso-spacerun: yes"> 
+</span>сейчас это<span style="mso-spacerun: yes">  </span>служит для
+
+<p><span
+style="mso-spacerun: yes">    </span>примера.<span style="mso-spacerun: yes"> 
+</span>Если программа<span style="mso-spacerun: yes">  </span>обращается<span
+style="mso-spacerun: yes">  </span>к<span style="mso-spacerun: yes"> 
+</span>данным во<span style='mso-tab-count:1'>      </span>многих участках
+
+<p><span
+style="mso-spacerun: yes">    </span>адресуемого в 8088 пространства,<span
+style="mso-spacerun: yes">  </span>то ей требуется много определений
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментов. Например, программа<span
+style="mso-spacerun: yes">  </span>управления устройствами доступа IBM
+
+<p><span
+style="mso-spacerun: yes">    </span>PC<span style='mso-tab-count:1'>      </span>может<span
+style='mso-tab-count:1'> </span>обращаться<span style="mso-spacerun: yes"> 
+</span>к<span style="mso-spacerun: yes">  </span>памяти<span style='mso-tab-count:
+1'>   </span>в<span style="mso-spacerun: yes">  </span>системной<span
+style="mso-spacerun: yes">  </span>области<span style='mso-tab-count:1'>   </span>данных,
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливать векторы прерываний в<span
+style='mso-tab-count:1'>    </span>начале памяти и выполняться как
+
+<p><span
+style="mso-spacerun: yes">    </span>программа в<span style="mso-spacerun:
+yes">  </span>любом другом месте.<span style="mso-spacerun: yes"> 
+</span>Каждая из этих<span style="mso-spacerun: yes">  </span>областей является
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментом и должна быть определена в
+программе.
+
+<p><span
+style='mso-tab-count:1'>      </span>Утверждение ASSUME на Фиг. 3.9
+предписывает ассемблеру работать
+
+<p><span
+style="mso-spacerun: yes">    </span>с учетом следующей<span style='mso-tab-count:
+1'>  </span>установки сегментных регистров:<span style="mso-spacerun: yes"> 
+</span>регистр CS со-
+
+<p><span
+style="mso-spacerun: yes">    </span>держит начальный адрес сегмента CODE,
+регистр DS указывает на DATA,
+
+<p><span
+style="mso-spacerun: yes">    </span>а регистр<span style='mso-tab-count:1'>     </span>ES<span
+style="mso-spacerun: yes">  </span>определяет<span style='mso-tab-count:1'>    </span>
+сегмент<span style="mso-spacerun: yes">  </span>BUFFER.<span
+style="mso-spacerun: yes">   </span>Утверждение<span style="mso-spacerun:
+yes">  </span>ASSUME
+
+<p><span
+style="mso-spacerun: yes">    </span>(полагать,<span style='mso-tab-count:1'>    </span>считать
+-<span style="mso-spacerun: yes">  </span>прим. перев.)<span
+style="mso-spacerun: yes">  </span>означает именно<span style="mso-spacerun:
+yes">  </span>то, что<span style="mso-spacerun: yes">  </span>оно
+
+<p><span
+style="mso-spacerun: yes">    </span>предписывает<span style="mso-spacerun:
+yes">  </span>ассемблеру.<span style="mso-spacerun: yes"> 
+</span>Ассемблер<span style="mso-spacerun: yes">  </span>обрабатывает<span
+style='mso-tab-count:1'>      </span>исходный<span style="mso-spacerun: yes"> 
+</span>текст
+
+<p><span
+style="mso-spacerun: yes">    </span>программы<span style="mso-spacerun: yes"> 
+</span>предполагая,<span style="mso-spacerun: yes">  </span>что<span
+style="mso-spacerun: yes">  </span>сегментные<span style="mso-spacerun: yes"> 
+</span>регистры<span style='mso-tab-count:1'>      </span>установлены как
+
+<p><span
+style="mso-spacerun: yes">    </span>указано в этом утверждении. Установка
+сегментных регистров, сделан-
+
+<p><span
+style="mso-spacerun: yes">    </span>ная в<span style="mso-spacerun: yes"> 
+</span>этом утверждении, остается<span style="mso-spacerun: yes">  </span>при
+ассемблировании в<span style="mso-spacerun: yes">  </span>силе пока
+
+<p><span
+style="mso-spacerun: yes">    </span>другое такое же утверждение не определит
+новые установки. Ассемблер
+
+<p><span
+style="mso-spacerun: yes">   </span>обрабатывает эти<span style="mso-spacerun:
+yes">  </span>утверждения последовательно, даже<span style="mso-spacerun:
+yes">  </span>если программа
+
+<p><span
+style="mso-spacerun: yes">    </span>ветвится<span style="mso-spacerun: yes"> 
+</span>и закручивается<span style="mso-spacerun: yes">  </span>в циклы.<span
+style="mso-spacerun: yes">  </span>Утверждение ASSUME<span style="mso-spacerun:
+yes">  </span>остается в
+
+<p><span
+style="mso-spacerun: yes">    </span>силе,<span style="mso-spacerun: yes"> 
+</span>пока ассемблер<span style="mso-spacerun: yes">  </span>не встретит<span
+style='mso-tab-count:1'>    </span>при последовательном<span
+style="mso-spacerun: yes">  </span>просмотре
+
+<p><span
+style="mso-spacerun: yes">    </span>программы следующее.<span
+style="mso-spacerun: yes">  </span>Заметим, что в утверждении<span
+style="mso-spacerun: yes">  </span>ASSUME не обязано
+
+<p><span
+style="mso-spacerun: yes">    </span>определять<span style='mso-tab-count:1'>    </span>все
+сегментные<span style='mso-tab-count:1'>    </span>регистры. В<span
+style="mso-spacerun: yes">  </span>нашем примере<span style="mso-spacerun:
+yes">  </span>не объявлен
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр SS.<span style="mso-spacerun:
+yes">  </span>На практике содержимое сегментного<span style="mso-spacerun:
+yes">  </span>ргистра может быть
+
+<p><span
+style="mso-spacerun: yes">    </span>временами<span style="mso-spacerun: yes"> 
+</span>и неизвестно<span style="mso-spacerun: yes">  </span>в<span
+style='mso-tab-count:1'>      </span>программе.<span style="mso-spacerun:
+yes">  </span>В этих<span style="mso-spacerun: yes">  </span>случаях
+утверждение
+
+<p><span
+style="mso-spacerun: yes">    </span>ASSUME должно указывать сегмент NOTHING.
+Например, утверждение
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>ASSUME<span style='mso-tab-count:1'>      </span>ES:NOTHING
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>сообщает ассемблеру, что программа<span
+style='mso-tab-count:1'>    </span>не знает, куда указывает допол-
+
+<p><span
+style="mso-spacerun: yes">    </span>нительный сегментный регистр. Поскольку
+значение регистра неизвест-
+
+<p><span
+style="mso-spacerun: yes">    </span>но, ассемблер не должен использовать его в
+адресных вычислениях.
+
+<p><span
+style='mso-tab-count:1'>      </span>Важно отметить, что утверждение ASSUME не
+генерирует команд ма-
+
+<p><span
+style="mso-spacerun: yes">    </span>шинного<span style="mso-spacerun: yes"> 
+</span>языка. Это<span style="mso-spacerun: yes">  </span>директива
+ассемблеру<span style="mso-spacerun: yes">  </span>полагать, что сегментные
+
+<p><span
+style="mso-spacerun: yes">    </span>регистры установлены в соответствии<span
+style="mso-spacerun: yes">  </span>с указанной в этом утверждении
+
+<p><span
+style="mso-spacerun: yes">    </span>информацией.<span style="mso-spacerun:
+yes">  </span>Добиться<span style="mso-spacerun: yes">  </span>правильное<span
+style='mso-tab-count:1'>    </span>установки<span style="mso-spacerun: yes"> 
+</span>сегментов<span style="mso-spacerun: yes">  </span>-<span
+style="mso-spacerun: yes">  </span>забота
+
+<p><span
+style="mso-spacerun: yes">    </span>программиста. Аналогично, ассемблер не
+может проверить, что утверж-
+
+<p><span
+style="mso-spacerun: yes">    </span>дение<span style="mso-spacerun: yes"> 
+</span>ASSUME<span style="mso-spacerun: yes">  </span>при<span
+style='mso-tab-count:1'>  </span>выполнении<span style="mso-spacerun: yes"> 
+</span>будет<span style="mso-spacerun: yes">  </span>соответствовать<span
+style="mso-spacerun: yes">  </span>содержимому
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментных<span style='mso-tab-count:1'>    </span>регистров.
+Из-за<span style="mso-spacerun: yes">  </span>того,<span style="mso-spacerun:
+yes">  </span>что<span style="mso-spacerun: yes">  </span>программа может<span
+style="mso-spacerun: yes">  </span>прийти к
+
+<p><span
+style="mso-spacerun: yes">    </span>любому<span style="mso-spacerun: yes">  
+</span>конкретному<span style="mso-spacerun: yes">  </span>ASSUME<span
+style="mso-spacerun: yes">   </span>множеством<span style="mso-spacerun: yes"> 
+</span>разных<span style='mso-tab-count:1'> </span>путей,<span
+style='mso-tab-count:1'>      </span>за<span style="mso-spacerun: yes"> 
+</span>его
+
+<p><span
+style="mso-spacerun: yes">    </span>корректность отвечает программист.<span
+style='mso-tab-count:1'>    </span>В нашем примере предполагается,
+
+<p><span
+style="mso-spacerun: yes">    </span>что сегментные регистры
+устанавливаются<span style="mso-spacerun: yes">  </span>до выполнения данного
+кус-
+
+<p><span
+style="mso-spacerun: yes">    </span>ка программы. Если они установленыы
+неверно, то программа будет вы-
+
+<p><span
+style="mso-spacerun: yes">    </span>полняться неправильно даже если
+ассемблирование прошло успешно.
+
+<p><span
+style='mso-tab-count:1'>      </span>Первая команда увеличивает значение VAR1,
+находящейся в сегмен-
+
+<p><span
+style="mso-spacerun: yes">    </span>те данных. Ассемблер полагает, что регистр
+DS указывает на сегмент
+
+<p><span
+style="mso-spacerun: yes">    </span>DATA<span style="mso-spacerun: yes"> 
+</span>в соответствии<span style="mso-spacerun: yes">  </span>с
+утверждением<span style="mso-spacerun: yes">  </span>ASSUME. Поскольку<span
+style="mso-spacerun: yes">  </span>регистр DS
+
+<p><span
+style="mso-spacerun: yes">    </span>предполагается при<span style='mso-tab-count:
+1'>  </span>использовании данных по умолчанию,<span style="mso-spacerun: yes"> 
+</span>то для этой
+
+<p><span
+style="mso-spacerun: yes">    </span>команды ассемблер не<span
+style="mso-spacerun: yes">  </span>генерирует сегментный префикс.
+Сформированная
+
+<p><span
+style="mso-spacerun: yes">    </span>этой инструкцией 4-байтовая машинная
+команда не содержит сегментно-
+
+<p><span
+style="mso-spacerun: yes">    </span>го<span style='mso-tab-count:1'>      </span>префикса.
+
+<p><span
+style='mso-tab-count:1'>      </span>Вторая команда определяет переменную<span
+style="mso-spacerun: yes">  </span>VAR2, которая находится в
+
+<p><span
+style="mso-spacerun: yes">    </span>сегменте<span style="mso-spacerun: yes"> 
+</span>названном<span style="mso-spacerun: yes">  </span>BUFFER.<span
+style="mso-spacerun: yes">  </span>Программа<span style="mso-spacerun: yes"> 
+</span>сообщила<span style="mso-spacerun: yes">  </span>ассемблеру,<span
+style="mso-spacerun: yes">  </span>что
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительный сегментный регистр
+указывает<span style="mso-spacerun: yes">  </span>на сегмент BUFFER. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>увеличения VAR2 ассемблер генерирует
+четырехбайтовую команду машин-
+
+<p><span
+style="mso-spacerun: yes">    </span>ного языка,<span style="mso-spacerun:
+yes">  </span>но ей предшествует<span style="mso-spacerun: yes"> 
+</span>команда с однобайтовым<span style="mso-spacerun: yes"> 
+</span>префиксом,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая<span style="mso-spacerun: yes"> 
+</span>отменяет<span style='mso-tab-count:1'>   </span>использование<span
+style="mso-spacerun: yes">  </span>регистра<span style="mso-spacerun: yes"> 
+</span>DS<span style="mso-spacerun: yes">   </span>в<span style="mso-spacerun:
+yes">  </span>этой<span style="mso-spacerun: yes">  </span>команде.
+
+<p><span
+style="mso-spacerun: yes">    </span>Префиксный<span style='mso-tab-count:1'>    </span>байт
+26H<span style="mso-spacerun: yes">  </span>говорит процессору<span
+style="mso-spacerun: yes">  </span>использовать при создании
+
+<p><span
+style="mso-spacerun: yes">    </span>20-битового адреса памяти регистр ES.<span
+style="mso-spacerun: yes">  </span>В колонке объектных кодов на
+
+<p><span
+style="mso-spacerun: yes">    </span>листинге ассемблер отмечает префиксную
+команду двоеточием.
+
+<p><span
+style='mso-tab-count:1'>      </span>Третья<span style='mso-tab-count:1'>      </span>команда<span
+style="mso-spacerun: yes">  </span>изменяет<span style="mso-spacerun: yes"> 
+</span>переменную<span style="mso-spacerun: yes">  </span>VAR3<span
+style="mso-spacerun: yes">  </span>в<span style='mso-tab-count:1'>    </span>сегменте<span
+style="mso-spacerun: yes">  </span>CODE.
+
+<p><span
+style="mso-spacerun: yes">    </span>Утверждение ASSUME связывает этот сегмент
+с регистром CS. Ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>автоматически<span style="mso-spacerun:
+yes">  </span>генерирует<span style="mso-spacerun: yes"> 
+</span>соответствующий<span style='mso-tab-count:1'>  </span>префикс<span
+style="mso-spacerun: yes">  </span>переназначения
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента.<span style="mso-spacerun: yes"> 
+</span>В<span style="mso-spacerun: yes">  </span>данном<span
+style="mso-spacerun: yes">  </span>случае<span style="mso-spacerun: yes"> 
+</span>префикс<span style="mso-spacerun: yes">  </span>2EH<span
+style='mso-tab-count:1'>  </span>предписывает процессору
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать<span style="mso-spacerun:
+yes">  </span>при<span style="mso-spacerun: yes">  </span>вычислении<span
+style="mso-spacerun: yes">  </span>испольнительного<span style="mso-spacerun:
+yes">  </span>адреса регистр CS.
+
+<p><span
+style='mso-tab-count:1'>      </span>Вначале<span style="mso-spacerun: yes"> 
+</span>утверждение<span style="mso-spacerun: yes">  </span>ASSUME<span
+style="mso-spacerun: yes">  </span>покажется<span style="mso-spacerun: yes"> 
+</span>излишеством.<span style="mso-spacerun: yes">  </span>В первое
+
+<p><span
+style="mso-spacerun: yes">    </span>время при<span style="mso-spacerun: yes"> 
+</span>написании программы естественно забывать<span style="mso-spacerun:
+yes">  </span>о его примене-
+
+<p><span
+style="mso-spacerun: yes">    </span>нии. Ассемблер выдаст массу сообщений об
+ошибках чтобы помочь вам в
+
+<p><span
+style="mso-spacerun: yes">    </span>вашей<span style="mso-spacerun: yes"> 
+</span>забывчивости. Но<span style="mso-spacerun: yes">  </span>при
+достаточном<span style="mso-spacerun: yes">  </span>опыте, утверждение ASSUME
+
+<p><span
+style="mso-spacerun: yes">    </span>помогает программисту ассемблера
+сосредоточиться на структурах дан-
+
+<p><span
+style="mso-spacerun: yes">    </span>ных<span style="mso-spacerun: yes"> 
+</span>в<span style="mso-spacerun: yes">  </span>программе.<span
+style='mso-tab-count:1'>  </span>Программист<span style="mso-spacerun: yes"> 
+</span>должен<span style="mso-spacerun: yes">  </span>не<span
+style="mso-spacerun: yes">  </span>забывать устанавливать
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментные регистры<span
+style="mso-spacerun: yes">  </span>для адресации требуемых<span
+style="mso-spacerun: yes">  </span>для программы данных.
+
+<p><span
+style="mso-spacerun: yes">    </span>Ассемблер<span style="mso-spacerun: yes"> 
+</span>облегчит<span style="mso-spacerun: yes">  </span>бремя<span
+style='mso-tab-count:1'>      </span>запоминания<span style="mso-spacerun:
+yes">  </span>для<span style="mso-spacerun: yes">  </span>каждой<span
+style="mso-spacerun: yes">  </span>команды,<span style="mso-spacerun: yes"> 
+</span>где
+
+<p><span
+style="mso-spacerun: yes">    </span>располагаются<span style="mso-spacerun:
+yes">  </span>данные<span style="mso-spacerun: yes">  </span>и<span
+style="mso-spacerun: yes">  </span>какой<span style="mso-spacerun: yes">  
+</span>сегментный<span style="mso-spacerun: yes">  </span>регистр<span
+style="mso-spacerun: yes">  </span>должен<span style="mso-spacerun: yes"> 
+</span>быть
+
+<p><span
+style="mso-spacerun: yes">    </span>использован чтобы попасть к ним.
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа может<span style="mso-spacerun:
+yes">  </span>использовать утверждение SEGMENT<span style="mso-spacerun: yes"> 
+</span>для передачи
+
+<p><span
+style="mso-spacerun: yes">    </span>информации<span style='mso-tab-count:1'>    </span>другим<span
+style='mso-tab-count:1'>      </span>программам.<span style="mso-spacerun:
+yes">  </span>Оператор<span style="mso-spacerun: yes">  </span>SEGMENT<span
+style='mso-tab-count:1'>      </span>может<span style="mso-spacerun: yes"> 
+</span>задавать
+
+<p><span
+style="mso-spacerun: yes">    </span>выравнивание сегмента в памяти,<span
+style="mso-spacerun: yes">  </span>способ его комбинирования с други-
+
+<p><span
+style="mso-spacerun: yes">    </span>ми<span style='mso-tab-count:1'>      </span>сегментами
+и<span style="mso-spacerun: yes">  </span>имя его<span style='mso-tab-count:
+1'>   </span>типа. Для<span style="mso-spacerun: yes">  </span>программистов
+IBM<span style="mso-spacerun: yes">  </span>PC особый
+
+<p><span
+style="mso-spacerun: yes">    </span>интерес представляют два<span
+style="mso-spacerun: yes">  </span>вида выравнивания сегментов. Выравнивание
+
+<p><span
+style="mso-spacerun: yes">    </span>по<span style='mso-tab-count:1'>      </span>параграфам<span
+style="mso-spacerun: yes">  </span>(тип<span style="mso-spacerun: yes"> 
+</span>PARA)<span style="mso-spacerun: yes">  </span>размещает<span
+style="mso-spacerun: yes">  </span>начало<span style="mso-spacerun: yes"> 
+</span>сегмента<span style="mso-spacerun: yes">  </span>с<span
+style="mso-spacerun: yes">  </span>начала
+
+<p><span
+style="mso-spacerun: yes">    </span>параграфа -<span style="mso-spacerun:
+yes">  </span>ячейки памяти, адрес<span style="mso-spacerun: yes"> 
+</span>которой в памяти<span style="mso-spacerun: yes">  </span>кратен 16-ти .
+
+<p><span
+style="mso-spacerun: yes">    </span>Это<span style="mso-spacerun: yes"> 
+</span>означает,<span style="mso-spacerun: yes">  </span>что<span
+style="mso-spacerun: yes">  </span>первый<span style="mso-spacerun: yes"> 
+</span>байт<span style="mso-spacerun: yes">  </span>сегмента<span
+style="mso-spacerun: yes">  </span>будет иметь смещение 0
+
+<p><span
+style="mso-spacerun: yes">    </span>относительно значения сегментного<span
+style="mso-spacerun: yes">  </span>регистра. Выравнивание по байтам
+
+<p><span
+style="mso-spacerun: yes">    </span>(тип<span style="mso-spacerun: yes"> 
+</span>BYTE), наоборот,<span style="mso-spacerun: yes">  </span>размещает
+сегмент<span style="mso-spacerun: yes">  </span>в любом<span style='mso-tab-count:
+1'>      </span>месте памяти. В
+
+<p><span
+style="mso-spacerun: yes">    </span>этом случае сегментный регистр может<span
+style="mso-spacerun: yes">  </span>и не указывать на первый байт
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента.<span style="mso-spacerun: yes"> 
+</span>В программе<span style="mso-spacerun: yes">  </span>может
+потребоваться<span style="mso-spacerun: yes">  </span>ненулевое смещение для
+
+<p><span
+style="mso-spacerun: yes">    </span>доступа к началу сегмента.
+
+<p><span
+style="mso-spacerun: yes">       </span>Различные<span style="mso-spacerun:
+yes">  </span>способы<span style="mso-spacerun: yes">  </span>связывания<span
+style="mso-spacerun: yes">  </span>сегментов<span style="mso-spacerun: yes"> 
+</span>задает<span style="mso-spacerun: yes">  </span>параметр типа
+
+<p><span
+style="mso-spacerun: yes">    </span>связи.<span style="mso-spacerun: yes"> 
+</span>Особенно<span style="mso-spacerun: yes">   </span>это<span
+style="mso-spacerun: yes">  </span>полезно<span style="mso-spacerun: yes"> 
+</span>при<span style="mso-spacerun: yes">   </span>модульном<span
+style="mso-spacerun: yes">  </span>программировании.
+
+<p><span
+style="mso-spacerun: yes">    </span>Описание PUBLIC приводит к объединению
+всех сегментов с одинаковыми
+
+<p><span
+style="mso-spacerun: yes">    </span>именами<span style="mso-spacerun: yes"> 
+</span>в один<span style="mso-spacerun: yes">  </span>большой<span
+style="mso-spacerun: yes">  </span>сегмент.<span style='mso-tab-count:1'>    </span>Например,
+можно<span style="mso-spacerun: yes">  </span>объединить все
+
+<p><span
+style="mso-spacerun: yes">    </span>сегменты кодов.<span style="mso-spacerun:
+yes">  </span>Это приведет к соединению<span style='mso-tab-count:1'>  </span>разных
+подпрограмм в их
+
+<p><span
+style="mso-spacerun: yes">    </span>собственных модулях с главной процедурой.
+Другой полезный тип связи
+
+<p><span
+style="mso-spacerun: yes">    </span>- AT,<span style="mso-spacerun: yes"> 
+</span>при указании<span style="mso-spacerun: yes">  </span>которого<span
+style="mso-spacerun: yes">  </span>в<span style="mso-spacerun: yes"> 
+</span>сочетании с<span style="mso-spacerun: yes">  </span>адресным выражением,
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмент<span style="mso-spacerun: yes"> 
+</span>располагается<span style="mso-spacerun: yes">  </span>по<span
+style='mso-tab-count:1'>      </span> заданному<span style="mso-spacerun:
+yes">  </span>абсолютному<span style="mso-spacerun: yes">  </span>адресу.<span
+style="mso-spacerun: yes">  </span>Такое
+
+<p><span
+style="mso-spacerun: yes">    </span>объявление необходимо<span
+style="mso-spacerun: yes">  </span>при работе с данными<span
+style="mso-spacerun: yes">  </span>в фиксированном месте,
+
+<p><span
+style="mso-spacerun: yes">    </span>например, с векторами прерываний в начале
+памяти.
+
+<p><span
+style='mso-tab-count:1'>      </span>Намного<span style="mso-spacerun: yes"> 
+</span>более<span style='mso-tab-count:1'>    </span>полное<span
+style='mso-tab-count:1'>      </span>описание<span style="mso-spacerun: yes"> 
+</span>описание<span style="mso-spacerun: yes">  </span>утверждения SEGMENT
+
+<p><span
+style="mso-spacerun: yes">    </span>можно найти<span style="mso-spacerun:
+yes">  </span>в справочном томе к<span style="mso-spacerun: yes"> 
+</span>макроассемблеру IBM PC. Некоторые
+
+<p><span
+style="mso-spacerun: yes">    </span>из<span style='mso-tab-count:1'>      </span>возможностей
+опертора<span style="mso-spacerun: yes">  </span>SEGMENT<span style='mso-tab-count:
+1'>      </span>мы<span style="mso-spacerun: yes">  </span>будем использовать<span
+style='mso-tab-count:1'>  </span>далее в
+
+<p><span
+style="mso-spacerun: yes">    </span>примерах.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

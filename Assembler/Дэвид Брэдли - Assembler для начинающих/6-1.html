@@ -1,0 +1,809 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="6-1">Макроопределения</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Макрокоманда - это программный инструмент,
+который позволяет вам
+
+<p><span
+style="mso-spacerun: yes">    </span>создавать собственные операции ассемблера.
+На самом деле макро-
+
+<p><span
+style="mso-spacerun: yes">    </span>определения относятся к механизму
+препроцессора. Макропроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет определять новые коды операций
+для процессора. В этом
+
+<p><span
+style="mso-spacerun: yes">    </span>определении вы, в частности, сообщаете
+ассемблеру текст выполняемой
+
+<p><span
+style="mso-spacerun: yes">    </span>операции. Когда ассемблер встречает этот
+вновь определенный код
+
+<p><span
+style="mso-spacerun: yes">    </span>операции, он обращается к сохраненному
+определению макрокоманды и
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает в транслируемый участок программы
+текст из этого
+
+<p><span
+style="mso-spacerun: yes">    </span>определения. Например, в программе могут
+быть определены в качестве
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманд часто используемые
+последовательности команд. Каждый
+
+<p><span
+style="mso-spacerun: yes">    </span>раз, когда эти команды должны быть
+вставлены в текст программы,
+
+<p><span
+style="mso-spacerun: yes">    </span>программист может вместо этого
+воспользоваться макрокомандой.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В использовании макрокоманды можно выделить
+два шага. На первом
+
+<p><span
+style="mso-spacerun: yes">    </span>шаге макрокоманда определяется в
+программе. Программист присваивает
+
+<p><span
+style="mso-spacerun: yes">    </span>ей имя и определение. Определение состоит
+из из операций ассемблера
+
+<p><span
+style="mso-spacerun: yes">    </span>и команд, которые будут генерироваться
+каждый раз при появлении
+
+<p><span
+style="mso-spacerun: yes">    </span>имени макрокоманды. Второй шаг -
+применение макрокоманды. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит когда ассемблер встречает ее
+имя в качестве кода
+
+<p><span
+style="mso-spacerun: yes">    </span>операции. Ассемблер заменяет это имя
+указанными в определении
+
+<p><span
+style="mso-spacerun: yes">    </span>командами.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Возьмем в качестве примера команды
+сопроцессора 8087, который
+
+<p><span
+style="mso-spacerun: yes">    </span>мы обсудим в глве 7. В написании программ
+с использованием команд
+
+<p><span
+style="mso-spacerun: yes">    </span>числового процессора 8087 возникают
+некоторые трудности. В
+
+<p><span
+style="mso-spacerun: yes">    </span>макроассемблере отсутствуют коды операций
+8087. Для использования
+
+<p><span
+style="mso-spacerun: yes">    </span>8087 вы должны сформировать его команды с
+помощью либо оператора
+
+<p><span
+style="mso-spacerun: yes">    </span>определения данных, либо кодов операций
+WAIT и ESC. Лучше всего это
+
+<p><span
+style="mso-spacerun: yes">    </span>делать через определение макрокоманды, что
+позволит вам писать
+
+<p><span
+style="mso-spacerun: yes">    </span>команды 8087. После этого программа может
+пользоваться командами
+
+<p><span
+style="mso-spacerun: yes">    </span>8087, хотя они и не входят в язык
+ассемблера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В программировании на языке ассемблера
+макрокоманды исполь-
+
+<p><span
+style="mso-spacerun: yes">    </span>зуются наиболее часто. Хотя видимых причин
+не применять макропро-
+
+<p><span
+style="mso-spacerun: yes">    </span>цессор в языках высокого уровня нет, там
+макрокоманды встречаются
+
+<p><span
+style="mso-spacerun: yes">    </span>довольно редко. Макроассемблер для IBM PC
+поддерживает
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды. Как мы уже отмечали,
+существует две версии
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера. Малый ассемблер, ASM, не
+поддерживает это средство.
+
+<p><span
+style="mso-spacerun: yes">    </span>Полный ассемблер, MASM, допускает все
+макрооперации, которые обсуж-
+
+<p><span
+style="mso-spacerun: yes">    </span>даются в этой главе. Для использования
+MASM ваш персональный
+
+<p><span
+style="mso-spacerun: yes">    </span>компьютер должен иметь как миимум 96K
+оперативной памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Простейшая макрокоманда, которую можно
+использовать как код
+
+<p><span
+style="mso-spacerun: yes">    </span>операции 8087, - FENI. Макроассеблер 8088
+не распознает ключевого
+
+<p><span
+style="mso-spacerun: yes">    </span>слова FENI, которое в действительности
+является командой для 8087.
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 6.1 показывает два шага
+макро-процесса: определение
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды FENI и ее последующий вызов в
+программе. Фиг.6.1
+
+<p><span
+style="mso-spacerun: yes">    </span>состоит из двух частей: часть (a) - это
+исходный файл для
+
+<p><span
+style="mso-spacerun: yes">    </span>программы, а часть (b) содержит листинг
+ассемблера для нее. Два
+
+<p><span
+style="mso-spacerun: yes">    </span>варианта на Фиг. 6.1 разделены, чтобы
+показать, какой из них
+
+<p><span
+style="mso-spacerun: yes">    </span>написан программистом, а какой
+сгенерирован макропроцессором.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа определяет макрокоманду с
+помощью ключевого слова
+
+<p><span
+style="mso-spacerun: yes">    </span>MACRO. На Фиг. 6.1 макроопределение
+выглядит так:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FENI<span style='mso-tab-count:1'>  </span>MACRO
+
+<p><span
+style='mso-tab-count:1'>      </span>;---- Тело макрокоманды
+
+<p><span
+style='mso-tab-count:2'>            </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Оператор MACRO является кодом
+псевдооперации. Эта конкретная псев-
+
+<p><span
+style="mso-spacerun: yes">    </span>дооперация сообщает ассемблеру, что
+начинается определение макроко-
+
+<p><span
+style="mso-spacerun: yes">    </span>манды. В поле имени операции указано это
+имя, которое программа
+
+<p><span
+style="mso-spacerun: yes">    </span>приписывает определяемой макрокоманде, в
+нашем случае FENI. Команды
+
+<p>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>PAGE<span style="mso-spacerun: yes">    </span>,132
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>TITLE<span style="mso-spacerun: yes">   </span>Фиг. 6.1
+Макрокоманда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FENI<span style="mso-spacerun: yes">    </span>MACRO
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>DB<span style="mso-spacerun: yes">      </span>0DBH, 0E0H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>CODE<span style="mso-spacerun: yes">    </span>SEGMENT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>ASSUME<span style="mso-spacerun: yes">  </span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>FENI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>CODE<span style="mso-spacerun: yes">    </span>ENDS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>END
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>Фиг. 6.1 (a) Исходный файл для программы
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>         </span><span style="mso-spacerun: yes">       </span>1/1/80
+04:02:38
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>Фиг. 6.1 Макрокоманда<span style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">       </span>Page<span style='mso-tab-count:1'> </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">   </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">   </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 6.1 Макрокоманда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">   </span>FENI<span style="mso-spacerun: yes">   
+</span>MACRO
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">   </span>DB<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">   </span>0DBH, 0E0H
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">   </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>0000<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">   </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">   </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">   </span>FENI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>0000<span style="mso-spacerun: yes">  </span>DB E0 <span
+style='mso-tab-count:2'>        </span>1<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">   </span>DB<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">   </span>0DBH, 0E0H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>0002<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">   </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">   </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>Фиг. 6.1 (b) Листинг ассмблера программы
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг.6.1 Макроопределение.(a) исходный
+файл; (b) листинг ассемблера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>(или действия ассемблера), которые будут
+заменять имя макрокоманды,
+
+<p><span
+style="mso-spacerun: yes">    </span>следуют за строкой заголовка. Наконец,
+ключевое слово ENDM
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает ассемблеру на конец определения.
+Текст между операторами
+
+<p><span
+style="mso-spacerun: yes">    </span>MSCRO и ENDM называется телом
+макрокоманды. На Фиг. 6.1 телом
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды FENI является оператор
+определения байтов. Поскольку в
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 нет команды, которая соответствовала
+бы команде FENI код
+
+<p><span
+style="mso-spacerun: yes">    </span>машинного языка для этой команды должен
+состять из операторов DB.
+
+<p><span
+style='mso-tab-count:1'>      </span>Важно заметить, что во время определения
+макрокоманды код
+
+<p><span
+style="mso-spacerun: yes">    </span>машинного языка еще не генерируется. Это
+можно утверждать, потому
+
+<p><span
+style="mso-spacerun: yes">    </span>что колонки адреса и данных в листинге
+ассемблера пусты. Когда
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер впервые встречае
+макроопределение, он сохраняет его для
+
+<p><span
+style="mso-spacerun: yes">    </span>дальнейшего использования. Затем программа
+на Фиг. 6.1 привлекает
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманду FENI. Программист использует
+имя макрокоманды FENI как
+
+<p><span
+style="mso-spacerun: yes">    </span>если бы это был код оперции ассемблера
+типа CLD или DAA, а
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер обращается к сохраненному
+определению макрокоманды FENI.
+
+<p><span
+style="mso-spacerun: yes">    </span>Ассемблер берет текст из тела
+макроопределения и помещает его в той
+
+<p><span
+style="mso-spacerun: yes">    </span>же позиции транслируемой программы. Знак
+&quot;+&quot;, появляющийся слева от
+
+<p><span
+style="mso-spacerun: yes">    </span>оператора DB в распечатке ассемблера,
+указывает на то, что эта
+
+<p><span
+style="mso-spacerun: yes">    </span>строка вставлена макропроцессором. Если
+сравнить исходный текст с
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблируемым, вы увидите в исходном
+тексте только команду FENI, в
+
+<p><span
+style="mso-spacerun: yes">    </span>то время как на листинге ассемблера за
+командой FENI следует тело
+
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды. В данном случае оно
+представлено одним оператором DB.
+
+<p><span
+style='mso-tab-count:1'>      </span>Этот простой пример демонстрирует большие
+возможности
+
+<p><span
+style="mso-spacerun: yes">    </span>макропроцессора. Возникла необходимость в
+коде операции FENI,
+
+<p><span
+style="mso-spacerun: yes">    </span>который не предусмотрен ассемблером. При
+отсутствии механизма
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманд программист был бы вынужден
+вместо операции FENI каждый
+
+<p><span
+style="mso-spacerun: yes">    </span>раз записывать ее код:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB 0DBH, 0E0H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Имея же в распоряжении такой механизм,
+можно определить
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманду FENI и в дальнейшем в этой же
+программе использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>как код операции только ее. Для
+использования подобных макрокоманд
+
+<p><span
+style="mso-spacerun: yes">    </span>есть две серьезные причины. Во-первых, они
+облегчают написание
+
+<p><span
+style="mso-spacerun: yes">    </span>программы. Во-вторых, при чтении текста
+программы оператор FENI,
+
+<p><span
+style="mso-spacerun: yes">    </span>выглядит гораздо более осмысленным, чем DB
+0DBH,0E0H.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Макрокоманду можно сравнить с
+подпрограммой. Подпрограмма - это
+
+<p><span
+style="mso-spacerun: yes">    </span>участок программы, определяемый в
+единственном месте программы,
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа может передать управление подпрограмме
+из любой своей
+
+<p><span
+style="mso-spacerun: yes">    </span>точки. Использование подпрограмм экономит
+время написания и объем
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, занимаемый программой. Вместо
+того, чтобы каждый раз
+
+<p><span
+style="mso-spacerun: yes">    </span>переписывать команды подпрограммы, когда
+необходимо ее выполнение,
+
+<p><span
+style="mso-spacerun: yes">    </span>вы вставляете ее вызов. Подпрограмма
+выполняет свою определенную
+
+<p><span
+style="mso-spacerun: yes">    </span>функцию, и управление возвращантся в точку
+вызова.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Макрокоманда точно также определяется в
+ассемблируемой
+
+<p><span
+style="mso-spacerun: yes">    </span>программе в единственном месте. После
+того, как макрокоманда
+
+<p><span
+style="mso-spacerun: yes">    </span>определена, ее можно привлечь
+(&quot;вызвать&quot;) в любой точке
+
+<p><span
+style="mso-spacerun: yes">    </span>транслируемой программы. Использование
+макрокоманды экономит время
+
+<p><span
+style="mso-spacerun: yes">    </span>составления программ и место, занимаемое
+исходным файлом. Вместо
+
+<p><span
+style="mso-spacerun: yes">    </span>того, чтобы всякий раз, когда в них
+возникает необходимость,
+
+<p><span
+style="mso-spacerun: yes">    </span>переписывать входящие в макрокоманду
+команды, в программу
+
+<p><span
+style="mso-spacerun: yes">    </span>вставляется вызов макрокоманды. Ассемблер
+генерирует заданные в
+
+<p><span
+style="mso-spacerun: yes">    </span>определении команды и переходит к
+обработке следующего кода
+
+<p><span
+style="mso-spacerun: yes">    </span>операции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Разница между макрокомандой и
+подпрограммой заключается в
+
+<p><span
+style="mso-spacerun: yes">    </span>моменте их использования. Макрокоманда
+является операцией текстовой
+
+<p><span
+style="mso-spacerun: yes">    </span>обработки. Она определяется и
+&quot;выполняется&quot; во время
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблирования. Выполнение макрокоманды
+состоит в замене имени
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды текстом, составляющим тело
+макрокоманды. Подпрограмма
+
+<p><span
+style="mso-spacerun: yes">    </span>же хотя и определяется при
+ассемблировании, но выполняется не
+
+<p><span
+style="mso-spacerun: yes">    </span>раньше, чем сама программа. Мы будем
+говорить, что макрокоманда
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняется при ассемблировании, а
+подпрограмма - во время
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения программы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Лучший способ отличить макрокоманду от
+подпрограммы - это
+
+<p><span
+style="mso-spacerun: yes">    </span>запомнить, когда они проявляются. На самом
+деле, макропроцессор не
+
+<p><span
+style="mso-spacerun: yes">    </span>является атрибутом языка программирования.
+Допустим, вы - адвокат,
+
+<p><span
+style="mso-spacerun: yes">    </span>и составляете завещания для множества
+разных людей. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>завещания часто похожи, то вы могли бы
+задать набор
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;макрозавещаний&quot;, которые будут
+содержать совпадающие части
+
+<p><span
+style="mso-spacerun: yes">    </span>составляемых завещаний. Первая часть
+завещания, где перечислены
+
+<p><span
+style="mso-spacerun: yes">    </span>участвующие в нем стороны, будет
+уникальной. Оставшаяся часть будет
+
+<p><span
+style="mso-spacerun: yes">    </span>состоять из различных макрозавещаний,
+охватывающих стандартные
+
+<p><span
+style="mso-spacerun: yes">    </span>куски завещаний. Результатом работы
+&quot;процессора завещаний&quot; будет
+
+<p><span
+style="mso-spacerun: yes">    </span>текстовый документ. Макрозавещания
+раскрываются и образуют
+
+<p><span
+style="mso-spacerun: yes">    </span>стандартную часть завещания. Вам остается
+только заполнить
+
+<p><span
+style="mso-spacerun: yes">    </span>переменные фрагменты документа между
+макрозавещаниями.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Но если макрокоманды и подпрограммы во
+многих отношениях так
+
+<p><span
+style="mso-spacerun: yes">    </span>похожи, то зачем использовать вместо
+процедуры макрокоманду?
+
+<p><span
+style="mso-spacerun: yes">    </span>Действительно, во многих случаях применима
+любая из них.
+
+<p><span
+style="mso-spacerun: yes">    </span>Последовательность команд может быть
+определена и как макрокоманда,
+
+<p><span
+style="mso-spacerun: yes">    </span>и как подпрограмма. Когда вам потребуется
+эта последовательность,
+
+<p><span
+style="mso-spacerun: yes">    </span>вы можете вызвать соответственно
+макрокоманду или подпрограмму.
+
+<p><span
+style="mso-spacerun: yes">    </span>Какую именно - зависит от того, как вы
+определили данную
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательность команд. Выбор
+последнего задается соображениями
+
+<p><span
+style="mso-spacerun: yes">    </span>времени выполнения программы и объема
+занимаемой ею памяти. В
+
+<p><span
+style="mso-spacerun: yes">    </span>большинстве случаев использование
+макрокоманд приводит к более
+
+<p><span
+style="mso-spacerun: yes">    </span>длинным программа, т.е. для реализации
+одной и той же функции
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется больше байтов объектного кода.
+Однако такая программа
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняется быстрее так как отсутствуют
+временные издержки,
+
+<p><span
+style="mso-spacerun: yes">    </span>связанные с вызовом подпрограммы и
+возвратом в программу каждый
+
+<p><span
+style="mso-spacerun: yes">    </span>раз, когда требуется данная
+последовательность команд. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>минимизации размера программы слудет
+использовать подпрограммы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Чтобы иметь программу с максимальным
+быстродействием, вы
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>пользуетесь макрокомандами.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В случае макрокоманды FENI на Фиг. 6.1,
+выбор в пользу
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды очевиден. Здесь
+соответствующий участок программы в
+
+<p><span
+style="mso-spacerun: yes">    </span>качестве макрокоманды не только
+выполняется быстрее нежели, в
+
+<p><span
+style="mso-spacerun: yes">    </span>качестве подпрограммы, но и занимает
+меньше памяти. Команда CALL
+
+<p><span
+style="mso-spacerun: yes">    </span>для близкой процедуры требует три байта.
+Макрокоманды FENI - только
+
+<p><span
+style="mso-spacerun: yes">    </span>два байта. В случае макрокоманд для
+процессора 8087 для реализации
+
+<p><span
+style="mso-spacerun: yes">    </span>тех же функций через процедуры
+потребовалось бы больше байтов
+
+<p><span
+style="mso-spacerun: yes">    </span>объектного кода. Кроме того использование
+макрокоманд сокращает
+
+<p><span
+style="mso-spacerun: yes">    </span>время выполнения программы.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

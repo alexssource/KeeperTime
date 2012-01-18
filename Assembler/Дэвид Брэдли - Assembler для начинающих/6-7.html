@@ -1,0 +1,1556 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="6-7">Сегменты</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Ранее уже рассматривался оператор SEGMENT.
+Теперь есть возможность
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотреть его более подробно и
+исследовать дополнительные
+
+<p><span
+style="mso-spacerun: yes">    </span>возможности, которые он предоставляет.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>До сих пор в большинстве примеров программ
+присутствовал только
+
+<p><span
+style="mso-spacerun: yes">    </span>один оператор SEGMENT. Так как программный
+код должен находиться в
+
+<p><span
+style="mso-spacerun: yes">    </span>некотором сегменте, то нужно присвоить ему
+имя. Учитывая, что
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер должен суметь определить адрес
+сегмента, единственный
+
+<p><span
+style="mso-spacerun: yes">    </span>оператор ASSUME в прграмме идентифицирует
+только один сегмент
+
+<p><span
+style="mso-spacerun: yes">    </span>программы. В подобных случаях возможности
+сегментации программ
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088 используются не
+полностью, но часто это и не
+
+<p><span
+style="mso-spacerun: yes">    </span>нужно. Если программа и ее данные
+помещаются в пределах одной и той
+
+<p><span
+style="mso-spacerun: yes">    </span>же адресуемой области памяти объемом 64
+кбайт, то нет необходимости
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать возможности процессора в
+сегментации памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существуют ситуации, когда в программе
+нужно использовать более
+
+<p><span
+style="mso-spacerun: yes">    </span>одного оператора SEGMENT. Одно из таких
+применений рассматривалоясв
+
+<p><span
+style="mso-spacerun: yes">    </span>гл.5 в нескольких примерах, использующих
+DOS. В этих примерах в
+
+<p><span
+style="mso-spacerun: yes">    </span>программе определялся сегмент STACK. Имя,
+выбранное для сегмента,
+
+<p><span
+style="mso-spacerun: yes">    </span>несущественно, но его тип, указанный в
+операторе SEGMENT, должен
+
+<p><span
+style="mso-spacerun: yes">    </span>быть STACK, так как файлу типа .EXE для
+выполнения программы
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимо отвести стековую область. Если
+в программе не задать
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмент STACK, то загрузчик DOS сохранит
+организацию стека в
+
+<p><span
+style="mso-spacerun: yes">    </span>некотором месте памяти, которое может
+оказаться неприемлемым. В
+
+<p><span
+style="mso-spacerun: yes">    </span>этом случае программа может работать
+недостаточно хорошо.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Другое назначение оператора SEGMENT -
+расположением данных в
+
+<p><span
+style="mso-spacerun: yes">    </span>определенном месте памяти. Как известно,
+при использовании DOS
+
+<p><span
+style="mso-spacerun: yes">    </span>лучше всего, если программа имеет
+перемещаемый программный сегмент.
+
+<p><span
+style="mso-spacerun: yes">    </span>В этом случае нас не заботит, куда DOS
+загружает программу. Но в
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторых случаях фактическое расположение
+команд или данных
+
+<p><span
+style="mso-spacerun: yes">    </span>оказывается существенным. В этих случаях
+для задания местоположения
+
+<p><span
+style="mso-spacerun: yes">    </span>данных можно воспользоваться директивой AT
+оператора SEGMENT.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Чтобы понять значение указателя AT,
+рассмотрим пример. В этом
+
+<p><span
+style="mso-spacerun: yes">    </span>примере программа использует как Отправную
+точку систему BIOS, хра-
+
+<p><span
+style="mso-spacerun: yes">    </span>нящаяся в ПЗУ персональной ЭВМ. Хотя язык
+ассемблера является очень
+
+<p><span
+style="mso-spacerun: yes">    </span>эффективным средством программирования, с
+другой стороны это
+
+<p><span
+style="mso-spacerun: yes">    </span>довольно трудный инструмент, особенно для
+больших программ. Поэтому
+
+<p><span
+style="mso-spacerun: yes">    </span>выбор языка ассемблера обусловливается
+свойствами, которые делают
+
+<p><span
+style="mso-spacerun: yes">    </span>его выгодным для решения определенной
+задачи. В случае IBM PC язык
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера - лучший язык для
+программирования функций, выполняемых
+
+<p><span
+style="mso-spacerun: yes">    </span>ROM BIOS. Эти функции можно
+охарактеризовать как управление устрой-
+
+<p><span
+style="mso-spacerun: yes">    </span>ствами ввода-вывода, где обычно требуется
+оперировать с отдельными
+
+<p><span
+style="mso-spacerun: yes">    </span>битами. Программирование подобных задач
+сводится к возможности ма-
+
+<p><span
+style="mso-spacerun: yes">    </span>нипулировать содержимым точно заданных
+ячеек памяти и портов ввода-
+
+<p><span
+style="mso-spacerun: yes">    </span>вывода. Язык ассемблера также используется
+в тех случаях, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>необходима минимизация размера программы
+или максимальное быстро-
+
+<p><span
+style="mso-spacerun: yes">    </span>действие программы. Всем эти требования
+предъявляет и система ROM
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS.
+
+<p><span
+style='mso-tab-count:1'>      </span>В рассматриваемом примере используется
+часть BIOS. В одной из
+
+<p><span
+style="mso-spacerun: yes">    </span>последующих глав будет рассмотрено, как
+заменять части системы
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS. Однако в данном случае нас
+интересует доступ к наборам
+
+<p><span
+style="mso-spacerun: yes">    </span>данных, которые использует ROM BIOS. Если
+вы посмотрите
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблерный листинг для ROM BIOS (он
+приводится в приложении A
+
+<p><span
+style="mso-spacerun: yes">    </span>технического руководства по IBM PC), то
+увидите, что сегмент DATA
+
+<p><span
+style="mso-spacerun: yes">    </span>располагается в сегменте 40H или по
+абсолютному адресу 400H.
+
+<p><span
+style="mso-spacerun: yes">    </span>Приведенная на Фиг. 6.12 программа
+обращается в область данных ПЗУ
+
+<p><span
+style="mso-spacerun: yes">    </span>системы BIOS c определенной целью. В
+сегменте DATA имеется
+
+<p><span
+style="mso-spacerun: yes">    </span>переменная KB_FLAG, которая указывает
+текущее состояние
+
+<p><span
+style="mso-spacerun: yes">    </span>переключателя регистров. Одна из жалоб, часто
+высказываемых по
+
+<p><span
+style="mso-spacerun: yes">    </span>поводу клавиатуры IBM, состоит в том, что
+неизвестно, работаете ли
+
+<p><span
+style="mso-spacerun: yes">    </span>вы в верхнем регистре (CAPS LOCK) или в
+нижнем. Программа на Фиг.
+
+<p><span
+style="mso-spacerun: yes">    </span>6.12 считывает значение бита,
+соответствующего CAPS LOCK, и
+
+<p><span
+style="mso-spacerun: yes">    </span>изображает его в верхнем правом углу
+цветного графического дисплея.
+
+<p><span
+style="mso-spacerun: yes">    </span>Хотя в данной программе это не
+реализовано, мы будем предполагать,
+
+<p><span
+style="mso-spacerun: yes">    </span>что при реальном использовании этого
+фрагмента программы, верхний
+
+<p><span
+style="mso-spacerun: yes">    </span>правый угол экрана зарезервируется для
+описанного индикатора.
+
+<p><span
+style='mso-tab-count:1'>      </span>Сегмент DATA на Фиг. 6.12 показывает, как
+программист может
+
+<p><span
+style="mso-spacerun: yes">    </span>передать в программу информацию,
+расположенную по абсолютным адре-
+
+<p><span
+style="mso-spacerun: yes">    </span>сам. Оператор DATA SEGMENT использует
+директиву AT для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечить безусловную привязку данного
+сегмента к параграфу 40H.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>1/1/80 04:03:25
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 6.12 Использование сегментов <span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">  </span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 6.12 Использование сегментов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span> <span
+style="mso-spacerun: yes">     </span>DATA<span style="mso-spacerun: yes">   
+</span>SEGMENT AT 40H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0017<span style='mso-tab-count:4'>                   </span><span
+style="mso-spacerun: yes">      </span>ORG<span style="mso-spacerun: yes">    
+</span>17H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0017<span style="mso-spacerun: yes">  </span>?? <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">      </span>KB_FLAG<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>DB<span style="mso-spacerun: yes">      </span>?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>= 0040<span style='mso-tab-count:3'>                 </span><span
+style="mso-spacerun: yes">      </span>CAPS_STATE<span style="mso-spacerun:
+yes">      </span>EQU<span style="mso-spacerun: yes">     </span>40H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0018<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>DATA<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>VIDEO<span style="mso-spacerun: yes">  
+</span>SEGMENT AT 0B800H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>009E<span style='mso-tab-count:4'>                   </span><span
+style="mso-spacerun: yes">      </span>ORG<span style="mso-spacerun: yes">    
+</span>158
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>009E<span style="mso-spacerun: yes">  </span>?? <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">      </span>INDICATOR<span
+style="mso-spacerun: yes">       </span>DB<span style="mso-spacerun: yes">     
+</span>?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>009F<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>VIDEO<span style="mso-spacerun: yes">  
+</span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CAPS<span style="mso-spacerun: yes">   
+</span>PROC<span style="mso-spacerun: yes">    </span>FAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>1E <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">      </span>START:<span
+style="mso-spacerun: yes">  </span>PUSH<span style="mso-spacerun: yes">   
+</span>DS<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">      </span>; Адрес возврата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0001<span style="mso-spacerun: yes">  </span>B8 0000<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AX,0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0004<span style="mso-spacerun: yes">  </span>50 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>PUSH<span
+style="mso-spacerun: yes">    </span>AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0005<span style="mso-spacerun: yes">  </span>B8 ---- R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AX,DATA<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>; Адрес сегмента DATA
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0008<span style="mso-spacerun: yes">  </span>8E D8<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>DS,AX
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>DS:DATA
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000A<span style="mso-spacerun: yes">  </span>B8 ---- R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AX,VIDEO<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">    
+</span>; Адрес сегмента VIDEO
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000D<span style="mso-spacerun: yes">  </span>8E C0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>ES,AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>Фиг. 6.12 Расположение сегмента (начало)
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes">   </span>ASSUME<span style="mso-spacerun: yes">  </span>ES:VIDEO
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000F<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>DISPLAY_CAPS:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000F<span style="mso-spacerun: yes">  </span>B0 18<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL,18H<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    
+</span>; Символ &quot;стрелка вверх&quot; имеет код 18H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0011<span style="mso-spacerun: yes">  </span>F6 06 0017 R 40<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>TEST<span style="mso-spacerun: yes">    </span>KB_FLAG,CAPS_STATE<span
+style="mso-spacerun: yes">     </span>; Определение состояния клавиши CAPS
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0016<span style="mso-spacerun: yes">  </span>75 02<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JNZ<span style="mso-spacerun: yes">     </span>CAPS_LOCK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0018<span style="mso-spacerun: yes">  </span>B0 19<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL,19H<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    
+</span>; Символ &quot;стрелка вниз&quot; имеет код 19H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001A<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CAPS_LOCK:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001A<span style="mso-spacerun: yes">  </span>26: A2 009E R<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">     
+</span>MOV<span style="mso-spacerun: yes">     </span>INDICATOR,AL<span
+style="mso-spacerun: yes">   </span>; Вывод в верхний левый угол экрана
+
+
+<p><span style='mso-tab-count:1'>      </span><span
+style='mso-fareast-font-family:"MS Mincho"'><span style="mso-spacerun:
+yes">       </span>001E<span style="mso-spacerun: yes">  </span>B4 06<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH,6<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Функция ДОС ввода с клавиатуры
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>и вывода на дисплей
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0020<span style="mso-spacerun: yes">  </span>B2 FF<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>DL,0FFH<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Направление - ввод с клавиатуры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0022<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0024<span style="mso-spacerun: yes">  </span>3C 00<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>CMP<span style="mso-spacerun: yes">     </span>AL,0<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Проверка на наличие символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0026<span style="mso-spacerun: yes">  </span>74 E7<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JZ<span style="mso-spacerun: yes">     
+</span>DISPLAY_CAPS<span style="mso-spacerun: yes">    </span>; Нет символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0028<span style="mso-spacerun: yes">  </span>3C 25<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>CMP<span style="mso-spacerun: yes">     </span>AL,'%'<span
+style="mso-spacerun: yes">         </span>; Проверка на символ конца
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002A<span style="mso-spacerun: yes">  </span>74 08<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JE<span style="mso-spacerun: yes">      </span>RETURN
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002C<span style="mso-spacerun: yes">  </span>B4 02<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH,2<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Функция вывода на дисплей
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002E<span style="mso-spacerun: yes">  </span>8A D0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>DL,AL<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Выводимый символ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0030<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0032<span style="mso-spacerun: yes">  </span>EB DB<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">    
+</span>DISPLAY_CAPS<span style="mso-spacerun: yes">    </span>; Повторение
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0034<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>RETURN:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0034<span style="mso-spacerun: yes">  </span>CB <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>RET<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Возврат в ДОС
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0035<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CAPS<span style="mso-spacerun: yes">   
+</span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0035<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END<span style="mso-spacerun: yes">    
+</span>START&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 6.12 Расположение сегмента
+(продолжение)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>Просматривая листинг ROM BIOS, мы
+находим переменную KB_FLAG со
+
+<p><span
+style="mso-spacerun: yes">    </span>смещением 17H в сегменте DATA. Оператор
+ORG 17H данной программы
+
+<p><span
+style="mso-spacerun: yes">    </span>задает смещение этой переменной в
+оттранслированной программе.
+
+<p><span
+style="mso-spacerun: yes">    </span>Наконец, смысл оператора EQU,
+определяющего константу CAPS_STATE
+
+<p><span
+style="mso-spacerun: yes">    </span>следует непосредственно из листинга BIOS
+ПЗУ. Заданный этой
+
+<p><span
+style="mso-spacerun: yes">    </span>константой бит указывает текущее состояние
+переключателя CAPS LOCK.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В приведенной на Фиг. 6.12 программе
+имеется еще один оператор
+
+<p><span
+style="mso-spacerun: yes">    </span>SEGMENT. Он определяет сегмент VIDEO с
+адресом 0B800H. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментный адрес буфера для адаптера
+цветного- графического
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея. Этот адрес нужен для вывода
+состояния индикатора на экран
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея. Если мы хотим поместить символ в
+правый верхний угол
+
+<p><span
+style="mso-spacerun: yes">    </span>экрана, при условии, что строка на экране
+содержит 80 символов, то
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение соответствующей ячейки должно
+быть равно 158 в десятичном
+
+<p><span
+style="mso-spacerun: yes">    </span>представлении. Программируемые
+характеристики оборудвания ПК
+
+<p><span
+style="mso-spacerun: yes">    </span>описываются в гл.8, а пока вы можете
+принять сказанное на веру.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первая часть программы устанавливает
+необходимую адресацию
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментов. Регистр DS указывает на сегмент
+DATA, а регистр ES - на
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмент VIDEO. Хотя в программе эти
+сегменты объявлены директивой
+
+<p><span
+style="mso-spacerun: yes">    </span>AT абсолютными, ассемблер все же
+обозначает их значком &quot;R&quot;, как
+
+<p><span
+style="mso-spacerun: yes">    </span>перемещаемые. Программа LINK, тем не
+менее, подставляет в
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующие поля данных правильные
+значения.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа тестирует переменную KB_FLAG, а
+ассемблер в
+
+<p><span
+style="mso-spacerun: yes">    </span>результате генерирует правильное смещение,
+равное 17H. В данном
+
+<p><span
+style="mso-spacerun: yes">    </span>примере символ стрелка вниз используется
+для обозначения обычного
+
+<p><span
+style="mso-spacerun: yes">    </span>режима, а стрелка вверх обозначает режим
+CAPS LOCK. Введенные с
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатуры символы считываются программой
+с помощью функции DOS,
+
+<p><span
+style="mso-spacerun: yes">    </span>выводящей эим символя на дисплей. В данном
+примере для выхода из
+
+<p><span
+style="mso-spacerun: yes">    </span>программы был произвольно выбран символ %.
+Если пользователь вводит
+
+<p><span
+style="mso-spacerun: yes">    </span>любой другой символ, то программа выводит
+его на дисплей и
+
+<p><span
+style="mso-spacerun: yes">    </span>возвращается к ожиданию ввода следующих.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если ввести и запустить данную программу,
+то вы увидите в
+
+<p><span
+style="mso-spacerun: yes">    </span>верхнем правом углу цветного графического
+дисплея направленную вниз
+
+<p><span
+style="mso-spacerun: yes">    </span>или вверх стрелку. Если для цветного
+дисплея установлен режим 40
+
+<p><span
+style="mso-spacerun: yes">    </span>символов в строке, при выполнении данной
+программы
+
+<p><span
+style="mso-spacerun: yes">    </span>стрелка-индикатор будет выводиться во
+второй сверху строке. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>нужно использовать эту программу с
+адаптером монохромного дисплея,
+
+<p><span
+style="mso-spacerun: yes">    </span>то измените адрес сегмента VIDEO на адрес
+0B000H, соответственно
+
+<p><span
+style="mso-spacerun: yes">    </span>местоположению буфера монохромного
+дисплея.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При выполнении данной программы с
+адаптером цветного
+
+<p><span
+style="mso-spacerun: yes">    </span>графического дисплея в режиме 80 символов
+в строке вы увидите на
+
+<p><span
+style="mso-spacerun: yes">    </span>экране сильную помеху, &quot;снег&quot;.
+Эта интерференция на экране
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит из-за прямой передачи данных из
+программы в буфер
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея. В случае монохромного адаптера
+или цветного-графического
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея в режиме 40 символов в строке этой
+помехи не будет. О
+
+<p><span
+style="mso-spacerun: yes">    </span>причинах этого эффекта и о том, как его
+избежать, мы узнаем при
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотрении аппаратного обеспечения IBM PC.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существуют и другие применения нескольких
+операторов SEGMENT в
+
+<p><span
+style="mso-spacerun: yes">    </span>одной программе. Если программе требуется
+область данных объмом
+
+<p><span
+style="mso-spacerun: yes">    </span>более 64 кбайт, то она должна организовать
+доступ к этим данным.
+
+<p><span
+style="mso-spacerun: yes">    </span>Как правило, вы воспользуетесь для
+обращения к этой области данных
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторой схемой управления памятью. В
+такой ситуации вам будет
+
+<p><span
+style="mso-spacerun: yes">    </span>доступна вся эта область данных (за
+исключением некоторых
+
+<p><span
+style="mso-spacerun: yes">    </span>фиксированных участков) косвенную
+адресацию.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В качестве примера рассмотрим, как
+интерпретатор команд DOS
+
+<p><span
+style="mso-spacerun: yes">    </span>загружает программы. DOS загружает
+транзитную программу на границу
+
+<p><span
+style="mso-spacerun: yes">    </span>параграфа сразу за резидентной частью DOS.
+Размер этой резидентной
+
+<p><span
+style="mso-spacerun: yes">    </span>части может варьироваться в зависимости от
+числа дисководов в
+
+<p><span
+style="mso-spacerun: yes">    </span>системе. Кроме того, этот размер может
+существенно возрастать при
+
+<p><span
+style="mso-spacerun: yes">    </span>использовании в DOS прерывания INT 27H,
+которое заканчивает
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнение программы, но оставляет ее
+резидентной в памяти. При
+
+<p><span
+style="mso-spacerun: yes">    </span>этом программный загрузчик DOS должен
+адресоваться к сегментному
+
+<p><span
+style="mso-spacerun: yes">    </span>префиксу PSP той программы, которую он
+загружает. Проще всего
+
+<p><span
+style="mso-spacerun: yes">    </span>задать эту структуру данных с помощью
+отдельного оператора SEGMENT.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 6.13 показано объявление сегмента,
+которое можно
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать в двух различных местах. Если
+бы можно было посмотреть
+
+<p><span
+style="mso-spacerun: yes">    </span>текст исходной программы для загрузчика
+DOS, то мы бы обнаружили
+
+<p><span
+style="mso-spacerun: yes">    </span>там подобное объявление. В случае
+программы, использующей структуру
+
+<p><span
+style="mso-spacerun: yes">    </span>.EXE, такая сегментация могла бы
+обеспечить доступ к переменным в
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментном префиксе PSP. В приведенном на
+Фиг. 5.6 примере
+
+<p><span
+style="mso-spacerun: yes">    </span>программы с применением функций DOS,
+использовалась структура файла
+
+<p><span
+style="mso-spacerun: yes">    </span>типа .COM. Это позволяло нам обращаться к
+различным ячейкам
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента PSP через смещение относительно
+блока PSP. Задача весьма
+
+<p><span
+style="mso-spacerun: yes">    </span>облегчалась тем, что DOS загружала
+программу в тот сегмент, который
+
+<p><span
+style="mso-spacerun: yes">    </span>содержал PSP.
+
+<p><span
+style='mso-tab-count:1'>      </span>В случае .EXE-файла блок PSP находится не
+в том же сегменте,
+
+<p><span
+style="mso-spacerun: yes">    </span>что и команды программы. Так как при
+передаче управления программе
+
+<p><span
+style="mso-spacerun: yes">    </span>типа .EXE DOS устанавливает регистры DS и
+ES на сегмент PSP, то
+
+<p><span
+style="mso-spacerun: yes">    </span>имеет смысл обращаться с PSP как с
+отдельным сегментом. Приведенный
+
+<p><span
+style="mso-spacerun: yes">    </span>на Фиг. 6.13 фрагмент программы из
+сегмента CODE, показывает, как
+
+<p><span
+style="mso-spacerun: yes">    </span>можно обращаться к данным в блоке PSP.
+
+<p>
+
+<p><span
+style='mso-tab-count:2'>            </span>Microsoft (R) Macro Assembler
+Version 5.00<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>1/1/80 04:03:31
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 6.13 Структура Программного
+Префикса<span style='mso-tab-count:2'>       </span><span style="mso-spacerun:
+yes">    </span>Page<span style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span>PAGE<span
+style='mso-tab-count:1'>  </span>,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span>TITLE<span
+style='mso-tab-count:1'> </span>Фиг. 6.13 Структура Программного Префикса
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>PROGRAM_SEGMENT_PREFIX<span
+style='mso-tab-count:1'>  </span>SEGMENT
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style="mso-spacerun: yes">  </span>0002[<span
+style='mso-tab-count:3'>                  </span>INT_20<span style='mso-tab-count:
+2'>            </span>DB<span style='mso-tab-count:1'>    </span>2 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>??
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes"> </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0002<span style="mso-spacerun: yes">  </span>????<span
+style='mso-tab-count:3'>             </span>MEMORY_SIZE<span style='mso-tab-count:
+1'> </span>DW<span style='mso-tab-count:1'>    </span>?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0004<span style="mso-spacerun: yes">  </span>0005[<span
+style='mso-tab-count:3'>                  </span>LONG_CALL<span
+style='mso-tab-count:1'>   </span>DB<span style='mso-tab-count:1'>    </span>5
+DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>??
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes"> </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0009<span style="mso-spacerun: yes">  </span>???????? <span
+style='mso-tab-count:2'>        </span>TERMINATE_ADDR<span style='mso-tab-count:
+1'>    </span>DD<span style='mso-tab-count:1'>    </span>?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>000D<span style="mso-spacerun: yes">  </span>???????? <span
+style='mso-tab-count:2'>        </span>CTRL_BREAK<span style='mso-tab-count:
+1'>  </span>DD<span style='mso-tab-count:1'>    </span>?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>005C<span style='mso-tab-count:5'>                         </span>ORG<span
+style='mso-tab-count:1'>   </span>05CH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>005C<span style="mso-spacerun: yes">  </span>0010[<span
+style='mso-tab-count:3'>                  </span>FCB1<span style='mso-tab-count:
+2'>        </span>DB<span style='mso-tab-count:1'>    </span>16 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>??
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes"> </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>006C<span style='mso-tab-count:5'>                         </span>ORG<span
+style='mso-tab-count:1'>   </span>06CH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>006C<span style="mso-spacerun: yes">  </span>0010[<span
+style='mso-tab-count:3'>                  </span>FCB2<span style='mso-tab-count:
+2'>        </span>DB<span style='mso-tab-count:1'>    </span>16 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>??
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes"> </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0080<span style='mso-tab-count:5'>                         </span>ORG<span
+style='mso-tab-count:1'>   </span>080H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0080<span style="mso-spacerun: yes">  </span>0080[<span
+style='mso-tab-count:3'>                  </span>DTA<span style='mso-tab-count:
+2'>         </span>DB<span style='mso-tab-count:1'>    </span>128 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>??
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes"> </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0100<span style='mso-tab-count:4'>                   </span>PROGRAM_SEGMENT_PREFIX<span
+style='mso-tab-count:1'>  </span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>CODE<span
+style='mso-tab-count:1'>  </span>SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span>ASSUME<span
+style='mso-tab-count:1'>      </span>CS:CODE,DS:PROGRAM_SEGMENT_PREFIX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style="mso-spacerun: yes">  </span>A1 0002 R<span
+style='mso-tab-count:3'>              </span>MOV<span style='mso-tab-count:
+1'>   </span>AX,MEMORY_SIZE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0003<span style='mso-tab-count:4'>                   </span>CODE<span
+style='mso-tab-count:1'>  </span>ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 6.13 Префикс программного
+сегмента
+
+<p><span
+style='mso-tab-count:1'>      </span>Обратите внимание, что сегмент PSP на Фиг.
+6.13 на самом деле
+
+<p><span
+style="mso-spacerun: yes">    </span>не содержит никаких значений для
+переменных. Например, мы знаем,
+
+<p><span
+style="mso-spacerun: yes">    </span>что в первых двух байтах PSP содержится
+код прерывания INT 20H.
+
+<p><span
+style="mso-spacerun: yes">    </span>Однако мы решили показать, что в этом
+месте находится поле длиной 2
+
+<p><span
+style="mso-spacerun: yes">    </span>байта без каких-либо указаний о
+содержащихся там значениях. Мы
+
+<p><span
+style="mso-spacerun: yes">    </span>должны делать именно так, чтобы в
+результате нашего описания
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента ни редактор связей, ни загрузчик
+не попытались записать в
+
+<p><span
+style="mso-spacerun: yes">    </span>память каких-либо данных. Фактически, мы
+используем этот сегмент
+
+<p><span
+style="mso-spacerun: yes">    </span>как средство для объявления данных.
+Оператор SEGMENT объявляет
+
+<p><span
+style="mso-spacerun: yes">    </span>структуру данных, которую мы называем
+префиксом программного
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента. Ее местоположение в памяти не
+фиксировано, а определяется
+
+<p><span
+style="mso-spacerun: yes">    </span>одним из сегментных регистров. В нашем
+примере на Фиг. 6.13 это
+
+<p><span
+style="mso-spacerun: yes">    </span>местоположение определяется регистром DS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Точно такой же способ можно использовать
+для обозначения любой
+
+<p><span
+style="mso-spacerun: yes">    </span>структуры данных, которая может быть
+расположена в произвольном
+
+<p><span
+style="mso-spacerun: yes">    </span>месте памяти микропроцессора 8088. Эта
+структура данных может быть,
+
+<p><span
+style="mso-spacerun: yes">    </span>например, болком управления для
+операционной системы, либо строкой
+
+<p><span
+style="mso-spacerun: yes">    </span>текста для текстового редактора, или даже
+блоком параметров
+
+<p><span
+style="mso-spacerun: yes">    </span>конкретной подпрограммы. Каждый объект
+структуры данных
+
+<p><span
+style="mso-spacerun: yes">    </span>располагается в своем отдельном сегменте.
+Таким образом, при
+
+<p><span
+style="mso-spacerun: yes">    </span>обращении программы к каждому элементу
+структуры данных сегментный
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр указывает на начало (или на
+близкую к началу точку) этого
+
+<p><span
+style="mso-spacerun: yes">    </span>элемента. Программа не обращается к двум
+различным элементам с
+
+<p><span
+style="mso-spacerun: yes">    </span>одним и тем же значением сегментного
+регистра. Для каждого элемента
+
+<p><span
+style="mso-spacerun: yes">    </span>всегда устанавливается свой адрес
+сегмента.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Здесь следует немного остановиться на том,
+какие вообще есть
+
+<p><span
+style="mso-spacerun: yes">    </span>методы распределения памяти
+микропроцессора 8088. IBM PC с
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессором 8088 может адресовать до
+1Мбайт оперативной
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, но один сегмент может охватывать
+не более 64 кбайт. Даже с
+
+<p><span
+style="mso-spacerun: yes">    </span>четырьмя сегментными регистрами программа
+не имеет возможности
+
+<p><span
+style="mso-spacerun: yes">    </span>охватить всю память, не используя
+некоторых способов сегментации.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если все данные помещаются в 64К, то нет
+нужды волноваться:
+
+<p><span
+style="mso-spacerun: yes">    </span>просто поместите все данные в один
+сегмент. Если же мы полагаем,
+
+<p><span
+style="mso-spacerun: yes">    </span>что программе требуется область данных,
+превышающая 64К, то нам
+
+<p><span
+style="mso-spacerun: yes">    </span>придется решать задачу распределения
+памяти. При этом возможны две
+
+<p><span
+style="mso-spacerun: yes">    </span>стратегии. В обоих случаях мы будем
+предполагать, что вся
+
+<p><span
+style="mso-spacerun: yes">    </span>совокупность данных может быть разбита на
+меньшие блоки (такие как
+
+<p><span
+style="mso-spacerun: yes">    </span>отдельные переменные, строки текста,
+управляющие блоки или
+
+<p><span
+style="mso-spacerun: yes">    </span>массивы), объемом не более 64К каждый.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первый метод распределения памяти
+применяется в ситуации, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>вашей главной заботой является экономия
+памяти. При этом методе вы
+
+<p><span
+style="mso-spacerun: yes">    </span>располагаете объекты данных в первых же
+свободных участках памяти.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа, управляющая доступом к областям
+данных, должна при этом
+
+<p><span
+style="mso-spacerun: yes">    </span>для каждой переменной использовать
+четырехбайтовый указатель. Из
+
+<p><span
+style="mso-spacerun: yes">    </span>них два байта используется для смещения и
+еще два байта для значе-
+
+<p><span
+style="mso-spacerun: yes">    </span>ния сегмента. Когда программе нужно
+полусить доступ к данным, она
+
+<p><span
+style="mso-spacerun: yes">    </span>извлекает адрес из области хранения
+адресов с помощью команд LDS
+
+<p><span
+style="mso-spacerun: yes">    </span>или LES. Если вам требуется еще большая
+экономия памяти, то вы
+
+<p><span
+style="mso-spacerun: yes">    </span>фактически можете хранить указатель в
+трехбайтовом поле. Два байта
+
+<p><span
+style="mso-spacerun: yes">    </span>содержат адрес сегмента данных, а
+оставшийся байт содержит смещение
+
+<p><span
+style="mso-spacerun: yes">    </span>данного объекта внутри сегмента. Начальное
+смещение всегда будет
+
+<p><span
+style="mso-spacerun: yes">   </span>иметь значение от 0 до 15, так как значение
+сегмента всегда кратно
+
+<p><span
+style="mso-spacerun: yes">    </span>16.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Хотя описанный метод наиболее эффективен в
+отношении объема
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, занимаемой данными, у него имеются
+пара недостатков.
+
+<p><span
+style="mso-spacerun: yes">    </span>Максимальная длина объекта данных немного
+меньше, чем 64 кбайт. В
+
+<p><span
+style="mso-spacerun: yes">    </span>рамках данной стратегии наихудшим окажется
+случай, когда абсолютный
+
+<p><span
+style="mso-spacerun: yes">    </span>адрес объекта данных кончается на 0FH. Так
+как максимальное
+
+<p><span
+style="mso-spacerun: yes">    </span>значение смещения в любом сегменте равно
+0FFFFH, то максимальная
+
+<p><span
+style="mso-spacerun: yes">    </span>длина переменной будет 64К - 15, или 65521
+байт. Второй недостаток
+
+<p><span
+style="mso-spacerun: yes">    </span>этого метода связан с затратами памяти для
+хранения указателей к
+
+<p><span
+style="mso-spacerun: yes">    </span>объектам данных. При большом числе
+объектов для хранения наряду с
+
+<p><span
+style="mso-spacerun: yes">    </span>ними всех четырехбайтовых (или
+трехбайтовых) указателей потребуется
+
+<p><span
+style="mso-spacerun: yes">    </span>много памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Примером использования описанного метода
+распределения памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>может служить блок управления файлом FCB.
+В последнем примере
+
+<p><span
+style="mso-spacerun: yes">    </span>работающей с DOS программы мы располагали
+блок FCB в произвольном
+
+<p><span
+style="mso-spacerun: yes">    </span>месте программы. Какого-либо выравнивания
+местоположения этой
+
+<p><span
+style="mso-spacerun: yes">    </span>структуры данных не производилось. Затем
+при обращении к DOS для
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения файловой операции программе
+понадобился четырехбайтовый
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель. Идентификация блока FCB для DOS
+осуществлялось парой
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров DS:DX.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При втором методе распределиня памяти все
+объекты данных
+
+<p><span
+style="mso-spacerun: yes">    </span>располагаются на границах параграфов. Это
+сразу же упрощает
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель, определяющий объект данных.
+Этот указатель состоит
+
+<p><span
+style="mso-spacerun: yes">    </span>только из двух байтов, которые определяют
+местонахождение сегмента
+
+<p><span
+style="mso-spacerun: yes">    </span>с этими данными. Так как распределение
+памяти всегда начинается с
+
+<p><span
+style="mso-spacerun: yes">    </span>границы параграфа, то начальное смещение
+данных будет всегда равно
+
+<p><span
+style="mso-spacerun: yes">    </span>нулю. Однако при таком методе, расходуется
+дополнительная память.
+
+<p><span
+style="mso-spacerun: yes">    </span>Каждый раз, когда вы располагаете в памяти
+новый объект, возможна
+
+<p><span
+style="mso-spacerun: yes">    </span>потеря до 15 байт памяти. Это происходит,
+если последний байт
+
+<p><span
+style="mso-spacerun: yes">    </span>предыдущего объекта попадает точно на
+границу параграфа. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>граница следующего параграфа будет через
+15 байт, то эти 15 байт в
+
+<p><span
+style="mso-spacerun: yes">    </span>промежутке теряются. Кроме того, при такой
+стратегии минимальная
+
+<p><span
+style="mso-spacerun: yes">    </span>длина объекта равна 16 байт. Даже если
+данные будут занимать меньше
+
+<p><span
+style="mso-spacerun: yes">    </span>места, оставшиеся байты все равно не могут
+быть использованы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как было отмечено, второй метод
+распределения памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>используется загрузчиком DOS при запуске
+программ. DOS загружает
+
+<p><span
+style="mso-spacerun: yes">    </span>программу на ближайшую границу параграфа.
+Так как DOS исходит из
+
+<p><span
+style="mso-spacerun: yes">    </span>того, что в памяти располагается мало больших
+по размерам объектов,
+
+<p><span
+style="mso-spacerun: yes">    </span>то при данном методе издержки памяти будут
+невелики. Однако, если
+
+<p><span
+style="mso-spacerun: yes">    </span>ваша прикладная программа использует много
+небольших объектов, то
+
+<p><span
+style="mso-spacerun: yes">    </span>выравнивание по параграфам может оказаться
+слишком дорогим.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Второй метод распределения памяти,
+использующий выравнивание по
+
+<p><span
+style="mso-spacerun: yes">    </span>параграфам, позволяет определять области
+данных с помощью структуры
+
+<p><span
+style="mso-spacerun: yes">    </span>SEGMENT. Если же хотите использовать
+первый метод распределения
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, то вам потребуется другой способ
+определения структур
+
+<p><span
+style="mso-spacerun: yes">    </span>данных. Такой способ объявления данных как
+раз рассматривается в
+
+<p><span
+style="mso-spacerun: yes">    </span>следующем разделе.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

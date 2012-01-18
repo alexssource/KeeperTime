@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<b><p><div align="center"><a name="9-4-1">Процедуры пользователя
+</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Существуют некоторые системные функции,
+которые требуют
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственного вмешательства
+пользовательской программы.<span style="mso-spacerun: yes">  </span>Для
+
+<p><span
+style="mso-spacerun: yes">    </span>этого предназначены два прерывания.<span
+style="mso-spacerun: yes">  </span>Первое, с вектором 1BH -
+
+<p><span
+style="mso-spacerun: yes">    </span>прекращение выполнения программы с по
+команде с клавиатуры.<span style="mso-spacerun: yes">  </span>Чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>прервать выполняемую программу,
+пользователь системы нажимает
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиши CTL-BREAK.<span style='mso-tab-count:
+1'>  </span>В обычных случаях это возвращает управление в
+
+<p><span
+style="mso-spacerun: yes">    </span>текущую программную систему - DOS или
+Бейсик.<span style="mso-spacerun: yes">  </span>Если пишется
+
+<p><span
+style="mso-spacerun: yes">    </span>программа, которая самостоятельно должна
+обрабатывать подобное
+
+<p><span
+style="mso-spacerun: yes">    </span>вмешательство пользователя, надо постоянно
+проверять, не нажал ли
+
+<p><span
+style="mso-spacerun: yes">    </span>пользователь соответствующие клавиши на
+клавиатуре.<span style="mso-spacerun: yes">  </span>Или можно
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать прерывание по
+отпусканию.<span style="mso-spacerun: yes">  </span>Программа обслуживания
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатуры BIOS всякий раз, когда
+возникает нажатие клавиши
+
+<p><span
+style="mso-spacerun: yes">    </span>CTL-BREAK, дает програмное прерывани
+1BH.<span style="mso-spacerun: yes">  </span>Обычно это прерывание
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает на возврат - команду IRET - так
+что ничего не происходит.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если мы хотим сразу знать о нажатии
+клавиши CTL-BREAK, тогда нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>сделать так, чтобы прерывание 1BH
+указывало на специальную
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмму нашей программы.<span
+style="mso-spacerun: yes">  </span>Эта подпрограмма сразу узнает о том,
+
+<p><span
+style="mso-spacerun: yes">    </span>что пользователь захотел выйти из
+программы и сможет предпринять
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторые действия.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Аналогично, можно написать программу,
+которой нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>периодическое прерывание. Например,
+игровая программа должна
+
+<p><span
+style="mso-spacerun: yes">    </span>постоянно знать положение клавиши
+управления игрой. BIOS выдает
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание 1CH всякий раз, когда
+срабатывает таймер. Как мы уже
+
+<p><span
+style="mso-spacerun: yes">    </span>видели, это случается примерно 18.2 раз в
+секунду, или раз в 55
+
+<p><span
+style="mso-spacerun: yes">    </span>миллисекунд. Можно написать программу,
+которая проверяет положение
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиш управления игрой каждый
+восемнадцатый раз возникновения
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания, позволяя тем самым
+корректировать информацию об их
+
+<p><span
+style="mso-spacerun: yes">    </span>положении примерно раз в секунду. Этот
+метод дает нам возможность
+
+<p><span
+style="mso-spacerun: yes">    </span>периодического входа в заданную
+подпрограмму.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

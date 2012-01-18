@@ -1,0 +1,386 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="4-10">Команды управления микропроцессором</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Оставшиеся команды микропроцессора 8088
+управляют его работой.
+
+<p><span
+style="mso-spacerun: yes">    </span>Многие из них устанавливают или сбрасывают
+некоторые флаги
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния.
+<p><div align="center"><b><a name="4-10-1">Установка флагов
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Есть три команды, которые непосредственно
+управляют состоянием
+
+<p><span
+style="mso-spacerun: yes">    </span>флага переноса.<span style="mso-spacerun:
+yes">  </span>Команды STC, CLC, CMC соответственно могут
+
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавлмвать, сбрасывать и изменять флаг
+переноса.<span style="mso-spacerun: yes">  </span>Этот флаг -
+
+<p><span
+style="mso-spacerun: yes">    </span>единственный, которому уделено такое
+внимание, и в первую очередь,
+
+<p><span
+style="mso-spacerun: yes">    </span>благодаря важности флага переноса при
+операциях с повышенной
+
+<p><span
+style="mso-spacerun: yes">    </span>точностью.<span style='mso-tab-count:1'>    </span>Флаг
+переноса критичен на промежуточных шагах любых
+
+<p><span
+style="mso-spacerun: yes">    </span>многословных операций.<span
+style="mso-spacerun: yes">  </span>Возможность сбрасывать или устанавливать
+
+<p><span
+style="mso-spacerun: yes">    </span>флаг переноса может помочь при циклической
+обработке с повышенной
+
+<p><span
+style="mso-spacerun: yes">    </span>точностью.<span style='mso-tab-count:1'>    </span>На
+Фиг. 4.31 показан пример использования команды CLC.
+
+<p><span
+style="mso-spacerun: yes">    </span>Цикл внутри примера складывает отдельные
+байты двух 10-разрядных
+
+<p><span
+style="mso-spacerun: yes">    </span>упакованных десятичных чисел.<span
+style="mso-spacerun: yes">  </span>Программа выполняет цикл пять раз,
+
+<p><span
+style="mso-spacerun: yes">    </span>так как за каждую итерацию она
+обрабатывает две цифры.<span style="mso-spacerun: yes">  </span>Информация
+
+<p><span
+style="mso-spacerun: yes">    </span>о переносе из одного оборота цикла в
+другой передается через флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>переноса.<span style="mso-spacerun: yes"> 
+</span>Команда CLC сбрасывает флаг переноса перед первым циклом
+
+<p><span
+style="mso-spacerun: yes">    </span>для того, чтобы перед первым сложением не
+было переноса.<span style="mso-spacerun: yes">  </span>Флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>переноса также важен в операциях сдвига,
+где он становится девятым
+
+<p><span
+style="mso-spacerun: yes">    </span>или семнадцатым битом регистра во время
+выполнения операции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Два флага состояния микропроцессора имеют
+специальные команды
+
+<p><span
+style="mso-spacerun: yes">    </span>работающие с ними. Программа может
+установить или сбросить маску
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний соответственно командами STI и
+CLI. Команда STI включает
+
+<p><span
+style="mso-spacerun: yes">    </span>систему прерываний микропроцессора 8088,
+позволяя ему реагировать
+
+<p><span
+style="mso-spacerun: yes">    </span>на внешние прерывания. Команда CLI
+блокирует систему внешних
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний.
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>1/1/80 04:02:06
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 4.31 Десятичная арифметика повышенной точности<span
+style='mso-tab-count:1'>    </span> Page<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.31 Десятичная арифметика повышенной точности
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>= 0005<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">     </span>NUMBER_LENGTH<span style="mso-spacerun:
+yes">   </span>EQU<span style="mso-spacerun: yes">     </span>5<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>; 5 байт для упакованного числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>0005[<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">    
+</span>NUMBER_ONE<span style="mso-spacerun: yes">      </span>DB<span
+style="mso-spacerun: yes">      </span>NUMBER_LENGTH DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>??
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0005<span style="mso-spacerun: yes">  </span>0005[<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">    
+</span>NUMBER_TWO<span style="mso-spacerun: yes">      </span>DB<span
+style="mso-spacerun: yes">      </span>NUMBER_LENGTH DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>??
+
+<p><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">      </span>]
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;----------------------------------------
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>; Эта программа складывает два десятичных
+упакованных
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>; числа (NUMBER_ONE и NUMBER_TWO) и
+заносит результат
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>; в NUMBER_TWO.
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;----------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000A<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>START_ADD:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000A<span style="mso-spacerun: yes">  </span>B9 0005<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>CX,
+NUMBER_LENGTH<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">     </span>; Определение длины чисел
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;-----<span style="mso-spacerun: yes"> 
+</span>Установка индексных регистров на младший байт складываемых чисел
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000D<span style="mso-spacerun: yes">  </span>8D 36 0004 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span><span style="mso-spacerun: yes"> </span>LEA<span style="mso-spacerun:
+yes">     </span>SI, NUMBER_ONE + NUMBER_LENGTH - 1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0011<span style="mso-spacerun: yes">  </span>8D 3E 0009 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">     </span>DI, NUMBER_TWO +
+NUMBER_LENGTH - 1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0015<span style="mso-spacerun: yes">  </span>F8<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">     </span>CLC<span
+style='mso-tab-count:4'>                      </span><span style="mso-spacerun:
+yes">     </span>; Нет младших разрядов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0016<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>ADD_LOOP:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0016<span style="mso-spacerun: yes">  </span>8A 04<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AL, [SI]<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Взять байт из первого числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0018<span style="mso-spacerun: yes">  </span>12 05<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>ADC<span style="mso-spacerun: yes">     </span>AL, [DI]<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Добавить из второго с учетом переноса
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001A<span style="mso-spacerun: yes">  </span>27<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>DAA<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>; Коррекция до упакованного формата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001B<span style="mso-spacerun: yes">  </span>88 05<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>[DI], AL<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Занесение байта результата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001D<span style="mso-spacerun: yes">  </span>9C<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSHF<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">     </span>; Сохранение флага переноса (CF)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001E<span style="mso-spacerun: yes">  </span>4E<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>DEC<span style="mso-spacerun: yes">     </span>SI <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Сдвиг указателя первого числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001F<span style="mso-spacerun: yes">  </span>4F<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>DEC<span style="mso-spacerun: yes">     </span>DI <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Сдвиг указателя второго числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0020<span style="mso-spacerun: yes">  </span>9D<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>POPF<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">     </span>; Восстановление флагов
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0021<span style="mso-spacerun: yes">  </span>E2 F3<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>LOOP<span style="mso-spacerun: yes">    </span>ADD_LOOP<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Обработка следующего байта
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0023<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 4.31 Операции с BCD повышенной точности
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа может установить или сбросить
+флаг направления с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью команд STD и CLD. Команда CLD
+сбрасывает флаг направления,
+
+<p><span
+style="mso-spacerun: yes">    </span>приводя к тому, что строковые команды
+ведут обработку при
+
+<p><span
+style="mso-spacerun: yes">    </span>возрастающих адресах памяти. Команда STD
+устанавливает флаг, в
+
+<p><span
+style="mso-spacerun: yes">    </span>результате чего строковые команды
+уменьшают адресный указатель
+
+<p><span
+style="mso-spacerun: yes">    </span>после каждого выполнения.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

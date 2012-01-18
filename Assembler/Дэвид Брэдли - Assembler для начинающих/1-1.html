@@ -1,0 +1,434 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i><a name="1-1">Программирование на языке Ассемблера</a>	</i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">     </span>Почему<span style="mso-spacerun: yes"> 
+</span>вас<span style="mso-spacerun: yes">  </span>могло<span
+style="mso-spacerun: yes">  </span>бы<span style="mso-spacerun: yes"> 
+</span>заинтересовать<span style="mso-spacerun: yes"> 
+</span>программирование<span style="mso-spacerun: yes">  </span>на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера?<span style="mso-spacerun:
+yes">  </span>Cегодня<span style="mso-spacerun: yes">  </span>повсюду<span
+style="mso-spacerun: yes">  </span>используются<span style="mso-spacerun:
+yes">  </span>такие<span style='mso-tab-count:1'> </span>языки<span
+style="mso-spacerun: yes">  </span>высокого
+
+<p><span
+style="mso-spacerun: yes">    </span>уровня как Бэйсик, Фортран и Паскаль<span
+style="mso-spacerun: yes">  </span>. Возможно, вы уже знакомы по
+
+<p><span
+style="mso-spacerun: yes">    </span>крайней<span style="mso-spacerun: yes"> 
+</span>мере с<span style="mso-spacerun: yes">  </span>одним языком<span
+style="mso-spacerun: yes">  </span>высокого уровня.<span style="mso-spacerun:
+yes">  </span>Если вы<span style="mso-spacerun: yes">  </span>постоянно
+
+<p><span
+style="mso-spacerun: yes">    </span>пльзуютесь<span style='mso-tab-count:1'>      </span>персональным<span
+style="mso-spacerun: yes">   </span>компьютером<span style="mso-spacerun:
+yes">  </span>IBM,<span style="mso-spacerun: yes">  </span>то<span
+style="mso-spacerun: yes">   </span>вы<span style="mso-spacerun: yes"> 
+</span>знаете,<span style="mso-spacerun: yes">  </span>что
+
+<p><span
+style="mso-spacerun: yes">    </span>интерпритатор<span style="mso-spacerun:
+yes">  </span>Бэйсика является<span style="mso-spacerun: yes">  </span>частью
+системы.<span style="mso-spacerun: yes">  </span>Зачем же возиться
+
+<p><span
+style="mso-spacerun: yes">    </span>еще<span style="mso-spacerun: yes"> 
+</span>с одним<span style="mso-spacerun: yes">  </span>языком
+программирования,<span style="mso-spacerun: yes">  </span>тем более<span
+style="mso-spacerun: yes">  </span>с таким, который
+
+<p><span
+style="mso-spacerun: yes">    </span>сулит определенные<span style='mso-tab-count:
+1'>      </span>трудности? Очевидно, даже<span style="mso-spacerun: yes"> 
+</span>располагая современ-
+
+<p><span
+style="mso-spacerun: yes">    </span>ными могучими языками, вы все еще
+нуждаетесь в ассемблере из-за его
+
+<p><span
+style="mso-spacerun: yes">    </span>эффективности и точности.
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Ассемблерные<span style="mso-spacerun: yes"> 
+</span>программы<span style="mso-spacerun: yes">  </span>могут<span
+style="mso-spacerun: yes">  </span>быть<span style="mso-spacerun: yes"> 
+</span>очень<span style="mso-spacerun: yes">  </span>эффективными.<span
+style="mso-spacerun: yes">  </span>Из
+
+<p><span
+style="mso-spacerun: yes">    </span>программистов,<span style="mso-spacerun:
+yes">  </span>с равными<span style="mso-spacerun: yes">  </span>навыками и<span
+style="mso-spacerun: yes">  </span>способностями, работающий на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке<span style="mso-spacerun: yes"> 
+</span>ассемблера<span style="mso-spacerun: yes">  </span>создаст<span
+style='mso-tab-count:1'>      </span>программу<span style="mso-spacerun: yes"> 
+</span>более<span style="mso-spacerun: yes">  </span>компактную<span
+style="mso-spacerun: yes">  </span>и быстро-
+
+<p><span
+style="mso-spacerun: yes">    </span>действущую, чем<span style="mso-spacerun:
+yes">  </span>такая же программа,<span style="mso-spacerun: yes"> 
+</span>написанная на языке<span style="mso-spacerun: yes">  </span>высокого
+
+<p><span
+style="mso-spacerun: yes">    </span>уровня.<span style="mso-spacerun: yes"> 
+</span>Это<span style="mso-spacerun: yes">  </span>так<span
+style="mso-spacerun: yes">  </span>практически<span style="mso-spacerun:
+yes">   </span>для<span style="mso-spacerun: yes">  </span>всех<span
+style='mso-tab-count:1'>      </span>небольших<span style="mso-spacerun: yes"> 
+</span>или<span style='mso-tab-count:1'>      </span>средних
+
+<p><span
+style="mso-spacerun: yes">    </span>программ. К<span style="mso-spacerun:
+yes">  </span>сожалению, по мере возрастания<span style="mso-spacerun: yes"> 
+</span>размеров, программы на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке<span style="mso-spacerun: yes"> 
+</span>ассемблера теряют<span style="mso-spacerun: yes">  </span>часть
+своих<span style="mso-spacerun: yes">  </span>преимуществ. Это<span
+style="mso-spacerun: yes">  </span>происходит
+
+<p><span
+style="mso-spacerun: yes">    </span>из-за необходимого в ассемблерной<span
+style="mso-spacerun: yes">  </span>программе внимания к деалям. Как
+
+<p><span
+style="mso-spacerun: yes">    </span>вы<span style='mso-tab-count:1'>      </span>увидите,
+язык<span style="mso-spacerun: yes">  </span>ассемблера требует<span
+style="mso-spacerun: yes">  </span>от вас<span style="mso-spacerun: yes"> 
+</span>планирования каждого
+
+<p><span
+style="mso-spacerun: yes">    </span>действия компьютера.<span
+style="mso-spacerun: yes">  </span>В небольших программах<span
+style="mso-spacerun: yes">  </span>это позволяет оптими-
+
+<p><span
+style="mso-spacerun: yes">    </span>зировать работу<span style="mso-spacerun:
+yes">  </span>программы с аппаратными<span style="mso-spacerun: yes"> 
+</span>средствами. В больших<span style="mso-spacerun: yes">  </span>же
+
+<p><span
+style="mso-spacerun: yes">    </span>программах<span style='mso-tab-count:1'>      </span>огромное
+количество<span style="mso-spacerun: yes">  </span>деталей может<span
+style="mso-spacerun: yes">  </span>помешать вам эффек-
+
+<p><span
+style="mso-spacerun: yes">    </span>тивно работать над самой программой, даже
+если отдельные компоненты
+
+<p><span
+style="mso-spacerun: yes">    </span>программы окажутся очень неплохими.
+Безусловно, программирование на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке ассемблера отвечает потребностям не
+каждой программы.
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Программы на языке ассемблера очень точны. Поскольку этот язык
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет программисту
+непосредственно<span style="mso-spacerun: yes">  </span>работать со всем
+аппаратным
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечением, ассемблерная программа может
+делать то, что недоступ-
+
+<p><span
+style="mso-spacerun: yes">    </span>но никакой<span style='mso-tab-count:1'>      </span>другой
+программе .<span style="mso-spacerun: yes">  </span>Несомненно, что в<span
+style="mso-spacerun: yes">  </span>программировании
+
+<p><span
+style="mso-spacerun: yes">    </span>устройств<span style="mso-spacerun: yes"> 
+</span>ввода-вывода,<span style="mso-spacerun: yes">  </span>где<span
+style="mso-spacerun: yes">  </span>требуется<span style="mso-spacerun: yes"> 
+</span>контроль<span style='mso-tab-count:1'>      </span>над<span
+style="mso-spacerun: yes">  </span>отдельными
+
+<p><span
+style="mso-spacerun: yes">    </span>разрядами<span style='mso-tab-count:1'>      </span>регистров<span
+style="mso-spacerun: yes">   </span>устроиства,<span style="mso-spacerun:
+yes">   </span>программирование<span style="mso-spacerun: yes">  
+</span>на<span style="mso-spacerun: yes">   </span>языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера - единственный подходящий
+выбор.
+
+
+<p><span style='mso-tab-count:1'>      </span><span
+style='mso-fareast-font-family:"MS Mincho"'><span style="mso-spacerun:
+yes"> </span>Ясно,<span style='mso-tab-count:1'>      </span>что<span
+style="mso-spacerun: yes">  </span>эффективность<span style="mso-spacerun:
+yes">  </span>и<span style="mso-spacerun: yes">  </span>точность<span
+style="mso-spacerun: yes">  </span>языка<span style='mso-tab-count:1'>      </span>ассемблера
+дают
+
+<p><span
+style="mso-spacerun: yes">    </span>определенные<span style="mso-spacerun:
+yes">  </span>преимущества.<span style="mso-spacerun: yes">  </span>Но<span
+style="mso-spacerun: yes">  </span>его<span style="mso-spacerun: yes"> 
+</span>детализированность<span style="mso-spacerun: yes">  </span>создает и
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторые<span style="mso-spacerun: yes"> 
+</span>проблемы. Когда<span style='mso-tab-count:1'> </span>же стоит<span
+style="mso-spacerun: yes">  </span>избирать для программирования
+
+<p><span
+style="mso-spacerun: yes">    </span>язык ассемблера?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Конечно<span style="mso-spacerun: yes">   </span>вы<span
+style='mso-tab-count:1'>      </span>должны<span style='mso-tab-count:1'>      </span>
+пользоваться<span style='mso-tab-count:1'>      </span>программами<span
+style="mso-spacerun: yes">   </span>на<span style="mso-spacerun: yes"> 
+</span>языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера, когда нет другого способа
+написать программу. Например,
+
+<p><span
+style="mso-spacerun: yes">    </span>программисты фирмы IBM писали<span
+style="mso-spacerun: yes">  </span>с использованием процедур ассемблера
+
+<p><span
+style="mso-spacerun: yes">    </span>все программы управления устройствами<span
+style="mso-spacerun: yes">  </span>ввода-вывода для IBM PC. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>управления<span style='mso-tab-count:1'>  </span>
+устройствами<span style="mso-spacerun: yes">  </span>ввода-вывода<span
+style="mso-spacerun: yes">   </span>и<span style="mso-spacerun: yes"> 
+</span>системой<span style="mso-spacerun: yes">   </span>прерываний,
+
+<p><span
+style="mso-spacerun: yes">    </span>потребовалась<span style="mso-spacerun:
+yes">  </span>та<span style="mso-spacerun: yes">  </span>точность<span
+style="mso-spacerun: yes">  </span>языка<span style='mso-tab-count:1'> </span>
+ассемблера<span style="mso-spacerun: yes">  </span>которую<span
+style="mso-spacerun: yes">  </span>не<span style="mso-spacerun: yes"> 
+</span>может
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечить<span style='mso-tab-count:1'>      </span>ни
+один<span style="mso-spacerun: yes">  </span>другой язык<span
+style="mso-spacerun: yes">  </span>программирования. Аналогично,<span
+style="mso-spacerun: yes">  </span>на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке<span style="mso-spacerun: yes"> 
+</span>ассемблера<span style="mso-spacerun: yes">  </span>в<span
+style="mso-spacerun: yes">  </span>фирме<span style="mso-spacerun: yes"> 
+</span>IBM<span style="mso-spacerun: yes">  </span>писались<span
+style='mso-tab-count:1'>      </span>процедуры<span style="mso-spacerun: yes"> 
+</span>диагностики,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые должны проверять каждую деталь
+аппаратуры.
+
+<p><span
+style='mso-tab-count:1'>      </span>Язык ассемблера необходим также и в тех
+случаях, когда главными
+
+<p><span
+style="mso-spacerun: yes">    </span>являются<span style="mso-spacerun: yes"> 
+</span>рабочие<span style="mso-spacerun: yes">  </span>характеристики<span
+style="mso-spacerun: yes">  </span>програмы.<span style="mso-spacerun: yes"> 
+</span>Это<span style="mso-spacerun: yes">  </span>может быть время
+
+<p><span
+style="mso-spacerun: yes">    </span>исполнения или конечный размер программы.
+Библиотека математических
+
+<p><span
+style="mso-spacerun: yes">    </span>процедур<span style="mso-spacerun: yes"> 
+</span>Фортрана -<span style="mso-spacerun: yes">  </span>пример
+программы,<span style="mso-spacerun: yes">  </span>требующей хороших характе-
+
+<p><span
+style="mso-spacerun: yes">    </span>ристик<span style="mso-spacerun: yes"> 
+</span>как<span style="mso-spacerun: yes">  </span>в<span style="mso-spacerun:
+yes">  </span>отношении<span style="mso-spacerun: yes">  </span>времени,<span
+style="mso-spacerun: yes">  </span>так<span style="mso-spacerun: yes"> 
+</span>и размера. Математические
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуры являтся<span
+style="mso-spacerun: yes">  </span>частью любой программы на<span
+style="mso-spacerun: yes">  </span>Фортране, поэтому они
+
+<p><span
+style="mso-spacerun: yes">    </span>должны занимать<span style="mso-spacerun:
+yes">  </span>как можно меньше места.<span style="mso-spacerun: yes"> 
+</span>Кроме того, эти процедуры
+
+<p><span
+style="mso-spacerun: yes">    </span>управляют всеми математическими функциями
+в фортрановской программе
+
+<p><span
+style="mso-spacerun: yes">    </span>и часто используются. Следовательно, они
+должны исполняться быстро.
+
+<p><span
+style='mso-tab-count:1'>      </span>Какая программа<span style="mso-spacerun:
+yes">  </span>не подходит для языка<span style='mso-tab-count:1'>      </span>ассемблера?
+Конечно, вы
+
+<p><span
+style="mso-spacerun: yes">    </span>можете написать на нем любую программу,
+однако с большой программой
+
+<p><span
+style="mso-spacerun: yes">    </span>лучше<span style="mso-spacerun: yes"> 
+</span>работать<span style="mso-spacerun: yes">  </span>в<span
+style='mso-tab-count:1'>      </span>языке<span style="mso-spacerun: yes"> 
+</span>высокого<span style="mso-spacerun: yes">  </span>уровня,<span
+style="mso-spacerun: yes">  </span>таком<span style="mso-spacerun: yes"> 
+</span>как Бэйсик или
+
+<p><span
+style="mso-spacerun: yes">    </span>Паскаль. Эти языки позволяют вам
+сосредоточиться на своей проблеме.
+
+<p><span
+style="mso-spacerun: yes">    </span>Вам<span style="mso-spacerun: yes">  
+</span>не<span style="mso-spacerun: yes">  </span>приходится<span
+style="mso-spacerun: yes">   </span>непосредственно<span style="mso-spacerun:
+yes">  </span>иметь<span style="mso-spacerun: yes">   </span>дело<span
+style="mso-spacerun: yes">  </span>с<span style="mso-spacerun: yes"> 
+</span>тонкостями
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратного<span style="mso-spacerun:
+yes">  </span>оборудования<span style="mso-spacerun: yes">  </span>и<span
+style="mso-spacerun: yes">   </span>процессора.<span style='mso-tab-count:1'>      </span>Языки<span
+style="mso-spacerun: yes">  </span>высокого<span style="mso-spacerun: yes"> 
+</span>уровня
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяют вам отступить назад и за
+деревьями увидеть лес.
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Очевидно далее, что вы<span style="mso-spacerun: yes">  </span>нуждаетесь
+в соединении программ языка
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера с<span style="mso-spacerun:
+yes">  </span>программами языков высокого уровня.<span style="mso-spacerun:
+yes">  </span>Эдесь мы ограни-
+
+<p><span
+style="mso-spacerun: yes">    </span>чимся<span style="mso-spacerun: yes"> 
+</span>программированием на<span style="mso-spacerun: yes">  </span>языке<span
+style='mso-tab-count:1'>      </span>ассемблера<span style="mso-spacerun:
+yes">  </span>для тех<span style="mso-spacerun: yes">  </span>задач, для
+
+<p><span
+style="mso-spacerun: yes">    </span>которых<span style="mso-spacerun: yes"> 
+</span>он хорошо<span style='mso-tab-count:1'>      </span>подходит, таких<span
+style="mso-spacerun: yes">  </span>как управление вводом-выводом.
+
+<p><span
+style="mso-spacerun: yes">    </span>Заключительная же<span
+style="mso-spacerun: yes">  </span>глава книги посвящена<span
+style="mso-spacerun: yes">  </span>прямо проблеме соединения
+
+<p><span
+style="mso-spacerun: yes">    </span>программ на языке ассемблера с другми
+языками программирования. Эти
+
+<p><span
+style="mso-spacerun: yes">    </span>методы<span style="mso-spacerun: yes"> 
+</span>предоставляют вам<span style="mso-spacerun: yes">  </span>все
+лучшее,<span style="mso-spacerun: yes">  </span>что есть<span
+style="mso-spacerun: yes">  </span>в обоих мирах. Вы
+
+<p><span
+style="mso-spacerun: yes">    </span>можете,<span style="mso-spacerun: yes"> 
+</span>когда<span style="mso-spacerun: yes">  </span>необходимы точность и
+эффективность,<span style="mso-spacerun: yes">  </span>использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуры<span style="mso-spacerun: yes"> 
+</span>на языке<span style="mso-spacerun: yes">  </span>ассемблера -<span
+style="mso-spacerun: yes">  </span>и процедуры<span style="mso-spacerun: yes"> 
+</span>высокого уровня для
+
+<p><span
+style="mso-spacerun: yes">    </span>программы в целом. Все что вы для этого
+должны сделать - сцепить их
+
+<p><span
+style="mso-spacerun: yes">    </span>вместе.
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>И<span style="mso-spacerun: yes">  </span>последняя причина<span
+style="mso-spacerun: yes">  </span>для изучения<span style="mso-spacerun:
+yes">  </span>программирования на<span style="mso-spacerun: yes">  </span>языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера.<span style="mso-spacerun:
+yes">  </span>Только<span style="mso-spacerun: yes">   </span>через<span
+style="mso-spacerun: yes">  </span>написание<span style="mso-spacerun: yes"> 
+</span>программ<span style="mso-spacerun: yes">   </span>на<span
+style="mso-spacerun: yes">  </span>этом<span style="mso-spacerun: yes"> 
+</span>уровне
+
+<p><span
+style="mso-spacerun: yes">    </span>детализации вы<span style="mso-spacerun:
+yes">  </span>можете понять как<span style="mso-spacerun: yes"> 
+</span>работает машина на<span style="mso-spacerun: yes">  </span>самом нижнем
+
+<p><span
+style="mso-spacerun: yes">    </span>уровне.<span style="mso-spacerun: yes"> 
+</span>Если вы<span style="mso-spacerun: yes">  </span>хотите узнать<span
+style="mso-spacerun: yes">  </span>о компьютере<span style="mso-spacerun:
+yes">  </span>все, вы<span style="mso-spacerun: yes">  </span>должны быть
+
+<p><span
+style="mso-spacerun: yes">    </span>знакомы с его языком ассемблера.
+Единственный способ добиться этого
+
+<p><span
+style="mso-spacerun: yes">    </span>- писать программы на этом языке. Простое
+чтение этой книги дела не
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвинет.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<b><p><div align="center"><a name="9-12-2">Функции ввода-вывода дисплея
+</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа дисплея BIOS имеет много
+функций, все они перечислены на
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг.9.6.<span style="mso-spacerun: yes"> 
+</span>В связи с тем, что видеопрограмма имеет так много
+
+<p><span
+style="mso-spacerun: yes">    </span>функций, она использует таблицу переходов
+к этим функциям.<span style='mso-tab-count:1'>    </span>Эта
+
+<p><span
+style="mso-spacerun: yes">    </span>таблица названа M1 и содержит смещения
+каждой точки входа программы
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея BIOS.<span style="mso-spacerun:
+yes">  </span>Первая часть программы VIDEO_IO извлекает код из
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра AH и преобразует его в адрес
+перехода.<span style="mso-spacerun: yes">  </span>Первая часть
+
+<p><span
+style="mso-spacerun: yes">    </span>программы выполняет еще и некоторые другие
+действия, включая
+
+<p><span
+style="mso-spacerun: yes">    </span>проверку поля EQUIP_FLAG.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фирма IBM написала видеопрограмму BIOS
+так, чтобы она могла
+
+<p><span
+style="mso-spacerun: yes">    </span>работать с двумя дисплейными адаптерами,
+как с цветным графическим,
+
+<p><span
+style="mso-spacerun: yes">    </span>так и с монохромным. Но BIOS также
+подразумевает, что из них
+
+<p><span
+style="mso-spacerun: yes">    </span>активен только один. Это означает, что вы
+не сможете использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS для того, чтобы записать символ в
+цветной дисплей, а затем
+
+<p><span
+style="mso-spacerun: yes">    </span>сразу использовать BIOS для записи символа
+в монохромный дисплей.
+
+<p><span
+style="mso-spacerun: yes">    </span>Видеопрограмма BIOS может иметь дело
+только с одним дисплейным
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптером.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>AH <span style='mso-tab-count:2'>          </span>Функция
+
+<p><span
+style='mso-tab-count:1'>      </span>-------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0<span style='mso-tab-count:2'>            </span>Инициализация адаптера
+дисплея
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>1<span style='mso-tab-count:2'>            </span>Установка размера и
+формы курсора
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>2<span style='mso-tab-count:2'>            </span>Установка позиции
+курсора
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>3<span style='mso-tab-count:2'>            </span>Чтение позиции курсора
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>4<span style='mso-tab-count:2'>            </span>Чтение позиции
+светового пера
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>5<span style='mso-tab-count:2'>            </span>Назначение текущей
+страницы
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>6<span style='mso-tab-count:2'>            </span>Сдвиг вверх
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>7<span style='mso-tab-count:2'>            </span>Сдвиг вниз
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>8<span style='mso-tab-count:2'>            </span>Чтение символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>9<span style='mso-tab-count:2'>            </span>Запись символа и
+атрибута
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>10<span style='mso-tab-count:2'>            </span>Запись одного символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>11<span style='mso-tab-count:2'>            </span>Выбор палитры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>12<span style='mso-tab-count:2'>            </span>Запись точки
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>13<span style='mso-tab-count:2'>            </span>Чтение точки
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>14<span style='mso-tab-count:2'>            </span>Запись на телетайп
+
+<p><span
+style='mso-tab-count:1'>      </span>-------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 9.4 Функции BIOS для
+видеомонитора
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Всякий раз, когда программа вызывает
+видеопрограмму BIOS, она
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет, какой дисплейный адаптер
+имеется в системе с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>проверки битов поля EQUIP_FLAG, которые
+соответствуют текущему
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплею. Если биты 5 и 4 оба равны 1, то в
+системе присутствует
+
+<p><span
+style="mso-spacerun: yes">    </span>монохромный адаптер. Любая другая
+установка бит говорит о том, что
+
+<p><span
+style="mso-spacerun: yes">    </span>в системе работает цветной адаптер. Фирма
+IBM написала эту
+
+<p><span
+style="mso-spacerun: yes">    </span>программу таким способом, исходя из того,
+что система может иметь
+
+<p><span
+style="mso-spacerun: yes">    </span>только один дисплейный адаптер. Перед
+первым включением машины вы
+
+<p><span
+style="mso-spacerun: yes">    </span>должны установить переключатели на
+системной плате в положение,
+
+<p><span
+style="mso-spacerun: yes">    </span>показывающее, какой адаптер дисплея
+используется.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Информация флагов оборудования в поле
+EQUIP_FLAG определяет,
+
+<p><span
+style="mso-spacerun: yes">    </span>какой из адресов буфера будет использовать
+видеопрограмма BIOS. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>монохромной платы BIOS загружает в регистр
+ES значение 0B000H, а
+
+<p><span
+style="mso-spacerun: yes">    </span>для цветной платы - значение 0B800H. Это
+позволяет остальным
+
+<p><span
+style="mso-spacerun: yes">    </span>программам дисплея BIOS работать без
+использования информации о
+
+<p><span
+style="mso-spacerun: yes">    </span>том, какой адаптер работает в системе. Все
+ссылки к буферу делаются
+
+<p><span
+style="mso-spacerun: yes">    </span>относительно регистра ES.
+
+<p><span
+style='mso-tab-count:1'>      </span>Вы можете решить, что, поскольку поле
+EQUIP_FLAG показывает,
+
+<p><span
+style="mso-spacerun: yes">    </span>какой адаптер используется, можно
+переключаться от одного адаптера
+
+<p><span
+style="mso-spacerun: yes">    </span>к другому просто изменяя биты в слове
+флагов. К сожалению, это не
+
+<p><span
+style="mso-spacerun: yes">    </span>так, Адрес ввода-вывода контроллера 6845
+отличается для двух
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптеров, и BIOS записывает этот базовый
+адрес в свою область
+
+<p><span
+style="mso-spacerun: yes">    </span>данных. Видеопрограмма BIOS заносит в
+переменную ADDR_6845 этот
+
+<p><span
+style="mso-spacerun: yes">    </span>адрес только при инициализации адаптера
+(команда AH = 0). Поэтому
+
+<p><span
+style="mso-spacerun: yes">    </span>переключение от одного дисплея к другому
+также требует
+
+<p><span
+style="mso-spacerun: yes">    </span>корректировки этой переменной.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Даже если переменная CURSOR_POSN содержит
+восемь позиций, она
+
+<p><span
+style="mso-spacerun: yes">    </span>не может обслуживать переключение на
+другой дисплей. Вы должны
+
+<p><span
+style="mso-spacerun: yes">    </span>сбрасывать положение курсора в области
+данных BIOS всякий раз при
+
+<p><span
+style="mso-spacerun: yes">    </span>переключении с одного адаптера на другой.
+Если вы не сделаете
+
+<p><span
+style="mso-spacerun: yes">    </span>этого, изображение курсора не будет
+соответствовать его положению,
+
+<p><span
+style="mso-spacerun: yes">    </span>записанному в области данных, и символ на
+экране будет записываться
+
+<p><span
+style="mso-spacerun: yes">    </span>в неверную позицию.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фирма IBM опубликовала методы смены одного
+дисплея другим, как
+
+<p><span
+style="mso-spacerun: yes">    </span>с помощью программы на языке ассемблера,
+так и с помощью программы
+
+<p><span
+style="mso-spacerun: yes">    </span>на Бейсике. В этих методах требуется для
+указания адаптера, который
+
+<p><span
+style="mso-spacerun: yes">    </span>вы хотите использовать, изменить
+переменную EQUIP_FLAG, а затем
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать видеопрерывание INT 10H при
+AH = 0. Эта функция
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализирует адаптер и обеспечивает
+правильную установку всех
+
+<p><span
+style="mso-spacerun: yes">    </span>полей данных программы BIOS. После этого
+BIOS может работать с тем
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплейным адаптером, который указан. При
+этом картинка на другом
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплее остается видимой. Кроме того,
+дисплейный буфер того
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптера продолжает отображать любые
+изменения текста и графики,
+
+<p><span
+style="mso-spacerun: yes">    </span>занесенной в него. Так что вы можете
+измекнять содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплейного буфера с помощью вашей
+программы (а не с помощью BIOS),
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы скорректировать информацию,
+находящуюся на экране, с которого
+
+<p><span
+style="mso-spacerun: yes">    </span>вы только что переключились.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Давайте рассмотрим простой пример. Вы
+имеете IBM PC с двумя
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптерами - цветным графическим и
+монохромным, и к каждому
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптеру подключен дисплей. Когда вы
+сначала включаете машину,
+
+<p><span
+style="mso-spacerun: yes">    </span>система использует монохромный дисплей.
+Именно с учетом этого вы и
+
+<p><span
+style="mso-spacerun: yes">    </span>должны установить переключатели на
+системной плате, так как
+
+<p><span
+style="mso-spacerun: yes">    </span>монохромный дисплей может быть поврежден,
+если не будет
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализирован сразу же после включения
+питания. Инструкция по
+
+<p><span
+style="mso-spacerun: yes">    </span>работе рекомендует, чтобы вы установили
+переключатели в положение,
+
+<p><span
+style="mso-spacerun: yes">    </span>показывающее, что в системе присутствует
+монохромный адаптер.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>После этого вы можете использовать
+видеопрограмму BIOS с
+
+<p><span
+style="mso-spacerun: yes">    </span>монохромным дисплеем. Чтобы перейти на
+цветной адаптер, можно
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнить программу на Фиг.П9.7. Эта
+программа включает цветной
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптер в 80-символьном текстовом режиме.
+Символы, которые были
+
+<p><span
+style="mso-spacerun: yes">    </span>высвечены на монохромном дисплее, на нем и
+остаются, а вы теперь
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>можете использовать видеопрограмму BIOS для работы с цветным
+
+<p><span
+style="mso-spacerun: yes">    </span>графическим дисплеем. Но если вам
+потребуется изменить содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>монохромного дисплея, вы сможете сделать
+это, записав новые символы
+
+<p><span
+style="mso-spacerun: yes">    </span>или атрибуты в буфер дисплея по адресу
+0B000H. Это не изменит
+
+<p><span
+style="mso-spacerun: yes">    </span>положения курсора, но изменит картинку. В
+этом случае если вы
+
+<p><span
+style="mso-spacerun: yes">    </span>хотите изменять текст одновременно на
+цветном и монохромном
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплеях, вы должны написать собственную
+программу обслуживания
+
+<p><span
+style="mso-spacerun: yes">    </span>монохромного дисплея. Или вы можете
+выяснить, какие значения надо
+
+<p><span
+style="mso-spacerun: yes">    </span>изменить в поле данных BIOS, чтобы курсор
+перешел назад, и
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнить нужные действия, не
+инициализируя адаптер каждый раз.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes"> 
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">      </span>1/1/80
+04:06:26
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 9.7 Переключение на цветной дисплей<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">     </span>Page<span
+style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 9.7 Переключение на цветной дисплей
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> SEGMENT STACK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>0040[<span
+style='mso-tab-count:4'>                   </span> DW<span style='mso-tab-count:
+1'>   </span> 64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0080<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> ENDS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> ABS0<span
+style='mso-tab-count:1'> </span> SEGMENT AT 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0410<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 410H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0410<span style='mso-tab-count:4'>                        </span>
+EQUIP_FLAG<span style='mso-tab-count:1'> </span> LABEL<span style='mso-tab-count:
+1'>      </span> BYTE<span style='mso-tab-count:1'> </span> ; Будет изменяться
+только младший
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0410<span style='mso-tab-count:4'>                        </span> ABS0<span
+style='mso-tab-count:1'> </span> ENDS<span style='mso-tab-count:3'>             </span>
+;<span style="mso-spacerun: yes">  </span>байт поля флагов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:ABS0
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>COLOR<span style='mso-tab-count:1'>      </span>
+PROC<span style='mso-tab-count:1'> </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>1E<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DS<span
+style='mso-tab-count:2'>         </span> ; Адрес возврата в ДОС
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0001<span style='mso-tab-count:1'>      </span>2B C0<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> AX, AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0003<span style='mso-tab-count:1'>      </span>50<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0004<span style='mso-tab-count:1'>      </span>8E D8<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> DS, AX <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Загрузка адреса сегмента ABS0 в регистр DS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0006<span style='mso-tab-count:1'>      </span>80 26 0410 R CF <span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes"> </span>AND<span style='mso-tab-count:1'>  </span> EQUIP_FLAG, 11001111b<span
+style='mso-tab-count:1'>  </span> ; Указание на цветной дисплей как
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000B<span style='mso-tab-count:1'>      </span>80 0E 0410 R 20 <span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes"> </span>OR<span style='mso-tab-count:1'>   </span> EQUIP_FLAG, 00100000b<span
+style='mso-tab-count:1'>  </span> ;<span style="mso-spacerun: yes">  </span>на
+основной (режим 80*25)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0010<span style='mso-tab-count:1'>      </span>B8 0003 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> AX, 3
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0013<span style='mso-tab-count:1'>      </span>CD 10<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 10H<span style='mso-tab-count:2'>        </span> ; Сброс дисплея
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0015<span style='mso-tab-count:1'>      </span>C3<span style='mso-tab-count:
+4'>                      </span> RET<span style='mso-tab-count:3'>              </span>
+; Возврат в ДОС
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>COLOR<span style='mso-tab-count:1'>      </span>
+ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0016<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 9.7 Переключение на цветной дисплей
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

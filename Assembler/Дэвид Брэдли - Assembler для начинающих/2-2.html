@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>
+<a name="2-2">Двоичное дополнение</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Для изображения как положительных, так и
+отрицательных чисел 8088
+
+<p><span
+style="mso-spacerun: yes">    </span>применяет арифметику двоичного дополнения.<span
+style='mso-tab-count:1'>  </span>В такой знакопеременной
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметике самый левый бит целого числа
+указывает на его знак.<span style="mso-spacerun: yes">  </span>По-
+
+<p><span
+style="mso-spacerun: yes">    </span>ложительные числа имеют 0 в старшем бите,
+а отрицательные - 1.<span style="mso-spacerun: yes">  </span>По-
+
+<p><span
+style="mso-spacerun: yes">    </span>ложительные числа имеют одинаковое
+значение в знаковой и без-
+
+<p><span
+style="mso-spacerun: yes">    </span>знаковой арифметике.<span
+style="mso-spacerun: yes">  </span>У отрицательных же значение иное.<span
+style="mso-spacerun: yes">  </span>Для того
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы сделать число отрицательным,
+изменить его знак на минус, оно
+
+<p><span
+style="mso-spacerun: yes">    </span>дополняется и результат увеличиваетя на
+единицу.<span style="mso-spacerun: yes">  </span>В 4-х битовом
+
+<p><span
+style="mso-spacerun: yes">    </span>примере 5 имеет значение 0101B, в то время
+как -5 равно 1011B.
+
+<p><span
+style="mso-spacerun: yes">    </span>Пример на Фиг.<span style="mso-spacerun:
+yes">  </span>2.4 показывает этот метод.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Пример на Фиг.<span style='mso-tab-count:
+1'>    </span>2.5 показывает единственность нуля в арифметике
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичного дополнения.<span
+style="mso-spacerun: yes">  </span>То есть -0 равен 0.<span style='mso-tab-count:
+1'>  </span>Для любого n-битового
+
+<p><span
+style="mso-spacerun: yes">    </span>числа в системе с двоичным дополнением
+наибольшее значение сос-
+
+<p><span
+style="mso-spacerun: yes">    </span>тавляет 2**(n-1)-1, а наименьшее
+-2**(n-1).<span style="mso-spacerun: yes">  </span>Ноль - единственен.<span
+style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>4-х битовой системе наибольшее число, как
+показано на Фиг.<span style='mso-tab-count:1'>    </span>2.6,
+
+<p><span
+style="mso-spacerun: yes">    </span>равно 7, а наименьшее -8.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>_________________________
+
+<p><span
+style="mso-spacerun: yes">      </span>5<span style="mso-spacerun: yes">       
+</span>=<span style="mso-spacerun: yes">       </span>0101B
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Для изменения знака:
+
+<p><span
+style="mso-spacerun: yes">     </span>Дополняем<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">       </span>1010B
+
+<p><span
+style="mso-spacerun: yes">     </span>Добавляем 1<span style="mso-spacerun:
+yes">       </span>0001B
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>-----<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>__________________________________
+
+<p><span
+style="mso-spacerun: yes">     </span>-5<span style="mso-spacerun: yes">       
+</span>=<span style="mso-spacerun: yes">       </span>1011B<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>0<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>=<span style="mso-spacerun: yes">       </span>0000B
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Для изменеия знака: <span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">   </span>Для изменения знака:
+
+<p><span
+style="mso-spacerun: yes">     </span>Дополняем<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">       </span>0100B<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>Дополняем<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">      </span>1111B
+
+<p><span
+style="mso-spacerun: yes">     </span>добавляем 1<span style="mso-spacerun:
+yes">       </span>0001B<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>Добавляем 1<span style="mso-spacerun:
+yes">       </span>0000B
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>-----<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">      </span>-----
+
+<p><span
+style="mso-spacerun: yes">      </span>5<span style="mso-spacerun: yes">    
+</span>=<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">       </span>0101B<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>-0<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>=<span style="mso-spacerun: yes">      
+</span>0000B<span style="mso-spacerun: yes">    </span>=<span
+style="mso-spacerun: yes">    </span>0
+
+<p><span
+style="mso-spacerun: yes">    </span>_________________________<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">  
+</span>__________________________________
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 2.4 Двоичное допол-<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">   </span>Фиг.
+2.5<span style="mso-spacerun: yes">  </span>То же самое с нулем
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>нение 5
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как мы увидим позднее, процессор 8088
+может работать с одним и
+
+<p><span
+style="mso-spacerun: yes">    </span>тем же целым как со значением имеющим или
+не имеющим знак.<span style='mso-tab-count:1'>    </span>Выбор
+
+<p><span
+style="mso-spacerun: yes">    </span>оставлен программисту языка
+ассемблера.<span style="mso-spacerun: yes">  </span>Во всяком случае, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>программа работает в арифметике со знаком,
+процессор 8088 применяет
+
+<p><span
+style="mso-spacerun: yes">    </span>при проведении операций двоичное
+дополнение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Десятичное<span style="mso-spacerun:
+yes">  </span>Двоичное<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>Десятичное<span style='mso-tab-count:1'>    </span>Двоичное
+
+<p><span
+style='mso-tab-count:1'>      </span>-------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>7<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>0111<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>-1<span style='mso-tab-count:1'>   </span>
+1111
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   </span><span
+style="mso-spacerun: yes"> </span>6<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">     </span>0110<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>-2<span style='mso-tab-count:1'>   </span>
+1110
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>5<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>0101<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>-3<span style='mso-tab-count:1'>   </span>
+1101
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>4<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>0100<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>-4<span style='mso-tab-count:1'>   </span>
+1100
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>3<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>0011<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>-5<span style='mso-tab-count:1'>   </span>
+1011
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>2<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>0010<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>-6<span style='mso-tab-count:1'>   </span>
+1010
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>0001<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>-7<span style='mso-tab-count:1'>   </span>
+1001<span style='mso-tab-count:1'> </span> Фиг. 2.6 Числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>0000<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>-8<span style='mso-tab-count:1'>   </span>
+1000<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">   
+</span>с<span style="mso-spacerun: yes">  </span>двоичным
+
+<p><span
+style='mso-tab-count:1'>      </span>-------------------------------------------------<span
+style="mso-spacerun: yes">   </span>дополнением
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

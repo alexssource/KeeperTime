@@ -1,0 +1,372 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<b><p><div align="center"><a name="9-9-2">Процедура BIOS клавиатуры изнутри
+</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Мы не собираемся построчно анализировать
+программу клавиатуры BIOS.
+
+<p><span
+style="mso-spacerun: yes">    </span>Но в ней, однако, есть интересные
+места.<span style="mso-spacerun: yes">  </span>Некоторые из них мы
+
+<p><span
+style="mso-spacerun: yes">    </span>упомянули раньше, например подпрограмму K4,
+которая сдвигает
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель буфера.
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа KB_INT использует несколько
+таблиц значений клавиш.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если вы посмотрите программу, то увидите,
+что эти таблицы
+
+<p><span
+style="mso-spacerun: yes">    </span>используются различными способами.
+Таблицы, содержащие значения
+
+<p><span
+style="mso-spacerun: yes">    </span>кодов сканирования, используются для
+поиска шаблонов. BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>сравнивает код сканирования клавиатуры со
+значениями в таблице.
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes"> 
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">      </span>1/1/80
+04:06:15
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 9.3 Состояние клавиатуры<span style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">     </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 9.3 Состояние клавиатуры
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> SEGMENT STACK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>0040[<span
+style='mso-tab-count:4'>                   </span> DW<span style='mso-tab-count:
+1'>   </span> 64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0080<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> ENDS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>0000<span
+style='mso-tab-count:3'>              </span> LITTLE<span style="mso-spacerun:
+yes">  </span>DW<span style='mso-tab-count:1'> </span> 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0002<span style='mso-tab-count:1'>      </span>0000<span
+style='mso-tab-count:3'>              </span> BIG<span style='mso-tab-count:
+1'>  </span> DW<span style='mso-tab-count:1'>   </span> 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0004<span style='mso-tab-count:4'>                        </span> COUNT<span
+style='mso-tab-count:1'>      </span> PROC<span style='mso-tab-count:1'> </span>
+FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0004<span style='mso-tab-count:1'>      </span>1E<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DS<span
+style='mso-tab-count:2'>         </span> ; Адрес возврата в ДОС
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0005<span style='mso-tab-count:1'>      </span>2B C0<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> AX, AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0007<span style='mso-tab-count:1'>      </span>50<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0008<span style='mso-tab-count:4'>                        </span>
+ADD_ONE:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0008<span style='mso-tab-count:1'>      </span>2E: FF 06 0000 R<span
+style='mso-tab-count:2'>        </span> INC<span style='mso-tab-count:1'>  </span>
+LITTLE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000D<span style='mso-tab-count:1'>      </span>75 05<span
+style='mso-tab-count:4'>                   </span> JNZ<span style='mso-tab-count:
+1'>  </span> STILL_LOW
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000F<span style='mso-tab-count:1'>      </span>2E: FF 06 0002 R<span
+style='mso-tab-count:2'>        </span> INC<span style='mso-tab-count:1'>  </span>
+BIG
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0014<span style='mso-tab-count:4'>                        </span>
+STILL_LOW:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0014<span style='mso-tab-count:1'>      </span>B4 01<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH, 1<span style='mso-tab-count:2'>            </span> ; Программа
+опроса статуса клавиатуры
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0016<span style='mso-tab-count:1'>      </span>CD 16<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 16H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0018<span style='mso-tab-count:1'>      </span>74 EE<span
+style='mso-tab-count:4'>                   </span> JZ<span style='mso-tab-count:
+1'>   </span> ADD_ONE<span style='mso-tab-count:1'>    </span> ; Переход, если
+нет символа в буфере ввода
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001A<span style='mso-tab-count:1'>      </span>B4 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH, 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001C<span style='mso-tab-count:1'>      </span>CD 16<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 16H<span style='mso-tab-count:2'>        </span> ; Чтение символа
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001E<span style='mso-tab-count:1'>      </span>3C 20<span
+style='mso-tab-count:4'>                   </span> CMP<span style='mso-tab-count:
+1'>  </span> AL, ' '<span style="mso-spacerun: yes">         </span>; Сравнение
+с пробелом
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0020<span style='mso-tab-count:1'>      </span>75 E6<span
+style='mso-tab-count:4'>                   </span> JNZ<span style='mso-tab-count:
+1'>  </span> ADD_ONE<span style='mso-tab-count:1'>    </span> ; Переход, если
+не пробел
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0022<span style='mso-tab-count:1'>      </span>CB<span style='mso-tab-count:
+4'>                      </span> RET<span style='mso-tab-count:3'>              </span>
+; Возврат в ДОС
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0023<span style='mso-tab-count:4'>                        </span> COUNT<span
+style='mso-tab-count:1'>      </span> ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0023<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END<span style='mso-tab-count:1'>  </span>
+COUNT&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 9.3 Состояние клавиатуры
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда REPNE SCASB, используемая после
+метки K16, позволяет BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>просмотреть таблицу в поисках соответствия
+с одной из регистровых
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиш. Когда BIOS находит соответствие в
+таблице кодов
+
+<p><span
+style="mso-spacerun: yes">    </span>сканирования, она использует смещение в
+таблице для получения
+
+<p><span
+style="mso-spacerun: yes">    </span>значения маски, используемого вместе с
+переменной KB_FLAG. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>все регистровые клавиши представлены
+битами в переменных флагов,
+
+<p><span
+style="mso-spacerun: yes">    </span>единая программа, пользуясь этими
+таблицами, может управлять
+
+<p><span
+style="mso-spacerun: yes">    </span>регистровыми клавишами.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>BIOS использует также другие таблицы для
+перекодировки кодов
+
+<p><span
+style="mso-spacerun: yes">    </span>сканирования в коды ASCII. Определив
+текущее состояние регистров,
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS загружает в регистр BX указатель на
+нужную таблицу кодов
+
+<p><span
+style="mso-spacerun: yes">    </span>ASCII. Затем программа преобразует код
+сканирования в правильное
+
+<p><span
+style="mso-spacerun: yes">    </span>начальное значение выбранной таблицы
+(вычитая начальный адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>таблицы). Команда XLAT переводит код
+сканирования в правильный код
+
+<p><span
+style="mso-spacerun: yes">    </span>ASCII. Этот прием используется там, где
+BIOS порождает коды
+
+<p><span
+style="mso-spacerun: yes">    </span>псевдосканирования цифровой клавиатуры в
+режиме использования
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра клавиатуры CONTROL (метка K63).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Подпрограмма ERROR_BEEP - пример
+управления динамиком, которое
+
+<p><span
+style="mso-spacerun: yes">    </span>мы разбирали в предыдущей главе; она
+порождает сигнал, который BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>посылает всегда, когда оператор вводит
+символ, а буфер полон. Так
+
+<p><span
+style="mso-spacerun: yes">    </span>как этот сигнал может возникнуть всякий
+раз, когда система
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживает прерывание от клавиатуры, было
+бы неразумно менять
+
+<p><span
+style="mso-spacerun: yes">    </span>значение счетчика в канале таймера,
+управляя динамиком. Для этой
+
+<p><span
+style="mso-spacerun: yes">    </span>цели BIOS использует непосредственное
+управление динамиком. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>уже генерируется какой-либо звук, он
+обрывается и появляется сигнал
+
+<p><span
+style="mso-spacerun: yes">    </span>о переполнении клавиатуры. Если вы
+внимательно послушаете сигнал
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнения, то заметите, что он слегка
+дрожит. Возникающее 18 раз
+
+<p><span
+style="mso-spacerun: yes">    </span>в секунду прерывание таймера меняет тон,
+прерывая цикл прямого
+
+<p><span
+style="mso-spacerun: yes">    </span>управления динамиком. Как было предложено
+в предыдущей главе, вы
+
+<p><span
+style="mso-spacerun: yes">    </span>можете исследовать последствия
+использования различных временных
+
+<p><span
+style="mso-spacerun: yes">    </span>циклов таймера на выходную тональность
+динамика.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

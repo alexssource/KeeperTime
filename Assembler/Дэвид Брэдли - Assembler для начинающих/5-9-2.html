@@ -1,0 +1,404 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><a name="5-9-2">Перекрестные ссылки
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Чтобы воспользоваться файлом перекрестных
+ссылок, сформированным
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблером, требуется дополнительная
+обработка.<span style="mso-spacerun: yes">  </span>Для перевода
+
+<p><span
+style="mso-spacerun: yes">    </span>файла типа .CRF в текстовый файл в коде
+ASCII нужно выполнить
+
+<p><span
+style="mso-spacerun: yes">    </span>программу CREF.<span style="mso-spacerun:
+yes">  </span>Программа CREF запускается точно так же, как и
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер, за исключением того, что при
+запуске задаются только два
+
+<p><span
+style="mso-spacerun: yes">    </span>файла:<span style="mso-spacerun: yes"> 
+</span>входной файл типа .CRF и выходной файл типа .REF.<span
+style="mso-spacerun: yes">  </span>При
+
+<p><span
+style="mso-spacerun: yes">    </span>вводе команды DOS A&gt; CREF запрашиваются
+имена двух файлов.
+
+<p><span
+style="mso-spacerun: yes">    </span>Альтернативой может служить команда A&gt;
+CREF B:FIG5=10, B, которая в
+
+<p><span
+style="mso-spacerun: yes">    </span>качестве входного файла использует файл
+B:FIG5=10.CRF и формирует
+
+<p><span
+style="mso-spacerun: yes">    </span>файл B:FIG5=10.REF.<span
+style="mso-spacerun: yes">  </span>Как и случае с ассемблером имеются и другие
+
+<p><span
+style="mso-spacerun: yes">    </span>варианты данной команды, описанные в
+справочном руководстве по
+
+<p><span
+style="mso-spacerun: yes">    </span>Макроассемблеру.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 5.12 показан выход формирователя
+перекрестных ссылок.
+
+<p><span
+style="mso-spacerun: yes">    </span>Данная конкретная таблица перекрестных
+ссылок получена для
+
+<p><span
+style="mso-spacerun: yes">    </span>программы, приведенной на Фиг. 5.6. В
+левом столбце перечислены все
+
+<p><span
+style="mso-spacerun: yes">    </span>символические имена, определенные в
+программе. Напротив каждого
+
+<p><span
+style="mso-spacerun: yes">    </span>символичсекого имени приводится
+последовательность целочисленных
+
+<p><span
+style="mso-spacerun: yes">    </span>параметров. Числа соответствуют номерам
+строк, в которых появляется
+
+<p><span
+style="mso-spacerun: yes">    </span>это имя. Если за номером строки следует
+символ #, то имя юыло
+
+<p><span
+style="mso-spacerun: yes">    </span>определено в этой строке. Если же символ #
+отсутствует, то значит в
+
+<p><span
+style="mso-spacerun: yes">    </span>этой строке содержится ссылка на имя.
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>Фиг. 5.6 Пример использования функций ДОС
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Symbol<span style="mso-spacerun: yes">  </span>Cross Reference<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   </span>(#
+is definition)<span style='mso-tab-count:1'>    </span> Cref-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>BAD_CLOSE_MSG<span style="mso-spacerun: yes">  </span>. . . . . . . . .<span
+style='mso-tab-count:1'>    </span>50#<span style='mso-tab-count:1'>   </span>169
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>BAD_OPEN_MSG . . . . . . . . . .<span style='mso-tab-count:1'>    </span>37#<span
+style='mso-tab-count:1'>   </span> 86
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>BAD_READ_MSG . . . . . . . . . .<span style='mso-tab-count:1'>    </span>46#<span
+style='mso-tab-count:1'>   </span>141
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>BAD_WRITE_MSG<span style="mso-spacerun: yes">  </span>. . . . . . . . .<span
+style='mso-tab-count:1'>    </span>41#<span style='mso-tab-count:1'>   </span>105<span
+style='mso-tab-count:1'>   </span>159
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>CHANGE_RECORD<span style="mso-spacerun: yes">  </span>. . . . . . . . .
+126<span style='mso-tab-count:1'>      </span>128#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>CHARACTER_LOOP . . . . . . . . .<span style='mso-tab-count:1'>    </span>94#<span
+style='mso-tab-count:1'>   </span>110
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>CHAR_BAD_MSG . . . . . . . . . .<span style='mso-tab-count:1'>    </span>60#<span
+style='mso-tab-count:1'>   </span>123
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>CLOSE_OK . . . . . . . . . . . . 168<span style='mso-tab-count:1'>      </span>171#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>CREATE_OK<span style="mso-spacerun: yes">  </span>. . . . . . . . . . .<span
+style='mso-tab-count:1'>    </span> 3#<span style='mso-tab-count:1'>   </span>
+28<span style='mso-tab-count:1'>   </span> 28<span style='mso-tab-count:1'>   </span>173
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>DISK_TRANSFER_ADDRESS<span style="mso-spacerun: yes">  </span>. . . . .<span
+style='mso-tab-count:1'>    </span>26#<span style='mso-tab-count:1'>   </span>
+68<span style='mso-tab-count:1'>   </span> 95<span style='mso-tab-count:1'>   </span>144<span
+style='mso-tab-count:1'>   </span>145<span style='mso-tab-count:1'>   </span>146<span
+style='mso-tab-count:1'>   </span>148<span style='mso-tab-count:1'>   </span>152
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ERROR_EXIT . . . . . . . . . . .<span style='mso-tab-count:1'>    </span>76#<span
+style='mso-tab-count:1'>   </span> 87<span style='mso-tab-count:1'>   </span>106<span
+style='mso-tab-count:1'>   </span>142<span style='mso-tab-count:1'>   </span>160<span
+style='mso-tab-count:1'>   </span>170
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB<span style="mso-spacerun: yes">  </span>. . . . . . . . . . . . . .<span
+style='mso-tab-count:1'>    </span> 5#<span style='mso-tab-count:1'>   </span>
+71<span style='mso-tab-count:1'>   </span> 82<span style='mso-tab-count:1'>   </span>
+99<span style='mso-tab-count:1'>   </span>136<span style='mso-tab-count:1'>   </span>155<span
+style='mso-tab-count:1'>   </span>165
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB_BLOCK<span style="mso-spacerun: yes">  </span>. . . . . . . . . . .<span
+style='mso-tab-count:1'>    </span>15#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB_CURRENT_RECORD . . . . . . .<span style='mso-tab-count:1'>    </span>23#<span
+style='mso-tab-count:1'>   </span> 89
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB_DATE . . . . . . . . . . . .<span style='mso-tab-count:1'>    </span>18#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB_DRIVE<span style="mso-spacerun: yes">  </span>. . . . . . . . . . .<span
+style='mso-tab-count:1'>    </span> 6#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB_EXT<span style="mso-spacerun: yes">  </span>. . . . . . . . . . . .<span
+style='mso-tab-count:1'>    </span>11#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB_FILE_SIZE<span style="mso-spacerun: yes">  </span>. . . . . . . . .<span
+style='mso-tab-count:1'>    </span>17#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB_NAME . . . . . . . . . . . .<span style='mso-tab-count:1'>    </span>
+7#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span><span style="mso-spacerun: yes"> </span>FCB_RANDOM_RECORD<span
+style="mso-spacerun: yes">  </span>. . . . . . .<span style='mso-tab-count:
+1'>    </span>24#<span style='mso-tab-count:1'>   </span> 90<span
+style='mso-tab-count:1'>   </span> 91<span style='mso-tab-count:1'>   </span>135
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB_RECORD_SIZE<span style="mso-spacerun: yes">  </span>. . . . . . . .<span
+style='mso-tab-count:1'>    </span>16#<span style='mso-tab-count:1'>   </span>
+92
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB_RESV . . . . . . . . . . . .<span style='mso-tab-count:1'>    </span>19#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FILE_ERROR_MSG . . . . . . . . .<span style='mso-tab-count:1'>    </span>33#<span
+style='mso-tab-count:1'>   </span> 75
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>INPUT_BAD_MSG<span style="mso-spacerun: yes">  </span>. . . . . . . . .<span
+style='mso-tab-count:1'>    </span>54#<span style='mso-tab-count:1'>   </span>117
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>KEYBOARD_BUFFER<span style="mso-spacerun: yes">  </span>. . . . . . . .<span
+style='mso-tab-count:1'>    </span>32#<span style='mso-tab-count:1'>   </span>112<span
+style='mso-tab-count:1'>   </span>115<span style='mso-tab-count:1'>   </span>124<span
+style='mso-tab-count:1'>   </span>150
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>KEYBOARD_ERROR . . . . . . . . . 118#<span style='mso-tab-count:1'>     </span>130<span
+style='mso-tab-count:1'>   </span>132
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>KEYBOARD_LOOP<span style="mso-spacerun: yes">  </span>. . . . . . . . .
+111#<span style='mso-tab-count:1'>     </span>121<span style='mso-tab-count:
+1'>   </span>162
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>KEY_INPUT_OK . . . . . . . . . . 116#<span style='mso-tab-count:1'>     </span>122#
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>NO_FILE<span style="mso-spacerun: yes">  </span>. . . . . . . . . . . .<span
+style='mso-tab-count:1'>    </span>74<span style='mso-tab-count:1'>    </span>
+80#
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>PROGRAM_EXIT . . . . . . . . . . 127<span style='mso-tab-count:1'>      </span>163#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>PROGRAM_START<span style="mso-spacerun: yes">  </span>. . . . . . . . .<span
+style='mso-tab-count:1'>    </span>29<span style='mso-tab-count:1'>    </span>
+66#
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>RANDOM_RECORD_OK . . . . . . . . 140<span style='mso-tab-count:1'>      </span>143#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>RANDOM_WRITE_OK<span style="mso-spacerun: yes">  </span>. . . . . . . .
+158<span style='mso-tab-count:1'>      </span>161#
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>RECORD_SIZE<span style="mso-spacerun: yes">  </span>. . . . . . . . . .<span
+style='mso-tab-count:1'>    </span>31#<span style='mso-tab-count:1'>   </span>
+92<span style='mso-tab-count:1'>   </span> 96<span style='mso-tab-count:1'>   </span>151
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>WRITE_OK . . . . . . . . . . . . 104<span style='mso-tab-count:1'>      </span>107#
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p>&#18;<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">      
+</span>Фиг. 5.12 Таблица перекрестных ссылок для
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>программы Фиг. 5.6
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как может быть использован листинг
+перекрестных ссылок?
+
+<p><span
+style="mso-spacerun: yes">    </span>Перекрестные ссылки позволяют определить,
+в каком месте
+
+<p><span
+style="mso-spacerun: yes">    </span>используется каждое имя. Например, если
+переменная получает
+ Mincho"'><span
+style="mso-spacerun: yes">    </span>неверное значение, то листинг перекрестных
+ссылок показывает все
+
+<p><span
+style="mso-spacerun: yes">    </span>команды, где имеются ссылки на данное
+символическое имя. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>поможет определить те команды, с которыми
+связано неправильное
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнение программы. Возможно также, что
+вы занимаетесь
+
+<p><span
+style="mso-spacerun: yes">    </span>модификацией уже существующей программы,
+написанной кем-то другим
+
+<p><span
+style="mso-spacerun: yes">    </span>или же вами, но так давно, что вы успели
+забыть, как эта программа
+
+<p><span
+style="mso-spacerun: yes">    </span>работает. Если вы захотели изменить одну
+из подпрограмм, то вам
+
+<p><span
+style="mso-spacerun: yes">    </span>должно быть известно, какие части
+программы эту подпрограмму
+
+<p><span
+style="mso-spacerun: yes">    </span>используют. Листинг перекрестных ссылок
+показывает все команды CALL
+
+<p><span
+style="mso-spacerun: yes">    </span>(а так же другие команды, имеющие к этому
+отношение), в которых
+
+<p><span
+style="mso-spacerun: yes">    </span>есть ссылки на это символическое имя.
+Проанализировав
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующие места программы, вы можете
+решить: допустимо ли
+
+<p><span
+style="mso-spacerun: yes">    </span>вносимое изменение для всех тех участков,
+откуда вызввается данная
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмма. Листинг перекрестных ссылок
+значительно облегчает
+
+<p><span
+style="mso-spacerun: yes">    </span>задачу определения всех участков
+программы, содержащих ссылки.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

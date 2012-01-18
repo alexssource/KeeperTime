@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-12">Оператор Segment</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Решить проблему<span style="mso-spacerun:
+yes">  </span>адресации сегментов поможет ассемблер.<span style="mso-spacerun:
+yes">  </span>В одной из
+
+<p><span
+style="mso-spacerun: yes">    </span>своих<span style="mso-spacerun: yes"> 
+</span>частей<span style="mso-spacerun: yes">  </span>программа<span
+style="mso-spacerun: yes">  </span>на<span style="mso-spacerun: yes"> 
+</span>языке<span style="mso-spacerun: yes">  </span>ассемблера<span
+style="mso-spacerun: yes">  </span>должна<span style="mso-spacerun: yes"> 
+</span>определить
+
+<p><span
+style="mso-spacerun: yes">    </span>составляющие ее<span style="mso-spacerun:
+yes">  </span>сегменты. Кроме того<span style="mso-spacerun: yes"> 
+</span>специальные команды сообщают
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблеру,<span style="mso-spacerun:
+yes">  </span>какие сегменты<span style="mso-spacerun: yes">  </span>с
+каким<span style="mso-spacerun: yes">  </span>регистром связаны.<span
+style="mso-spacerun: yes">  </span>Благодаря
+
+<p><span
+style="mso-spacerun: yes">    </span>этому ассемблер может, когда требуется,
+определить какой сегментный
+
+<p><span
+style="mso-spacerun: yes">    </span>префикс нужен<span style="mso-spacerun:
+yes">  </span>в коде команды.<span style="mso-spacerun: yes">  </span>Если
+программист задает<span style="mso-spacerun: yes">  </span>ссылку, не
+
+<p><span
+style="mso-spacerun: yes">    </span>связанную<span style="mso-spacerun: yes"> 
+</span>с регистром<span style="mso-spacerun: yes">  </span>DS,<span
+style="mso-spacerun: yes">  </span>но<span style="mso-spacerun: yes"> 
+</span>доступную через<span style="mso-spacerun: yes">  </span>другой
+сегментный
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр,<span style="mso-spacerun: yes"> 
+</span>то<span style="mso-spacerun: yes">  </span>ассемблер<span
+style="mso-spacerun: yes">  </span>сам<span style="mso-spacerun: yes"> 
+</span>сформирует<span style="mso-spacerun: yes">  </span>правильный<span
+style="mso-spacerun: yes">  </span>префикс.<span style="mso-spacerun: yes"> 
+</span>Это
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет программисту работать
+непосредственно с данными и текстом
+
+<p><span
+style="mso-spacerun: yes">    </span>программы, оставив ассемблеру работу по
+осуществлению адресации.
+
+<p><span
+style='mso-tab-count:1'>      </span>Объявление сегментов позволяет ассемблеру
+следить за тем, какие
+
+<p><span
+style="mso-spacerun: yes">    </span>сегменты доступны через сегментные<span
+style='mso-tab-count:1'>    </span>регистры и определять возможные
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибки. Например,<span
+style="mso-spacerun: yes">  </span>в программе могут<span style="mso-spacerun:
+yes">  </span>появиться переменные, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>недоступны из-за того, что на<span
+style="mso-spacerun: yes">  </span>сегмент этой переменной не указывает
+
+<p><span
+style="mso-spacerun: yes">    </span>ни один<span style="mso-spacerun: yes"> 
+</span>из сегментных регистров.<span style="mso-spacerun: yes"> 
+</span>Ассемблер квалифицирует это<span style="mso-spacerun: yes">  </span>как
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+3'>              </span>1/1/80 03:53:05
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 3.9<span style="mso-spacerun: yes">  </span>Сегменты<span
+style='mso-tab-count:6'>                                </span>Page<span
+style='mso-tab-count:1'>  </span> 1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 3.9<span style="mso-spacerun: yes">  </span>Сегменты
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>DATA<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>01<span style='mso-tab-count:
+3'>                 </span><span style="mso-spacerun: yes">    </span>VAR1<span
+style="mso-spacerun: yes">    </span>DB<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>; Переменная в сегменте DATA
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0001<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>DATA<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>BUFFER<span style="mso-spacerun: yes"> 
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>02<span style='mso-tab-count:
+3'>                 </span><span style="mso-spacerun: yes">    </span>VAR2<span
+style="mso-spacerun: yes">    </span>DB<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>2<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>; Переменная в сегменте BUFFER
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0001<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>BUFFER<span style="mso-spacerun: yes"> 
+</span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>03<span style='mso-tab-count:
+3'>                 </span><span style="mso-spacerun: yes">    </span>VAR3<span
+style="mso-spacerun: yes">    </span>DB<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>3<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>; Переменная в сегменте CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE, DS:DATA, ES:BUFFER
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0001<span style="mso-spacerun: yes">  </span>FE 06 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>INC<span style="mso-spacerun: yes">     </span>VAR1<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    </span>;
+Переменная из сегмента DATA
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0005<span style="mso-spacerun: yes">  </span>26: FE 06 0000 R<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">   
+</span>INC<span style="mso-spacerun: yes">     </span>VAR2<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    </span>;
+Переменная из сегмента BUFFER
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000A<span style="mso-spacerun: yes">  </span>2E: FE 06 0000 R<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">   
+</span>INC<span style="mso-spacerun: yes">     </span>VAR3<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    </span>;
+Переменная из сегмента CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000F<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>Фиг. 3.9 Сегменты
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибку.<span style="mso-spacerun: yes"> 
+</span>Она возникает<span style="mso-spacerun: yes">  </span>из-за того,<span
+style="mso-spacerun: yes">  </span>что в<span style='mso-tab-count:1'>  </span>программе
+не обеспечена
+
+<p><span
+style="mso-spacerun: yes">    </span>адресуемость.<span style="mso-spacerun:
+yes">  </span>Это<span style='mso-tab-count:1'>  </span>ограничение,<span
+style="mso-spacerun: yes">  </span>но<span style="mso-spacerun: yes"> 
+</span>лучше<span style="mso-spacerun: yes">  </span>обнаружить<span
+style="mso-spacerun: yes">  </span>ошибку при
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблировании, чем во время работы
+программы.
+
+<p><span
+style='mso-tab-count:1'>      </span>Оператор SEGMENT определяет все<span
+style="mso-spacerun: yes">  </span>сегменты, давая каждому из них
+
+<p><span
+style="mso-spacerun: yes">    </span>имя.<span style="mso-spacerun: yes"> 
+</span>Программа на<span style='mso-tab-count:1'>  </span>Фиг. 3.9<span
+style="mso-spacerun: yes">  </span>демонстрирует определение<span
+style="mso-spacerun: yes">  </span>нескольких
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментов.<span style='mso-tab-count:1'>    </span>В
+качестве<span style="mso-spacerun: yes">  </span>имени сегмента<span
+style="mso-spacerun: yes">  </span>может использоваться<span
+style="mso-spacerun: yes">  </span>любое
+
+<p><span
+style="mso-spacerun: yes">    </span>допустимое имя переменной. Утверждение
+SEGMENT сообщает ассемблеру,
+
+<p><span
+style="mso-spacerun: yes">    </span>что<span style="mso-spacerun: yes"> 
+</span>все следующие<span style='mso-tab-count:1'>  </span>команды и данные во
+время<span style="mso-spacerun: yes">  </span>выполнения программы
+
+<p><span
+style="mso-spacerun: yes">    </span>будут<span style="mso-spacerun: yes"> 
+</span>находиться в<span style="mso-spacerun: yes">  </span>этом сегменте.<span
+style="mso-spacerun: yes">  </span>Оператор ENDS<span style='mso-tab-count:
+1'>      </span>указывает конец
+
+<p><span
+style="mso-spacerun: yes">    </span>текущего сегмента. В этом<span
+style="mso-spacerun: yes">  </span>утверждении тоже указывается имя сегмен-
+
+<p><span
+style="mso-spacerun: yes">    </span>та. Каждому утверждению<span
+style="mso-spacerun: yes">  </span>SEGMENT должно соответствовать утверждение
+
+<p><span
+style="mso-spacerun: yes">    </span>ENDS. В противном случае ассемблер
+запутается и выдаст сообщение об
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибке.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

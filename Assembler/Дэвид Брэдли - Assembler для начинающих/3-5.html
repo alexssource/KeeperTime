@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<body lang=RU style="'tab-interval:36.0pt'" background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-5">Вычисление адресов</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>В способе<span style="mso-spacerun: yes"> 
+</span>прямой адресации<span style="mso-spacerun: yes">  </span>памяти
+привлекательна<span style='mso-tab-count:1'>      </span>простота, но во
+
+<p><span
+style="mso-spacerun: yes">    </span>многих случаях программа вынуждена
+вычислять действительный адрес в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.<span style="mso-spacerun: yes"> 
+</span>Простейший<span style="mso-spacerun: yes">  </span>пример<span
+style="mso-spacerun: yes">  </span>-<span style="mso-spacerun: yes">  
+</span>операции<span style="mso-spacerun: yes">  </span>с<span
+style="mso-spacerun: yes">  </span>вектором,<span style="mso-spacerun: yes"> 
+</span>одномерным
+
+<p><span
+style="mso-spacerun: yes">    </span>массивом.<span style="mso-spacerun: yes"> 
+</span>В<span style="mso-spacerun: yes">  </span>программе<span
+style="mso-spacerun: yes">  </span>на<span style="mso-spacerun: yes"> 
+</span>языке<span style='mso-tab-count:1'>    </span>Фортран<span
+style="mso-spacerun: yes">  </span>такую<span style='mso-tab-count:1'>    </span>структуру
+можно
+
+<p><span
+style="mso-spacerun: yes">    </span>создать оператором
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DIMENTION<span style="mso-spacerun:
+yes">   </span>OPND(20)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>В других<span style="mso-spacerun: yes"> 
+</span>языках<span style="mso-spacerun: yes">  </span>высокого<span
+style='mso-tab-count:1'>      </span>уровня<span style='mso-tab-count:1'>      </span>существуют<span
+style="mso-spacerun: yes">  </span>аналогичные способы
+
+<p><span
+style="mso-spacerun: yes">    </span>создания<span style="mso-spacerun: yes"> 
+</span>массивов.<span style="mso-spacerun: yes">  </span>При<span
+style="mso-spacerun: yes">  </span>выполнении<span style="mso-spacerun: yes"> 
+</span>программа<span style="mso-spacerun: yes">  </span>получает<span
+style="mso-spacerun: yes">  </span>доступ к
+
+<p><span
+style="mso-spacerun: yes">    </span>разным<span style="mso-spacerun: yes"> 
+</span>элементам в<span style="mso-spacerun: yes">  </span>соответствии со<span
+style="mso-spacerun: yes">  </span>значением индекса,<span style="mso-spacerun:
+yes">  </span>например,
+
+<p><span
+style="mso-spacerun: yes">    </span>OPND(5).<span style="mso-spacerun: yes"> 
+</span>Написание<span style="mso-spacerun: yes">  </span>программы<span
+style="mso-spacerun: yes">  </span>на<span style='mso-tab-count:1'>    </span>
+языке<span style='mso-tab-count:1'>      </span>ассемблера<span
+style="mso-spacerun: yes">  </span>требует<span style="mso-spacerun: yes"> 
+</span>от
+
+<p><span
+style="mso-spacerun: yes">    </span>программиста<span style="mso-spacerun:
+yes">  </span>вычисления<span style="mso-spacerun: yes"> 
+</span>местонахождения<span style="mso-spacerun: yes">  </span>пятого<span
+style="mso-spacerun: yes">  </span>элемента<span style="mso-spacerun: yes"> 
+</span>в поле
+
+<p><span
+style="mso-spacerun: yes">    </span>данных OPND. Затем программа может
+использовать полученное значение
+
+<p><span
+style="mso-spacerun: yes">    </span>для прямой адресации. Однако, в<span
+style="mso-spacerun: yes">  </span>случае с выражением OPND(I), где I
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисляется в<span style="mso-spacerun:
+yes">  </span>ходе выполнения программы,<span style="mso-spacerun: yes"> 
+</span>способа прямого указания
+
+<p><span
+style="mso-spacerun: yes">    </span>правильного адреса для программы на языке
+ассемблера не существует.
+
+<p><span
+style="mso-spacerun: yes">    </span>Адрес должен вычисляться в ходе выполнения
+программы.
+
+<p><span
+style='mso-tab-count:1'>      </span>Набор команд 8088 допускает<span
+style="mso-spacerun: yes">  </span>несколько способов определения ис-
+
+<p><span
+style="mso-spacerun: yes">    </span>полнительного адреса (Effective Address -
+EA) операнда. Эти способы
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисления<span style='mso-tab-count:1'>    </span>адреса<span
+style='mso-tab-count:1'>      </span>называют<span style="mso-spacerun: yes"> 
+</span>способами<span style="mso-spacerun: yes">  </span>адресации.<span
+style="mso-spacerun: yes">  </span>Их<span style="mso-spacerun: yes"> 
+</span>количество
+
+<p><span
+style="mso-spacerun: yes">    </span>предназначено<span style="mso-spacerun:
+yes">  </span>для<span style='mso-tab-count:1'>  </span>облегчения<span
+style="mso-spacerun: yes">  </span>задачи<span style="mso-spacerun: yes"> 
+</span>определения<span style="mso-spacerun: yes">  </span>исполнительных
+
+<p><span
+style="mso-spacerun: yes">    </span>адресов. Благодаря правильному выбору
+способа адресации программист
+
+<p><span
+style="mso-spacerun: yes">    </span>может минимизировать количество вычислений
+в программе.
+
+<p><span
+style='mso-tab-count:1'>      </span>Формула для определения I-го элемента
+массива OPND такова:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>EA = адрес базы OPND + (I * длина),
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>где длина<span style="mso-spacerun: yes"> 
+</span>- это длина<span style="mso-spacerun: yes">  </span>каждого элемента
+массива.<span style="mso-spacerun: yes">  </span>В данном примере
+
+<p><span
+style="mso-spacerun: yes">    </span>OPND<span style="mso-spacerun: yes"> 
+</span>- массив,<span style="mso-spacerun: yes">  </span>состоящий из<span
+style="mso-spacerun: yes">  </span>слов, поэтому<span style="mso-spacerun:
+yes">  </span>каждый элемент<span style="mso-spacerun: yes">  </span>в нем
+
+<p><span
+style="mso-spacerun: yes">    </span>имеет длину 2 байта. Тогда формула
+выглядит так:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>EA = адрес базы + (I * 2)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для вычисления этого адреса требуется по
+крайней мере один<span style="mso-spacerun: yes">  </span>ре-
+
+<p><span
+style="mso-spacerun: yes">    </span>гистр,<span style="mso-spacerun: yes"> 
+</span>содержащий адрес операнда. Программа может вычислить испол-
+
+<p><span
+style="mso-spacerun: yes">    </span>нительный адрес, оставив результат в<span
+style="mso-spacerun: yes">  </span>одном<span style="mso-spacerun: yes"> 
+</span>из<span style="mso-spacerun: yes">  </span>регистров.<span
+style="mso-spacerun: yes">  </span>Тогда,
+
+<p><span
+style="mso-spacerun: yes">    </span>вместо указния адреса в самой команде INC,<span
+style='mso-tab-count:1'>  </span>можно<span style="mso-spacerun: yes"> 
+</span>просто<span style="mso-spacerun: yes">  </span>указать,
+
+<p><span
+style="mso-spacerun: yes">    </span>какой из регистров его содержит.
+
+<p><span
+style='mso-tab-count:1'>      </span>Для хранения адресов операндов программа
+может использовать лю-
+
+<p><span
+style="mso-spacerun: yes">    </span>бой<span style="mso-spacerun: yes"> 
+</span>из<span style="mso-spacerun: yes">  </span>четырех адресных регистров.
+Так, в нашем примере программа
+
+<p><span
+style="mso-spacerun: yes">    </span>добавляет к адресу базы 2*I и помещает
+результат в регистр BX.<span style="mso-spacerun: yes">  </span>Со-
+
+<p><span
+style="mso-spacerun: yes">    </span>ответствующий элемент вектора в этом
+случае будет увеличиваться ко-
+
+<p><span
+style="mso-spacerun: yes">    </span>мандой
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>INC<span style="mso-spacerun: yes">   
+</span>WORD PTR [BX]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Выражение [BX] сообщает ассемблеру, что
+регистр BX содержит ад-
+
+<p><span
+style="mso-spacerun: yes">    </span>рес операнда,<span style="mso-spacerun:
+yes">  </span>а не является операндом<span style="mso-spacerun: yes"> 
+</span>сам по себе. Скобки<span style="mso-spacerun: yes">  </span>[ и ],
+
+<p><span
+style="mso-spacerun: yes">    </span>заключающие<span style="mso-spacerun:
+yes">  </span>какое-либо<span style="mso-spacerun: yes">  </span>значение,<span
+style='mso-tab-count:1'>    </span>указывают<span style="mso-spacerun: yes"> 
+</span>ассемблеру,<span style='mso-tab-count:1'>  </span>что это
+
+<p><span
+style="mso-spacerun: yes">    </span>значение<span style="mso-spacerun: yes"> 
+</span>- адрес.<span style='mso-tab-count:1'>  </span>Другая часть<span
+style="mso-spacerun: yes">  </span>операндного выражения,<span
+style="mso-spacerun: yes">  </span>WORD PTR,
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется<span style='mso-tab-count:1'>     </span>ассемблеру<span
+style="mso-spacerun: yes">   </span>для<span style="mso-spacerun: yes">  
+</span>информации,<span style='mso-tab-count:1'>      </span> что<span
+style="mso-spacerun: yes">  </span>операнд<span style="mso-spacerun: yes"> 
+</span>является
+
+<p><span
+style="mso-spacerun: yes">    </span>переменной типа<span style="mso-spacerun:
+yes">  </span>WORD (слово). Далее мы<span style="mso-spacerun: yes"> 
+</span>обсудим оператор PTR более
+
+<p><span
+style="mso-spacerun: yes">    </span>подробно.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

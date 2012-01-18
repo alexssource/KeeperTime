@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-4-10">Символьная коррекция: деление
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Так же, как и другие арифметические
+операции, деление имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующую команду для обслуживания
+распакованных десятичных
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел.<span style="mso-spacerun: yes"> 
+</span>Однако в отличие от других команд, програииа должна
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнять команду символьной коррекции
+деления AAD до выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>команды деления.<span style="mso-spacerun:
+yes">  </span>Команда AAD берет две цифры распакованного
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичного числа из регистра AX (старшая
+значащая цифра адресуется
+
+<p><span
+style="mso-spacerun: yes">    </span>в регистре AH) и преобразует его в
+двоичное число в регистре AL,
+
+<p><span
+style="mso-spacerun: yes">    </span>оставляя в регистре AH нуль.<span
+style="mso-spacerun: yes">  </span>После этого в регистре AX оказывается
+
+<p><span
+style="mso-spacerun: yes">    </span>значение, готовое для деления на
+десятичное распакованное число,
+
+<p><span
+style="mso-spacerun: yes">    </span>состоящее из одной цифры.<span
+style="mso-spacerun: yes">  </span>Команда AAD устанавливает коды условия в
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствии с результатом в регистре
+AL.<span style="mso-spacerun: yes">  </span>Флаги нечетности, знака
+
+<p><span
+style="mso-spacerun: yes">    </span>и нуля соответствуют значению AL, а
+остальные неизвестны.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Есть случаи, когда после деления может
+оказаться, что частное -
+
+<p><span
+style="mso-spacerun: yes">    </span>это не одна десятичная цифра. Так
+получается потому, что в этом
+
+<p><span
+style="mso-spacerun: yes">    </span>случае переполнение после деления не
+регистрируется. В худшем
+
+<p><span
+style="mso-spacerun: yes">    </span>случае 99 делится на 1, давая частное 99,
+число, меньшее
+
+<p><span
+style="mso-spacerun: yes">    </span>максимального как для команды DIV, так и
+для команды IDIV, так что
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнение не возникает. Однако это
+число больше максимального
+
+<p><span
+style="mso-spacerun: yes">    </span>распакованного десятичного числа из одной
+цифры, которое равно 9.
+
+<p><span
+style="mso-spacerun: yes">    </span>Существует два метода борьбы с таким
+случаем. Во=первых, после
+
+<p><span
+style="mso-spacerun: yes">    </span>каждой последовательности команд AAD=DIV
+можно проверять, не
+
+<p><span
+style="mso-spacerun: yes">    </span>превысило ли частное 9, и вызывать
+соответствующую обработку
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнения. Или программа может
+использовать команду AAM после
+
+<p><span
+style="mso-spacerun: yes">    </span>деления, чтобы преобразовать частное в распакованное
+десятичное
+
+<p><span
+style="mso-spacerun: yes">    </span>число из двух цифр. Но в этом случае
+программа должна где=либо
+
+<p><span
+style="mso-spacerun: yes">    </span>сохранить остаток до выполнения команды
+AAM, так как она разрушит
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое регистра AH. Этот способ
+порождает десятичный результат,
+
+<p><span
+style="mso-spacerun: yes">    </span>состоящий из двух цифр, после деления
+значения из двух цифр на
+
+<p><span
+style="mso-spacerun: yes">    </span>число из одной цифры. Но если
+распакованный десятичный делитель
+
+<p><span
+style="mso-spacerun: yes">    </span>нулевой, то деление вызовет прерывание по
+делению на нуль,
+
+<p><span
+style="mso-spacerun: yes">    </span>показывая, что произошло переполнение при
+делении.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

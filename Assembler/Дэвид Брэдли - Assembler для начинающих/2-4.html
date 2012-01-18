@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="2-4">Машинный язык и язык Ассемблера</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Мы уже видели, как из нулей и единиц,
+хранимых в ЭВМ, формируются
+
+<p><span
+style="mso-spacerun: yes">    </span>числа.Теперь мы посмотрим как комбинации
+тех же значений 0 и 1
+
+<p><span
+style="mso-spacerun: yes">    </span>могут быть использованы для
+программирования компьютера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Машинная программа представляет собой
+последовательность ко-
+
+<p><span
+style="mso-spacerun: yes">    </span>манд (инструкций).<span style='mso-tab-count:
+1'>  </span>Эти команды &quot;объясняют&quot; компьютеру, что он
+
+<p><span
+style="mso-spacerun: yes">    </span>должен делать.<span style="mso-spacerun:
+yes">  </span>Это похоже на рецепты в кулинарной книге.<span
+style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>рецепте имеется описание действий, которые
+необходимы для
+
+<p><span
+style="mso-spacerun: yes">    </span>приготовления определенного блюда.<span
+style='mso-tab-count:1'>    </span>Подобным образом, компьютер
+
+<p><span
+style="mso-spacerun: yes">    </span>имеет последовательность команд, которые
+точно описывают ему
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательность действий.<span
+style="mso-spacerun: yes">  </span>Этот набор команд называется
+
+<p><span
+style="mso-spacerun: yes">    </span>программой.<span style="mso-spacerun:
+yes">  </span>Процесс построения корректного набора команд
+
+<p><span
+style="mso-spacerun: yes">    </span>называют программированием
+компьютера.<span style="mso-spacerun: yes">  </span>В нашей аналогии с рецептом
+
+<p><span
+style="mso-spacerun: yes">    </span>рецепт является программой, а тот кто его
+написал - программистом.
+
+<p><span
+style="mso-spacerun: yes">    </span>Роль компьютера здесь играет повар,
+готовящий еду.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Реальная программа, которую выполняет
+компьютер, это последова-
+
+<p><span
+style="mso-spacerun: yes">    </span>тельность едениц и нулей, связанных с
+памятью компьютера. Эту стро-
+
+<p><span
+style="mso-spacerun: yes">    </span>ку бит принято называть машинным языком.
+Машинный язык<span style="mso-spacerun: yes">  </span>-<span
+style="mso-spacerun: yes">  </span>это<span style="mso-spacerun: yes"> 
+</span>тот
+
+<p><span
+style="mso-spacerun: yes">    </span>язык который машина понимает. Компьютер
+извлекает команды машинного
+
+<p><span
+style="mso-spacerun: yes">    </span>языка из памяти точно определенным
+способом. Затем компьютер выпол-
+
+<p><span
+style="mso-spacerun: yes">    </span>няет команду, обозначенную данной
+конфигурацией бит. Этот цикл изв-
+
+<p><span
+style="mso-spacerun: yes">    </span>лечения и исполнения будет разобран в
+одном из последующих разделов
+
+<p><span
+style="mso-spacerun: yes">    </span>данной главы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Однако машинный язык мало о чем говорит
+людям.<span style='mso-tab-count:1'>  </span>Если вы хотите
+
+<p><span
+style="mso-spacerun: yes">    </span>сложить два числа в 8088 (например,
+содержимое регистров AX BX -
+
+<p><span
+style="mso-spacerun: yes">    </span>краткое описание регистров сейчас
+последует), команда будет
+
+<p><span
+style="mso-spacerun: yes">    </span>выглядеть таким образом:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>0000001111000011B<span
+style="mso-spacerun: yes">  </span>(или 03C3H)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Эти два байта точно указывают компьютеру
+какую опреацию произвести.
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогично, для вычитания двух чисел
+(вычитание регистра BX из ре-
+
+<p><span
+style="mso-spacerun: yes">    </span>гистра AX) мы будем иметь в машинном языке
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>0010101111000011B<span
+style="mso-spacerun: yes">  </span>(или 2BC3H)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Здесь необходимо коротко пояснить, что
+такое регистры, поскольку в
+
+<p><span
+style="mso-spacerun: yes">    </span>обсуждении основ работы 8088 с ними
+приходится чато сталкиваться.
+
+<p><span
+style="mso-spacerun: yes">    </span>Регистр - это часть процессора,
+предназанченная для сохранения дан-
+
+<p><span
+style="mso-spacerun: yes">    </span>ных.<span style="mso-spacerun: yes"> 
+</span>К данным, сохраненным в регистре, процессор получает доступ
+
+<p><span
+style="mso-spacerun: yes">    </span>очень быстро - намного быстрее, чем к
+данным, хранимым в памяти.
+
+<p><span
+style="mso-spacerun: yes">    </span>Возможно еще специальное использование
+регистров в некоторых коман-
+
+<p><span
+style="mso-spacerun: yes">    </span>дах.<span style="mso-spacerun: yes"> 
+</span>В третьей главе будет дано полное описание регистров 8088.
+
+<p><span
+style='mso-tab-count:1'>      </span>Хотя машинный язык - это действительно
+прекрасно, если вы явля-
+
+<p><span
+style="mso-spacerun: yes">    </span>етесь компьютером, он труден для
+программистов - людей.<span style="mso-spacerun: yes">  </span>К счастью,
+
+<p><span
+style="mso-spacerun: yes">    </span>существует более простой способ
+программирования.<span style="mso-spacerun: yes">  </span>Этим методом,
+
+<p><span
+style="mso-spacerun: yes">    </span>более близким людям, чем машинам, является
+программирование на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке ассемблера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Язык ассемблера, как язык
+программирования, т.е. более понятный
+
+<p><span
+style="mso-spacerun: yes">    </span>программисту, чем<span
+style="mso-spacerun: yes">  </span>машинный, язык, все<span
+style="mso-spacerun: yes">  </span>еще сохраняет все <span style="mso-spacerun:
+yes"> </span>значения
+
+<p><span
+style="mso-spacerun: yes">    </span>машинного языка.<span style="mso-spacerun:
+yes">  </span>Компьютер читает программы на<span style="mso-spacerun: yes"> 
+</span>языке ассемблера и
+
+<p><span
+style="mso-spacerun: yes">    </span>переводит их в машинный язык, в ту форму,
+которая понятна ЭВМ. Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>процесс,<span style="mso-spacerun: yes">  
+</span>называемый<span style="mso-spacerun: yes">  
+</span>&quot;ассемблированием&quot;<span style="mso-spacerun: yes">  
+</span>программы,<span style="mso-spacerun: yes">  </span>фактически
+
+<p><span
+style="mso-spacerun: yes">    </span>является переводом<span style='mso-tab-count:
+1'>  </span>с одного языка<span style='mso-tab-count:1'>    </span>на другой.
+Операцию<span style="mso-spacerun: yes">  </span>перевода с
+
+<p><span
+style="mso-spacerun: yes">    </span>языка ассемблера<span style="mso-spacerun:
+yes">  </span>на машинный язык<span style='mso-tab-count:1'>    </span>выполняет
+программа, называемая
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблером.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Чтобы лучше понять разницу, давайте
+взглянем на примеры,
+
+<p><span
+style="mso-spacerun: yes">    </span>которыми мы уже пользовались выше.<span
+style='mso-tab-count:1'>    </span>Ассемблерная команда для
+
+<p><span
+style="mso-spacerun: yes">    </span>сложения содержимого регистров AX и BX
+проста:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>ADD<span style="mso-spacerun: yes">  
+</span>AX,BX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогично, для вычитания регистра BX из
+регистра AX мы напишем:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>SUB<span style="mso-spacerun: yes">  
+</span>AX,BX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Ассемблер превращает эти предложения в
+форму, которую мы видели вы-
+
+<p><span
+style="mso-spacerun: yes">    </span>ше.<span style="mso-spacerun: yes"> 
+</span>Компьютер сам управляется с проблемой превращения файла с по-
+
+<p><span
+style="mso-spacerun: yes">    </span>нятным человеку текстом в программу на
+машинном языке, которую мог
+
+<p><span
+style="mso-spacerun: yes">    </span>бы выполнить процессор.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Язык ассемблера не похож на языки типа
+Фортран, Кобол или
+
+<p><span
+style="mso-spacerun: yes">    </span>Паскаль.<span style="mso-spacerun: yes"> 
+</span>Эти языки, как и многие подобные им, являются языками
+
+<p><span
+style="mso-spacerun: yes">    </span>высокого уровня.<span style="mso-spacerun:
+yes">  </span>Языки высокого уровня разработаны для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>можно было иметь дело непосредственно с
+задачей, решаемой
+
+<p><span
+style="mso-spacerun: yes">    </span>программой.<span style="mso-spacerun:
+yes">  </span>В этом качестве они иногда называются процедурными
+
+<p><span
+style="mso-spacerun: yes">    </span>языками, поскольку описывают процедуру,
+используемую для решения
+
+<p><span
+style="mso-spacerun: yes">    </span>задачи.<span style="mso-spacerun: yes"> 
+</span>Языки высокого уровня машинно-независимы.<span style='mso-tab-count:
+1'>      </span>Программа,
+
+<p><span
+style="mso-spacerun: yes">    </span>написанная на Фортране для IBM PC будет
+правильно работать и давать
+
+<p><span
+style="mso-spacerun: yes">    </span>те же самые результаты при выполнении на
+IBM/370.<span style="mso-spacerun: yes">  </span>язык
+
+<p><span
+style="mso-spacerun: yes">    </span>программирования не зависит от машины.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Програмы же на языке ассемблера
+непосредственно относятся к той
+
+<p><span
+style="mso-spacerun: yes">    </span>машине, на которой они должны выполняться.
+Язык<span style="mso-spacerun: yes">  </span>ассемблера<span
+style="mso-spacerun: yes">  </span>машин-
+
+<p><span
+style="mso-spacerun: yes">    </span>нозависимый. Язык<span
+style="mso-spacerun: yes">  </span>ассемблера для IBM<span style="mso-spacerun:
+yes">  </span>PC принципиально отличен<span style="mso-spacerun: yes"> 
+</span>от
+
+<p><span
+style="mso-spacerun: yes">    </span>языка ассемблера для IBM/370. Это<span
+style="mso-spacerun: yes">  </span>связано с тем, что команды языка
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера<span style='mso-tab-count:1'>    </span>почти
+один<span style="mso-spacerun: yes">  </span>к<span style="mso-spacerun: yes"> 
+</span>одному<span style="mso-spacerun: yes">  </span>переводятся в<span
+style="mso-spacerun: yes">  </span>команды машинного
+
+<p><span
+style="mso-spacerun: yes">    </span>языка<span style="mso-spacerun: yes"> 
+</span>т.е. каждая<span style='mso-tab-count:1'>  </span>команда языка<span
+style="mso-spacerun: yes">  </span>ассемблера обычно<span style="mso-spacerun:
+yes">  </span>преобразуется
+
+<p><span
+style="mso-spacerun: yes">    </span>точно<span style="mso-spacerun: yes"> 
+</span>в одну<span style="mso-spacerun: yes">  </span>команду<span
+style="mso-spacerun: yes">  </span>машинного<span style="mso-spacerun: yes"> 
+</span>языка. Поскольку<span style="mso-spacerun: yes">  </span>машинные языки
+
+<p><span
+style="mso-spacerun: yes">    </span>разных<span style="mso-spacerun: yes"> 
+</span>компьютеров различны,<span style="mso-spacerun: yes">  </span>то
+различаются<span style="mso-spacerun: yes">  </span>и языки<span
+style="mso-spacerun: yes">  </span>ассемблера.
+
+<p><span
+style="mso-spacerun: yes">    </span>Обычно каждое утверждение языка<span
+style="mso-spacerun: yes">  </span>ассемблера генерирует одну команду
+
+<p><span
+style="mso-spacerun: yes">    </span>машинного<span style="mso-spacerun: yes"> 
+</span>языка.<span style="mso-spacerun: yes">  </span>В<span
+style="mso-spacerun: yes">  </span>некоторых<span style="mso-spacerun: yes"> 
+</span>случаях<span style="mso-spacerun: yes">  </span>это<span
+style="mso-spacerun: yes">  </span>не<span style="mso-spacerun: yes"> 
+</span>так,<span style="mso-spacerun: yes">  </span>потому что
+
+<p><span
+style="mso-spacerun: yes">    </span>существуют команды, которые не являются
+частью выполняемой програм-
+
+<p><span
+style="mso-spacerun: yes">    </span>мы, а предназачены для ассемблера. Они
+описывают действия ассембле-
+
+<p><span
+style="mso-spacerun: yes">    </span>ра, который<span style="mso-spacerun:
+yes">  </span>должен выполнять их<span style="mso-spacerun: yes">  </span>во
+время ассемблирования.<span style="mso-spacerun: yes">  </span>Пример
+
+<p><span
+style="mso-spacerun: yes">    </span>директивы<span style="mso-spacerun: yes"> 
+</span>ассемблеру<span style="mso-spacerun: yes">   </span>(такой<span
+style="mso-spacerun: yes">  </span>предназначенной<span style="mso-spacerun:
+yes">  </span>только<span style="mso-spacerun: yes">   </span>для<span
+style="mso-spacerun: yes">  </span>него
+
+<p><span
+style="mso-spacerun: yes">    </span>команды) -
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>TITLE<span style='mso-tab-count:1'> </span>Пример
+Программы
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Эта инструкция сообщает ассемблеру
+заголовок программы.<span style="mso-spacerun: yes">  </span>После
+
+<p><span
+style="mso-spacerun: yes">    </span>трансляции ассемблером прграммы этот
+заголовок - &quot;Пример
+
+<p><span
+style="mso-spacerun: yes">    </span>программы&quot;- появляется в верхней
+части каждой страницы сообщений
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера.<span style="mso-spacerun:
+yes">  </span>Эта инструкция имеет смысл только для ассемблера.<span
+style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 нет команды, которая могла бы
+выполнить эту опреацию.
+
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

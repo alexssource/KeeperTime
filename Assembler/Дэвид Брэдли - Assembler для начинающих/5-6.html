@@ -1,0 +1,2338 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="5-6">Блок управления файлом (FCB)</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Прежде, чем перейти к упомянутому примеру,
+необходимо рассмотреть
+
+<p><span
+style="mso-spacerun: yes">    </span>формируемую DOS структуру данных - блок
+управления файлом FCB (File
+
+<p><span
+style="mso-spacerun: yes">    </span>Control Block), который является
+существенным элементом файловой
+
+<p><span
+style="mso-spacerun: yes">    </span>системы и участвует во всех файловых
+операциях.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Блок управления файлом обеспечивает связь
+пользовательской
+
+<p><span
+style="mso-spacerun: yes">    </span>программы с функциями DOS. При любой
+файловой операции происходит
+
+<p><span
+style="mso-spacerun: yes">    </span>обращение к блоку FCB. На Фиг.5.5 показан
+состав стандартного
+
+<p><span
+style="mso-spacerun: yes">    </span>блока FCB. Имеется модификация блока FCB,
+называемая расширенным
+
+<p><span
+style="mso-spacerun: yes">    </span>блоком FCB, которая применяется в
+специальных случаях, когда нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;скрыть&quot; файл. Скрытый файл
+защищен от записи. Это значит, что
+
+<p><span
+style="mso-spacerun: yes">    </span>программа не может модифицировать
+содержимое этого файла, не
+
+<p><span
+style="mso-spacerun: yes">    </span>изменив предварительно его блока FCB.
+Скрытый файл не фигурирует в
+
+<p><span
+style="mso-spacerun: yes">    </span>листинге справочника. Скрыть файл - один
+из простейших способов
+
+<p><span
+style="mso-spacerun: yes">    </span>защиты файла от неумелого пользователя. В
+приводимых примерах
+
+<p><span
+style="mso-spacerun: yes">    </span>используются только стандартные блоки FCB.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поля данных блока FCB охватывают все
+атрибуты файла. Номер
+
+<p><span
+style="mso-spacerun: yes">    </span>дисковода, имя и тип файла составляют
+идентификатор файла. Размер
+
+<p><span
+style="mso-spacerun: yes">    </span>файла и дата яаляются атрибутами файла,
+которые приводятся в
+
+<p><span
+style="mso-spacerun: yes">    </span>листинге справочника. Оставшиеся поля -
+текущий номер блока, длина
+
+<p><span
+style="mso-spacerun: yes">    </span>записи и номер записи при произвольном
+доступе - служат для
+
+<p><span
+style="mso-spacerun: yes">    </span>определения местоположения внутри файла при
+операциях чтения и
+
+<p><span
+style="mso-spacerun: yes">    </span>записи. Длина записи указывает на число
+байтов в определяемой
+
+<p><span
+style="mso-spacerun: yes">    </span>пользователем записи. Так как все операции
+чтения и записи в файл
+
+<p><span
+style="mso-spacerun: yes">    </span>начинаются с границы записи, то длина
+записи определяет количество
+
+<p><span
+style="mso-spacerun: yes">    </span>данных, обрабатываемых во время каждой из
+этих операций.
+
+<p><span
+style='mso-tab-count:1'>      </span>Существуют два способа определения текущей
+записи при обращении
+
+<p><span
+style="mso-spacerun: yes">    </span>к файлу. При первом, последовательном,
+способе записи
+
+<p><span
+style="mso-spacerun: yes">    </span>обрабатываются по порядку. При этом
+текущий номер блока и
+
+<p><span
+style="mso-spacerun: yes">    </span>относительный номер записи определяют
+запись, которая будет
+
+<p><span
+style="mso-spacerun: yes">    </span>обрабатываться следующей. По мере того,
+как программа выполняет
+
+<p><span
+style="mso-spacerun: yes">    </span>операции чтения или записи, DOS
+увеличивает на 1 относительный
+
+<p><span
+style="mso-spacerun: yes">    </span>номер записи, чтобы он указывал на
+следующую запись. Выполнение
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ЪДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>0 і<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+6'>                                    </span><span style="mso-spacerun:
+yes">      </span>Номер носителя
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДЕДДДДВДДДДВДДДДВДДДДВДДДДВДДДДВДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>1 і<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>      </span>і<span style="mso-spacerun: yes">    </span>і<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>     </span> і<span
+style="mso-spacerun: yes">    </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>Имя файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДЕДДДДЕДДДДЕДДДДБДДДДБДДДДБДДДДБДДДДЩ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>9 і<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>      </span>і<span style="mso-spacerun: yes">    </span>і<span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>Расширение
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДЕДДДДЕДДДДЩ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>0С і<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>      </span>і<span style='mso-tab-count:5'>                             </span><span
+style="mso-spacerun: yes">      </span>Текущий блок
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДЕДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>0E і<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>      </span>і<span style='mso-tab-count:5'>                             </span><span
+style="mso-spacerun: yes">      </span>Размер записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДЕДДДДЕДДДДВДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>10 і<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>      </span>і<span style="mso-spacerun: yes">    </span>і<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:4'>                     </span><span style="mso-spacerun:
+yes">      </span>Размер файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДЕДДДДЕДДДДБДДДДЩ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>14 і<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>      </span>і<span style='mso-tab-count:5'>                             </span><span
+style="mso-spacerun: yes">      </span>Дата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДЕДДДДЕДДДДВДДДДВДДДДВДДДДВДДДДВДДДДВДДДДВДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>16 і<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>      </span>і<span style="mso-spacerun: yes">    </span>і<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>     </span> і<span
+style="mso-spacerun: yes">    </span>і<span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'>      </span> і<span style="mso-spacerun:
+yes">    </span>Зарезервировано
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДЕДДДДБДДДДБДДДДБДДДДБДДДДБДДДДБДДДДБДДДДБДДДДДЩ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>20 і<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+6'>                                    </span><span style="mso-spacerun:
+yes">      </span>Относительная запись
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДЕДДДДВДДДДВДДДДї<span style='mso-tab-count:4'>                     </span><span
+style="mso-spacerun: yes">       </span>(нумерация в блоке)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>21 і<span style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:
+1'>      </span>і<span style="mso-spacerun: yes">    </span>і<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:4'>                     </span><span style="mso-spacerun:
+yes">      </span>Номер записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>АДДДДБДДДДБДДДДБДДДДЩ<span style='mso-tab-count:4'>                     </span><span
+style="mso-spacerun: yes">       </span>прямого доступа
+
+<p>&#18;
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>Фиг. 5.5 Блок управления файлом
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательных операций идет в
+направлении от начала к концу
+
+<p><span
+style="mso-spacerun: yes">    </span>файла. Примером последовательного файла
+служит программный файл на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке ассемблера. Ассемблер осуществляет
+чтение записей от начала
+
+<p><span
+style="mso-spacerun: yes">    </span>до конца этого файла.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа может обращаться к файлу,
+используя также и
+
+<p><span
+style="mso-spacerun: yes">    </span>произвольный доступ. Произвольный в данном
+случае не означает, что
+
+<p><span
+style="mso-spacerun: yes">    </span>запись выбирается случайным образом.
+Наоборот, это значит, что
+
+<p><span
+style="mso-spacerun: yes">    </span>программа может выбрать в качестве
+следующей любую запись в файле.
+
+<p><span
+style="mso-spacerun: yes">    </span>По-другому такой файл называют файлом с
+прямым доступом, так как у
+
+<p><span
+style="mso-spacerun: yes">    </span>программы имеется непосредственный доступ
+к любой записи.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа может обращаться к файлу любым
+из двух указанных
+
+<p><span
+style="mso-spacerun: yes">    </span>способов. При последовательных операциях
+DOS автоматически изменяет
+
+<p><span
+style="mso-spacerun: yes">    </span>в блоке FCB значение поля относительного
+номера записи. При
+
+<p><span
+style="mso-spacerun: yes">    </span>произвольном доступе к файлу номер записи
+должен определяться
+
+<p><span
+style="mso-spacerun: yes">    </span>программой. В файловой системе файл с
+произвольным доступом
+
+<p><span
+style="mso-spacerun: yes">    </span>является аналогом вектора. Точно так же,
+как для обращения к любому
+
+<p><span
+style="mso-spacerun: yes">    </span>элементу вектора программа должна задать
+значение соответствующего
+
+<p><span
+style="mso-spacerun: yes">    </span>индекса, так и при обращение к записи в
+файле с произвольным
+
+<p><span
+style="mso-spacerun: yes">    </span>доступом номер записи должен определяться
+программой.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Теперь можно рассмотреть пример программы,
+использующей блок
+
+<p><span
+style="mso-spacerun: yes">    </span>FCB и функции DOS. На Фиг. 5.6 приведена
+длинная программа, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>реально мало что делает. Ее цель -
+продемонстрировать использование
+
+<p><span
+style="mso-spacerun: yes">    </span>блока FCB и функци DOS, связанных с
+прерыванием 21H. Однако
+
+<p><span
+style="mso-spacerun: yes">    </span>содержащиеся в этой программе операции
+могут применяться в реальных
+
+<p><span
+style="mso-spacerun: yes">    </span>задачах.
+
+<p><span style='mso-tab-count:1'>      </span><span
+style='mso-fareast-font-family:"MS Mincho"'><span style="mso-spacerun:
+yes">      </span>Microsoft (R) Macro Assembler Version 5.00<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">  
+</span>1/1/80 04:02:12
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 5.6 Пример использования функций ДОС <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>Page<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 5.6 Пример использования функций ДОС
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>005C<span style='mso-tab-count:4'>                   </span><span
+style="mso-spacerun: yes">      </span>ORG<span style="mso-spacerun: yes">    
+</span>05CH<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">      </span>; Положение первого поля FCB
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>005C<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>FCB<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">      </span>LABEL<span style="mso-spacerun: yes">  
+</span>BYTE<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>; Метка всего поля FCB
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>005C<span style="mso-spacerun: yes">  </span>?? <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">      </span>FCB_DRIVE <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span><span
+style="mso-spacerun: yes"> </span>DB<span style="mso-spacerun: yes">     
+</span>? <span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">      </span>; Номер устройства
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>005D<span style="mso-spacerun: yes">  </span>0008[<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>FCB_NAME<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">      </span>DB<span style="mso-spacerun: yes">     
+</span>8 DUP (?)<span style="mso-spacerun: yes">       </span>; Имя файла
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>??
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">       </span>]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0065<span style="mso-spacerun: yes">  </span>0003[<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>FCB_EXT<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">      </span>DB<span style="mso-spacerun: yes">     
+</span>3 DUP (?)<span style="mso-spacerun: yes">       </span>; Тип файла
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>??
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">       </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0068<span style="mso-spacerun: yes">  </span>????<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">      </span>FCB_BLOCK <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">      </span>DW<span style="mso-spacerun: yes">      </span>? <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">      </span>;
+Номер текущего блока
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>006A<span style="mso-spacerun: yes">  </span>????<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">      </span>FCB_RECORD_SIZE<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>DW<span style="mso-spacerun: yes">      </span>? <span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">      </span>; Размер записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>006C<span style="mso-spacerun: yes">  </span>????????<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>FCB_FILE_SIZE<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">      </span>DD<span style="mso-spacerun: yes">     
+</span>? <span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">      </span>; Размер файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0070<span style="mso-spacerun: yes">  </span>????<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">      </span>FCB_DATE<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">     
+</span>DW<span style="mso-spacerun: yes">      </span>? <span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">      </span>; Дата последнего
+изменения
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0072<span style="mso-spacerun: yes">  </span>000A[<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>FCB_RESV<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">      </span>DB<span style="mso-spacerun: yes">     
+</span>10 DUP (?)<span style="mso-spacerun: yes">      </span>; Зарезервировано
+ДОС
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>??
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">       </span>]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>007C<span style="mso-spacerun: yes">  </span>?? <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun:
+yes">      </span>FCB_CURRENT_RECORD<span style="mso-spacerun: yes">     
+</span>DB<span style="mso-spacerun: yes">      </span>?<span
+style="mso-spacerun: yes">       </span>; Номер текущей записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>007D<span style="mso-spacerun: yes">  </span>????????<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>FCB_RANDOM_RECORD<span style="mso-spacerun: yes">       </span>DD<span
+style="mso-spacerun: yes">      </span>?<span style="mso-spacerun: yes">      
+</span>; Номер записи при прямом
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>доступе
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0090<span style='mso-tab-count:4'>                   </span><span
+style="mso-spacerun: yes">      </span>ORG<span style="mso-spacerun: yes">    
+</span>090H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0090<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>DISK_TRANSFER_ADDRESS<span
+style="mso-spacerun: yes">   </span>LABEL<span style="mso-spacerun: yes">  
+</span>BYTE<span style="mso-spacerun: yes">    </span>; Буфер для данных
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0100<span style='mso-tab-count:4'>                   </span><span
+style="mso-spacerun: yes">      </span>ORG<span style="mso-spacerun: yes">    
+</span>100H
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE,ES:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0100<span style="mso-spacerun: yes">  </span>E9 01CD R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">     </span>PROGRAM_START<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Переход на начало программы
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>= 0020<span style='mso-tab-count:3'>                 </span><span
+style="mso-spacerun: yes">      </span>RECORD_SIZE<span style="mso-spacerun:
+yes">     </span>EQU<span style="mso-spacerun: yes">     </span>32<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>; Размер записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0103<span style="mso-spacerun: yes">  </span>03 00 00 00 00<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>KEYBOARD_BUFFER DB<span style="mso-spacerun: yes">      </span>3, 0, 0,
+0, 0<span style="mso-spacerun: yes">   </span>; Буфер ввода с клавиатуры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0108<span style="mso-spacerun: yes">  </span>94 A0 A9 AB 20 E3 A6<span
+style="mso-spacerun: yes">     </span>FILE_ERROR_MSG<span style="mso-spacerun:
+yes">  </span>DB<span style="mso-spacerun: yes">      </span>'Файл уже
+существует', 10, 13, '$'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>A5 20 E1 E3 E9 A5 E1
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>E2 A2 E3 A5 E2 0A 0D
+
+<p><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">     </span>24
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>011E<span style="mso-spacerun: yes">  </span>8D A5 A2 AE A7 AC AE<span
+style="mso-spacerun: yes">     </span>BAD_OPEN_MSG<span style="mso-spacerun:
+yes">    </span>DB<span style="mso-spacerun: yes">      </span>'Невозможно
+открыть файл', 10, 13, '$'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>A6 AD AE 20 AE E2 AA
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>E0 EB E2 EC 20 E4 A0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>A9 AB 0A 0D 24
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0138<span style="mso-spacerun: yes">  </span>8E E8 A8 A1 AA A0 20<span
+style="mso-spacerun: yes">     </span>BAD_WRITE_MSG<span style="mso-spacerun:
+yes">   </span>DB<span style="mso-spacerun: yes">      </span>'Ошибка при
+записи в файл', 10, 13, '$'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>AF E0 A8 20 A7 A0 AF
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>A8 E1 A8 20 A2 20 E4
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>A0 A9 AB 0A 0D 24
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0153<span style="mso-spacerun: yes">  </span>8E E8 A8 A1 AA A0 20<span
+style="mso-spacerun: yes">     </span>BAD_READ_MSG<span style="mso-spacerun:
+yes">    </span>DB<span style="mso-spacerun: yes">      </span>'Ошибка при
+чтении файла', 10, 13, '$'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>AF E0 A8 20 E7 E2 A5
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>AD A8 A8 20 E4 A0 A9
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>AB A0 0A 0D 24
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>016D<span style="mso-spacerun: yes">  </span>8E E8 A8 A1 AA A0 20<span
+style="mso-spacerun: yes">     </span>BAD_CLOSE_MSG<span style="mso-spacerun:
+yes">   </span>DB<span style="mso-spacerun: yes">      </span>'Ошибка при
+закрытии файла', 10, 13, '$'
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">   </span>Фиг. 5.6 Пример использования функциямй DOS (начало)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>AF E0 A8 20 A7 A0 AA
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>E0 EB E2 A8 A8 20 E4
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>A0 A9 AB A0 0A 0D 24
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0189<span style="mso-spacerun: yes">  </span>8F E0 A8 20 A2 A2 AE<span
+style="mso-spacerun: yes">     </span>INPUT_BAD_MSG<span style="mso-spacerun:
+yes">   </span>DB<span style="mso-spacerun: yes">      </span>'При вводе
+требуется два символа', 10, 13, '$'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>A4 A5 20 E2 E0 A5 A1
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>E3 A5 E2 E1 EF 20 A4
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>A2 A0 20 E1 A8 AC A2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>AE AB A0 0A 0D 24
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01AB<span style="mso-spacerun: yes">  </span>82 A2 AE A4 20 A4 AE<span
+style="mso-spacerun: yes">     </span>CHAR_BAD_MSG<span style="mso-spacerun:
+yes">    </span>DB<span style="mso-spacerun: yes">      </span>'Ввод должен
+быть: символ|символ', 10, 13, '$'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>AB A6 A5 AD 20 A1 EB
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>E2 EC 3A 20 E1 A8 AC
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>A2 AE AB 7C E1 A8 AC
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>A2 AE AB 0A 0D 24
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes">  
+</span>Установка буфера (Области связи с диском)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01CD<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>PROGRAM_START:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01CD<span style="mso-spacerun: yes">  </span>B4 1A<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 1AH<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Установка буфера
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01CF<span style="mso-spacerun: yes">  </span>8D 16 0090 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, DISK_TRANSFER_ADDRESS
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01D3<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes">  
+</span>Поиск файла
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01D5<span style="mso-spacerun: yes">  </span>B4 11<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 11H<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Поиск файла с заданным
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01D7<span style="mso-spacerun: yes">  </span>8D 16 005C R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, FCB<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>;<span style="mso-spacerun: yes">  </span>именем
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01DB<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01DD<span style="mso-spacerun: yes">  </span>0A C0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OR<span style="mso-spacerun: yes">      </span>AL, AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01DF<span style="mso-spacerun: yes">  </span>75 0A<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JNZ<span style="mso-spacerun: yes">     </span>NO_FILE<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Переход если файл новый
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01E1<span style="mso-spacerun: yes">  </span>8D 16 0108 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, FILE_ERROR_MSG<span
+style="mso-spacerun: yes">      </span>; Сообщение о неправильном
+
+
+<p><span style='mso-tab-count:1'>      </span><span
+style='mso-fareast-font-family:"MS Mincho"'><span style="mso-spacerun:
+yes">       </span>01E5<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>ERROR_EXIT:<span style='mso-tab-count:
+3'>             </span><span style="mso-spacerun: yes">      </span>; имени
+файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01E5<span style="mso-spacerun: yes">  </span>B4 09<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 9H<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">     
+</span>; Вывод сообщения на экран
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01E7<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">     
+</span>;<span style="mso-spacerun: yes">  </span>и выход из программы
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01E9<span style="mso-spacerun: yes">  </span>CD 20<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>20H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes">  
+</span>Создание нового файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01EB<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>NO_FILE:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01EB<span style="mso-spacerun: yes">  </span>B4 16<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 16H<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Создание файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01ED<span style="mso-spacerun: yes">  </span>8D 16 005C R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, FCB
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01F1<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01F3<span style="mso-spacerun: yes">  </span>0A C0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span><span style="mso-spacerun: yes"> </span>OR<span
+style="mso-spacerun: yes">      </span>AL, AL<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">      </span>; Проверка на успех
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01F5<span style="mso-spacerun: yes">  </span>74 06<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JZ<span style="mso-spacerun: yes">      </span>CREATE_OK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01F7<span style="mso-spacerun: yes">  </span>8D 16 011E R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, BAD_OPEN_MSG<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>; Сообщение об ошибке при
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01FB<span style="mso-spacerun: yes">  </span>EB E8<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">     </span>ERROR_EXIT<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>;<span style="mso-spacerun: yes">  </span>создании файла
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Установка параметров FCB
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01FD<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CREATE_OK:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>01FD<span style="mso-spacerun: yes">  </span>C6 06 007C R 00<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>MOV<span style="mso-spacerun: yes">     </span>FCB_CURRENT_RECORD, 0<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">      </span>;
+Инициализация номера
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0202<span style="mso-spacerun: yes">  </span>C7 06 007D R 0000<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>WORD PTR
+FCB_RANDOM_RECORD, 0<span style="mso-spacerun: yes">   </span>;<span
+style="mso-spacerun: yes">  </span>записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0208<span style="mso-spacerun: yes">  </span>C7 06 007F R 0000<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>WORD PTR
+FCB_RANDOM_RECORD+2, 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>020E<span style="mso-spacerun: yes">  </span>C7 06 006A R 0020<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>WORD PTR
+FCB_RECORD_SIZE, RECORD_SIZE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">   </span>Фиг. 5.6 Пример использования функциямй DOS (продолжение)
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes">  
+</span>Вывод в файл
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0214<span style="mso-spacerun: yes">  </span>B0 41<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL, 'A'<span
+style="mso-spacerun: yes">                 </span>; В этом цикле выводятся
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0216<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CHARACTER_LOOP:<span style='mso-tab-count:
+3'>               </span><span style="mso-spacerun: yes">      </span>; символы
+алфавита
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0216<span style="mso-spacerun: yes">  </span>8D 3E 0090 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DI, DISK_TRANSFER_ADDRESS
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>021A<span style="mso-spacerun: yes">  </span>B9 0020<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>CX,
+RECORD_SIZE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>021D<span style="mso-spacerun: yes">  </span>F3/ AA<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">      </span>REP<span style="mso-spacerun: yes">     </span>STOSB<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>; Заполнение буфера символами
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>021F<span style="mso-spacerun: yes">  </span>50 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>PUSH<span
+style="mso-spacerun: yes">    </span>AX<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">      </span>; Сохранение символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0220<span style="mso-spacerun: yes">  </span>8D 16 005C R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, FCB
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0224<span style="mso-spacerun: yes">  </span>B4 15<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 15H<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Последовательный вывод
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0226<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">     
+</span>;<span style="mso-spacerun: yes">  </span>блока символов
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0228<span style="mso-spacerun: yes">  </span>0A C0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OR<span style="mso-spacerun: yes">      </span>AL, AL<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">     
+</span>; Проверка на ошибку
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>022A<span style="mso-spacerun: yes">  </span>58 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>POP<span
+style="mso-spacerun: yes">     </span>AX<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">      </span>; Восстановление символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>022B<span style="mso-spacerun: yes">  </span>74 06<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JZ<span style="mso-spacerun: yes">      </span>WRITE_OK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>022D<span style="mso-spacerun: yes">  </span>8D 16 0138 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, BAD_WRITE_MSG<span
+style="mso-spacerun: yes">       </span>; Ошибка записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0231<span style="mso-spacerun: yes">  </span>EB B2<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">     </span>ERROR_EXIT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0233<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>WRITE_OK:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0233<span style="mso-spacerun: yes">  </span>FE C0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INC<span style="mso-spacerun: yes">     </span>AL<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>; Следующий символ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0235<span style="mso-spacerun: yes">  </span>3C 5B<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>CMP<span style="mso-spacerun: yes">     </span>AL, 'Z'+1<span
+style="mso-spacerun: yes">               </span>; Проверка на окончание вывода
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0237<span style="mso-spacerun: yes">  </span>75 DD<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JNE<span style="mso-spacerun: yes">     </span>CHARACTER_LOOP<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">      </span>;
+Вывод следующего символа
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Изменение файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0239<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>KEYBOARD_LOOP:<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">      </span>; Цикл
+ввода символов
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0239<span style="mso-spacerun: yes">  </span>8D 16 0103 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, KEYBOARD_BUFFER<span
+style="mso-spacerun: yes">     </span>;<span style="mso-spacerun: yes"> 
+</span>с клавиатуры и
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>023D<span style="mso-spacerun: yes">  </span>B4 0A<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 0AH<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>;<span style="mso-spacerun: yes">  </span>изменение файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>023F<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">     
+</span>; Ввод с клавиатуры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0241<span style="mso-spacerun: yes">  </span>80 3E 0104 R 02<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>CMP<span style="mso-spacerun: yes">     </span>KEYBOARD_BUFFER+1, 2<span
+style="mso-spacerun: yes">    </span>; Было введено два символа?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0246<span style="mso-spacerun: yes">  </span>74 0A<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JE<span style="mso-spacerun: yes">      </span>KEY_INPUT_OK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0248<span style="mso-spacerun: yes">  </span>8D 16 0189 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, INPUT_BAD_MSG<span
+style="mso-spacerun: yes">       </span>; Сообщение об ошибке
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>024C<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>KEYBOARD_ERROR:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>024C<span style="mso-spacerun: yes">  </span>B4 09<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 9H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>024E<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">     
+</span>; Печать сообщения об ошибке
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0250<span style="mso-spacerun: yes">  </span>EB E7<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">     </span>KEYBOARD_LOOP<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Повторный ввод
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0252<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>KEY_INPUT_OK:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0252<span style="mso-spacerun: yes">  </span>8D 16 01AB R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, CHAR_BAD_MSG<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>; Установка указателя на
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>сообщение об ошибке
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0256<span style="mso-spacerun: yes">  </span>A0 0105 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL, KEYBOARD_BUFFER+2<span
+style="mso-spacerun: yes">   </span>; Выборка первого символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0259<span style="mso-spacerun: yes">  </span>3C 24<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>CMP<span style="mso-spacerun: yes">     </span>AL, '$'<span
+style="mso-spacerun: yes">                 </span>; Сравнение с символом конца
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>025B<span style="mso-spacerun: yes">  </span>75 03<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JNE<span style="mso-spacerun: yes">     </span>CHANGE_RECORD<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Изменение записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>025D<span style="mso-spacerun: yes">  </span>EB 5C 90<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">     </span>PROGRAM_EXIT
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Чтение старой записи из файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0260<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CHANGE_RECORD:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0260<span style="mso-spacerun: yes">  </span>3C 41<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>CMP<span style="mso-spacerun: yes">     </span>AL, 'A'<span
+style="mso-spacerun: yes">                 </span>; Проверка на то, что символ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0262<span style="mso-spacerun: yes">  </span>7C E8<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JL<span style="mso-spacerun: yes">      </span>KEYBOARD_ERROR<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     
+</span>;<span style="mso-spacerun: yes">  </span>находится в диапазоне A-Z
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0264<span style="mso-spacerun: yes">  </span>3C 5A<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>CMP<span style="mso-spacerun: yes">     </span>AL, 'Z'
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0266<span style="mso-spacerun: yes">  </span>77 E4<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JA<span style="mso-spacerun: yes">      </span>KEYBOARD_ERROR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0268<span style="mso-spacerun: yes">  </span>2A E4<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>SUB<span style="mso-spacerun: yes">     </span>AH, AH<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">     
+</span>; Преобразование символа в
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>026A<span style="mso-spacerun: yes">  </span>2C 41<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>SUB<span style="mso-spacerun: yes">     </span>AL, 'A'<span
+style="mso-spacerun: yes">                 </span>;<span style="mso-spacerun:
+yes">  </span>номер записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>026C<span style="mso-spacerun: yes">  </span>A3 007D R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>word ptr
+FCB_RANDOM_RECORD, AX<span style="mso-spacerun: yes">  </span>; Занесение
+номера в FCB
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>026F<span style="mso-spacerun: yes">  </span>8D 16 005C R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, FCB
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0273<span style="mso-spacerun: yes">  </span>B4 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 21H<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Прямое чтение записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0275<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">      </span>INT<span style="mso-spacerun: yes">    
+</span>21H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">   </span>Фиг. 5.6 Пример использования функциямй DOS (продолжение)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0277<span style="mso-spacerun: yes">  </span>0A C0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OR<span style="mso-spacerun: yes">      </span>AL, AL<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">     
+</span>; Проверка на ошибку
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0279<span style="mso-spacerun: yes">  </span>74 07<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JE<span style="mso-spacerun: yes">     
+</span>RANDOM_RECORD_OK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>027B<span style="mso-spacerun: yes">  </span>8D 16 0153 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, BAD_READ_MSG<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>; Сообщение об ошибке
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>027F<span style="mso-spacerun: yes">  </span>E9 01E5 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">     </span>ERROR_EXIT
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Вывод старой записи на экран
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0282<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>RANDOM_RECORD_OK:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0282<span style="mso-spacerun: yes">  </span>C6 06 00B0 R 0A<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>MOV<span style="mso-spacerun: yes">     </span>DISK_TRANSFER_ADDRESS+32,
+10<span style="mso-spacerun: yes">    </span>; Занесение символов конца
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0287<span style="mso-spacerun: yes">  </span>C6 06 00B1 R 0D<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>MOV<span style="mso-spacerun: yes">     </span>DISK_TRANSFER_ADDRESS+33,
+13<span style="mso-spacerun: yes">    </span>;<span style="mso-spacerun: yes"> 
+</span>строки и конца вывода
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>028C<span style="mso-spacerun: yes">  </span>C6 06 00B2 R 24<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>MOV<span style="mso-spacerun: yes">     </span>DISK_TRANSFER_ADDRESS+34,
+'$'<span style="mso-spacerun: yes">   </span>;<span style="mso-spacerun: yes"> 
+</span>в буфер
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0291<span style="mso-spacerun: yes">  </span>B4 09<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 9H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0293<span style="mso-spacerun: yes">  </span>8D 16 0090 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, DISK_TRANSFER_ADDRESS
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0297<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">     
+</span>; Вывод записи на экран
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Изменение файла
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0299<span style="mso-spacerun: yes">  </span>A0 0106 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL,
+KEYBOARD_BUFFER+3<span style="mso-spacerun: yes">   </span>; Выборка символа,
+на который будет
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>029C<span style="mso-spacerun: yes">  </span>B9 001F<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>CX,
+RECORD_SIZE-1<span style="mso-spacerun: yes">       </span>;<span
+style="mso-spacerun: yes">  </span>заменяться содержимое записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>029F<span style="mso-spacerun: yes">  </span>8D 3E 0091 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DI,
+DISK_TRANSFER_ADDRESS+1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02A3<span style="mso-spacerun: yes">  </span>F3/ AA<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">      </span>REP<span style="mso-spacerun: yes">     </span>STOSB<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>; Замена 31 символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02A5<span style="mso-spacerun: yes">  </span>B4 22<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 22H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02A7<span style="mso-spacerun: yes">  </span>8D 16 005C R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, FCB
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02AB<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">     
+</span>; Прямая запись на файла на
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>старое место
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02AD<span style="mso-spacerun: yes">  </span>0A C0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OR<span style="mso-spacerun: yes">      </span>AL, AL<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">     
+</span>; Проверка на ошибку
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02AF<span style="mso-spacerun: yes">  </span>74 07<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JZ<span style="mso-spacerun: yes">     
+</span>RANDOM_WRITE_OK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02B1<span style="mso-spacerun: yes">  </span>8D 16 0138 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, BAD_WRITE_MSG<span
+style="mso-spacerun: yes">       </span>; Сообщение об ошибке
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02B5<span style="mso-spacerun: yes">  </span>E9 01E5 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">     </span>ERROR_EXIT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02B8<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>RANDOM_WRITE_OK:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02B8<span style="mso-spacerun: yes">  </span>E9 0239 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">     </span>KEYBOARD_LOOP<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Обработка следующей записи
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Конец программы
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02BB<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>PROGRAM_EXIT:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02BB<span style="mso-spacerun: yes">  </span>B4 10<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, 10H<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Закрытие файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02BD<span style="mso-spacerun: yes">  </span>8D 16 005C R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, FCB
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02C1<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02C3<span style="mso-spacerun: yes">  </span>0A C0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OR<span style="mso-spacerun: yes">      </span>AL, AL<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">     
+</span>; Проверка на ошибку
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02C5<span style="mso-spacerun: yes">  </span>74 07<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JZ<span style="mso-spacerun: yes">      </span>CLOSE_OK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02C7<span style="mso-spacerun: yes">  </span>8D 16 016D R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LEA<span style="mso-spacerun: yes">     </span>DX, BAD_CLOSE_MSG<span
+style="mso-spacerun: yes">       </span>; Сообщение об ошибке
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02CB<span style="mso-spacerun: yes">  </span>E9 01E5 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">     </span>ERROR_EXIT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02CE<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CLOSE_OK:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>02CE<span style="mso-spacerun: yes">  </span>CD 20<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>INT<span style="mso-spacerun: yes">     </span>20H<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">     
+</span>; Возврат в ДОС
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   </span><span
+style="mso-spacerun: yes">    </span>02D0<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 5.6 Пример использования
+функциямй DOS (продолжение)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Приведенная программа состоит из двух
+частей. В первой части
+
+<p><span
+style="mso-spacerun: yes">    </span>создается файл из 26 записей длиной по 32
+байта. Каждая запись
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствует одной букве алфавита: запись
+1 - это &quot;AAAA...A&quot;,
+
+<p><span
+style="mso-spacerun: yes">    </span>запись 2 - &quot;BBBB...B&quot; и т.д.
+Данный файл формируется
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательно. Во второй части программы
+этот файл
+ Mincho"'><span
+style="mso-spacerun: yes">    </span>рассматривается как файл с произвольным
+доступом. В ответ на
+
+<p><span
+style="mso-spacerun: yes">    </span>введенный пользователем с клавиатуры
+запрос программа считывает и
+
+<p><span
+style="mso-spacerun: yes">    </span>выводит на дисплей одну из 26 записей. С
+помощью этого же ввода
+
+<p><span
+style="mso-spacerun: yes">    </span>осущкствляется редактирование записи: 31
+символ записи, начиная со
+
+<p><span
+style="mso-spacerun: yes">    </span>второго, заменяется на значение, которое
+вводится с клавиатуры.
+
+<p><span
+style="mso-spacerun: yes">    </span>Выполнение программы завершается при вводе
+с клавиатуры символа
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;$&quot;.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В этом примере моделируется справочная
+база данных. На первом
+
+<p><span
+style="mso-spacerun: yes">    </span>этапе программа осуществляет формирование
+этой базы данных. На
+
+<p><span
+style="mso-spacerun: yes">    </span>втором этапе выполняется обработка
+произвольных запросов к базе
+
+<p><span
+style="mso-spacerun: yes">    </span>данных и редактирование ее содержимого.
+Хотя любая реальная
+
+<p><span
+style="mso-spacerun: yes">    </span>программа управления базой данных гораздо
+сложнее, чем приведенный
+
+<p><span
+style="mso-spacerun: yes">    </span>здесь пример, однако он является хорошей
+иллюстрацией основных
+
+<p><span
+style="mso-spacerun: yes">    </span>функций, относящихся к работе с файлами.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа, приведенная на Фиг. 5.6, - это
+файл типа .COM. В
+
+<p><span
+style="mso-spacerun: yes">    </span>следующем разделе мы обсудим различие
+между этим файлом и файлом
+
+<p><span
+style="mso-spacerun: yes">    </span>типа .EXE. Использование в данном примере
+файла типа .COM позволяет
+
+<p><span
+style="mso-spacerun: yes">    </span>для завершения работы программы
+воспользоваться прерыванием INT
+
+<p><span
+style="mso-spacerun: yes">    </span>20H. В случае файла типа .COM начало
+программы в сегменте должно
+
+<p><span
+style="mso-spacerun: yes">    </span>иметь смещение 100H. Первые 100H байт
+программного сегмента
+
+<p><span
+style="mso-spacerun: yes">    </span>называются программным префиксом PSP и
+предназначены для хранения
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторых специальных данных, которые
+используются программной,
+
+<p><span
+style="mso-spacerun: yes">    </span>написанной на языке ассемблера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Смещение блока FCB в сегменте равно 05CH,
+и использование в
+
+<p><span
+style="mso-spacerun: yes">    </span>программе этого на первый взгляд
+произвольного адреса имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>определенные основания. Запись информации
+в данный блок FCB
+
+<p><span
+style="mso-spacerun: yes">    </span>осуществляется командным процессором,
+входящим в состав DOS. После
+
+<p><span
+style="mso-spacerun: yes">    </span>того, как пользователь вызвал программу,
+указав ее имя, DOS
+
+<p><span
+style="mso-spacerun: yes">    </span>просматривает оставшуюся часть командной
+строки в поисках имен
+
+<p><span
+style="mso-spacerun: yes">    </span>файлов. Первое встретившееся в команде имя
+помещается в блок FCB,
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение которого равно 05CH. Если в
+командной строке будет еще
+
+<p><span
+style="mso-spacerun: yes">    </span>одно имя, то оно запишется в блок FCB со
+смещением 06CH. Так как в
+
+<p><span
+style="mso-spacerun: yes">    </span>нашеи примере фигурирует только один файл,
+то используют только
+
+<p><span
+style="mso-spacerun: yes">    </span>блок FCB со смещением 05CH. Запуск
+описываемой программы
+
+<p><span
+style="mso-spacerun: yes">    </span>осуществляется с помощью следующей
+синтаксической конструкции:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt; FIG5=6 TEST.FIL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FIG5=6 - имя программы. В каталоге
+программа фигурирует под
+
+<p><span
+style="mso-spacerun: yes">    </span>именем FIG5=6.COM. Файл TEST.FIL является
+файлом, который программа
+
+<p><span
+style="mso-spacerun: yes">    </span>создает и затем модифицирует.
+Интерпретатор командных строк
+
+<p><span
+style="mso-spacerun: yes">    </span>выбирает имя &quot;TEST.FIL&quot; и
+помещает его в соответствующее поле блока
+
+<p><span
+style="mso-spacerun: yes">    </span>FCB со смещением 05CH. Рассматривая имя
+файла в качестве параметра
+
+<p><span
+style="mso-spacerun: yes">    </span>командной строки, можно с помощью
+описываемой программы создавать и
+
+<p><span
+style="mso-spacerun: yes">    </span>модифицировать любой файл. Если бы имя
+файла входило в ассемблерную
+
+<p><span
+style="mso-spacerun: yes">    </span>программу, мы могли бы работать только с
+единственным файлом.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Начиная со смещения 05CH, текст программы
+соответствует
+
+<p><span
+style="mso-spacerun: yes">    </span>структуре блока FCB. Первая ячейка
+идентифицируется меткой блока
+
+<p><span
+style="mso-spacerun: yes">    </span>FCB. Каждое из полей FCB имеет свою метку
+и длину, так что
+
+<p><span
+style="mso-spacerun: yes">    </span>программа может обрабатывать их непосредственно.
+Например, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>задать длину записи, программа
+модифицирует переменную
+
+<p><span
+style="mso-spacerun: yes">    </span>FCB_RECORD_SIZE.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Начиная с адреса 080H помещается еще одно
+специальное поле
+
+<p><span
+style="mso-spacerun: yes">    </span>программного префикса. Эта область памяти
+размером 128 байт
+
+<p><span
+style="mso-spacerun: yes">    </span>отводится по умолчанию под область связи с
+диском DTA (Disk
+
+<p><span
+style="mso-spacerun: yes">    </span>Transfer Area) и используется DOS в
+качестве буфера для всех
+
+<p><span
+style="mso-spacerun: yes">    </span>файловых записей. Всякий раз, записывая
+или читая запись, DOS
+
+<p><span
+style="mso-spacerun: yes">    </span>использует буфер области DTA. Во время
+инициализации DOS
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает смещение области DTA в
+программном сегменте равным
+
+<p><span
+style="mso-spacerun: yes">    </span>080H. Программа может изменить это
+значение, используя функцию 1AH
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания 21H. Это смещение должно быть
+изменено, еслм длина
+
+<p><span
+style="mso-spacerun: yes">    </span>записи больше, чем 128 байт. В
+рассматриваемом примере область
+
+<p><span
+style="mso-spacerun: yes">    </span>связи с диском сдвигается до смещения в
+сегменте, равного 90H. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>связано с тем, что блок FCB со смещением
+05CH выходит за границу с
+
+<p><span
+style="mso-spacerun: yes">    </span>адресом 80H. Если бы граница области DTA
+определялась соглашением,
+
+<p><span
+style="mso-spacerun: yes">    </span>принятым по умолчанию, то при передаче
+файлов информация в
+
+<p><span
+style="mso-spacerun: yes">    </span>последнем байте блока FCB была бы
+разрушена. В этом байте
+
+<p><span
+style="mso-spacerun: yes">    </span>записывается номер записи при произвольном
+доступе к файлу. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>в данной программе для чтения-записи
+данных используется
+
+<p><span
+style="mso-spacerun: yes">    </span>произвольный доступ, упомянутое наложение
+информации необходимо
+
+<p><span
+style="mso-spacerun: yes">    </span>исключить.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первая команда программы имеет смещение
+100H и является
+
+<p><span
+style="mso-spacerun: yes">    </span>переходом на фактическое начало программы.
+Такая структура
+
+<p><span
+style="mso-spacerun: yes">    </span>программы может показаться неэффективной,
+однако ассемблирование
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит гораздо успешней, если все
+данные помещаются перед
+
+<p><span
+style="mso-spacerun: yes">    </span>командами, которые на них ссылаются.
+Фактически в программе могут
+
+<p><span
+style="mso-spacerun: yes">    </span>быть ошибки, если она содержит ссылки на
+данные вперед. Поэтому для
+
+<p><span
+style="mso-spacerun: yes">    </span>большей надежности данные помещаются в
+начале программы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В первой части программы устанавливается
+область связи с
+
+<p><span
+style="mso-spacerun: yes">    </span>диском. В данной программе эта буферная
+область имеет смещение 90H.
+
+<p><span
+style="mso-spacerun: yes">    </span>Так как длина записи равняется только 32
+байтам, то впереди
+
+<p><span
+style="mso-spacerun: yes">    </span>программы имется достаточно места.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Далее в программе используется прерывание
+21H и функция DOS для
+
+<p><span
+style="mso-spacerun: yes">    </span>поиска файла с именем, совпадающим с
+именем, записанным в блоке
+
+<p><span
+style="mso-spacerun: yes">    </span>FCB. Обратите внимание, что пара регистров
+DC:DX указывает на блок
+
+<p><span
+style="mso-spacerun: yes">    </span>FCB, как и должно быть при любых файловых
+операциях. Если система
+
+<p><span
+style="mso-spacerun: yes">    </span>обнаружит файл с идентичным именем,
+программа завершит работу,
+
+<p><span
+style="mso-spacerun: yes">    </span>выдав сообщение об ошибке и сохранив
+существующий уже файл. В
+
+<p><span
+style="mso-spacerun: yes">    </span>данной программе обрабатываются только
+новые файлы. Существующие
+
+<p><span
+style="mso-spacerun: yes">    </span>файлы здесь никак не используются, однако
+гарантируется, что их
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое программой не сотрется.
+Конечно, в реальной практике
+
+<p><span
+style="mso-spacerun: yes">    </span>програма была бы составлена так, чтобы
+охватывать случай как новых,
+
+<p><span
+style="mso-spacerun: yes">    </span>так и уже существующих файлов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Создание файла обеспечивается участком
+программы, помещенным
+
+<p><span
+style="mso-spacerun: yes">    </span>NO_FILE. Формировать блок FCB до этого
+данной программе не нужно,
+
+<p><span
+style="mso-spacerun: yes">    </span>так как он был сформирован командным
+процессором. Если описываемая
+
+<p><span
+style="mso-spacerun: yes">    </span>файловая операция не сможет быть
+выполнена, например, из-за
+
+<p><span
+style="mso-spacerun: yes">    </span>отсутствия свободного места на диске или
+отсутствия места в
+
+<p><span
+style="mso-spacerun: yes">    </span>каталоге диска, то программа завершит
+выполнение и выдаст
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующее сообщение об ошибке.
+
+<p><span
+style='mso-tab-count:1'>      </span>При любом обращении DOS к файлу программа
+должна, прежде всего,
+
+<p><span
+style="mso-spacerun: yes">    </span>открыть файл. Процедура открытия файла
+устанавливает связь между
+
+<p><span
+style="mso-spacerun: yes">    </span>операционной системой и пользовательской
+программой. В процессе
+
+<p><span
+style="mso-spacerun: yes">    </span>этой операции DOS просматривает справочник
+диска, находит нужный
+
+<p><span
+style="mso-spacerun: yes">    </span>файл (или не находит, что соответствует
+сбойной ситуации) и
+
+<p><span
+style="mso-spacerun: yes">    </span>заполняет поле блока FCB, относящееся к
+длине файла. После того,
+
+<p><span
+style="mso-spacerun: yes">    </span>как файл открыт, DOS не должна
+просматривать справочник диска
+
+<p><span
+style="mso-spacerun: yes">    </span>всякий раз, когда происходит обращение к
+файлу. Система DOS
+
+<p><span
+style="mso-spacerun: yes">    </span>сохраняет в блоке FCB информацию о файле
+до тех пор, пока она этот
+
+<p><span
+style="mso-spacerun: yes">    </span>файл не &quot;закроет&quot;. Термины
+&quot;закрыть&quot; и &quot;открыть&quot; файл еще раз
+
+<p><span
+style="mso-spacerun: yes">    </span>указывают на связь с традиционным
+делопроизводством. Папку с файлом
+
+<p><span
+style="mso-spacerun: yes">    </span>документов нужно открыть прежде, чем можно
+будет ознакомиться с
+
+<p><span
+style="mso-spacerun: yes">    </span>содержащимся в ней бумагами, и закрыть до
+того, как ее уберут снова
+
+<p><span
+style="mso-spacerun: yes">    </span>в бюро.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В рассматриваемом примере открытие файла
+происходит при его
+
+<p><span
+style="mso-spacerun: yes">    </span>создании. Если бы такой файл уже
+существовал, связь с ним была бы
+
+<p><span
+style="mso-spacerun: yes">    </span>установлена с помощью функции открытия
+файла (AH=0FH). Если
+
+<p><span
+style="mso-spacerun: yes">    </span>открытие файла произошло успешно,
+программма изменяет значения
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторых полей блока FCB. В частности,
+длина записи должна быть
+
+<p><span
+style="mso-spacerun: yes">    </span>установлена равной 32 байт, так как по
+умолчанию DOS считает ее
+
+<p><span
+style="mso-spacerun: yes">    </span>равной 128 байт.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Часть программы с именем CHARACTER_LOOP
+передает в файл 26
+
+<p><span
+style="mso-spacerun: yes">    </span>записей. Определяющий символ каждой записи
+передается в буфер
+
+<p><span
+style="mso-spacerun: yes">    </span>области DTA оператором REP STOSB.
+Отдельные записи передаются на
+
+<p><span
+style="mso-spacerun: yes">    </span>диск с помощью функции последовательной
+записи (AH=0AH). Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>также выполняет проверку на отсутствие
+ошибок.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Начиная с метки KEYBOARD_LOOP программа
+переходит от
+
+<p><span
+style="mso-spacerun: yes">    </span>формирования файла к запросу=коррекции
+записей в нем. В данном
+
+<p><span
+style="mso-spacerun: yes">    </span>примере используется буферированный ввод с
+клавиатуры,
+
+<p><span
+style="mso-spacerun: yes">    </span>поддерживаемый DOS. Это позволяет
+пользователю вводить строку из
+
+<p><span
+style="mso-spacerun: yes">    </span>двух символов и, если необходимо,
+осуществлять редактирование.
+
+<p><span
+style="mso-spacerun: yes">    </span>После ввода двух символов должна быть
+нажата клавиша окончания
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода. Программа выполняет проверку
+правильности ввода, и если
+
+<p><span
+style="mso-spacerun: yes">    </span>последний не удовлетворяет требованиям, то
+он отвергается и
+
+<p><span
+style="mso-spacerun: yes">    </span>выдается сообщение об ошибке.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При вводе пользователем символа
+&quot;$&quot; программа заканчивает
+
+<p><span
+style="mso-spacerun: yes">    </span>работу. В случае же ввода символов от
+&quot;A&quot; до &quot;Z&quot; программа
+
+<p><span
+style="mso-spacerun: yes">    </span>осуществляет чтение соответствующей записи
+и выводит на дисплей ее
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое. В оставшиеся 31 байт буфера
+программа записывает второй
+
+<p><span
+style="mso-spacerun: yes">    </span>из введенных с клавиатуры символов.
+Модицифированная таким образом
+
+<p><span
+style="mso-spacerun: yes">    </span>запись передается на диск в режиме
+произвольного доступа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В заключительной части программы
+осуществляется закрытие файла.
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогично тому, как функция открытия
+файла устанавливала связь
+
+<p><span
+style="mso-spacerun: yes">    </span>между DOS и пользовательской программой,
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>??????
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>файла существенно для гарантии того, что
+DOS записала на диск все
+
+<p><span
+style="mso-spacerun: yes">    </span>модифицированные записи. Во время
+нормального выполнения программы
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS может оставить несколько последних
+записей в буфере. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>ускоряет выполнение, так как DOS не должна
+обращаться к диску по
+
+<p><span
+style="mso-spacerun: yes">    </span>поводу каждой записи. Функция закрытия
+файла осуществляет запись на
+
+<p><span
+style="mso-spacerun: yes">    </span>диск содержимого буфера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Приведенный на Фиг. 5.6 пример программы
+иллюстрирует основные
+
+<p><span
+style="mso-spacerun: yes">    </span>способы обращения к файлу с помощью DOS.
+Эта программа ничего
+
+<p><span
+style="mso-spacerun: yes">    </span>полезного не выполняет, однако приближение
+ее к реальным задачам
+
+<p><span
+style="mso-spacerun: yes">    </span>потребовало бы намного большего числа
+команд, которые мало что
+
+<p><span
+style="mso-spacerun: yes">    </span>прояснили бы в отношении использования
+функций DOS. В данной
+
+<p><span
+style="mso-spacerun: yes">    </span>программе важно обратить внимание на
+необходимость проверки ошибок
+
+<p><span
+style="mso-spacerun: yes">    </span>после каждой операции, выполняемой DOS. В
+то время, как DOS с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью прерывания 24H обрабатывает
+аппаратные ошибки,
+
+<p><span
+style="mso-spacerun: yes">    </span>пользовательская программа должна разрешать
+такие ситуации, как
+
+<p><span
+style="mso-spacerun: yes">    </span>совпадение имен файлов или отсутствие
+свободного места на дискете.
+
+<p><span
+style="mso-spacerun: yes">    </span>В данном примере обработка ошибок проста и
+состоит из вывода
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующего сообщения и завершения
+работ программы. Обработка
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибок в реальных программах значительно
+сложнее и более актуальна,
+
+<p><span
+style="mso-spacerun: yes">    </span>так как в этом случае возможность потери
+важной информации должна
+
+<p><span
+style="mso-spacerun: yes">    </span>быть исключена.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>И наконец, возможно, что проработав с
+данной программой, вы
+
+<p><span
+style="mso-spacerun: yes">    </span>будете не очень удовлетворены ею как пользователь:
+в ней
+
+<p><span
+style="mso-spacerun: yes">    </span>отсутствует запрос на ввод данных,
+сообщения об ошибках лаконичны и
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторые из выводимых сообщений частично
+накладываются на
+
+<p><span
+style="mso-spacerun: yes">    </span>предыдущие, затирая их. Данная программа
+нуждается в доработке
+
+<p><span
+style="mso-spacerun: yes">    </span>прежде, чем ею сможет воспользоваться
+кто-либо, не участвовавший в
+
+<p><span
+style="mso-spacerun: yes">    </span>ее написании или тщательно в ней не
+разобравшийся.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

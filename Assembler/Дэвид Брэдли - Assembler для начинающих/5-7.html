@@ -1,0 +1,536 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="5-7">Файлы .com и .exe</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>В предыдущем примере рассматривался файл
+типа .COM.<span style="mso-spacerun: yes">  </span>Однако
+
+<p><span
+style="mso-spacerun: yes">    </span>результатом процесса
+ассемблирования-редактирования связей является
+
+<p><span
+style="mso-spacerun: yes">    </span>обычно файл типа .EXE.<span
+style="mso-spacerun: yes">  </span>Зачем нужен файл типа .COM, если проще
+
+<p><span
+style="mso-spacerun: yes">    </span>получить файл типа .COM?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>У каждого из обоих типов файлов есть свои
+преимущества. И чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>принять обоснованное решение о том, какой
+из них предпочесть в
+
+<p><span
+style="mso-spacerun: yes">    </span>каждом конкретном случае, нужно
+представлять их отличия.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Главное различие между файлами типа .COM и
+типа .EXE связано с
+
+<p><span
+style="mso-spacerun: yes">    </span>форматом записи соответствующего
+объектного файла на дискете. Оба
+
+<p><span
+style="mso-spacerun: yes">    </span>типа файлов являются программами,
+записанными на машинном языке.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа, записанная в файле типа .COM
+может сразу выполняться.
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS может непосредственно загрузить его в
+память машины с дискеты.
+
+<p><span
+style="mso-spacerun: yes">    </span>После этого DOS передает управление в
+сегмент памяти, отведенный
+
+<p><span
+style="mso-spacerun: yes">    </span>для команд, в точку со смещением 100H.
+Файл типа .EXE
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно выполнен быть не может. У
+соответствующего
+
+<p><span
+style="mso-spacerun: yes">    </span>объектного файла, хранящегося на дискете,
+имеется заголовок. В нем
+
+<p><span
+style="mso-spacerun: yes">    </span>содержится информация, сгенерированная
+редактором связей. Наиболее
+
+<p><span
+style="mso-spacerun: yes">    </span>важная ее часть относится к информации,
+связанной с перемещением. В
+
+<p><span
+style="mso-spacerun: yes">    </span>то время, как у файла типа .COM перемещаем
+один сегмент команд, у
+
+<p><span
+style="mso-spacerun: yes">    </span>файла типа .EXE могут быть перемещены
+многие различные сегменты.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это ограничивает максимальный размер файла
+.COM 64 кбайтами, если
+
+<p><span
+style="mso-spacerun: yes">    </span>только программа не подгружает еще и
+другие сегменты. Файл типа
+
+<p><span
+style="mso-spacerun: yes">    </span>.EXE может содержать ряд сегментов,
+которые динамически
+
+<p><span
+style="mso-spacerun: yes">    </span>перемещаются в пределах программной
+области.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В чем состоит перемещаемость? Во время
+ассемблирования
+
+<p><span
+style="mso-spacerun: yes">    </span>программа расположена в каком-то
+определенном месте памяти. Как
+
+<p><span
+style="mso-spacerun: yes">    </span>было ранее установлено, ассемблер
+автоматически начинает каждый
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмент со смещением 0. В ассемблерных
+листингах рядом с некоторыми
+
+<p><span
+style="mso-spacerun: yes">    </span>адресами стоят символы R. Это означает,
+что данный адрес является
+
+<p><span
+style="mso-spacerun: yes">    </span>перемещаемым. Если программа сдвигается
+так, что ее начало будет
+
+<p><span
+style="mso-spacerun: yes">    </span>иметь смещение, отличное от 0, то
+упомянутый адрес должен быть
+
+<p><span
+style="mso-spacerun: yes">    </span>изменен. Обычно перемещением занимается
+редактор связей. Однако
+
+<p><span
+style="mso-spacerun: yes">    </span>пересчет значений некоторых адресов не
+может быть выполнен до
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузки программы. В каждом файле типа
+.EXE имеется информация о
+
+<p><span
+style="mso-spacerun: yes">    </span>таких адресах.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Файл типа .COM не является перемещаемым. У
+такого файла
+
+<p><span
+style="mso-spacerun: yes">    </span>отсутствует информация, необходимая для
+перемещения. Вместо этого у
+
+<p><span
+style="mso-spacerun: yes">    </span>программы, составляющей файл типа .COM,
+должен быть перемещаем
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмент команд. Это означает, что хотя сам
+сегмент команд можно
+
+<p><span
+style="mso-spacerun: yes">    </span>модифицировать, начальное смещение всегда
+должно быть одним и тем
+
+<p><span
+style="mso-spacerun: yes">    </span>же. В такой программе все смещения должны
+оставаться неизмененными.
+
+<p><span
+style="mso-spacerun: yes">    </span>Кроме того, от программиста требуется
+предусмотреть, чтобы при
+
+<p><span
+style="mso-spacerun: yes">    </span>любой операции с сегментными регистрами
+(например, запись в
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментный регистр полученного значения)
+всегда производилось
+
+<p><span
+style="mso-spacerun: yes">    </span>обращение к регистру текущего сегмента
+команд. Примером правильной
+
+<p><span
+style="mso-spacerun: yes">    </span>программной последовательностью для записи
+в регистр DS текущего
+
+<p><span
+style="mso-spacerun: yes">    </span>значения сегмента команд будет:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>PUSH<span style='mso-tab-count:1'>  </span>CS
+
+<p><span
+style="mso-spacerun: yes">      </span>POP DS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Иногда может показаться заманчивым реализовать
+ту же операцию с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью следующей последовательности
+команд (предположим, что как и
+
+<p><span
+style="mso-spacerun: yes">    </span>в приведенной на Фиг. 5.6 программе имя
+сегмента команд - &quot;CODE&quot;)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>MOV<span style="mso-spacerun: yes">    
+</span>AX,CODE
+
+<p><span
+style="mso-spacerun: yes">      </span>MOV<span style="mso-spacerun: yes">    
+</span>DS,AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для программного файла типа .COM эта
+запись будет неправильной.
+
+<p><span
+style="mso-spacerun: yes">    </span>В момент ассемблирования и редактирования
+связей сегментное
+
+<p><span
+style="mso-spacerun: yes">    </span>значение для сегмента CODE неизвестно. Оно
+определяется только при
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузке программы. Поскольку файл типа
+.COM не может предоставить
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузчику перечня всех сегментных ссылок
+(информация для
+
+<p><span
+style="mso-spacerun: yes">    </span>перемещения), то в данном случае программа
+будет выполняться
+
+<p><span
+style="mso-spacerun: yes">    </span>неправильно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Между описываемыми типами файлов имеются
+различия в отношении
+
+<p><span
+style="mso-spacerun: yes">    </span>установки значений сегметных регистров и
+расположения стека. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>файла типа .COM значения регистров CS, DS,
+ES и SS устанавливаются
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS, равными такими, что они указывают на
+тот сегмент, в который
+
+<p><span
+style="mso-spacerun: yes">    </span>они загружают программу. Значение регистра
+SP устанавливается так,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы он указывал на последнюю доступную в
+сегменте ячейку памяти.
+
+<p><span
+style="mso-spacerun: yes">    </span>Таким образом программа занимает начало, а
+стек - конец сегмента.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В головной метке файла типа .EXE задаются
+значения регистров
+
+<p><span
+style="mso-spacerun: yes">    </span>CS, IP, SS и SP. Значения регистров DS и
+ES DOS устанавливает таким
+
+<p><span
+style="mso-spacerun: yes">    </span>образом, чтобы они указывали на тот
+сегмент, в который загружается
+
+<p><span
+style="mso-spacerun: yes">    </span>программа. Регистр CS указывает на
+сегмент, который был
+
+<p><span
+style="mso-spacerun: yes">    </span>идентифицирован как сегмент содержащий
+стартовый адрес программы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если в файле типа .COM программа должна
+иметь начальное смещение в
+
+<p><span
+style="mso-spacerun: yes">    </span>сегменте команд равным 100H, то в
+программном файле типа .EXE
+
+<p><span
+style="mso-spacerun: yes">    </span>начальный адрес может иметь другое
+значение. Как показано ниже,
+
+<p><span
+style="mso-spacerun: yes">    </span>значение этого адреса может содержаться в
+операторе END:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>END START_LOCATION
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Это является указанием
+ассемблеру-редактору связей, что после
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузки программы управление следует
+передать на метку
+
+<p><span
+style="mso-spacerun: yes">    </span>START_LOCATION.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В обоих типах файлов используется
+программный префикс PSP,
+
+<p><span
+style="mso-spacerun: yes">    </span>который образуют первые 100H байтов того
+сегмента, куда загружается
+
+<p><span
+style="mso-spacerun: yes">    </span>программа. В этой области памяти хранится
+специальная информация, о
+
+<p><span
+style="mso-spacerun: yes">    </span>которой говорилось при рассмотрении
+программы, приведенной на
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 5.6. В случае файла типа .EXE
+регистры DS и ES указывают на
+
+<p><span
+style="mso-spacerun: yes">    </span>эту область данных, тогда как значения
+регистров CS и SS
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливаются на соответствующих этапах
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблирования-редактирования связей. В
+случае файла типа .COM все
+
+<p><span
+style="mso-spacerun: yes">    </span>регистры указывают на PSP. Это
+обеспечивает обоим типам файлов
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственный доступ к информации,
+хранящейся в порядке
+
+<p><span
+style="mso-spacerun: yes">    </span>программного сегмента.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Преимущества файла типа .COM состоит в
+том, что в этом случае
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр CS указывает на PSP, а в файле
+типа .EXE - нет. Прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>20H и 27H, связанные с завершением
+выполнения программы и передачей
+
+<p><span
+style="mso-spacerun: yes">    </span>управления DOS, требуют, чтобы во время
+прерывания регистр указывал
+
+<p><span
+style="mso-spacerun: yes">    </span>на PSP. В случае файла типа .EXE это
+осуществить сложно. К
+
+<p><span
+style="mso-spacerun: yes">    </span>счастью, следующая последовательность
+команд позволяет в
+
+<p><span
+style="mso-spacerun: yes">    </span>программном файле типа .EXE передать
+управление обратно DOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>PROGRAM PROG FAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>PUSH DS<span style='mso-tab-count:2'>        </span>;<span
+style="mso-spacerun: yes">   </span>запись<span style="mso-spacerun: yes">   
+</span>сегмента<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>с<span style="mso-spacerun: yes">   
+</span>PSP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>MOV<span style='mso-tab-count:1'>      </span>AX,0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>PUSH AX<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">      </span>;<span style="mso-spacerun: yes">   </span>запись<span
+style="mso-spacerun: yes">   </span>в<span style="mso-spacerun: yes">  
+</span>стек<span style="mso-spacerun: yes">   </span>смещения<span
+style='mso-tab-count:1'>    </span> 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>...
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span>PROGRAM ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В относящейся к PSP ячейке со смещением 0
+содержится команда
+
+<p><span
+style="mso-spacerun: yes">    </span>INT 20H. Запись в стек состояния регистра
+DS и нуля устанавливает
+
+<p><span
+style="mso-spacerun: yes">    </span>значение адреса длинного возврата, равное
+адресу PSP со смещением
+
+<p><span
+style="mso-spacerun: yes">    </span>0. Выполнив команду возврата, программа
+перейдет к команде INT 20H.
+
+
+<p><span
+style="mso-spacerun: yes">    </span>Но к этому моменту в регистре CS уже будет
+храниться значение PSP,
+
+<p><span
+style="mso-spacerun: yes">    </span>и команда прерывания INT 20H возвратит
+управление DOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для прерывания 27H, при котором
+завершается работа программы и
+
+<p><span
+style="mso-spacerun: yes">    </span>управление передается DOS с сохранением
+программы в памяти,
+
+<p><span
+style="mso-spacerun: yes">    </span>аналогичного способа реализации нет. Хотя
+имеются методы записи в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр CS правильного значения перед
+прерыванием 27H, обычно более
+
+<p><span
+style="mso-spacerun: yes">    </span>простым является организация программы в
+виде файла типа .COM.
+
+<p><span
+style='mso-tab-count:1'>      </span>И наконец, файл типа .COM занимает на
+диске меньше места, чес
+
+<p><span
+style="mso-spacerun: yes">    </span>файл типа .EXE с такой же как в файле типа
+.COM программой. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>у файла типа .COM отсутствует заголовок,
+то и места для него на
+
+<p><span
+style="mso-spacerun: yes">    </span>диске не требуется. При рассмотрении в
+следующем разделе программы
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG будет изложен метод, позволяющий
+преобразовывать файл типа
+
+<p><span
+style="mso-spacerun: yes">    </span>.EXE в файл типа .COM.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

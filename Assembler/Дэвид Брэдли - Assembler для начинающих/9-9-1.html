@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-9">Клавиатура</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>Программы BIOS, обслуживающие клавиатуру, дают примеры различной
+
+<p><span
+style="mso-spacerun: yes">    </span>программной техники.<span
+style="mso-spacerun: yes">  </span>Прежде всего программы обслуживания
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатуры BIOS имеют большой обработчик
+прерываний, который
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразует коды сканирования клавиатуры в
+коды ASCII.<span style="mso-spacerun: yes">  </span>Обработчик
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний обслуживает обычные и
+регистровые клавиши.<span style="mso-spacerun: yes">  </span>Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживания клавиатуры также поддерживает
+кольцевой буфер длиной
+
+<p><span
+style="mso-spacerun: yes">    </span>15 символов, позволяя вам печатать
+быстрее, чем программа может
+
+<p><span
+style="mso-spacerun: yes">    </span>обрабатывать нажатия клавиш.
+
+
+
+<b><p><div align="center"><a name="9-9-1">Данные клавиатуры
+</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Поле данных программ клавиатуры начинается
+у смещения 17H в
+
+<p><span
+style="mso-spacerun: yes">    </span>сегменте DATA.<span style="mso-spacerun:
+yes">  </span>Две флаговых переменных, KB_FLAG и KB_FLAG_1, имеют
+
+<p><span
+style="mso-spacerun: yes">    </span>битовое значение и отслеживают текущее
+положение регистровых
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиш.<span style="mso-spacerun: yes"> 
+</span>За определением этих переменных следуют выражения,
+
+<p><span
+style="mso-spacerun: yes">    </span>показывающие назначение их битов.<span
+style="mso-spacerun: yes">  </span>Например, бит 3 переменной
+
+<p><span
+style="mso-spacerun: yes">    </span>KB_FLAG следит за состоянием клавиши
+ALT.<span style="mso-spacerun: yes">  </span>Если она нажата, этот
+
+<p><span
+style="mso-spacerun: yes">    </span>бит равен 1.<span style="mso-spacerun:
+yes">  </span>Если клавиша ALT не нажата, бит равен 0.<span
+style="mso-spacerun: yes">  </span>Биты
+
+<p><span
+style="mso-spacerun: yes">    </span>переменной KB_FLAG определяют текущее
+состояние всех регистровых
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиш, обычных и триггерных.<span
+style="mso-spacerun: yes">  </span>Триггерные клавиши управления
+
+<p><span
+style="mso-spacerun: yes">    </span>регистрами используют биты переменной
+KB_FLAG_1.<span style="mso-spacerun: yes">  </span>Эти клавиши
+
+<p><span
+style="mso-spacerun: yes">    </span>изменяют состояние клавиатуры всякий раз,
+когда нажимаются.
+
+<p><span
+style="mso-spacerun: yes">    </span>Например, клавиша CAPS LOCK переключает
+клавиатуру с больших букв
+
+<p><span
+style="mso-spacerun: yes">    </span>на маленькие и наоборот каждый раз, когда
+нажимается.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>BIOS использует биты переменной KB_FLAG_1
+для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>отслеживать, нажата ли в текущий момент
+клавиша CAPS LOCK (а также
+
+<p><span
+style="mso-spacerun: yes">    </span>другие триггерные клавиши). BIOS должна
+отслеживать их из-за того,
+
+<p><span
+style="mso-spacerun: yes">    </span>что все клавиши клавиатуры имеют
+встроенную функцию автоповторения
+
+<p><span
+style="mso-spacerun: yes">    </span>по прошествии некоторого времени. Если бы
+BIOS переключала бит
+
+<p><span
+style="mso-spacerun: yes">    </span>CAPS_STATE каждый раз, когда получала код
+&quot;нажатия&quot; от клавиши CAPS
+
+<p><span
+style="mso-spacerun: yes">    </span>LOCK, автоповторение клавиши сделало бы
+невозможным для оператора
+
+<p><span
+style="mso-spacerun: yes">    </span>определение текущего состояния клавиатуры.
+BIOS переключает бит
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиши CAPS_STATE, когда поступает первый
+код нажатия. Затем
+
+<p><span
+style="mso-spacerun: yes">    </span>программа BIOS игнорирует все коды нажатия
+до тех пор, пока он не
+
+<p><span
+style="mso-spacerun: yes">    </span>получит код отпускания от клавиши CAPS
+LOCK, означающий, что
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиша отпущена.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>BIOS использует переменную ALT_INPUT для
+обеспечения
+
+<p><span
+style="mso-spacerun: yes">    </span>специального режима ввода в альтернативном
+регистре. Когда нажата
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиша альтернативного регистра, можно
+ввести десятичное число с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью цифровой клавиатуры. Когда клавиша
+альтернативного регистра
+
+<p><span
+style="mso-spacerun: yes">    </span>отпускается, программа клавиатуры
+возвращает символ кода ASCII,
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующий этому десятичному числу.
+Такая техника позволяет
+
+<p><span
+style="mso-spacerun: yes">    </span>оператору вводить в IBM PC любые символы,
+даже если их нет на
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатуре. Например, нажмите клавишу ALT,
+затем напечатайте с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью цифровой клавиатуры 1, 1, 1 и
+отпустите клавишу ALT.
+
+<p><span
+style="mso-spacerun: yes">    </span>Появится символ &quot;o&quot;. Этот символ
+имеет код со значением 111 в коде
+
+<p><span
+style="mso-spacerun: yes">    </span>ASCII.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Переменная ALT_INPUT хранит текущее
+значение кода, который
+
+<p><span
+style="mso-spacerun: yes">    </span>вводится в альтернативном регистре. Когда
+на цифровой клавиатуре
+
+<p><span
+style="mso-spacerun: yes">    </span>печатается цифра, и состояние клавиатуры
+показывает, что включен
+
+<p><span
+style="mso-spacerun: yes">    </span>альтернативный регистр, программа BIOS
+умножает текущее значение
+
+<p><span
+style="mso-spacerun: yes">    </span>переменной ALT_INPUT на 10, и прибавляет к
+нему новое число. Когда
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиша альтернативного регистра
+отпускается, в переменной
+
+<p><span
+style="mso-spacerun: yes">    </span>ALT_INPUT содержится введенный символ.
+Обычно переменная ALT_INPUT
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливается равной нулю, и программа
+BIOS не считает нулевое
+
+<p><span
+style="mso-spacerun: yes">    </span>значение правильным результатом ввода в
+альтернативном регистре.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это позволяет оператору использовать
+клавишу альтернативного
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра вместе с другими клавишами,
+нажимая и отпуская ее (как это
+
+<p><span
+style="mso-spacerun: yes">    </span>делается в интерпретаторе языка Бейсик,
+где ALT-A порождает строку
+
+<p><span
+style="mso-spacerun: yes">    </span>символов AUTO и не вводя при этом кода 0 в
+момент отпускания этой
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиши.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Остальные переменные поддерживают буфер
+клавиатуры. По мере
+
+<p><span
+style="mso-spacerun: yes">    </span>того, как на клавиатуре печатаются
+символы, возникают прерывания.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа KB_INT, входящая в BIOS
+принимает прерывание от
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатуры, читает код сканирования из
+порта 60H, и определяет код
+
+<p><span
+style="mso-spacerun: yes">    </span>ASCII этой клавиши. Затем программа BIOS
+записывает это значение в
+
+<p><span
+style="mso-spacerun: yes">    </span>буфер клавиатуры KB_BUFFER. В этом буфере
+есть 16 слов - каждая
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиша записывается в виде слова. Первый
+байт - это код ASCII
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиши, второй байт - код сканирования
+или расширенный код
+
+<p><span
+style="mso-spacerun: yes">    </span>сканирования клавиши. Использование
+расширенного кода сканирования
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет передавать в прикладную
+программу символы, которые не
+
+<p><span
+style="mso-spacerun: yes">    </span>имеют кода ASCII.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>У буфера есть два указателя. Переменная
+BUFFER_HEAD содержит
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение первого символа в буфере в
+сегменте DATA, соответствующего
+
+<p><span
+style="mso-spacerun: yes">    </span>клавише, нажатой раньше других. Переменная
+BUFFER_TAIL указывает на
+
+<p><span
+style="mso-spacerun: yes">    </span>символ, соответствующий самой последней
+нажатой клавише. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>указатели имеют одинаковые значения, буфер
+пуст.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда обработчик прерывания BIOS реагирует
+на очередное нажатие
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиши, при котором должен быть
+сгенерирован символ, он помещает
+
+<p><span
+style="mso-spacerun: yes">    </span>этот символ в буфер. Если буфер не
+заполнен, обработчик прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает символ по адресу, на который
+указывает переменная
+
+<p><span
+style="mso-spacerun: yes">    </span>BUFFER_TAIL. Затем он увеличивает
+переменную BUFFER_TAIL на два,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы указывать на следующую ячейку
+буфера. Если увеличение
+
+<p><span
+style="mso-spacerun: yes">    </span>указателя перемещает его за пределы
+буфера, указатель перемещается
+
+<p><span
+style="mso-spacerun: yes">    </span>на начало буфера. Это означает, что буфер
+клавиатуры &quot;закольцован&quot;.
+
+<p><span
+style="mso-spacerun: yes">    </span>После шестнадцатого нажатия очередной
+символ попадает в начало
+
+<p><span
+style="mso-spacerun: yes">    </span>буфера. Такая организация буфера также
+называется циклической, так
+
+<p><span
+style="mso-spacerun: yes">    </span>как позиции буфера образуют замкнутый
+цикл, а не расположены в ряд.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа клавиатуры BIOS, вызываемая по
+команде INT 16H, имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>три функции.<span style="mso-spacerun:
+yes">  </span>Одна из них удаляет символ из буфера.<span style="mso-spacerun:
+yes">  </span>Указатель
+
+<p><span
+style="mso-spacerun: yes">    </span>BUFFER_HEAD указывает на первый символ
+буфера.<span style="mso-spacerun: yes">  </span>Если буфер не пуст,
+
+<p><span
+style="mso-spacerun: yes">    </span>(что получается, если указатель начала
+равен указателю конца), BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>удаляет слово по указателю BUFFER_HEAD и
+увеличивает указатель
+
+<p><span
+style="mso-spacerun: yes">    </span>начала на два.<span style="mso-spacerun:
+yes">  </span>Если указатель превышает значение указателя
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>BUFFER_END, он перемещается назад в начало буфера.<span
+style='mso-tab-count:1'>      </span>Подпрограмма K4
+
+<p><span
+style="mso-spacerun: yes">    </span>в программе клавиатуры BIOS обеспечивает
+сдвиг указателя и, если
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимо, его перенос в начало.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Другая функция клавиатуры возвращает
+текущее состояние буфера
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатуры. Она сообщает вызвавшей
+программе, есть ли в буфере
+
+<p><span
+style="mso-spacerun: yes">    </span>символ или нет. Программа может
+использовать эту информацию для
+
+<p><span
+style="mso-spacerun: yes">    </span>того, чтобы избежать ожидания нажатия
+клавиши, если у нее есть чем
+
+<p><span
+style="mso-spacerun: yes">    </span>заняться в это время. Такой вызов функции
+чтения состояния можно
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать для определения момента
+выхода из цикла. Во время
+
+<p><span
+style="mso-spacerun: yes">    </span>каждого прохода по циклу можно проверить,
+введен ли уже символ с
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатуры. Если нет, цикл продолжается.
+Если символ введен, цикл
+
+<p><span
+style="mso-spacerun: yes">    </span>завершается. Тело цикла не может
+выполняться в случае использования
+
+<p><span
+style="mso-spacerun: yes">    </span>циклящей программой функции чтения
+символа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 9.3 показан листинг программы на
+языке ассемблера,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая прибавляет единицу к
+четырехбайтовому целому числу всякий
+
+<p><span
+style="mso-spacerun: yes">    </span>раз, когда она проходит через цикл. Когда
+оператор нажимает клавишу
+
+<p><span
+style="mso-spacerun: yes">    </span>пробела, происходит выход из программы.
+Эта программа использует
+
+<p><span
+style="mso-spacerun: yes">    </span>две функции BIOS. Когда регистр AH
+установлен в 1, BIOS возвращает
+
+<p><span
+style="mso-spacerun: yes">    </span>состояние буфера клавиатуры. Если
+установлен флаг нуля, символа
+
+<p><span
+style="mso-spacerun: yes">    </span>нет. Если символ есть, программа должна
+также прочитать этот
+
+<p><span
+style="mso-spacerun: yes">    </span>символ, иначе он останется в буфере до тех
+пор, пока следующая
+
+<p><span
+style="mso-spacerun: yes">    </span>программа (или эта же, но позднее) не
+запросит символ. В этом
+
+<p><span
+style="mso-spacerun: yes">    </span>примере символ из буфера извлекается
+вызовом функции программы
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживания клавиатуры BIOS с нулевым
+значением в регистре AH.
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS возвращает символ в регистре AL, и
+программа сравнивает
+
+<p><span
+style="mso-spacerun: yes">    </span>значение символа с пробелом. Этот пример
+показывает, как можно
+
+<p><span
+style="mso-spacerun: yes">    </span>организовать проверку определенного
+символа в каждом проходе цикла.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+
+</body>
+</html>

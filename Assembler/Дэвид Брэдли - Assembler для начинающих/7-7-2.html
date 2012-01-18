@@ -1,0 +1,728 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="7-7-2">Команды управления
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команды управления микросхемы 8087 ничего
+не вычисляют, однако
+
+<p><span
+style="mso-spacerun: yes">    </span>они необходимы для управления ее
+работой.<span style="mso-spacerun: yes">  </span>На Фиг. 7.12 показан
+
+<p><span
+style="mso-spacerun: yes">    </span>литсинг ассемблера команд управления
+сопроцессора 8087.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Многие из команд управления могут
+выполняться без синхронизации
+
+<p><span
+style="mso-spacerun: yes">    </span>с микропроцессором 8088.<span
+style="mso-spacerun: yes">  </span>На Фиг. 7.12 показаны эти команды в
+
+<p><span
+style="mso-spacerun: yes">    </span>форме, ассемблированной с использованием
+команды WAIT, а код
+
+<p><span
+style="mso-spacerun: yes">    </span>операции в поле комментариев изображает
+команды без команды WAIT.
+
+<p><span
+style="mso-spacerun: yes">    </span>Ассемблеру сообщается о том, что операция
+выполняется без ожидания,
+
+<p><span
+style="mso-spacerun: yes">    </span>с помощью символов FN в качестве первых
+двух символов мнемоники
+
+<p><span
+style="mso-spacerun: yes">    </span>команды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 7.13 перечислены действия всех
+команд управления
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессором 8087.<span
+style="mso-spacerun: yes">  </span>Команды FENI, FDISI, FCLEX обслуживают
+особые
+
+<p><span
+style="mso-spacerun: yes">    </span>ситуации в сопроцессоре 8087.<span
+style="mso-spacerun: yes">  </span>В управляющем регистре содержится
+
+<p><span
+style="mso-spacerun: yes">    </span>маска прерываний, которая выделяет те
+ситуации, которые могут
+
+<p><span
+style="mso-spacerun: yes">    </span>вызвать прерывание.<span
+style="mso-spacerun: yes">  </span>Маской прерываний сопроцессора 8087 в целом
+
+<p><span
+style="mso-spacerun: yes">    </span>управляют команды FENI и FDISI; эти
+команды аналогичны
+
+<p><span
+style="mso-spacerun: yes">    </span>соответственно командам STI и CLI микропроцессора
+8088, за
+
+<p><span
+style="mso-spacerun: yes">    </span>исключением того, что они управляют
+прерываниями только от
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087.<span style='mso-tab-count:
+1'>  </span>Команда FCLEX сбрасывает биты особых ситуаций
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра состояния.<span
+style="mso-spacerun: yes">  </span>Микросхема 8087 помнит все особые ситуации,
+
+<p><span
+style="mso-spacerun: yes">    </span>так что если последовательность команд
+возбудила более одного типа
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибки, все эти ошибки будут отмечены в
+регистре состояния.<span style="mso-spacerun: yes">  </span>И
+
+<p><span
+style="mso-spacerun: yes">    </span>команда FCLEX - единственный способ сброса
+этих флагов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда <span style='mso-tab-count:3'>                </span>Действие
+
+<p><span
+style='mso-tab-count:1'>      </span>--------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>FINIT<span style='mso-tab-count:1'> </span>Инициализация
+8087. Переустановка программ
+
+<p><span
+style='mso-tab-count:1'>      </span>FENI<span style='mso-tab-count:1'>  </span>Освобождение
+прерываний по исключительным состояниям
+
+<p><span
+style='mso-tab-count:1'>      </span>FDISI<span style='mso-tab-count:1'> </span>Блокирование
+прерываний по исключительным состояниям
+
+<p><span
+style='mso-tab-count:1'>      </span>FLDCW<span style='mso-tab-count:1'> </span>Загрузка
+управляющего регистра 8087 из памяти
+
+<p><span
+style='mso-tab-count:1'>      </span>FSTCW<span style='mso-tab-count:1'> </span>Сохранение
+управляющего регистра 8087 в память
+
+<p><span
+style='mso-tab-count:1'>      </span>FSTSW<span style='mso-tab-count:1'> </span>Сохранение
+регистра состояния 8087 в память
+
+<p><span
+style='mso-tab-count:1'>      </span>FCLEX<span style='mso-tab-count:1'> </span>Очистка
+индикаторов исключительных состояний
+
+<p><span
+style='mso-tab-count:1'>      </span>FSTENV<span style='mso-tab-count:1'>      </span>Сохранить
+оборудование 8087 в память
+
+<p><span
+style='mso-tab-count:1'>      </span>FLDENV<span style='mso-tab-count:1'>      </span>Загрузить
+оборудование 8087 из памяти
+
+<p><span
+style='mso-tab-count:1'>      </span>FSAVE<span style='mso-tab-count:1'> </span>Сохранить
+состояние 8087 в память
+
+<p><span
+style='mso-tab-count:1'>      </span>FRSTOR<span style='mso-tab-count:1'>      </span>Загрузить
+состояние 8087 из памяти
+
+<p><span
+style='mso-tab-count:1'>      </span>FINCSTP Увеличеть указатель вершины стека
+
+<p><span
+style='mso-tab-count:1'>      </span>FDECSTP Уменьшить указатель вершины стека
+
+<p><span
+style='mso-tab-count:1'>      </span>FFREE<span style='mso-tab-count:1'> </span>Освободить
+регистр стека
+
+<p><span
+style='mso-tab-count:1'>      </span>FNOP<span style='mso-tab-count:1'>  </span>Ничего
+не делать
+
+<p><span
+style='mso-tab-count:1'>      </span>FWAIT<span style='mso-tab-count:1'> </span>Идентично
+WAIT
+
+<p><span
+style='mso-tab-count:1'>      </span>--------------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 7.13 Управляющие действия
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Мы уже рассмотрели управляющее слово и
+слово состояния в
+
+<p><span
+style="mso-spacerun: yes">    </span>составе программной модели сопроцессора
+8087.<span style="mso-spacerun: yes">  </span>Команды управления
+
+<p><span
+style="mso-spacerun: yes">    </span>FLDCW, FSTCW и FSTSW загружают и сохраняют
+эти регистры.
+
+<p><span
+style='mso-tab-count:1'>      </span>Рабочая среда сопроцессора 8087 содержит
+все регистры
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхемы, за исключением стека данных;
+рабочая среда состоит из
+
+<p><span
+style="mso-spacerun: yes">    </span>14 байт.<span style="mso-spacerun: yes"> 
+</span>Рисунок 7.14 показывает структуру рабочей среды после
+
+<p><span
+style="mso-spacerun: yes">    </span>того, как сопроцессор 8087 записал ее в
+память.<span style="mso-spacerun: yes">  </span>Запись рабочей
+
+<p><span
+style="mso-spacerun: yes">    </span>среды - это обычное действие при обработке
+особой ситуации в
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессоре 8087, так как рабочая среда
+содержит все данные об
+
+<p><span
+style="mso-spacerun: yes">    </span>особых ситуациях.<span
+style="mso-spacerun: yes">  </span>Один 20=битовый адрес указывает на последнюю
+
+<p><span
+style="mso-spacerun: yes">    </span>команду, которую выполнил сопроцессор
+8087.<span style="mso-spacerun: yes">  </span>Другой адрес указывает
+
+<p><span
+style="mso-spacerun: yes">    </span>последнюю из вызывавшихся ячеек
+данных.<span style="mso-spacerun: yes">  </span>Код последней
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнявшейся сопроцессором 8087 команды
+тоже входит в рабочую
+
+<p><span
+style="mso-spacerun: yes">    </span>среду.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">  </span>ВОЗРАСТАНИ АДРЕСОВ
+
+<p><span
+style='mso-tab-count:5'>                              </span>ДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>15<span style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">   </span>0<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДї<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>УПРАВЛЯЮЩЕЕ СЛОВО<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">    </span>і+0<span style="mso-spacerun: yes">     
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>СЛОВО СОСТОЯНИЯ<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і+2<span style="mso-spacerun: yes">     
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">   </span>СЛОВО ПРИЗНАКА<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і+4<span style="mso-spacerun: yes">     
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">      </span>IP15-0<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>і+6
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>УКАЗАТЕЛЬ<span style="mso-spacerun: yes"> 
+</span>ГДДДДДДДДДДДВДВДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>КОМАНДЫ<span style="mso-spacerun: yes">    </span>і IP19-16<span
+style='mso-tab-count:1'>   </span>і0і КОД ОПЕРАЦИИ<span style="mso-spacerun:
+yes">    </span>і+8
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДБДБДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">      </span>OP15-0<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>і+10
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>УКАЗАТЕЛЬ<span style="mso-spacerun: yes"> 
+</span>ГДДДДДДДДДДДВДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>ОПЕРАНДА<span style="mso-spacerun: yes">   </span>і OP19-16<span
+style='mso-tab-count:1'>   </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">  </span>0<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">    </span>і+12
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>АДДДДДДДДДДДБДДДДДДДДДДДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>Фиг. 7.14 Рабочая среда 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Состояние микросхемы 8087 - это рабочая
+среда вместе с
+
+<p><span
+style="mso-spacerun: yes">    </span>регистрами данных.<span style='mso-tab-count:
+1'>  </span>Так как в сопроцессоре 8087 имеется восемь
+
+<p><span
+style="mso-spacerun: yes">    </span>10=байтовых регистров, состояние содержит
+94 байта.<span style="mso-spacerun: yes">  </span>Рисунок 7.15
+
+<p><span
+style="mso-spacerun: yes">    </span>иллюстрирует структуру состояния
+сопроцессора 8087, записанного в
+
+<p><span
+style="mso-spacerun: yes">    </span>память.<span style="mso-spacerun: yes"> 
+</span>Структура состояния идентична рабочей среде с добавленным
+
+<p><span
+style="mso-spacerun: yes">    </span>в конце регистровым стеком.<span
+style="mso-spacerun: yes">  </span>Программа может записать состояние
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087, когда происходит
+переключение задач, или если в
+
+<p><span
+style="mso-spacerun: yes">    </span>обработчике прерываний потребуется
+использование сопроцессора 8087.
+
+<p><span
+style="mso-spacerun: yes">    </span>Когда ранее выполнявшаяся задача снова
+получает управление,
+
+<p><span
+style="mso-spacerun: yes">    </span>состояние может быть программно
+восстановлено.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Две команды - FINCSTP и FDECSTP -
+взаимодействуют с указателем
+
+<p><span
+style="mso-spacerun: yes">    </span>стека; они перемещают его.<span
+style='mso-tab-count:1'>      </span>Все данные в регистрах остаются на
+
+<p><span
+style="mso-spacerun: yes">    </span>местах, т.е.<span style="mso-spacerun:
+yes">  </span>слово &quot;этикеток&quot; не изменяется.<span
+style="mso-spacerun: yes">  </span>Увеличение указателя
+
+<p><span
+style="mso-spacerun: yes">    </span>стека не эквивалентно извлечению данных из
+стека, так как
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;этикетка&quot; для этих данных все
+же показывает, что в регистре есть
+
+<p><span
+style="mso-spacerun: yes">    </span>данные.<span style="mso-spacerun: yes"> 
+</span>Попытка загрузить какое=либо число в такой стек приведет к
+
+<p><span
+style="mso-spacerun: yes">    </span>появлению особой ситуации - переполнению
+стека.<span style="mso-spacerun: yes">  </span>Команда FFREE
+
+<p><span
+style="mso-spacerun: yes">    </span>освобождает ячейку стека, устанавливая
+&quot;этикетку&quot; для этой ячейки
+
+<p><span
+style="mso-spacerun: yes">    </span>так, что она показывает отсутствие данных
+в ячейке.<span style="mso-spacerun: yes">  </span>Но команда
+
+<p><span
+style="mso-spacerun: yes">    </span>FFREE не меняет указатель стека, и если
+вам просто нужно выбросить
+
+<p><span
+style="mso-spacerun: yes">    </span>верхний элемент из стека, то в большинстве
+случаев это легче
+
+<p><span
+style="mso-spacerun: yes">    </span>сделать с помощью арифметической команды.
+
+<p>A
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">  </span>ВОЗРАСТАНИЕ АДРЕСОВ
+
+<p><span
+style='mso-tab-count:5'>                              </span>ДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>15<span style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">   </span>0<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДї<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>УПРАВЛЯЮЩЕЕ СЛОВО<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">    </span>і+0<span style="mso-spacerun: yes">     
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>СЛОВО СОСТОЯНИЯ<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і+2<span style="mso-spacerun: yes">     
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">   </span>СЛОВО ПРИЗНАКА<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>і+4<span style="mso-spacerun: yes">     
+</span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">      </span>IP15-0<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>і+6
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>УКАЗАТЕЛЬ<span style="mso-spacerun: yes"> 
+</span>ГДДДДДДДДДДДВДВДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>КОМАНДЫ<span style="mso-spacerun: yes">    </span>і IP19-16<span
+style='mso-tab-count:1'>   </span>і0і КОД ОПЕРАЦИИ<span style="mso-spacerun:
+yes">    </span>і+8
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДБДБДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">      </span>OP15-0<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>і+10
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>УКАЗАТЕЛЬ<span style="mso-spacerun: yes"> 
+</span>ГДДДДДДДДДДДВДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>ОПЕРАНДА<span style="mso-spacerun: yes">   </span>і OP19-16<span
+style='mso-tab-count:1'>   </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">  </span>0<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">    </span>і+12
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДБДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>МАНТИССА 15-0 <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і+14
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>МАНТИССА 31-16<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і+16
+
+<p><span
+style="mso-spacerun: yes">      </span>ЭЛЕМЕНТ
+ВЕРШИ-ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">      </span>НЫ СТЕКА:ST<span style="mso-spacerun:
+yes">   </span>і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>МАНТИССА 47-32<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">    </span>і+18
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>МАНТИССА 63-48<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і+20
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>іsі<span style="mso-spacerun: yes">    </span>ПОРЯДОК 14-0 <span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">    </span>і+22
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>МАНТИССА 15-0 <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і+24
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>МАНТИССА 31-16<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і+26
+
+<p><span
+style="mso-spacerun: yes">       </span>СЛЕДУЮЩИЙ<span style="mso-spacerun:
+yes">    </span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">      </span>ЭЛЕМЕНТ СТЕКА і<span style='mso-tab-count:
+1'>   </span><span style="mso-spacerun: yes">  </span>МАНТИССА 47-32<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">   
+</span>і+28
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>МАНТИССА 63-48<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і+30
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>іsі<span style="mso-spacerun: yes">    </span>ПОРЯДОК 14-0 <span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">    </span>і+32
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>...<span style='mso-tab-count:1'>      </span> <span
+style="mso-spacerun: yes">     </span>. . . . . . .<span style='mso-tab-count:
+1'>     </span><span style="mso-spacerun: yes">   </span>...
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>МАНТИССА 15-0 <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і+84
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>МАНТИССА 31-16<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і+86
+
+<p><span
+style="mso-spacerun: yes">       </span>ПОСЛЕДНИЙ<span style="mso-spacerun:
+yes">    </span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">       </span>ЭЛЕМЕНТ СТЕКАі<span style='mso-tab-count:
+1'>   </span><span style="mso-spacerun: yes">  </span>МАНТИССА 47-32<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">   
+</span>і+88
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>МАНТИССА 63-48<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і+90
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>іsі<span style="mso-spacerun: yes">    </span>ПОРЯДОК 14-0 <span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">    </span>і+92
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>АДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">  
+</span>ПРИМЕЧАНИЯ:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>S = Знак
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>Бит 0 каждого поля - самый правый младший бит соответствующего
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>поля регистра
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>бит 63 мантиссы - целый бит (подразумевая двоичная точка
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>находится рядом с ним, справа)&#18;
+
+<p><span
+style='mso-tab-count:3'>                  </span>Фиг. 7.15 Состояние 8087
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

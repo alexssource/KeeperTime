@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-6">Адресация через базу и смещение</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку<span style="mso-spacerun: yes"> 
+</span>вычисление для<span style="mso-spacerun: yes">  </span>операнда<span
+style="mso-spacerun: yes">  </span>адреса,<span style="mso-spacerun: yes"> 
+</span>состоящего из<span style="mso-spacerun: yes">  </span>базы и
+
+<p><span
+style="mso-spacerun: yes">    </span>индекса, встречается довольно часто,<span
+style="mso-spacerun: yes">  </span>среди способов адресации 8088
+
+<p><span
+style="mso-spacerun: yes">    </span>есть<span style="mso-spacerun: yes"> 
+</span>такие, что<span style="mso-spacerun: yes">  </span>позволяют
+автоматически<span style="mso-spacerun: yes">  </span>производить идексирующее
+
+<p><span
+style="mso-spacerun: yes">    </span>сложение.<span style="mso-spacerun: yes"> 
+</span>Вместо<span style="mso-spacerun: yes">  </span>выполнения<span
+style="mso-spacerun: yes">   </span>всех<span style="mso-spacerun: yes"> 
+</span>вычислений,<span style="mso-spacerun: yes">  </span>программа<span
+style="mso-spacerun: yes">  </span>может
+
+<p><span
+style="mso-spacerun: yes">    </span>определить только величину 2*I и поместить
+ее в регистр BX. Команда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>INC<span style="mso-spacerun: yes">   
+</span>[OPND + BX]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисляет исполнительный адрес через
+сложение адреса базы<span style="mso-spacerun: yes">  </span>OPND<span
+style="mso-spacerun: yes">  </span>со
+
+<p><span
+style="mso-spacerun: yes">    </span>значением<span style="mso-spacerun: yes"> 
+</span>индекса в BX. Этой командой достигается тот же самый ре-
+
+<p><span
+style="mso-spacerun: yes">    </span>зультат что и в предыдущем случае, но
+меньшим числом команд.<span style="mso-spacerun: yes">  </span>Обра-
+
+<p><span
+style="mso-spacerun: yes">    </span>тите внимание, что в этой команде
+ассемблеру не требуется подсказка
+
+<p><span
+style="mso-spacerun: yes">    </span>WORD<span style="mso-spacerun: yes"> 
+</span>PTR,<span style='mso-tab-count:1'>    </span>потому что ассемблер уже
+знает, что OPND является пере-
+
+<p><span
+style="mso-spacerun: yes">    </span>менной типа WORD. Оператор PTR требуется
+только в тех случаях, ког-
+
+<p><span
+style="mso-spacerun: yes">    </span>да ассемблер не может определить тип
+операнда.
+
+<p><span
+style='mso-tab-count:1'>      </span>Любой из<span style="mso-spacerun: yes"> 
+</span>четырех адресных регистров<span style="mso-spacerun: yes">  </span>может
+быть использован<span style="mso-spacerun: yes">  </span>в
+
+<p><span
+style="mso-spacerun: yes">    </span>качестве индекса<span style="mso-spacerun:
+yes">  </span>при базе. Фиг.<span style="mso-spacerun: yes">  </span>3.2
+показывает возможные<span style='mso-tab-count:1'>    </span>способы
+
+<p><span
+style="mso-spacerun: yes">    </span>адресации через<span style="mso-spacerun:
+yes">  </span>базу и индекс. Вы<span style='mso-tab-count:1'>    </span>видите,
+что ассемблер допускает
+
+<p><span
+style="mso-spacerun: yes">    </span>несколько способов<span style='mso-tab-count:
+1'>  </span>записи операции адресации.<span style="mso-spacerun: yes"> 
+</span>В группе, состоящей
+
+<p><span
+style="mso-spacerun: yes">    </span>из<span style='mso-tab-count:1'>      </span>пяти
+команд<span style="mso-spacerun: yes">  </span>на Фиг.<span
+style="mso-spacerun: yes">  </span>3.2,<span style="mso-spacerun: yes"> 
+</span>во<span style='mso-tab-count:1'>      </span>всех командах<span
+style="mso-spacerun: yes">  </span>адрес базы<span style="mso-spacerun: yes"> 
+</span>OPND
+
+<p><span
+style="mso-spacerun: yes">    </span>складывается с указанным рядом индексным
+регистром.
+
+<p><span
+style='mso-tab-count:1'>      </span>Надо<span style="mso-spacerun: yes"> 
+</span>отметить,<span style="mso-spacerun: yes">  </span>что<span
+style="mso-spacerun: yes">  </span>в<span style="mso-spacerun: yes"> 
+</span>команде,<span style="mso-spacerun: yes">  </span>содержащей<span
+style="mso-spacerun: yes">  </span>базисный<span style="mso-spacerun: yes"> 
+</span>адрес,
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр<span style="mso-spacerun: yes"> 
+</span>не обязательно<span style="mso-spacerun: yes">  </span>должен
+содержать<span style="mso-spacerun: yes">  </span>именно значение индекса.
+
+<p><span
+style="mso-spacerun: yes">    </span>Действительно, поскольку BX<span
+style="mso-spacerun: yes">  </span>называется базисным регистром, кажется
+
+<p><span
+style="mso-spacerun: yes">    </span>разумным воспользоваться
+противоположной<span style="mso-spacerun: yes">  </span>конфигурацией. В
+качестве
+
+<p><span
+style="mso-spacerun: yes">    </span>примера<span style="mso-spacerun: yes"> 
+</span>предположим,<span style="mso-spacerun: yes">  </span>что<span
+style='mso-tab-count:1'>      </span>программа<span style="mso-spacerun: yes"> 
+</span>использует<span style="mso-spacerun: yes">  </span>множество разных
+
+<p><span
+style="mso-spacerun: yes">    </span>векторов с одинаковой длиной<span
+style="mso-spacerun: yes">  </span>и размером элементов. Такую структуру
+
+<p><span
+style="mso-spacerun: yes">    </span>может<span style="mso-spacerun: yes"> 
+</span>иметь,<span style="mso-spacerun: yes">   </span>например,<span
+style="mso-spacerun: yes">  </span>классный<span style="mso-spacerun: yes"> 
+</span>журнал,<span style="mso-spacerun: yes">   </span>в<span
+style="mso-spacerun: yes">  </span>котором<span style="mso-spacerun: yes"> 
+</span>векторам
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствуют<span style="mso-spacerun:
+yes">   </span>наборы<span style="mso-spacerun: yes">   </span>оценок<span
+style="mso-spacerun: yes">   </span>за<span style="mso-spacerun: yes">  
+</span>каждую<span style="mso-spacerun: yes">  </span>контрольную<span
+style='mso-tab-count:1'>    </span>работу.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа, вычисляющая оценку пятого
+ученика в классе по I-й работе
+
+<p><span
+style="mso-spacerun: yes">    </span>будет<span style="mso-spacerun: yes"> 
+</span>иметь<span style="mso-spacerun: yes">  </span>уже<span
+style="mso-spacerun: yes">  </span>известное<span style="mso-spacerun: yes"> 
+</span>значение<span style="mso-spacerun: yes">  </span>индекса<span
+style="mso-spacerun: yes">  </span>(5) а базу (вектор
+
+<p><span
+style="mso-spacerun: yes">    </span>данной<span style="mso-spacerun: yes"> 
+</span>контрольной<span style="mso-spacerun: yes">   </span>работы)<span
+style="mso-spacerun: yes">  </span>-<span style="mso-spacerun: yes"> 
+</span>вычисляемую<span style="mso-spacerun: yes">   </span>в<span
+style="mso-spacerun: yes">  </span>ходе<span style="mso-spacerun: yes"> 
+</span>выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>программы.
+
+<p><span
+style='mso-tab-count:1'>      </span>Индексный регистр может содержать как
+адрес базы вектора, так и
+
+<p><span
+style="mso-spacerun: yes">    </span>значение<span style="mso-spacerun: yes"> 
+</span>индекса<span style="mso-spacerun: yes">  </span>в<span
+style="mso-spacerun: yes">  </span>векторе.<span style="mso-spacerun: yes"> 
+</span>Поскольку<span style="mso-spacerun: yes">  </span>константное<span
+style="mso-spacerun: yes">  </span>значение<span style="mso-spacerun: yes"> 
+</span>в
+
+<p><span
+style="mso-spacerun: yes">    </span>команде может<span style="mso-spacerun:
+yes">  </span>оказаться и базой<span style="mso-spacerun: yes">  </span>и
+индексом (или<span style="mso-spacerun: yes">  </span>вовсе чем-нибудь
+
+<p><span
+style="mso-spacerun: yes">    </span>известным только программисту), то это
+значение называют смещением.
+
+<p><span
+style="mso-spacerun: yes">    </span>Оно соответствует<span
+style="mso-spacerun: yes">  </span>расстояню или смещению<span
+style="mso-spacerun: yes">  </span>от адреса в<span style="mso-spacerun: yes"> 
+</span>регистре до
+
+<p><span
+style="mso-spacerun: yes">    </span>исполнительного адреса, по которому
+происходит обращение.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

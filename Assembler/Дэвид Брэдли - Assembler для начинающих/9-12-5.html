@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<b><p><div align="center"><a name="9-12-5">Чтение и запись символов
+</a></div></p></b>
+<p><span
+style="mso-spacerun: yes">    </span>Подпрограммы видеопрограммы BIOS,
+соответствующие номерам от 8 до
+
+<p><span
+style="mso-spacerun: yes">    </span>10, обрабатывают символы на дисплее.<span
+style="mso-spacerun: yes">  </span>Все эти три программы
+
+<p><span
+style="mso-spacerun: yes">    </span>работают с текущим положением
+курсора.<span style="mso-spacerun: yes">  </span>Чтобы записать конкретный
+
+<p><span
+style="mso-spacerun: yes">    </span>символ на экран, программа должна прежде
+всего задать положение
+
+<p><span
+style="mso-spacerun: yes">    </span>курсора с помощью видеопрограммы BIOS при
+AH-2.<span style="mso-spacerun: yes">  </span>После вывода
+
+<p><span
+style="mso-spacerun: yes">    </span>символа курсор не продвигается
+автоматически после того, как символ
+
+<p><span
+style="mso-spacerun: yes">    </span>записан на экране.<span style='mso-tab-count:
+1'>  </span>Если программе нужно записать более одного
+
+<p><span
+style="mso-spacerun: yes">    </span>символа, она дожна переместить курсор на
+следующую позицию перед
+
+<p><span
+style="mso-spacerun: yes">    </span>записью символа.<span style="mso-spacerun:
+yes">  </span>То же самое справедливо и для чтения символов с
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея.<span style="mso-spacerun: yes"> 
+</span>Так как все символьные операции происходят там, где
+
+<p><span
+style="mso-spacerun: yes">    </span>расположен курсор, программа, использующая
+видеопрограмму BIOS, не
+
+<p><span
+style="mso-spacerun: yes">    </span>сможет определить, по какому адресу
+расположен символ в буфере.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программы чтения и записи символа
+определяют, где он расположен, а
+
+<p><span
+style="mso-spacerun: yes">    </span>вызывающая программа должна знать только
+строку и колонку символа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Имеются две формы программы записи
+символа. Одна из этих
+
+<p><span
+style="mso-spacerun: yes">    </span>программ требует указания как символа, так
+и атрибутов (мигание,
+
+<p><span
+style="mso-spacerun: yes">    </span>яркость, цвета и так далее), чтобы
+поместить символ по текущему
+
+<p><span
+style="mso-spacerun: yes">    </span>адресу курсора. Другая программа записи
+символа записывает только
+
+<p><span
+style="mso-spacerun: yes">    </span>символ и не меняет атрибуты этой позиции.
+Эти две различные формы
+
+<p><span
+style="mso-spacerun: yes">    </span>программ записи символа позволяют
+вызывающей программе принимать
+
+<p><span
+style="mso-spacerun: yes">    </span>текущие атрибуты позиции символа, не
+выясняя, какие они. Функция
+
+<p><span
+style="mso-spacerun: yes">    </span>чтения символа возвращает и символ, и его
+атрибуты по адресу
+
+<p><span
+style="mso-spacerun: yes">    </span>курсора. Иметь здесь две разные функции не
+надо - информация
+
+<p><span
+style="mso-spacerun: yes">    </span>доступна, и если нужна вам, используйте
+ее.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В связи с проблемой помех цветной
+графической платы в программы
+
+<p><span
+style="mso-spacerun: yes">    </span>чтения и записи встроена проверка
+горизонтального обратного хода.
+
+<p><span
+style="mso-spacerun: yes">    </span>Эта проверка нужна для того, чтобы на
+экране не появился &quot;снег&quot; во
+
+<p><span
+style="mso-spacerun: yes">    </span>время работы микропроцессора. Эта проверка
+выполняется всегда,
+
+<p><span
+style="mso-spacerun: yes">    </span>независимо от того, в каком режиме
+находится дисплей; она
+
+<p><span
+style="mso-spacerun: yes">    </span>производится даже тогда, когда
+используется монохромная плата.
+
+<p><span
+style="mso-spacerun: yes">    </span>Максимальное время ожидания сигнала
+горизонтального обратного хода
+
+<p><span
+style="mso-spacerun: yes">    </span>составляет примерно 63 микросекунды, или
+63 миллионных долей
+
+<p><span
+style="mso-spacerun: yes">    </span>секунды. Это ожидание - минимальное в
+процессе выдачи символа на
+
+<p><span
+style="mso-spacerun: yes">    </span>экран. У фирмы IBM не оказалось достаточно
+места в ПЗУ, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>написать подпрограммы, проверяющие
+специальные случаи. Так что BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>всегда ждет сигнала отсутствия помех перед
+чтением и записью.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

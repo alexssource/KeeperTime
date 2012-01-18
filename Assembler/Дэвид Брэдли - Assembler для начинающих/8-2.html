@@ -1,0 +1,1001 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="8-2">Динамик</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Внутри корпуса IBM PC есть маленький
+динамик. Программа может
+
+<p><span
+style="mso-spacerun: yes">    </span>управлять звуками, генерируемыми этими
+динамиком. Для этого нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>управлять некоторыми выходными битами
+микросхемы 8255 и генератора
+
+<p><span
+style="mso-spacerun: yes">    </span>тона в микросхеме 8253.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 8.1 показана программа, которая
+управляет динамиком
+
+<p><span
+style="mso-spacerun: yes">    </span>двумя разными способами. Первый способ,
+помеченный в листинге
+
+<p><span
+style="mso-spacerun: yes">    </span>меткой DIRECT, непосредственно управляет
+динамиком. Бит 1 выводного
+
+<p><span
+style="mso-spacerun: yes">    </span>порта 61H подключен к динамику. Всякий
+раз, когда программа меняет
+
+<p><span
+style="mso-spacerun: yes">    </span>значение этого бита, диффузор динамика
+двигается либо наружу, либо
+
+<p><span
+style="mso-spacerun: yes">    </span>внутрь. Быстро меняя значение этого бита,
+программа генерирует
+
+<p><span
+style="mso-spacerun: yes">    </span>звук. Это иллюстрирует первая часть
+программы на Фиг. 8.1, она
+
+<p><span
+style="mso-spacerun: yes">    </span>меняет значение бита 1, порождая
+высокочастотный тон. Скорость, с
+
+<p><span
+style="mso-spacerun: yes">    </span>которой программа меняет бит 1, определяет
+частоту тона.
+
+<p><span
+style='mso-tab-count:1'>      </span>Взяв на себя непосредственное управление
+динамиком, вы должны
+
+<p><span
+style='mso-tab-count:2'>           </span>Microsoft (R) Macro Assembler Version
+5.00<span style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>1/1/80 04:05:08
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 8.1 Управление динамиком<span
+style='mso-tab-count:4'>                   </span><span style="mso-spacerun:
+yes">    </span>Page<span style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span>PAGE<span
+style='mso-tab-count:1'>  </span>,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span>TITLE<span
+style='mso-tab-count:1'> </span>Фиг. 8.1 Управление динамиком
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>STACK<span
+style='mso-tab-count:1'> </span>SEGMENT STACK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style="mso-spacerun: yes">  </span>0040[<span
+style='mso-tab-count:4'>                        </span>DW<span
+style='mso-tab-count:1'>    </span>64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">   </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes"> </span>]
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0080<span style='mso-tab-count:4'>                   </span>STACK<span
+style='mso-tab-count:1'> </span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>CODE<span
+style='mso-tab-count:1'>  </span>SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span>ASSUME<span
+style='mso-tab-count:1'>      </span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>SPEAKER
+PROC<span style='mso-tab-count:1'>      </span>FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style="mso-spacerun: yes">  </span>1E<span
+style='mso-tab-count:4'>                     </span>PUSH<span style='mso-tab-count:
+1'>  </span>DS<span style='mso-tab-count:2'>          </span>; Адрес возврата
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0001<span style="mso-spacerun: yes">  </span>B8 0000<span
+style='mso-tab-count:4'>                      </span>MOV<span style='mso-tab-count:
+1'>   </span>AX, 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0004<span style="mso-spacerun: yes">  </span>50<span
+style='mso-tab-count:4'>                     </span>PUSH<span style='mso-tab-count:
+1'>  </span>AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span>;-----<span
+style='mso-tab-count:1'>      </span>Задание режима работы динамика
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0005<span style="mso-spacerun: yes">  </span>2B C9<span
+style='mso-tab-count:4'>                        </span>SUB<span
+style='mso-tab-count:1'>   </span>CX, CX<span style='mso-tab-count:2'>            </span>;
+Счетчик цикла
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0007<span style="mso-spacerun: yes">  </span>E4 61<span
+style='mso-tab-count:4'>                        </span>IN<span
+style='mso-tab-count:1'>    </span>AL, 61H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0009<span style="mso-spacerun: yes">  </span>24 FE<span
+style='mso-tab-count:4'>                        </span>AND<span
+style='mso-tab-count:1'>   </span>AL, 0FEH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>000B<span style="mso-spacerun: yes">  </span>E6 61<span
+style='mso-tab-count:4'>                        </span>OUT<span
+style='mso-tab-count:1'>   </span>61H, AL <span style='mso-tab-count:1'>    </span>;
+Установка разряда 0 порта 61H в 0 для
+
+<p><span
+style='mso-tab-count:10'>                                                            </span>;<span
+style="mso-spacerun: yes">  </span>задания прямого управления динамиком
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>000D<span style='mso-tab-count:4'>                   </span>DIRECT:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>000D<span style="mso-spacerun: yes">  </span>0C 02<span
+style='mso-tab-count:4'>                        </span>OR<span
+style='mso-tab-count:1'>    </span>AL, 2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>000F<span style="mso-spacerun: yes">  </span>E6 61<span
+style='mso-tab-count:4'>                        </span>OUT<span
+style='mso-tab-count:1'>   </span>61H, AL <span style='mso-tab-count:1'>    </span>;
+Включить динамик
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0011<span style="mso-spacerun: yes">  </span>24 FD<span
+style='mso-tab-count:4'>                        </span>AND<span
+style='mso-tab-count:1'>   </span>AL, 0FDH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0013<span style="mso-spacerun: yes">  </span>E6 61<span
+style='mso-tab-count:4'>                        </span>OUT<span
+style='mso-tab-count:1'>   </span>61H, AL <span style='mso-tab-count:1'>    </span>;
+Выключить динамик
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0015<span style="mso-spacerun: yes">  </span>E2 F6<span
+style='mso-tab-count:4'>                        </span>LOOP<span
+style='mso-tab-count:1'>  </span>DIRECT
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span>;-----<span
+style='mso-tab-count:1'>      </span>Управление высотой звука динамика
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0017<span style="mso-spacerun: yes">  </span>B0 B6<span
+style='mso-tab-count:4'>                        </span>MOV<span
+style='mso-tab-count:1'>   </span>AL, 10110110b
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0019<span style="mso-spacerun: yes">  </span>E6 43<span
+style='mso-tab-count:4'>                        </span>OUT<span
+style='mso-tab-count:1'>   </span>43H, AL <span style='mso-tab-count:1'>    </span>;
+Установка режима для 2-го канала
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>001B<span style="mso-spacerun: yes">  </span>B8 03E8<span
+style='mso-tab-count:4'>                      </span>MOV<span style='mso-tab-count:
+1'>   </span>AX, 1000<span style='mso-tab-count:1'>    </span>; Выбор высоты
+звука
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>001E<span style="mso-spacerun: yes">  </span>E6 42<span
+style='mso-tab-count:4'>                        </span>OUT<span
+style='mso-tab-count:1'>   </span>42H, AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0020<span style="mso-spacerun: yes">  </span>8A C4<span
+style='mso-tab-count:4'>                        </span>MOV<span
+style='mso-tab-count:1'>   </span>AL, AH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0022<span style="mso-spacerun: yes">  </span>E6 42<span
+style='mso-tab-count:4'>                        </span>OUT<span
+style='mso-tab-count:1'>   </span>42H, AL <span style='mso-tab-count:1'>    </span>;
+Занесение высоты звука в порт динамика
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0024<span style="mso-spacerun: yes">  </span>E4 61<span
+style='mso-tab-count:4'>                        </span>IN<span
+style='mso-tab-count:1'>    </span>AL, 61H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0026<span style="mso-spacerun: yes">  </span>8A E0<span
+style='mso-tab-count:4'>                        </span>MOV<span
+style='mso-tab-count:1'>   </span>AH, AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0028<span style="mso-spacerun: yes">  </span>0C 03<span
+style='mso-tab-count:4'>                        </span>OR<span
+style='mso-tab-count:1'>    </span>AL, 3
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>002A<span style="mso-spacerun: yes">  </span>E6 61<span
+style='mso-tab-count:4'>                        </span>OUT<span
+style='mso-tab-count:1'>   </span>61H, AL <span style='mso-tab-count:1'>    </span>;
+Выбор режима управления динамикаом
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>002C<span style="mso-spacerun: yes">  </span>2B C9<span
+style='mso-tab-count:4'>                        </span>SUB<span
+style='mso-tab-count:1'>   </span>CX, CX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>002E<span style='mso-tab-count:4'>                   </span>KILL_TIME:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>002E<span style="mso-spacerun: yes">  </span>E2 FE<span
+style='mso-tab-count:4'>                        </span>LOOP<span
+style='mso-tab-count:1'>  </span>KILL_TIME<span style='mso-tab-count:1'>   </span>;
+Цикл ожидания, во время которого
+
+<p><span
+style='mso-tab-count:10'>                                                            </span>;<span
+style="mso-spacerun: yes">  </span>работает динамик
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0030<span style="mso-spacerun: yes">  </span>8A C4<span
+style='mso-tab-count:4'>                        </span>MOV<span
+style='mso-tab-count:1'>   </span>AL, AH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0032<span style="mso-spacerun: yes">  </span>E6 61<span
+style='mso-tab-count:4'>                        </span>OUT<span
+style='mso-tab-count:1'>   </span>61H, AL <span style='mso-tab-count:1'>    </span>;
+Выключение динамика
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0034<span style="mso-spacerun: yes">  </span>CB<span
+style='mso-tab-count:4'>                     </span>RET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0035<span style='mso-tab-count:4'>                   </span>SPEAKER
+ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0035<span style='mso-tab-count:4'>                   </span>CODE<span
+style='mso-tab-count:1'>  </span>ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 8.1 Управление динамиком
+
+<p><span
+style="mso-spacerun: yes">    </span>прежде всего работать с выводным портом
+микросхемы 8255 системной
+
+<p><span
+style="mso-spacerun: yes">    </span>платы. Программируемый периферийный
+
+<p><span
+style="mso-spacerun: yes">    </span>интерфейс микросхемы 8255 (PPI) имеет
+всего три входных или
+
+<p><span
+style="mso-spacerun: yes">    </span>выходных, порта. IBM PC<span
+style="mso-spacerun: yes">    </span>инициализирует микросхему 8255 так, чтобы
+получилось два входных
+
+<p><span
+style="mso-spacerun: yes">    </span>порта - 60H и 62H - и один порт вывода,
+61H. Порт 60H в первую
+
+<p><span
+style="mso-spacerun: yes">    </span>очередь вводит значения с клавиатуры. Его
+можно
+
+<p><span
+style="mso-spacerun: yes">    </span>также использовать для чтения положения
+переключателей на системной
+
+<p><span
+style="mso-spacerun: yes">    </span>плате. Обычно состояния этих
+переключателей читаются только один
+
+<p><span
+style="mso-spacerun: yes">    </span>раз, во время инициализации при включении
+питания системы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Результат программа BIOS записывает в
+память для дальнейшего
+
+<p><span
+style="mso-spacerun: yes">    </span>использования. Поэтому с точки зрения
+наших целей можно считать,
+
+<p><span
+style="mso-spacerun: yes">    </span>что порт 60H непосредственно обслуживает
+ввод с клавиатуры. Вообще
+
+<p><span
+style="mso-spacerun: yes">    </span>входной порт выполняет важную функцию. Он
+служит буфером между
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессором и устройством
+ввода-вывода; он передает данные
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессору только тогда, когда
+последний запрашивает их
+
+<p><span
+style="mso-spacerun: yes">    </span>командой IN. Все остальное время вводной
+порт задерживает данные и
+
+<p><span
+style="mso-spacerun: yes">    </span>не допускает, чтобы они повлияли на работу
+микропроцессора.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Другой порт ввода микросхемы 8255, порт
+62H, обслуживает другие
+
+
+<p><span
+style="mso-spacerun: yes">    </span>входы. Четыре его бита непосредственно
+соответствуют
+
+<p><span
+style="mso-spacerun: yes">    </span>переключателям, показывающим объем памяти,
+подсоединенной к
+
+<p><span
+style="mso-spacerun: yes">    </span>системному каналу ввода-вывода. Другие
+четыре бита имеют
+
+<p><span
+style="mso-spacerun: yes">    </span>индивидуальное назначение. Два из них
+показывают тип системной
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибки. Программа обслуживания
+немаскируемого прерывания NMI
+
+<p><span
+style="mso-spacerun: yes">    </span>использует эти биты для определения
+причины системной аварии. Бит 5
+
+<p><span
+style="mso-spacerun: yes">    </span>порта 62H используется для обратной связи
+с одним из каналов
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера-счетчика. Этот бит служит
+индикатором текущего выхода
+
+<p><span
+style="mso-spacerun: yes">    </span>второго канала микросхемы 8253. Бит 4
+порта 62H отражает текущее
+
+<p><span
+style="mso-spacerun: yes">    </span>состояние ввода с кассетного магнитофона.
+Сзади у IBM PC, рядом с
+
+<p><span
+style="mso-spacerun: yes">    </span>разъемом для подключения клавиатуры,
+имеется разъем для подключения
+
+<p><span
+style="mso-spacerun: yes">    </span>кассетного магнитофона. При чтении данных
+с кассеты, этот бит
+
+<p><span
+style="mso-spacerun: yes">    </span>используется для определения текущего
+значения, вводимого с
+
+<p><span
+style="mso-spacerun: yes">    </span>кассеты.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Порт 61H - это порт вывода микросхемы 8255
+в машине фирмы IBM.
+
+<p><span
+style="mso-spacerun: yes">    </span>Всякий выходной порт захватывает (временно
+запоминает) данные,
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>выводимые программой. Если бы аппаратура не запоминала данные, они
+
+<p><span
+style="mso-spacerun: yes">    </span>бы пропали в течение микросекунды или
+около этого. Такое
+
+<p><span
+style="mso-spacerun: yes">    </span>запоминание данных позволяет сохранять их
+значение в порте до тех
+
+<p><span
+style="mso-spacerun: yes">    </span>пор, пока они снова не будут изменены
+программой. То есть, когда мы
+
+<p><span
+style="mso-spacerun: yes">    </span>выводим значение, меняющее положение
+диффузора динамика, оно
+
+<p><span
+style="mso-spacerun: yes">    </span>остается неизменными до тех пор, пока его
+не изменит программа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.8.2 показано значение битов порта
+61H. Эти данные взяты
+
+<p><span
+style="mso-spacerun: yes">    </span>из из технического описания.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+
+<p><span style='mso-tab-count:1'>      </span><span
+style='mso-fareast-font-family:"MS Mincho"'>При изучении управления динамиком
+имеют значение только биты 0
+
+<p><span
+style="mso-spacerun: yes">    </span>и 1. Из всех других - только бит 3 -
+управление двигателем
+
+<p><span
+style="mso-spacerun: yes">    </span>кассетного магнитофона - и бит 7 - сброс
+ввода с клавиатуры - имеют
+
+<p><span
+style="mso-spacerun: yes">    </span>какое-то значение для наших программ.
+Остальные биты предназначены
+
+<p><span
+style="mso-spacerun: yes">    </span>только для инициализации и диагностики.
+Чтобы полностью разобраться
+
+<p><span
+style="mso-spacerun: yes">    </span>в них, нужно детально изучить
+принципиальные схемы системы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Возвращаясь к обсуждению управления
+динамиком, мы можем
+
+<p><span
+style="mso-spacerun: yes">    </span>заметить, что биты 0 и 1 используются для
+непосредственного
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>Бит<span style='mso-tab-count:3'>                  </span>Значение
+
+<p><span
+style='mso-tab-count:1'>      </span>-----------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>0<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">    </span>Порт 2 таймера (упраление динамиком)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>1<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">    </span>Прямое управление динамиком
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>2<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">    </span>Мультиплексный порт 62H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>3<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">    </span>Управление мотором кассетного магнитофона
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>4<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">    </span>Включение контроля доступа на системной
+
+<p><span
+style='mso-tab-count:3'>                  </span>плате памяти
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>5<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">    </span>Включение контроля доступа в памяти
+
+<p><span
+style='mso-tab-count:3'>                  </span>каналов ввода-вывода
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>6<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">    </span>Временной контроль клавиатуры
+
+
+<p><span style='mso-tab-count:1'>      </span><span
+style='mso-fareast-font-family:"MS Mincho"'><span style="mso-spacerun: yes">  
+</span>7<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">    </span>Мультиплексный/сброса ввода с клавиатуры
+
+<p><span
+style='mso-tab-count:3'>                  </span>порт 60H
+
+<p><span
+style='mso-tab-count:1'>      </span>-----------------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 8.2 Значение битов порта 61H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>управления. Как показано на Фиг. 8.1,
+установка бита 0 в положение
+
+<p><span
+style="mso-spacerun: yes">    </span>0 включает прямое управление динамиком,
+блокируя механизм генерации
+
+<p><span
+style="mso-spacerun: yes">    </span>звука микросхемой 8253. Этот метод
+используется во второй части
+
+<p><span
+style="mso-spacerun: yes">    </span>програмы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обратите внимание на то, как программа
+сбрасывает бит 0.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда OUT включает все 8 бит порта 61H.
+Способа изменить только
+
+<p><span
+style="mso-spacerun: yes">    </span>бит 0, оставив остальные биты нетронутыми,
+не существует. Если в
+
+<p><span
+style="mso-spacerun: yes">    </span>программе нужно изменить только бит 0, она
+должна считать из порта
+
+<p><span
+style="mso-spacerun: yes">    </span>текущее значение других разрядов. К
+счастью, микросхема 8255
+
+<p><span
+style="mso-spacerun: yes">    </span>допускает прямое программное чтение
+выводных портов.
+
+<p><span
+style="mso-spacerun: yes">    </span>Последовательность команд
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>IN<span style="mso-spacerun: yes">   
+</span>AL , 61H
+
+<p><span
+style='mso-tab-count:1'>      </span>AND<span style="mso-spacerun: yes">  
+</span>AL , 0FFH
+
+<p><span
+style='mso-tab-count:1'>      </span>OUT<span style="mso-spacerun: yes">  
+</span>61H, AL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>читает текущий код из выводного порта,
+затем команда AND сбрасывает
+
+<p><span
+style="mso-spacerun: yes">    </span>младший бит, а команда OUT посылает
+результат в выводной порт. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>бы программа вывела в порт просто число 0,
+динамик работал бы
+
+<p><span
+style="mso-spacerun: yes">    </span>верно, но клавиатура была бы выключена.
+Работая с любым портом
+
+<p><span
+style="mso-spacerun: yes">    </span>вывода побитовой настройки, стройте
+программу так, чтобы она не
+
+<p><span
+style="mso-spacerun: yes">    </span>влияла ни на один из других бит, если
+только вы не собираететсь
+
+<p><span
+style="mso-spacerun: yes">    </span>изменять и их.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Оставшаяся часть первой программы на
+Фиг.8.1 изменяет значение
+
+<p><span
+style="mso-spacerun: yes">    </span>бита 1 выходного порта. Исходное значение
+порта 61H находится уже в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AL, так что программе не нужно
+читать его при каждом
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнении цикла. Регистр CX используется
+таким образом, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнить цикл 64K раз. При выполнении
+программы вам, возможно, не
+
+<p><span
+style="mso-spacerun: yes">    </span>удастся услышать звук, генерируемый
+программой. В этом случае
+
+<p><span
+style="mso-spacerun: yes">    </span>попытайтесь вставить несколько добавочных
+команд NOP в цикл DIRECT.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это снизит частоту тона.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вторая часть программы на Фиг. 8.1 для
+генерации тональности
+
+<p><span
+style="mso-spacerun: yes">    </span>использует таймер-счетчик 8253. Прежде чем
+двигаться дальше,
+
+<p><span
+style="mso-spacerun: yes">    </span>обсудим функционирование микросхемы 8253,
+чтобы понять, как она
+
+<p><span
+style="mso-spacerun: yes">    </span>используется в системе. Микросхема 8253
+фирмы Intel содержит три
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовых счетчика, которые могут быть
+использованы в системе для
+
+<p><span
+style="mso-spacerun: yes">    </span>счета или задания временных интервалов. В
+один из счетчиков
+
+<p><span
+style="mso-spacerun: yes">    </span>программа загружает 16-битовое значение.
+Содержимое счетчика
+
+<p><span
+style="mso-spacerun: yes">    </span>уменьшается на единицу по каждому импульсу
+от таймера; частота
+
+<p><span
+style="mso-spacerun: yes">    </span>импульсов, подводимых с таймера ко всем
+трем каналам, равна
+
+<p><span
+style="mso-spacerun: yes">    </span>1.19МГц. Это означает, что содержимое
+счетчика уменьшается на
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>единицу каждые 840 наносекунд. Каждый из трех каналов имеет
+выход.
+
+<p><span
+style="mso-spacerun: yes">    </span>Строка контроля выхода изменяется всякий
+раз, когда содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>счетчика достигает нуля. Командами
+управления определяют способ,
+
+<p><span
+style="mso-spacerun: yes">    </span>которым микросхема 8253 ведет счет.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Выходы этих трех каналов счетчика-таймера
+подключаются к
+
+<p><span
+style="mso-spacerun: yes">    </span>различным узлам системной платы. Канал 0
+подключается к контроллеру
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний 8259. Система использует этот
+канал для порождения
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания времени суток. Канал 1 соединен
+с контроллером прямого
+
+<p><span
+style="mso-spacerun: yes">    </span>доступа к памяти (ПДП или DMA) 8237, и
+использовать этот канал
+
+<p><span
+style="mso-spacerun: yes">    </span>схемы 8253 нельзя, так как смена кода в
+этом счетчике с большой
+
+<p><span
+style="mso-spacerun: yes">    </span>вероятностью уничтожит вашу программу и
+все другие данные в памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>системы. Канал 2 подключен к динамику для
+генерации звука.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Позже мы вернемся к каналу 0 микросхемы
+8253. Канал 2 Дает
+
+<p><span
+style="mso-spacerun: yes">    </span>выход на динамик. Для установки канала
+таймера программа посылает
+
+<p><span
+style="mso-spacerun: yes">    </span>код 0B6H в порт 43H, управляющий порт
+микросхемы 8253. Тем самым
+
+<p><span
+style="mso-spacerun: yes">    </span>канал 2 таймера-счетчика настраивается на
+работу в качестве
+
+<p><span
+style="mso-spacerun: yes">    </span>делителя частоты. Таймер делит исходную
+частоту - в данном случае
+
+<p><span
+style="mso-spacerun: yes">    </span>1.19МГц - на 16-битовое число, которое
+программа загружает в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр канала 2. Регистр канала 2
+расположен по адресу порта 42H
+
+<p><span
+style="mso-spacerun: yes">    </span>(канал 0 - это порт 40H и, поскольку вы
+никогда не должны изменять
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое канала 1, задачу определения
+адреса его порта мы
+
+<p><span
+style="mso-spacerun: yes">    </span>оставляем вам). Программа в примере
+загружает в регистр канала
+
+<p><span
+style="mso-spacerun: yes">    </span>число 1000. Это означает, что на выходе вы
+услышите частоту 1190Гц.
+
+<p><span
+style="mso-spacerun: yes">    </span>На самом деле, вы услышите основную
+частоту 1190 Гц плюс обертоны,
+
+<p><span
+style="mso-spacerun: yes">    </span>вызванные прямоугольной формой сигнала
+таймера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Заметим, что число 1000 - 16-битовое, в то
+время как порт 42H -
+
+<p><span
+style="mso-spacerun: yes">    </span>8-битовый. Команда установки режима
+работы, которую мы послали в
+
+<p><span
+style="mso-spacerun: yes">    </span>порт 43H, сообщила микросхеме 8253, что в
+нее будет выводиться
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовое число в виде двух 8-битовых.
+Сначала посылается младший
+
+<p><span
+style="mso-spacerun: yes">    </span>значащий байт, а за ним следует старший.
+Такая двухшаговая
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура загружает в канальный регистр
+требуемое значение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Далее программа должна дать управляющему
+порту 61H такую
+
+<p><span
+style="mso-spacerun: yes">    </span>установку, чтобы он пропускал сигнал на
+динамик. Для этого
+
+<p><span
+style="mso-spacerun: yes">    </span>программа устанавливает равными 1 биты 0 и
+1 управляющего порта.
+
+<p><span
+style="mso-spacerun: yes">    </span>Заметим, что программа в начале сохраняет
+первоначальное значение
+
+<p><span
+style="mso-spacerun: yes">    </span>кода из управляющего порта и
+восстанавливает его в конце. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>отключает динамик по окончании звука. Если
+этот способ
+
+<p><span
+style="mso-spacerun: yes">    </span>недостаточен, - например, если программа
+генерирует звук тогда,
+
+<p><span
+style="mso-spacerun: yes">    </span>когда не совсем ясно, был ли выключен
+динамик - можно выключить
+
+<p><span
+style="mso-spacerun: yes">    </span>его, сбросив в нуль бит 1 порта 61H.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эти два метода управления динамиком
+наиболее прямолинейны. Эти
+
+<p><span
+style="mso-spacerun: yes">    </span>методы можно пытаться комбинировать в
+поисках интересных эффектов.
+
+<p><span
+style="mso-spacerun: yes">    </span>После установки на вывод звука при помощи
+микросхемы 8253 можно
+
+<p><span
+style="mso-spacerun: yes">    </span>модулировать выходной сигнал посредством
+битов 1, 0 или обоих,
+
+<p><span
+style="mso-spacerun: yes">    </span>порта 61H, а также менять число в
+канальном счетчике при включенном
+
+<p><span
+style="mso-spacerun: yes">    </span>динамике. Программу на Фиг. 8.1 можно
+изменить так, чтобы она
+
+<p><span
+style="mso-spacerun: yes">    </span>выводила значение регистра CX при каждой
+итерации цикла. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>приведет к тому, что частота сигнала из
+динамика будет расти от
+
+<p><span
+style="mso-spacerun: yes">    </span>очень низкого к очень высокому тону.
+Работая с этими тремя
+
+<p><span
+style="mso-spacerun: yes">    </span>управляющими значениями, вы сможете
+создать множество интересных
+
+<p><span
+style="mso-spacerun: yes">    </span>эффектов.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

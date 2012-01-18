@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body><body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="8-6-5">Цвета в режиме APA 320*200
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>А теперь рассмотрим цвета, которые можно
+получить в графическом
+
+<p><span
+style="mso-spacerun: yes">    </span>режиме среднего разрешения. Так как точке
+отведено два бита, для
+
+<p><span
+style="mso-spacerun: yes">    </span>нее можно указать один из четырех цветов.
+Цвет 0 (00B) - это цвет
+
+<p><span
+style="mso-spacerun: yes">    </span>фона. В качестве этого цвета можно выбрать
+любой из 16 цветов,
+
+<p><span
+style="mso-spacerun: yes">    </span>показанных на Фиг. 8.10, записав
+соответствующее 4-битовое значение
+
+<p><span
+style="mso-spacerun: yes">    </span>в регистр выбора цвета (3D9H). Остальные
+три цвета определены
+
+<p><span
+style="mso-spacerun: yes">    </span>фирмой IBM: вы не можете выбирать
+произвольно цвета 1, 2 и 3. Фирма
+
+<p><span
+style="mso-spacerun: yes">    </span>IBM определила две различные палитры
+цветов, они показаны на Фиг.
+
+<p><span
+style="mso-spacerun: yes">    </span>8.14. Палитру можно выбрать, устанавливая
+бит 5 регистра выбора
+
+<p><span
+style="mso-spacerun: yes">    </span>цвета.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как показано на Фиг. 8.14, если сбросить
+бит 5 в 0, получатся
+
+<p><span
+style="mso-spacerun: yes">    </span>цвета зеленый, красный и желтый вместе с
+выбранным цветом фона.
+
+<p><span
+style="mso-spacerun: yes">    </span>Установка бита 5 равным 1 дает голубой,
+пурпурный и белый. Вы также
+
+<p><span
+style="mso-spacerun: yes">    </span>можете модифицировать палитру и другим
+битом регистра выбора цвета.
+
+<p><span
+style="mso-spacerun: yes">    </span>Установка бита 4 равным 1 делает цвета
+палитры более яркими.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программы инициализации BIOS обычно загружают
+в регистр выбора
+
+<p><span
+style="mso-spacerun: yes">    </span>цвета значение 30H. Это соостветствует
+черному цвету фона (0) и и
+
+<p><span
+style="mso-spacerun: yes">    </span>яркой палитре 1.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Значение цвета<span style='mso-tab-count:
+1'>    </span>Палитра 0 цвета<span style="mso-spacerun: yes">  </span>Палитра 1
+цвета
+
+<p><span
+style="mso-spacerun: yes">     
+</span>--------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>1
+(01B)<span style='mso-tab-count:1'>    </span>Зеленый <span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes"> </span>Голубой
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>2
+(10B)<span style='mso-tab-count:1'>    </span>Красный <span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes"> </span>Фиолетовый
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>3
+(11B)<span style='mso-tab-count:1'>    </span>Желтый<span style='mso-tab-count:
+2'>            </span> Белый
+
+<p><span
+style='mso-tab-count:3'>                  </span>бит 5 = 0<span
+style='mso-tab-count:1'>   </span> бит 5 = 1
+
+<p><span
+style="mso-spacerun: yes">     
+</span>--------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span>Фиг. 8.14 Цветные
+палитры
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>для графики 320*200
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

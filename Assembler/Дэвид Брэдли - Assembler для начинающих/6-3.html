@@ -1,0 +1,1156 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="6-3">Ассемблирование по условию</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>До сих пор макрокоманды не отличались от
+подпрограмм с точки зрения
+
+<p><span
+style="mso-spacerun: yes">    </span>как их функционирования, так и
+использования параметров. Далее, нам
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется возмоность ассемблирования в
+зависимости от условия. Так
+
+<p><span
+style="mso-spacerun: yes">    </span>же как ход выполнения подпрограммы может
+меняться в зависимости от
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторых условицй в момент выполнения,
+так и у макрокоманды должна
+
+<p><span
+style="mso-spacerun: yes">    </span>быть возможность изменять в момент
+транслирования генерацию
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующего машинного кода в
+зависимости от удовлетворения
+
+<p><span
+style="mso-spacerun: yes">    </span>условий.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Макроассемблер фирмы IBM допускает
+условное ассемблирование. На
+
+<p><span
+style="mso-spacerun: yes">    </span>самом деле, условное ассемблирование не
+обязательно входит только в
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманду. Программа может использовать
+условное транслирование
+
+<p><span
+style="mso-spacerun: yes">    </span>в любом месте ассемблерного текста. Однако
+наиболее часто оно
+
+<p><span
+style="mso-spacerun: yes">    </span>встречается в макрокомандах. В IBM PC
+условное транслирование
+
+<p><span
+style="mso-spacerun: yes">    </span>поддерживается только Макроассемблером
+MASM.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Так же, как и выполнение макрокоманд,
+условное ассемблирование
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит во время трансляции, а не
+выполнения программы. Условное
+
+<p><span
+style="mso-spacerun: yes">    </span>транслирование позволяет программисту
+&quot;запрограммировать&quot; ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>на транслирование различных
+последовательостей кодов. Ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет, что ему транслировать по
+параметру, известному во время
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблирования. Хотя эта возможность
+может использоваться
+
+<p><span
+style="mso-spacerun: yes">    </span>программой в любой момент ассемблирования,
+мы изучим прежде всего,
+
+<p><span
+style="mso-spacerun: yes">    </span>как она влияет на ассемблирование
+макрокоманд.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 6.4 иллюстрирует условное
+транслирование при расширении
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды FIDIVR сопроцессора 8087.
+Условное тарнслирование
+
+<p><span
+style="mso-spacerun: yes">    </span>требуетя данной макрокоманде из-за
+разделения переменных в
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблере по типам. Как мы увидим в гл.7,
+команда, обозначенная
+
+<p><span
+style="mso-spacerun: yes">    </span>FIDIVR, может применяться к операндам двух
+типов. Операнд может
+
+<p><span
+style="mso-spacerun: yes">    </span>быть двух- или четырехбайтовым целым
+числом. Мы хотим, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер выбрал правильный машинный код в
+зависимости от типа
+
+<p><span
+style="mso-spacerun: yes">    </span>операнда. Как мы вмдели, у команды ADD в
+действительности имеется
+
+<p><span
+style="mso-spacerun: yes">    </span>несколько форм, в зависимости от того,
+какие операнды представлены
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблеру, который выбирает верную форму
+машинной команды в
+
+<p><span
+style="mso-spacerun: yes">    </span>зависиммости от этих операндов. Мы хотим
+делать то же самое для
+
+<p><span
+style="mso-spacerun: yes">    </span>команды FIDIVR Но в теперь макропроцессор
+должен определить тип
+
+<p><span
+style="mso-spacerun: yes">    </span>операнда и сгенерировать правильную
+команду.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>У команды FIDIVR может быть один из двух
+типов операндов, и в
+
+<p><span
+style="mso-spacerun: yes">    </span>зависимости от этого будут различаться
+результирующие команды.
+
+<p><span
+style="mso-spacerun: yes">    </span>Таким образом, расширение макрокоманды
+FIDIVR должно
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствовать нужному операнду. Это
+обеспечивается двумя
+
+<p><span
+style="mso-spacerun: yes">    </span>средствами языка: условным транслированием
+и оператором TYPE.
+
+<p><span
+style='mso-tab-count:1'>      </span>В языке ассемблера имеется оператор TYPE,
+который возвращает
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+3'>              </span>4/2/89 16:06:42
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 6.4 Условное транслирование<span style='mso-tab-count:4'>                        </span>Page<span
+style='mso-tab-count:1'>  </span> 1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 6.4 Условное транслирование
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>FIDIVR<span style="mso-spacerun: yes"> 
+</span>MACRO<span style="mso-spacerun: yes">   </span>SOURCE
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>IFE<span style="mso-spacerun: yes">    
+</span>2 - TYPE SOURCE
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">    </span>DB<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>09BH<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>;; FWAIT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">    </span>ESC<span style="mso-spacerun: yes">    
+</span>037H,SOURCE<span style="mso-spacerun: yes">     </span>;; FIDIVR слово
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ENDIF
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>IFE<span style="mso-spacerun: yes">    
+</span>4 - TYPE SOURCE
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">    </span>DB<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>09BH<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>;; FWAIT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">    </span>ESC<span style="mso-spacerun: yes">    
+</span>017H,SOURCE<span style="mso-spacerun: yes">     </span>;; FIDIVR
+короткое целое
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ENDIF
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>???? <span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">    </span>TWO_BYTE<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun: yes"> </span>DW<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0002<span style="mso-spacerun: yes">  </span>????????<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">   
+</span>FOUR_BYTE<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">    </span>DD<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0006<span style="mso-spacerun: yes">  </span>??<span style='mso-tab-count:
+3'>                 </span><span style="mso-spacerun: yes">    </span>ONE_BYTE<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>DB<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">    </span>?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>FIDIVR<span style="mso-spacerun: yes"> 
+</span>TWO_BYTE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0007<span style="mso-spacerun: yes">  </span>9B<span style='mso-tab-count:
+3'>                 </span> 1<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">    </span>DB<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>09BH<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>;
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0008<span style="mso-spacerun: yes">  </span>DE 3E 0000 R <span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>1<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">   
+</span>ESC<span style="mso-spacerun: yes">     </span>037H,TWO_BYTE<span
+style="mso-spacerun: yes">   </span>;
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>FIDIVR<span style="mso-spacerun: yes"> 
+</span>FOUR_BYTE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000C<span style="mso-spacerun: yes">  </span>9B<span style='mso-tab-count:
+3'>                 </span> 1<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">    </span>DB<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>09BH<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>;
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000D<span style="mso-spacerun: yes">  </span>DA 3E 0002 R <span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>1<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">   
+</span>ESC<span style="mso-spacerun: yes">     </span>017H,FOUR_BYTE<span
+style="mso-spacerun: yes">  </span>;
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>FIDIVR<span style="mso-spacerun: yes"> 
+</span>ONE_BYTE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0011<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 6.4. Ассемблирование
+макрокоманд по условию
+
+<p><span
+style="mso-spacerun: yes">    </span>значение, равное длине операнда. В случае
+FIDIVR мы ожидаем, что
+
+<p><span
+style="mso-spacerun: yes">    </span>операнд будет двух- или четырехбайтовым
+целым числом.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Выражение
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>IFE 2-TYPE SOURCE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>в<span style="mso-spacerun: yes"> 
+</span>макрокоманде FIDIVR проверяет длину операнда SOURCE.
+
+<p><span
+style="mso-spacerun: yes">    </span>Арифметическое выражение 2=TYPE SOURCE,
+равняется 0, если операнд
+
+<p><span
+style="mso-spacerun: yes">    </span>SOURCE является двухбайтовым целым числом,
+и принимает ненулевое
+
+<p><span
+style="mso-spacerun: yes">    </span>значение при любом другом типе операнда.
+Оператор IFE
+
+<p><span
+style="mso-spacerun: yes">    </span>(транслировать, если равно) сообщает
+ассемблеру, что нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>транслировать все последующие команды,
+если выражение в поле
+
+<p><span
+style="mso-spacerun: yes">    </span>операнда равно 0. Таким образом, оператор
+IFE вырабатывает значение
+
+<p><span
+style="mso-spacerun: yes">    </span>истина, если операнд SOURCE является
+двухбайтовым целым числом. В
+
+<p><span
+style="mso-spacerun: yes">    </span>этом случае происходит трансляция всех
+команд, следующих за
+
+<p><span
+style="mso-spacerun: yes">    </span>оператором IFE до тех пор, пока не
+встретится оператор ENDIF. В
+
+<p><span
+style="mso-spacerun: yes">    </span>нашем примере это означает, что если
+операнд является двухбайтовым
+
+<p><span
+style="mso-spacerun: yes">    </span>целым числом, то ассемблируется участок
+программы
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB 09BH
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">    
+</span>ESC 37H,SOURCE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В первом вызове макрокоманды на Фиг. 6.4 в
+качестве операнда
+
+<p><span
+style="mso-spacerun: yes">    </span>используется двухбайтовое целое число.
+Поэтому, для расширения этой
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды ассемблер выбирает команду
+ESC 37H.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Так как команда FIDIVR имеет два варианта,
+соответствующие двум
+
+<p><span
+style="mso-spacerun: yes">    </span>разным типам операндов, то в при
+выполнении другого условия,
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманда использует второй оператор
+IFE. Когда операнд является
+
+<p><span
+style="mso-spacerun: yes">    </span>четырехбайтовым целым числом, макрокоманда
+генерирует код ESC 17H.
+
+<p><span
+style="mso-spacerun: yes">    </span>На Фиг. 6.4 показаны два разных расширения
+одной макрокоманды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обратите внимание, что в последнем из
+показанных на Фиг. 6.4
+
+<p><span
+style="mso-spacerun: yes">    </span>вызовов макрокоманды операнд не
+удовлетворяет ни одному из условий.
+
+<p><span
+style="mso-spacerun: yes">    </span>Так как ни один из операторов IFE не
+вырабатывает значения
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;истина&quot;, то и ассемблироваться
+не будет ни один из них. В этом
+
+<p><span
+style="mso-spacerun: yes">    </span>случае макропроцессор не генерирует
+никакого кода.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>С помощью оператора IFE ассемблер может
+проверять выполнение
+
+<p><span
+style="mso-spacerun: yes">    </span>различных условий. Эти условия приведены в
+таблице на Фиг. 6.5.
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>Общая форма оператора IF имеет вид:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>IFхх<span style="mso-spacerun: yes">  
+</span>выражение
+
+<p><span
+style="mso-spacerun: yes">      </span>...
+
+<p><span
+style="mso-spacerun: yes">      </span>ELSE
+
+<p><span
+style="mso-spacerun: yes">      </span>...
+
+<p><span
+style="mso-spacerun: yes">      </span>ENDIF
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если значение условия &quot;истина&quot;,
+то ассемблер обрабатывает
+
+<p><span
+style="mso-spacerun: yes">    </span>участок программы, следующий за оператором
+IFхх. Этот транслируемый
+
+<p><span
+style="mso-spacerun: yes">    </span>участок программы заканчивается либо
+оператором ELSE или ENDIF.
+
+<p><span
+style="mso-spacerun: yes">    </span>Оператор ELSE не является обязательным.
+Если он имеется, то
+
+<p><span
+style="mso-spacerun: yes">    </span>следующий за ним участок программы будет
+транслирован при
+
+<p><span
+style="mso-spacerun: yes">    </span>невыполнении условия в операторе IF.
+Оператор ENDIF завершает
+
+<p><span
+style="mso-spacerun: yes">    </span>условное ассемблирование и является
+обязательным.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>IF-операция<span style='mso-tab-count:
+2'>       </span>Ассемблировать если:
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>IF<span
+style='mso-tab-count:1'>   </span>выражение<span style='mso-tab-count:1'>   </span>
+Выражение не равно 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>IFE<span style='mso-tab-count:1'>  </span>выражение<span
+style='mso-tab-count:1'>   </span> Выражение равно 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>IFDEF<span style='mso-tab-count:1'>      </span>имя<span
+style='mso-tab-count:2'>         </span> Имя уже было описано как внешнее
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>IFNDEF имя<span style='mso-tab-count:2'>       </span> Имя еще не
+описывалось
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>IFB<span style='mso-tab-count:1'>  </span>&lt;аргумент&gt;<span
+style='mso-tab-count:1'>  </span> Аргумент пуст
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>IFNB<span style='mso-tab-count:1'> </span>&lt;аргумент&gt;<span
+style='mso-tab-count:1'>  </span> Аргумент не пуст
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>IFIDN<span style='mso-tab-count:1'>      </span>&lt;арг1&gt;,&lt;арг2&gt;<span
+style='mso-tab-count:1'>     </span> Строка арг1 идентична строке арг2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>IFDIF<span style='mso-tab-count:1'>      </span>&lt;арг1&gt;,&lt;арг2&gt;<span
+style='mso-tab-count:1'>     </span> Строка арг1 отличается от строки арг2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>IF1<span style='mso-tab-count:3'>              </span> Первый
+поход ассемблера
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>IF2<span style='mso-tab-count:3'>              </span> Второй
+проход ассемблера
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>---------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 6.5 Операторы IF для условного
+ассемблирования
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Рассмотрим<span style="mso-spacerun:
+yes">  </span>еще один<span style="mso-spacerun: yes">  </span>пример,
+чтобы<span style="mso-spacerun: yes">  </span>познакомиться с некоторыми
+
+<p><span
+style="mso-spacerun: yes">    </span>другими<span style="mso-spacerun: yes"> 
+</span>вариантами<span style="mso-spacerun: yes">  </span>использования<span
+style='mso-tab-count:1'>    </span> ассемблирования по условию. На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 6.6<span style="mso-spacerun: yes"> 
+</span>показано применение<span style="mso-spacerun: yes">  </span>другого
+условного оператора<span style='mso-tab-count:1'>    </span>- IFB, а
+
+<p><span
+style="mso-spacerun: yes">    </span>также<span style="mso-spacerun: yes"> 
+</span>использование вложенных<span style="mso-spacerun: yes">  </span>условных
+операторов.<span style="mso-spacerun: yes">  </span>Макрокомандой
+
+<p><span
+style="mso-spacerun: yes">    </span>здесь<span style="mso-spacerun: yes"> 
+</span>является<span style="mso-spacerun: yes">  </span>FLD<span
+style="mso-spacerun: yes">  </span>-<span style="mso-spacerun: yes"> 
+</span>команда<span style="mso-spacerun: yes">  </span>загрузки<span
+style='mso-tab-count:1'>  </span>сопроцессора<span style="mso-spacerun: yes"> 
+</span>8087. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>транслирования<span style="mso-spacerun:
+yes">   </span>этой<span style="mso-spacerun: yes">   </span>команды<span
+style="mso-spacerun: yes">    </span>требуется<span style="mso-spacerun:
+yes">   </span>несколько<span style="mso-spacerun: yes">   </span>условных
+
+<p><span
+style="mso-spacerun: yes">    </span>операторов, так как она может применяться
+в следующих вариантах:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>FLD
+
+<p><span
+style="mso-spacerun: yes">      </span>FLD 1
+
+<p><span
+style="mso-spacerun: yes">      </span>FLD короткое_вещественное
+
+<p><span
+style="mso-spacerun: yes">      </span>FLD длинное_вещественное
+
+<p><span
+style="mso-spacerun: yes">      </span>FLD временное_вещественное
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поле операнда макрокоманды FLD может быть
+пустым, содержать
+
+<p><span
+style="mso-spacerun: yes">    </span>константу, или четырехбайтовую,
+восьмибайтовую либо десятибайтовую
+
+<p><span
+style="mso-spacerun: yes">    </span>переменную. Макрокоманда должна распознать
+каждый из перечисленныз
+
+<p><span
+style="mso-spacerun: yes">    </span>случаев и сгенерировать правильный
+программный код. (все эти типы
+
+<p><span
+style="mso-spacerun: yes">    </span>данных рассмотрены очень подробно в гл.7.)
+
+<p><span
+style='mso-tab-count:1'>      </span>Оператор IFB проверяет наличие операнда.
+Если операнд
+
+<p><span
+style="mso-spacerun: yes">    </span>отсутствует, то ассемблер генерирует
+соответствующий этому случаю
+
+<p><span
+style="mso-spacerun: yes">    </span>программный код, так как оператор IFB
+вырабатывает значение
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;истина&quot;. Это иллюстрирует
+первый вызов макрокоманды, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>генерируется код
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB 09BH,0D9H,0C 1H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Оператор EXITM, содержащийся в этой части
+условного оператора
+
+<p><span
+style="mso-spacerun: yes">    </span>IF, реализует выход из макрокоманды.
+Каждый раз, когда при
+
+<p><span
+style="mso-spacerun: yes">    </span>расширении макрокоманды ассемблеру
+встречается этот оператор,
+
+<p><span
+style="mso-spacerun: yes">    </span>расширение заканчивается, как если бы
+встретился ENDM. В данном
+
+<p><span
+style="mso-spacerun: yes">    </span>случае ассемблер пропускает оставшуюся
+часть макроопределения. При
+
+<p><span
+style="mso-spacerun: yes">    </span>таком выходе из макрокоманды в
+ассемблерном листинге появляется
+
+<p><span
+style="mso-spacerun: yes">    </span>предупреждающее сообщение &quot;Open
+conditionals:1&quot; (&quot;Незавершенные
+
+<p><span
+style="mso-spacerun: yes">    </span>условные операторы: 1&quot;). Оно
+предупреждает вас, что ассемблер не
+ Mincho"'><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">      
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">   </span>4/2/89 16:06:47
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 6.6 Вложенные условные макрокоманды<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">  </span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 6.6 Вложенные условные макрокоманды
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>FLD<span style="mso-spacerun: yes">    
+</span>MACRO<span style="mso-spacerun: yes">   </span>SOURCE
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>IFB<span style="mso-spacerun: yes">    
+</span>&lt;SOURCE&gt;
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">      </span>DB<span style="mso-spacerun: yes">     
+</span>09BH,0D9H,0C1H<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>;; FLD ST(1)
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">      </span>EXITM
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ELSE
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">      </span>IFE<span style="mso-spacerun: yes">    
+</span>TYPE SOURCE
+
+<p><span
+style='mso-tab-count:8'>                                                </span><span
+style="mso-spacerun: yes">      </span>DB<span style="mso-spacerun: yes">     
+</span>09BH,0D9H,0C0H+SOURCE
+
+<p><span
+style='mso-tab-count:11'>                                                                  </span><span
+style="mso-spacerun: yes">      </span>;; FLD ST(i)
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">      </span>ENDIF
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">      </span>IFE<span style="mso-spacerun: yes">    
+</span>4 - TYPE SOURCE
+
+<p><span
+style='mso-tab-count:8'>                                                </span><span
+style="mso-spacerun: yes">      </span>DB<span style="mso-spacerun: yes">     
+</span>09BH
+
+<p><span
+style='mso-tab-count:8'>                                                </span><span
+style="mso-spacerun: yes">      </span>ESC<span style="mso-spacerun: yes">    
+</span>8,SOURCE<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>;; FLD короткое плавающее
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">      </span>ENDIF
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">      </span>IFE<span style="mso-spacerun: yes">    
+</span>8 - TYPE SOURCE
+
+<p><span
+style='mso-tab-count:8'>                                                </span><span
+style="mso-spacerun: yes">      </span>DB<span style="mso-spacerun: yes">     
+</span>09BH
+
+<p><span
+style='mso-tab-count:8'>                                                </span><span
+style="mso-spacerun: yes">      </span>ESC<span style="mso-spacerun: yes">    
+</span>40,SOURCE<span style="mso-spacerun: yes">      </span>;; FLD длинное
+плавающее
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">      </span>ENDIF
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">      </span>IFE<span style="mso-spacerun: yes">    
+</span>4 - TYPE SOURCE
+
+<p><span
+style='mso-tab-count:8'>                                                </span><span
+style="mso-spacerun: yes">      </span>DB<span style="mso-spacerun: yes">     
+</span>09BH
+
+<p><span
+style='mso-tab-count:8'>                                                </span><span
+style="mso-spacerun: yes">      </span>ESC<span style="mso-spacerun: yes">    
+</span>01DH,SOURCE<span style="mso-spacerun: yes">    </span>;; FLD временное
+плавающее
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes">      </span>ENDIF
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style='mso-tab-count:
+3'>                  </span><span style="mso-spacerun: yes">      </span>ENDIF
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>????????<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>FOUR_BYTE<span style="mso-spacerun: yes">       </span>DD<span
+style="mso-spacerun: yes">      </span>?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0004<span style="mso-spacerun: yes">  </span>????????????????<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">     
+</span>EIGHT_BYTE<span style="mso-spacerun: yes">      </span>DQ<span
+style="mso-spacerun: yes">      </span>?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000C<span style="mso-spacerun: yes">  </span>???????????????????<span
+style="mso-spacerun: yes">      </span>TEN_BYTE<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>DT<span style="mso-spacerun: yes">     
+</span>?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>?
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>FLD
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0016<span style="mso-spacerun: yes">  </span>9B D9 C1<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>1<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">      </span>DB<span style="mso-spacerun: yes">      </span>09BH,0D9H,0C1H<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">      </span>;
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>FLD<span style="mso-spacerun: yes">    
+</span>1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0019<span style="mso-spacerun: yes">  </span>9B D9 C1<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">  
+</span>1<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">      </span>DB<span style="mso-spacerun: yes">     
+</span>09BH,0D9H,0C0H+1
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>FLD<span style="mso-spacerun: yes">    
+</span>FOUR_BYTE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001C<span style="mso-spacerun: yes">  </span>9B <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">   </span>1<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>DB<span style="mso-spacerun: yes">      </span>09BH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001D<span style="mso-spacerun: yes">  </span>D9 06 0000 R<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">   </span>1<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>ESC<span style="mso-spacerun: yes">     </span>8,FOUR_BYTE<span
+style='mso-tab-count:1'>     </span>;
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0021<span style="mso-spacerun: yes">  </span>9B <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">   </span>1<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>DB<span style="mso-spacerun: yes">      </span>09BH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0022<span style="mso-spacerun: yes">  </span>DB 2E 0000 R<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">   </span>1<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>ESC<span style="mso-spacerun: yes">     </span>01DH,FOUR_BYTE<span
+style='mso-tab-count:1'>  </span>;
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>FLD<span style="mso-spacerun: yes">    
+</span>EIGHT_BYTE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0026<span style="mso-spacerun: yes">  </span>9B <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">   </span>1<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>DB<span style="mso-spacerun: yes">      </span>09BH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0027<span style="mso-spacerun: yes">  </span>DD 06 0004 R<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">   </span>1<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>ESC<span style="mso-spacerun: yes">     </span>40,EIGHT_BYTE<span
+style='mso-tab-count:1'>   </span> ;
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>FLD<span style="mso-spacerun: yes">    
+</span>TEN_BYTE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002B<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 6.6 Вложенное условное
+ассемблирование
+
+
+<p><span
+style="mso-spacerun: yes">    </span>встретил оператора ENDIF, закрывающего
+условный оператор. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит в результате раннего входа из
+макрокоманды. Хотя это и
+
+<p><span
+style="mso-spacerun: yes">    </span>нежелательно, но ни к каким разрушительным
+последствиям не
+
+<p><span
+style="mso-spacerun: yes">    </span>приводит. Если оператор EXITM расположен
+вне условного оператора,
+
+<p><span
+style="mso-spacerun: yes">    </span>то предупреждение не выводится.
+
+<p><span
+style='mso-tab-count:1'>      </span>Оператор EXITM необходим в данной
+макрокоманде, так как
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер проверяет все условные
+операторы, даже если они не
+
+<p><span
+style="mso-spacerun: yes">    </span>транслируются. В нашем случае, если
+операнд SOURCE пуст, оператор
+
+<p><span
+style="mso-spacerun: yes">    </span>ELSE предотвращает генерацию всех других
+вариантов команды FLD.
+
+<p><span
+style="mso-spacerun: yes">    </span>Однако, продолжая просмотр, ассемблер
+проверяет оператора
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>IFE TYPE SOURCE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>хотя и не может сгенерировать никакого
+кода. Если SOURCE пусто,
+
+<p><span
+style="mso-spacerun: yes">    </span>то ассемблер фиксирует синтаксическую
+ошибку. Вы можете не обращать
+
+<p><span
+style="mso-spacerun: yes">    </span>внимания на эту ошибку, но принимать
+трансляцию с сообщениями об
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибках идет в разрез с нашими правилами.
+С другой стороны,
+
+<p><span
+style="mso-spacerun: yes">    </span>использование оператора EXITM приводит к
+предупреждению &quot;Открытое
+
+<p><span
+style="mso-spacerun: yes">    </span>условие&quot;. Оно нежелательно, но это
+меньшее из двух зол.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Заметим, что макрокоманда FLD использует
+ветвь ELSE чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>указать на необходимость вычисления
+выражения в поле операнда
+
+<p><span
+style="mso-spacerun: yes">    </span>только в случае непустоты этого поля.
+IF-выражения, содержащие
+
+<p><span
+style="mso-spacerun: yes">    </span>оператор TYPE, определяют, какой тип
+операнда использовался при
+
+<p><span
+style="mso-spacerun: yes">    </span>вызове макрокоманды. Хотя это не
+упоминается в Руководстве по
+
+<p><span
+style="mso-spacerun: yes">    </span>Макроассемблеру, оператор TYPE возвращает
+значение 0, если операнд
+
+<p><span
+style="mso-spacerun: yes">    </span>является не символическим именем, а
+константой. Выбор такого
+
+<p><span
+style="mso-spacerun: yes">    </span>способа в данной макрокоманде вызван
+скорее соображениями
+
+<p><span
+style="mso-spacerun: yes">    </span>работоспособности, чем стремлением к
+элегантности.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

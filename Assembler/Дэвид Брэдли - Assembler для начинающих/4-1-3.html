@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-1-3">Команды ввода и вывода</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">   </span>Для
+выполнения операций ввода и вывода микропроцессор 8088 имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>команды IN и OUT соответственно.<span
+style="mso-spacerun: yes">  </span>Каждое устройство ввода=вывода
+
+<p><span
+style="mso-spacerun: yes">    </span>IBM PC имеет один или больше встроенных
+регистров, с которыми могут
+
+<p><span
+style="mso-spacerun: yes">    </span>работать эти команды.<span
+style="mso-spacerun: yes">  </span>Каждое устройство ввода=вывода имеет адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>для каждого регистра в устройстве.<span
+style='mso-tab-count:1'>    </span>Это адресное пространство
+
+<p><span
+style="mso-spacerun: yes">    </span>отличается от адресного пространтва
+памяти; всего существует 216,
+
+<p><span
+style="mso-spacerun: yes">    </span>или 65536 адресов ввода=вывода, доступных
+микропроцессору 8088.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>IBM PC 512 из этих адресов назначены
+системному каналу ввода=вывода
+
+<p><span
+style="mso-spacerun: yes">    </span>и могут использоваться различными
+адаптерами.<span style="mso-spacerun: yes">  </span>Другие 256 адресов
+
+<p><span
+style="mso-spacerun: yes">    </span>исполбзуются на системной плате для
+управления подключенными туда
+
+<p><span
+style="mso-spacerun: yes">    </span>устройствами ввода=вывода.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда IN пересылает данные из устройства
+ввода=вывода в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AL. Эта команда может указать
+адрес устройства ввода=вывода
+
+<p><span
+style="mso-spacerun: yes">    </span>двумя различными способами. Если адрес
+устройства находится в
+
+<p><span
+style="mso-spacerun: yes">    </span>пределах 0 - 255, он может содержаться в
+команде как
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственное значение. Если адрес
+больше 255, команда сообщает
+
+<p><span
+style="mso-spacerun: yes">    </span>это косвенно. В случае косвенной команды
+адрес устройства
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода=вывода содержится в регистре DX.
+Регистр DX может содержать
+
+<p><span
+style="mso-spacerun: yes">    </span>адреса всех устройств ввода=вывода,
+включая те, номера которых
+
+<p><span
+style="mso-spacerun: yes">    </span>меньше 256.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Аналогично работает команда OUT, за
+исключением того, что она
+
+<p><span
+style="mso-spacerun: yes">    </span>записывает регистр AL в регистр устройства
+ввода=вывода. Адреса в
+
+<p><span
+style="mso-spacerun: yes">    </span>команде OUT указываются так же, как и в
+команде IN.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команды IN и OUT также могут пересылать
+слова в устройства
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода=вывода и из них. В случае работы со
+словами источником и
+
+<p><span
+style="mso-spacerun: yes">    </span>приемником является регистр AX. Так как у
+микропроцессора 8088
+
+<p><span
+style="mso-spacerun: yes">    </span>однобайтовая внешняя шина, устройства
+ввода=вывода IBM PC работают
+
+<p><span
+style="mso-spacerun: yes">    </span>только с байтами при любых операциях
+ввода=вывода. Это означает,
+
+<p><span
+style="mso-spacerun: yes">    </span>что операции ввода=вывода слов не
+используются в персональной ЭВМ.
+
+<p><span
+style="mso-spacerun: yes">    </span>Однако пословные операции ввода=вывода
+имеют смысл в системе с
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессором 8086, который имеет тот
+же набор команд.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

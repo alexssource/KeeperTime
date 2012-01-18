@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="5-10-3">Операция редактирования связей
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Рассмотрим теперь операции, с помощью
+которых описанные выше
+
+<p><span
+style="mso-spacerun: yes">    </span>программные модули были объединены в один
+исполняемый модуль.
+
+<p><span
+style="mso-spacerun: yes">    </span>Ассемблирование программ выполняется с
+помощью команд, описанных в
+
+<p><span
+style="mso-spacerun: yes">    </span>предыдущем разделе:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>B:&gt;A:MAS<span style='mso-tab-count:
+1'>    </span>FIG5=13,,,;
+
+<p><span
+style="mso-spacerun: yes">      </span>B:&gt;A:MASM FIG5=14,,,;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">       </span>При этом получается два объектных
+модуля FIG5=13.OBJ и
+
+<p><span
+style="mso-spacerun: yes">    </span>FIG5=14.OBJ.<span style="mso-spacerun:
+yes">  </span>Для объединения этих модулей вызывается программа
+
+<p><span
+style="mso-spacerun: yes">    </span>LINK.<span style="mso-spacerun: yes"> 
+</span>На Фиг. 5.15 приведены операции, с которых начинается работа
+
+<p><span
+style="mso-spacerun: yes">    </span>программы LINK.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В данном примере предполагается, что
+дискета с DOS установлена
+
+<p><span
+style="mso-spacerun: yes">    </span>в дисководе A:, рабочая дискета - в
+дисководе B:, и дисковод B:
+
+<p><span
+style="mso-spacerun: yes">    </span>выбирается по умолчанию. После запуска
+программа LINK запрашивает
+
+<p><span
+style="mso-spacerun: yes">    </span>пользователя, для каких объектных файлов
+следует выполнить
+
+<p><span
+style="mso-spacerun: yes">    </span>редактирование связей. Имена файлов
+вводятся без указания типа
+
+<p><span
+style="mso-spacerun: yes">    </span>.OBJ. Если связываемых модулей больше
+одного, то их имена вводятся
+
+<p><span
+style="mso-spacerun: yes">    </span>через разделитель &quot;+&quot;. В данном
+примере выполняется редактирование
+
+<p><span
+style="mso-spacerun: yes">    </span>связей для модулей FIG5=13 и FIG5=14.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>-------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>A&gt;LINK
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>IBM Personal Computer Linker
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>Version 1.10 (c)Copyright IBM Corp 1982
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>Object Modules [.OBJ]: B:FIG5_13+B:FIG5_14
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>RunFile [A:FIG5_13.EXE]: B:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>List File [NUL.MAP]: B:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>Libraries {.LIB]:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>A&gt;
+
+<p><span
+style='mso-tab-count:2'>            </span>-------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 5.15 Выполнение редактирования связей
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Модули связываются в том же порядке, в
+каком их имена
+
+<p><span
+style="mso-spacerun: yes">    </span>передаются программе LINK. В данном случае
+программа FIG5=13
+
+<p><span
+style="mso-spacerun: yes">    </span>предшествует программе FIG5=14.
+Перечисление модулей в обратном
+
+<p><span
+style="mso-spacerun: yes">    </span>порядке привело бы к такому же обратному
+порядку их расположения в
+
+<p><span
+style="mso-spacerun: yes">    </span>итоговом модуле. Как правило, порядок
+формирования программы
+
+<p><span
+style="mso-spacerun: yes">    </span>безразличен. Единственное исключение
+делается для входной точки
+
+<p><span
+style="mso-spacerun: yes">    </span>программы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Следующий запрос редактора связей
+относится к имени
+
+<p><span
+style="mso-spacerun: yes">    </span>исполняемого, или рабочего, файла. По
+умолчанию ему присваивается
+
+<p><span
+style="mso-spacerun: yes">    </span>имя первого из объектных модулей с
+расширением .EXE. Вводя другое
+
+<p><span
+style="mso-spacerun: yes">    </span>имя, можно изменить имя файла, но не его
+расширение .EXE.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Далее запрашивается имя файла для хранения
+карты связей.
+
+<p><span
+style="mso-spacerun: yes">    </span>Допускается любое имя, однако в режиме по
+умолчанию формирование
+
+<p><span
+style="mso-spacerun: yes">    </span>карты не производится. В нашем примере
+ввод символа B: является
+
+<p><span
+style="mso-spacerun: yes">    </span>указанием редактору связей записать карту
+связей на дисководе B:.
+
+<p><span
+style="mso-spacerun: yes">    </span>Редактор связей выбрал для этого файла имя
+FIG5=13.MAP. Полученный
+
+<p><span
+style="mso-spacerun: yes">    </span>в результате операции связывания файл
+FIG5=13.MAP приводится на
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 5.16 и будет рассмотрен в следующем
+параграфе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Последний запрос редактора связей касается
+библиотек программ,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые могут быть включены в полученный
+при связывании модуль. В
+
+<p><span
+style="mso-spacerun: yes">    </span>случае некоторых языков высокого уровня на
+этом шаге может
+
+<p><span
+style="mso-spacerun: yes">    </span>возникнуть необходимость указать имя
+библиотеки рабочих программ.
+
+<p><span
+style="mso-spacerun: yes">    </span>Для программ на языке ассемблера такой
+необходимости нет.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

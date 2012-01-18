@@ -1,0 +1,1255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="6-8">Структуры</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Структура данных - это организация данных,
+которая имеет для
+
+<p><span
+style="mso-spacerun: yes">    </span>программиста определенный смысл. Как
+показывает опыт, мы определяем
+
+<p><span
+style="mso-spacerun: yes">    </span>структуры данных когда одна и та же
+совокупность данных
+
+<p><span
+style="mso-spacerun: yes">    </span>используется более чем одной программой
+или программистами.
+
+<p><span
+style="mso-spacerun: yes">    </span>Благодаря определению, обе стороны имеют
+четкий образ этих данных.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если программа A передает некотрые данные
+программе B, то
+
+<p><span
+style="mso-spacerun: yes">    </span>определение структуры данных гарантирует,
+что каждая из программ
+
+<p><span
+style="mso-spacerun: yes">    </span>ищет данные в одном и том же месте.
+
+<p><span
+style='mso-tab-count:1'>      </span>У нас уже был хороший пример структуры
+данных. Блок управления
+
+<p><span
+style="mso-spacerun: yes">    </span>файлом FCB является структурой данных.
+Блок FCB используется
+
+<p><span
+style="mso-spacerun: yes">    </span>программами для обмена информацией о файле
+с DOS. В блоке FCB
+
+<p><span
+style="mso-spacerun: yes">    </span>содержатся такие важные данные об
+обрабатываемом файле, как номер
+
+<p><span
+style="mso-spacerun: yes">    </span>текущей записи, длина файла и т.д. Кроме
+того, в блоке FCB имеется
+
+<p><span
+style="mso-spacerun: yes">    </span>зарезервированное поле, которое содержит
+информацию, используемую
+
+<p><span
+style="mso-spacerun: yes">    </span>только DOS. В блоке FCB находится вся
+информация, необходимая для
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS и прикладных программ. Эта структура
+данных служит для передачи
+
+<p><span
+style="mso-spacerun: yes">    </span>параметров файла между DOS и прикладной
+программой.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Теперь нужно найти такой способ
+определения структур данных,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы программа могла с удобством ими
+пользоваться. В
+
+<p><span
+style="mso-spacerun: yes">    </span>Макроассемблере фирмы IBM имеется оператор
+STRUC, позволяющий
+
+<p><span
+style="mso-spacerun: yes">    </span>определять структуру данных. С точки
+зрения программиста структура
+
+<p><span
+style="mso-spacerun: yes">    </span>данных выглядит как еще один сегмент.
+Определение данных
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблируется так же, как и обычные
+операторы данных, и описание
+
+<p><span
+style="mso-spacerun: yes">    </span>структуры, как и описание сегмента,
+заканчивается оператором ENDS.
+
+<p><span
+style="mso-spacerun: yes">    </span>Однако в действительности структура не
+генерирует данные. Оператор
+
+<p><span
+style="mso-spacerun: yes">    </span>STRUC определяет структуру данных для
+ассемблера. В дальнейшем имя
+
+<p><span
+style="mso-spacerun: yes">    </span>этой структуры данных используется в
+ассемблируемой программе для
+
+<p><span
+style="mso-spacerun: yes">    </span>генерации соответствующей области данных.
+
+<p><span
+style='mso-tab-count:1'>      </span>Если рассматривать оператор STRUC
+описанным выше образом, то он
+
+<p><span
+style="mso-spacerun: yes">    </span>больше похож на оператор MACRO. Программа
+определяет структуру
+
+<p><span
+style="mso-spacerun: yes">    </span>данных в одном месте, а ее вызов
+осуществляет позднее. Фактическая
+
+<p><span
+style="mso-spacerun: yes">    </span>генерация данных происходит при вызове
+структуры. Фиг. 6.14 поможет
+
+<p><span
+style="mso-spacerun: yes">    </span>понять работу оператора STRUC.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>1/1/80 04:03:36
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 6.14 Структуры<span style='mso-tab-count:5'>                              </span>
+Page<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 6.14 Структуры
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>FCB<span style="mso-spacerun: yes">    
+</span>STRUC
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>00<span style='mso-tab-count:
+1'>    </span><span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>DRIVE<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>DB<span style="mso-spacerun: yes">     
+</span>0<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">     </span>; Номер устройства
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0001<span style="mso-spacerun: yes">  </span>20 20 20 20 20 20 20<span
+style="mso-spacerun: yes">     </span>FILE_NAME<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">     </span>DB<span style="mso-spacerun: yes">     
+</span>'<span style="mso-spacerun: yes">        </span>'<span
+style="mso-spacerun: yes">      </span>; Имя файла
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>20
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0009<span style="mso-spacerun: yes">  </span>20 20 20<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>FILE_EXT<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>DB<span style="mso-spacerun: yes">     
+</span>'<span style="mso-spacerun: yes">   </span>'<span style="mso-spacerun:
+yes">           </span>; Тип файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000C<span style="mso-spacerun: yes">  </span>0000<span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">    
+</span>CURRENT_BLOCK<span style="mso-spacerun: yes">   </span>DW<span
+style="mso-spacerun: yes">      </span>0<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>; Номер текущего блока
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000E<span style="mso-spacerun: yes">  </span>0080<span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">     </span>RECORD_SIZE<span
+style="mso-spacerun: yes">     </span>DW<span style="mso-spacerun: yes">     
+</span>80H<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">     </span>; Логический размер записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0010<span style="mso-spacerun: yes">  </span>00000000<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>FILE_SIZE<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">     </span>DD<span style="mso-spacerun: yes">     
+</span>0<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">     </span>; Размер файла в байтах
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0014<span style="mso-spacerun: yes">  </span>0000<span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">     </span>DATE<span
+style='mso-tab-count:1'>   </span> <span style="mso-spacerun:
+yes">    </span>DW<span style="mso-spacerun: yes">      </span>0<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>; Дата последнего изменения
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">   </span>Фиг. 6.14 Структуры (начало)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0016<span style="mso-spacerun: yes">  </span>000A[<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">    
+</span>RESERVED<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">     </span>DB<span style="mso-spacerun: yes">     
+</span>10 DUP (?)<span style="mso-spacerun: yes">      </span>; Зарезервировано
+ДОС
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>??
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0020<span style="mso-spacerun: yes">  </span>00<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">    
+</span>SEQ_NUMBER<span style="mso-spacerun: yes">      </span>DB<span
+style="mso-spacerun: yes">      </span>0<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>; Номер текущей записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0021<span style="mso-spacerun: yes">  </span>00000000<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>RANDOM_NUMBER<span style="mso-spacerun: yes">   </span>DD<span
+style="mso-spacerun: yes">      </span>0<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>; Номер записи при прямом
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes">     </span>;<span style='mso-tab-count:1'>      </span>доступе
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0025<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>FCB<span style="mso-spacerun: yes">    
+</span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>STACK<span style="mso-spacerun: yes">  
+</span>SEGMENT STACK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>0040[<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>DW<span style="mso-spacerun: yes">      </span>64<span
+style="mso-spacerun: yes">      </span>DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span>????
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0080<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>STACK<span style="mso-spacerun: yes">  
+</span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>01<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">    
+</span>INPUT<span style="mso-spacerun: yes">   </span>FCB<span
+style="mso-spacerun: yes">     </span>&lt;1,'FIG6-14','INP'&gt;
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0001<span style="mso-spacerun: yes">  </span>464947362D313420
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0009<span style="mso-spacerun: yes">  </span>494E50
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000C<span style="mso-spacerun: yes">  </span>0000
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000E<span style="mso-spacerun: yes">  </span>0080
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0010<span style="mso-spacerun: yes">  </span>00000000
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0014<span style="mso-spacerun: yes">  </span>0000
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0016<span style="mso-spacerun: yes">  </span>000A[
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>??
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0020<span style="mso-spacerun: yes">  </span>00
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0021<span style="mso-spacerun: yes">  </span>00000000
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0025<span style="mso-spacerun: yes">  </span>02<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">    
+</span>OUTPUT<span style="mso-spacerun: yes">  </span>FCB<span
+style="mso-spacerun: yes">     </span>&lt;2,'EXAMPLE','TST'&gt;
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0026<span style="mso-spacerun: yes">  </span>4558414D504C4520
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>002E<span style="mso-spacerun: yes">  </span>545354
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0031<span style="mso-spacerun: yes">  </span>0000
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0033<span style="mso-spacerun: yes">  </span>0080
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0035<span style="mso-spacerun: yes">  </span>00000000
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0039<span style="mso-spacerun: yes">  </span>0000
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003B<span style="mso-spacerun: yes">  </span>000A[
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>??
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0045<span style="mso-spacerun: yes">  </span>00
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0046<span style="mso-spacerun: yes">  </span>00000000
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>004A<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>STRUCTURES<span style="mso-spacerun:
+yes">      </span>PROC<span style="mso-spacerun: yes">    </span>FAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>004A<span style="mso-spacerun: yes">  </span>1E<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>DS <span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">     </span>; Установка адреса возврата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>004B<span style="mso-spacerun: yes">  </span>B8 0000<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX,0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>004E<span style="mso-spacerun: yes">  </span>50<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>004F<span style="mso-spacerun: yes">  </span>0E<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>CS <span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">     </span>; Установка DS на сегмент CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0050<span style="mso-spacerun: yes">  </span>1F<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">   </span>POP<span style="mso-spacerun: yes">    
+</span>DS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>DS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0051<span style="mso-spacerun: yes">  </span>8D 16 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">     </span>DX,INPUT<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">   
+</span>; Открытие вводимого файл
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>Фиг. 6.14 Структуры (продолжение)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0055<span style="mso-spacerun: yes">  </span>B4 0F<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AH,0FH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0057<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0059<span style="mso-spacerun: yes">  </span>8D 16 0025 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">     </span>DX,OUTPUT<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">   
+</span>; Создание выводимого файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>005D<span style="mso-spacerun: yes">  </span>B4 16<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AH,16H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>005F<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0061<span style="mso-spacerun: yes">  </span>8D 1E 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">    </span><span style="mso-spacerun:
+yes"> </span>BX,INPUT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0065<span style="mso-spacerun: yes">  </span>C7 47 0E 0010<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>MOV<span style="mso-spacerun: yes">     </span>[BX].RECORD_SIZE,16<span
+style="mso-spacerun: yes">    </span>; Установка размера записи для ввода
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>006A<span style="mso-spacerun: yes">  </span>C6 47 20 01 <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">    
+</span>[BX].SEQ_NUMBER,1<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>; Пропуск первой записи
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>006E<span style="mso-spacerun: yes">  </span>C7 06 0033 R 0010<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">    
+</span>MOV<span style="mso-spacerun: yes">    
+</span>OUTPUT.RECORD_SIZE,16<span style="mso-spacerun: yes">  </span>;
+Установка размера записи для
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes">     </span>;<span style='mso-tab-count:1'>      </span>вывода
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0074<span style="mso-spacerun: yes">  </span>8D 16 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">     </span>DX,INPUT<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">   
+</span>; Чтение второй записи из файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0078<span style="mso-spacerun: yes">  </span>B4 14<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AH,14H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>007A<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>007C<span style="mso-spacerun: yes">  </span>8D 16 0025 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">     </span>DX,OUTPUT<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">   
+</span>; Вывод введенной записи
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0080<span style="mso-spacerun: yes">  </span>B4 15<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AH,15H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0082<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0084<span style="mso-spacerun: yes">  </span>B4 10<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AH,10H<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">   
+</span>; Закрытие выводимого файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0086<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0088<span style="mso-spacerun: yes">  </span>CB<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0089<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>STRUCTURES<span style="mso-spacerun:
+yes">      </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0089<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler<span style="mso-spacerun: yes"> 
+</span>Version 4.00<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">  </span>4/16/89 23:15:19
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 6.14 Структуры<span style='mso-tab-count:5'>                             </span><span
+style="mso-spacerun: yes">  </span>Symbols-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span><span style="mso-spacerun: yes"> </span>Structures and Records:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>N a m e<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">      </span>Width<span style="mso-spacerun: yes">  
+</span># fields
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>Shift<span style="mso-spacerun: yes">  
+</span>Width<span style="mso-spacerun: yes">   </span>Mask<span
+style="mso-spacerun: yes">    </span>Initial
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>FCB<span style="mso-spacerun: yes">  </span>. . . . . . . . . . . . . .<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>0025<span style="mso-spacerun: yes">    </span>000A
+
+<p><span
+style='mso-tab-count:2'>            </span>DRIVE<span style="mso-spacerun:
+yes">  </span>. . . . . . . . . . . .<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>0000
+
+<p><span
+style='mso-tab-count:2'>            </span>FILE_NAME<span style="mso-spacerun:
+yes">  </span>. . . . . . . . . .<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>0001
+
+<p><span
+style='mso-tab-count:2'>            </span>FILE_EXT . . . . . . . . . . .<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0009
+
+<p><span
+style='mso-tab-count:2'>            </span>CURRENT_BLOCK<span
+style="mso-spacerun: yes">  </span>. . . . . . . .<span style='mso-tab-count:
+1'>      </span><span style="mso-spacerun: yes">      </span>000C
+
+<p><span
+style='mso-tab-count:2'>            </span>RECORD_SIZE<span
+style="mso-spacerun: yes">  </span>. . . . . . . . .<span style='mso-tab-count:
+1'>      </span><span style="mso-spacerun: yes">      </span>000E
+
+<p><span
+style='mso-tab-count:2'>            </span>FILE_SIZE<span style="mso-spacerun:
+yes">  </span>. . . . . . . . . .<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>0010
+
+<p><span
+style='mso-tab-count:2'>            </span>DATE . . . . . . . . . . . . .<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0014
+
+<p><span
+style='mso-tab-count:2'>            </span>RESERVED . . . . . . . . . . .<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0016
+
+<p><span
+style='mso-tab-count:2'>            </span>SEQ_NUMBER . . . . . . . . . .<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0020
+
+<p><span
+style='mso-tab-count:2'>            </span>RANDOM_NUMBER<span
+style="mso-spacerun: yes">  </span>. . . . . . . .<span style='mso-tab-count:
+1'>      </span><span style="mso-spacerun: yes">      </span>0021&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>Фиг. 6.14 Структуры (продолжение)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 6.14 приведена очень простая
+программа, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>использует файлы системы DOS. Эта
+программа открывает файл DOS на
+
+<p><span
+style="mso-spacerun: yes">    </span>носителе в дисководе A:, считывает вторую
+запись этого файла и
+
+<p><span
+style="mso-spacerun: yes">    </span>записывает ее в файл на носителе в
+дисководе B:. Маловероятно,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы вы когда-нибудь применили эту
+программу чтобы сделать
+
+<p><span
+style="mso-spacerun: yes">    </span>что-либо существенное, но сейчас она дает
+нам возможность
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать структуру данных для блока
+FCB.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первая часть программы на Фиг. 6.14
+определяет структуру данных
+
+<p><span
+style="mso-spacerun: yes">    </span>FCB. Оператор языка ассемблера STRUC
+отмечает начало определения
+
+<p><span
+style="mso-spacerun: yes">    </span>структуры. Метка FCB является здесь именем
+данной конкретной
+
+<p><span
+style="mso-spacerun: yes">    </span>структуры. В примере определяется каждое
+поле структуры данных FCB.
+
+<p><span
+style="mso-spacerun: yes">    </span>Обратите внимание, что в столбцах слева
+ассемблер генерирует
+
+<p><span
+style="mso-spacerun: yes">    </span>объектный код данной структуры. Однако,
+при редактировании связей
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблированного объектного кода, область
+данных в программе
+
+<p><span
+style="mso-spacerun: yes">    </span>отсутствует. Ассемблер распечаьываеь
+данную структуру данных в
+
+<p><span
+style="mso-spacerun: yes">    </span>оттранслированном виде исключительно для
+вашего сведения.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Точно так же, как и вслучае макрокоманды,
+имя FCB становится
+
+<p><span
+style="mso-spacerun: yes">    </span>как бы новым оператором языка ассемблера.
+Первым оператором в
+
+<p><span
+style="mso-spacerun: yes">    </span>сегменте CODE является вызов структуры
+данных FCB. В примере этой
+
+<p><span
+style="mso-spacerun: yes">    </span>структуре данных присваивается имя INPUT.
+Данная структура FCB
+
+<p><span
+style="mso-spacerun: yes">    </span>идентифицирует входной набор данных.
+Заметьте, что в этом операторе
+
+<p><span
+style="mso-spacerun: yes">    </span>FCB имеются операнды. Они заменяют или
+перекрывают значения,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые были включены в исходное
+определение структуры данных.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если мы сравним объектный код определения
+структуры FCB с
+
+<p><span
+style="mso-spacerun: yes">    </span>объектным кодом структуры INPUT, то
+увидим, что они различаются по
+
+<p><span
+style="mso-spacerun: yes">    </span>значениям первых трех полей. В определении
+структуры данных поле
+
+<p><span
+style="mso-spacerun: yes">    </span>DRIVE равно 0, в структуре INPUT - 1.
+Первый операнд в угловых
+
+<p><span
+style="mso-spacerun: yes">    </span>скобках определения структуры INPUT равен
+1. Это значение заменяет
+
+<p><span
+style="mso-spacerun: yes">    </span>исходно определенное значение 0.
+Аналогично в данном примере
+
+<p><span
+style="mso-spacerun: yes">    </span>изменяются значения второго и третьего
+полей, относящихся к имени
+
+<p><span
+style="mso-spacerun: yes">    </span>файла. Закрывающая угловая скобка в
+определении структуры INPUT
+
+<p><span
+style="mso-spacerun: yes">    </span>завершает процедуру замены значений полей
+структуры данных.
+
+<p><span
+style="mso-spacerun: yes">    </span>Оставшаяся часть структуры INPUT идентична
+определеной в структуре
+
+<p><span
+style="mso-spacerun: yes">    </span>данных FCB.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа может изменять любой из полей
+структуры FCB, если
+
+<p><span
+style="mso-spacerun: yes">    </span>определение этого поля содержит только
+один элемент. В
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматриваемом примере программа может
+изменять любое поле
+
+<p><span
+style="mso-spacerun: yes">    </span>структруыр FCB, за исключением поля
+RESERVED. Мы определили это
+
+<p><span
+style="mso-spacerun: yes">    </span>поле поле как 10 отдельных элементов, и
+оно не может быть изменено.
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогично, если поле определено
+оператором
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB 10,20
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>то его нельзя перекрыть. При вызове
+структуры можно изменять только
+
+<p><span
+style="mso-spacerun: yes">    </span>поля, состоящие из единственного элемента.
+Символьная строка,
+
+<p><span
+style="mso-spacerun: yes">    </span>включающая несколько символов,
+рассматривается ассемблером как один
+
+<p><span
+style="mso-spacerun: yes">    </span>элемент. В данном примере поле FILE_NAME
+содержит несколько
+
+<p><span
+style="mso-spacerun: yes">    </span>символов, но является одним элементом,
+значение которого можно
+
+<p><span
+style="mso-spacerun: yes">    </span>изменить.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Операнды, перечисленные в угловых скобках,
+заменяют операнды,
+
+<p><span
+style="mso-spacerun: yes">    </span>входящие в определение, по позиционному
+принципу, как и в
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманде. Если вы не хотите
+модифицировать заданное в
+
+<p><span
+style="mso-spacerun: yes">    </span>определении значение, но желаете изменить
+следующее за ним поле, то
+
+<p><span
+style="mso-spacerun: yes">    </span>в список значений нужно включить пустой
+параметр. Например, для
+
+<p><span
+style="mso-spacerun: yes">    </span>модификации полей FILE_NAME и
+CURRENT_BLOCK, оставляя в то же время
+
+<p><span
+style="mso-spacerun: yes">    </span>по умолчанию заданные значения полей DRIVE
+и FILE_EXT, структуру
+
+<p><span
+style="mso-spacerun: yes">    </span>FCB следует вызвать оператором:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>EXAMPLE FCB &lt;,NEWNAME,,12&gt;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первый параметр пуст, так что ассемблер
+использует для него
+
+<p><span
+style="mso-spacerun: yes">    </span>значение по умолчанию. В следующем поле
+NEWNAME заменяет строку
+
+<p><span
+style="mso-spacerun: yes">    </span>пробелов. Для значения поля FILE_EXT по
+умолчанию используется
+
+<p><span
+style="mso-spacerun: yes">    </span>строка пробелов, и наконец, нулевое
+значение поля CURRENT_BLOCK
+
+<p><span
+style="mso-spacerun: yes">    </span>заменяется на 12.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В следующей исходной программной строке на
+Фиг. 6.14 программа
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет структуру FCB под именем OUTPUT
+для выходного файла.
+
+<p><span
+style="mso-spacerun: yes">    </span>Здесь снова модифицируются первые три поля
+определения данных путем
+
+<p><span
+style="mso-spacerun: yes">    </span>включения новых значений в поля операндов
+оператора FCB.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Выигрыш от использования структур данных
+проявляется в
+
+<p><span
+style="mso-spacerun: yes">    </span>действительных командах программы.
+Программа может ссылаться на
+
+<p><span
+style="mso-spacerun: yes">    </span>имена INPUT и OUTPUT так же, как и на
+любые другие метки в
+
+<p><span
+style="mso-spacerun: yes">    </span>программе. Вы можете видеть это, в том
+участке программы, где
+
+<p><span
+style="mso-spacerun: yes">    </span>открывается входной файл INPUT и оператор
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>LEA DX,INPUT
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>используется для<span style="mso-spacerun:
+yes">   </span>установки адреса входной структуры данных FCB.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В программе можно использовать каждое из
+указанных полей
+
+<p><span
+style="mso-spacerun: yes">    </span>структуры данных. Значению каждого имени
+соответствует смещение
+
+<p><span
+style="mso-spacerun: yes">    </span>какого-либо поля в структуре данных.
+Например, программа помещает в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр BX адрес FCB INPUT. После этого
+программа обращается к
+
+<p><span
+style="mso-spacerun: yes">    </span>полям RECORD_SIZE и SEQ_NUMBER в режиме
+адресации по базе. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр BX уже указывает на структуру
+данных FCB, то нужно задать
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение относительно этой базы. Способ
+адресации
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>[BX].RECORD_SIZ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>указывает ассемблеру, что в команде,
+которую он должен
+
+<p><span
+style="mso-spacerun: yes">    </span>сгенерировать, смещение поля RECORD_SIZE
+складывается со значением
+
+<p><span
+style="mso-spacerun: yes">    </span>базы, хранящимся в регистре BX. Если вы
+рассмотрите соответствующие
+
+<p><span
+style="mso-spacerun: yes">    </span>команды на машинном языке, то увидите, что
+в них присутствуют
+
+<p><span
+style="mso-spacerun: yes">    </span>смещения для полей RECORD_SIZE (0EH) и
+SEQ_NUMBER (20H). Символ &quot;.&quot;
+
+<p><span
+style="mso-spacerun: yes">    </span>идентифицирует имена полей как смещения в
+структуре данных.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Помимо режимов адресации по базе и индексу
+можно использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>структуру данных и для прямой адресации.
+Следующий участок
+
+<p><span
+style="mso-spacerun: yes">    </span>программы непосредственно изменяет поле
+RECORD_SIZE в FCB OUTPUT.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа именует это поле
+OUTPUT.RECORD_SIZE. Имя OUTPUT
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет конкретную структуру данных, а
+RECORD_SIZE - имя поля в
+
+<p><span
+style="mso-spacerun: yes">    </span>этой структуре данных.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прежде, чем покончить с этим примером,
+посмотрим, какой
+
+<p><span
+style="mso-spacerun: yes">    </span>информацией о структуре данных располагает
+ассемблер. Фиг. 6.14
+
+<p><span
+style="mso-spacerun: yes">    </span>включает в себя фрагмент таблицы
+символических имен. Ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>выделяет один из разделов этой таблицы для
+структур и записей.
+
+<p><span
+style="mso-spacerun: yes">    </span>Ассемблер показывает вам всю информацию о
+структуре данных, которой
+
+<p><span
+style="mso-spacerun: yes">    </span>располагает. Этот раздел имеет заголовок
+&quot;Structures and records&quot;
+
+<p><span
+style="mso-spacerun: yes">    </span>(&quot;Структуры и записи&quot;). В первой
+строке этого раздела для структуры
+
+<p><span
+style="mso-spacerun: yes">    </span>FCB из нашего примера указано, что эта
+структура имеет длину 25H
+
+<p><span
+style="mso-spacerun: yes">    </span>байт и содержит 0AH полей. Далее ассемблер
+перечисляет все эти
+
+<p><span
+style="mso-spacerun: yes">    </span>поля, печатая их с отступом по отношению к
+имени структуры. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>каждого из полей приводится значение
+соответствующего смещения. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>структур ассемблер использует два столбца,
+обозначеные &quot;width&quot;
+
+<p><span
+style="mso-spacerun: yes">    </span>(ширина) и &quot;#dfields&quot; (число
+полей). Вторая строка в меток колонок
+
+<p><span
+style="mso-spacerun: yes">    </span>используется для записей. Структуры
+данных, которые ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>интерпретирует как записи, будут
+рассмотрены в следующем разделе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа, приведенная на Фиг. 6.14, не
+делает ничего
+
+<p><span
+style="mso-spacerun: yes">    </span>полезного. Кроме того, в ней нет никакой
+обработки ошибок. Однако
+
+<p><span
+style="mso-spacerun: yes">    </span>она хорошо иллюстрирует применение
+оператора STRUC. Этот способ
+
+<p><span
+style="mso-spacerun: yes">    </span>определения данных особенно подходит для
+часто используемых
+
+<p><span
+style="mso-spacerun: yes">    </span>структур данных. Использование имен полей
+в качестве значений
+
+<p><span
+style="mso-spacerun: yes">    </span>смещений очень удобно при модификации
+структур данных на этапе
+
+<p><span
+style="mso-spacerun: yes">    </span>разработки программы. Если вы внесете
+изменения в структуру данных,
+
+<p><span
+style="mso-spacerun: yes">    </span>то ассемблер автоматически изменит
+значения смещений при повторном
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблировании программы. Кроме того,
+использование структур
+
+<p><span
+style="mso-spacerun: yes">    </span>данных делает программу на языке
+ассемблера более читабельной и
+
+<p><span
+style="mso-spacerun: yes">    </span>понятной.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

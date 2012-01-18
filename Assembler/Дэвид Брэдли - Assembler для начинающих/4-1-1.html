@@ -1,0 +1,1081 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1" face="Arial">Глава 4 </font></b></div></p>
+<p><div align="center"><b><font size="+1" face="Arial">Набор команд микропроцессора 8088 </font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>В этой главе обсуждается набор команд
+микропроцессора 8088.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>предыдущих главах было рассмотрено
+расположение регистров и
+
+<p><span
+style="mso-spacerun: yes">    </span>механизмы адресации микропроцессора; в
+этой главе будут изучены
+
+<p><span
+style="mso-spacerun: yes">    </span>операции, которые можно выполнять с
+помощью регистров.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Разобьем команды микропроцессора 8088 на
+несколько групп.
+
+<p><span
+style="mso-spacerun: yes">    </span>Принадлежность команды к той или иной
+группе будет определяться
+
+<p><span
+style="mso-spacerun: yes">    </span>функцией, которую она выполняет. В этой
+главе описываются группы
+
+<p><span
+style="mso-spacerun: yes">    </span>команд и объясняется, как лучше всего ими
+пользоваться, но не будет
+
+<p><span
+style="mso-spacerun: yes">    </span>приводиться последовательного описания
+команд (такую задачу решает
+
+<p><span
+style="mso-spacerun: yes">    </span>руководство по Макроассемблеру).
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="4-1">Пересылка данных</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команды пересылки данных обычно наиболее
+часто используются из
+
+<p><span
+style="mso-spacerun: yes">    </span>всего набора команд любой ЭВМ, и
+микропроцессор 8088 - не
+
+<p><span
+style="mso-spacerun: yes">    </span>исключение.<span style="mso-spacerun:
+yes">  </span>Большая часть каждой задачи по обработке данных
+
+<p><span
+style="mso-spacerun: yes">    </span>заключается в переносе информации из одного
+места в другое.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа может выполнять некоторую
+обработку информации по мере
+
+<p><span
+style="mso-spacerun: yes">    </span>того, как она пересылается, но громадная
+часть работы сводится
+
+<p><span
+style="mso-spacerun: yes">    </span>только к пересылке.<span
+style="mso-spacerun: yes">  </span>В этом разделе рассматривается основные
+
+<p><span
+style="mso-spacerun: yes">    </span>команды пересылки данных микропроцессора
+8088, а в разделе,
+
+<p><span
+style="mso-spacerun: yes">    </span>посвященном обработке строк - остальная
+часть таких команд.
+<p><div align="center"><b><a name="4-1-1">Команда пересылки</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда MOV - основная команда пересылки
+данных, которая пересылает
+
+<p><span
+style="mso-spacerun: yes">    </span>байт или слово данных из памяти в регистр,
+из регисрта в память,
+
+<p><span
+style="mso-spacerun: yes">    </span>или из регистра в регистр.<span
+style='mso-tab-count:1'>      </span>Команда MOV может также занести число,
+
+<p><span
+style="mso-spacerun: yes">    </span>определенное программистом, в регистр или
+в память.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В действительности команда MOV - это целое
+семейство машинных
+
+<p><span
+style="mso-spacerun: yes">    </span>команд микропроцессора 8088. Таблица, в
+которую сведены варианты
+
+<p><span
+style="mso-spacerun: yes">    </span>всех машинных команд микропроцессора 8088,
+приведена в приложении
+
+<p><span
+style="mso-spacerun: yes">    </span>А. Беглый просмотр этой таблицы
+показывает, что существует семь
+
+<p><span
+style="mso-spacerun: yes">    </span>различных вариантов команды MOV, но
+программист использует каждую
+
+<p><span
+style="mso-spacerun: yes">    </span>из этих команд с помощью единого названия
+операции MOV. Ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>порождает правильную машинную команду,
+основываясь на типах
+
+<p><span
+style="mso-spacerun: yes">    </span>операндов, которые написал программист; и
+это одна из причин, по
+
+<p><span
+style="mso-spacerun: yes">    </span>которой ассемблер требует для операндов
+назначения типов, т.е.
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер должен знать, что представляет
+собой каждый операнд -
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр, байт памяти, слово памяти,
+сегментный регистр, или
+
+<p><span
+style="mso-spacerun: yes">    </span>что=нибудь еще. Такое назначение типов
+позволяет ассемблеру
+
+<p><span
+style="mso-spacerun: yes">    </span>построить правильную машинную команду. В
+случае использования
+
+<p><span
+style="mso-spacerun: yes">    </span>команды MOV ассемблер должен решить, какой
+из семи вариантов
+
+<p><span
+style="mso-spacerun: yes">    </span>является подходящим, основываясь на
+операндах, написанных
+
+<p><span
+style="mso-spacerun: yes">    </span>программистом.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.4.1 представлены различные способы,
+которыми в
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессоре 8088 можно переслать
+данные из одного места в
+
+<p><span
+style="mso-spacerun: yes">    </span>другое. Каждый прямоугольник означает
+здесь регистр или ячейку
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти. Стрелки показывают пути пересылки
+данных, которые допускает
+
+<p><span
+style="mso-spacerun: yes">    </span>набор команд микропроцессора 8088.
+Основной путь - из памяти в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистры и наоборот. С данными,
+помещенными в регистры, можно
+
+<p><span
+style="mso-spacerun: yes">    </span>работать с большей эффективностью, чем с
+данными в памяти, так как
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор не делает обращения к
+памяти всякий раз, когда нужны
+
+<p><span
+style="mso-spacerun: yes">    </span>данные. Кроме того, все команды
+микропроцессора 8088 могут указать
+
+<p><span
+style="mso-spacerun: yes">    </span>только один операнд памяти. Поэтому,
+например, команда сложения ADD
+
+<p><span
+style="mso-spacerun: yes">    </span>требует, чтобы по крайней мере один из
+операндов был в регистре.
+
+<p><span
+style="mso-spacerun: yes">    </span>Микропроцессор 8088 не имеет возможности
+сложить одну ячейку памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>с другой с помощью одной команды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>ЪДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>і<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">      </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>і<span style="mso-spacerun: yes">  </span>Непосредственные<span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>АДДДДДДВДДДДДДВДДДДДДЩ
+
+<p><span
+style='mso-tab-count:1'>      </span>ЪДДДДДДДДДДї<span style='mso-tab-count:
+2'>            </span>і<span style="mso-spacerun: yes">      </span>і<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>і<span
+style="mso-spacerun: yes">      </span>і<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>і<span style="mso-spacerun: yes"> 
+</span>Регистры і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">   </span>Г&lt;ДДДДДДДДДДДЩ<span style="mso-spacerun:
+yes">      </span>АДДДДДДДДДДД&gt;ґ<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">  </span>AX<span style='mso-tab-count:1'>  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:4'>                    </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>BX<span style='mso-tab-count:1'>  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes"> 
+</span>Память<span style="mso-spacerun: yes"> 
+</span>Г&lt;ДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД&gt;ґ<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>CX<span style='mso-tab-count:1'>  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:4'>                    </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>DX<span style='mso-tab-count:1'>  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">   </span>Г&lt;ДДДДДДДДДДДї<span style="mso-spacerun:
+yes">      </span>ЪДДДДДДДДДДД&gt;ґ<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">  </span>SI<span style='mso-tab-count:1'>  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>і<span
+style="mso-spacerun: yes">      </span>і<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>DI<span style='mso-tab-count:1'>  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>і<span
+style="mso-spacerun: yes">      </span>і<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>BP<span style='mso-tab-count:1'>  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>        </span>і<span
+style="mso-spacerun: yes">      </span>і<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>SP<span style='mso-tab-count:1'>  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>АДДДДДДДДДДЩ<span style='mso-tab-count:
+2'>            </span>v<span style="mso-spacerun: yes">      </span>v<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">   
+</span>АДДДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>ЪДДДДДДБДДДДДДБДДДДДДДї
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>і Сегментные регистры і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>і<span style="mso-spacerun: yes">   </span>CS<span
+style="mso-spacerun: yes">  </span>DS<span style="mso-spacerun: yes"> 
+</span>ES<span style="mso-spacerun: yes">  </span>SS<span style="mso-spacerun:
+yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>АДДДДДДДДДДДДДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>Фиг.4.1 Операции пересылки данных
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В самой команде MOV может содежаться новое
+содержимое регистра.
+
+<p><span
+style="mso-spacerun: yes">    </span>Такая форма операнда называется
+непосредственным оперндом; данные
+
+<p><span
+style="mso-spacerun: yes">    </span>находятся в самой команде и не требуют
+вычисления адреса. Вы можете
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматривать эту форму адресации как
+специальный тип, при котором
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>операнд находится в самой команде, а не где=то в другом месте
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти или в регистре. Кроме команд
+пересылки, у микропроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 есть и команды обработки данных с
+непосредственным операндом.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Из Фиг.4.1 также ясно, что команда может
+переслать
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственнйе данные в регистр или
+ячейку памяти. Записывать
+
+<p><span
+style="mso-spacerun: yes">    </span>информацию в команду бессмысленно, так что
+поток данных для команды
+
+<p><span
+style="mso-spacerun: yes">    </span>с непосредственным операндом имеет одно
+направление.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Наконец, команда MOV может записать
+сегментный регистр в память
+
+<p><span
+style="mso-spacerun: yes">    </span>или регистр. Она может также загрузить
+сегментный регистр из памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>или из другого регистра. Однако не
+существует команды загрузки
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментного регистра данными с
+непосредственным операндом; это
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что загружать сегментный регистр
+такими данными
+
+<p><span
+style="mso-spacerun: yes">    </span>непроизводительно. Если в программе
+необходимо поместить известное
+
+<p><span
+style="mso-spacerun: yes">    </span>значение в сегментный регистр, нужно
+сначала записать это значение
+
+<p><span
+style="mso-spacerun: yes">    </span>в один из регистров или в ячейку памяти, а
+затем можно уже
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылать это значение в сегментный
+регистр. На Фиг. 4.2 показано,
+
+<p><span
+style="mso-spacerun: yes">    </span>как это сделать.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>icrosoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+3'>              </span>1/1/80 04:00:28
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 4.2<span style="mso-spacerun: yes">  </span>Команда пересылки<span
+style='mso-tab-count:4'>                      </span> Page<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">  </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.2<span style="mso-spacerun: yes">  </span>Команда пересылки
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>EXWORD<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>EXBYTE<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>BYTE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>8B C3<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX,BX<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Регистр BX --&gt; Регистр AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0002<span style="mso-spacerun: yes">  </span>8B D8<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>BX,AX<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Регистр AX --&gt; Регистр BX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0004<span style="mso-spacerun: yes">  </span>8B 0E 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>MOV<span style="mso-spacerun: yes">     </span>CX,EXWORD<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Память --&gt; Регистр
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0008<span style="mso-spacerun: yes">  </span>89 16 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>MOV<span style="mso-spacerun: yes">     </span>EXWORD,DX<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Регистр --&gt; Память
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000C<span style="mso-spacerun: yes">  </span>8A 2E 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>MOV<span style="mso-spacerun: yes">     </span>CH,EXBYTE<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Память --&gt; Регистр (байт)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0010<span style="mso-spacerun: yes">  </span>88 36 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>MOV<span style="mso-spacerun: yes">     </span>EXBYTE,DH<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Регистр --&gt; Память (байт)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0014<span style="mso-spacerun: yes">  </span>BE 03E8<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>SI,1000<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    
+</span>; Непосредственное --&gt; Регистр
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0017<span style="mso-spacerun: yes">  </span>B3 17<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>BL,23<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Непосредственное --&gt; Регистр (байт)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0019<span style="mso-spacerun: yes">  </span>C7 06 0000 R 07D0<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">    
+</span>MOV<span style="mso-spacerun: yes">     </span>EXWORD,2000<span
+style="mso-spacerun: yes">     </span>; Непосредственное --&gt; Память
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001F<span style="mso-spacerun: yes">  </span>C6 06 0000 R 2E<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>MOV<span style="mso-spacerun: yes">     </span>EXBYTE,46<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Непосредственное --&gt; Память (байт)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0024<span style="mso-spacerun: yes">  </span>A1 0000 R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX,EXWORD<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Память --&gt; Аккумулятор
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0027<span style="mso-spacerun: yes">  </span>A0 0000 R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AL,EXBYTE<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Память --&gt; Аккумулятор (байт)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>002A<span style="mso-spacerun: yes">  </span>A3 0000 R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>EXWORD,AX<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Аккумулятор --&gt; Память
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>002D<span style="mso-spacerun: yes">  </span>A2 0000 R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>EXBYTE,AL<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Аккумулятор --&gt; Память (байт)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0030<span style="mso-spacerun: yes">  </span>8E 1E 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>MOV<span style="mso-spacerun: yes">     </span>DS,EXWORD<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Память --&gt; Сегментный регистр
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0034<span style="mso-spacerun: yes">  </span>8E D8<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>DS,AX<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Регистр --&gt; Сегментный регистр
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0036<span style="mso-spacerun: yes">  </span>8C 1E 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>MOV<span style="mso-spacerun: yes">     </span>EXWORD,DS<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Сегментный регистр --&gt; Память
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003A<span style="mso-spacerun: yes">  </span>8C C0<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX,ES<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Сегментный регистр --&gt; Регистр
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;-----<span style="mso-spacerun: yes"> 
+</span>Непосредственное значение в сегментный регистр
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003C<span style="mso-spacerun: yes">  </span>B8 ---- R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX,CODE<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    
+</span>; Взять непосредственное значение
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003F<span style="mso-spacerun: yes">  </span>8E D8<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>DS,AX<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Загрузить его в сегментный регистр
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0041<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>Фиг. 4.2 Команды пересылки
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 4.2 изображен листинг ассемблера
+некоторых возможных
+
+<p><span
+style="mso-spacerun: yes">    </span>вариантов команды MOV. Единственная
+команда ассемблера MOV
+
+<p><span
+style="mso-spacerun: yes">    </span>порождает несколько различных машинных
+команд.
+
+<p><span
+style='mso-tab-count:1'>      </span>Рассматривая Фиг.4.2, обратите внимание на
+сантаксис команды
+
+<p><span
+style="mso-spacerun: yes">    </span>MOV. Команда MOV имеет два операнда:
+источник и результат. В
+
+<p><span
+style="mso-spacerun: yes">    </span>команде они следуют друг за другом,
+источник следует за
+
+<p><span
+style="mso-spacerun: yes">    </span>результатом. Первая команда на рисунке MOV
+AX, BX пересылает
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое регистра BX в регистр AX.
+Следующая команда обратна
+
+<p><span
+style="mso-spacerun: yes">    </span>предыдущей, содержимое регистра AX
+пересылается в регистр BX.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда MOV не меняет источник, т.е.
+команда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV AX, BX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>меняет регистр AX, результат, но не меняет
+регистр BX,
+
+<p><span
+style="mso-spacerun: yes">    </span>источник.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Никакие из команд MOV не меняют флагов
+состояния. Хотя иногда
+
+<p><span
+style="mso-spacerun: yes">    </span>это кажется неудобным, но является
+наилучшим способом работы с
+
+<p><span
+style="mso-spacerun: yes">    </span>флагами. Как мы увидим далее,
+микропроцессор 8088 имеет команды,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые могут эффективно проверить любую
+ячейку памяти так, что
+
+<p><span
+style="mso-spacerun: yes">    </span>команда пересылки не потребуется. В
+качестве примера случая, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>установка флагов при пересылке не нужна,
+рассмотрим арифметику
+
+<p><span
+style="mso-spacerun: yes">    </span>повышенной точности. Когда программа
+выполняет вычисления
+
+<p><span
+style="mso-spacerun: yes">    </span>повышенной точности, она должна переслать
+части операндов в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистры, чтобы расположить их там для
+выполнения операции. Такая
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылка не меняет ни одного флага, а это
+позволяет флагам
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживать арифметику повышенной
+точности.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как было замечено, существует несколько
+различных вариантов
+
+<p><span
+style="mso-spacerun: yes">    </span>команд пересылки на машинном языке.
+Объектный код на Фиг. 4.2
+
+<p><span
+style="mso-spacerun: yes">    </span>иллюстрирует эти варианты. Если вас
+интересует структура машинного
+
+<p><span
+style="mso-spacerun: yes">    </span>языка, вы можете сравнить объектный код с
+описанием машинного языка
+
+<p><span
+style="mso-spacerun: yes">    </span>в приложении А. Такое сравнение поможет
+выяснить значение отдельных
+
+<p><span
+style="mso-spacerun: yes">    </span>битов в машинном коде. Например, вы
+сможете увидеть значения данных
+
+<p><span
+style="mso-spacerun: yes">    </span>с непосредственным операндом в командах. К
+счастью, для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>писать программы на ассемблере, вам не
+требуется точно знать, как
+
+<p><span
+style="mso-spacerun: yes">    </span>работает ассемблер.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если вы хотите достичь наибольшей
+возможной эффективности
+
+<p><span
+style="mso-spacerun: yes">    </span>программ, вам надо изучить объектный код
+на Фиг. 4.2. Число байтов
+
+<p><span
+style="mso-spacerun: yes">    </span>команды непосредственно связано с
+количеством времени, необходимого
+
+<p><span
+style="mso-spacerun: yes">    </span>для выполнения этой команды. Например,
+команда пересылки, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>берет непосредственное значение и посылает
+его в память, занимает 6
+
+<p><span
+style="mso-spacerun: yes">    </span>байт. Набор команд микропроцессора 8088
+содержит несколько команд,
+
+<p><span
+style="mso-spacerun: yes">    </span>оптимизированных для работы с
+аккумулятором AX либо AL.
+
+<p><span
+style="mso-spacerun: yes">    </span>Использование этих команд поможет вам
+сэкономить время и место в
+
+<p><span
+style="mso-spacerun: yes">    </span>программах, где это важно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Последние две команды на Фиг. 4.2
+показывают, как занести
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственное значение в сегментный
+регистр. Любой другой
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр, в примере это регистр AX, может
+временно содержать
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственное значение перед его
+записью в сегментный регистр.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Есть и другеи команды, которые переносят
+данные. Пример на
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 4.3 иллюстрирует эти команды.
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>1/1/80 04:00:33
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 4.3 Команды пересылки данных<span style='mso-tab-count:4'>                       </span>Page<span
+style='mso-tab-count:1'>  </span> 1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.3 Команды пересылки данных
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:2'>         </span><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>CODE<span style="mso-spacerun: yes">    </span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE, DS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>EXDWORD LABEL<span style="mso-spacerun:
+yes">   </span>DWORD
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>EXWORD<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>EXBYTE<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>BYTE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>87 D9<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>XCHG<span style="mso-spacerun: yes">    </span>BX,CX<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">    </span>;
+Регистр BX &lt;--&gt; Регистр CX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0002<span style="mso-spacerun: yes">  </span>87 1E 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>XCHG<span style="mso-spacerun: yes">    </span>BX,EXWORD<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">    </span>;
+Регистр BX &lt;--&gt; Память
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0006<span style="mso-spacerun: yes">  </span>93<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>XCHG<span style="mso-spacerun: yes">    </span>AX,BX<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">    </span>;
+Регистр AX &lt;--&gt; Регистр BX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0007<span style="mso-spacerun: yes">  </span>E4 20<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>IN<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>AL,020H<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>; Порт 20H --&gt; AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0009<span style="mso-spacerun: yes">  </span>EC<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">    </span>IN<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>AL,DX<span style='mso-tab-count:1'>   </span><span style="mso-spacerun:
+yes">    </span>; Порт (DX) --&gt; AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000A<span style="mso-spacerun: yes">  </span>E6 21<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>OUT<span style="mso-spacerun: yes">     </span>021H,AL<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">   
+</span>; AL --&gt; Порт 021H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000C<span style="mso-spacerun: yes">  </span>EE<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>OUT<span style="mso-spacerun: yes">     </span>DX,AL<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">    </span>; AL
+--&gt; Порт (DX)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000D<span style="mso-spacerun: yes">  </span>8D 36 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>LEA<span style="mso-spacerun: yes">     </span>SI,EXWORD<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">    </span>;
+Адрес(EXWORD) --&gt; SI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0011<span style="mso-spacerun: yes">  </span>C5 36 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>LDS<span style="mso-spacerun: yes">     </span>SI,EXDWORD<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    </span>;
+M(EXDWORD) --&gt; SI
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">    </span>; M(EXDWORD+2) --&gt; DS
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0015<span style="mso-spacerun: yes">  </span>C4 3E 0000 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>LES<span style="mso-spacerun: yes">     </span>DI,EXDWORD<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    </span>;
+M(EXDWORD) --&gt; DI
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">    </span>; M(EXDWORD+2) --&gt; ES
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0019<span style="mso-spacerun: yes">  </span>9F<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>LAHF<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">    </span>; Флаги --&gt; AH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001A<span style="mso-spacerun: yes">  </span>9E<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>SAHF<span style='mso-tab-count:1'>    </span><span style='mso-tab-count:
+1'>      </span><span style="mso-spacerun: yes">    </span>; AH --&gt; Флаги
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001B<span style="mso-spacerun: yes">  </span>D7<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>XLAT<span style="mso-spacerun: yes">    </span>EXBYTE<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>; M(BX+AL) --&gt; AL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001C<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.3 Команды пересылки данных
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

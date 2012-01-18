@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<b><p><div align="center"><a name="9-12-6">Текст в графических режимах
+</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Одной из важных возможностей программы
+BIOS фирмы IBM является
+
+<p><span
+style="mso-spacerun: yes">    </span>способность показывать на экране текст
+даже тогда, когда цветной
+
+<p><span
+style="mso-spacerun: yes">    </span>графический адаптер работает в графическом
+режиме.<span style='mso-tab-count:1'>      </span>Это
+
+<p><span
+style="mso-spacerun: yes">    </span>осуществляется с помощью таблицы образов
+символов по адресу
+
+<p><span
+style="mso-spacerun: yes">    </span>0FFFFH:0FA6EH.<span style="mso-spacerun:
+yes">  </span>Эта таблица содержит образы символов для первых 128
+
+<p><span
+style="mso-spacerun: yes">    </span>символов.<span style="mso-spacerun: yes"> 
+</span>Если нужно, пользователь может загрузить в вектор
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания 01FH указатель на таблицу
+образов оставшихся 128
+
+<p><span
+style="mso-spacerun: yes">    </span>символов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как видно в листинге BIOS, когда цветная
+графическая плата
+
+<p><span
+style="mso-spacerun: yes">    </span>находится в графическом режиме, программа
+записи символа переходит
+
+<p><span
+style="mso-spacerun: yes">    </span>к специальной части под названием
+GRAPHICS_WRITE. Эта часть
+
+<p><span
+style="mso-spacerun: yes">    </span>программы извлекает образ символа из
+таблицы в ПЗУ или из таблицы
+
+<p><span
+style="mso-spacerun: yes">    </span>пользователя и помещает точки в
+соответствующие места памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея. В этой программе есть несколько
+интересных мест. В режиме
+
+<p><span
+style="mso-spacerun: yes">    </span>среднего разрешения программа BIOS
+расширяет 8-битовый по ширине
+
+<p><span
+style="mso-spacerun: yes">    </span>образ символа в 16-битовый. Подпрограмма
+S21 (EXPAND_BYTE) помещает
+
+<p><span
+style="mso-spacerun: yes">    </span>в<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>регистр AL строку образа символа и
+расширяет ее до полного
+
+<p><span
+style="mso-spacerun: yes">    </span>слова, возвращаемого в регистре AX.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа записи символов должна также
+учитывать адресацию
+
+<p><span
+style="mso-spacerun: yes">    </span>четных и нечетных полей графической платы.
+В подпрограмме
+
+<p><span
+style="mso-spacerun: yes">    </span>GRAPHICS_WRITE происходит запись различных
+строк образов в байты,
+
+<p><span
+style="mso-spacerun: yes">    </span>расположенные на расстоянии 2000H друг от
+друга. Это лучше всего
+
+<p><span
+style="mso-spacerun: yes">    </span>видно в подпрограмме записи для режима с
+высоким разрешением. В
+
+<p><span
+style="mso-spacerun: yes">    </span>этом режиме BIOS может записывать символы
+со строками образа прямо
+
+<p><span
+style="mso-spacerun: yes">    </span>в буфер дисплея. Но вместо использования
+команды REP MOVSB для
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылки восьми байт используется цикл
+для обслуживания четных и
+
+<p><span
+style="mso-spacerun: yes">    </span>нечетных полей. Сначала BIOS записывает
+четное поле с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>команды STOSB. Затем записывается нечетное
+поле с помощью команды
+
+<p><span
+style="mso-spacerun: yes">    </span>MOV по адресу [DI+2000H-1].
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Другая возможность программ записи
+символов - запись символов
+
+<p><span
+style="mso-spacerun: yes">    </span>на экран с помощью функции
+&quot;исключающее или&quot;. Это обычный способ
+
+<p><span
+style="mso-spacerun: yes">    </span>выдачи на экран символов, которые затем
+надо удалить. Когда
+
+<p><span
+style="mso-spacerun: yes">    </span>программа BIOS записывает символ на
+дисплей при включенном бите
+
+<p><span
+style="mso-spacerun: yes">    </span>XOR, он берет функцию &quot;исключающее
+или&quot; от содержимого буфера и
+
+<p><span
+style="mso-spacerun: yes">    </span>образа символа. Обычно это дает символ в
+читабельной форме, но его
+
+<p><span
+style="mso-spacerun: yes">    </span>фактический вид зависит от фона, на
+котором он записывается. Но
+
+<p><span
+style="mso-spacerun: yes">    </span>когда программа BIOS снова записывает
+символ на то же место, опять
+
+<p><span
+style="mso-spacerun: yes">    </span>используя функцию XOR, символ исчезает, и
+экран возвращается к
+
+<p><span
+style="mso-spacerun: yes">    </span>своему первоначальному виду. Этот метод
+предпочтительнее того, при
+
+<p><span
+style="mso-spacerun: yes">    </span>котором записывается символ, а затем
+поверх него выдается пробел.
+
+<p><span
+style="mso-spacerun: yes">    </span>Запись пробела не восстановит экран к
+виду, который он имел до
+
+<p><span
+style="mso-spacerun: yes">    </span>записи символа. Вы можете очень эффективно
+использовать эту
+
+<p><span
+style="mso-spacerun: yes">    </span>возможность записи со стиранием в случаях,
+когда вам надо выдать
+
+<p><span
+style="mso-spacerun: yes">    </span>временное сообщение на экран.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа чтения символа работает
+аналогично, когда дисплей
+
+<p><span
+style="mso-spacerun: yes">    </span>находится в графическом режиме; BIOS
+извлекает образ символа из
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплейного буфера, а затем сравнивает
+этот образ с образами
+
+<p><span
+style="mso-spacerun: yes">    </span>таблицы символов. Когда она находит
+символ, это отвечает, что по
+
+<p><span
+style="mso-spacerun: yes">    </span>данному адресу находится найденный символ.
+Эта программа работает
+
+<p><span
+style="mso-spacerun: yes">    </span>только в случае точного соответствия, так
+что если часть другой
+
+<p><span
+style="mso-spacerun: yes">    </span>графической картинки вторгнется в позицию
+символа, BIOS не сможет
+
+<p><span
+style="mso-spacerun: yes">    </span>распознать символ. Более того, эта
+программа позволяет программисту
+
+<p><span
+style="mso-spacerun: yes">    </span>считать графический режим идентичным
+текстовому режиму. Пока
+
+<p><span
+style="mso-spacerun: yes">    </span>программа использует для взаимодействия с
+дисплеем BIOS, она может
+
+<p><span
+style="mso-spacerun: yes">    </span>работать с текстом независимо от режима
+работы дисплея.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вспомним теперь, что и программы сдвига
+изображения тоже имеют
+
+<p><span
+style="mso-spacerun: yes">    </span>специальные части для обслуживания
+графических режимов. Если вы
+
+<p><span
+style="mso-spacerun: yes">    </span>вернетесь к соответствующей части BIOS, то
+обнаружите, что она
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет окна сдвига в графическом
+дисплее и выполняет сдвиг
+
+<p><span
+style="mso-spacerun: yes">    </span>способом, который идентичен сдвигу в
+текстовом режиме. Сдвиг в
+
+<p><span
+style="mso-spacerun: yes">    </span>графических режимах происходит несколько
+медленне, чем в текстовом
+
+<p><span
+style="mso-spacerun: yes">    </span>режиме, в первую очередь из-за того, что
+программа должна переслать
+
+<p><span
+style="mso-spacerun: yes">    </span>все 16000 байт, а не 2000 или 4000 байт,
+нужных в текстовом режиме.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это дает 4- - 8-кратное увеличение времени
+сдвига, и оно становится
+
+<p><span
+style="mso-spacerun: yes">    </span>заметно больше.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Способность BIOS обрабатывать символы в
+графических режимах
+
+<p><span
+style="mso-spacerun: yes">    </span>дает большие возможности. Становится
+достаточно простым нарисовать
+
+<p><span
+style="mso-spacerun: yes">    </span>график или картинку, а затем использовать
+символы для пометки
+
+<p><span
+style="mso-spacerun: yes">    </span>отдельных частей рисунка. Кроме того, вы
+можете отвести часть
+
+<p><span
+style="mso-spacerun: yes">    </span>экрана под графическое изображение, а
+другое окно использовать для
+
+<p><span
+style="mso-spacerun: yes">    </span>текста. В это окно вы можете заносить
+обычный текст с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>программ символьного вывода, а также
+сдвигать его. В других случаях
+
+<p><span
+style="mso-spacerun: yes">    </span>вы можете записывать символы на дисплей,
+не обращая внимания на его
+
+<p><span
+style="mso-spacerun: yes">    </span>текущий режим. BIOS сама определит, в
+каком режиме находится
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплей, и правильно запишет символы.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

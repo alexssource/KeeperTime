@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><a name="4-1-4">Загрузка исполнительного адреса</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда загрузки действительного адреса
+LEA очень похожа на команду
+
+<p><span
+style="mso-spacerun: yes">    </span>MOV.<span style="mso-spacerun: yes"> 
+</span>Но вместо пересылки данных из ячейки памяти в регистр команда
+
+<p><span
+style="mso-spacerun: yes">    </span>LEA загружает в регистр адрес двнных.<span
+style="mso-spacerun: yes">  </span>Так как набор команд
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088 разрешает иметь в
+команде только один адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, в качестве приемника результата
+всегда указывается регистр.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда LEA может ссылаться на операнд
+источника с помощью любого
+
+<p><span
+style="mso-spacerun: yes">    </span>типа адресации, который можно указать
+байтом mod=r/m.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Во многих случаях команда LEA идентична
+команде MOV с
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственным операндом. Команды
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV<span style='mso-tab-count:1'>   </span>BX,<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">   
+</span>OFFSET<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">    </span>EXWORD
+
+<p><span
+style="mso-spacerun: yes">      </span>LEA BX, EXWORD
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>делают одно и то же. Первая команда - это
+непосредственная
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылка, которая использует смещение
+переменной EXWORD. Оператор
+
+<p><span
+style="mso-spacerun: yes">    </span>OFFSET говорит ассемблеру о том, что в
+регистр BX надо загрузить
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение адресного значения (все адресные
+значения имеют две части
+
+<p><span
+style="mso-spacerun: yes">    </span>- сегмент и смещение) переменной EXWORD.
+Команда LEA вычисляет
+
+<p><span
+style="mso-spacerun: yes">    </span>действительный адрес переменной EXWORD и
+помещает его в регистр BX.
+
+<p><span
+style="mso-spacerun: yes">    </span>В этом случае команды выполняют одинаковые
+действия.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Но если бы программа загружала в регистр
+BX адрес десятого
+
+<p><span
+style="mso-spacerun: yes">    </span>байта массива, на который указывает
+регистр DI, команда LEA
+
+<p><span
+style="mso-spacerun: yes">    </span>выглядела бы следующим образом
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>LEA BX, 10[DI]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Микропроцессор выполнил бы вычисление
+адреса, используя
+
+<p><span
+style="mso-spacerun: yes">    </span>информацию из байта mod=r/m в точности,
+как в случае команды MOV.
+
+<p><span
+style="mso-spacerun: yes">    </span>Затем он поместил бы вычисленное смещение,
+а не данные, по этому
+
+<p><span
+style="mso-spacerun: yes">    </span>адресу в регистр BX. Аналогичной команде с
+непосредственным
+
+<p><span
+style="mso-spacerun: yes">    </span>операндом MOV, которая могла бы выполнять
+ту же функцию, нет. У
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера здесь нет способа определения
+непосредственного
+
+<p><span
+style="mso-spacerun: yes">    </span>значения, так как адрес неизвестен во
+время ассемблирования.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

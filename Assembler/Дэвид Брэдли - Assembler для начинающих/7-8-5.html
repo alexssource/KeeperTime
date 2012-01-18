@@ -1,0 +1,1074 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="7-8-5">Синус угла
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Последний пример использования
+сопроцессора 8087 - вычисление
+
+<p><span
+style="mso-spacerun: yes">    </span>синуса угла.<span style="mso-spacerun:
+yes">  </span>У сопроцессора 8087 нет команды вычисления функции
+
+<p><span
+style="mso-spacerun: yes">    </span>SIN; самое большее, что он может - это
+выполнить команду FPTAN,
+
+<p><span
+style="mso-spacerun: yes">    </span>нахождение частичного тангенса.<span
+style="mso-spacerun: yes">  </span>Чтобы выполнить операцию SIN,
+
+<p><span
+style="mso-spacerun: yes">    </span>воспользуемся этой командой, а также
+командой FPREM (частичный
+
+<p><span
+style="mso-spacerun: yes">    </span>остаток).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа, вычисляющая SIN, показана на
+Фиг. 7.27.<span style="mso-spacerun: yes">  </span>Эта
+
+<p><span
+style="mso-spacerun: yes">    </span>программа вычисляет и печатает синусы
+углов от 1/2 до 6 с шагом 1/2
+
+<p><span
+style="mso-spacerun: yes">    </span>радиана.<span style="mso-spacerun: yes"> 
+</span>Выдача программы аналогична выдаче следующей программы на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке Бейсик:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>10<span style="mso-spacerun: yes"> 
+</span>FOR X = .5 TO 6.0 STEP .5
+
+<p><span
+style='mso-tab-count:1'>      </span>20<span style="mso-spacerun: yes"> 
+</span>PRINT SIN(X)
+
+<p><span
+style='mso-tab-count:1'>      </span>30<span style="mso-spacerun: yes"> 
+</span>NEXT X
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для печати результатов используется
+подпрограмма на Фиг. 7.25.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">   </span>1/1/80 04:05:01
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Фиг. 7.27 Вычисление синуса угла <span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">   </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 7.27 Вычисление синуса угла
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>STACK<span style="mso-spacerun: yes">  
+</span>SEGMENT STACK
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style="mso-spacerun:
+yes">  </span>0040[<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>DW<span style="mso-spacerun: yes">     
+</span>64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0080<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>STACK<span style="mso-spacerun: yes">  
+</span>ENDS
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE,ES:CODE
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>EXTRN<span style="mso-spacerun: yes">  
+</span>FLOAT_ASCII:NEAR
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style="mso-spacerun:
+yes">  </span>0001<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">       </span>NUM_ANGLE<span style="mso-spacerun:
+yes">       </span>DW<span style="mso-spacerun: yes">      </span>1
+
+<p><span
+style='mso-tab-count:2'>            </span>0002<span style="mso-spacerun:
+yes">  </span>0002<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">       </span>DEN_ANGLE<span style="mso-spacerun:
+yes">       </span>DW<span style="mso-spacerun: yes">      </span>2
+
+<p><span
+style='mso-tab-count:2'>            </span>0004<span style="mso-spacerun:
+yes">  </span>????<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">       </span>STATUS<span style="mso-spacerun: yes"> 
+</span>DW<span style="mso-spacerun: yes">      </span>?
+
+<p><span
+style='mso-tab-count:2'>            </span>0006<span style="mso-spacerun:
+yes">  </span>0004<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">       </span>FOUR<span style="mso-spacerun: yes">   
+</span>DW<span style="mso-spacerun: yes">      </span>4
+
+<p><span
+style='mso-tab-count:2'>            </span>= 0040<span style='mso-tab-count:
+3'>                  </span><span style="mso-spacerun: yes">      
+</span>C3<span style="mso-spacerun: yes">      </span>EQU<span
+style="mso-spacerun: yes">     </span>40H
+
+<p><span
+style='mso-tab-count:2'>            </span>= 0004<span style='mso-tab-count:
+3'>                  </span><span style="mso-spacerun: yes">      
+</span>C2<span style="mso-spacerun: yes">      </span>EQU<span
+style="mso-spacerun: yes">     </span>04H
+
+<p><span
+style='mso-tab-count:2'>            </span>= 0002<span style='mso-tab-count:
+3'>                  </span><span style="mso-spacerun: yes">      
+</span>C1<span style="mso-spacerun: yes">      </span>EQU<span
+style="mso-spacerun: yes">     </span>02H
+
+<p><span
+style='mso-tab-count:2'>            </span>= 0001<span style='mso-tab-count:
+3'>                  </span><span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">     </span>C0<span style="mso-spacerun: yes">     
+</span>EQU<span style="mso-spacerun: yes">     </span>01H
+
+<p><span
+style='mso-tab-count:2'>            </span>0008<span style="mso-spacerun:
+yes">  </span>93 A3 AE AB 20 E1 AB<span style="mso-spacerun: yes">    
+</span>ERROR_MSG<span style="mso-spacerun: yes">       </span>DB<span
+style="mso-spacerun: yes">      </span>'Угол слишком большой', 10, 13, '$'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>A8 E8 AA AE AC 20 A1
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>AE AB EC E8 AE A9 0A
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>0D 24
+
+<p><span
+style='mso-tab-count:2'>            </span>001F<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>SIN<span style="mso-spacerun: yes">    
+</span>PROC<span style="mso-spacerun: yes">    </span>FAR
+
+<p><span
+style='mso-tab-count:2'>            </span>001F<span style="mso-spacerun:
+yes">  </span>1E<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>PUSH<span style="mso-spacerun: yes">   
+</span>DS
+
+<p><span
+style='mso-tab-count:2'>            </span>0020<span style="mso-spacerun:
+yes">  </span>2B C0<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>SUB<span style="mso-spacerun: yes">    
+</span>AX, AX
+
+<p><span
+style='mso-tab-count:2'>            </span>0022<span style="mso-spacerun:
+yes">  </span>50<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>PUSH<span style="mso-spacerun: yes">   
+</span>AX
+
+<p><span
+style='mso-tab-count:2'>            </span>0023<span style="mso-spacerun:
+yes">  </span>8C C8<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>MOV<span style="mso-spacerun: yes">    
+</span>AX, CS
+
+<p><span
+style='mso-tab-count:2'>            </span>0025<span style="mso-spacerun:
+yes">  </span>8E D8<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>MOV<span style="mso-spacerun: yes">    
+</span>DS, AX
+
+<p><span
+style='mso-tab-count:2'>            </span>0027<span style="mso-spacerun:
+yes">  </span>8E C0<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>MOV<span style="mso-spacerun: yes">    
+</span>ES, AX
+
+<p><span
+style='mso-tab-count:2'>            </span>0029<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>DO_AGAIN:
+
+<p><span
+style='mso-tab-count:2'>            </span>0029<span style="mso-spacerun:
+yes">  </span>9B DB E3<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FINIT<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">       </span>;-----ST(0)-----;-----ST(1)------
+
+<p><span
+style='mso-tab-count:2'>            </span>002C<span style="mso-spacerun:
+yes">  </span>9B DF 06 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FILD<span style="mso-spacerun: yes">   
+</span>NUM_ANGLE<span style="mso-spacerun: yes">       </span>;<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">      
+</span>;
+
+<p><span
+style='mso-tab-count:2'>            </span>0031<span style="mso-spacerun:
+yes">  </span>9B DE 36 0002 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FIDIV<span style="mso-spacerun: yes">  
+</span>DEN_ANGLE<span style="mso-spacerun: yes">       </span>; X = Угол<span
+style="mso-spacerun: yes">      </span>;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 7.27 (a) Процедура SIN (начало)
+
+<p><span
+style='mso-tab-count:2'>            </span>0036<span style="mso-spacerun:
+yes">  </span>9B D9 EB<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FLDPI<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">       </span>; PI<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>; X
+
+<p><span
+style='mso-tab-count:2'>            </span>0039<span style="mso-spacerun:
+yes">  </span>9B DE 36 0006 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FIDIV<span style="mso-spacerun: yes">  
+</span>FOUR<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">       </span>; PI/4<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>; X
+
+<p><span
+style='mso-tab-count:2'>            </span>003E<span style="mso-spacerun:
+yes">  </span>9B D9 C9<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FXCH<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">       </span>; X<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">       </span>; PI/4
+
+<p><span
+style='mso-tab-count:2'>            </span>0041<span style="mso-spacerun:
+yes">  </span>9B D9 F8<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FPREM<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">       </span>; R<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">       </span>; PI/4
+
+<p><span
+style='mso-tab-count:2'>            </span>0044<span style="mso-spacerun:
+yes">  </span>9B DD 3E 0004 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FSTSW<span style="mso-spacerun: yes">  
+</span>STATUS
+
+<p><span
+style='mso-tab-count:2'>            </span>0049<span style="mso-spacerun:
+yes">  </span>9B<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FWAIT
+
+<p><span
+style='mso-tab-count:2'>            </span>004A<span style="mso-spacerun:
+yes">  </span>8A 26 0005 R<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">       </span>MOV<span style="mso-spacerun: yes">    
+</span>AH, BYTE PTR STATUS+1
+
+<p><span
+style='mso-tab-count:2'>            </span>004E<span style="mso-spacerun:
+yes">  </span>F6 C4 04<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>TEST<span style="mso-spacerun: yes">   
+</span>AH, C2
+
+<p><span
+style='mso-tab-count:2'>            </span>0051<span style="mso-spacerun:
+yes">  </span>75 55<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>JNZ<span style="mso-spacerun: yes">    
+</span>BIG_ANGLE
+
+<p><span
+style='mso-tab-count:2'>            </span>0053<span style="mso-spacerun:
+yes">  </span>F6 C4 02<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>TEST<span style="mso-spacerun: yes">   
+</span>AH, C1<span style='mso-tab-count:1'>   </span><span style="mso-spacerun:
+yes">       </span>; Определяется, необходимо ли вычитание PI/4
+
+<p><span
+style='mso-tab-count:2'>            </span>0056<span style="mso-spacerun:
+yes">  </span>74 05<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>JZ<span style="mso-spacerun: yes">     
+</span>DO_R<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">       </span>; Если 0, то не необходимо вычитание PI/4
+
+<p><span
+style='mso-tab-count:2'>            </span>0058<span style="mso-spacerun:
+yes">  </span>9B DE E1<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FSUBRP<span style="mso-spacerun: yes"> 
+</span>ST(1), ST(0)<span style="mso-spacerun: yes">    </span>; A = PI/4-R<span
+style="mso-spacerun: yes">    </span>; ?
+
+<p><span
+style='mso-tab-count:2'>            </span>005B<span style="mso-spacerun:
+yes">  </span>EB 06<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>JMP<span style="mso-spacerun: yes">    
+</span>SHORT DO_FPTAN
+
+<p><span
+style='mso-tab-count:2'>            </span>005D<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>DO_R:
+
+<p><span
+style='mso-tab-count:2'>            </span>005D<span style="mso-spacerun:
+yes">  </span>9B D9 C9<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FXCH<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">       </span>; PI/4<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>; R
+
+<p><span
+style='mso-tab-count:2'>            </span>0060<span style="mso-spacerun:
+yes">  </span>9B D8 D9<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FCOMP<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">       </span>; R<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">       </span>; ?
+
+<p><span
+style='mso-tab-count:2'>            </span>0063<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>DO_FPTAN:
+
+<p><span
+style='mso-tab-count:2'>            </span>0063<span style="mso-spacerun:
+yes">  </span>9B D9 F2<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FPTAN<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">       </span>; OPP<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">       </span>; ADJ<span style="mso-spacerun: yes">  
+</span>Где OPP/ADJ=Tan(A)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">       </span>;-----<span style="mso-spacerun: yes"> 
+</span>Опеределение того, что нужно - синус или косинус
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0066<span style="mso-spacerun:
+yes">  </span>F6 C4 42<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>TEST<span style="mso-spacerun: yes">   
+</span>AH, C3 or C1
+
+<p><span
+style='mso-tab-count:2'>            </span>0069<span style="mso-spacerun:
+yes">  </span>7A 03<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>JPE<span style="mso-spacerun: yes">    
+</span>DO_SINE
+
+<p><span
+style='mso-tab-count:2'>            </span>006B<span style="mso-spacerun:
+yes">  </span>9B D9 C9<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FXCH<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">       </span>; ADJ<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">       </span>; OPP
+
+<p><span
+style='mso-tab-count:2'>            </span>006E<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>DO_SINE: <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">       </span>; D<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">      
+</span>; N
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">       </span>;-----<span style="mso-spacerun: yes"> 
+</span>Вычисление N/SQR(N**2 + D**2)
+
+<p><span
+style='mso-tab-count:2'>            </span>006E<span style="mso-spacerun:
+yes">  </span>9B D8 8E 0000 U<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FMUL<span style="mso-spacerun: yes">   
+</span>ST(0)<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">       </span>; D**2<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>; N
+
+<p><span
+style='mso-tab-count:2'>            </span>0073<span style="mso-spacerun:
+yes">  </span>9B D9 C9<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FXCH<span style="mso-spacerun: yes">   
+</span>ST(1)<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">       </span>; N<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">       </span>; D**2
+
+<p><span
+style='mso-tab-count:2'>            </span>0076<span style="mso-spacerun:
+yes">  </span>9B D9 C0<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FLD<span style="mso-spacerun: yes">    
+</span>ST(0)<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">       </span>; N<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">       </span>; N<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">       </span>; D**2
+
+<p><span
+style='mso-tab-count:2'>            </span>0079<span style="mso-spacerun:
+yes">  </span>9B D8 8E 0000 U<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FMUL<span style="mso-spacerun: yes">   
+</span>ST(0)<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">       </span>; N**2<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>; N<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">       </span>; D**2
+
+<p><span
+style='mso-tab-count:2'>            </span>007E<span style="mso-spacerun:
+yes">  </span>9B DC 06 0000 U<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FADD<span style="mso-spacerun: yes">   
+</span>ST(2)<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">       </span>; N**2 + D**2<span style="mso-spacerun: yes">   </span>; N<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>; D**2
+
+<p><span
+style='mso-tab-count:2'>            </span>0083<span style="mso-spacerun:
+yes">  </span>9B D9 FA<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FSQRT<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">       </span>; SQR(N2 + D2)<span
+style="mso-spacerun: yes">  </span>; N<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">       </span>; D**2
+
+<p><span
+style='mso-tab-count:2'>            </span>0086<span style="mso-spacerun:
+yes">  </span>9B DE F1<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FDIVRP<span style="mso-spacerun: yes"> 
+</span>ST(1)<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">       </span>; SIN(X)<span style="mso-spacerun: yes">        </span>;
+D**2
+
+<p><span
+style='mso-tab-count:2'>            </span>0089<span style="mso-spacerun:
+yes">  </span>9B D9 C9<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FXCH<span style="mso-spacerun: yes">   
+</span>ST(1)<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">       </span>; D**2<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>; SIN(X)
+
+<p><span
+style='mso-tab-count:2'>            </span>008C<span style="mso-spacerun:
+yes">  </span>9B D8 D9<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FCOMP<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">       </span>; SIN(X)<span style="mso-spacerun:
+yes">        </span>; ?
+
+<p><span
+style='mso-tab-count:2'>            </span>008F<span style="mso-spacerun:
+yes">  </span>F6 C4 01<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>TEST<span style="mso-spacerun: yes">   
+</span>AH, C0
+
+<p><span
+style='mso-tab-count:2'>            </span>0092<span style="mso-spacerun:
+yes">  </span>74 03<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>JZ<span style="mso-spacerun: yes">     
+</span>SIGN_OK
+
+<p><span
+style='mso-tab-count:2'>            </span>0094<span style="mso-spacerun:
+yes">  </span>9B D9 E0<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FCHS
+
+<p><span
+style='mso-tab-count:2'>            </span>0097<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>SIGN_OK:
+
+<p><span
+style='mso-tab-count:2'>            </span>0097<span style="mso-spacerun:
+yes">  </span>E8 0000 E <span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">       </span>CALL<span style="mso-spacerun: yes">   
+</span>FLOAT_ASCII
+
+<p><span
+style='mso-tab-count:2'>            </span>009A<span style="mso-spacerun:
+yes">  </span>FF 06 0000 R<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">       </span>INC<span style="mso-spacerun: yes">    
+</span>NUM_ANGLE
+
+<p><span
+style='mso-tab-count:2'>            </span>009E<span style="mso-spacerun:
+yes">  </span>83 3E 0000 R 0D<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>CMP<span style="mso-spacerun: yes">    
+</span>NUM_ANGLE, 13
+
+<p><span
+style='mso-tab-count:2'>            </span>00A3<span style="mso-spacerun:
+yes">  </span>77 02<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>JA<span style="mso-spacerun: yes">     
+</span>RETURN_INST
+
+<p><span
+style='mso-tab-count:2'>            </span>00A5<span style="mso-spacerun:
+yes">  </span>EB 82<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>JMP<span style="mso-spacerun: yes">    
+</span>DO_AGAIN
+
+<p><span
+style='mso-tab-count:2'>            </span>00A7<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>RETURN_INST:
+
+<p><span
+style='mso-tab-count:2'>            </span>00A7<span style="mso-spacerun:
+yes">  </span>CB<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>RET
+
+<p><span
+style='mso-tab-count:2'>            </span>00A8<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>BIG_ANGLE:
+
+<p><span
+style='mso-tab-count:2'>            </span>00A8<span style="mso-spacerun:
+yes">  </span>8D 16 0008 R<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">       </span>LEA<span style="mso-spacerun: yes">    
+</span>DX, ERROR_MSG
+
+<p><span
+style='mso-tab-count:2'>            </span>00AC<span style="mso-spacerun:
+yes">  </span>B4 09<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>MOV<span style="mso-spacerun: yes">    
+</span>AH, 9H
+
+<p><span
+style='mso-tab-count:2'>            </span>00AE<span style="mso-spacerun:
+yes">  </span>CD 21<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">       </span>INT<span style="mso-spacerun: yes">    
+</span>21H
+
+<p><span
+style='mso-tab-count:2'>            </span>00B0<span style="mso-spacerun:
+yes">  </span>CB<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>RET
+
+<p><span
+style='mso-tab-count:2'>            </span>00B1<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>SIN<span style="mso-spacerun: yes">    
+</span>ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span>00B1<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>END<span style="mso-spacerun: yes">    
+</span>SIN&#18;
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 7.27 (a) Процедура SIN (продолжение)
+
+<p><span
+style='mso-tab-count:2'>            </span>A&gt;SIN
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>4.79425539E-001
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>8.41470985E-001
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>9.97494987E-001
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>5.98472144E-001
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>1.41120008E-001
+
+<p><span
+style='mso-tab-count:2'>            </span>-3.50783228E-001
+
+<p><span
+style='mso-tab-count:2'>            </span>-7.56802495E-001
+
+<p><span
+style='mso-tab-count:2'>            </span>-9.77530118E-001
+
+<p><span
+style='mso-tab-count:2'>            </span>-9.58924275E-001
+
+<p><span
+style='mso-tab-count:2'>            </span>-7.05540326E-001
+
+<p><span
+style='mso-tab-count:2'>            </span>-2.79415498E-001
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>2.15119988E-001
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 7.27 (b) Вывод процедуры SIN
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 7.27 Вычисление синуса угла
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В первой части программы происходит ее
+инициализация для работы
+
+<p><span
+style="mso-spacerun: yes">    </span>в качестве файла типа .EXE.<span
+style="mso-spacerun: yes">  </span>Затем сопроцессор 8087 загружает два
+
+<p><span
+style="mso-spacerun: yes">    </span>целых числа и делит их, формируя исходный
+угол.<span style="mso-spacerun: yes">  </span>Это - пример
+
+<p><span
+style="mso-spacerun: yes">    </span>использования двух целых чисел для
+порождения числа с плавающей
+
+<p><span
+style="mso-spacerun: yes">    </span>точкой (в данном случае 1/2), что нельзя
+сделать непосредственно с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью ассемблера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как вы помните из тригонометрии, синус -
+периодическая функция.
+
+<p><span
+style="mso-spacerun: yes">    </span>То есть функция дает один и тот же
+результат в случае исходных
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел, различающихся ровно на 2*PI.<span
+style="mso-spacerun: yes">  </span>Поэтому первой задачей
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы SIN является замена исходного
+угла соответствующим
+
+<p><span
+style="mso-spacerun: yes">    </span>значением, лежащим в диапазоне
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>0 &lt;= X &lt; 2*PI
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В команде FPTAN требуется, чтобы угол
+находился в диапазоне
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>0 &lt;= X &lt; PI/4
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Это означает, что даже если угол и меньше
+2*PI, мы должны
+
+<p><span
+style="mso-spacerun: yes">    </span>уменьшить его еще, чтобы он удовлетворял
+ограничениям команды
+
+<p><span
+style="mso-spacerun: yes">    </span>FPTAN.<span style="mso-spacerun: yes"> 
+</span>К счастью, если исходный угол уменьшен до значения,
+
+<p><span
+style="mso-spacerun: yes">    </span>меньшего PI/4, все еще можно определить
+верное значение
+
+<p><span
+style="mso-spacerun: yes">    </span>тригонометрических функций.<span
+style="mso-spacerun: yes">  </span>Чтобы это сделать, надо знать, в каком
+
+<p><span
+style="mso-spacerun: yes">    </span>месте исходного диапазона от 0 до 2*PI
+находился исходный угол.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Нужное уменьшение угла выполняет команда
+FPREM.<span style="mso-spacerun: yes">  </span>Она не только
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисляет остаток, но и три младших бита
+частного, определяемого в
+
+<p><span
+style="mso-spacerun: yes">    </span>течение процесса поиска остатка.<span
+style="mso-spacerun: yes">  </span>Эти три бита команда записывает в
+
+<p><span
+style="mso-spacerun: yes">    </span>слово состояния.<span style="mso-spacerun:
+yes">  </span>Следовательно, хотя мы и уменьшили угол до
+
+<p><span
+style="mso-spacerun: yes">    </span>значения одной восьмой исходного
+диапазона, все же можно определить
+
+<p><span
+style="mso-spacerun: yes">    </span>октант, в который попадет угол.<span
+style="mso-spacerun: yes">  </span>Зная его, можно найти формулу
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисления синуса с помощью
+тригонометрических преобразований.
+
+<p><span
+style="mso-spacerun: yes">    </span>Таблица на Фиг. 7.28 показывает связь
+между исходным октантом и
+
+<p><span
+style="mso-spacerun: yes">    </span>методом вычисления синуса угла.<span
+style="mso-spacerun: yes">  </span>В таблице предполагается, что
+
+<p><span
+style="mso-spacerun: yes">    </span>число R - это остаток от уменьшения
+исходного угла до значения
+
+<p><span
+style="mso-spacerun: yes">    </span>меньше PI/4.<span style="mso-spacerun:
+yes">  </span>Номер октанта появляется в разрядах C3 = C1 = C0
+
+<p><span
+style="mso-spacerun: yes">    </span>после выполнения команды FPREM.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>С помощью этой таблицы мы можем определить
+формулу вычислений,
+
+<p><span
+style="mso-spacerun: yes">    </span>применяемую в каждом случае выполнения
+программы.<span style="mso-spacerun: yes">  </span>После загрузки
+
+<p><span
+style="mso-spacerun: yes">    </span>значения угла в радианах программа
+загружает число и делит его на
+
+<p><span
+style="mso-spacerun: yes">    </span>4, чтобы использовать в команде
+FPREM.<span style="mso-spacerun: yes">  </span>В этот момент
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;захватывается&quot; слово
+состояния.<span style="mso-spacerun: yes">  </span>Если процесс поиска остатка
+не
+
+<p><span
+style="mso-spacerun: yes">    </span>завершился на этом единственном шаге, это
+означает, что исходный
+
+<p><span
+style="mso-spacerun: yes">    </span>угол был больше 2**64.<span
+style="mso-spacerun: yes">  </span>Следовательно, его значение настолько больше
+
+<p><span
+style="mso-spacerun: yes">    </span>максимально возможного при вычислениях
+тригонометрических функций,
+
+<p><span
+style="mso-spacerun: yes">    </span>что мы отбрасываем это число, как слишком
+большое.<span style='mso-tab-count:1'>      </span>Этого не
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит со значениями, выбранными в
+примере, но здесь для
+
+<p><span
+style="mso-spacerun: yes">    </span>иллюстрации введена такая проверка.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Октанты
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>C0<span style='mso-tab-count:1'>  </span>C3<span style='mso-tab-count:
+1'>    </span>C1<span style='mso-tab-count:1'>    </span>Диапазон<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">   
+</span>SIN(X) = :
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>-----------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>0<span style='mso-tab-count:1'>  </span> 0<span style='mso-tab-count:
+1'>    </span> 0<span style='mso-tab-count:1'>    </span>0<span
+style='mso-tab-count:1'>     </span>PI/4<span style='mso-tab-count:1'>  </span>SIN(R)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>0<span style='mso-tab-count:1'>  </span> 0<span style='mso-tab-count:
+1'>    </span> 1<span style='mso-tab-count:1'>    </span>PI/4<span
+style='mso-tab-count:1'>  </span>PI/2<span style='mso-tab-count:1'>  </span>COS(PI/4-R)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>0<span style='mso-tab-count:1'>  </span> 1<span style='mso-tab-count:
+1'>    </span> 0<span style='mso-tab-count:1'>    </span>PI/2<span
+style='mso-tab-count:1'>  </span>3*PI/4<span style='mso-tab-count:1'>      </span>COS(R)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>0<span style='mso-tab-count:1'>  </span> 1<span style='mso-tab-count:
+1'>    </span> 1<span style='mso-tab-count:1'>    </span>3*PI/4<span
+style='mso-tab-count:1'>      </span>PI<span style='mso-tab-count:1'>    </span>SIN(PI/4-R)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>1<span style='mso-tab-count:1'>  </span> 0<span style='mso-tab-count:
+1'>    </span> 0<span style='mso-tab-count:1'>    </span>PI<span
+style='mso-tab-count:1'>    </span>5*PI/4<span style='mso-tab-count:1'>      </span>-
+SIN(R)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>1<span style='mso-tab-count:1'>  </span> 0<span style='mso-tab-count:
+1'>    </span> 1<span style='mso-tab-count:1'>    </span>5*PI/4<span
+style='mso-tab-count:1'>      </span>3*PI/2<span style='mso-tab-count:1'>      </span>-
+COS(PI4-R)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>1<span style='mso-tab-count:1'>  </span> 1<span style='mso-tab-count:
+1'>    </span> 0<span style='mso-tab-count:1'>    </span>3*PI/2<span
+style='mso-tab-count:1'>      </span>7*PI/4<span style='mso-tab-count:1'>      </span>-
+COS(R)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>1<span style='mso-tab-count:1'>  </span> 1<span style='mso-tab-count:
+1'>    </span> 1<span style='mso-tab-count:1'>    </span>7*PI/4<span
+style='mso-tab-count:1'>      </span>2*PI<span style='mso-tab-count:1'>  </span>-
+SIN(PI/4-R)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>(R - остаток, 0&lt;R&lt;PI/4)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>-----------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>Фиг. 7.28 SIN(X) в восьми секторах
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа проверяет разряд C1 в регистре
+состояния, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>определить, должна ли она использовать
+остаток R, или его надо
+
+<p><span
+style="mso-spacerun: yes">    </span>вычесть из PI/4.<span style="mso-spacerun:
+yes">  </span>Так как PI/4 еще находится в одном из регистров,
+
+<p><span
+style="mso-spacerun: yes">    </span>это сделать просто.<span
+style="mso-spacerun: yes">  </span>Если вычитание не требуется, команда FCOMP
+
+<p><span
+style="mso-spacerun: yes">    </span>удаляет из стека ненужное значение PI/4.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Затем команда FPTAN вычисляет частичный
+тангенс.<span style="mso-spacerun: yes">  </span>Результат
+
+<p><span
+style="mso-spacerun: yes">    </span>работы команды показан, как OPP/ADJ
+(сокращения от английских слов
+
+<p><span
+style="mso-spacerun: yes">    </span>Opposite (противоположный) и Adjacent
+(соседний)), что равно
+
+<p><span
+style="mso-spacerun: yes">    </span>тангенсу угла R или PI/4-R, в зависимости
+от того, что было
+
+<p><span
+style="mso-spacerun: yes">    </span>выбрано.<span style="mso-spacerun: yes"> 
+</span>С помощью этих двух чисел теперь можно опеределить синус
+
+<p><span
+style="mso-spacerun: yes">    </span>или косинус угла.<span
+style="mso-spacerun: yes">  </span>Например, синус, заданный парой чисел
+OPP/ADJ,
+
+<p><span
+style="mso-spacerun: yes">    </span>можно вычислить по формуле
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>SIN(X) = OPP/SQR(OPP**2+ADJ**2), где
+TAN(X) = OPP/ADJ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Чтобы вычислить косинус, нужно числитель
+заменить на ADJ.<span style="mso-spacerun: yes">  </span>Мы
+
+<p><span
+style="mso-spacerun: yes">    </span>решаем, нужен ли синус или косинус,
+анализируя запомненные
+
+<p><span
+style="mso-spacerun: yes">    </span>описатели октанта, т.е.<span
+style="mso-spacerun: yes">  </span>проверяя значения разрядов C3 и C1.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда TEST выделяет эти значения, а
+команда JPE делает переход,
+
+<p><span
+style="mso-spacerun: yes">    </span>если они оба нулевые или оба
+единичные.<span style="mso-spacerun: yes">  </span>В этом случае мы вычисляем
+
+<p><span
+style="mso-spacerun: yes">    </span>синус; если же они различны, мы вычисляем
+косинус, что достигается
+
+<p><span
+style="mso-spacerun: yes">    </span>заменой местами значений OPP и ADJ в стеке
+регистров.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Далее следующие команды сопроцессора 8087
+вычисляют значение
+
+<p><span
+style="mso-spacerun: yes">    </span>синуса (или косинуса) по значению
+частичного тангенса.
+
+<p><span
+style="mso-spacerun: yes">    </span>Единственный шаг, который еще надо выполнить
+- это определение
+
+<p><span
+style="mso-spacerun: yes">    </span>окончательного знака результата.<span
+style="mso-spacerun: yes">  </span>В случае синуса результат
+
+<p><span
+style="mso-spacerun: yes">    </span>отрицателен, если угол находится в
+октантах от четвертого до
+
+<p><span
+style="mso-spacerun: yes">    </span>седьмого.<span style="mso-spacerun: yes"> 
+</span>Проверка разряда C0 определяет верный знак результата.
+
+<p><span
+style="mso-spacerun: yes">    </span>Затем программа FLOAT_ASCII, показанная на
+Фиг. 7.25, печатает
+
+<p><span
+style="mso-spacerun: yes">    </span>число в плавающем формате.<span
+style='mso-tab-count:1'>      </span>Управление возвращается назад, к началу
+
+<p><span
+style="mso-spacerun: yes">    </span>цикла, если еще не пройдены все
+октанты.<span style="mso-spacerun: yes">  </span>Нижняя часть Фиг. 7.27
+
+<p><span
+style="mso-spacerun: yes">    </span>иллюстрирует результат выполнения этой
+программы.
+
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

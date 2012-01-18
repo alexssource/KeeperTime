@@ -1,0 +1,603 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+<b><p><div align="center"><a name="9-11-4">Команда форматирования
+</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда форматирования инициализирует
+новую дискету.<span style="mso-spacerun: yes">  </span>Когда вы
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализируете дискету, происходит запись
+на нее маркеров
+
+<p><span
+style="mso-spacerun: yes">    </span>идентификации секторов.<span
+style="mso-spacerun: yes">  </span>Эти поля контроллер использует при
+
+<p><span
+style="mso-spacerun: yes">    </span>операциях чтения и записи для опознавания
+секторов.<span style="mso-spacerun: yes">  </span>Например, во
+
+<p><span
+style="mso-spacerun: yes">    </span>время операции чтения BIOS посылает четыре
+байта идентификации
+
+<p><span
+style="mso-spacerun: yes">    </span>сектора в контроллер дисковода.<span
+style="mso-spacerun: yes">  </span>Эти четыре байта обычно
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствуют номеру дорожки, номеру
+головки, номеру сектора и
+
+<p><span
+style="mso-spacerun: yes">    </span>размеру сектора, и называются номером
+цилиндра-головки-записи CHRN.
+
+<p><span
+style="mso-spacerun: yes">    </span>Контроллер использует значение номера CHRN
+сравнивая его со
+
+<p><span
+style="mso-spacerun: yes">    </span>значениями, записанными в поля
+идентификации секторов во время
+
+<p><span
+style="mso-spacerun: yes">    </span>форматирования.
+
+<p><span
+style='mso-tab-count:1'>      </span>Это означает, что контроллер не обращает
+внимания на то, что
+
+<p><span
+style="mso-spacerun: yes">    </span>записано в поле номера CHRN на дискете,
+т.е. сектора могут
+
+<p><span
+style="mso-spacerun: yes">    </span>пронумерованы в произвольном порядке, не
+от первого до восьмого на
+
+<p><span
+style="mso-spacerun: yes">    </span>каждой дорожке. Как только контроллер
+находит сектор, у которого
+
+<p><span
+style="mso-spacerun: yes">    </span>поле номера CHRN совпадает с заданным, он
+читает сектор. Значения
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes"> 
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">      </span>1/1/80
+04:06:20
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 9.5 Форматирование дискеты<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">     </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 9.5 Форматирование дискеты
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> SEGMENT STACK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>0040[<span
+style='mso-tab-count:4'>                   </span> DW<span style='mso-tab-count:
+1'>   </span> 64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0080<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> ENDS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,ES:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>00 00 01 02 00 00 02<span
+style='mso-tab-count:1'>    </span> ID_BUFFER<span style='mso-tab-count:1'>  </span>
+DB<span style='mso-tab-count:1'>   </span> 0, 0, 1, 2, 0, 0, 2, 2
+
+<p><span
+style='mso-tab-count:3'>                  </span>02
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0008<span style='mso-tab-count:1'>      </span>00 00 03 02 00 00 04<span
+style='mso-tab-count:3'>                </span> DB<span style='mso-tab-count:
+1'>   </span> 0, 0, 3, 2, 0, 0, 4, 2
+
+<p><span
+style='mso-tab-count:3'>                  </span>02
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0010<span style='mso-tab-count:1'>      </span>00 00 05 02 00 00 06<span
+style='mso-tab-count:3'>                </span> DB<span style='mso-tab-count:
+1'>   </span> 0, 0, 5, 2, 0, 0, 6, 2
+
+<p><span
+style='mso-tab-count:3'>                  </span>02
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0018<span style='mso-tab-count:1'>      </span>00 00 07 02 00 00 08<span
+style='mso-tab-count:3'>                </span> DB<span style='mso-tab-count:
+1'>   </span> 0, 0, 7, 2, 0, 0, 8, 2
+
+<p><span
+style='mso-tab-count:3'>                  </span>02
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0020<span style='mso-tab-count:4'>                        </span>
+FORMAT<span style="mso-spacerun: yes">  </span>PROC<span style='mso-tab-count:
+1'>     </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0020<span style='mso-tab-count:1'>      </span>1E<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DS<span
+style='mso-tab-count:2'>         </span> ; Адрес возврата в ДОС
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0021<span style='mso-tab-count:1'>      </span>2B C0<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> AX, AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0023<span style='mso-tab-count:1'>      </span>50<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0024<span style='mso-tab-count:1'>      </span>8D 1E 0000 R<span
+style='mso-tab-count:3'>                  </span> LEA<span style='mso-tab-count:
+1'>  </span> BX, ID_BUFFER<span style='mso-tab-count:1'>    </span> ; Занесение
+адреса буфера в ES:BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0028<span style='mso-tab-count:1'>      </span>0E<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> CS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0029<span style='mso-tab-count:1'>      </span>07<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> ES
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002A<span style='mso-tab-count:1'>      </span>B9 0001 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> CX, 1<span
+style='mso-tab-count:2'>            </span> ; Трек 0, сектор 1
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002D<span style='mso-tab-count:1'>      </span>BA 0000 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX, 0<span
+style='mso-tab-count:2'>            </span> ; Дисковод 0, сторона 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0030<span style='mso-tab-count:4'>                        </span>
+TRACK_LOOP:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0030<span style='mso-tab-count:1'>      </span>8D 3E 0000 R<span
+style='mso-tab-count:3'>                  </span> LEA<span style='mso-tab-count:
+1'>  </span> DI, ID_BUFFER<span style='mso-tab-count:1'>    </span> ;
+Необходимо для занесения номера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0034<span style='mso-tab-count:1'>      </span>B0 08<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 8<span style='mso-tab-count:2'>            </span> ;<span
+style="mso-spacerun: yes">  </span>трека в буфер форматирования
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0036<span style='mso-tab-count:4'>                        </span>
+ID_SETUP:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0036<span style='mso-tab-count:1'>      </span>26: 88 2D<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> ES:[DI], CH<span style='mso-tab-count:1'>      </span> ; Занесение
+номера трека (цилиндра)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0039<span style='mso-tab-count:1'>      </span>83 C7 04<span
+style='mso-tab-count:3'>                </span> ADD<span style='mso-tab-count:
+1'>  </span> DI, 4<span style='mso-tab-count:2'>            </span> ; Переход
+на следующее поле
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003C<span style='mso-tab-count:1'>      </span>FE C8<span
+style='mso-tab-count:4'>                   </span> DEC<span style='mso-tab-count:
+1'>  </span> AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003E<span style='mso-tab-count:1'>      </span>75 F6<span
+style='mso-tab-count:4'>                   </span> JNZ<span style='mso-tab-count:
+1'>  </span> ID_SETUP<span style='mso-tab-count:1'>   </span> ; Цикл по полям в
+буфере
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0040<span style='mso-tab-count:1'>      </span>B8 0501 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> AX, 501H<span
+style='mso-tab-count:1'>   </span> ; Форматирование
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0043<span style='mso-tab-count:1'>      </span>CD 13<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 13H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0045<span style='mso-tab-count:1'>      </span>FE C5<span
+style='mso-tab-count:4'>                   </span> INC<span style='mso-tab-count:
+1'>  </span> CH<span style='mso-tab-count:2'>         </span> ; Переход на
+следующий трек
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0047<span style='mso-tab-count:1'>      </span>80 FD 40<span
+style='mso-tab-count:3'>                </span> CMP<span style='mso-tab-count:
+1'>  </span> CH, 40H<span style='mso-tab-count:1'>    </span> ; Все
+сформатировано?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004A<span style='mso-tab-count:1'>      </span>75 E4<span
+style='mso-tab-count:4'>                   </span> JNE<span style='mso-tab-count:
+1'>  </span> TRACK_LOOP<span style='mso-tab-count:1'> </span> ; Цикл по трекам
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004C<span style='mso-tab-count:1'>      </span>CB<span style='mso-tab-count:
+4'>                      </span> RET<span style='mso-tab-count:3'>              </span>
+; Возврат в ДОС
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004D<span style='mso-tab-count:4'>                        </span>
+FORMAT<span style="mso-spacerun: yes">  </span>ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004D<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END<span style='mso-tab-count:1'>  </span>
+FORMAT&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 9.5 Форматирование дискеты
+
+<p><span
+style="mso-spacerun: yes">   </span>номера CHRN контроллер помещает на дискету
+во время операции
+
+<p><span
+style="mso-spacerun: yes">    </span>форматирования. Вы имеете возможность
+записать в качестве значений
+
+<p><span
+style="mso-spacerun: yes">    </span>номера CHRN любые значения, которые
+выберете. Буфер данных для
+
+<p><span
+style="mso-spacerun: yes">    </span>команды форматирования содержит байты
+номера CHRN для каждого
+
+<p><span
+style="mso-spacerun: yes">    </span>сектора дискеты. Это означает, что буфер
+данных может содержать
+
+<p><span
+style="mso-spacerun: yes">    </span>например такие значения:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB<span style="mso-spacerun: yes">   
+</span>10,0,1,2,10,0,2,2
+
+<p><span
+style='mso-tab-count:1'>      </span>DB<span style="mso-spacerun: yes">   
+</span>10,0,3,2,10,0,4,2
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>для дорожки 10 стороны 0 дискеты. Это
+пример поля данных,
+
+<p><span
+style="mso-spacerun: yes">    </span>которое использует команда FORMAT
+операционной системы PC DOS или
+
+<p><span
+style="mso-spacerun: yes">    </span>MS DOS. На Фиг. 9.5 показана программа,
+которая форматирует
+
+<p><span
+style="mso-spacerun: yes">    </span>одностороннюю дискету с обычными
+значениями номера CHRN. Заменять
+
+<p><span
+style="mso-spacerun: yes">    </span>этой программой команду FORMAT
+операционной системы PC DOS нельзя,
+
+<p><span
+style="mso-spacerun: yes">    </span>так как система PC DOS также проверяет
+дискету и записывает на
+
+<p><span
+style="mso-spacerun: yes">    </span>дискету справочник и таблицу расположения
+файлов. Еще вы можете
+
+<p><span
+style="mso-spacerun: yes">    </span>заметить, что эта программа сразу же после
+запуска начинает
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>форматировать дискету в дисководе A:. Вы должны быть готовы к
+
+<p><span
+style="mso-spacerun: yes">    </span>этому, если собираетесь выполнить эту
+программу.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вы можете использовать команду
+форматирования в том случае,
+
+<p><span
+style="mso-spacerun: yes">    </span>если хотите защитить дискету от
+копирования. Защита от копирования
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что дискета шифруется таким
+образом, что ее становится
+
+<p><span
+style="mso-spacerun: yes">    </span>трудно скопировать. Так как утилита
+DISKCOPY предполагает, что
+
+<p><span
+style="mso-spacerun: yes">    </span>идентификаторы секторов записаны обычным
+образом, она не может
+
+<p><span
+style="mso-spacerun: yes">    </span>копировать дискету с не стандартными
+номерами секторов. Записав на
+
+<p><span
+style="mso-spacerun: yes">    </span>дискету идентификатор сектора, отличный от
+нормального, вы защитите
+
+<p><span
+style="mso-spacerun: yes">    </span>ее от копирования.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В качестве примера давайте защитим дискету
+от копирования,
+
+<p><span
+style="mso-spacerun: yes">    </span>записав не стандартный номер сектора на
+дорожку 10. Пример,
+
+<p><span
+style="mso-spacerun: yes">    </span>приведенный выше, показывает обычные
+номера секторов. Если вместо
+
+<p><span
+style="mso-spacerun: yes">    </span>них буфер данных будет содержать значения
+DB 10, 0, 10, 2, 10, 0,
+
+<p><span
+style="mso-spacerun: yes">    </span>2, 2 DB 10, 0, 3, 2, 10, 0, 4, 2
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>дорожка 10 не будет иметь сектора 1.
+Вместо него на ней
+
+<p><span
+style="mso-spacerun: yes">    </span>появится сектор 10, которого не бывает на
+нормальной дискете
+
+<p><span
+style="mso-spacerun: yes">    </span>системы PC DOS. Программа DISKCOPY не
+может скопировать дорожку 10
+
+<p><span
+style="mso-spacerun: yes">    </span>правильно. Если теперь данная программа
+проверит (с помощью команды
+
+<p><span
+style="mso-spacerun: yes">    </span>проверки) наличие сектора 10 на дорожке 10
+дискеты, отсутствие
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибки будет означать, что дискета
+оригинальная, а не копия.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Этот способ защиты от копирования не
+совсем надежен. Каждый
+
+<p><span
+style="mso-spacerun: yes">    </span>опытный пользователь (и даже некоторые
+программы копирования) могут
+
+<p><span
+style="mso-spacerun: yes">    </span>обнаружить защиту такого типа и обойти ее.
+Но модификация
+
+<p><span
+style="mso-spacerun: yes">    </span>идентификаторов секторов не может
+производиться произвольно. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>определения адреса установки головок BIOS
+использует номер дорожки
+
+<p><span
+style="mso-spacerun: yes">    </span>из поле CHRN, так что номер цилиндра
+должен соответствовать номеру
+
+<p><span
+style="mso-spacerun: yes">    </span>цилиндра, на котором находится сектор. Код
+в байте номера головки
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет установку электронного
+переключателя, выбирающего
+
+<p><span
+style="mso-spacerun: yes">    </span>головку, поэтому это значение должно быть
+задано корректно. Длина
+
+<p><span
+style="mso-spacerun: yes">    </span>поля берется из таблицы параметров, а не
+из регистров при вызове,
+
+<p><span
+style="mso-spacerun: yes">    </span>так что ее изменить трудно. К тому же, это
+число использует и BIOS,
+
+<p><span
+style="mso-spacerun: yes">    </span>и контроллер, определяя длину сектора, так
+что изменить его вы
+
+<p><span
+style="mso-spacerun: yes">    </span>сможете только после тщательной
+подготовки. Свободно изменяемым
+
+<p><span
+style="mso-spacerun: yes">    </span>остается только номер сектора. Перед тем,
+как вы начнете изменять
+
+<p><span
+style="mso-spacerun: yes">    </span>номера секторов, запомните, что если при
+этом вы собираетесь еще
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать эту дискету в рамках DOS,
+система будет пытаться
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать сектор, который вы заменили
+сектором со своим
+
+<p><span
+style="mso-spacerun: yes">    </span>нестандартным номером, если вы не
+модифицируете таблицу
+
+<p><span
+style="mso-spacerun: yes">    </span>расположения файлов дискеты так, чтобы
+зарезервировать этот сектор.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если вам нужно считывать по нескольку
+секторов (что позволяет
+
+<p><span
+style="mso-spacerun: yes">    </span>драйвер дисковода BIOS), номера у секторов
+должны быть
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательными, но не обязательно
+начинаться с первого.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В общем, команда форматирования дает
+некоторое средство защиты
+
+<p><span
+style="mso-spacerun: yes">    </span>от копирования. Однако абсолютно надежный
+метод защиты еще не
+
+<p><span
+style="mso-spacerun: yes">    </span>найден. Только хороший выбор техники
+шифрования поможет оставить
+
+<p><span
+style="mso-spacerun: yes">    </span>честных людей честными.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

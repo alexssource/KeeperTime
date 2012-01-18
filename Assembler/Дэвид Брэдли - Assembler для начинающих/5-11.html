@@ -1,0 +1,1343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="5-11">Отладчик DEBUG</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа DEBUG (отладчик) дает средство
+обнаружения ошибок при
+
+<p><span
+style="mso-spacerun: yes">    </span>работе с программой, транслированной в
+машинный язык.<span style="mso-spacerun: yes">  </span>Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG обеспечивает возможность пошагово
+выполнять программу и
+
+<p><span
+style="mso-spacerun: yes">    </span>следить за тем, что при этом
+происходит.<span style="mso-spacerun: yes">  </span>Программа DEBUG - это еще
+
+<p><span
+style="mso-spacerun: yes">    </span>одно программное средство, поставляемое
+как часть DOS.<span style="mso-spacerun: yes">  </span>Вы
+
+<p><span
+style="mso-spacerun: yes">    </span>загружаете ее так же, как и любую другую
+программу, и работаете в
+
+<p><span
+style="mso-spacerun: yes">    </span>диалоге, используя клавиатуру и
+экран.<span style="mso-spacerun: yes">  </span>Когда программа DEBUG
+
+<p><span
+style="mso-spacerun: yes">    </span>ожидает каких-либо действий со стороны
+пользователя, то свой запрос
+
+<p><span
+style="mso-spacerun: yes">    </span>она обозначает символом &quot;-&quot;.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вместо перечисления всех команд, которые
+входят в программу
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG, используем данный отладчик для
+проверки работы только что
+
+<p><span
+style="mso-spacerun: yes">    </span>составленной программы, приведенной на
+Фиг. 5.13 и П5.14. На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 5.17 приведен соответствующий листинг.
+
+<p><span
+style='mso-tab-count:1'>      </span>В данном примере сначала вызывается
+программа DEBUG и
+
+<p><span
+style="mso-spacerun: yes">    </span>указывается та программа, которую
+предполагается отлаживать - в
+
+<p><span
+style="mso-spacerun: yes">    </span>нашем случае программа FIG5=13.EXE. После
+того, как программа DEBUG
+
+<p><span
+style="mso-spacerun: yes">    </span>загружена, она производит загрузку
+отлаживаемой программы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Управление теперь принадлежит отладчику, и
+он с помощью символа &quot;-&quot;
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает, что ожидает ввода. До тех пор,
+пока вы не введете для
+
+<p><span
+style="mso-spacerun: yes">    </span>него указаний, с программой ничего
+происходить не будет.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда R выводит содержимое всех регистров
+в момент,
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующий загрузке программы FIG5=13
+и передаче ей управления.
+
+<p><span
+style="mso-spacerun: yes">    </span>Содержимое регистров не требует пояснений,
+за исключением, быть
+
+<p><span
+style="mso-spacerun: yes">    </span>может, значений флагов.<span
+style="mso-spacerun: yes">  </span>Флаг NV указывает на отсутствие
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнения, флаг UP - флаг направления и
+т.д.<span style="mso-spacerun: yes">  </span>При выводе
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимого регистров в последней строке
+приводится следующая
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняемая команда.<span
+style="mso-spacerun: yes">  </span>В ячейке 04C5:0000 записана команда PUSH DS.
+
+<p><span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes"> </span>B&gt;A:DEBUG<span style="mso-spacerun: yes">  </span>FIG5_13.EXE
+
+<p><span
+style='mso-tab-count:3'>                  </span>-R
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>AX=0000<span
+style="mso-spacerun: yes">  </span>BX=0000<span style="mso-spacerun: yes"> 
+</span>CX=0120<span style="mso-spacerun: yes">  </span>DX=0000<span
+style="mso-spacerun: yes">  </span>SP=FFF0<span style="mso-spacerun: yes"> 
+</span>BP=0000<span style="mso-spacerun: yes">  </span>SI=0000<span
+style="mso-spacerun: yes">  </span>DI=0000
+
+<p><span
+style='mso-tab-count:3'>                  </span>DS=2C26<span
+style="mso-spacerun: yes">  </span>ES=2C26<span style="mso-spacerun: yes"> 
+</span>SS=2C26<span style="mso-spacerun: yes">  </span>CS=2C26<span
+style="mso-spacerun: yes">  </span>IP=0000<span style="mso-spacerun: yes">  
+</span>NV UP DI PL NZ NA PO NC
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0000<span
+style="mso-spacerun: yes">  </span>1E<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">  </span>PUSH<span style='mso-tab-count:1'>      </span>
+DS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>-U
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0000<span
+style="mso-spacerun: yes">  </span>1E<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">  </span>PUSH<span style='mso-tab-count:1'>      </span>
+DS
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0001<span
+style="mso-spacerun: yes">  </span>B80000<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>MOV<span style='mso-tab-count:1'> </span>
+AX,0000
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0004<span
+style="mso-spacerun: yes">  </span>50<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">  </span>PUSH<span style='mso-tab-count:1'>      </span>
+AX
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0005<span
+style="mso-spacerun: yes">  </span>FC<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">  </span>CLD
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0006<span
+style="mso-spacerun: yes">  </span>8CC8 <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>MOV<span style='mso-tab-count:1'> </span>
+AX,CS
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0008<span
+style="mso-spacerun: yes">  </span>8ED8 <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>MOV<span style='mso-tab-count:1'> </span>
+DS,AX
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:000A<span
+style="mso-spacerun: yes">  </span>8D361D00<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">  </span>LEA<span style='mso-tab-count:1'> </span>
+SI,[001D]
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:000E<span
+style="mso-spacerun: yes">  </span>AC<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">  </span>LODSB
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:000F<span
+style="mso-spacerun: yes">  </span>A24000<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>MOV<span style='mso-tab-count:1'> </span>
+[0040],AL
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0012<span
+style="mso-spacerun: yes">  </span>E82C00<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>CALL<span style='mso-tab-count:1'>      </span>
+0041
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0015<span
+style="mso-spacerun: yes">  </span>803E40000A<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>CMP<span style='mso-tab-count:1'> </span>
+[0040],0A
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:001A<span
+style="mso-spacerun: yes">  </span>75F2 <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>JNZ<span style='mso-tab-count:1'> </span>
+000E
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:001C<span
+style="mso-spacerun: yes">  </span>CB<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">  </span>RET<span style='mso-tab-count:1'> </span>
+Far
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:001D<span
+style="mso-spacerun: yes">  </span>9D<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">  </span>POPF
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:001E<span
+style="mso-spacerun: yes">  </span>E2A0 <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>LOOP<span style='mso-tab-count:1'>      </span>
+FFC0
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0020<span
+style="mso-spacerun: yes">  </span>20AFE0AE<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">  </span>AND<span style='mso-tab-count:1'> </span>
+[BX+AEE0],CH
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:0024<span
+style="mso-spacerun: yes">  </span>A3E0A0<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>MOV<span style='mso-tab-count:1'> </span>
+[A0E0],AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>-D2C26:0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C0E:0000<span
+style="mso-spacerun: yes">   </span>CD 20 00 A0 00 9A EE FE 1D F0 ED 04 04 1C
+3C 01<span style="mso-spacerun: yes">   </span>. ............&lt;.
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C0E:0010<span
+style="mso-spacerun: yes">   </span>22 1B EB 04 22 1B 04 1C 01 01 01 00 02 06
+FF FF<span style="mso-spacerun: yes">   </span>&quot;...&quot;...........
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C0E:0020<span
+style="mso-spacerun: yes">   </span>FF FF FF FF FF FF FF FF FF FF FF FF 08 2C
+D0 FF<span style="mso-spacerun: yes">   </span>.............,..
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C0E:0030<span
+style="mso-spacerun: yes">   </span>04 1C 14 00 18 00 0E 2C FF FF FF FF 00 00
+00 00<span style="mso-spacerun: yes">   </span>.......,........
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C0E:0040<span
+style="mso-spacerun: yes">   </span>00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00<span style="mso-spacerun: yes">   </span>................
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C0E:0050<span
+style="mso-spacerun: yes">   </span>CD 21 CB 00 00 00 00 00 00 00 00 00 00 20
+20 20<span style="mso-spacerun: yes">   </span>.!...........
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C0E:0060<span
+style="mso-spacerun: yes">   </span>20 20 20 20 20 20 20 20 00 00 00 00 00 20
+20 20<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">      </span>.....
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C0E:0070<span
+style="mso-spacerun: yes">   </span>20 20 20 20 20 20 20 20 00 00 00 00 00 00
+00 00<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">      </span>........
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>-RAX
+
+<p><span
+style='mso-tab-count:3'>                  </span>AX 0000
+
+<p><span
+style='mso-tab-count:3'>                  </span>:1234
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>-E 2C0E:21
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C0E:0021<span
+style='mso-tab-count:1'>   </span>69.<span style='mso-tab-count:1'>   </span>73.<span
+style='mso-tab-count:1'>   </span>20.<span style='mso-tab-count:1'>   </span>61.20<span
+style='mso-tab-count:1'> </span>20.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>-G 3C
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>AX=0E54<span
+style="mso-spacerun: yes">  </span>BX=0000<span style="mso-spacerun: yes"> 
+</span>CX=003F<span style="mso-spacerun: yes">  </span>DX=0000<span
+style="mso-spacerun: yes">  </span>SP=FFEA<span style="mso-spacerun: yes"> 
+</span>BP=0000<span style="mso-spacerun: yes">  </span>SI=001D<span
+style="mso-spacerun: yes">  </span>DI=0000
+
+<p><span
+style='mso-tab-count:3'>                  </span>DS=2C26<span
+style="mso-spacerun: yes">  </span>ES=2C26<span style="mso-spacerun: yes"> 
+</span>SS=2C26<span style="mso-spacerun: yes">  </span>CS=2C26<span
+style="mso-spacerun: yes">  </span>IP=003C<span style="mso-spacerun: yes">  
+</span>NV UP DI PL NZ NA PO NC
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:003C CD10<span
+style='mso-tab-count:2'>          </span>INT<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">   </span>10
+
+<p><span
+style='mso-tab-count:3'>                  </span>-T
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>AX=0E54<span
+style="mso-spacerun: yes">  </span>BX=0000<span style="mso-spacerun: yes"> 
+</span>CX=003F<span style="mso-spacerun: yes">  </span>DX=0000<span
+style="mso-spacerun: yes">  </span>SP=FFEA<span style="mso-spacerun: yes"> 
+</span>BP=0000<span style="mso-spacerun: yes">  </span>SI=001D<span
+style="mso-spacerun: yes">  </span>DI=0000
+
+<p><span
+style='mso-tab-count:3'>                  </span>DS=2C26<span
+style="mso-spacerun: yes">  </span>ES=2C26<span style="mso-spacerun: yes"> 
+</span>SS=2C26<span style="mso-spacerun: yes">  </span>CS=F000<span
+style="mso-spacerun: yes">  </span>IP=0165<span style="mso-spacerun: yes">  
+</span>NV UP DI PL NZ NA PO NC
+
+<p><span
+style='mso-tab-count:3'>                  </span>F000:F065 FB<span
+style='mso-tab-count:2'>            </span>STI
+
+<p><span
+style='mso-tab-count:3'>                  </span>-T<span style="mso-spacerun:
+yes">   </span>&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 5.17 Листинг отладчика для Фиг 5.13 и 4.14 (начало)
+
+
+<p><span
+style='mso-tab-count:3'>                  </span>AX=0E54<span
+style="mso-spacerun: yes">  </span>BX=0000<span style="mso-spacerun: yes"> 
+</span>CX=003F<span style="mso-spacerun: yes">  </span>DX=0000<span
+style="mso-spacerun: yes">  </span>SP=FFEA<span style="mso-spacerun: yes"> 
+</span>BP=0000<span style="mso-spacerun: yes">  </span>SI=001D<span
+style="mso-spacerun: yes">  </span>DI=0000
+
+<p><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:2'>            </span>DS=2C26<span
+style="mso-spacerun: yes">  </span>ES=2C26<span style="mso-spacerun: yes"> 
+</span>SS=2C26<span style="mso-spacerun: yes">  </span>CS=F000<span
+style="mso-spacerun: yes">  </span>IP=0166<span style="mso-spacerun: yes">  
+</span>NV UP DI PL NZ NA PE NC
+
+<p><span
+style='mso-tab-count:3'>                  </span>F000:F066 FC<span
+style='mso-tab-count:2'>            </span>CLD
+
+<p><span
+style='mso-tab-count:3'>                  </span>-G 2C26:3E
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>T
+
+<p><span
+style='mso-tab-count:3'>                  </span>AX=0E54<span
+style="mso-spacerun: yes">  </span>BX=0000<span style="mso-spacerun: yes"> 
+</span>CX=003F<span style="mso-spacerun: yes">  </span>DX=0000<span
+style="mso-spacerun: yes">  </span>SP=FFEA<span style="mso-spacerun: yes"> 
+</span>BP=0000<span style="mso-spacerun: yes">  </span>SI=001D<span
+style="mso-spacerun: yes">  </span>DI=0000
+
+<p><span
+style='mso-tab-count:3'>                  </span>DS=2C26<span
+style="mso-spacerun: yes">  </span>ES=2C26<span style="mso-spacerun: yes"> 
+</span>SS=2C26<span style="mso-spacerun: yes">  </span>CS=2C26<span
+style="mso-spacerun: yes">  </span>IP=013E<span style="mso-spacerun: yes">  
+</span>NV UP DI PL NZ NA PO NC
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:003E<span
+style='mso-tab-count:2'>         </span>RET
+
+<p><span
+style='mso-tab-count:3'>                  </span>-G
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>Эта программа - тест
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>Program terminated normally
+
+<p><span
+style='mso-tab-count:3'>                  </span>-R
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>AX=0754<span
+style="mso-spacerun: yes">  </span>BX=0000<span style="mso-spacerun: yes"> 
+</span>CX=003F<span style="mso-spacerun: yes">  </span>DX=0000<span
+style="mso-spacerun: yes">  </span>SP=FFEA<span style="mso-spacerun: yes"> 
+</span>BP=0000<span style="mso-spacerun: yes">  </span>SI=001D<span
+style="mso-spacerun: yes">  </span>DI=0000
+
+<p><span
+style='mso-tab-count:3'>                  </span>DS=2C26<span
+style="mso-spacerun: yes">  </span>ES=2C26<span style="mso-spacerun: yes"> 
+</span>SS=2C26<span style="mso-spacerun: yes">  </span>CS=2C26<span
+style="mso-spacerun: yes">  </span>IP=003E<span style="mso-spacerun: yes">  
+</span>NV UP DI PL NZ NA PO NC
+
+<p><span
+style='mso-tab-count:3'>                  </span>2C26:003E C3<span
+style='mso-tab-count:2'>            </span>RET
+
+<p><span
+style='mso-tab-count:3'>                  </span>-Q
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>B&gt;&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 5.17 Листинг отладчика для Фиг 5.13 и
+4.14 (продолжение)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Здесь следует немного задержаться и
+проанализировать
+
+<p><span
+style="mso-spacerun: yes">    </span>информацию, которая записывается в
+регистры. Содержимое регистров
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствует моменту, когда программа
+FIG5=13 получает управление
+
+<p><span
+style="mso-spacerun: yes">    </span>от командного процессора. Обратите
+внимание, что пара регистров
+
+<p><span
+style="mso-spacerun: yes">    </span>CS:IP указывает на первую команду,
+определяемую оператором END
+
+<p><span
+style="mso-spacerun: yes">    </span>программы. Регистры DS и ES указывают на
+префикс программного
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>сегмента. И наконец, пара регистров SS:SP указывает на сегмент
+
+<p><span
+style="mso-spacerun: yes">    </span>STACK. Описанное состояние регистров будет
+сравниваться позднее с
+
+<p><span
+style="mso-spacerun: yes">    </span>аналогичным состоянием регистров для файла
+типа .COM.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Чтобы просмотреть большее число команд,
+надо ввести символ &quot;U&quot;
+
+<p><span
+style="mso-spacerun: yes">    </span>(дизассемблировать), и на дисплей
+выводится около двадцати
+
+<p><span
+style="mso-spacerun: yes">    </span>следующих команд. Это удобно при обладке
+программы, для которой нет
+
+<p><span
+style="mso-spacerun: yes">    </span>листинга. Дизассемблирование программы
+позволяет просмотреть ее
+
+<p><span
+style="mso-spacerun: yes">    </span>команды. Это может сэкономить вам бумагу и
+время в случае, когда в
+
+<p><span
+style="mso-spacerun: yes">    </span>программу внесены небольшие изменения. Так
+как ваш листинг больше
+
+<p><span
+style="mso-spacerun: yes">    </span>не соответствует той программе, которая
+находится в памяти, то ее
+
+<p><span
+style="mso-spacerun: yes">    </span>дизассемблирование позволяет вам узнать
+правильные адреса для
+
+<p><span
+style="mso-spacerun: yes">    </span>каждой команды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Однако у дизассемблирования с помощью
+программы DEBUG имеется
+
+<p><span
+style="mso-spacerun: yes">    </span>ряд недостатков по сравнению с
+использованием листинга. Отсутствуют
+
+<p><span
+style="mso-spacerun: yes">    </span>комментарии (может быть очень важные для
+понимания программы), и
+
+<p><span
+style="mso-spacerun: yes">    </span>ячейки памяти идентифицируются только по
+адресу, а не по имени
+
+<p><span
+style="mso-spacerun: yes">    </span>переменной. Например, хранящаяся в ячейке
+04C5:000E команда имеет,
+
+<p><span
+style="mso-spacerun: yes">    </span>как показано на Фиг.5.13, следующий вид:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV<span style='mso-tab-count:1'>   </span>OUTPUT_CHARACTER,AL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>а в дизассемблированном виде
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV<span style='mso-tab-count:1'>   </span>[0030],AL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Это одна и та же команда. Для
+программиста, выполняющего
+
+<p><span
+style="mso-spacerun: yes">    </span>отладку, имя переменной OUTPUT_CHARACTER
+говорит больше, чем адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>ячейки [0030]. Однако программе DEBUG не
+известны имена переменных,
+
+<p><span
+style="mso-spacerun: yes">    </span>и она вынуждена оперировать фактическими
+адресами.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Кроме того, программа, DEBUG не
+обеспечивает той же самой
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблерной мнемоники, которую
+воспринимает ассемблер. Это значит,
+
+<p><span
+style="mso-spacerun: yes">    </span>что некоторые команды будут выглядеть
+по-разному. Команда из ячейки
+
+<p><span
+style="mso-spacerun: yes">    </span>04C5:0014 будет при дмзассемблировании
+иметь вид
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>CMP<span style='mso-tab-count:1'>   </span>B,[3000],0A
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>но та же саммая команда на Фиг.5.13
+представлена в виде:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>CMP<span style='mso-tab-count:1'>   </span>OUTPUT_CHARACTER,10
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа дизассемблирования как на входе,
+так и на выходе
+
+<p><span
+style="mso-spacerun: yes">    </span>работает только с шестнадцатеричными
+значениями. Этим объясняется
+
+<p><span
+style="mso-spacerun: yes">    </span>появление значения 0A. Мы уже выяснили,
+почему получается значение
+
+<p><span
+style="mso-spacerun: yes">    </span>[0030], вместо имени OUTPUT_CHARACTER. Что
+же такое символ &quot;B,&quot;?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Ассемблер оперирует переменными вполне
+определенного типа. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>значит, что во время ассемблирования тип
+переменных может иметь
+
+<p><span
+style="mso-spacerun: yes">    </span>значение: байт, слово или какой-нибудь
+другой. Таким образом, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>программист вводит команду, содержащую
+ссылку на область памяти, то
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблеру известен размер этой области.
+На программа DEBUG не
+
+<p><span
+style="mso-spacerun: yes">    </span>имеет представления о длине переменной,
+записанной по адресу
+
+<p><span
+style="mso-spacerun: yes">    </span>[0030]. Однако программе
+дизассемблирования точно известно, что
+
+<p><span
+style="mso-spacerun: yes">    </span>данная команда пересылает ровно один байт
+данных, указанных
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно в команде, по адресу
+[0030]. Таким образом, символ
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;B,&quot; указывает на то, что
+непосредственная операция состоит в
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылке одного байта. Для получения того
+же самого результата с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью ассемблера соответствующая команда
+должна иметь вид:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>CMP<span style='mso-tab-count:1'>   </span>BYTE
+PTR [0030],10
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вы можете рассматривать символ
+&quot;B,&quot; как сокращение BYTE PTR.
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогично символ W используется для WORD
+PTR,L - для длинного
+
+<p><span
+style="mso-spacerun: yes">    </span>(far) возврата и т.д.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вместе с командой в дизассемблированном
+виде вводится и ее
+
+<p><span
+style="mso-spacerun: yes">    </span>объектный код. Как вы можете заметить, по
+адресу 04C5:001C записаны
+
+<p><span
+style="mso-spacerun: yes">    </span>какие-то команды, которых нет на Фиг.
+5.13. Эта область данных,
+
+<p><span
+style="mso-spacerun: yes">    </span>содержащая строку &quot;Это тест&quot;.
+Однако команде, осуществляющей
+
+<p><span
+style="mso-spacerun: yes">    </span>дизассемблирование, не известно, где в
+программе кончаются команды
+
+<p><span
+style="mso-spacerun: yes">    </span>и начинаются данные. Таким образом она все
+интерпретирует как
+
+<p><span
+style="mso-spacerun: yes">    </span>команды. (Кстати, именно эта
+последовательность команд выполнялась
+
+<p><span
+style="mso-spacerun: yes">    </span>бы, если в вашей программе был сделан
+переход в рассматриваемую
+
+<p><span
+style="mso-spacerun: yes">    </span>область данных.)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда вывода на экран D позволяет
+просмотреть на дисплее
+
+<p><span
+style="mso-spacerun: yes">    </span>области данных. Отображение на экране
+состоит из двух частей.
+
+<p><span
+style="mso-spacerun: yes">    </span>Вместе с листингом содержимого ячеек
+памяти в шестнадцатеричном
+
+<p><span
+style="mso-spacerun: yes">    </span>представлении приводятся символы в коде
+ASCII, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствуют этим значениям. Если
+отображение команд подобным
+
+<p><span
+style="mso-spacerun: yes">    </span>образом не имеет смысла, то область данных
+представляется очень
+
+<p><span
+style="mso-spacerun: yes">    </span>ясно. Когда вам будет нечем особенно
+заняться, вы можете
+
+<p><span
+style="mso-spacerun: yes">    </span>попробовать написать такую программу,
+команды которой в коде ASCII
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствуют инициалам вашего имени. С
+помощью отладчика можно
+
+<p><span
+style="mso-spacerun: yes">    </span>изменять содержимое регистров и ячеек
+памяти. Если ввести символ R
+
+<p><span
+style="mso-spacerun: yes">    </span>(регистр) и затем тип регистра, то на
+дисплей будет выведено
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое этого регистра с возможностью
+его коррекции. Если нажать
+
+<p><span
+style="mso-spacerun: yes">    </span>клавишу &quot;возврат&quot;, то содержимое
+регистра останется прежним. Оно
+
+<p><span
+style="mso-spacerun: yes">    </span>будет изменено, если ввести новое
+значение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Можно также модифицировать содержимое
+ячеек памяти. Ввод
+
+<p><span
+style="mso-spacerun: yes">    </span>символа E (редактирование) позволяет это
+сделать. При этом
+
+<p><span
+style="mso-spacerun: yes">    </span>программа DEBUG выводит на дисплей
+значения отдельных ячеек памяти,
+
+<p><span
+style="mso-spacerun: yes">    </span>после которых следует символ . Вы можете
+изменить содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>ячейки, вводя новое значение, либо нажать
+клавишу пробела, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>перейти к следующей ячейке, или - клавишу
+&quot;возврат&quot;, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>вернуться к режиму запроса следующей
+команды отладчика. В
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматриваемом примере значения в первых
+трех ячейках остаются
+
+<p><span
+style="mso-spacerun: yes">    </span>прежними. Содержимое ячейки 04C5:0024
+изменено со значения 61H на
+
+<p><span
+style="mso-spacerun: yes">    </span>значенее 20H. Так как эта ячейка входит в
+область данных, то
+
+<p><span
+style="mso-spacerun: yes">    </span>выводимое сообщение будет отличаться от
+тог, которое было в
+
+<p><span
+style="mso-spacerun: yes">    </span>транслированной программе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В любой команде, обращающейся к ячейкам
+памяти, предполагается,
+
+<p><span
+style="mso-spacerun: yes">    </span>что адрес является частью команды. Команда
+E, как и команда
+
+<p><span
+style="mso-spacerun: yes">    </span>отображения, выводит на дисплей содержимое
+ячейки по указанному в
+
+<p><span
+style="mso-spacerun: yes">    </span>ней адресу. Точно так же можно было
+использовать адрес в команде
+
+<p><span
+style="mso-spacerun: yes">    </span>дизассемблирования. Можно ввести адрес в
+виде сегмента и смещения,
+
+<p><span
+style="mso-spacerun: yes">    </span>или только смещения. Если вы указали
+только смещение, то
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующий сегментный регистр будет
+выбран программой DEBUG. В
+
+<p><span
+style="mso-spacerun: yes">    </span>случае команды U используется регистр CS,
+а для команд D и E по
+
+<p><span
+style="mso-spacerun: yes">    </span>умолчанию сегмент будет определяться
+регистром DS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Теперь попытаемся выполнить эту программу.
+Ее можно просто
+
+<p><span
+style="mso-spacerun: yes">    </span>запустить и посмотреть, что будет
+происходить. На для этого не
+
+<p><span
+style="mso-spacerun: yes">    </span>нужна программа DEBUG. Программа DEBUG
+позволяет задать точки
+
+<p><span
+style="mso-spacerun: yes">    </span>останова, называемые &quot;точками
+прерывания&quot; программы. Благодаря
+
+<p><span
+style="mso-spacerun: yes">    </span>введению в программу таких точек можно
+возвращать управление
+
+<p><span
+style="mso-spacerun: yes">    </span>программе DEBUG. Это дает еще одну
+возможность проверки состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти и регистров для того, чтобы
+контролировать ход выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>программы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда G, (выполнять) передает управление
+от программы DEBUG
+
+<p><span
+style="mso-spacerun: yes">    </span>пользовательской программе. Выполнение
+команд начинается с ячейки,
+
+<p><span
+style="mso-spacerun: yes">    </span>задаваемой парой регистров CS:IP (так же,
+как в реальном
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессоре). Тестируемая программа
+продолжает выполняться до
+
+<p><span
+style="mso-spacerun: yes">    </span>тех пор, пока она не пройдет точку
+прерывания. В нашем примере мы
+
+<p><span
+style="mso-spacerun: yes">    </span>задали точку прерывания по адресу 3CH. Так
+как мы указали только
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение, то для определения сегмента
+программа DEBUG использует
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое регистра CS. Из листинга,
+приведенного на Фиг. 5.14,
+
+<p><span
+style="mso-spacerun: yes">    </span>видно, что смещение 3CH соответствует
+команде INT 10H. В
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматриваемом примере программы было
+выбрано именно это место,
+
+<p><span
+style="mso-spacerun: yes">    </span>потому что это - та точка, где управление
+передается подпрограмме
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS, вызываемой из ПЗУ. Проверка
+программы в этой точке
+
+<p><span
+style="mso-spacerun: yes">    </span>гарантирует, что мя установили регистры в
+нужное состояние перед
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнением подпрограммы BIOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как только встречается точка прерывания,
+управление
+
+<p><span
+style="mso-spacerun: yes">    </span>возвращается программе DEBUG. При этом,
+так же как и в случае
+
+<p><span
+style="mso-spacerun: yes">    </span>команды R, на дисплей выводятся содержимое
+регистров и следующая
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняемая команда. Так как управление
+опять передано программе
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG, вы можете использовать любую из
+команд отладки.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Имеются ограничения на использование точек
+прерывания.
+
+<p><span
+style="mso-spacerun: yes">    </span>Фактически точка прерывания реализуется
+кодом операции 0CCH.
+
+<p><span
+style="mso-spacerun: yes">    </span>Соответствующая этому коду команда
+вызывает прерывание INT 3.
+
+<p><span
+style="mso-spacerun: yes">    </span>Данное математическое прерывание
+возвращает управление программе
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG. Если какая-то команда возвращает
+управление отладчику, то
+
+<p><span
+style="mso-spacerun: yes">    </span>точка прерывания должна находиться в
+начале этой команды. Если же
+
+<p><span
+style="mso-spacerun: yes">    </span>точка прерывания выбрана где-то в другом
+месте, то управление не
+
+<p><span
+style="mso-spacerun: yes">    </span>будет возвращено отладчику и будет
+выполняться не та команда
+
+<p><span
+style="mso-spacerun: yes">    </span>программы, которая предполагалась.
+Например, если бы было задано
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;=G 3D&quot;, то по адресу 3CH была
+бы команда INT 0CCH, и дальнейшее
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнение программы предсказать трудно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если точка прерывания выбрана
+осмотрительно, то никаких
+
+<p><span
+style="mso-spacerun: yes">    </span>осложнений не будет. Командв &quot;G&quot;
+позволяет задать до десяти точек
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания. После прохождения любой из них
+происходит
+
+<p><span
+style="mso-spacerun: yes">    </span>восстановление исходных значений точек
+прерывания. Выполнение
+
+<p><span
+style="mso-spacerun: yes">    </span>команды отладки &quot;G&quot; без указания
+точек прерывания никогда не выйдет
+
+<p><span
+style="mso-spacerun: yes">    </span>ни на какую из ранее заданных точек
+прерывания, потому что все они
+
+<p><span
+style="mso-spacerun: yes">    </span>были удалены. Если вы запустили программу,
+и произошел ее останов и
+
+<p><span
+style="mso-spacerun: yes">    </span>она зациклилась, то возможно, что вернуть
+управление, которое
+
+<p><span
+style="mso-spacerun: yes">    </span>передано программе, удастся только с
+помощью клавиши системного
+
+<p><span
+style="mso-spacerun: yes">    </span>сброса Ctrl=Alt=Del, т.е. вам придется
+начать все с начала.
+
+<p><span
+style="mso-spacerun: yes">    </span>Запуская незнакомую программу, следует
+быть осторожным.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если вы захотите ввести пермаментную точку
+прерывания,
+
+<p><span
+style="mso-spacerun: yes">    </span>воспользуйтесь командой E для изменения
+значения первого байта
+
+<p><span
+style="mso-spacerun: yes">    </span>команды на значение 0CCH. Эта точка
+прерывания будет там постоянно
+
+<p><span
+style="mso-spacerun: yes">    </span>или, по крайней мере, до тех пор, пока вы
+ее не измените. Возможно
+
+<p><span
+style="mso-spacerun: yes">    </span>вы захотите использовать это прерывание в
+точке входа в
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмму обработки ошибки и
+проанализируете возникающие ошибки
+
+<p><span
+style="mso-spacerun: yes">    </span>более тщательно, чем при передаче их
+обработки программе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существует еще одно обстоятельство,
+связанное с точками
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания, о котором следует помнить.
+Если вы попытаетесь задать
+
+<p><span
+style="mso-spacerun: yes">    </span>точку прерывания в области, относящейся к
+ПЗУ, то ничего не
+
+<p><span
+style="mso-spacerun: yes">    </span>получится. Так как вы не можете менять
+содержимое ПЗУ, то команда
+
+<p><span
+style="mso-spacerun: yes">    </span>0CCH никогда туда не запишется.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Рассмотрим следующую команду отладчика -
+команда трассировки T.
+
+<p><span
+style="mso-spacerun: yes">    </span>Данная команда инициирует выполнение одной
+команды отлаженной
+
+<p><span
+style="mso-spacerun: yes">    </span>программы. В нашем примере команда T
+выполнена несколько раз. Как
+
+<p><span
+style="mso-spacerun: yes">    </span>вы можете убедиться, выполняется несколько
+первых команд BIOS,
+
+<p><span
+style="mso-spacerun: yes">    </span>вызванной по прерыванию INT 10H.
+Подпрограмма BIOS, естественно,
+
+<p><span
+style="mso-spacerun: yes">    </span>находится в ПЗУ. Команда трассировки
+позволяет &quot;приостановить&quot;
+
+<p><span
+style="mso-spacerun: yes">    </span>программу при ее выполнении в ПЗУ.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Перед передачей управления
+пользовательской программе команда
+
+<p><span
+style="mso-spacerun: yes">    </span>трассировки выставляет в регистре флагов
+соответствующий бит
+
+<p><span
+style="mso-spacerun: yes">    </span>трассировки. Этот бит инициирует
+прерывание INT 1 после выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>каждой команды. Вектор прерывания INT 1
+возвращает управление
+
+<p><span
+style="mso-spacerun: yes">    </span>программе DEBUG. Выполнение прерывания INT
+1 автоматически
+
+<p><span
+style="mso-spacerun: yes">    </span>сбрасывает бит трассировки в исходное
+состояние. Это значит, что
+
+<p><span
+style="mso-spacerun: yes">    </span>программа DEBUG не прерывается после
+выполнения каждой ее команды.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда трассировки служит прекрасным
+средством &quot;пробиться&quot; через
+
+<p><span
+style="mso-spacerun: yes">    </span>трудный участок программы. При этом
+программа DEBUG выводит на
+
+<p><span
+style="mso-spacerun: yes">    </span>экран каждую команду вместе с содержимым
+регистров как раз в
+
+<p><span
+style="mso-spacerun: yes">    </span>момент, предшествующий выполнению этой
+команды. Так как в данном
+
+<p><span
+style="mso-spacerun: yes">    </span>режиме используются не точки прерывания, а
+собственно прерывания,
+
+<p><span
+style="mso-spacerun: yes">    </span>то можно выполнять трассировку даже
+программ ПЗУ.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вернемся к нашему примеру. Команда =G
+4C5:3E обеспечивает
+
+<p><span
+style="mso-spacerun: yes">    </span>полное выполнение подпрограммы BIOS.
+Обратите внимание, что
+
+<p><span
+style="mso-spacerun: yes">    </span>программа вывела на дисплей символ
+&quot;Э&quot;. Вызванная по прерыванию 10H
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмма BIOS выводит символы на
+дисплей. В данном случае это
+
+<p><span
+style="mso-spacerun: yes">    </span>первый символ выводимого сообщения. Так
+как теперь можно быть
+
+<p><span
+style="mso-spacerun: yes">    </span>уверенными, что наша программа выполняется
+правильно, то, введя
+
+<p><span
+style="mso-spacerun: yes">    </span>символ &quot;G&quot;, мы обеспечим
+выполнение программы до конца без точек
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В данном примере рассматривался файл типа
+.EXE, и потому для
+
+<p><span
+style="mso-spacerun: yes">    </span>возврата управления системе DOS мы не
+могли использовать прерывание
+
+<p><span
+style="mso-spacerun: yes">    </span>INT 20H. Вместо этого программа записала в
+стек состояние регистра
+
+<p><span
+style="mso-spacerun: yes">    </span>DS и значение 0. Управление передается
+обратно системе DOS в конце
+
+<p><span
+style="mso-spacerun: yes">    </span>основной программы с помощью команды
+возврата типа FAR. Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG распознает это и фиксирует состояние
+машины в конце
+
+<p><span
+style="mso-spacerun: yes">    </span>тестируемой программы. Если бы это был
+файл типа .EXE, то
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание INT 20H аналогичным образом
+вернуло бы управление
+
+<p><span
+style="mso-spacerun: yes">    </span>программе DEBUG. Теперь, уделив достаточно
+времени этому примеру,
+
+<p><span
+style="mso-spacerun: yes">    </span>мы можем выйти из программы DEBUG и
+вернуться в систему DOS с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью команды завершения Q.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="7-6">ћодель программировани€ 8087</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>††††† </span>’от€ физически микросхема 8087
+представл€ет собой отдельный
+
+<p><span
+style="mso-spacerun: yes">††† </span>процессор, его нужно рассматривать, как
+расширитель микропроцессора
+
+<p><span
+style="mso-spacerun: yes">††† </span>8088, добавл€ющий к нему новые
+возможности.<span style="mso-spacerun: yes">† </span>Ёти возможности
+
+<p><span
+style="mso-spacerun: yes">††† </span>включают в сеьы дополнительные типы
+данных, дополнительные командв
+
+<p><span
+style="mso-spacerun: yes">††† </span>и регистры.<span style="mso-spacerun:
+yes">† </span>–исунок 7.6 иллюстрирует программную модель
+
+<p><span
+style="mso-spacerun: yes">††† </span>сопроцессора 8087.<span style='mso-tab-count:
+1'>† </span>≈го регистры показаны вместе с регистрами всей
+
+<p><span
+style="mso-spacerun: yes">††† </span>системы программировани€.
+<p><div align="center"><b><a name="7-6-1">–егистровый стек
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>††††† </span>—опроцессор 8087 имеет четыре регистра
+специального назначенм€
+
+<p><span
+style="mso-spacerun: yes">††† </span>и восьмирегистровый стек дл€
+арифметических операндов.<span style="mso-spacerun: yes">† </span>Ётот
+
+<p><span
+style="mso-spacerun: yes">††† </span>регистровый стек лежит в основе работы
+сопроцессора 8087, и поэтому
+
+<p><span
+style="mso-spacerun: yes">††† </span>мы прежде всего рассмотрим именно его.
+
+<p><span
+style='mso-tab-count:1'>††††† </span>–егистровый стек процессора числовой
+обработки состоит из
+
+<p><span
+style="mso-spacerun: yes">††† </span>восьми позиций, кажда€ из которых имеет
+ширину 80 бит.<span style="mso-spacerun: yes">† </span>—ороцессор
+
+<p><span
+style="mso-spacerun: yes">††† </span>8087 запоминает все объекты во временном
+действительном формате,
+
+<p><span
+style="mso-spacerun: yes">††† </span>независимо от того, как они представлены в
+пам€ти системы;
+
+<p><span
+style="mso-spacerun: yes">††††
+</span>Џƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒњ
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:2'>††††††††††† </span><span
+style="mso-spacerun: yes">†††† </span>ѕќЋ≈ ƒјЌЌџ’<span style='mso-tab-count:
+3'>††††††††††††† </span><span style="mso-spacerun: yes">††† </span>ѕќЋ≈<span
+style="mso-spacerun: yes">††† </span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:1'>††††† </span>79<span
+style="mso-spacerun: yes">†† </span>78 <span style='mso-tab-count:1'>††† </span><span
+style="mso-spacerun: yes">†††</span>64 63<span style='mso-tab-count:3'>††††††††††††††† </span>
+0<span style="mso-spacerun: yes">† </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">† </span>0 ≥
+
+<p><span
+style="mso-spacerun: yes">††††
+</span>≥Џƒƒƒƒƒƒ¬ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ¬ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒњ<span
+style="mso-spacerun: yes">† </span>Џƒƒƒƒƒƒњ≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥≥«Ќј <span style="mso-spacerun: yes">†
+</span>≥ ѕќ–яƒќ <span style='mso-tab-count:1'>† </span><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:1'>††††† </span><span
+style="mso-spacerun: yes">†† </span>ћјЌ“»——ј<span style='mso-tab-count:2'>†††††† </span>
+≥<span style="mso-spacerun: yes">† </span>≥<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">†† </span>≥≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥√ƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒі<span
+style="mso-spacerun: yes">† </span>√ƒƒƒƒƒƒі≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥≥<span style="mso-spacerun: yes">†††††
+</span>≥<span style='mso-tab-count:2'>††††††††† </span><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:4'>††††††††††††††††††††††† </span>
+≥<span style="mso-spacerun: yes">† </span>≥<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">†† </span>≥≥
+
+<p><span
+style="mso-spacerun: yes">††††
+</span>≥√ƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒі<span
+style="mso-spacerun: yes">† </span>√ƒƒƒƒƒƒі≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥≥<span style="mso-spacerun: yes">†††††
+</span>≥<span style='mso-tab-count:2'>††††††††† </span><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:4'>††††††††††††††††††††††† </span>
+≥<span style="mso-spacerun: yes">† </span>≥<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">†† </span>≥≥
+
+<p><span
+style="mso-spacerun: yes">††††
+</span>≥√ƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒі<span
+style="mso-spacerun: yes">† </span>√ƒƒƒƒƒƒі≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥≥<span style="mso-spacerun: yes">†††††
+</span>≥<span style='mso-tab-count:2'>††††††††† </span><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:4'>††††††††††††††††††††††† </span>
+≥<span style="mso-spacerun: yes">† </span>≥<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">†† </span>≥≥
+
+<p><span
+style="mso-spacerun: yes">††††
+</span>≥√ƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒі<span
+style="mso-spacerun: yes">† </span>√ƒƒƒƒƒƒі≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥≥<span style="mso-spacerun: yes">†††††
+</span>≥<span style='mso-tab-count:2'>††††††††† </span><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:4'>††††††††††††††††††††††† </span>
+≥<span style="mso-spacerun: yes">† </span>≥<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">†† </span>≥≥
+
+<p><span
+style="mso-spacerun: yes">††††
+</span>≥√ƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒі<span
+style="mso-spacerun: yes">† </span>√ƒƒƒƒƒƒі≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥≥<span style="mso-spacerun: yes">†††
+</span><span style="mso-spacerun: yes">††</span>≥<span style='mso-tab-count:
+2'>††††††††† </span><span style="mso-spacerun: yes">†††† </span>≥<span
+style='mso-tab-count:4'>††††††††††††††††††††††† </span> ≥<span
+style="mso-spacerun: yes">† </span>≥<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">†† </span>≥≥
+
+<p><span
+style="mso-spacerun: yes">††††
+</span>≥√ƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒі<span
+style="mso-spacerun: yes">† </span>√ƒƒƒƒƒƒі≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥≥<span style="mso-spacerun: yes">†††††
+</span>≥<span style='mso-tab-count:2'>††††††††† </span><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:4'>††††††††††††††††††††††† </span>
+≥<span style="mso-spacerun: yes">† </span>≥<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">†† </span>≥≥
+
+<p><span
+style="mso-spacerun: yes">††††
+</span>≥√ƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ≈ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒі<span
+style="mso-spacerun: yes">† </span>√ƒƒƒƒƒƒі≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥≥<span style="mso-spacerun: yes">†††††
+</span>≥<span style='mso-tab-count:2'>††††††††† </span><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:4'>††††††††††††††††††††††† </span>
+≥<span style="mso-spacerun: yes">† </span>≥<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">†† </span>≥≥
+
+<p><span
+style="mso-spacerun: yes">††††
+</span>≥јƒƒƒƒƒƒЅƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒЅƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒў<span
+style="mso-spacerun: yes">† </span>јƒƒƒƒƒƒў≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>15<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">†† </span>0<span style='mso-tab-count:2'>††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>Џƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒњ<span
+style='mso-tab-count:2'>††††††† </span><span style="mso-spacerun: yes">†††
+</span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥”ѕ–ј¬Ћяёў»… –≈√»—“–<span
+style="mso-spacerun: yes">†† </span>≥<span style='mso-tab-count:2'>††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>√ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒі<span
+style='mso-tab-count:2'>††††††† </span><span style="mso-spacerun: yes">†††
+</span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥–≈√»—“– —ќ—“ќяЌ»я<span style='mso-tab-count:
+1'>† </span><span style="mso-spacerun: yes">†† </span>≥<span style='mso-tab-count:
+2'>††††††† </span><span style="mso-spacerun: yes">††† </span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>√ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒі<span
+style='mso-tab-count:2'>††††††† </span><span style="mso-spacerun: yes">†††
+</span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥<span style='mso-tab-count:3'>†††††††††††† </span><span
+style="mso-spacerun: yes">†† </span>≥<span style='mso-tab-count:2'>††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>√ƒ ” ј«ј“≈Ћ№<span style="mso-spacerun:
+yes">† </span> ќћјЌƒ<span style="mso-spacerun: yes">† </span>ƒі<span
+style='mso-tab-count:2'>††††††† </span><span style="mso-spacerun: yes">†††
+</span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥<span style='mso-tab-count:3'>†††††††††††† </span><span
+style="mso-spacerun: yes">†† </span>≥<span style='mso-tab-count:2'>††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>√ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒі<span
+style='mso-tab-count:2'>††††††† </span><span style="mso-spacerun: yes">†††
+</span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥<span style='mso-tab-count:3'>†††††††††††† </span><span
+style="mso-spacerun: yes">†† </span>≥<span style='mso-tab-count:2'>††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>√ƒ ” ј«ј“≈Ћ№<span style="mso-spacerun:
+yes">† </span>ƒјЌЌџ’ ƒƒі<span style='mso-tab-count:2'>††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥<span style='mso-tab-count:3'>†††††††††††† </span><span
+style="mso-spacerun: yes">†† </span>≥<span style='mso-tab-count:2'>††††††† </span><span
+style="mso-spacerun: yes">††† </span>≥
+
+<p><span
+style="mso-spacerun: yes">†††† </span>≥<span style='mso-tab-count:3'>††††††††††††††††† </span><span
+style="mso-spacerun: yes">††† </span>јƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒў<span
+style='mso-tab-count:2'>††††††† </span><span style="mso-spacerun: yes">†††
+</span>≥
+
+<p><span
+style="mso-spacerun: yes">††††
+</span>јƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒў
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>††††† </span><span style="mso-spacerun: yes">†
+</span>‘иг. 7.6 –егистрова€ труктура микросхемы INTEL 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">††† </span>сопроцессор 8087 преобразует целые и
+действительные числа во
+
+<p><span
+style="mso-spacerun: yes">††† </span>внутренний формат.<span style='mso-tab-count:
+1'>† </span> ак мы уже видели, такое представление
+
+<p><span
+style="mso-spacerun: yes">††† </span>допускает очень высокую точность и большой
+диапазон.<span style="mso-spacerun: yes">† </span>¬ случае
+
+<p><span
+style="mso-spacerun: yes">††† </span>целых чисел сопроцессор 8087 получает
+точные результаты вплоть до
+
+<p><span
+style="mso-spacerun: yes">††† </span>значени€ 2**64.<span style="mso-spacerun:
+yes">† </span>¬нутренний формат с плавающей точкой малоинтересен
+
+<p><span
+style="mso-spacerun: yes">††† </span>дл€ тех программистов, которые
+обрабатывают целые числа с помощью
+
+<p><span
+style="mso-spacerun: yes">††† </span>микросхемы 8087.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>††††† </span>–егистры сопроцессора 8087 функционируют
+как обычный стек,
+
+<p><span
+style="mso-spacerun: yes">††† </span>такой же, как и стек микропроцессора 8088.<span
+style='mso-tab-count:1'>† </span>Ќо у этого стека
+
+<p><span
+style="mso-spacerun: yes">††† </span>имеетс€ ограниченное число позиций -
+только вомесь.<span style="mso-spacerun: yes">† </span>ѕроцессор 8087
+
+<p><span
+style="mso-spacerun: yes">††† </span>имеет еще один регистр, труднодоступный
+дл€ программиста.<span style="mso-spacerun: yes">† </span>Ётот
+
+<p><span
+style="mso-spacerun: yes">††† </span>регистр представл€ет собой слово,
+содержащее &quot;этикетки&quot; каждой
+
+<p><span
+style="mso-spacerun: yes">††† </span>позиции стека.<span style="mso-spacerun:
+yes">† </span>“акой регистр позвол€ет сопроцессору 8087
+
+<p><span
+style="mso-spacerun: yes">††† </span>отслеживать, какие из позиций стека
+используютс€, а какие свободны.
+
+<p><span
+style="mso-spacerun: yes">††† </span>Ћюба€ попытка помещени€ объекта в стек на
+уже зан€тую позицию
+
+<p><span
+style="mso-spacerun: yes">††† </span>приводит к врзникновению особой ситуации -
+недействительной
+
+<p><span
+style="mso-spacerun: yes">††† </span>операции.<span style="mso-spacerun: yes">†
+</span>Ќиже будут обсуждены особые ситуации, и то, как
+
+<p><span
+style="mso-spacerun: yes">††† </span>программа может боротьс€ с проблемой
+переполнени€ стека.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>††††† </span>ѕрограмма может заносить данные в стек
+сопроцессора 8087 с
+
+<p><span
+style="mso-spacerun: yes">††† </span>помощью команды загрузки, и все команды
+загрузки помешают данные в
+
+<p><span
+style="mso-spacerun: yes">††† </span>вершину стека.<span style="mso-spacerun:
+yes">† </span>≈сли число в главной пам€ти записано не во
+
+<p><span
+style="mso-spacerun: yes">††† </span>временном действительном формате,
+микросхема 8087 преобразует его в
+
+<p><span
+style="mso-spacerun: yes">††† </span>80-битовое представление во врем€
+выполнени€ команды загрузки.
+
+<p><span
+style="mso-spacerun: yes">††† </span>јналогично команды записи извлекают
+значение из стека микросхемы
+
+<p><span
+style="mso-spacerun: yes">††† </span>8087 и помещают их в главную пам€ть, а
+если необходимо
+
+<p><span
+style="mso-spacerun: yes">††† </span>преобразование формата данных, сопроцессор
+8087 выполн€ет его как
+
+<p><span
+style="mso-spacerun: yes">††† </span>часть операции записи.<span
+style="mso-spacerun: yes">† </span>Ќекоторые формы операции записи оставл€ют
+
+<p><span
+style="mso-spacerun: yes">††† </span>вершину стека нетронутой дл€ дальнейших
+действий.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>††††† </span>ѕосле того, как программа поместила данные
+в стек сопроцессора
+
+<p><span
+style="mso-spacerun: yes">††† </span>8087, они могут быть использованы в любой
+вычислительной команде.
+
+<p><span
+style="mso-spacerun: yes">††† </span>¬ычислительные команды процессора 8087
+допускают как действи€ между
+
+<p><span
+style="mso-spacerun: yes">††† </span>регистрами, так и действи€ между пам€тью и
+регистрами.<span style="mso-spacerun: yes">† </span>“очно так
+
+<p><span
+style="mso-spacerun: yes">††† </span>же, как и в случае микропроцессора 8088,
+из любых двух операндов
+
+<p><span
+style="mso-spacerun: yes">††† </span>арифметической операции один должен
+находитьс€ в регистре.<span style='mso-tab-count:1'>††† </span>”
+
+<p><span
+style="mso-spacerun: yes">††† </span>сопроцессора 8087 один из операндов должен
+быть всегда верхним
+
+<p><span
+style="mso-spacerun: yes">††† </span>элементом стека, а другой операнд может
+быть вз€т их пам€ти, либо
+
+<p><span
+style="mso-spacerun: yes">††† </span>из стека регистров.<span
+style="mso-spacerun: yes">† </span>—тек регистров сопроцессора 8087 всегда
+должен
+
+<p><span
+style="mso-spacerun: yes">††† </span>быть приемником результата любой
+арифметической операции.
+
+<p><span
+style="mso-spacerun: yes">††† </span>Ќепосредственно записать результат в
+пам€ть той же командой,
+
+<p><span
+style="mso-spacerun: yes">††† </span>котора€ выполнила вычислени€, процессор
+числовой обработки не
+
+<p><span
+style="mso-spacerun: yes">††† </span>может.<span style="mso-spacerun: yes">†
+</span>„тобы переслать операнд обратно в пам€ть, необходима
+
+<p><span
+style="mso-spacerun: yes">††† </span>отдельна€ команда записи (или команда
+извлечени€ из стека с записью
+
+<p><span
+style="mso-spacerun: yes">††† </span>в пам€ть).<span style='mso-tab-count:1'>††† </span>Ќекоторые
+арифметические команды извлекают верхний
+
+<p><span
+style="mso-spacerun: yes">††† </span>элемент стека и сбрасывают его, не
+записыва€ в пам€ть.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+<body background="../bgrwhite.gif">
+
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="2-13">Прерывания</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Механизм прерываний - существенная часть
+любой вычислительной сис-
+
+<p><span
+style="mso-spacerun: yes">    </span>темы.<span style="mso-spacerun: yes"> 
+</span>Как мы увидим, он важен и для IBM PC.<span style="mso-spacerun: yes"> 
+</span>Структура прерываний
+
+<p><span
+style="mso-spacerun: yes">    </span>предоставляет эффективное средство для
+связи устройств вводоа-выво-
+
+<p><span
+style="mso-spacerun: yes">    </span>да с процессором.<span
+style="mso-spacerun: yes">  </span>Нам прерывания интересны потому, что
+управление
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываниями - прерогатива
+программирования на языке ассемблера.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>языках высокого уровня отсутствуют
+средства для работы с
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываниями на машинном уровне.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прерывания обычно вызываются внешними
+устройствами.<span style="mso-spacerun: yes">  </span>Прерывание
+
+<p><span
+style="mso-spacerun: yes">    </span>сигнализирует процесору о необходимости
+прервать текущие действия и
+
+<p><span
+style="mso-spacerun: yes">    </span>ответить внешнему устройству.<span
+style="mso-spacerun: yes">  </span>В IBM PC клавиатура посылает сигнал
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания всякий раз при нажатии любой
+клавиши.<span style="mso-spacerun: yes">  </span>Прерывание
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатуры заставляет процессор прекратить
+текущую деятельность и
+
+<p><span
+style="mso-spacerun: yes">    </span>считать набранный на клавиатуре символ.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Легко понять, за что прерывания получили
+свое название.<span style="mso-spacerun: yes">  </span>Преры-
+
+<p><span
+style="mso-spacerun: yes">    </span>вание сигнализирует о необходимости
+&quot;прервать&quot; текущее действие
+
+<p><span
+style="mso-spacerun: yes">    </span>процессора.<span style="mso-spacerun:
+yes">  </span>Прерывания хороши тем, что избавляют процессор
+
+<p><span
+style="mso-spacerun: yes">    </span>постоянного контроля за внешними
+устройствами.<span style="mso-spacerun: yes">  </span>Если бы, например,
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатура пользователя не вызывала
+прерываний, то процессор был бы
+
+<p><span
+style="mso-spacerun: yes">    </span>вынужден непрерывно проверять клавиатуру,
+чтобы обнаружить нажатие
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиши.<span style="mso-spacerun: yes"> 
+</span>Каждая написанная для компьютера программа была бы
+
+<p><span
+style="mso-spacerun: yes">    </span>вынуждена делать одно и то же, и им
+пришлось бы очень часто
+
+<p><span
+style="mso-spacerun: yes">    </span>тестировать клавиатуру.<span
+style="mso-spacerun: yes">  </span>Но наличие прерываний снимают это
+
+<p><span
+style="mso-spacerun: yes">    </span>требование, и программа может выполняться
+без постоянного
+
+<p><span
+style="mso-spacerun: yes">    </span>тестирования клавиатуры.<span
+style="mso-spacerun: yes">  </span>Каждый раз, как клавиатура получает
+
+<p><span
+style="mso-spacerun: yes">    </span>какую-либо информацию, она сигнализирует
+об этом процессору.<span style="mso-spacerun: yes">  </span>После
+
+<p><span
+style="mso-spacerun: yes">    </span>того, как микропроцессор удовлетворит
+запрос клавиатуры, он может
+
+<p><span
+style="mso-spacerun: yes">    </span>возобновить нормальный ход выполнения
+программы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Работа 8088 с прерываниями во многом
+напоминает его обращение с
+
+<p><span
+style="mso-spacerun: yes">    </span>процедурами.<span style="mso-spacerun:
+yes">  </span>Прерывание не может прекратить работу процессора во
+
+<p><span
+style="mso-spacerun: yes">    </span>время выполнения команды.<span
+style="mso-spacerun: yes">  </span>Сначала 8088 закончит выполнение текущей
+
+<p><span
+style="mso-spacerun: yes">    </span>команды, но следующую уже
+проигнорирует.<span style="mso-spacerun: yes">  </span>Вместо ее выполнения
+про-
+
+<p><span
+style="mso-spacerun: yes">    </span>цессор действует так, как будто следующая
+команда была вызовом про-
+
+<p><span
+style="mso-spacerun: yes">    </span>цедуры.<span style="mso-spacerun: yes"> 
+</span>Он сохраняет адрес очередной команды в стеке и переходит в
+
+<p><span
+style="mso-spacerun: yes">    </span>специальную процедуру, которую называют
+программой обработки
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний.<span style="mso-spacerun:
+yes">  </span>Эта процедура содержит команды для работы с вызвавшим
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание устройством.<span
+style="mso-spacerun: yes">  </span>В случае с клавиатурой программа обработки
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания считывает символ и сохраняет
+его для дальнейшего
+
+<p><span
+style="mso-spacerun: yes">    </span>использования.<span style="mso-spacerun:
+yes">  </span>После того как она закончит работу с устройством,
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит возврат в точку
+прерывания.<span style="mso-spacerun: yes">  </span>Процессор извлекает из
+
+<p><span
+style="mso-spacerun: yes">    </span>стека адрес возврата и продолжает
+выполнение программы как будто
+
+<p><span
+style="mso-spacerun: yes">    </span>ничего не случилось.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку прерывание вызывается внешним
+устройством, оно может
+
+<p><span
+style="mso-spacerun: yes">    </span>произойти в любой момент выполнения
+программы.<span style="mso-spacerun: yes">  </span>Программа не может
+
+<p><span
+style="mso-spacerun: yes">    </span>предпринять каких-либо действий чтобы
+подготовиться к прерыванию,
+
+<p><span
+style="mso-spacerun: yes">    </span>так как не может предвидеть, когда
+пользователь нажмет на клавишу
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатуры.<span style="mso-spacerun:
+yes">  </span>Отсюда следует, что прерывание не должно изменять
+
+<p><span
+style="mso-spacerun: yes">    </span>данные в прерываемой программе.<span
+style="mso-spacerun: yes">  </span>Если прерывание иозменит
+
+<p><span
+style="mso-spacerun: yes">    </span>какое-либо значение в программе, то она не
+сможет нормально
+
+<p><span
+style="mso-spacerun: yes">    </span>работать когда к ней вернется управление.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В ходе прерывания 8088 автоматически
+сохраняет некоторые уста-
+
+<p><span
+style="mso-spacerun: yes">    </span>новленные программой значения в стек.<span
+style="mso-spacerun: yes">  </span>В свою очередь, программа
+
+<p><span
+style="mso-spacerun: yes">    </span>обработки прерываний отвечает за
+сохранение любых других данных,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые она может изменить во время своего
+выполнения.<span style="mso-spacerun: yes">  </span>Эти данные
+
+<p><span
+style="mso-spacerun: yes">    </span>обычно сохраняются в стеке.<span
+style="mso-spacerun: yes">  </span>Затем, перед возвращением управления в
+
+<p><span
+style="mso-spacerun: yes">    </span>прерванную программу, программа обработки
+прерывания должна вернуть
+
+<p><span
+style="mso-spacerun: yes">    </span>измененным данным те значения, которые они
+имели в момент
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания.<span style="mso-spacerun:
+yes">  </span>Факт возникновения прерывания должен остаться
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;невидимым&quot; для выполняемой
+программы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку сигнал прерывания могут посылать
+процессору многие
+
+<p><span
+style="mso-spacerun: yes">    </span>устройстваэ, 8088 имеет механизм
+ориентации прерываний.<span style="mso-spacerun: yes">  </span>Это озна-
+
+<p><span
+style="mso-spacerun: yes">    </span>чет, что 8088 определяет, какое устройство
+вызвало прерывание и пе-
+
+<p><span
+style="mso-spacerun: yes">    </span>редает управление программе обработки
+прерывания, соответствующей
+
+<p><span
+style="mso-spacerun: yes">    </span>этому устройству.<span
+style="mso-spacerun: yes">  </span>Процессор атоматически управляет
+веторизацией
+
+<p><span
+style="mso-spacerun: yes">    </span>зап росов на прерывания.<span
+style="mso-spacerun: yes">  </span>Программе обработки прерывания не
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется перед обработкой прерывания
+определять, какое устройство
+
+<p><span
+style="mso-spacerun: yes">    </span>его вызвало.<span style="mso-spacerun:
+yes">  </span>Это сокращает время реакции на прерывание и упрощает
+
+<p><span
+style="mso-spacerun: yes">    </span>программирование прерываний.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В программамах встречаются такие участки,
+выполнение которых не
+
+<p><span
+style="mso-spacerun: yes">    </span>может быть прервано.<span
+style="mso-spacerun: yes">  </span>Например, это может быть кусок программы,
+
+<p><span
+style="mso-spacerun: yes">    </span>который должен выполняться очень быстро,
+чтобы закончить выполнение
+
+<p><span
+style="mso-spacerun: yes">    </span>специфической задачи, или момент работы с
+данными, которые могут
+
+<p><span
+style="mso-spacerun: yes">    </span>быть изменены программой обработки
+прерывания.<span style="mso-spacerun: yes">  </span>В обоих случаях
+
+<p><span
+style="mso-spacerun: yes">    </span>программа должна иметь возможность
+задержать или предотвратить
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания, т.е.<span style="mso-spacerun:
+yes">  </span>программа должна уметь не допускать возникновения
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний во время выполнения таких
+критических участков.<span style='mso-tab-count:1'>    </span>После
+
+<p><span
+style="mso-spacerun: yes">    </span>прохождения этих участков программа должна
+восстановить способность
+
+<p><span
+style="mso-spacerun: yes">    </span>системы прерываний вызывать
+прерывания.<span style="mso-spacerun: yes">  </span>Программа не может
+
+<p><span
+style="mso-spacerun: yes">    </span>отключать прерывания на слишком долгое
+время, иначе с устройством,
+
+<p><span
+style="mso-spacerun: yes">    </span>запросившим прерывание, может произойти
+какая-нибудь неприятность.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если прерывание клавиатуры не считает
+символ до того как оператор
+
+<p><span
+style="mso-spacerun: yes">    </span>нажмет другую клавишу, второй симол может
+быть потерян.<span style="mso-spacerun: yes">  </span>В 8088
+
+<p><span
+style="mso-spacerun: yes">    </span>имеется возможность блокировать все
+внешние прерывания.<span style="mso-spacerun: yes">  </span>IBM PC
+
+<p><span
+style="mso-spacerun: yes">    </span>имеет более развитую возможность выбирать,
+каким из устройств можно
+
+<p><span
+style="mso-spacerun: yes">    </span>вызывать прерывание, а каким нет.<span
+style="mso-spacerun: yes">  </span>Программа может использовать эту
+
+<p><span
+style="mso-spacerun: yes">    </span>возможность для выбора наиболее важных
+устройств, которым можно
+
+<p><span
+style="mso-spacerun: yes">    </span>разрешить прерывания, а менее критическим
+запретить.<span style="mso-spacerun: yes">  </span>Способы
+
+<p><span
+style="mso-spacerun: yes">    </span>отключения прерываний мы обсудим в
+следующих главах.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

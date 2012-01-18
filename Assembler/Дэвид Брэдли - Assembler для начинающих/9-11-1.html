@@ -1,0 +1,368 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-11">Дискета</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа обслуживания дисковода BIOS
+выполняет блочные операции с
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптером дисковода.<span
+style="mso-spacerun: yes">  </span>BIOS позволяет вызывающей программе указывать
+
+<p><span
+style="mso-spacerun: yes">    </span>адреса дорожки и сектора для команды
+чтения или записи.<span style="mso-spacerun: yes">  </span>BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>управляет адаптером и самим дисководом,
+настраивая их на операцию,
+
+<p><span
+style="mso-spacerun: yes">    </span>а затем пересылает данные из буфера или в
+буфер пользователя.
+
+<p><span
+style="mso-spacerun: yes">    </span>После операции BIOS собирает результаты и
+передает их как часть
+
+<p><span
+style="mso-spacerun: yes">    </span>выходных параметров программы обслуживания
+дисков BIOS.<span style="mso-spacerun: yes">  </span>Вызывающей
+
+<p><span
+style="mso-spacerun: yes">    </span>программе не нужно обслуживать различные
+функции контроллера дисков
+
+<p><span
+style="mso-spacerun: yes">    </span>и беспокоиться о временных соотношениях.
+
+<b><p><div align="center"><a name="9-11-1">Области данных драйвера BIOS дискеты</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Области данных дискового драйвера BIOS
+начинаются у смещения 3EH в
+
+<p><span
+style="mso-spacerun: yes">    </span>сегменте DATA.<span style="mso-spacerun:
+yes">  </span>Первые четыре байта поля данных хранят информацию
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния дисководов между
+операциями.<span style="mso-spacerun: yes">  </span>Семибайтовый буфер с именем
+
+<p><span
+style="mso-spacerun: yes">    </span>NEC_STATUS хранит информацию о состоянии
+контроллера, возвращаемую
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллером дисководов фирмы NEC после
+операций чтения и записи.
+
+<p><span
+style="mso-spacerun: yes">    </span>Как видно из управляющих программ, этот
+буфер позволяет BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>расшифровывать любую ошибку и
+предоставлять все ошибки в виде
+
+<p><span
+style="mso-spacerun: yes">    </span>простого набора кодов ошибок.<span
+style="mso-spacerun: yes">  </span>Эти коды ошибок программа BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает в байт с именем DISKETTE_STATUS,
+одновременно возвращая
+
+<p><span
+style="mso-spacerun: yes">    </span>его в вызывающую программу в регистре AH
+после выполнения операций
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода-вывода.<span style="mso-spacerun:
+yes">  </span>Операторы ассемблера после имени DISKETTE_STATUS
+
+<p><span
+style="mso-spacerun: yes">    </span>перечисляют все коды ошибок, которые может
+получить вызывающая
+
+<p><span
+style="mso-spacerun: yes">    </span>программа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Контроллер дисковода фирмы NEC знает
+положение головки
+
+<p><span
+style="mso-spacerun: yes">    </span>чтения-записи в каждом из четырех
+дисководов, которые он может
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживать. Но для этого контроллер
+должен войти в синхронизацию с
+
+<p><span
+style="mso-spacerun: yes">    </span>этими механизмами до того, как он начнет
+точно отслеживать текущее
+
+<p><span
+style="mso-spacerun: yes">    </span>положение головок; синхронизация нужна
+потому, что после включения
+
+<p><span
+style="mso-spacerun: yes">    </span>питания или после сброса контроллер фирмы
+NEC не знает, где
+
+<p><span
+style="mso-spacerun: yes">    </span>находятся головки. Байт SEEK_STATUS
+использует младшие 4 бита, по
+
+<p><span
+style="mso-spacerun: yes">    </span>одному биту на механизм, чтобы указать,
+известно ли контроллеру
+
+<p><span
+style="mso-spacerun: yes">    </span>текущее положение головок или нет. Когда
+BIOS посылает сигнал
+
+<p><span
+style="mso-spacerun: yes">    </span>сброса в контроллер, он заносит нуль в
+этот байт. Перед каждой
+
+<p><span
+style="mso-spacerun: yes">    </span>операцией обмена данными с дисководами
+BIOS проверяет этот байт
+
+<p><span
+style="mso-spacerun: yes">    </span>установки. Если содержимое бита,
+соответствующего механизму, с
+
+<p><span
+style="mso-spacerun: yes">    </span>которым идет работа, равно 0, BIOS
+посылает команду рекалибровки
+
+<p><span
+style="mso-spacerun: yes">    </span>перед командой установки. На этапе
+рекалибровки головка
+
+<p><span
+style="mso-spacerun: yes">    </span>чтения-записи устанавливается на дорожку
+0, и теперь контроллер и
+
+<p><span
+style="mso-spacerun: yes">    </span>механизм согласованы в смысле положения
+головки. Все последующие
+
+<p><span
+style="mso-spacerun: yes">    </span>операции установки делаются без предварительной
+рекалибровки.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Операция рекалибровки играет важную роль и
+при обычной работе
+
+<p><span
+style="mso-spacerun: yes">    </span>для устранения условий появления ошибки.
+После любой ошибки
+
+<p><span
+style="mso-spacerun: yes">    </span>рекомендуется сбросить контроллер. Этим
+обеспечивается сброс
+
+<p><span
+style="mso-spacerun: yes">    </span>условия появления ошибки в контроллере.
+Байт SEEK_STATUS при этом
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливается равным нулю. Поэтому перед
+тем, как прикладная
+
+<p><span
+style="mso-spacerun: yes">    </span>программа повторит операцию (неудачную
+операцию нужно повторять по
+
+<p><span
+style="mso-spacerun: yes">    </span>крайней мере три раза, так как большинство
+таких ошибок устранимы и
+
+<p><span
+style="mso-spacerun: yes">    </span>не повторяются), выполнится рекалибровка
+механизма. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>автоматически устраняет ошибку, вызванную
+неправильной установкой,
+
+<p><span
+style="mso-spacerun: yes">    </span>когда головка не попала на нужную дорожку.
+В обычных случаях
+
+<p><span
+style="mso-spacerun: yes">    </span>рекалибровка и повторная установка на эту
+же дорожку устраняет
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибку.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Байты MOTOR_STATUS и MOTOR_COUNT управляют
+двигателем
+
+<p><span
+style="mso-spacerun: yes">    </span>дисковода. Адаптер дисковода имеет
+управляющий регистр, который
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет выбрать двигатель дисковода,
+который включается в двнное
+
+<p><span
+style="mso-spacerun: yes">    </span>время. В этот управляющий регистр можно
+только записывать данные,
+
+<p><span
+style="mso-spacerun: yes">    </span>читать из него нельзя, и байт MOTOR_STATUS
+является его образом в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти. Перед тем, как выполнить операцию
+записи-чтения на дискете,
+
+<p><span
+style="mso-spacerun: yes">    </span>вы должны дать возможность двигателю
+разогнаться до необходимой
+
+<p><span
+style="mso-spacerun: yes">    </span>скорости, подождав некоторое время - около
+половины секунды. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>двигатель уже работает, ждать не нужно.
+Чтение конкретного бита в
+
+<p><span
+style="mso-spacerun: yes">    </span>этом байте состояния позволяет определить,
+нужно ли ожидание.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Далее после выполнения операции важно
+оставить двигатель
+
+<p><span
+style="mso-spacerun: yes">    </span>включенным. Есть вероятность, что доступ к
+дискете вскоре
+
+<p><span
+style="mso-spacerun: yes">    </span>повторится; однако здесь нужно выбирать
+между износом дискеты и
+
+<p><span
+style="mso-spacerun: yes">    </span>увеличением времени доступа. BIOS не
+допускает непрерывного
+
+<p><span
+style="mso-spacerun: yes">    </span>вращения двигателей дисководов, для этого
+в ячейке MOTOR_COUNT
+
+<p><span
+style="mso-spacerun: yes">    </span>находится уменьшающийся счетчик. При
+каждом прерывании от таймера
+
+<p><span
+style="mso-spacerun: yes">    </span>этот счетчик уменьшается, и когда счетчик
+достигает нуля, все
+
+<p><span
+style="mso-spacerun: yes">    </span>двигатели выключаются. Обычно временные
+параметры установлены так,
+
+<p><span
+style="mso-spacerun: yes">    </span>что двигатель работет примерно две секунды
+после завершения
+
+<p><span
+style="mso-spacerun: yes">    </span>операции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В тексте программы обслуживания дисководов
+BIOS можно увидеть,
+
+<p><span
+style="mso-spacerun: yes">    </span>что величина MOTOR_COUNT на одном из
+первых шагов устанавливается
+
+<p><span
+style="mso-spacerun: yes">    </span>равной 255. Тем самым гарантируется, что
+прерывание от таймера не
+
+<p><span
+style="mso-spacerun: yes">    </span>выключит двигатель дисковода в течение
+операции. Текущее значение,
+
+<p><span
+style="mso-spacerun: yes">    </span>представляющее две секунды, записывается в
+байт счетчика перед
+
+<p><span
+style="mso-spacerun: yes">    </span>возвратом из BIOS в вызывающую программу.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.9.4 приведены команды управления
+дисководом. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>сброса пересылает в контроллер параметры
+механизма, такие как режим
+
+<p><span
+style="mso-spacerun: yes">    </span>работы ПДП и скорость предачи. Команда
+сброса также выполняет
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратный сброс контроллера. Фирма IBM
+рекомендует выполнять это
+
+<p><span
+style="mso-spacerun: yes">    </span>действие после любой ошибки. Это
+необходимо, так как некоторые
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибки (в частности, ошибка по
+исчерпыванию времени операции,
+
+<p><span
+style="mso-spacerun: yes">    </span>получающаяся, если в дисководе нет
+дискеты) ставят контроллер в
+
+<p><span
+style="mso-spacerun: yes">    </span>затруднительное положение. После таких
+ошибок вернуть контроллер к
+
+<p><span
+style="mso-spacerun: yes">    </span>нормальной работе можно только с помощью
+сброса.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

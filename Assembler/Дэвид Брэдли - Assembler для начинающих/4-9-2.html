@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><a name="4-9-2">Адресация переходов
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Если адрес перехода или вызова
+подпрограммы является частью самой
+
+<p><span
+style="mso-spacerun: yes">    </span>коамнды (как данные в командах с
+непосредственным операндом), это -
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственный переход.<span
+style="mso-spacerun: yes">  </span>Если адрес перехода команды содержится в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре или ячейке памяти, это -
+косвенный переход, так как
+
+<p><span
+style="mso-spacerun: yes">    </span>команда требует загрузки адреса,
+извлекаемого из некоторого
+
+<p><span
+style="mso-spacerun: yes">    </span>промежуточного места хранения; программа
+не может перейти прямо в
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимое место, и должа идти туда
+косвенно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существует два метода вычисления адреса
+перехода. Если в
+
+<p><span
+style="mso-spacerun: yes">    </span>команде указано значение адреса, это
+абсолютный переход, т.е.
+
+<p><span
+style="mso-spacerun: yes">    </span>переход по абсолютному адресу. Команда
+может указать место
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода, как некоторое расстояние от нее
+самой. Этот метод
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода называется относительным
+переходом.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Преимущество относительных переходов
+заключается в том, что
+
+<p><span
+style="mso-spacerun: yes">    </span>программа наиболее часто переходит к
+близлежащим ячейкам; команда
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода может использовать однобайтовое
+смещение. Если смещение
+
+<p><span
+style="mso-spacerun: yes">    </span>трактуется, как число в дополнительном
+коде, то двухбайтовая
+
+<p><span
+style="mso-spacerun: yes">    </span>команда относительного перехода (один байт
+- код операции, и один
+
+<p><span
+style="mso-spacerun: yes">    </span>байт - смещение) может выполнить переход
+на 127 байт вперед или на
+
+<p><span
+style="mso-spacerun: yes">    </span>128 байт назад внутри программы.
+Микропроцессор 8088 имеет два типа
+
+<p><span
+style="mso-spacerun: yes">    </span>относительных переходов: один имеет
+однобайтовое смещение, другой -
+
+<p><span
+style="mso-spacerun: yes">    </span>двухбайтовое.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В микропроцессоре 8088 все условные
+переходы имеют однобайтовое
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение. Иногда это неудобно, например в
+случае условного перехода
+
+<p><span
+style="mso-spacerun: yes">    </span>к ячейке, находящейся на расстоянии в 150
+байт от текущего места.
+
+<p><span
+style="mso-spacerun: yes">    </span>В таких случаях программа должна
+использовать пару переходов,
+
+<p><span
+style="mso-spacerun: yes">    </span>условный и безусловный; далее приводится
+пример такого метода
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода. В обычных же случаях
+однобайтовые смещения условных
+
+<p><span
+style="mso-spacerun: yes">    </span>переходов в микропроцессоре 8088
+минимизируют объем программы,
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимой для реализации любой заданной
+функции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При расчете смещения относительного
+перехода микропроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 отсчитывает смещения от значения
+указателя команд, которое
+
+<p><span
+style="mso-spacerun: yes">    </span>получится после выполнения команды. Фиг.
+4.26 показывает разные
+
+<p><span
+style="mso-spacerun: yes">    </span>примеры команд относительного перехода.
+Если точка перехода следует
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно за переходом, смещение
+равно 0. При переходе к
+
+<p><span
+style="mso-spacerun: yes">    </span>самой команде перехода смещение равно -2.
+При двухбайтовом смещении
+
+<p><span
+style="mso-spacerun: yes">    </span>переход может быть сделан в диапазоне
+-32768 - 32767 байт от
+
+<p><span
+style="mso-spacerun: yes">    </span>значения регистра IP после выполнения
+команды перехода.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

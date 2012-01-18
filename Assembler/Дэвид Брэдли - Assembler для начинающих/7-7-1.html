@@ -1,0 +1,1032 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="7-7-1">Команды пересылки данных
+</a></b></div></p>
+
+
+<p><span
+style='mso-tab-count:1'>      </span>В группе команд пересылки данных
+сопроцессора 8087 имеется
+
+<p><span
+style="mso-spacerun: yes">    </span>всего три основных команды.<span
+style="mso-spacerun: yes">  </span>Команда загрузки помещает данные в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистровый стек 8087.<span
+style="mso-spacerun: yes">  </span>Обычно эти данные читаются из памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>системы, но команда загрузки может также
+извлечь число из самого
+
+<p><span
+style="mso-spacerun: yes">    </span>стека и заменить им вершину стека.<span
+style='mso-tab-count:1'>    </span>Команда записи берет данные из
+
+<p><span
+style="mso-spacerun: yes">    </span>вершины стека и помещает их в память
+ЭВМ.<span style="mso-spacerun: yes">  </span>Команда замены
+
+<p><span
+style="mso-spacerun: yes">    </span>обменивает два числа в регистровом стеке
+сопроцессора 8087.
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 7.10 показан листинг ассемблера
+команд пересылки
+
+<p><span
+style="mso-spacerun: yes">    </span>данных.<span style="mso-spacerun: yes"> 
+</span>В текст в самом начале помещен набор макрокоманд
+
+<p><span
+style="mso-spacerun: yes">    </span>процессора 8087 с помощью фрагмента:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>IF1
+
+<p><span
+style="mso-spacerun: yes">      </span>INCLUDE<span style="mso-spacerun: yes"> 
+</span>87MAC.LIB
+
+<p><span
+style="mso-spacerun: yes">      </span>ENDIF
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта последовательность команд помещает в
+текст программы
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманды определения команд
+сопроцессора 8087 во время первого
+
+<p><span
+style="mso-spacerun: yes">    </span>прохода ассемблера, когда должны
+обрабатываться макрорасширения.
+
+<p><span
+style="mso-spacerun: yes">    </span>Ассемблер не читает файл макрокоманд во
+время второго прохода, так
+
+<p><span
+style="mso-spacerun: yes">    </span>как этот файл больше не нужен.<span
+style="mso-spacerun: yes">  </span>В листинге ассемблера появляется
+
+<p><span
+style="mso-spacerun: yes">    </span>только команда ENDIF.
+
+<p><span
+style='mso-tab-count:1'>      </span>Первая команда пересылки данных, которую
+мы рассмотрим -
+
+<p><span
+style="mso-spacerun: yes">    </span>команда загрузки.<span
+style="mso-spacerun: yes">  </span>Название всех команд сопроцессора 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>начинается с буквы &quot;F&quot;. <span
+style="mso-spacerun: yes"> </span>Так что, чтобы загрузить число в
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхему 8087, используется команда FLD
+(Floating LoaD, плавающая
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузка).<span style='mso-tab-count:1'>    </span>В
+отличие от команд микропроцессора 8088, где команда
+
+<p><span
+style="mso-spacerun: yes">    </span>MOV обслуживает все форматы данных, здесь
+существует разная
+
+<p><span
+style='mso-tab-count:2'>           </span>Microsoft (R) Macro Assembler Version
+5.00<span style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>1/1/80 01:21:45
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Фиг. 7.10 Команды пересылки сопроцессора 8087<span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">   </span>Page<span
+style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 7.10 Команды пересылки сопроцессора 8087
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>WORD_INTEGER<span style="mso-spacerun:
+yes">    </span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>SHORT_INTEGER<span style="mso-spacerun:
+yes">   </span>LABEL<span style="mso-spacerun: yes">   </span>DWORD
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>LONG_INTEGER<span style="mso-spacerun:
+yes">    </span>LABEL<span style="mso-spacerun: yes">   </span>QWORD
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>BCD_INTEGER<span style="mso-spacerun:
+yes">     </span>LABEL<span style="mso-spacerun: yes">   </span>TBYTE
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>SHORT_REAL<span style="mso-spacerun:
+yes">      </span>LABEL<span style="mso-spacerun: yes">   </span>DWORD
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>LONG_REAL<span style="mso-spacerun:
+yes">       </span>LABEL<span style="mso-spacerun: yes">   </span>QWORD
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>TEMPORARY_REAL<span
+style="mso-spacerun: yes">  </span>LABEL<span style="mso-spacerun: yes">  
+</span>TBYTE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style="mso-spacerun:
+yes">  </span>9B DF 06 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FILD<span style="mso-spacerun: yes">   
+</span>WORD_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span>0005<span style="mso-spacerun:
+yes">  </span>9B DB 06 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FILD<span style="mso-spacerun: yes">   
+</span>SHORT_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span>000A<span style="mso-spacerun:
+yes">  </span>9B DF 2E 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FILD<span style="mso-spacerun: yes">   
+</span>LONG_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span>000F<span style="mso-spacerun:
+yes">  </span>9B DF 26 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FBLD<span style="mso-spacerun: yes">   
+</span>BCD_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span>0014<span style="mso-spacerun:
+yes">  </span>9B D9 06 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FLD<span style="mso-spacerun: yes">    
+</span>SHORT_REAL
+
+<p><span
+style='mso-tab-count:2'>            </span>0019<span style="mso-spacerun:
+yes">  </span>9B DD 06 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FLD<span style="mso-spacerun: yes">    
+</span>LONG_REAL
+
+<p><span
+style='mso-tab-count:2'>            </span>001E<span style="mso-spacerun:
+yes">  </span>9B DB 2E 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FLD<span style="mso-spacerun: yes">    
+</span>TEMPORARY_REAL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0023<span style="mso-spacerun:
+yes">  </span>9B D9 C2<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FLD<span style="mso-spacerun: yes">    
+</span>ST(2)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0026<span style="mso-spacerun:
+yes">  </span>9B DF 16 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FIST<span style="mso-spacerun: yes">   
+</span>WORD_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span>002B<span style="mso-spacerun:
+yes">  </span>9B DB 16 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FIST<span style="mso-spacerun: yes">   
+</span>SHORT_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span>0030<span style="mso-spacerun:
+yes">  </span>9B D9 16 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FST<span style="mso-spacerun: yes">    
+</span>SHORT_REAL
+
+<p><span
+style='mso-tab-count:2'>            </span>0035<span style="mso-spacerun:
+yes">  </span>9B DD 16 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FST<span style="mso-spacerun: yes">    
+</span>LONG_REAL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>003A<span style="mso-spacerun:
+yes">  </span>9B DD D2<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FST<span style="mso-spacerun: yes">    
+</span>ST(2)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>003D<span style="mso-spacerun:
+yes">  </span>9B DF 1E 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FISTP<span style="mso-spacerun: yes">  
+</span>WORD_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span>0042<span style="mso-spacerun:
+yes">  </span>9B DB 1E 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FISTP<span style="mso-spacerun: yes">  
+</span>SHORT_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span>0047<span style="mso-spacerun:
+yes">  </span>9B DF 3E 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FISTP<span style="mso-spacerun: yes">  
+</span>LONG_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span>004C<span style="mso-spacerun:
+yes">  </span>9B DF 36 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FBSTP<span style="mso-spacerun: yes">  
+</span>BCD_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span>0051<span style="mso-spacerun:
+yes">  </span>9B D9 1E 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FSTP<span style="mso-spacerun: yes">   
+</span>SHORT_REAL
+
+<p><span
+style='mso-tab-count:2'>            </span>0056<span style="mso-spacerun:
+yes">  </span>9B DD 1E 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FSTP<span style="mso-spacerun: yes">   
+</span>LONG_REAL
+
+<p><span
+style='mso-tab-count:2'>            </span>005B<span style="mso-spacerun:
+yes">  </span>9B DB 3E 0000 R<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">       </span>FSTP<span style="mso-spacerun: yes">   
+</span>TEMPORARY_REAL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0060<span style="mso-spacerun:
+yes">  </span>9B DD DA<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FSTP<span style="mso-spacerun: yes">   
+</span>ST(2)
+
+<p><span
+style='mso-tab-count:2'>            </span>0063<span style="mso-spacerun:
+yes">  </span>9B D9 CA<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FXCH<span style="mso-spacerun: yes">   
+</span>ST(2)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0066<span style="mso-spacerun:
+yes">  </span>9B D9 EE<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FLDZ
+
+<p><span
+style='mso-tab-count:2'>            </span>0069<span style="mso-spacerun:
+yes">  </span>9B D9 E8<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FLD1
+
+<p><span
+style='mso-tab-count:2'>            </span>006C<span style="mso-spacerun:
+yes">  </span>9B D9 EB<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FLDPI
+
+<p><span
+style='mso-tab-count:2'>            </span>006F<span style="mso-spacerun:
+yes">  </span>9B D9 E9<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FLDL2T
+
+<p><span
+style='mso-tab-count:2'>            </span>0072<span style="mso-spacerun:
+yes">  </span>9B D9 EA<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FLDL2E
+
+<p><span
+style='mso-tab-count:2'>            </span>0075<span style="mso-spacerun:
+yes">  </span>9B D9 EC<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FLDLG2
+
+<p><span
+style='mso-tab-count:2'>            </span>0078<span style="mso-spacerun:
+yes">  </span>9B D9 ED<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FLDLN2
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>007B<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>END&#18;
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 7.10 Команды пересылки сопроцессора 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>мнемоника для разных типов данных.<span
+style='mso-tab-count:1'>    </span>Так получилось потому, что
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер может различать четырехбайтовые
+и восьмибайтовые
+
+<p><span
+style="mso-spacerun: yes">    </span>операнды, но не может знать, является ли
+операнд действительным или
+
+<p><span
+style="mso-spacerun: yes">    </span>целым числом.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Всякий раз, когда операнд - целое,
+используется команда FILD.
+
+<p><span
+style="mso-spacerun: yes">    </span>Итак, FILD загружает слово (16 бит),
+короткое целое число (32 бита)
+
+<p><span
+style="mso-spacerun: yes">    </span>или длинное целое число (64 бита).<span
+style='mso-tab-count:1'>    </span>Чтобы загрузить упакованное
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичное число (80 бит), используется
+команда FBLD.<span style="mso-spacerun: yes">  </span>Буква B
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает десятичные числа.<span
+style="mso-spacerun: yes">  </span>Наконец, команда FLD загружает
+
+<p><span
+style="mso-spacerun: yes">    </span>действительные числа.<span
+style="mso-spacerun: yes">  </span>Ассемблер определяет, какой вид целого или
+
+<p><span
+style="mso-spacerun: yes">    </span>действительного числа вы желаете
+использовать.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В ассемблере для имен команд сопроцессора
+8087, ссылающихся к
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, используется соглашение о том, что
+в случае целых чисел
+
+<p><span
+style="mso-spacerun: yes">    </span>вслед за буквой F следует буква I, в
+случае десятичных чисел -
+
+<p><span
+style="mso-spacerun: yes">    </span>буква B, и никакой буквы не следует в
+случае действительных чисел.
+
+<p><span
+style="mso-spacerun: yes">    </span>Мы увидим, что то же соглашение
+используется и в командах записи, и
+
+<p><span
+style="mso-spacerun: yes">    </span>в арифметических командах, которые
+указывают операнд в памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как видно из Фиг. 7.10, для каждого из
+семи обслуживаемых
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессором 8087 типов данных существует
+команда загрузки.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда загрузки указывает поле данных в
+памяти, микросхема 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразует данные из их внешнего
+представления во временный
+
+<p><span
+style="mso-spacerun: yes">    </span>действительный формат.<span
+style="mso-spacerun: yes">  </span>Преобразованное число помещается в стек,
+
+<p><span
+style="mso-spacerun: yes">    </span>увеличивая его объем на единицу.<span
+style="mso-spacerun: yes">  </span>Если вы попытаетесь поместить
+
+<p><span
+style="mso-spacerun: yes">    </span>число в стек, который уже содержит восемь
+чисел, сопроцессор 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>сообщит об особой ситуации - переполнении
+стека. <span style="mso-spacerun: yes"> </span>Если программа не
+
+<p><span
+style="mso-spacerun: yes">    </span>обрабатывает особую ситуацию в своей
+собственной подпрограмме,
+
+<p><span
+style="mso-spacerun: yes">    </span>встроенный обработчик особой ситуации
+пометит загруженное значение,
+
+<p><span
+style="mso-spacerun: yes">    </span>как &quot;неопределенное&quot;.<span
+style="mso-spacerun: yes">  </span>Это означает, что дальнейшие действия с этим
+
+<p><span
+style="mso-spacerun: yes">    </span>числом дадут неопределенные
+результаты.<span style="mso-spacerun: yes">  </span>Если вы сделаете ошибку,
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессор 8087 проследит за тем, чтобы
+она не осталась
+
+<p><span
+style="mso-spacerun: yes">    </span>незамеченной.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Оставшаяся разновидность команды загрузки
+берет один из
+
+<p><span
+style="mso-spacerun: yes">    </span>элементов стека и помещает его в
+стек.<span style="mso-spacerun: yes">  </span>Например, команда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FLD<span style="mso-spacerun: yes">   
+</span>ST0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>дублирует вершину стека.<span
+style="mso-spacerun: yes">  </span>После нее два верхних элемента имеют
+
+<p><span
+style="mso-spacerun: yes">    </span>одинаковые значения.<span
+style="mso-spacerun: yes">  </span>Команда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FLD<span style="mso-spacerun: yes">   
+</span>ST3
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>помещает копию четвертого элемента стека в
+стек.<span style="mso-spacerun: yes">  </span>Заметим, что
+
+<p><span
+style="mso-spacerun: yes">    </span>число, которое было раньше ST3, стало
+теперь ST4.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Давайте посмотрим на машинный язык, в
+действительности
+
+<p><span
+style="mso-spacerun: yes">    </span>формируемый этими командами.<span
+style="mso-spacerun: yes">  </span>Поскольку этот текст порождает
+
+<p><span
+style="mso-spacerun: yes">    </span>команды процессора 8087 с помощью
+макрокоманд, сравнительно легко
+
+<p><span
+style="mso-spacerun: yes">    </span>увидеть, откуда появляются различные части
+команд.<span style='mso-tab-count:1'>      </span>Во=первых,
+
+<p><span
+style="mso-spacerun: yes">    </span>каждая команда начинается с байта
+09BH.<span style="mso-spacerun: yes">  </span>Это - команда WAIT.<span
+style="mso-spacerun: yes">  </span>Как
+
+<p><span
+style="mso-spacerun: yes">    </span>вы помните, сопроцессор 8087 должен быть
+синхронизирован с работой
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088.<span
+style="mso-spacerun: yes">  </span>Если микропроцессор 8088 попытается
+
+
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнить следующую команду сопроцессора
+8087 до того, как
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессор 8087 завершит текущую команду,
+действия микросхемы 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>дадут неверный результат.<span
+style='mso-tab-count:1'>      </span>Фактически все макрокоманды 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>содержат команду WAIT для обеспечения
+синхронизации.<span style="mso-spacerun: yes">  </span>(Команды без
+
+<p><span
+style="mso-spacerun: yes">    </span>синхронизации сопроцессора 8087 - это все
+команды управления,
+
+<p><span
+style="mso-spacerun: yes">    </span>обычно не требеющие ожидания
+результата.<span style="mso-spacerun: yes">  </span>Эти команды можно легко
+
+<p><span
+style="mso-spacerun: yes">    </span>отличить так как они все начинаются с FN, где
+буква N означает
+
+<p><span
+style="mso-spacerun: yes">    </span>отсутствие синхронизации).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>По макрорасширениям также можно видеть,
+что команды процессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8087 формируются командами ESC.<span
+style="mso-spacerun: yes">  </span>Чтобы указать адрес памяти,
+
+<p><span
+style="mso-spacerun: yes">    </span>команда ESC имеет два операнда.<span
+style="mso-spacerun: yes">  </span>Первый определяет, какая это
+
+<p><span
+style="mso-spacerun: yes">    </span>команда ESC, а второй ссылается на ячейку
+памяти.<span style="mso-spacerun: yes">  </span>Команда ESC
+
+<p><span
+style="mso-spacerun: yes">    </span>может иметь длину два, три или четыре
+байта, в зависимости от
+
+<p><span
+style="mso-spacerun: yes">    </span>размера поля индексного смещения,
+сопровождающего байт mod=r/m.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>комбинации с командой WAIT максимальная
+длина команды сопроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8087 достигает пяти байт.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда записи имеет два варианта.<span
+style="mso-spacerun: yes">  </span>Первый вариант этой команды
+
+<p><span
+style="mso-spacerun: yes">    </span>извлекает число с вершины стека и
+записывает ее в поименованную
+
+<p><span
+style="mso-spacerun: yes">    </span>ячейку памяти.<span style="mso-spacerun:
+yes">  </span>Выполняя эту команду, сопроцессор 8087 делает
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразование данных из временного
+действительного формата в
+
+<p><span
+style="mso-spacerun: yes">    </span>желаемую внешнюю форму.<span
+style="mso-spacerun: yes">  </span>Эта команда имеет коды операций FST и
+
+<p><span
+style="mso-spacerun: yes">    </span>FIST.<span style="mso-spacerun: yes"> 
+</span>(Заметим, что здесь продолжают свое действие соглашения об
+
+<p><span
+style="mso-spacerun: yes">    </span>именах команд).<span style="mso-spacerun:
+yes">  </span>Этой же командой вы можете занести вершину стека в
+
+<p><span
+style="mso-spacerun: yes">    </span>любое место внутри стека.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вероятно вы заметили, что команда FST не
+допускает запись всех
+
+<p><span
+style="mso-spacerun: yes">    </span>возможных внешних типов данных.<span
+style="mso-spacerun: yes">  </span>Допустимы лишь типы из &quot;большой
+
+<p><span
+style="mso-spacerun: yes">    </span>четверки&quot; - целое слово, короткое
+целое, короткое и длинное
+
+<p><span
+style="mso-spacerun: yes">    </span>действительные.<span style="mso-spacerun:
+yes">  </span>Эта команда не поддерживает все внешниие типы
+
+<p><span
+style="mso-spacerun: yes">    </span>данных, потому что создатели процессора
+8087 понимали, что это не
+
+<p><span
+style="mso-spacerun: yes">    </span>обязательно из=за свойств следующей
+команды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Второй вариант команды записи, кроме
+записи данных, также
+
+<p><span
+style="mso-spacerun: yes">    </span>изменяет положение указателя стека.<span
+style="mso-spacerun: yes">  </span>Команды FSTP (а также команды
+
+<p><span
+style="mso-spacerun: yes">    </span>FISTP и FBSTP) выполняют ту же операцию
+записи данных из
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087 в память, но они также
+извлекают число из стека.
+
+<p><span
+style="mso-spacerun: yes">    </span>Эта разновидность команд поддерживает все
+внешние типы данных.
+
+<p><span
+style="mso-spacerun: yes">    </span>Конструкторы микросхемы 8087 кое=где
+экономили на командах, и
+
+<p><span
+style="mso-spacerun: yes">    </span>поэтому только команды FLD и FSTP
+поддерживают все внешние типы
+
+<p><span
+style="mso-spacerun: yes">    </span>данных.<span style="mso-spacerun: yes"> 
+</span>Все остальные команды сохранения данных в памяти работают
+
+<p><span
+style="mso-spacerun: yes">    </span>только с &quot;большой четверкой&quot; типов
+данных.<span style="mso-spacerun: yes">  </span>Конструкторы понимали,
+
+<p><span
+style="mso-spacerun: yes">    </span>что эти четыре типа будут преобладать над
+всеми, и использование
+
+<p><span
+style="mso-spacerun: yes">    </span>других форматов может быть реализовано
+только командами FLD и FSTP.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда замены FXCH - следующая команда в
+группе команд
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылки данных.<span
+style="mso-spacerun: yes">  </span>Команда FXCH меняет местами содержимое
+вершины
+
+<p><span
+style="mso-spacerun: yes">    </span>стека с содержимым другого регистра стека.<span
+style='mso-tab-count:1'>  </span>Эта команда может
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать в качестве операнда только
+другой элемент стека.
+
+<p><span
+style="mso-spacerun: yes">    </span>Нельзя одной командой поменять местами
+содержимое вершины стека и
+
+<p><span
+style="mso-spacerun: yes">    </span>ячейки памяти.<span style="mso-spacerun:
+yes">  </span>Эта процедура потребует несколько команд и рабочее
+
+<p><span
+style="mso-spacerun: yes">    </span>поле где=то в памяти.<span
+style="mso-spacerun: yes">  </span>В отличие от микропроцесоора 8088,
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессор 8087 может в одной команде
+выполнить чтение из памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>или запись в память, но не то или другое
+одновременно.
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда <span style='mso-tab-count:1'>    </span>Константа
+
+<p><span
+style='mso-tab-count:1'>      </span>--------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>FLDZ<span style='mso-tab-count:2'>            </span>0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>FLD1<span style='mso-tab-count:2'>            </span>1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>FLDPI <span style='mso-tab-count:1'>    </span>PI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>FLDL2T<span style='mso-tab-count:1'>    </span>LOG2(10)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>FLDL2E<span style='mso-tab-count:1'>    </span>LOG2(e)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>FLDG2 <span style='mso-tab-count:1'>    </span>LOG10(2)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>FLDLN2<span style='mso-tab-count:1'>    </span>LOGe(2)
+
+<p><span
+style='mso-tab-count:1'>      </span>-------------------------- Фиг. 7.11
+Константы 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Остальные команды группы команд персылки
+данных обслуживают
+
+<p><span
+style="mso-spacerun: yes">    </span>константы.<span style='mso-tab-count:1'>    </span>Они
+загружают в стек заранее известные значения.<span style="mso-spacerun: yes"> 
+</span>Эти
+
+<p><span
+style="mso-spacerun: yes">    </span>константы описывают набор величин,
+необходимых программам при
+
+<p><span
+style="mso-spacerun: yes">    </span>вычислениях, и были выбраны из соображений
+упрощения счета
+
+<p><span
+style="mso-spacerun: yes">    </span>трансцендентных и тригонометрических
+функций.<span style="mso-spacerun: yes">  </span>Мы используем
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторые из этих констант в
+демонстрационных программах.<span style="mso-spacerun: yes">  </span>Таблица
+
+<p><span
+style="mso-spacerun: yes">    </span>на Фиг. 7.11 показывает, какое именно
+значение загружается в элемент
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun: yes"> </span>ST0
+в случае каждой команды.<span style="mso-spacerun: yes">  </span>В каждом
+случае мнемоника команды
+
+<p><span
+style="mso-spacerun: yes">    </span>выбрана так, чтобы отражать значение
+константы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">   </span>1/1/80 04:04:07
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Фиг. 7.12 Команды управления сопроцессора 8087<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">   </span>Page<span
+style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 7.12 Команды управления сопроцессора 8087
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>STATUS_WORD<span style="mso-spacerun:
+yes">     </span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CONTROL_WORD<span style="mso-spacerun:
+yes">    </span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>ENVIRONMENT<span style="mso-spacerun:
+yes">     </span>LABEL<span style="mso-spacerun: yes">   </span>BYTE<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">       </span>;
+Область размером 14 байт
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>STATE<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">       </span>LABEL<span style="mso-spacerun: yes">  
+</span>BYTE<span style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">       </span>; Область размером 94 байта
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style="mso-spacerun:
+yes">  </span>9B DB E3<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FINIT
+
+<p><span
+style='mso-tab-count:2'>            </span>0003<span style="mso-spacerun:
+yes">  </span>9B DB E0<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FENI
+
+<p><span
+style='mso-tab-count:2'>            </span>0006<span style="mso-spacerun:
+yes">  </span>9B DB E1<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FDISI
+
+<p><span
+style='mso-tab-count:2'>            </span>0009<span style="mso-spacerun:
+yes">  </span>9B 2E: D9 2E 0000 R<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>FLDCW<span style="mso-spacerun: yes">  
+</span>CONTROL_WORD
+
+<p><span
+style='mso-tab-count:2'>            </span>000F<span style="mso-spacerun:
+yes">  </span>9B 2E: D9 3E 0000 R<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>FSTCW<span style="mso-spacerun: yes">  
+</span>CONTROL_WORD
+
+<p><span
+style='mso-tab-count:2'>            </span>0015<span style="mso-spacerun:
+yes">  </span>9B DB E2<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FCLEX
+
+<p><span
+style='mso-tab-count:2'>            </span>0018<span style="mso-spacerun:
+yes">  </span>9B 2E: D9 36 0000 R<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>FSTENV<span style="mso-spacerun: yes"> 
+</span>ENVIRONMENT
+
+<p><span
+style='mso-tab-count:2'>            </span>001E<span style="mso-spacerun:
+yes">  </span>9B 2E: D9 26 0000 R<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>FLDENV<span style="mso-spacerun: yes"> 
+</span>ENVIRONMENT
+
+<p><span
+style='mso-tab-count:2'>            </span>0024<span style="mso-spacerun:
+yes">  </span>9B 2E: DD 36 0000 R<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>FSAVE<span style="mso-spacerun: yes">  
+</span>STATE
+
+<p><span
+style='mso-tab-count:2'>            </span>002A<span style="mso-spacerun:
+yes">  </span>9B 2E: DD 26 0000 R<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">       </span>FRSTOR<span style="mso-spacerun: yes"> 
+</span>STATE
+
+<p><span
+style='mso-tab-count:2'>            </span>0030<span style="mso-spacerun:
+yes">  </span>9B D9 F7<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FINCSTP
+
+<p><span
+style='mso-tab-count:2'>            </span>0033<span style="mso-spacerun:
+yes">  </span>9B D9 F6<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FDECSTP
+
+<p><span
+style='mso-tab-count:2'>            </span>0036<span style="mso-spacerun:
+yes">  </span>9B DD C2<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FFREE<span style="mso-spacerun: yes">  
+</span>ST(2)
+
+<p><span
+style='mso-tab-count:2'>            </span>0039<span style="mso-spacerun:
+yes">  </span>9B D9 D0<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FNOP
+
+<p><span
+style='mso-tab-count:2'>            </span>003C<span style="mso-spacerun:
+yes">  </span>9B<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">       </span>FWAIT
+
+<p><span
+style='mso-tab-count:2'>            </span>003D<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Фиг. 7.12 Команды управления сопроцессора 8087
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

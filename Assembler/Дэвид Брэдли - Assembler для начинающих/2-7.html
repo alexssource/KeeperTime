@@ -1,0 +1,742 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="2-7">Биты, байты и слова</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Мы назвали &quot;битом&quot; двоичную
+цифру, еденичное значение 0 или 1.<span style="mso-spacerun: yes">  </span>Для
+
+<p><span
+style="mso-spacerun: yes">    </span>удобства введем специальные названия для
+некоторых последо-
+
+<p><span
+style="mso-spacerun: yes">    </span>вательностей битов.<span
+style="mso-spacerun: yes">  </span>Группу из 8 бит принято называть
+байтом.<span style="mso-spacerun: yes">  </span>Во
+
+<p><span
+style="mso-spacerun: yes">    </span>всей документации IBM и в этой книге о
+любых 8 битах информации
+
+<p><span
+style="mso-spacerun: yes">    </span>говорится как о байте.<span
+style="mso-spacerun: yes">  </span>Байт заслужил свое собственное имя по
+
+<p><span
+style="mso-spacerun: yes">    </span>нескольким причинам.<span
+style="mso-spacerun: yes">  </span>Элементарная ячейка памяти имеет длину 8
+бит.
+
+<p><span
+style="mso-spacerun: yes">    </span>При каждом обращении к паамяти IBM PC для
+процессора запрашивыается
+
+<p><span
+style="mso-spacerun: yes">    </span>ровно 8 бит информации.<span
+style="mso-spacerun: yes">  </span>Как мы увидим позднее, отдельные команды
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 могут производить арифметические и
+логические опреации над
+
+<p><span
+style="mso-spacerun: yes">    </span>группами в 8 бит.<span
+style="mso-spacerun: yes">  </span>Байт - наименьшая еденица информации, с
+которой
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 может манипулировать непосредственно.<span
+style='mso-tab-count:1'>  </span>8088 может одной
+
+<p><span
+style="mso-spacerun: yes">    </span>операцией сложить два 8-битовых числа, но
+не может этого проделать
+
+<p><span
+style="mso-spacerun: yes">    </span>с 4-битовыми.<span style="mso-spacerun:
+yes">  </span>Кроме того IBM PC использует байт для представления
+
+<p><span
+style="mso-spacerun: yes">    </span>одного символа.<span style="mso-spacerun:
+yes">  </span>Используя один байт можно представить 256 (2**8)
+
+<p><span
+style="mso-spacerun: yes">    </span>отдельных элементов, таких, например, как
+графические символы.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>следующем пункте мы рассмотрим набор
+символов IBM PC.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку байт является элементом памяти,
+мы должны иметь сред-
+
+<p><span
+style="mso-spacerun: yes">    </span>ство определения в ней отдельных
+байтов.<span style="mso-spacerun: yes">  </span>Задача ассемблера
+
+<p><span
+style="mso-spacerun: yes">    </span>фактически и будет состоять в определении
+содержимого памяти для
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения программы.<span
+style="mso-spacerun: yes">  </span>В основном исходный текст ассемблера состоит
+
+<p><span
+style="mso-spacerun: yes">    </span>из выполняемых инструкций.<span
+style='mso-tab-count:1'>      </span>Но для помещения определенного значения
+
+<p><span
+style="mso-spacerun: yes">    </span>в байт памяти ассемблер располагает
+специальным механизмом -
+
+<p><span
+style="mso-spacerun: yes">    </span>определением байта (dtfine byte) или
+псевдокомандой DB.<span style="mso-spacerun: yes">  </span>DB не
+
+<p><span
+style="mso-spacerun: yes">    </span>является командой 8088.<span
+style="mso-spacerun: yes">  </span>Это команда ассемблеру поместить в память
+
+<p><span
+style="mso-spacerun: yes">    </span>определенные значения.<span
+style="mso-spacerun: yes">  </span>Псевдокоманда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB<span style="mso-spacerun: yes">  
+</span>23
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>дает ассемблеру задание сохранить
+десятичное значение 23 в текущий
+
+<p><span
+style="mso-spacerun: yes">    </span>байт памяти.<span style="mso-spacerun:
+yes">  </span>А оператор
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB<span style="mso-spacerun: yes">  
+</span>1,2,3,4
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>сохраняет значения от 1 до 4 по четырем
+последовательным адресам в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В программах на языке ассемблера оператор
+DB применяют для
+
+<p><span
+style="mso-spacerun: yes">    </span>определения областей памяти.<span
+style="mso-spacerun: yes">  </span>В предыдущих примерах мы размещали в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти определенные значения.<span
+style="mso-spacerun: yes">  </span>Это может быть поисковая таблица или
+
+<p><span
+style="mso-spacerun: yes">    </span>информация для перекодировки чисел.<span
+style="mso-spacerun: yes">  </span>Мы составим несколько
+
+<p><span
+style="mso-spacerun: yes">    </span>примеров, в которых используется
+определенная подобным образом
+
+<p><span
+style="mso-spacerun: yes">    </span>информация.<span style="mso-spacerun:
+yes">  </span>Кроме того встречаются ситуации, когда программе
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется место в памяти для сохранения
+данных в процессе
+
+<p><span
+style="mso-spacerun: yes">    </span>исполнения.<span style="mso-spacerun:
+yes">  </span>Во время ассемблирования программы содержимое этого
+
+<p><span
+style="mso-spacerun: yes">    </span>участка памяти неизвестно:<span
+style='mso-tab-count:1'>      </span>собственно, это содержимое будет
+
+<p><span
+style="mso-spacerun: yes">    </span>переменным во время исполнения
+программы.<span style="mso-spacerun: yes">  </span>Инструкция
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB<span style="mso-spacerun: yes">  
+</span>?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>сообщает ассемблеру о необходимости
+выделить один байт памяти, не
+
+<p><span
+style="mso-spacerun: yes">    </span>изменяя его содержимое.<span
+style="mso-spacerun: yes">  </span>В Этом байте может оказаться любое
+
+<p><span
+style="mso-spacerun: yes">    </span>случайное число, которое будет там
+оставаться пока какая-либо
+
+<p><span
+style="mso-spacerun: yes">    </span>команда не поместит в него определенное
+значение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Нам может потребоваться выделить и большое
+количество байтов,
+
+<p><span
+style="mso-spacerun: yes">    </span>например, чтобы оставить область памяти
+для массива.<span style="mso-spacerun: yes">  </span>Мы можем это
+
+<p><span
+style="mso-spacerun: yes">    </span>сделать так:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB<span style="mso-spacerun: yes">  
+</span>25 DUP(?)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Этой инструкцией выделяется 25 байт
+памяти.<span style="mso-spacerun: yes">  </span>Ключевое слово DUP в
+
+<p><span
+style="mso-spacerun: yes">    </span>этой псевдокоманде означает повторить
+(duplicate).<span style='mso-tab-count:1'>      </span>Число 25
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает, сколько раз ассемблер повторит
+определение байта в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.<span style="mso-spacerun: yes"> 
+</span>Значение или значения в скобках ассемблер использует для
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализации этой области памяти.<span
+style='mso-tab-count:1'>    </span>В данном случае это значение
+
+<p><span
+style="mso-spacerun: yes">    </span>неизвестно.<span style="mso-spacerun:
+yes">  </span>Для инициализации области с одним и тем же значением
+
+<p><span
+style="mso-spacerun: yes">    </span>выражение, например,
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB 17 DUP(31)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>создает 17 байт со значением 31
+каждый.<span style="mso-spacerun: yes">  </span>Наконец,
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DB 30 DUP(1,2,3,4,5)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>выделяет 30 байт со значениями от 1 до 5 в
+первых пяти байтах. Сле-
+
+<p><span
+style="mso-spacerun: yes">    </span>дующие пять байт тоже имеют значения от 1
+до 5 и т.д.<span style="mso-spacerun: yes">  </span>Ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>повторяет значения в скобках пока не будут
+заполнены все 30 байт.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Иногда нам хочется обратиться к набору бит
+меньшему чем байт.
+
+<p><span
+style="mso-spacerun: yes">    </span>Принят размер 4 бит.<span
+style="mso-spacerun: yes">  </span>В 4 битах мы можем представить все 10
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичных цифр.<span style="mso-spacerun:
+yes">  </span>Для значений такого размера мы будем
+
+<p><span
+style="mso-spacerun: yes">    </span>пользоваться термином
+&quot;полубайт&quot;.<span style="mso-spacerun: yes">  </span>Этот термин (в
+оригинале
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;nybble&quot; - прим.<span
+style="mso-spacerun: yes">  </span>перев.), который достиг широкого применения,
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет нам говорить о данных, меньших,
+чем &quot;байт&quot;.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Термин &quot;Слово&quot; имеет для
+программиста значение отличное от
+
+<p><span
+style="mso-spacerun: yes">    </span>принятого в языке.<span style='mso-tab-count:
+1'>  </span>В применении к ЭВМ слово - это наибольшее
+
+<p><span
+style="mso-spacerun: yes">    </span>количество бит, с которым машина может
+обращаться как с единым
+
+<p><span
+style="mso-spacerun: yes">    </span>элементом.<span style='mso-tab-count:1'>    </span>Для
+системы IBM/370 слово составляет 32 бит, а для
+
+<p><span
+style="mso-spacerun: yes">    </span>семейства Intel 8088 - 16.<span
+style='mso-tab-count:1'>      </span>Поэтому термин &quot;слово&quot; имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>неопределенный смысл, пока не известна
+конкретная машина.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Размер слова в 8088 составляет 16 бит.<span
+style='mso-tab-count:1'>    </span>Этот размер
+
+<p><span
+style="mso-spacerun: yes">    </span>определяется каналами передачи данных в
+процессоре.<span style="mso-spacerun: yes">  </span>Над числами до
+
+<p><span
+style="mso-spacerun: yes">    </span>16 бит 8088 может призводить операции
+одной командой.<span style="mso-spacerun: yes">  </span>Любое более
+
+<p><span
+style="mso-spacerun: yes">    </span>крупное число потребует более одной
+команды.<span style="mso-spacerun: yes">  </span>Существуют команды,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые манипулируют и с меньшими объемами
+памяти, как, например,
+
+<p><span
+style="mso-spacerun: yes">    </span>команда сложения двух 8-битовых
+чисел.<span style="mso-spacerun: yes">  </span>Несколько инструкций
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяют манипулировать и с отдельными
+битами.<span style="mso-spacerun: yes">  </span>Но для сложения
+
+<p><span
+style="mso-spacerun: yes">    </span>двух 32-битовых чисел потребуется уже две
+команды, складывающие по
+
+<p><span
+style="mso-spacerun: yes">    </span>16 бит каждая.<span style="mso-spacerun:
+yes">  </span>Наибольшее число над которым мы можем производить
+
+<p><span
+style="mso-spacerun: yes">    </span>элементарные операции типа сложения имеет
+размер машинного слова.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Аналогично команде определения байта
+памяти, существует и
+
+<p><span
+style="mso-spacerun: yes">    </span>инструкция для определения слова
+памяти.<span style="mso-spacerun: yes">  </span>Оператор ассемблера DW
+
+<p><span
+style="mso-spacerun: yes">    </span>означает определение слова (defie
+word).<span style="mso-spacerun: yes">  </span>Первое утверждение DW на
+
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг.<span style="mso-spacerun: yes"> 
+</span>2.10 определяет 16 бит памяти со значением 1234H.<span
+style="mso-spacerun: yes">  </span>Как и в
+
+<p><span
+style="mso-spacerun: yes">    </span>случае с байтами, мы можем использовать
+оператор DUP для
+
+<p><span
+style="mso-spacerun: yes">    </span>определения больших областей памяти,
+разбитых на слова.<span style="mso-spacerun: yes">  </span>И точно
+
+<p><span
+style="mso-spacerun: yes">    </span>также, для обозначения неинициируемых
+областей можно использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>операнд &quot;?&quot;.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>10/29/88
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>16:10:44
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span><span style="mso-spacerun: yes">  </span>Фиг. 2.10 Примеры определения
+слов<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">  </span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>1<span style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>2<span style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 2.10 Примеры определения слов
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>3
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>4 0000<span style="mso-spacerun: yes">  </span>1234<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">      </span>DW<span style="mso-spacerun: yes">      </span>1234H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>5 0002<span style="mso-spacerun: yes">  </span>0003[<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>DW<span style="mso-spacerun: yes">      </span>3 DUP(5678H)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>6<span style='mso-tab-count:2'>            </span> 5678
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>7<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">       </span>]
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>8
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>9 0008<span style="mso-spacerun: yes">  </span>????<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">      </span>DW<span style="mso-spacerun: yes">      </span>?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>10
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>11<span style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>END
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>Фиг. 2.10 Примеры определения слов&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Одна из обескураживающих черт 8088 - это
+его манера хранения
+
+<p><span
+style="mso-spacerun: yes">    </span>слов в памяти.<span style="mso-spacerun:
+yes">  </span>На Фиг.<span style="mso-spacerun: yes">  </span>2.10, хоть мы и
+определяли значение слова
+
+<p><span
+style="mso-spacerun: yes">    </span>как 1234Н, ассемблер сохранит в памяти
+значение 3412Н, по крайней
+
+<p><span
+style="mso-spacerun: yes">    </span>мере так это выглядит.<span
+style="mso-spacerun: yes">  </span>Посмотрим, как это получается.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Допустим, слово 1234Н сохранено в ячейках
+100 и 101.<span style="mso-spacerun: yes">  </span>8088 тре-
+
+<p><span
+style="mso-spacerun: yes">    </span>бует, чтобы ассемблер поместил значение
+34Н в ячейку 100, а 12Н - в
+
+<p><span
+style="mso-spacerun: yes">    </span>101.<span style="mso-spacerun: yes"> 
+</span>Легче всего запомнить это так, что ассемблер сохраняет
+
+<p><span
+style="mso-spacerun: yes">    </span>младший байт слова в ячейку памяти с
+меньшим адресом, а старший
+
+<p><span
+style="mso-spacerun: yes">    </span>байт - с большим.<span
+style="mso-spacerun: yes">  </span>На Фиг.<span style='mso-tab-count:1'>      </span>2.11
+показано, содержимое памяти после
+
+<p><span
+style="mso-spacerun: yes">    </span>того, как ассемблер поместит в нее данные.<span
+style='mso-tab-count:1'>  </span>Пока вы не привыкнете к
+
+<p><span
+style="mso-spacerun: yes">    </span>такому методу, вам
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>Адрес<span style='mso-tab-count:
+1'> </span><span style="mso-spacerun: yes">   </span>Значение
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>-------------------------
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>.<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>.
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>.<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>.
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>100<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>34Н
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>101<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>12Н
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>.<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>.
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>.<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>.<span style="mso-spacerun: yes">      
+</span>Фиг. 2.11 Представление
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>-------------------------<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>в памяти<span style="mso-spacerun: yes"> 
+</span>DW 1234H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>будет казаться, что все в памяти наоборот.<span
+style='mso-tab-count:1'>  </span>К счастью, если вы не
+
+<p><span
+style="mso-spacerun: yes">    </span>будете смешивать операции над байтами и
+над словами одной и той же
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>области в памяти, вам незачем беспокоиться об этом неожиданном
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;переключении&quot; байтов.<span
+style="mso-spacerun: yes">  </span>Программа может спокойно работать со
+
+<p><span
+style="mso-spacerun: yes">    </span>словами, а 8088 всегда разберется что к
+чему.<span style="mso-spacerun: yes">  </span>Только в том случае,
+
+<p><span
+style="mso-spacerun: yes">    </span>если вы захотите обратиться к конкретному
+байту какого-либо слова,
+
+<p><span
+style="mso-spacerun: yes">    </span>вам придется иметь дело с фактическим
+способом хранения слов в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти семейства 8088.<span
+style="mso-spacerun: yes">  </span>Ассемблер обращает внимание на структуру
+
+
+<p><span
+style="mso-spacerun: yes">    </span>слов в распечатке программы, то есть изображает
+слова в объектном
+
+<p><span
+style="mso-spacerun: yes">    </span>коде как слова, а не как байты, которые
+выглядели бы перевернутыми
+
+<p><span
+style="mso-spacerun: yes">    </span>наоборот.<span style="mso-spacerun: yes"> 
+</span>Вы сможете различать слова благодаря тому, что ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>записывает их шестнадцатеричными цифрами
+без пробелов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Однако остался еще один тип данных,
+который постоянно использу-
+
+<p><span
+style="mso-spacerun: yes">    </span>ется программах на языке ассемблера для
+микропроцессора 8088.<span style="mso-spacerun: yes">  </span>Это
+
+<p><span
+style="mso-spacerun: yes">    </span>- двойное слово, значение в 32 бита
+длиной.<span style="mso-spacerun: yes">  </span>Программы пользуются
+
+<p><span
+style="mso-spacerun: yes">    </span>двойными словами для хранения адресов и
+очень больших чисел.<span style="mso-spacerun: yes">  </span>Чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>определить область, содержащую значение
+двойного слова, оператор
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DD<span style="mso-spacerun: yes">  
+</span>значение
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>генерирует поле размером в 4 байта.<span
+style="mso-spacerun: yes">  </span>DD означает операцию выделения
+
+<p><span
+style="mso-spacerun: yes">    </span>двойнго слова (define doubleword).<span
+style='mso-tab-count:1'>    </span>Так же как в случае с DW -
+
+<p><span
+style="mso-spacerun: yes">    </span>опратором, ассемблер размещает в памяти
+младший байт ниже, а
+
+<p><span
+style="mso-spacerun: yes">    </span>старший - выше.<span style="mso-spacerun:
+yes">  </span>В таком же порядке сохраняются средние два байта.
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогично операторам DB и DW вы можете
+пользоваться функцией DUP и
+
+<p><span
+style="mso-spacerun: yes">    </span>применять операнд &quot;?&quot; для того
+чтобы оставить область
+
+<p><span
+style="mso-spacerun: yes">    </span>неопределенной.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Ассемблер может генерировать и другие
+структуры данных.<span style="mso-spacerun: yes">  </span>Их об-
+
+<p><span
+style="mso-spacerun: yes">    </span>суждение мы отложим, пока не дойдем до
+некоторых свойств макроас-
+
+<p><span
+style="mso-spacerun: yes">    </span>семблера и сопроцессора 8087.<span
+style="mso-spacerun: yes">  </span>Остальные структуры данных
+
+<p><span
+style="mso-spacerun: yes">    </span>используются в программах прежде всего для
+очень больших чисел в
+
+<p><span
+style="mso-spacerun: yes">    </span>Числовом сопроцессоре или для определения
+собственных структур
+
+<p><span
+style="mso-spacerun: yes">    </span>данных.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-1-7">Перекодировка
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда перекодировки XLAT преобразует
+информацию из одного
+
+<p><span
+style="mso-spacerun: yes">    </span>представления в другое.<span
+style="mso-spacerun: yes">  </span>Команда XLAT преобразует значение в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AL в другое значение, выбираемое
+из таблицы, на которую
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает регистр BX.<span
+style="mso-spacerun: yes">  </span>На Фиг.4.4 схематически показано, как
+
+<p><span
+style="mso-spacerun: yes">    </span>работает эта команда.<span
+style="mso-spacerun: yes">  </span>Регистр BX вместе с выбранным сегментным
+
+<p><span
+style="mso-spacerun: yes">    </span>регистром определяет точку начала таблицы
+перекодировки в памяти.
+
+<p><span
+style="mso-spacerun: yes">    </span>К этому адресу таблицы команда прибавляет
+содержимое регистра AL,
+
+<p><span
+style="mso-spacerun: yes">    </span>значение между 0 и 255.<span
+style="mso-spacerun: yes">  </span>Данные, расположенные по этому адресу,
+
+<p><span
+style="mso-spacerun: yes">    </span>команда XLAT пересылает в регистр AL.<span
+style="mso-spacerun: yes">  </span>Команда XLAT выполняет
+
+<p><span
+style="mso-spacerun: yes">    </span>операцию просмотра таблицы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команду XLAT хорошо использовать при
+кодировании и
+
+<p><span
+style="mso-spacerun: yes">    </span>декодировании текстовых данных. С помощью
+этой команды программа
+
+<p><span
+style="mso-spacerun: yes">    </span>может организовать простую замену кодов
+символов. В следующем
+
+<p><span
+style="mso-spacerun: yes">    </span>примере десять символов кода ASCII от 0 до
+9 перекодируются в целях
+
+<p><span
+style="mso-spacerun: yes">    </span>передачи. Этот метод может использоваться
+в системе для
+
+<p><span
+style="mso-spacerun: yes">    </span>перекодировки информации, передаваемой из
+одной машины в другую.
+
+<p><span
+style="mso-spacerun: yes">    </span>Когда данные принимаются, другая программа
+возвращает
+
+<p><span
+style="mso-spacerun: yes">    </span>закодированные символы к их
+первоначальному виду. На Фиг. 4.5
+
+<p><span
+style="mso-spacerun: yes">    </span>демонстрируется кодировка и декодировка.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.4.5 изображены две таблицы
+перекодировки, одна для
+
+<p><span
+style="mso-spacerun: yes">    </span>передачи, а другая для приема. Чтобы
+передать значение 5, программа
+
+<p><span
+style="mso-spacerun: yes">    </span>находит значение 5 в таблице передачи (а),
+из которой извлекает
+
+<p><span
+style="mso-spacerun: yes">    </span>значение 6, которое передает. Когда это
+значение принимается,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа декодирования ищет 6 в таблице
+приема (b), чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>перекодировать его в истинное значение 5.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 4.6 показана подпрограмма, которая
+производит это
+
+<p><span
+style="mso-spacerun: yes">    </span>декодирование. Подпрограмма
+перекодирования читает начальное
+
+<p><span
+style="mso-spacerun: yes">    </span>значение из порта ввода=вывода, и
+возвращает кодированное или
+
+<p><span
+style="mso-spacerun: yes">    </span>декодированное значение в вызывающую
+программу через регистр AL.
+
+<p><span
+style="mso-spacerun: yes">    </span>Одна и та же программа выполняет как
+кодирова- ние, так и
+
+<p><span
+style="mso-spacerun: yes">    </span>декодирование, меняя таблицы кодировки.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сначала подпрограмма читает данные из
+вводного порта 40H в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AL. Затем она вычитает значение
+&quot;0&quot; в коде ASCII из
+
+<p><span
+style="mso-spacerun: yes">    </span>значения данных, чтобы получить цифровое
+значение. Это означает,
+
+<p><span
+style="mso-spacerun: yes">    </span>что символ &quot;0&quot; дает значение 0 в
+регистре AL, символ &quot;1&quot; дает 1, и
+
+<p><span
+style="mso-spacerun: yes">    </span>т.д. Команда LDS загружает указатель
+нужной таблицы в пару
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров DS:BX. Загружая этот указатель
+из ячейки памяти - в
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">      
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">   </span>1/1/80 04:00:38
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 4.6 Пример перекодировки<span style='mso-tab-count:4'>                   </span><span
+style="mso-spacerun: yes">  </span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.6 Пример перекодировки
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE, DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes">      
+</span>Эта программа вводит значение из порта 040H и
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes">      
+</span>декодирует его, используя таблицу перекодировки.
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes">      
+</span>Так как одна и та же программа используется как для
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes">      
+</span>кодировки, так и декодировки, указатель TABLE_POINTER
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes">      
+</span>указывает на соответсвующую таблицу перекодировки.
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes">      
+</span>Вызывая подпрограмму, необходимо установить
+
+<p><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes">      
+</span>этот указатель на соответствующую таблицу.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>TRANSLATE<span style="mso-spacerun:
+yes">       </span>PROC<span style="mso-spacerun: yes">    </span>NEAR<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">      </span>;
+Подпрограмма TRANSLATE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>E4 40<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>IN<span style="mso-spacerun: yes">      </span>AL,040H<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Ввод значения из порта
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0002<span style="mso-spacerun: yes">  </span>2C 30<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>SUB<span style="mso-spacerun: yes">    
+</span>AL,&quot;0&quot;<span style="mso-spacerun: yes">                 
+</span>; Значение относительно символа &quot;0&quot;,
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes">      </span>; т.е. относительно начала таблицы
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0004<span style="mso-spacerun: yes">  </span>C5 1E 000A R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>LDS<span style="mso-spacerun: yes">     </span>BX,TABLE_POINTER<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>; (DS,BX) указывает на таблицу
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0008<span style="mso-spacerun: yes">  </span>D7 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>XLAT<span
+style="mso-spacerun: yes">    </span>XMIT_TABLE<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>; Перекодировка числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0009<span style="mso-spacerun: yes">  </span>C3 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>RET
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000A<span style="mso-spacerun: yes">  </span>000E ---- R<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>TABLE_POINTER<span style="mso-spacerun: yes">   </span>DD<span
+style="mso-spacerun: yes">      </span>XMIT_TABLE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000E<span style="mso-spacerun: yes">  </span>35 37 39 31 33 36 38<span
+style="mso-spacerun: yes">     </span>XMIT_TABLE<span style="mso-spacerun:
+yes">      </span>DB<span style="mso-spacerun: yes">      </span>'5791368024'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>30 32 34
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0018<span style="mso-spacerun: yes">  </span>37 33 38 34 39 30 35<span
+style="mso-spacerun: yes">     </span>RECV_TABLE<span style="mso-spacerun:
+yes">      </span>DB<span style="mso-spacerun: yes">      </span>'7384905162'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>31 36 32
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0022<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>TRANSLATE<span style="mso-spacerun:
+yes">       </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0022<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.6 Пример перекодировки
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>примере TABLE_POINTER - подпрограмма может
+использовать любую
+
+<p><span
+style="mso-spacerun: yes">    </span>таблицу перекодировки. В этой программе
+имеются две табдицы, одна
+
+<p><span
+style="mso-spacerun: yes">    </span>из них для передачи, названная XMIT_TABLE,
+которая соответствует
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг.4.5(а), другая - таблица приема,
+названная RECV_TABLE, -
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствует Фиг.4.5(б). Перед вызовом
+подпрограммы головная
+
+<p><span
+style="mso-spacerun: yes">    </span>программа должна записать нужный адресный
+указатель в переменную
+
+<p><span
+style="mso-spacerun: yes">    </span>TABLE_POINTER. Если головная программа
+принимает коды, она должна
+
+<p><span
+style="mso-spacerun: yes">    </span>поместить адрес таблицы RECV_TABLE в
+переменную TABLE_POINTER.
+
+<p><span
+style="mso-spacerun: yes">    </span>Заметим, что эта подпрограмма может
+проделать любую перекодировку,
+
+<p><span
+style="mso-spacerun: yes">    </span>поскольку таблицу перекодировки назначает
+вызывающая программа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда XLAT выполняет перекодировку по
+таблице, на которую
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает пара регистров DS:BX. В регистре
+AL находится значение
+
+<p><span
+style="mso-spacerun: yes">    </span>между 0 и 9. Команда XLAT складывает это
+значение с содержимым
+
+<p><span
+style="mso-spacerun: yes">    </span>указателя и загружает перекодированное
+значение в регистр AL.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда RET возвращает управление в
+вызывающую программу.
+
+<p><span
+style='mso-tab-count:1'>      </span>Другим обычным случаем использования
+команды XLAT является
+
+<p><span
+style="mso-spacerun: yes">    </span>смена кода представления символов в одной
+машине на код
+
+<p><span
+style="mso-spacerun: yes">    </span>представления в другой машине. IBM PC,
+работает в коде ASCII, а
+
+<p><span
+style="mso-spacerun: yes">    </span>большинство машин фирмы IBM используют код
+EBCDIC (Extended
+
+<p><span
+style="mso-spacerun: yes">    </span>Binary=Coded=Decimal Interchange Code -
+расширенный
+
+<p><span
+style="mso-spacerun: yes">    </span>двоично=кодированный десятичный код обмена
+информации). Чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>связываться с такими машинами, в программе
+надо перекодировать
+
+<p><span
+style="mso-spacerun: yes">    </span>символы, и команда XLAT естественным
+образом подходит для этой
+
+<p><span
+style="mso-spacerun: yes">    </span>функции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Итак, команда XLAT является весьма мощным
+средством
+
+<p><span
+style="mso-spacerun: yes">    </span>перекодировки байтовой или символьной
+информации. Мощность этой
+
+<p><span
+style="mso-spacerun: yes">    </span>команды делает ее редко используемой, так
+как возможность
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать ее преимущества возникает не
+часто. Однако помните об
+
+<p><span
+style="mso-spacerun: yes">    </span>этой команде на тот случай, когда она
+окажется полностью
+
+<p><span
+style="mso-spacerun: yes">    </span>оправданной.
+
+<p><div align="center"><b><font size="+1"><i>	
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

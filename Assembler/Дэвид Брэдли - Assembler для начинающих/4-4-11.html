@@ -1,0 +1,116 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="4-4-11">Команда преобразования
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Когда программа выполняет целое деление со
+знаком, возникает
+
+<p><span
+style="mso-spacerun: yes">    </span>проблема, если делимое - байтовый операнд.<span
+style='mso-tab-count:1'>  </span>Иногда нужно разделить
+
+<p><span
+style="mso-spacerun: yes">    </span>байтовое значение на байтовое, но команда
+деления требует, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>делимое занимало регистр AX.<span
+style="mso-spacerun: yes">  </span>В случае деления со знаком
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимо, чтобы значение в регистре AX
+было правильной копией
+
+<p><span
+style="mso-spacerun: yes">    </span>числа, представленного в дополнительном
+коде.<span style="mso-spacerun: yes">  </span>Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразования байта в слово CBW решает
+эту задачу; она берет число
+
+<p><span
+style="mso-spacerun: yes">    </span>из регистра AL и расширяет его знак в
+регистр AH.<span style="mso-spacerun: yes">  </span>Таким образом,
+
+<p><span
+style="mso-spacerun: yes">    </span>если значение в регистре AL положительно,
+команда заполняет регистр
+
+<p><span
+style="mso-spacerun: yes">    </span>AH нулями, если же значение в регистре AL
+отрицательно, она
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает в регистре AH все
+единицы.<span style="mso-spacerun: yes">  </span>Команда CBW загружает в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AX 16=битовое число, равное
+значению исходного байта в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AL.<span style="mso-spacerun:
+yes">  </span>В случае деления слов команда преобразования слова в
+
+<p><span
+style="mso-spacerun: yes">    </span>двойное слово CWD выполняет идентичную
+функцию.<span style="mso-spacerun: yes">  </span>Команда CWD
+
+<p><span
+style="mso-spacerun: yes">    </span>расширяет знак слова из регистра AX в
+регистр DX.<span style="mso-spacerun: yes">  </span>Эти две команды
+
+<p><span
+style="mso-spacerun: yes">    </span>расширяют операнды до выполнения целого
+деления со знаком.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В случае целого деления без знака при тех
+же условиях знака уже
+
+
+<p><span
+style="mso-spacerun: yes">   </span>не существует, и его не надо расширять в
+старшую часть делимого. В
+
+<p><span
+style="mso-spacerun: yes">    </span>этом случае правильным является заполнение
+регистра AH (или
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра DX) нулями перед делением.
+Существует много команд,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые могут выполнить эту задачу,
+включая команду MOV с
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственным операндом, или просто
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>SUB<span style='mso-tab-count:1'>   </span>AH,AH
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>что гарантирует обнуление регистра AH.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

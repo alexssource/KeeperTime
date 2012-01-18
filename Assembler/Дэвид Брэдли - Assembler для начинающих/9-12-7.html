@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<b><p><div align="center"><a name="9-12-7">Графика
+</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Видеопрограмма BIOS имеет несколько
+функций, которые обслуживают
+
+<p><span
+style="mso-spacerun: yes">    </span>графику на IBM PC.<span style='mso-tab-count:
+1'>  </span>Устанавливая регистр AH равным 11, программа
+
+<p><span
+style="mso-spacerun: yes">    </span>может сделать выбор цвета в графическом
+режиме.<span style="mso-spacerun: yes">  </span>Эта подпрограмма
+
+<p><span
+style="mso-spacerun: yes">    </span>устроена так, что она работает с истинной
+палитрой, а не с
+
+<p><span
+style="mso-spacerun: yes">    </span>предопределенными палитрами цветной платы.<span
+style='mso-tab-count:1'>  </span>Если графический режим
+
+<p><span
+style="mso-spacerun: yes">    </span>320*200 имеет истинную палитру, то это
+означает, что должно
+
+<p><span
+style="mso-spacerun: yes">    </span>существовать отображение в четыре цвета,
+возможных для каждой
+
+<p><span
+style="mso-spacerun: yes">    </span>точки, из четырех цветов, которые хотела
+бы иметь программа.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>настоящее время это делается для цвета
+фона в режиме нормального
+
+<p><span
+style="mso-spacerun: yes">    </span>разрешения.<span style="mso-spacerun:
+yes">  </span>Вы можете выбрать любой цвет в качестве цвета 0, цвета
+
+<p><span
+style="mso-spacerun: yes">    </span>фона.<span style="mso-spacerun: yes"> 
+</span>Интерфейс этой программы был разработан для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>позволять определение истинной палитры
+цветов, если фирма IBM
+
+<p><span
+style="mso-spacerun: yes">    </span>когда-либо модифицирует аппаратуру так,
+чтобы позволять это.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Чтобы достичь этой цели, значение точки
+определяется в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>BH. В регистре BL определяется цвет, который
+присвоит адаптер этой
+
+<p><span
+style="mso-spacerun: yes">    </span>точке. Например, если содержимое регистра
+BH равно 0; регистр BL
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит значение цвета фона. BIOS
+обслуживает значение регистра
+
+<p><span
+style="mso-spacerun: yes">    </span>BH, равное только 0 или 1 , так как можно
+выбрать только цвет фона
+
+<p><span
+style="mso-spacerun: yes">    </span>и одну из двух предопределенных палитр.
+Пролог BIOS определяет
+
+<p><span
+style="mso-spacerun: yes">    </span>палитру. С помощью этой функции можно
+также определить цвет
+
+<p><span
+style="mso-spacerun: yes">    </span>окаймления в текстовых режимах.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Две другие графические подпрограммы
+позволяют читать либо
+
+<p><span
+style="mso-spacerun: yes">    </span>записывать конкретные точки графического
+экрана. В простейших
+
+<p><span
+style="mso-spacerun: yes">    </span>случаях эта функция BIOS позволяет вам
+определить строку и колонку
+
+<p><span
+style="mso-spacerun: yes">    </span>без определения их отображения в буфер
+дисплея. При построении
+
+<p><span
+style="mso-spacerun: yes">    </span>больших картин, а также при выполнении
+любой графической работы эти
+
+<p><span
+style="mso-spacerun: yes">    </span>функции требуют очень много времени.
+Программа должна вызывать BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>при выдаче каждой точки на экран. В случае
+режима высокого
+
+<p><span
+style="mso-spacerun: yes">    </span>разрешения программа должна вызвать BIOS
+128000 раз, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>изобразить каждую точку правильно. Хотя
+программы, входящие в BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняется очень быстро, она должна
+вычислять адрес буфера всякий
+
+<p><span
+style="mso-spacerun: yes">    </span>раз, когда получает информацию о строке и
+колонке. Для этого
+
+<p><span
+style="mso-spacerun: yes">    </span>действия требуется умножение и несколько
+сложений, и следовательно,
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется некоторое время. В общем случае
+программа записывает
+
+<p><span
+style="mso-spacerun: yes">    </span>график с помощью стартового положения
+точки и смещений относительно
+
+<p><span
+style="mso-spacerun: yes">    </span>этого положения. Это означает, что
+программа вычисляет положение
+
+<p><span
+style="mso-spacerun: yes">    </span>первой точки с помощью алгоритма
+отображения в буфер, а положения
+
+<p><span
+style="mso-spacerun: yes">    </span>остальных точек отсчитывает от текущего
+адреса буфера.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

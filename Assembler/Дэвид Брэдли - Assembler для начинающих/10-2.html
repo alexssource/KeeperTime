@@ -1,0 +1,2106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="10-2">Возврат программы в DOS с сохранением ее резидентности</a></i></font></b></div></p>
+<p><span
+style="mso-spacerun: yes">    </span>Первый способ написания и загрузки
+постоянной функции в DOS состоит
+
+<p><span
+style="mso-spacerun: yes">    </span>в том, чтобы, возвращая управление DOS,
+программа оставалась в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти резидентной. Такую функцию
+существляет прерывание INT 27H.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обычно для выхода в DOS используется
+прерывание INT 20H, либо
+
+<p><span
+style="mso-spacerun: yes">    </span>программа производит переход по адресу 0
+программного префикса, как
+
+<p><span
+style="mso-spacerun: yes">    </span>мы делали в программах типа .EXE. В
+результате управление
+
+<p><span
+style="mso-spacerun: yes">    </span>возвращается DOS. Операционная система
+освобождает память,
+
+<p><span
+style="mso-spacerun: yes">    </span>предоставленную этой программе. Следующую
+программу, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>загружается после прерывания INT 20H, DOS
+помещает в ту же область
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, которая использовалась для
+предыдущей.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Выход в DOS через прерывание INT 27H
+отличается от
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотренного. Управление возвращается в
+DOS точно так же, как и в
+
+<p><span
+style="mso-spacerun: yes">    </span>случае прерывания INT 20H, но часть
+памяти, занимаемая программой,
+
+<p><span
+style="mso-spacerun: yes">    </span>не возвращается для дальнейшего
+использования. В регистре DX
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает на адрес первой свободной ячейки
+после той области
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, котрую вы хотите зарезервировать.
+DOS резервирует эту
+
+<p><span
+style="mso-spacerun: yes">    </span>область памяти, как часть системы. Это
+означает, что ваша программа
+
+<p><span
+style="mso-spacerun: yes">    </span>становится частью DOS. Такую программу
+можно удалить из памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>только перезагрузив DOS и начав все
+сначала.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если выход в PC DOS осуществляется при
+помощи прерывания INT
+
+<p><span
+style="mso-spacerun: yes">    </span>27H, то в регистре CS должен находиться
+адрес программного
+
+<p><span
+style="mso-spacerun: yes">    </span>префикса. Легче всего это сделать, если
+писать использующую INT 21H
+
+<p><span
+style="mso-spacerun: yes">    </span>программу как .COM программу. Написать
+программу типа .EXE,
+
+<p><span
+style="mso-spacerun: yes">    </span>оставляющую при выходе содержимое
+регистров CS и DX корректным,
+
+<p><span
+style="mso-spacerun: yes">    </span>довольно трудно. Поскольку создание
+программ типа .COM было
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотрено в гл.5, будем считать, что все
+наши остающиеся
+
+<p><span
+style="mso-spacerun: yes">    </span>резидентными программы имеют тип .COM.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Рассматриваемый для прерывания DOS INT 27H
+пример довольно
+
+<p><span
+style="mso-spacerun: yes">    </span>сложен. Он иллюстрирует не только
+использование INT 27H, но и
+
+<p><span
+style="mso-spacerun: yes">    </span>способы замены существующей BIOS другой
+версией. В этом примере мы
+
+<p><span
+style="mso-spacerun: yes">    </span>даже применим несколько трюков с таймером
+для увеличения скорости
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>обработки.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Пример представлен на Фиг. 10.1.
+Приведенная здесь программа
+
+<p><span
+style="mso-spacerun: yes">    </span>предназначена для обслуживания буфера
+печати. Обычно при выдаче на
+
+<p><span
+style="mso-spacerun: yes">    </span>печать символа программа обращается к
+прерыванию INT 17H - драйверу
+
+<p><span
+style="mso-spacerun: yes">    </span>печати BIOS. Эта функция выдает символ на
+принтер после
+
+<p><span
+style="mso-spacerun: yes">    </span>проверки ошибок и ожидания готовности
+принтера. Как правило, при
+
+<p><span
+style="mso-spacerun: yes">    </span>этом обеспечивается достаточная
+производительность. Но допустим,
+
+<p><span
+style="mso-spacerun: yes">    </span>что вы пишете несколько программ и хотите
+вывести их на принтер.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если вы попытаетесь сделать это, то не
+сможете обратиться к системе
+
+<p><span
+style="mso-spacerun: yes">    </span>до тех пор, пока принтер не закончит
+работу. Чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>продолжить редактирование или
+ассемблирование другой части
+
+<p><span
+style="mso-spacerun: yes">    </span>программы, вам придется ждать завершения
+печати.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p>A<br>
+<span style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">     </span>Microsoft (R) Macro Assembler Version 5.00 <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>4/2/89 16:06:27
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 10.1 Буфер для печати<span style='mso-tab-count:4'>                     </span><span
+style="mso-spacerun: yes">     </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">  </span>PAGE<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 10.1 Буфер для печати
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> ABS0<span
+style='mso-tab-count:1'> </span> SEGMENT AT 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0020<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 4*8H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0020<span style='mso-tab-count:1'>      </span>????????<span
+style='mso-tab-count:2'>          </span> TIMER_INT<span style='mso-tab-count:
+1'>  </span> DD<span style='mso-tab-count:1'>   </span> ?<span
+style='mso-tab-count:1'>    </span> ; Аппратное прерывание от таймера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>005C<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 4*17H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>005C<span style='mso-tab-count:1'>      </span>????????<span
+style='mso-tab-count:2'>          </span> PRINTER_INT<span style='mso-tab-count:
+1'>      </span> DD<span style='mso-tab-count:1'>   </span> ?<span
+style='mso-tab-count:1'>    </span> ; Прерывание к BIOS для печати
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0408<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 408H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0408<span style='mso-tab-count:1'>      </span>????<span
+style='mso-tab-count:3'>              </span> PRINTER_BASE<span
+style='mso-tab-count:1'>     </span> DW<span style='mso-tab-count:1'>   </span>
+?<span style='mso-tab-count:1'>    </span> ; Базовый адрес адаптера принтера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>040A<span style='mso-tab-count:4'>                        </span> ABS0<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0100<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 100H
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE,ES:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0100<span style='mso-tab-count:1'>      </span>EB 09 90<span
+style='mso-tab-count:3'>                </span> JMP<span style='mso-tab-count:
+1'>  </span> START
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0103<span style='mso-tab-count:1'>      </span>????????<span
+style='mso-tab-count:2'>          </span> PRINT_VECTOR<span style='mso-tab-count:
+1'>     </span> DD<span style='mso-tab-count:1'>   </span> ?<span
+style='mso-tab-count:1'>    </span> ; Место для хранения исходного вектора 17h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0107<span style='mso-tab-count:1'>      </span>????????<span
+style='mso-tab-count:2'>          </span> TIMER_VECTOR<span style='mso-tab-count:
+1'>     </span> DD<span style='mso-tab-count:1'>   </span> ?<span
+style='mso-tab-count:1'>    </span> ; Место для хранения исходного вектора 9h
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>010B<span style='mso-tab-count:4'>                        </span> START:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>010B<span style='mso-tab-count:1'>      </span>2B C0<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> AX,AX<span style='mso-tab-count:2'>            </span>; Установка
+регистра ES на сегмент ABS0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>010D<span style='mso-tab-count:1'>      </span>8E C0<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> ES,AX
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>ES:ABS0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>010F<span style='mso-tab-count:1'>      </span>26: A1 005C R<span
+style='mso-tab-count:3'>                 </span> MOV<span style='mso-tab-count:
+1'>  </span> AX,WORD PTR PRINTER_INT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0113<span style='mso-tab-count:1'>      </span>26: 8B 1E 005E R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+BX,WORD PTR PRINTER_INT+2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0118<span style='mso-tab-count:1'>      </span>26: 8B 0E 0020 R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+CX,WORD PTR TIMER_INT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>011D<span style='mso-tab-count:1'>      </span>26: 8B 16 0022 R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+DX,WORD PTR TIMER_INT+2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0122<span style='mso-tab-count:1'>      </span>A3 0103 R<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> WORD PTR PRINT_VECTOR,AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0125<span style='mso-tab-count:1'>      </span>89 1E 0105 R<span
+style='mso-tab-count:3'>                  </span> MOV<span style='mso-tab-count:
+1'>  </span> WORD PTR PRINT_VECTOR+2,BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0129<span style='mso-tab-count:1'>      </span>89 0E 0107 R<span
+style='mso-tab-count:3'>                  </span> MOV<span style='mso-tab-count:
+1'>  </span> WORD PTR TIMER_VECTOR,CX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>012D<span style='mso-tab-count:1'>      </span>89 16 0109 R<span
+style='mso-tab-count:3'>                  </span> MOV<span style='mso-tab-count:
+1'>  </span> WORD PTR TIMER_VECTOR+2,DX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Во время занесения векторов прерываний прерывания запрещены
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0131<span style='mso-tab-count:1'>      </span>FA<span style='mso-tab-count:
+4'>                      </span> CLI
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>Фиг. 10.1 Буфер печати (начало)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0132<span style='mso-tab-count:1'>      </span>26: C7 06 005C R 0162<span
+style='mso-tab-count:2'>         </span> MOV<span style='mso-tab-count:1'>  </span>
+WORD PTR PRINTER_INT,offset PRINT_HANDLER
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>R
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0139<span style='mso-tab-count:1'>      </span>26: 8C 0E 005E R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+WORD PTR PRINTER_INT+2,CS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>013E<span style='mso-tab-count:1'>      </span>26: C7 06 0020 R 0196<span
+style='mso-tab-count:2'>         </span> MOV<span style='mso-tab-count:1'>  </span>
+WORD PTR TIMER_INT,offset TIMER_HANDLER
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>R
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0145<span style='mso-tab-count:1'>      </span>26: 8C 0E 0022 R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+WORD PTR TIMER_INT+2,CS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>014A<span style='mso-tab-count:1'>      </span>B0 36<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,00110110b
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>014C<span style='mso-tab-count:1'>      </span>E6 43<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> 43H,AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>014E<span style='mso-tab-count:1'>      </span>B0 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,0<span style='mso-tab-count:1'> </span>; Увеличение скорости
+работы таймера в 256 раз
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0150<span style='mso-tab-count:1'>      </span>E6 40<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> 40H,AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0152<span style='mso-tab-count:1'>      </span>B0 01<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,1
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0154<span style='mso-tab-count:1'>      </span>E6 40<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> 40H,AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0156<span style='mso-tab-count:1'>      </span>FB<span style='mso-tab-count:
+4'>                      </span> STI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0157<span style='mso-tab-count:1'>      </span>8D 16 28FE R<span
+style='mso-tab-count:3'>                  </span> LEA<span style='mso-tab-count:
+1'>  </span> DX,BUFFER_END<span style='mso-tab-count:1'>    </span>; Занесение
+адреса конца программы
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>015B<span style='mso-tab-count:1'>      </span>CD 27<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 27H<span style='mso-tab-count:2'>        </span> ; Выход с сохранением
+программы в памяти
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>015D<span style='mso-tab-count:1'>      </span>00<span style='mso-tab-count:
+3'>                </span> TIMER_COUNT<span style='mso-tab-count:1'>      </span>
+DB<span style='mso-tab-count:1'>   </span> 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>015E<span style='mso-tab-count:1'>      </span>01EE R<span
+style='mso-tab-count:3'>                  </span> BUFFER_HEAD<span
+style='mso-tab-count:1'>      </span> DW<span style='mso-tab-count:1'>   </span>
+BUFFER_START
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0160<span style='mso-tab-count:1'>      </span>01EE R<span
+style='mso-tab-count:3'>                  </span> BUFFER_TAIL<span
+style='mso-tab-count:1'>      </span> DW<span style='mso-tab-count:1'>   </span>
+BUFFER_START
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Эта подпрограмма управляет вызовом прерывания 17h
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0162<span style='mso-tab-count:4'>                        </span>
+PRINT_HANDLER<span style='mso-tab-count:1'>    </span> PROC<span
+style='mso-tab-count:1'> </span> FAR
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:nothing,ES:nothing
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0162<span style='mso-tab-count:1'>      </span>0A E4<span
+style='mso-tab-count:4'>                   </span> OR<span style='mso-tab-count:
+1'>   </span> AH,AH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0164<span style='mso-tab-count:1'>      </span>74 05<span
+style='mso-tab-count:4'>                   </span> JZ<span style='mso-tab-count:
+1'>   </span> BUFFER_CHARACTER<span style='mso-tab-count:1'> </span> ; Проверка
+на функцию вывода символа
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0166<span style='mso-tab-count:1'>      </span>2E: FF 2E 0103 R<span
+style='mso-tab-count:2'>        </span> JMP<span style='mso-tab-count:1'>  </span>
+PRINT_VECTOR<span style='mso-tab-count:2'>           </span> ; Переход на
+стандартный обработчик
+
+
+<p><span style='mso-tab-count:11'>                                                                  </span><span
+style='mso-fareast-font-family:"MS Mincho"'><span style="mso-spacerun:
+yes"> </span>;<span style="mso-spacerun: yes">  </span>прерывания 17h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>016B<span style='mso-tab-count:4'>                        </span>
+BUFFER_CHARACTER:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>016B<span style='mso-tab-count:1'>      </span>FB<span style='mso-tab-count:
+4'>                      </span> STI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>016C<span style='mso-tab-count:1'>      </span>53<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>016D<span style='mso-tab-count:1'>      </span>51<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> CX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>016E<span style='mso-tab-count:1'>      </span>56<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> SI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>016F<span style='mso-tab-count:1'>      </span>2B C9<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> CX,CX<span style='mso-tab-count:2'>            </span>; Счетчик
+отсчетов таймера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0171<span style='mso-tab-count:4'>                        </span>
+PRINT_LOOP:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0171<span style='mso-tab-count:1'>      </span>2E: 8B 1E 0160 R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+BX,BUFFER_TAIL ; Выборка адреса конца буфера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0176<span style='mso-tab-count:1'>      </span>8B F3<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> SI,BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0178<span style='mso-tab-count:1'>      </span>E8 01E2 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> ADVANCE_POINTER ; Перемещение указателя на следующий байт
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>017B<span style='mso-tab-count:1'>      </span>2E: 3B 1E 015E R<span
+style='mso-tab-count:2'>        </span> CMP<span style='mso-tab-count:1'>  </span>
+BX,BUFFER_HEAD ; Проверка на наличие места в буфере
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0180<span style='mso-tab-count:1'>      </span>74 0E<span
+style='mso-tab-count:4'>                   </span> JE<span style='mso-tab-count:
+1'>   </span> BUFFER_FULL<span style='mso-tab-count:1'>      </span> ; Нет
+места,ожидается пока оно появится
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0182<span style='mso-tab-count:1'>      </span>2E: 88 04<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> CS:[SI],AL<span style='mso-tab-count:1'> </span>; Вывод символа в
+буфер
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0185<span style='mso-tab-count:1'>      </span>2E: 89 1E 0160 R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+BUFFER_TAIL,BX ; Занесение нового адреса конца буфера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>018A<span style='mso-tab-count:1'>      </span>B4 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH,0<span style='mso-tab-count:2'>       </span>; Код возврата из
+прерывания 17h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>018C<span style='mso-tab-count:4'>                        </span>
+PRINT_RETURN:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>018C<span style='mso-tab-count:1'>      </span>5E<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> SI
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>018D<span style='mso-tab-count:1'>      </span>59<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> CX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>018E<span style='mso-tab-count:1'>      </span>5B<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>018F<span style='mso-tab-count:1'>      </span>CF<span style='mso-tab-count:
+4'>                      </span> IRET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0190<span style='mso-tab-count:4'>                        </span>
+BUFFER_FULL:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0190<span style='mso-tab-count:1'>      </span>E2 DF<span
+style='mso-tab-count:4'>                   </span> LOOP<span style='mso-tab-count:
+1'> </span> PRINT_LOOP<span style='mso-tab-count:1'> </span> ; Повторить цикл
+проверки занятости буфера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0192<span style='mso-tab-count:1'>      </span>B4 01<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH,1<span style='mso-tab-count:2'>       </span>; Буфер занят
+слишком долго,ошибка
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0194<span style='mso-tab-count:1'>      </span>EB F6<span
+style='mso-tab-count:4'>                   </span> JMP<span style='mso-tab-count:
+1'>  </span> PRINT_RETURN
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0196<span style='mso-tab-count:4'>                        </span>
+PRINT_HANDLER<span style='mso-tab-count:1'>    </span> ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>Фиг. 10.1 Буфер печати (продолжение)
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Эта программа вызывает 4660 раз в секунду
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0196<span style='mso-tab-count:4'>                        </span>
+TIMER_HANDLER<span style='mso-tab-count:1'>    </span> PROC<span
+style='mso-tab-count:1'> </span> FAR
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:nothing,ES:nothing
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0196<span style='mso-tab-count:1'>      </span>50<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0197<span style='mso-tab-count:1'>      </span>53<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0198<span style='mso-tab-count:1'>      </span>2E: 8B 1E 015E R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+BX,BUFFER_HEAD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>019D<span style='mso-tab-count:1'>      </span>2E: 3B 1E 0160 R<span
+style='mso-tab-count:2'>        </span> CMP<span style='mso-tab-count:1'>  </span>
+BX,BUFFER_TAIL ; Есть ли что-нибудь в буфере?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01A2<span style='mso-tab-count:1'>      </span>75 14<span
+style='mso-tab-count:4'>                   </span> JNZ<span style='mso-tab-count:
+1'>  </span> TEST_READY<span style='mso-tab-count:1'> </span> ; Переход,если
+буфер не пуст
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Эта подпрограмма управляет таймером в скоростном режиме
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01A4<span style='mso-tab-count:4'>                        </span>
+TIMER_RETURN:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01A4<span style='mso-tab-count:1'>      </span>5B<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01A5<span style='mso-tab-count:1'>      </span>2E: FE 06 015D R<span
+style='mso-tab-count:2'>        </span> INC<span style='mso-tab-count:1'>  </span>
+TIMER_COUNT<span style='mso-tab-count:1'>      </span> ; Увеличение счетчика
+делителя таймера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01AA<span style='mso-tab-count:1'>      </span>75 06<span
+style='mso-tab-count:4'>                   </span> JNZ<span style='mso-tab-count:
+1'>  </span> SKIP_NORMAL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01AC<span style='mso-tab-count:1'>      </span>58<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> AX<span
+style='mso-tab-count:2'>         </span> ; Это выполняется один раз на 256
+прерываний
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01AD<span style='mso-tab-count:1'>      </span>2E: FF 2E 0107 R<span
+style='mso-tab-count:2'>        </span> JMP<span style='mso-tab-count:1'>  </span>
+TIMER_VECTOR<span style='mso-tab-count:1'>     </span> ; Переход на стандартную
+программу обработки
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes"> </span>;<span style="mso-spacerun: yes"> 
+</span>прерывания от таймера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01B2<span style='mso-tab-count:4'>                        </span>
+SKIP_NORMAL:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01B2<span style='mso-tab-count:1'>      </span>B0 20<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,20H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01B4<span style='mso-tab-count:1'>      </span>E6 20<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> 20H,AL <span style='mso-tab-count:1'>    </span>; Конец прерывания
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01B6<span style='mso-tab-count:1'>      </span>58<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01B7<span style='mso-tab-count:1'>      </span>CF<span style='mso-tab-count:
+4'>                      </span> IRET
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Символ в буфере,производится попытка напечатать его
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01B8<span style='mso-tab-count:4'>                        </span>
+TEST_READY:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01B8<span style='mso-tab-count:1'>      </span>52<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01B9<span style='mso-tab-count:1'>      </span>1E<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01BA<span style='mso-tab-count:1'>      </span>2B D2<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> DX,DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01BC<span style='mso-tab-count:1'>      </span>8E DA<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> DS,DX<span style='mso-tab-count:2'>            </span>; Установка
+регистра DS на сегмент ABS0
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>DS:ABS0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01BE<span style='mso-tab-count:1'>      </span>8B 16 0408 R<span
+style='mso-tab-count:3'>                  </span> MOV<span style='mso-tab-count:
+1'>  </span> DX,PRINTER_BASE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01C2<span style='mso-tab-count:1'>      </span>42<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> DX<span
+style='mso-tab-count:2'>         </span> ; Установка на порт состояния
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01C3<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span>
+AL,DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01C4<span style='mso-tab-count:1'>      </span>A8 80<span
+style='mso-tab-count:4'>                   </span> TEST<span style='mso-tab-count:
+1'> </span> AL,80H <span style='mso-tab-count:1'>    </span>; Проверка
+готовности принтера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01C6<span style='mso-tab-count:1'>      </span>74 16<span
+style='mso-tab-count:4'>                   </span> JZ<span style='mso-tab-count:
+1'>   </span> NO_PRINT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01C8<span style='mso-tab-count:1'>      </span>4A<span style='mso-tab-count:
+4'>                      </span> DEC<span style='mso-tab-count:1'>  </span> DX<span
+style='mso-tab-count:2'>         </span> ; Установка на порт данных
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01C9<span style='mso-tab-count:1'>      </span>2E: 8A 07<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,CS:[BX]<span style='mso-tab-count:1'> </span>; Выбрка
+выводимого символа
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01CC<span style='mso-tab-count:1'>      </span>E8 01E2 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> ADVANCE_POINTER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01CF<span style='mso-tab-count:1'>      </span>2E: 89 1E 015E R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+BUFFER_HEAD,BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01D4<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span>
+DX,AL<span style='mso-tab-count:2'>            </span>; Вывод символа в порт принтера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01D5<span style='mso-tab-count:1'>      </span>83 C2 02<span
+style='mso-tab-count:3'>                </span> ADD<span style='mso-tab-count:
+1'>  </span> DX,2<span style='mso-tab-count:2'>       </span>; Установка на
+порт управления
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01D8<span style='mso-tab-count:1'>      </span>B0 0D<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,0DH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01DA<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span>
+DX,AL<span style='mso-tab-count:2'>            </span>; Передача символа из
+порта в принтер
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01DB<span style='mso-tab-count:1'>      </span>B0 0C<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,0CH
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01DD<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span>
+DX,AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01DE<span style='mso-tab-count:4'>                        </span>
+NO_PRINT:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01DE<span style='mso-tab-count:1'>      </span>1F<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01DF<span style='mso-tab-count:1'>      </span>5A<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01E0<span style='mso-tab-count:1'>      </span>EB C2<span
+style='mso-tab-count:4'>                   </span> JMP<span style='mso-tab-count:
+1'>  </span> TIMER_RETURN<span style='mso-tab-count:1'>     </span> ; Возврат
+через подпрограмму управления
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01E2<span style='mso-tab-count:4'>                        </span>
+TIMER_HANDLER<span style='mso-tab-count:1'>    </span> ENDP<span
+style='mso-tab-count:2'>       </span> ;<span style="mso-spacerun: yes"> 
+</span>таймером
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01E2<span style='mso-tab-count:4'>                        </span>
+ADVANCE_POINTER PROC<span style='mso-tab-count:1'>   </span> NEAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01E2<span style='mso-tab-count:1'>      </span>43<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> BX<span
+style='mso-tab-count:2'>         </span> ; Сдвиг указателя
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>Фиг. 10.1 Буфер печати (продолжение)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01E3<span style='mso-tab-count:1'>      </span>81 FB 28FE R<span
+style='mso-tab-count:3'>                  </span> CMP<span style='mso-tab-count:
+1'>  </span> BX,offset BUFFER_END
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01E7<span style='mso-tab-count:1'>      </span>75 04<span
+style='mso-tab-count:4'>                   </span> JNE<span style='mso-tab-count:
+1'>  </span> ADVANCE_RETURN<span style="mso-spacerun: yes">  </span>; Проверка
+на конец циклического буфера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01E9<span style='mso-tab-count:1'>      </span>8D 1E 01EE R<span
+style='mso-tab-count:3'>                  </span> LEA<span style='mso-tab-count:
+1'>  </span> BX,BUFFER_START ; Установка указателя на начало буфера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01ED<span style='mso-tab-count:4'>                        </span>
+ADVANCE_RETURN:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01ED<span style='mso-tab-count:1'>      </span>C3<span style='mso-tab-count:
+4'>                      </span> RET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01EE<span style='mso-tab-count:4'>                        </span>
+ADVANCE_POINTER ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01EE<span style='mso-tab-count:4'>                        </span>
+BUFFER_START<span style='mso-tab-count:1'>     </span> LABEL<span
+style='mso-tab-count:1'>      </span> BYTE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>01EE<span style='mso-tab-count:1'>      </span>2710[<span
+style='mso-tab-count:4'>                   </span> DB<span style='mso-tab-count:
+1'>   </span> 10000 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>??
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>28FE<span style='mso-tab-count:4'>                        </span>
+BUFFER_END<span style='mso-tab-count:1'> </span> LABEL<span style='mso-tab-count:
+1'>      </span> BYTE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>28FE<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END&#18;
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 10.1 Буфер печати (продолжение)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Приведенная в примере программа может
+облегчить решение задачи.
+
+<p><span
+style="mso-spacerun: yes">    </span>Конечно, это не обойдется вам даром.
+Программа отводит под буфер
+
+<p><span
+style="mso-spacerun: yes">    </span>печати некоторую область памяти, котрая
+будет постоянно за ним
+
+<p><span
+style="mso-spacerun: yes">    </span>закреплена. DOS изымает эту область из
+общего объема памяти,
+
+<p><span
+style="mso-spacerun: yes">    </span>предоставляемой пользователю. Например,
+если в системе 96K байт
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, а 10 кбайт отводится под буфер
+печати, то пользоваться
+
+<p><span
+style="mso-spacerun: yes">    </span>Макроассемблером уже не удастся. Для
+макроассемблера требуется 96
+
+<p><span
+style="mso-spacerun: yes">    </span>кбайт, а после создания буфера печати
+останется лишь 86 кбайт.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поэтому, прежде чем организовать
+буферизацию печати, убедитесь, что
+
+<p><span
+style="mso-spacerun: yes">    </span>в системе останется еще достаточный объем
+памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Буферизация печати осуществляется примерно
+так. Стандартная
+
+<p><span
+style="mso-spacerun: yes">    </span>команда PRINT (INT 17H) заменяется
+процедурой, которая помещает
+
+<p><span
+style="mso-spacerun: yes">    </span>символы в буфер вместо того, чтобы
+посылать их на принтер. Эта
+
+<p><span
+style="mso-spacerun: yes">    </span>часть программы и называется буферизацией
+печати. Отдельная часть
+
+<p><span
+style="mso-spacerun: yes">    </span>программы, называемая выводом на печать,
+извлекает символы из
+
+<p><span
+style="mso-spacerun: yes">    </span>буфера печати и пересылает их на принтер.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Основным моментом в данном примере
+является замена прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>INT 17H базовой системы ввода-вывода.
+Почти все прикладные
+
+<p><span
+style="mso-spacerun: yes">    </span>программы для вывода на печать используют
+именно это прерывание, а
+
+<p><span
+style="mso-spacerun: yes">    </span>это означает, что теперь все обычные
+операции печати будут
+
+<p><span
+style="mso-spacerun: yes">    </span>приводить к пересылке символов в
+подпрограмму буферизации печати, а
+
+<p><span
+style="mso-spacerun: yes">    </span>не на принтер. В частности, в нашем
+примере, мы можем
+
+<p><span
+style="mso-spacerun: yes">    </span>листинг ассемблирования вывести на
+принтер, нажав клавиши
+
+<p><span
+style="mso-spacerun: yes">    </span>Ctrl-PrtSc, служащие для пересылки
+символов с экрана на печать.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда мы выводим листинг ассемблирования с
+программой
+
+<p><span
+style="mso-spacerun: yes">    </span>буферизации печати в памяти, символы
+поступают в буфер в памяти, а
+
+<p><span
+style="mso-spacerun: yes">    </span>не на принтер. Буферизация очень
+незначительно
+
+<p><span
+style="mso-spacerun: yes">    </span>увеличивает время просмотра. Когда файл
+выведен на экран (и в буфер
+
+<p><span
+style="mso-spacerun: yes">    </span>печати), управление возвращается DOS. Вы
+можете прекратить
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылку символов на принтер, снова нажав
+клавиши Ctrl-PrtSc.
+
+<p><span
+style="mso-spacerun: yes">    </span>Листинговый файл находится в буфере, и DOS
+готова продолжить
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнение других заданий, например,
+редактирование или
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблирование.
+
+<p><span
+style='mso-tab-count:1'>      </span>Затем начинает выполняться вторая часть
+программы. Эта
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура извлекает символы из буфера и
+пересылает их на принтер.
+
+<p><span
+style="mso-spacerun: yes">    </span>Она управляется прерыванием от таймера.
+При каждом прерывании от
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера процедура вывода на печать также
+получает управление. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>в буфере имеется символ, и если устройство
+печати находится в
+
+<p><span
+style="mso-spacerun: yes">    </span>состоянии &quot;готово&quot;, то
+подпрограмма пересылает этот символ на
+
+<p><span
+style="mso-spacerun: yes">    </span>принтер. Таким образом, символы
+извлекаются из буфера и
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылаются на принтер со скоростью
+работы этого устройства.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку программа вывода на печать
+работает в фоновом режиме,
+
+<p><span
+style="mso-spacerun: yes">    </span>одновременно могут выполняться другие
+задания, например,
+
+<p><span
+style="mso-spacerun: yes">    </span>редактирование или ассемблирование.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обратимся к программе, представленной на
+Фиг. 10.1, и
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотрим, как взаимодействуют ее
+компоненты. Во-первых, в ней
+
+<p><span
+style="mso-spacerun: yes">    </span>описан сегмент ABS0, содержащий вектор
+прерываний, с которым
+
+<p><span
+style="mso-spacerun: yes">    </span>программа имеет дело. Приведенная в
+примере программа заменяет как
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание вывода на печать INT 17H, так и
+прерывание от таймера
+
+<p><span
+style="mso-spacerun: yes">    </span>INT 8. Заметим также, что в сегменте ABS0
+определяется адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>PRINTER_BASE. В этой ячейке находится
+базовый адрес для устройства
+
+<p><span
+style="mso-spacerun: yes">    </span>печати 0. В данном примере предполагается,
+что все операции печати
+
+<p><span
+style="mso-spacerun: yes">    </span>производятся на системном устройстве
+печати.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сегмент CODE - это та секция программы,
+которая остается
+
+<p><span
+style="mso-spacerun: yes">    </span>резидентной. При помощи команды ORG 100H
+мы составили эту программу
+
+<p><span
+style="mso-spacerun: yes">    </span>как файл типа .COM. Это означает, что для
+создания из выходного
+
+<p><span
+style="mso-spacerun: yes">    </span>файла редактора связей файла типа .COM,
+необходимо выполнить
+
+<p><span
+style="mso-spacerun: yes">    </span>описанную в гл.5 последовательность
+действий. Для хранения исходных
+
+<p><span
+style="mso-spacerun: yes">    </span>значений вектора печати и вектора таймера
+в программе используются
+
+<p><span
+style="mso-spacerun: yes">    </span>области памяти PRINT_VECTOR и
+TIMER_VECTOR. Хотя программа заменяет
+
+<p><span
+style="mso-spacerun: yes">    </span>значения этих векторов, при выводе на
+печать в ней должны быть
+
+<p><span
+style="mso-spacerun: yes">    </span>известны их исходные значения.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первая часть сегмента CODE, начиная с
+метки START, является
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализирующей частью программы. В ней
+считываются исходные
+
+<p><span
+style="mso-spacerun: yes">    </span>значения векторов прерываний и сохраняются
+в области данных
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента CODE. В процедуре инициализации
+векторы прерываний в
+
+<p><span
+style="mso-spacerun: yes">    </span>нижних адресах памяти заменяются новыми,
+используемыми в процедурах
+
+<p><span
+style="mso-spacerun: yes">    </span>буферизации и вывода на печать. Обратите
+внимание на команду CLI,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая блокирует прерывания перед
+выполнением этой операции.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку программа изменяет прерывание
+таймера, она не может
+
+<p><span
+style="mso-spacerun: yes">    </span>допустить обработку его шага в этот момент
+времени. Если бы
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание от таймера произошло в тот
+момент, когда программа
+
+<p><span
+style="mso-spacerun: yes">    </span>изменила только одно из двух слов вектора
+прерываний от таймера, то
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор продолжил бы выполнение с
+непредсказуемого адреса
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти. Разумнее запретить прерывания, чем
+допустить возможность
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода по неизвестному адресу.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прежде чем разблокировать прерывания,
+программа изменяет
+
+<p><span
+style="mso-spacerun: yes">    </span>текущее значение счетчика таймера. Обычно
+прерывания от таймера
+
+<p><span
+style="mso-spacerun: yes">    </span>происходят примерно 18 раз в секунду.
+Устройство печати может
+
+<p><span
+style="mso-spacerun: yes">    </span>печатать по 80 символов в секунду. Если бы
+процедура вывода на
+
+<p><span
+style="mso-spacerun: yes">    </span>печать выдавала по одному символу при
+каждом прерывании от таймера,
+
+<p><span
+style="mso-spacerun: yes">    </span>то максимальная скорость печати составила
+бы 18 символов в секунду.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если ускорить таймер, прерывания от
+таймера будут происходить чаще.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это позволит программе выдавать на печать
+все 80 символов в
+
+<p><span
+style="mso-spacerun: yes">    </span>секунду. В приведенном примере в таймер
+загружается значение
+
+<p><span
+style="mso-spacerun: yes">    </span>счетчика 256, оно в 256 раз меньше
+стандартного значения.
+
+<p><span
+style="mso-spacerun: yes">    </span>Компенсируется это увеличение скорости при
+помощи процедуры
+
+<p><span
+style="mso-spacerun: yes">    </span>TIMER_HANDLER.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Процедура инициализации возвращает
+управление в DOS при помощи
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания INT 27H. Перед выходом из
+процедуры в регистр DX
+
+<p><span
+style="mso-spacerun: yes">    </span>загружается указатель на байт, сразу
+следующий за последнм байтом
+
+<p><span
+style="mso-spacerun: yes">    </span>всей программы. Заметим, что все процедуры
+и буфер печати мы
+
+<p><span
+style="mso-spacerun: yes">    </span>расположили в пределах этой области
+памяти. В соответствии с
+
+<p><span
+style="mso-spacerun: yes">    </span>правилами действия прерывания INT 27H DOS
+не затронет эту
+
+<p><span
+style="mso-spacerun: yes">    </span>область.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Приведенная программа зря расходует часть
+памяти.
+
+<p><span
+style="mso-spacerun: yes">    </span>Инициализирующая ее часть выполняется
+только один раз, поэтому нет
+
+<p><span
+style="mso-spacerun: yes">    </span>смысла оставлять ее в памяти. Можно
+оптимизировать программу
+
+<p><span
+style="mso-spacerun: yes">    </span>поместив часть кода от команды START до
+INT 27H после метки
+
+<p><span
+style="mso-spacerun: yes">    </span>BUFFER_END. В этом случае при прерывании
+INT 27H инициализирующая
+
+<p><span
+style="mso-spacerun: yes">    </span>часть программы оказалась бы за пределами
+защищаемой области
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, и следующая загружаемая DOS
+программа перекрыла бы
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуру инициализации. Экономия около 90
+байт из более чем 10000
+
+<p><span
+style="mso-spacerun: yes">    </span>байт в нашем примере не впечетляет, но она
+вполне доступна в случае
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимости.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Далее следует процедура PRINT_HANDLER. Эта
+подпрограмма
+
+<p><span
+style="mso-spacerun: yes">    </span>вместо базовой системы ввода-вывода
+осуществляет управление
+
+<p><span
+style="mso-spacerun: yes">    </span>принтером при каждом обращении программ к
+прерыванию INT 17H для
+
+<p><span
+style="mso-spacerun: yes">    </span>вывода данных на печать. Первые три
+команды управляют перехватом
+
+<p><span
+style="mso-spacerun: yes">    </span>управления у BIOS. Наша процедура работает
+только тогда, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>должен быть напечатан символ (AH = 0). При
+любом другом коде
+
+<p><span
+style="mso-spacerun: yes">    </span>функции работу выполняет BIOS, поэтому
+программа производит
+
+<p><span
+style="mso-spacerun: yes">    </span>проверку, не равен ли регистр AH нулю.
+Если нет, то производится
+
+<p><span
+style="mso-spacerun: yes">    </span>косвенный переход с использованием
+сохраненного значения исходного
+
+<p><span
+style="mso-spacerun: yes">    </span>вектора печати. В результате управление
+передается процедуре
+
+<p><span
+style="mso-spacerun: yes">    </span>входящей в BIOS, которая выполняет
+требуемую функцию. Сказанное
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что в нашей процедуре обработки
+прерывания достаточно
+
+<p><span
+style="mso-spacerun: yes">    </span>написать только поддержку сделанных
+изменений.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Относительно рассмотренного способа
+управления печатью следует
+
+<p><span
+style="mso-spacerun: yes">    </span>сделать два замечания. Во-первых, передача
+дальше всех функций
+
+<p><span
+style="mso-spacerun: yes">    </span>печати кроме случая AH = 0 - не блестящая
+идея. Если какая-либо
+
+<p><span
+style="mso-spacerun: yes">    </span>программа инициализирует принтер (AH = 2)
+во время работы механизма
+
+<p><span
+style="mso-spacerun: yes">    </span>буферизации, то BIOS берет управление на
+себя и выдает на принтер
+
+<p><span
+style="mso-spacerun: yes">    </span>команду RESET. Эта команда обрывает ту
+строку, которая в это время
+
+<p><span
+style="mso-spacerun: yes">    </span>выводится на печать, что в большинстве
+случаев приводит к потере
+
+<p><span
+style="mso-spacerun: yes">    </span>одного или нескольких символов. Если вы
+хотите сделать эту
+
+<p><span
+style="mso-spacerun: yes">    </span>программу более защищенной от ошибок, то
+вам придется рассмотреть
+
+<p><span
+style="mso-spacerun: yes">    </span>вопрос об управлении всеми функциями
+печати.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Второе, на что следует обратить внимание -
+это использование
+
+<p><span
+style="mso-spacerun: yes">    </span>сохраненного вектора прерываний печати.
+Можно было бы обратиться к
+
+<p><span
+style="mso-spacerun: yes">    </span>листингу BIOS, приведенному в техническом
+справочнике, и найти
+
+<p><span
+style="mso-spacerun: yes">    </span>начальный адрес процедуры печати. Затем
+включить этот адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно в код программы так же,
+как это делается для других
+
+<p><span
+style="mso-spacerun: yes">    </span>абсолютных адресов. Однако в результате
+программа оказалась бы
+
+<p><span
+style="mso-spacerun: yes">    </span>жестко к этому адресу в системе BIOS. Если
+фирма IBM изменит
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуры BIOS и, таким образом, - адрес
+процедуры печати, то
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотренная программа не сможет больше работать.
+Конечно, если
+
+<p><span
+style="mso-spacerun: yes">    </span>пишите эту программу для своей собственной
+машины, а покупать новую
+
+<p><span
+style="mso-spacerun: yes">    </span>или продавать свою программу не
+собираетесь, то указанных проблем
+
+<p><span
+style="mso-spacerun: yes">    </span>не возникнет. Однако в общем случае надо
+избегать использования
+
+<p><span
+style="mso-spacerun: yes">    </span>абсолютных адресов, если есть выбор. В
+приведенном примере
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура инициализации легко может
+использовать вектор
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний печати для определения адреса
+процедуры печати
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS в ПЗУ.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В оставшейся части процедуры PRINT_HANDLER
+символ помещается в
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>буфер печати. Перед тем, как поместить символ программа
+проверяет,
+
+<p><span
+style="mso-spacerun: yes">    </span>есть ли в буфере место. Если буфер полон,
+программа ждет, пока
+
+<p><span
+style="mso-spacerun: yes">    </span>освободится место. Это ожидание не вызовет
+проблем, поскольку и
+
+<p><span
+style="mso-spacerun: yes">    </span>стандартная процедура BIOS ждет, чтобы
+принтер был готов принять
+
+<p><span
+style="mso-spacerun: yes">    </span>символ. Из соображений безопасности в
+регистре CX накапливается
+
+<p><span
+style="mso-spacerun: yes">    </span>число проходов по ветви
+&quot;занято&quot;. Если это число становится равным
+
+<p><span
+style="mso-spacerun: yes">    </span>64K, а буфер по-прежнему полон, то это
+может означать какой-то
+
+<p><span
+style="mso-spacerun: yes">    </span>сбой. В этом случае процедура
+PRINT_HANDLER так же, как и BIOS,
+
+<p><span
+style="mso-spacerun: yes">    </span>выдает сообщение о превышении допустимого
+времени ожидания.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В приведенном примере процедура печати
+использует также
+
+<p><span
+style="mso-spacerun: yes">    </span>внутреннюю процедуру ADVANCE_POINTER. Эта
+несложная процедура
+
+<p><span
+style="mso-spacerun: yes">    </span>делает буфер печати циклическим. Если
+указатель сдвигается за
+
+<p><span
+style="mso-spacerun: yes">    </span>пределы буфера, подпрограмма переносит его
+на начало буфера. Она
+
+<p><span
+style="mso-spacerun: yes">    </span>аналогична процедуре BIOS для буфера
+клавиатуры. Только в данном
+
+<p><span
+style="mso-spacerun: yes">    </span>случае в буфер помещается 10000 символов,
+а не 16.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Интересно рассмотреть работу процедуры
+TIMER_HANDLER из
+
+<p><span
+style="mso-spacerun: yes">    </span>приведенного примера. Инициализирующая
+процедура связывает эту
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмму с аппаратным прерыванием от
+таймера, поэтому на каждом
+
+<p><span
+style="mso-spacerun: yes">    </span>цикле таймера она получает управление.
+Помимо пересылки кодов на
+
+<p><span
+style="mso-spacerun: yes">    </span>принтер, эта процедура должна
+обеспечивать, через компенсацию
+
+<p><span
+style="mso-spacerun: yes">    </span>ускоения таймера, выполнение его обычных
+функций, таких как
+
+<p><span
+style="mso-spacerun: yes">    </span>ведение времени дня.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сначала процедура работы с таймером
+проверяет, имеются ли
+
+<p><span
+style="mso-spacerun: yes">    </span>предназначенные для вывода на печать
+символы. Нет смысла пытаться
+
+<p><span
+style="mso-spacerun: yes">    </span>переслать символы на принтер, если
+пересылать нечего. Если в буфере
+
+<p><span
+style="mso-spacerun: yes">    </span>нет символов, процедура проходит на метку
+TIMER_RETURN. Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>фрагмент процедуры обслуживает ускорение
+таймера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Метка TIMER_RETURN указывает часть
+программы, обеспечивающую
+
+<p><span
+style="mso-spacerun: yes">    </span>нормальное функционирование таймера. При
+каждом прерывании от
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера значение байта TIMER_COUNT
+увеличивается на единицу. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>этот байт не нулевой, то процедура выходит
+из прерывания после
+
+<p><span
+style="mso-spacerun: yes">    </span>выдачи сигнала о завершении прерывания на
+контроллер прерываний.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если этот байт равен нулю, то выход из
+программы осуществляется
+
+<p><span
+style="mso-spacerun: yes">    </span>посредством косвенного перехода по
+сохраненному вектору прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>от таймера TIMER_VECTOR. При этом
+управление передается процедуре
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS для определения текущего времени и
+выключения дисковода.
+
+<p><span
+style="mso-spacerun: yes">    </span>Дублировать эти операции в нашей программе
+не требуется. Переход в
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS происходит только один из 256 раз
+выполнения подпрограммы
+
+<p><span
+style="mso-spacerun: yes">    </span>работы с таймером. Но поскольку скорость
+таймера была увеличена в
+
+<p><span
+style="mso-spacerun: yes">    </span>256 раз, процедура реакции на прерывание
+от таймера базовой системы
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода-вывода по-прежнему будет получать
+управление 18,2 раза в
+
+<p><span
+style="mso-spacerun: yes">    </span>секунду. Это означает, что текущее время
+будет поддерживаться
+
+<p><span
+style="mso-spacerun: yes">    </span>правильно, и мотор дисковода будет
+выключен вовремя. Именно поэтому
+
+<p><span
+style="mso-spacerun: yes">    </span>и было выбрано ускорение таймера в 256
+раз, хотя и ускорения в 5
+
+<p><span
+style="mso-spacerun: yes">    </span>раз было бы достаточно, чтобы обеспечить
+работу устройства печати с
+
+<p><span
+style="mso-spacerun: yes">    </span>максимальной скоростью.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Ускорение таймера в 256 раз было выбрано
+потому, что это было
+
+<p><span
+style="mso-spacerun: yes">    </span>просто сделать. Однако если брать в расчет
+производительность, то
+
+<p><span
+style="mso-spacerun: yes">    </span>лучше было бы ускорить работу таймера в 5
+раз, поскольку на
+
+<p><span
+style="mso-spacerun: yes">    </span>обработку каждого прерывания от таймера
+тратится по меньшей мере 10
+
+<p><span
+style="mso-spacerun: yes">    </span>микросекунд, и даже больше, если в буфере
+печати есть символы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Время, затраченное на обработку
+прерываний, идет в ущерб выполнению
+
+<p><span
+style="mso-spacerun: yes">    </span>системой других заданий, например
+ассемблирования. При такой
+
+<p><span
+style="mso-spacerun: yes">    </span>частоте прерываний от таймера, становится
+заметным замедление
+
+<p><span
+style="mso-spacerun: yes">    </span>работы. Для оптимизации производительности
+следует ускорять таймер
+
+<p><span
+style="mso-spacerun: yes">    </span>менее, чем в 256 раз.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Что же происходит в процедуре работы с
+таймером, когда в буфере
+
+<p><span
+style="mso-spacerun: yes">    </span>есть символы, предназначенные для печати?
+Программа считывает порт
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния, чтобы определить, готов ли
+принтер к приему символа.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку в процедуре используется базовый
+адрес из области данных
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS, то наша подпрограмма будет работать
+и с автономным адаптером
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства печати, и с портом адаптера
+монохромного дисплея. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>устройство печати не готово, процедура
+возвращает управление на
+
+<p><span
+style="mso-spacerun: yes">    </span>метку TIMER_RETURN, где в случае
+необходимости поддерживаются
+
+<p><span
+style="mso-spacerun: yes">    </span>стандартные функции таймера. Процедура
+вывода на печать не ждет,
+
+<p><span
+style="mso-spacerun: yes">    </span>когда устройство печати освободится, если
+оно занято. Мы знаем, что
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание от таймера очень скоро
+повторится, тогда мы и повторим
+
+<p><span
+style="mso-spacerun: yes">    </span>попытку вывода. Ожидание готовности
+устройства печати здесь
+
+<p><span
+style="mso-spacerun: yes">    </span>связывало бы бы всю систему. Результат был
+бы таким же, как и в
+
+<p><span
+style="mso-spacerun: yes">    </span>случае отсутствия буферизации печати.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если принтер готов, программа извлекает
+символ из буфера и
+
+<p><span
+style="mso-spacerun: yes">    </span>передает его на принтер. И в данном случае
+программа вновь не
+
+<p><span
+style="mso-spacerun: yes">    </span>делает всего, что следовало бы.
+Подпрограмма, входящая в BIOS,
+
+<p><span
+style="mso-spacerun: yes">    </span>делает проверку на ситуацию ошибки при
+передаче каждого символа. То
+
+<p><span
+style="mso-spacerun: yes">    </span>же самое следовало бы делать и в нашей
+процедуре. Но что же
+
+<p><span
+style="mso-spacerun: yes">    </span>произойдет в случае сбоя? Если процедура
+вывода обнаружила ошибку,
+
+<p><span
+style="mso-spacerun: yes">    </span>то как она сможет сообщить программе, что
+это произошло во время
+
+<p><span
+style="mso-spacerun: yes">    </span>печати? В некоторых случаях к этому
+моменту программа передававшая
+
+<p><span
+style="mso-spacerun: yes">    </span>даные для печати уже завершила свою
+работу. Наилучший выход может
+
+<p><span
+style="mso-spacerun: yes">    </span>состоять в проверке ошибок при каждой
+пересылке символа на принтер
+
+<p><span
+style="mso-spacerun: yes">    </span>процедурой работы с таймером. При
+обнаружении ошибки процедура
+
+<p><span
+style="mso-spacerun: yes">    </span>PRINT_HANDLER должна выдать сообщение об
+ошибке, что далее все
+
+<p><span
+style="mso-spacerun: yes">    </span>программы будут производить вывод на
+печать через прерывание INT
+
+<p><span
+style="mso-spacerun: yes">    </span>17H. Возможно, это не идеальный вариант,
+но, вероятно, лучший.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прежде чем закончить рассмотрение примера,
+следует обратить
+
+<p><span
+style="mso-spacerun: yes">    </span>внимание еще на одну проблему. Существуют
+и другие процедуры,
+
+<p><span
+style="mso-spacerun: yes">    </span>изменяющие частоту прерываний от таймера.
+BASICA - расширенная
+
+<p><span
+style="mso-spacerun: yes">    </span>версия интерпретатора Бейсика, для
+ускорения таймера используется
+
+<p><span
+style="mso-spacerun: yes">    </span>прием, во многом аналогичный приведенному.
+При вызове программы
+
+<p><span
+style="mso-spacerun: yes">    </span>BASICA после установки буферизованной
+печати, процедура
+
+<p><span
+style="mso-spacerun: yes">    </span>TIMER_HANDLER получает прерывания уже не с
+той частотой, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>предполагается. Поскольку процедура
+TIMER_HANDLER ограничивает
+
+<p><span
+style="mso-spacerun: yes">    </span>передачу управления прерыванием от таймера
+процедуре BIOS, текущее
+
+<p><span
+style="mso-spacerun: yes">    </span>время замедлится в 256 раз. BASICA
+осуществляет также инициализацию
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства печати, что, как мы уже видели,
+мешает выводу на печать.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это означает, что программа буферизации
+печати будет работать не
+
+<p><span
+style="mso-spacerun: yes">    </span>для всех приложений. Однако она
+иллюстрирует использование
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания INT 27H для создания постоянной
+системной функции.
+
+<p><span
+style="mso-spacerun: yes">    </span>Приведенный пример иллюстрирует также
+метод переопределения
+
+<p><span
+style="mso-spacerun: yes">    </span>векторов BIOS для подцепления новой
+функции к уже имеющимся
+
+<p><span
+style="mso-spacerun: yes">    </span>программам.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

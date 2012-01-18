@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-3">Прерывания ROM BIOS</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как показано в таблице на Фиг.9.1, BIOS
+использует векторы
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний микропроцессора 8088. Эти
+векторы служат для нескольких
+
+<p><span
+style="mso-spacerun: yes">    </span>различных целей. Первый блок векторов
+имеет дело непосредственно с
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратными прерываниями. Программы
+обслуживающие эти прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>получают управление всегда, когда
+возникает аппаратное прерывание.
+
+<p><span
+style="mso-spacerun: yes">    </span>Например, прерывание от клавиатуры
+использует вектор прерывания 9,
+
+<p><span
+style="mso-spacerun: yes">    </span>расположенный по адресу 9*4 или 24H. BIOS
+обслуживает не все
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания инициируемые контроллером 8259.
+Некоторые прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>зарезервированы за устройствами фирмы IBM,
+а другие вы можете
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать для своих целей. И даже в том
+случае, если фирма IBM
+
+<p><span
+style="mso-spacerun: yes">    </span>зарезервировала какой-то вектор
+прерывания, вы все равно можете
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать его по-своему. Но если вы
+хотите тиражировать
+
+<p><span
+style="mso-spacerun: yes">    </span>программу, нужно помнить, что у других
+пользователей компьютеры
+
+<p><span
+style="mso-spacerun: yes">    </span>имеют не совсем такие же конфигурации, как
+у вас.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

@@ -1,0 +1,382 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="7-4">Форматы действительных чисел</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существует три формата чисел с плавающей
+точкой, поддерживаемых
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессором 8087.<span
+style="mso-spacerun: yes">  </span>Эти форматы показаны нп Фиг. 7.1 и 7.2.<span
+style="mso-spacerun: yes">  </span>На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 7.1 показана логическая структура
+чисел, а на Фиг. 7.2 показано
+
+<p><span
+style="mso-spacerun: yes">    </span>расположение отдельных частей числа, когда
+оно записывается в
+
+<p><span
+style="mso-spacerun: yes">    </span>память.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Короткие и длинные форматы данных
+соответствуют предложенному
+
+<p><span
+style="mso-spacerun: yes">    </span>ИИЭР стандарту для представления чисел с
+плавающей точкой.
+
+<p><span
+style="mso-spacerun: yes">    </span>Короткое действительное число занимает 32
+бита, или четыре байта
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.<span style="mso-spacerun: yes"> 
+</span>Этот формат часто называют числом с плавающей тоской
+
+<p><span
+style="mso-spacerun: yes">    </span>обычной точности.<span
+style="mso-spacerun: yes">  </span>Его мантисса содержит 23 бита, что по
+точности
+
+<p><span
+style="mso-spacerun: yes">    </span>приблизительно соответствует шести - семи
+десятичным цифрам.<span style="mso-spacerun: yes">  </span>То
+
+<p><span
+style="mso-spacerun: yes">    </span>есть семизначное десятичное число по
+точности примерно
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствует 23-битовому двоичному числу.<span
+style='mso-tab-count:1'>  </span>Восьмибитовое поле
+
+<p><span
+style="mso-spacerun: yes">    </span>порыдка имеет значение смещения 127, или
+07FH.<span style="mso-spacerun: yes">  </span>Значение порядка
+
+<p><span
+style="mso-spacerun: yes">    </span>лежит в диапазоне от -127 до 127, что
+приблизительно соответствует
+
+<p><span
+style="mso-spacerun: yes">    </span>диапазону от 10**-38 до 10**38.<span
+style="mso-spacerun: yes">  </span>Оставшийся бит определяет знак
+
+<p><span
+style="mso-spacerun: yes">    </span>всего числа.<span style="mso-spacerun:
+yes">  </span>Заметим, что внутри чисоа с плавающей точкой есть два
+
+<p><span
+style="mso-spacerun: yes">    </span>знаковых бита.<span style="mso-spacerun:
+yes">  </span>Один из них - знак порядка, содержащийся внутри
+
+<p><span
+style="mso-spacerun: yes">    </span>поля порядка (модифицирующийся смещением).<span
+style='mso-tab-count:1'>  </span>Другой знак показывает,
+
+<p><span
+style="mso-spacerun: yes">    </span>что отрицательно или положительно само
+число.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Длинный действительный формат числа
+занимает 64 бита, или
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>восемь байтов памяти.<span style="mso-spacerun: yes">  </span>Это
+число удвоенной точности имет 52-
+
+<p><span
+style="mso-spacerun: yes">    </span>битовую мантиссу, что по точности
+соответствует примеоно 15- 16
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичным цифрам.<span style='mso-tab-count:
+1'>  </span>Одиннадцатибитовый порядок имеет диапазон от
+
+<p><span
+style="mso-spacerun: yes">    </span>2**-1023 до 2**1023 и значение смещения
+1023, или 03FFH.<span style="mso-spacerun: yes">  </span>В десятичной
+
+<p><span
+style="mso-spacerun: yes">    </span>форме это соответствует диапазону от
+10**-307 до 10**307.
+
+
+<p><span style='mso-tab-count:1'>      </span><span
+style='mso-fareast-font-family:"MS Mincho"'>Сопроцессор 8087 всегда хранит в памяти длинные и короткие
+
+<p><span
+style="mso-spacerun: yes">    </span>действительные числа в нормализованном
+виде.<span style="mso-spacerun: yes">  </span>В это означает, что
+
+<p><span
+style="mso-spacerun: yes">    </span>первый бит мантиссы всегда единичен; и
+поэтому хранить его
+
+<p><span
+style="mso-spacerun: yes">    </span>бессмысленно, но всегда подразумевается,
+что он присутствует, как
+
+<p><span
+style="mso-spacerun: yes">    </span>показано на Фиг. 7.2.<span
+style="mso-spacerun: yes">  </span>Под изображением расположения данных длинных
+
+<p><span
+style="mso-spacerun: yes">    </span>и коротких действительных чисел показана 1
+перед двоичной точкой.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этот разряд отсутствует в памяти, но
+известно, что он на самом деле
+
+<p><span
+style="mso-spacerun: yes">    </span>существует.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Заметим теперь, что все шесть форматов
+данных сопроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8087, которые были рассмотрены - четыре
+целых и два действительных
+
+<p><span
+style="mso-spacerun: yes">    </span>- существуют только за пределами
+процессора.<span style="mso-spacerun: yes">  </span>То есть сопроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>8087 переводит данные в эти форматы только
+тогда, когда записывает
+
+<p><span
+style="mso-spacerun: yes">    </span>их в память; кроме того, он может читать
+данные, записанные в
+
+<p><span
+style="mso-spacerun: yes">    </span>память в этих форматах.<span
+style="mso-spacerun: yes">  </span>В сопроцессоре 8087 данные всех типов
+
+<p><span
+style="mso-spacerun: yes">    </span>хранятся в седьмом формате -
+промежуточном, или временном
+
+<p><span
+style="mso-spacerun: yes">    </span>действительном.<span style="mso-spacerun:
+yes">  </span>Это означает, что программа, в которой вы
+
+<p><span
+style="mso-spacerun: yes">    </span>работаете с сопроцессором 8087, использует
+преимущества
+
+<p><span
+style="mso-spacerun: yes">    </span>расширенного диапазона и точности
+временного действительного числа
+
+<p><span
+style="mso-spacerun: yes">    </span>только тогда, когда данные обрабатываются
+внутри процессора 8086.
+
+<p><span
+style="mso-spacerun: yes">    </span>Другие форматы данных существуют для
+удобства их хранения и
+
+<p><span
+style="mso-spacerun: yes">    </span>представления вне процессора.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Временное действительное число является
+наиболее точным и имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>большой диапазон.<span
+style="mso-spacerun: yes">  </span>Оно представляется 80 битами или 10 байтами.
+
+<p><span
+style="mso-spacerun: yes">    </span>Его мантисса имеет длину 64 бита, это дает
+точность, эквивалентную
+
+<p><span
+style="mso-spacerun: yes">    </span>примерно 19 десятичным цифрам.<span
+style="mso-spacerun: yes">  </span>Мантисса в общем случае
+
+<p><span
+style="mso-spacerun: yes">    </span>нормализована, но в некоторых случаях
+может оказаться
+
+<p><span
+style="mso-spacerun: yes">    </span>денормализованной.<span style='mso-tab-count:
+1'>  </span>По этой причине временный действительный формат
+
+<p><span
+style="mso-spacerun: yes">    </span>уже не пожразумевает, что старший бит
+мантиссы равен 1.<span style="mso-spacerun: yes">  </span>На Фиг. 7.2
+
+<p><span
+style="mso-spacerun: yes">    </span>старшая нормализованная единица показана
+явно частью мантиссы, а не
+
+<p><span
+style="mso-spacerun: yes">    </span>чем-то подразумеваемым.<span
+style="mso-spacerun: yes">  </span>Пятнадцатибитовое поле порядка смещается
+
+<p><span
+style="mso-spacerun: yes">    </span>значением 16383, или 03FFFH.<span
+style="mso-spacerun: yes">  </span>Такой порядок допускает диапазон
+
+<p><span
+style="mso-spacerun: yes">    </span>изменения чисел от 2**-16383 до 2**16383,
+или примерно от 10**-4932 до
+
+<p><span
+style="mso-spacerun: yes">    </span>10**4932.<span style="mso-spacerun: yes"> 
+</span>Поскольку сопроцессор 8087 может денормализовать мантиссу
+
+<p><span
+style="mso-spacerun: yes">    </span>временного действительного числа, нижняя
+граница его расширяется
+
+<p><span
+style="mso-spacerun: yes">    </span>еще дальше.<span style="mso-spacerun:
+yes">  </span>Так как число денормализовано, в мантиссе есть
+
+<p><span
+style="mso-spacerun: yes">    </span>незначащие нули, и это позволяет
+изобразить даже меньшее число, чем
+
+<p><span
+style="mso-spacerun: yes">    </span>допускает диапазон значений порядка.<span
+style="mso-spacerun: yes">  </span>Например, давайте снова
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотрим простую форму числа с плавающей
+точкой, содержащую
+
+<p><span
+style="mso-spacerun: yes">    </span>3-битовое поле порядка и 4-битовую
+матиссу.<span style="mso-spacerun: yes">  </span>Наименьшее
+
+<p><span
+style="mso-spacerun: yes">    </span>положительное число, которое здесь может
+быть представлено, есть
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>1.000*10000B=1*2**-3=1/8
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В этом примере подразумевается:<span
+style="mso-spacerun: yes">  </span>что значение порядка смещено
+
+<p><span
+style="mso-spacerun: yes">    </span>на значение 3.<span style="mso-spacerun:
+yes">  </span>Если теперь мя денормализуем мантиссу, то сможем
+
+<p><span
+style="mso-spacerun: yes">    </span>представить даже меньшее число, например
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>0.100*10000B=1/2*2**-3=1/16
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>а наименьшее положительное число, которое
+можно представить
+
+<p><span
+style="mso-spacerun: yes">    </span>денормализацией мантиссы есть
+
+<p class=MsoPlainT
+<p><span
+style='mso-tab-count:1'>      </span>0.001*10000B=1/8*2**-3=1/64
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Денормализация мантиссы расширяет нижнюю
+границу диапазона
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Этот дополнительный диапазон дается не
+даром.<span style="mso-spacerun: yes">  </span>Поскольку мы
+
+<p><span
+style="mso-spacerun: yes">    </span>ввели незначащие нули, точность мантиссы
+уменьшилась.<span style="mso-spacerun: yes">  </span>Временный
+
+<p><span
+style="mso-spacerun: yes">    </span>действительный формат числа дает
+возможность пожертвовать точностью
+
+<p><span
+style="mso-spacerun: yes">    </span>ради расширения диапазона числа, когда это
+необходимо.<span style="mso-spacerun: yes">  </span>Такая
+
+<p><span
+style="mso-spacerun: yes">    </span>возможность требуется в первую очередь на
+промежуточных шагах
+
+<p><span
+style="mso-spacerun: yes">    </span>длительных вычислений.<span
+style="mso-spacerun: yes">  </span>Иногда прикладная программа вычитает два
+
+<p><span
+style="mso-spacerun: yes">    </span>примерно одинаковых числа перед
+выполнением другой операции, и
+
+<p><span
+style="mso-spacerun: yes">    </span>результат много меньше, чем любое из
+исходных чисел.<span style="mso-spacerun: yes">  </span>Эта разность
+
+<p><span
+style="mso-spacerun: yes">    </span>может оказаться очень важной.<span
+style="mso-spacerun: yes">  </span>В таких специальных случаях
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисления можно продолжать, допуская
+расширение диапазона
+
+<p><span
+style="mso-spacerun: yes">    </span>представления числа.<span
+style="mso-spacerun: yes">  </span>Единственной альтернативой здесь была бы
+
+<p><span
+style="mso-spacerun: yes">    </span>установка нулевого результата вычитания, а
+в этом случае всякая
+
+<p><span
+style="mso-spacerun: yes">    </span>значимость теряется.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

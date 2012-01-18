@@ -1,0 +1,892 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="4-4">Арифметические команды</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Арифметические команды любого
+микропроцессора привлекают к себе
+
+<p><span
+style="mso-spacerun: yes">    </span>наибольшее внимание. Каждый заинтересован
+в выполнении
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметических вычислений, и именно эти
+команды проделывают такую
+
+<p><span
+style="mso-spacerun: yes">    </span>работу. Хотя их немного, они выполняют
+большинство преобразований
+
+<p><span
+style="mso-spacerun: yes">    </span>данных а микропроцессоре. В реальных же
+условиях арифметические
+
+<p><span
+style="mso-spacerun: yes">    </span>команды занимают лишь малую часть всех
+исполняемых команд.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команды пересылки используют большинство
+принципов работы
+
+<p><span
+style="mso-spacerun: yes">    </span>команд микропроцессора 8088, а при
+изучении арифметических команд
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимо рассмотреть некоторые тонкости
+их выполнения.
+
+<p><div align="center"><b><a name="4-4-1">Сложение
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда ADD выполняет сложение указанных
+операндов, представленных
+
+<p><span
+style="mso-spacerun: yes">    </span>в двоичном дополнительном коде.<span
+style="mso-spacerun: yes">  </span>Микропроцессор помещает результат
+
+<p><span
+style="mso-spacerun: yes">    </span>на место первого операнда после того, как
+сложит оба операнда.
+
+<p><span
+style="mso-spacerun: yes">    </span>Второй операнд не изменяется.<span
+style="mso-spacerun: yes">  </span>Команда корректирует регистр флагов
+
+<p><span
+style="mso-spacerun: yes">    </span>в соответствии с результатом
+сложения.<span style="mso-spacerun: yes">  </span>Например, команда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ADD<span style="mso-spacerun: yes">   </span>AX,BX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>складывает содержимое регистра BX с
+содержимым регистра AX, и
+
+<p><span
+style="mso-spacerun: yes">    </span>оставляет результат в регистре AX.<span
+style='mso-tab-count:1'>    </span>Регистр флагов сообщает о том,
+
+<p><span
+style="mso-spacerun: yes">    </span>был ли результат нулевым, отрицательным,
+имел ли четность, перенос
+
+<p><span
+style="mso-spacerun: yes">    </span>или переполнение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 4.8 кратко иллюстрирует варианты
+команды ADD.
+
+<p><span
+style="mso-spacerun: yes">    </span>Существуют две формы сложения, 8=битовое и
+16=битовое. В различных
+
+<p><span
+style="mso-spacerun: yes">    </span>формах сложения принимают участие
+различные регистры. Ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>следит за тем, чтобы операнды
+соответствовали друг другу.
+
+<p><span
+style="mso-spacerun: yes">    </span>Содержимое байтового регистра (например,
+CH) не может быть
+
+<p><span
+style="mso-spacerun: yes">    </span>прибавлено к ячейке памяти, которая не
+имеет тип BYTE. Если ячейка
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти является одним из операндов, она
+может быть либо
+
+<p><span
+style="mso-spacerun: yes">    </span>операндом=результатом, либо неизменяемым
+операндом. Тем самым
+
+<p><span
+style="mso-spacerun: yes">    </span>команда может прибавить содержимое
+регистра к ячейке памяти и
+
+<p><span
+style="mso-spacerun: yes">    </span>возвратить результат в память. Одним из
+операндов может также быть
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственное значение. На Фиг. 4.9
+показан листинг ассемблера с
+
+<p><span
+style="mso-spacerun: yes">    </span>накоторыми арифметическими командами.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда сложения с переносом ADC - это та
+же команда ADD, за
+
+<p><span
+style="mso-spacerun: yes">    </span>исключением того, что в сумму включается
+флаг переноса. Для любой
+
+<p><span
+style="mso-spacerun: yes">    </span>формы команды ADD существует сравнимая с
+ней команда ADC.
+
+<p><span
+style="mso-spacerun: yes">     </span>ЪДДДДДДДДї<span style="mso-spacerun:
+yes">     </span>ЪДДДДДДДДї<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>ЪДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+AX<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">     </span>і<span style='mso-tab-count:1'>     </span>AX<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>AX<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+BX<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">     </span>і<span style='mso-tab-count:1'>     </span>BX<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>BX<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+CX<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">     </span>і<span style='mso-tab-count:1'>     </span>CX<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>      </span>ДДДДДДД&gt;<span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>CX<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+DX<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">     </span>і<span style='mso-tab-count:1'>     </span>DX<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>DX<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>АДДДДДДДДЩ<span style="mso-spacerun:
+yes">     </span>АДДДДДДДДЩ<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>АДДДДДДДДЩ
+
+<p><span
+style="mso-spacerun: yes">     </span>ЪДДДДДДДДї<span style="mso-spacerun:
+yes">  </span>+<span style="mso-spacerun: yes">  </span>ЪДДДДДДДДї<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>ЪДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+SI<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">     </span>і<span style='mso-tab-count:1'>     </span>SI<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>SI<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+DI<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes"> 
+</span><span style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:
+1'>     </span>DI<span style="mso-spacerun: yes">   </span>і<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>і<span style="mso-spacerun: yes">   </span>DI<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+BP<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">     </span>і<span style='mso-tab-count:1'>     </span>BP<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>      </span>ДДДДДДД&gt;<span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>BP<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+SP<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">     </span>і<span style='mso-tab-count:1'>     </span>SP<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>SP<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>АДДДДДДДДЩ<span style="mso-spacerun:
+yes">     </span>АДДДДДДДДЩ<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>АДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і Память і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і(слова) і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>АДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>іНепосред-і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>іственный і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>АДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">     </span>ЪДДДДДДДДДї<span style="mso-spacerun:
+yes">    </span>ЪДДДДДДДДДї <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>ЪДДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+AH<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>     </span>AH<span
+style="mso-spacerun: yes">    </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>AH<span style="mso-spacerun: yes">    </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+AL<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>     </span>AL<span
+style="mso-spacerun: yes">    </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>AL<span style="mso-spacerun: yes">    </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+BH<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>     </span>BH<span
+style="mso-spacerun: yes">    </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>BH<span style="mso-spacerun: yes">    </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+BL<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>     </span>BL<span
+style="mso-spacerun: yes">    </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>BL<span style="mso-spacerun: yes">    </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+CH<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>     </span>CH<span
+style="mso-spacerun: yes">    </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>CH<span style="mso-spacerun: yes">    </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+CL<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun: yes"> 
+</span>+ і<span style='mso-tab-count:1'>     </span>CL<span
+style="mso-spacerun: yes">    </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>CL<span style="mso-spacerun: yes">    </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+DH<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>     </span>DH<span
+style="mso-spacerun: yes">    </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>DH<span style="mso-spacerun: yes">    </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+DL<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>     </span>DL<span
+style="mso-spacerun: yes">    </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>DL<span style="mso-spacerun: yes">    </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>АДДДДДДДДДЩ<span style="mso-spacerun:
+yes">    </span>АДДДДДДДДДЩ <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">   </span>АДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДДї <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>ЪДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і Память<span style="mso-spacerun: yes">  </span>і<span
+style="mso-spacerun: yes">  </span>ДДДДДДД&gt;<span style="mso-spacerun: yes"> 
+</span>і Память<span style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і(слова)<span style="mso-spacerun: yes">  </span>і <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">   </span>і(слова)<span style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>АДДДДДДДДДЩ <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>АДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>іНепосред-і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>іственный і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>АДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>Фиг. 4.8 Операции сложения
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обе команды сложения, как ADD, так и ADC,
+устанавливают равным
+
+<p><span
+style="mso-spacerun: yes">    </span>1 флаг переноса, если произошел перенос из
+старшего разряда
+
+<p><span
+style="mso-spacerun: yes">    </span>результата. Команда ADD складывает два
+операнда, не обращая
+
+<p><span
+style="mso-spacerun: yes">    </span>внимания на флаг переноса, а команда ADC
+учитывает и флаг переноса.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если флаг переноса равен 0, результат
+равен результату выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>команды ADD. Если же флаг переноса равен
+1, то результат на 1
+
+<p><span
+style="mso-spacerun: yes">    </span>больше результата команды ADD. Таким
+образом, программа может
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать флаг переноса для операций
+повышенной точности.
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>1/1/80 04:00:49
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 4.9<span style="mso-spacerun: yes">  </span>Арифметические команды<span
+style='mso-tab-count:4'>                       </span> Page<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">  </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.9<span style="mso-spacerun: yes">  </span>Арифметические команды
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>EXBYTE<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>BYTE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>EXWORD<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>03 1E 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>ADD<span style="mso-spacerun: yes">     </span>BX,EXWORD<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+BX &lt;- BX + [EXWORD]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0004<span style="mso-spacerun: yes">  </span>29 0E 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>SUB<span style="mso-spacerun: yes">     </span>EXWORD,CX<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+[EXWORD] &lt;- [EXWORD] - CX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0008<span style="mso-spacerun: yes">  </span>12 3E 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>ADC<span style="mso-spacerun: yes">     </span>BH,EXBYTE<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+BH &lt;- BH + [EXBYTE] + Carry
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000C<span style="mso-spacerun: yes">  </span>18 0E 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>SBB<span style="mso-spacerun: yes">     </span>EXBYTE,CL<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+[EXBYTE] &lt;- [EXBYTE] - CL - Carry
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0010<span style="mso-spacerun: yes">  </span>F7 1E 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>NEG<span style="mso-spacerun: yes">     </span>EXWORD<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; [EXWORD] &lt;- -[EXWORD]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0014<span style="mso-spacerun: yes">  </span>FE 06 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>EXBYTE<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; [EXBYTE] &lt;- [EXBYTE] + 1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0018<span style="mso-spacerun: yes">  </span>4E<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>DEC<span style="mso-spacerun: yes">     </span>SI <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+SI &lt;- SI - 1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0019<span style="mso-spacerun: yes">  </span>81 C7 00C8<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">     </span>ADD<span style="mso-spacerun: yes">     </span>DI,200<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; DI &lt;- DI + 200
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001D<span style="mso-spacerun: yes">  </span>83 EC 64<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>SUB<span style="mso-spacerun: yes">     </span>SP,100<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; SP &lt;- SP - 100
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0020<span style="mso-spacerun: yes">  </span>83 D1 0A<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>ADC<span style="mso-spacerun: yes">     </span>CX,10<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; CX &lt;- CX + 10 + Carry
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0023<span style="mso-spacerun: yes">  </span>83 1E 0000 R 14<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>SBB<span style="mso-spacerun: yes">     </span>EXWORD,20<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+[EXWORD] &lt;- [EXWORD] - 20 - Carry
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0028<span style="mso-spacerun: yes">  </span>3B C3<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>CMP<span style="mso-spacerun: yes">     </span>AX,BX<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Установка флагов по AX - BX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>002A<span style="mso-spacerun: yes">  </span>81 FE 01F4<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">     </span>CMP<span style="mso-spacerun: yes">     </span>SI,500<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Установка флагов по SI - 500
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>002E<span style="mso-spacerun: yes">  </span>F6 26 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>MUL<span style="mso-spacerun: yes">     </span>EXBYTE<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; AX &lt;- AL * [EXBYTE]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0032<span style="mso-spacerun: yes">  </span>F7 EB<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>IMUL<span style="mso-spacerun: yes">    </span>BX <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+DX:AX &lt;- AX * BX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0034<span style="mso-spacerun: yes">  </span>F7 36 0000 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>DIV<span style="mso-spacerun: yes">     </span>EXWORD<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; AX &lt;- DX:AX / [EXWORD]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0038<span style="mso-spacerun: yes">  </span>F6 FD<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>IDIV<span style="mso-spacerun: yes">    </span>CH <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+AL &lt;- AX / CH
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003A<span style="mso-spacerun: yes">  </span>27<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>DAA<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>; Десятичное коррекция для сложения
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003B<span style="mso-spacerun: yes">  </span>2F<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>DAS<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>; Десятичное коррекция для вычитания
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003C<span style="mso-spacerun: yes">  </span>37<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>AAA<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>; ASCII коррекция для сложения
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003D<span style="mso-spacerun: yes">  </span>3F<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>AAS<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>; ASCII коррекция для вычитания
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>003E<span style="mso-spacerun: yes">  </span>D4 0A<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>AAM<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">     </span>; ASCII коррекция для умножения
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0040<span style="mso-spacerun: yes">  </span>D5 0A<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>AAD<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">     </span>; ASCII коррекция для деления
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0042<span style="mso-spacerun: yes">  </span>98<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>CBW<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>; AX &lt;- расширенное по знаку AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0043<span style="mso-spacerun: yes">  </span>99<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>CWD<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>; DX:AX &lt;- расширенное по знаку AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0044<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.9 Арифметические команды
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">      
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">   </span>1/1/80 04:00:54
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 4.10 Пример вычислений с повышенной точностью<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes"> 
+</span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.10 Пример вычислений с повышенной точностью
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>????????<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>VALUE1<span style="mso-spacerun: yes">  </span>DD<span
+style="mso-spacerun: yes">      </span>? <span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>; Область данных размером 32 разряда
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0004<span style="mso-spacerun: yes">  </span>????????<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>VALUE2<span style="mso-spacerun: yes">  </span>DD<span
+style="mso-spacerun: yes">      </span>?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Сложение двух 32-разрядных чисел
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0008<span style="mso-spacerun: yes">  </span>A1 0000 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AX,WORD PTR
+VALUE1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000B<span style="mso-spacerun: yes">  </span>01 06 0004 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>ADD<span style="mso-spacerun: yes">     </span>WORD PTR VALUE2,AX<span
+style="mso-spacerun: yes">      </span>; Сложение младших 16 разрядов
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000F<span style="mso-spacerun: yes">  </span>A1 0002 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AX,WORD PTR
+VALUE1+2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0012<span style="mso-spacerun: yes">  </span>11 06 0006 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>ADC<span style="mso-spacerun: yes">     </span>WORD PTR VALUE2+2,AX<span
+style="mso-spacerun: yes">    </span>; Сложение старших 16 разрядов
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;-----<span style="mso-spacerun: yes"> 
+</span>Вычитание двух 32-разрядных чисел
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0016<span style="mso-spacerun: yes">  </span>A1 0000 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AX,WORD PTR
+VALUE1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0019<span style="mso-spacerun: yes">  </span>29 06 0004 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>SUB<span style="mso-spacerun: yes">     </span>WORD PTR VALUE2,AX<span
+style="mso-spacerun: yes">      </span>; Вычитание младшей части
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001D<span style="mso-spacerun: yes">  </span>A1 0002 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AX,WORD PTR
+VALUE1+2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span><span style="mso-spacerun: yes"> </span>0020<span style="mso-spacerun:
+yes">  </span>19 06 0006 R<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">      </span>SBB<span style="mso-spacerun: yes">    
+</span>WORD PTR VALUE2+2,AX<span style="mso-spacerun: yes">    </span>;
+Вычитание старшей части
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0024<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 4.10 Пример с повышенной точностью
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 4.10 иллюстрирует сложение пары
+32=битовых чисел; в
+
+<p><span
+style="mso-spacerun: yes">    </span>примере складываются 32=битовые числа поля
+VALUE1 и поля VALUE2, а
+
+<p><span
+style="mso-spacerun: yes">    </span>результат помещается в поле VALUE2.
+Заметим, что один из операндов
+
+<p><span
+style="mso-spacerun: yes">    </span>должен быть помещен в регистр. В первом
+сложении используеся
+
+<p><span
+style="mso-spacerun: yes">    </span>команда ADD, так как текущее значение
+флага переноса несущественно
+
+<p><span
+style="mso-spacerun: yes">    </span>для первого сложения. После
+соответствующего размещения операндов
+
+<p><span
+style="mso-spacerun: yes">    </span>программа на Фиг. 4.10 выполняет второе
+сложение с помощью команды
+
+<p><span
+style="mso-spacerun: yes">    </span>ADC, с учетом флага переноса,
+установленного предыдущим сложением.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это также хороший пример показывающий,
+почему команда MOV не
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает никаких флагов. Если бы
+команда MOV изменяла флаги,
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнить правильно второе сложение было
+бы гораздо труднее.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

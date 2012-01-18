@@ -1,0 +1,714 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="8-10">Адаптер дисковода</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Адаптер дисковода является интерфейсом
+между микропроцессором и
+
+<p><span
+style="mso-spacerun: yes">    </span>накопителем на гибких магнитных дисках.
+Схемы, смонтированные на
+
+<p><span
+style="mso-spacerun: yes">    </span>плате этого адаптера, обеспечивают все
+функции, необходимые для
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода и вывода данных на гибкий диск
+(дискету). Адаптер
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечивает также физическое кодирование
+и декодирование данных,
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимое для использования дискет.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Центральной частью адаптера дисковода
+фирмы IBM является
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхема контроллера гибкого диска FDC
+(Floppy Disk Controller)
+
+<p><span
+style="mso-spacerun: yes">    </span>мPD765 фирмы NEC. Эта компонента также
+производится фирмой Intel
+
+<p><span
+style="mso-spacerun: yes">    </span>как микросхема 8272. Микросхема FDC
+управляет потоком данных на
+
+<p><span
+style="mso-spacerun: yes">    </span>дискету и с нее. Микросхема FDC имеет два
+порта ввода-вывода, один
+
+<p><span
+style="mso-spacerun: yes">    </span>для данных, а другой для отражения
+состояния. Порт данных находится
+
+<p><span
+style="mso-spacerun: yes">    </span>по адресу 3F4H, а порт состояния по адресу
+3F5H. Порт данных -
+
+<p><span
+style="mso-spacerun: yes">    </span>двунаправленный, т.е. в различные моменты
+времени можно и читать
+
+<p><span
+style="mso-spacerun: yes">    </span>данные из этого порта, и записывать их в
+порт. Регистр состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>можно только читать в любой момент
+времени. Он сообщает, как в
+
+<p><span
+style="mso-spacerun: yes">    </span>данный момент нужно работать с регистром
+данных.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В регистре состояния есть 2 бита, которые
+используются во время
+
+<p><span
+style="mso-spacerun: yes">    </span>работы с дисководом. Бит 6 - это признак
+ввода-вывода данных (DIO -
+
+<p><span
+style="mso-spacerun: yes">    </span>Data Input/Output). Этот бит сообщает,
+каких действий в отношении
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра данных ожидает от вас контроллер.
+Если признак DIO равен
+
+<p><span
+style="mso-spacerun: yes">    </span>1, микросхема FDC ждет от вас чтения
+регистра данных. Если DIO
+
+<p><span
+style="mso-spacerun: yes">    </span>равен 0, FDC ждет записи в регистр данных.
+Бит 7 порта состояния -
+
+<p><span
+style="mso-spacerun: yes">    </span>это бит запроса устройства (RQM - Request
+For Master). Он
+
+<p><span
+style="mso-spacerun: yes">    </span>аналогичен биту &quot;занято&quot;
+печатающего устройства. Когда бит RQM
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит 1, микросхема FDC готова к тому,
+чтобы читался или
+
+<p><span
+style="mso-spacerun: yes">    </span>записывался регистр данных. Если вы не
+уделите внимание биту RQM,
+
+<p><span
+style="mso-spacerun: yes">    </span>то введете микросхему FDC в заблуждение, и
+после этого ничего не
+
+<p><span
+style="mso-spacerun: yes">    </span>будет работать.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Регистр данных в действительности не
+является единственным.
+
+<p><span
+style="mso-spacerun: yes">    </span>Подобно контроллеру 6845, порт данных
+фактически состоит из группы
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров. Но в отличие от микросхемы
+6845, регистра индекса
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров данных здесь нет. Данные,
+которые вы посылаете в
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер, должны поступать в
+определенном порядке. Аналогично, в
+
+<p><span
+style="mso-spacerun: yes">    </span>определенном порядке данные поступают из
+порта, когда вы их
+
+<p><span
+style="mso-spacerun: yes">    </span>читаете.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В техническом описании содержится
+диаграмма, показывающая
+
+<p><span
+style="mso-spacerun: yes">    </span>входные и выходные комбинации для всех
+операций дисковода.
+
+<p><span
+style="mso-spacerun: yes">    </span>Рассмотрим простейшую команду микросхемы
+FDC, опрос состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>механизма. Вы выполняете эту операцию
+тогда, когда хотите что-либо
+
+<p><span
+style="mso-spacerun: yes">    </span>узнать о текущем состоянии дисковода. На
+Фиг. 8.19 показаны данные
+
+<p><span
+style="mso-spacerun: yes">    </span>для команды опроса состояния, а на Фиг.
+8.20 показана программа,
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняющая операцию опроса состояния
+дисковода.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>----------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда...................04H
+
+<p><span
+style='mso-tab-count:1'>      </span>Модификатор команды.......00H
+
+<p><span
+style='mso-tab-count:1'>      </span>статус возврата...........ST3<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">   </span>Фиг.
+8.19 Команда опроса
+
+<p><span
+style="mso-spacerun: yes">      </span>----------------------------------<span
+style="mso-spacerun: yes">       </span>состояния
+
+<p>A<br>
+<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>1/1/80 04:06:03
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 8.20 Проверка состояния дисковода <span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">     </span>Page<span
+style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 8.20 Проверка состояния дисковода
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> SEGMENT STACK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>0040[<span
+style='mso-tab-count:4'>                   </span> DW<span style='mso-tab-count:
+1'>   </span> 64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0080<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>FDC_STATUS<span style='mso-tab-count:1'> </span>
+RECORD <span style="mso-spacerun: yes"> </span>RQM:1, DIO:1, OTHER:6
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> SENSE<span
+style='mso-tab-count:1'>      </span> PROC<span style='mso-tab-count:1'> </span>
+FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>1E<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DS<span
+style='mso-tab-count:2'>         </span> ; Адрес возврата
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0001<span style='mso-tab-count:1'>      </span>2B C0<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> AX, AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0003<span style='mso-tab-count:1'>      </span>50<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0004<span style='mso-tab-count:1'>      </span>BA 03F4 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX, 3F4H<span
+style='mso-tab-count:1'>   </span> ; Порт состояния контроллера дисков
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0007<span style='mso-tab-count:1'>      </span>B4 04<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH, 04H<span style='mso-tab-count:1'>    </span> ; Команда
+состояния устройства
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0009<span style='mso-tab-count:1'>      </span>E8 001E R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> OUTPUT <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Передача в контроллер
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000C<span style='mso-tab-count:1'>      </span>B4 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH, 0<span style='mso-tab-count:2'>            </span> ; Второй
+байт команды
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000E<span style='mso-tab-count:1'>      </span>E8 001E R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> OUTPUT
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:4'>                        </span><span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>;-----<span
+style="mso-spacerun: yes">  </span>Чтение состояния из контроллера дисков
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0011<span style='mso-tab-count:4'>                        </span>
+IN_DIO:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0011<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span> AL,
+DX <span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes"> </span>; Ждать, пока флаг DIO разрешит ввод
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0012<span style='mso-tab-count:1'>      </span>A8 80<span
+style='mso-tab-count:4'>                   </span> TEST<span style='mso-tab-count:
+1'> </span> AL, MASK RQM<span style='mso-tab-count:1'>     </span> ;<span
+style="mso-spacerun: yes">  </span>из контроллера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0014<span style='mso-tab-count:1'>      </span>74 FB<span
+style='mso-tab-count:4'>                   </span> JZ<span style='mso-tab-count:
+1'>   </span> IN_DIO
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0016<span style='mso-tab-count:4'>                        </span>
+IN_RQM:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0016<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span> AL,
+DX <span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes"> </span>; Ждать, пока флаг RQM покажет, что
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0017<span style='mso-tab-count:1'>      </span>A8 80<span
+style='mso-tab-count:4'>                   </span> TEST<span style='mso-tab-count:
+1'> </span> AL, MASK RQM<span style='mso-tab-count:1'>     </span> ;<span
+style="mso-spacerun: yes">  </span>контроллер готов
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0019<span style='mso-tab-count:1'>      </span>74 FB<span
+style='mso-tab-count:4'>                   </span> JZ<span style='mso-tab-count:
+1'>   </span> IN_RQM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001B<span style='mso-tab-count:1'>      </span>42<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> DX<span
+style='mso-tab-count:2'>         </span> ; Установка на порт данных
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001C<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span> AL,
+DX <span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes"> </span>; Чтение состояния контроллера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001D<span style='mso-tab-count:1'>      </span>CB<span style='mso-tab-count:
+4'>                      </span> RET<span style='mso-tab-count:3'>              </span>
+; Конец примера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001E<span style='mso-tab-count:4'>                        </span> SENSE<span
+style='mso-tab-count:1'>      </span> ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Подпрограмма посылки байта в контроллер
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001E<span style='mso-tab-count:4'>                        </span>
+OUTPUT<span style="mso-spacerun: yes">  </span>PROC<span style='mso-tab-count:
+1'>     </span> NEAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001E<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span> AL,
+DX <span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes"> </span>; Ожидание пока DIO разрешит чтение
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001F<span style='mso-tab-count:1'>      </span>A8 40<span
+style='mso-tab-count:4'>                   </span> TEST<span style='mso-tab-count:
+1'> </span> AL, MASK DIO<span style='mso-tab-count:1'>     </span> ;<span
+style="mso-spacerun: yes">  </span>из контроллера из контроллера
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0021<span style='mso-tab-count:1'>      </span>75 FB<span
+style='mso-tab-count:4'>                   </span> JNZ<span style='mso-tab-count:
+1'>  </span> OUTPUT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0023<span style='mso-tab-count:4'>                        </span>
+OUT_RQM:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0023<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span> AL,
+DX <span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes"> </span>; Ожидание пока RQM покажет, что
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0024<span style='mso-tab-count:1'>      </span>A8 80<span
+style='mso-tab-count:4'>                   </span> TEST<span style='mso-tab-count:
+1'> </span> AL, MASK RQM<span style='mso-tab-count:1'>     </span> ;<span
+style="mso-spacerun: yes">  </span>контроллер готов
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0026<span style='mso-tab-count:1'>      </span>74 FB<span
+style='mso-tab-count:4'>                   </span> JZ<span style='mso-tab-count:
+1'>   </span> OUT_RQM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0028<span style='mso-tab-count:1'>      </span>42<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> DX<span
+style='mso-tab-count:2'>         </span> ; Установка на порт данных
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0029<span style='mso-tab-count:1'>      </span>8A C4<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, AH <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Посылаемые данные
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002B<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span> DX,
+AL <span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes"> </span>; Вывод в порт
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002C<span style='mso-tab-count:1'>      </span>4A<span style='mso-tab-count:
+4'>                      </span> DEC<span style='mso-tab-count:1'>  </span> DX<span
+style='mso-tab-count:2'>         </span> ; Установка на порт состояния
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002D<span style='mso-tab-count:1'>      </span>C3<span style='mso-tab-count:
+4'>                      </span> RET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002E<span style='mso-tab-count:4'>                        </span>
+OUTPUT<span style="mso-spacerun: yes">  </span>ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002E<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END<span style='mso-tab-count:1'>  </span>
+SENSE&#18;A
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 8.20 Проверка состояния
+дисковода
+
+<p><span
+style='mso-tab-count:1'>      </span>Каждое действие, выполняемое контроллером
+дисковода, состоит из
+
+<p><span
+style="mso-spacerun: yes">    </span>трех фаз: команды, выполнения и
+результата. В фазе команды
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхема FDC ожидает данные, и это
+отражает бит DIO. Когда
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхема FDC устанавливает бит RQM,
+чтобы он указывал на
+
+<p><span
+style="mso-spacerun: yes">    </span>готовность принять данные, программа может
+посылать команду в
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер. В случае опроса состояния
+дисковода, она выводит в
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхему FDC два байта команды. Первый
+байт, 04H, является кодом
+
+<p><span
+style="mso-spacerun: yes">    </span>операции этой команды. Второй байт
+сообщает, какой из механизмов
+
+<p><span
+style="mso-spacerun: yes">    </span>опросить. В течение командной фазы признак
+DIO всегда показывает,
+
+<p><span
+style="mso-spacerun: yes">    </span>что микросхема FDC ждет данные, и
+программа использует бит RQM для
+
+<p><span
+style="mso-spacerun: yes">    </span>определения момента, когда можно посылать
+очередной байт данных.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Теперь контроллер переходит в фазу
+выполнения. В течение этой
+
+<p><span
+style="mso-spacerun: yes">    </span>фазы контроллер выполняет команду. В
+данном случае он опрашивает
+
+<p><span
+style="mso-spacerun: yes">    </span>состояние дисковода. В течение этого
+времени бит RQM сообщает
+
+<p><span
+style="mso-spacerun: yes">    </span>программе, чтобы она не использовала порт
+данных. После завершения
+
+<p><span
+style="mso-spacerun: yes">    </span>операции признак DIO переключается на 1,
+сообщая программе, что она
+
+<p><span
+style="mso-spacerun: yes">    </span>может читать регистр данных. По разрешению
+RQM программа может
+
+<p><span
+style="mso-spacerun: yes">    </span>прочитать единственный байт состояния от
+этой операции. Как только
+
+<p><span
+style="mso-spacerun: yes">    </span>программа прочитает всю информацию
+состояния признак DIO снова
+
+<p><span
+style="mso-spacerun: yes">    </span>принимает значение 0, ожидая ввода
+следующей команды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как видно из таблицы в техническом
+описании, команда опроса
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния дисковода - одна из самых
+простых. Команде чтения данных
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется девять байт данных во время
+командной фазы. Когда
+
+<p><span
+style="mso-spacerun: yes">    </span>операция завершится, программа должна
+прочитать семь байт состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>из контроллера. Выполнение не начинается
+до тех пор, пока не
+
+<p><span
+style="mso-spacerun: yes">    </span>присылается шестой командный байт, и вы не
+можете начать другую
+
+<p><span
+style="mso-spacerun: yes">    </span>операцию, пока не будут прочитаны все семь
+байт состояния.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>По адресу ввода-вывода 3F2H находится
+цифровой выводной регистр
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллера дисковода. Этот выводной порт
+выполняет некоторые
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительные операции управления
+дисководом. Основное назначение
+
+<p><span
+style="mso-spacerun: yes">    </span>этого порта - управление двигателями дисковода.
+У механизмов
+
+<p><span
+style="mso-spacerun: yes">    </span>дисководов 5 1/4 дюйма, используемых в IBM
+PC, двигатели работают
+
+<p><span
+style="mso-spacerun: yes">    </span>не непрерывно. Программа должна включить
+двигатель перед чтением
+
+<p><span
+style="mso-spacerun: yes">    </span>или записью на дискету - и выключить его
+после. Если вы оставите
+
+<p><span
+style="mso-spacerun: yes">    </span>двигатель включенным на все время, это
+приведет к быстрому износу
+
+<p><span
+style="mso-spacerun: yes">    </span>дискеты. Когда двигатель работает, на
+передней панели дисковода
+
+<p><span
+style="mso-spacerun: yes">    </span>горит красная лампочка.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Адаптер использует цифровой выводной
+регистр и для других
+
+<p><span
+style="mso-spacerun: yes">    </span>целей. Два бита выбирают необходимый
+дисковод. Этот регистр также
+
+<p><span
+style="mso-spacerun: yes">    </span>используется для сброса микросхемы FDC,
+так как существуют
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибочные ситуации, которые вводят
+контроллер в неопределенное
+
+<p><span
+style="mso-spacerun: yes">    </span>состояние. В таких случаях единственный
+выход - сбросить контроллер
+
+<p><span
+style="mso-spacerun: yes">    </span>и попробовать снова.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

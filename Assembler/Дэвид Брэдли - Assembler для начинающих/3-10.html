@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-10">Сегментные регистры</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>INTEL 8088<span style='mso-tab-count:1'>    </span>имеет
+четыре сегментных<span style="mso-spacerun: yes">  </span>регистра: CS,DS,SS
+и<span style="mso-spacerun: yes">  </span>ES - для
+
+<p><span
+style="mso-spacerun: yes">    </span>кодового,<span style='mso-tab-count:1'>     </span>данных-,<span
+style="mso-spacerun: yes">   </span>стекового<span style='mso-tab-count:1'>    </span>и<span
+style="mso-spacerun: yes">   </span>дополнительного<span style="mso-spacerun:
+yes">   </span>сегментов
+
+<p><span
+style="mso-spacerun: yes">    </span>соответственно.<span style="mso-spacerun:
+yes">  </span>Это их<span style="mso-spacerun: yes">  </span>обычное
+использование,<span style="mso-spacerun: yes">  </span>но применение этих
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров может именяться в соответствии с
+потребностями программы.
+
+<p><span
+style='mso-tab-count:1'>      </span>8088<span style="mso-spacerun: yes"> 
+</span>использует регистр<span style="mso-spacerun: yes">  </span>сегмента
+программы<span style="mso-spacerun: yes">  </span>для идентификации
+
+<p><span
+style="mso-spacerun: yes">    </span>того<span style="mso-spacerun: yes"> 
+</span>сегмента,<span style="mso-spacerun: yes">  </span>который<span
+style="mso-spacerun: yes">  </span>содержит<span style='mso-tab-count:1'>    </span>
+выполняемую<span style="mso-spacerun: yes">  </span>в<span style="mso-spacerun:
+yes">  </span>данный<span style="mso-spacerun: yes">  </span>момент
+
+<p><span
+style="mso-spacerun: yes">    </span>программу. В сочетании с<span
+style="mso-spacerun: yes">  </span>указателем команд регистр CS используется
+
+<p><span
+style="mso-spacerun: yes">    </span>для указания текущей команды.<span
+style="mso-spacerun: yes">  </span>Каждая выполняемая команда находится
+
+<p><span
+style="mso-spacerun: yes">    </span>в ячейке, на которую указывает пара
+регистров CS:IP.
+
+<p><span
+style='mso-tab-count:1'>      </span>Комбинация сегментного<span
+style='mso-tab-count:1'>  </span> регистра<span style="mso-spacerun: yes"> 
+</span>с<span style="mso-spacerun: yes">  </span>регистром<span
+style="mso-spacerun: yes">   </span>смещения<span style="mso-spacerun: yes"> 
+</span>для
+
+<p><span
+style="mso-spacerun: yes">    </span>указания физического<span
+style="mso-spacerun: yes">  </span>адреса записывается в<span
+style="mso-spacerun: yes">  </span>виде сегмент:смещение,
+
+<p><span
+style="mso-spacerun: yes">    </span>например, CS:IP. Значение сегмента стоит
+перед двоеточием, смещение
+
+<p><span
+style="mso-spacerun: yes">    </span>- после.<span style="mso-spacerun: yes"> 
+</span>Такая<span style="mso-spacerun: yes">  </span>нотация<span
+style="mso-spacerun: yes">  </span>используется<span style="mso-spacerun:
+yes">   </span>и<span style='mso-tab-count:1'>  </span>для<span
+style="mso-spacerun: yes">  </span>регистров,<span style="mso-spacerun: yes"> 
+</span>и<span style="mso-spacerun: yes">  </span>для
+
+<p><span
+style="mso-spacerun: yes">    </span>абсолютных<span style='mso-tab-count:1'>    </span>адресов.<span
+style="mso-spacerun: yes">  </span>Вы<span style="mso-spacerun: yes"> 
+</span>можете<span style="mso-spacerun: yes">  </span>писать<span
+style="mso-spacerun: yes">  </span>такие<span style="mso-spacerun: yes"> 
+</span>адреса как CS:100,
+
+<p><span
+style="mso-spacerun: yes">    </span>DS:BX, 570:100, или 630:DI.
+
+<p><span
+style='mso-tab-count:1'>      </span>Регистр сегмента данных (DS)<span
+style="mso-spacerun: yes">  </span>процессор использует для обычного
+
+<p><span
+style="mso-spacerun: yes">    </span>доступа<span style="mso-spacerun: yes"> 
+</span>к<span style='mso-tab-count:1'>    </span>данным.<span
+style="mso-spacerun: yes">  </span>Схемы<span style='mso-tab-count:1'>    </span>адресации<span
+style="mso-spacerun: yes">  </span>для<span style='mso-tab-count:1'>    </span>операндов,<span
+style="mso-spacerun: yes">  </span>которые<span style="mso-spacerun: yes"> 
+</span>мы
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматривали в<span style="mso-spacerun:
+yes">  </span>предыдущем пункте, дают<span style="mso-spacerun: yes"> 
+</span>16-битовое смещение, и<span style="mso-spacerun: yes">  </span>в
+
+<p><span
+style="mso-spacerun: yes">    </span>большинстве случаев для формирования
+исполнительного адреса процес-
+
+<p><span
+style="mso-spacerun: yes">    </span>сор комбинирует это смещение с ргеистром
+DS.
+
+<p><span
+style='mso-tab-count:1'>      </span>Регистр<span style="mso-spacerun: yes"> 
+</span>сегмента стека<span style="mso-spacerun: yes">  </span>указывает на<span
+style="mso-spacerun: yes">  </span>системный стек.<span style='mso-tab-count:
+1'>      </span>Команды
+
+<p><span
+style="mso-spacerun: yes">    </span>PUSH, POP, CALL и RET управляют данными в
+стеке в позиции по адресу
+
+<p><span
+style="mso-spacerun: yes">    </span>SS:SP.<span style="mso-spacerun: yes"> 
+</span>Регистр<span style="mso-spacerun: yes">  </span>SP<span
+style="mso-spacerun: yes">  </span>-<span style="mso-spacerun: yes"> 
+</span>указатель<span style="mso-spacerun: yes">  </span>стека<span
+style="mso-spacerun: yes">  </span>-<span style="mso-spacerun: yes"> 
+</span>служит для определения
+
+<p><span
+style="mso-spacerun: yes">    </span>смещения<span style="mso-spacerun: yes"> 
+</span>в стеке.<span style='mso-tab-count:1'>  </span>Кроме<span
+style="mso-spacerun: yes">  </span>того,<span style="mso-spacerun: yes"> 
+</span>сегмент стека<span style="mso-spacerun: yes">  </span>подразумевается по
+
+<p><span
+style="mso-spacerun: yes">    </span>умолчанию<span style="mso-spacerun: yes"> 
+</span>при адресации<span style="mso-spacerun: yes">  </span>с<span
+style="mso-spacerun: yes">  </span>использованием<span style="mso-spacerun:
+yes">  </span>регистра BP.<span style="mso-spacerun: yes">  </span>Это дает
+
+<p><span
+style="mso-spacerun: yes">    </span>доступ<span style="mso-spacerun: yes"> 
+</span>к<span style="mso-spacerun: yes">  </span>данным<span
+style="mso-spacerun: yes">  </span>в<span style="mso-spacerun: yes"> 
+</span>стеке<span style="mso-spacerun: yes">  </span>с<span
+style="mso-spacerun: yes">  </span>использованием в качестве указателя
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра<span style="mso-spacerun: yes"> 
+</span>BP. В<span style="mso-spacerun: yes">  </span>следующей главе<span
+style="mso-spacerun: yes">  </span>есть пункт<span style="mso-spacerun: yes"> 
+</span>о стековых операциях,
+
+<p><span
+style="mso-spacerun: yes">    </span>который<span style="mso-spacerun: yes"> 
+</span>демонстрирует, каким<span style="mso-spacerun: yes">  </span>образом
+адресация<span style="mso-spacerun: yes">  </span>через BP упрощает
+
+<p><span
+style="mso-spacerun: yes">    </span>связь с данными в стеке.
+
+<p><span
+style='mso-tab-count:1'>      </span>Наконец, регистр дополнительного сегмента
+используется 8088 для
+
+<p><span
+style="mso-spacerun: yes">    </span>доступа к<span style="mso-spacerun: yes"> 
+</span>данным, когда требуется<span style='mso-tab-count:1'>    </span>более
+одного сенмента.<span style='mso-tab-count:1'>  </span>Обычной
+
+<p><span
+style="mso-spacerun: yes">    </span>операцией такого рода является<span
+style="mso-spacerun: yes">  </span>копирование данных из одной области
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти в<span style="mso-spacerun: yes"> 
+</span>другую. Между областями, находящимися<span style="mso-spacerun: yes"> 
+</span>не внутри одного и
+
+<p><span
+style="mso-spacerun: yes">    </span>того же блока памяти размером 64К,
+невозможно произвести обмен дан-
+
+<p><span
+style="mso-spacerun: yes">    </span>ными, используя единственный
+сегментный<span style="mso-spacerun: yes">  </span>регистр. Имея в распоряже-
+
+<p><span
+style="mso-spacerun: yes">    </span>нии дополнительный<span style='mso-tab-count:
+1'>  </span>сегментный регистр, программа,<span style='mso-tab-count:1'>      </span>как
+показано на
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 3.7,<span style="mso-spacerun: yes"> 
+</span>может указать одновременно исходный<span style="mso-spacerun: yes"> 
+</span>и целевой сегменты.
+
+<p><span
+style="mso-spacerun: yes">    </span>Регистр<span style="mso-spacerun: yes"> 
+</span>DS<span style="mso-spacerun: yes">  </span>указывает<span
+style="mso-spacerun: yes">  </span>область<span style="mso-spacerun: yes"> 
+</span>исходных<span style="mso-spacerun: yes">  </span>данных,<span
+style='mso-tab-count:1'>      </span>а<span style="mso-spacerun: yes"> 
+</span>регистр ES -
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>і<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span>ГДДДДДДДДДДДДДДДДДДДДґ ДДДДД
+DS
+
+<p><span
+style="mso-spacerun: yes">     </span>Копировать <span style='mso-tab-count:
+1'>  </span>і<span style="mso-spacerun: yes">     </span>Сегмент -<span
+style="mso-spacerun: yes">      </span>і
+
+<p><span
+style="mso-spacerun: yes">      </span>отсюда<span style='mso-tab-count:1'>      </span>ДДДДДДДДґ<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>і<span style='mso-tab-count:1'>    </span>і<span style="mso-spacerun:
+yes">     </span>источник<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>і<span style='mso-tab-count:1'>    </span>ГДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>і<span style='mso-tab-count:1'>    </span>і<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>і<span style='mso-tab-count:1'>    </span>і<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>і<span style='mso-tab-count:1'>    </span>ГДДДДДДДДДДДДДДДДДДДДґ ДДДДД
+ES
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>і<span style='mso-tab-count:1'>    </span>і<span style="mso-spacerun:
+yes">      </span>Сегмент<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>і<span style='mso-tab-count:1'>    </span>і<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>сюда<span style='mso-tab-count:1'> </span>ДДДДДДДДґ<span
+style="mso-spacerun: yes">    </span>назначения<span style="mso-spacerun:
+yes">      </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span>ГДДДДДДДДДДДДДДДДДДДДґ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>Фиг.3.7 Копирование из сегмента в сегмент
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмент<span style="mso-spacerun: yes"> 
+</span>назначения.<span style="mso-spacerun: yes">  </span>Для<span
+style="mso-spacerun: yes">  </span>передачи<span style="mso-spacerun: yes"> 
+</span>данных<span style="mso-spacerun: yes">  </span>существуют специальные
+
+<p><span
+style="mso-spacerun: yes">    </span>строковые команды,<span style='mso-tab-count:
+1'>  </span>которые автоматически используют<span style="mso-spacerun: yes"> 
+</span>регистры DS и
+
+<p><span
+style="mso-spacerun: yes">    </span>ES для указания исходного и целевого
+регистров.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

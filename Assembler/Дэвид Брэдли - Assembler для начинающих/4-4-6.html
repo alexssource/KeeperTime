@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-4-6">Симовльная коррекция: сложение и вычитание  </a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команды символьной коррекции очень похожи
+на команды десятичной
+
+<p><span
+style="mso-spacerun: yes">    </span>коррекции.<span style='mso-tab-count:1'>    </span>Они
+следуют за сложением или вычитанием распакованных
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичных чисел.<span
+style="mso-spacerun: yes">  </span>В тех же случаях, в которых программа
+использует
+
+<p><span
+style="mso-spacerun: yes">    </span>команды десятичной коррекции DAA и DAS для
+упакованных десятичных
+<p><span
+style="mso-spacerun: yes">    </span>чисел, она использует символьную коррекцию
+для распакованных
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичных чисел.<span
+style="mso-spacerun: yes">  </span>В распакованных десятичных числах цифры от 0
+до
+
+<p><span
+style="mso-spacerun: yes">    </span>9 представляются одним байтом.<span
+style="mso-spacerun: yes">  </span>Такая конструкция числа называется
+
+<p><span
+style="mso-spacerun: yes">    </span>символьной десятичной из=за того, что
+такие числа просто
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразовывать в символьный вид и
+наоборот (прибавлять и вычитать
+
+<p><span
+style="mso-spacerun: yes">    </span>30H, соответственно).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>После сложения двух распакованных
+десятичных чисел программа
+
+<p><span
+style="mso-spacerun: yes">    </span>обычно выполняет команду символьной
+коррекции при сложении AAA,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая преобразует результат в правильное
+распакованное
+
+<p><span
+style="mso-spacerun: yes">    </span>представление десятичного числа. Правила
+сложения идентичны
+
+<p><span
+style="mso-spacerun: yes">    </span>правилам для упакованных десятичних чисел.
+Поскольку сложение двух
+
+<p><span
+style="mso-spacerun: yes">    </span>распакованных десятичных чисел может дать
+в результате число,
+
+<p><span
+style="mso-spacerun: yes">    </span>большее 9, командам AAA и AAS требуется
+для работы не только
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AL. В случае команды AAA младшая
+цифра скорректированного
+
+<p><span
+style="mso-spacerun: yes">    </span>результата остается в регистре AL. Если
+десятичное сложение привело
+
+<p><span
+style="mso-spacerun: yes">    </span>к переносу из младшей цифры, команда AAA
+устанавливает равными 1
+
+<p><span
+style="mso-spacerun: yes">    </span>флаги переноса и дополнительного переноса.
+В других случаях она
+
+<p><span
+style="mso-spacerun: yes">    </span>сбрасывает их в 0. Содержимое других
+флагов не определено после
+
+<p><span
+style="mso-spacerun: yes">    </span>команды коррекции. Команды символьной
+коррекции отличаются от
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичных команд тем, что они влияют на
+содержимое регистра AH, а
+
+<p><span
+style="mso-spacerun: yes">    </span>также устанавливают флаг переноса, если
+есть перенос из младшей
+
+<p><span
+style="mso-spacerun: yes">    </span>значащей цифры.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Символьная коррекция вычитания AAS
+используется в программе
+
+<p><span
+style="mso-spacerun: yes">    </span>после вычитания одного распакованного
+десятичного числа из другого,
+
+<p><span
+style="mso-spacerun: yes">    </span>и результат этой байтовой операции должен
+быть помещен в регистр
+
+<p><span
+style="mso-spacerun: yes">    </span>AL. Результат команды символьной коррекции
+остается в регистре AL,
+
+<p><span
+style="mso-spacerun: yes">    </span>и если вычитание привело к появлению
+заема, команда AAS уменьшает
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AH, а также устанавливает флаги
+переноса и дополнительного
+
+<p><span
+style="mso-spacerun: yes">    </span>переноса. В противном случае флаги
+сбрасываются. Другие флаги после
+
+<p><span
+style="mso-spacerun: yes">    </span>команды не определены.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

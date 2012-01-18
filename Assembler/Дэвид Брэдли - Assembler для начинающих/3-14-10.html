@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><a name="3-14-10">Флаг захвата</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Флаг захвата (специального прерывания) TF
+помогает при отладке
+
+<p><span
+style="mso-spacerun: yes">    </span>программ. Этот флаг устанавливается не в
+результате работы
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора, а - программой, с помощью
+специальной команды.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этот флаг называется также флагом
+трассировки или шага.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда этот флаг установлен, после
+выполнения каждой команды
+
+<p><span
+style="mso-spacerun: yes">    </span>возникает прерывание. Эффект при этом
+такой же, как если бы после
+
+<p><span
+style="mso-spacerun: yes">    </span>каждой команды некоторое внешнее
+устройство запрашивало прерывание.
+
+<p><span
+style="mso-spacerun: yes">    </span>Прерывание по трассировке передает
+управление в ячейку,
+
+<p><span
+style="mso-spacerun: yes">    </span>определенную вектором прерывания 4. Во
+время процедуры прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор сбрасывает флаг
+специального прерывания. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет программе обработки прерывания
+по трассировке избежать
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания после каждой команды. Когда
+обработчик прерывания по
+
+<p><span
+style="mso-spacerun: yes">    </span>трассировке возвращает управление
+программе пользователя, он
+
+<p><span
+style="mso-spacerun: yes">    </span>восстанавливает начальное состояние
+регистра флагов, в котором флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>трассировки установлен. Микропроцессор
+выполняет следующую команду
+
+<p><span
+style="mso-spacerun: yes">    </span>пользователя, и снова возникает
+специальное прерывание. Обработчик
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний по трассировке получает
+управление после каждой команды
+
+<p><span
+style="mso-spacerun: yes">    </span>до тех пор, пока программа пользователя не
+сбросит флаг захвата.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Отладчик DOS использует флаг трассировки.
+Одной из функций
+
+<p><span
+style="mso-spacerun: yes">    </span>отладчика является пошаговое выполнение,
+при котором перед каждым
+
+<p><span
+style="mso-spacerun: yes">    </span>возвращением управления к отладчику
+выполняется одна команда
+
+<p><span
+style="mso-spacerun: yes">    </span>программы пользователя. Это прерывание
+инициируется флагом захвата.
+
+<p><span
+style="mso-spacerun: yes">    </span>Полное описание процедуры прерывания дано
+в разделе &quot;Векторы
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний&quot;.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

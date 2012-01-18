@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><a name="4-1-6">Пересылка флагов
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Набор команд микропроцессора 8088 имеет
+команды LAHF и SAHF в
+
+<p><span
+style="mso-spacerun: yes">    </span>первую очередь для совместимости с набором
+команд микропроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8080.<span style="mso-spacerun: yes"> 
+</span>Команда LAHF берет 8 младших бит регистра флагов - а эти
+
+<p><span
+style="mso-spacerun: yes">    </span>флаги совпадают с флагами микропроцессора
+8080 - и засылает их в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AH.<span style="mso-spacerun:
+yes">  </span>Команда SAHF действует наоборот, младший байт регистра
+
+<p><span
+style="mso-spacerun: yes">    </span>флагов загружает из регистра AH.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вам потребуюся эти две команды, если вы
+переводите программу из
+
+<p><span
+style="mso-spacerun: yes">    </span>системы команд микропроцессора 8080 в
+команды микропроцессора 8088.
+
+<p><span
+style="mso-spacerun: yes">    </span>Они необходимы, чтобы отобразить стековые
+операции с аккумулятором
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8080 в стековые операции
+микропроцессора 8088.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1" face="Arial"><a name="chapter2">Глава 2</a> </font></b></div></p>
+
+<p><div align="center"><b><font size="+1" face="Arial">Основы компьютерных вычислений </font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>В этой главе разъясняются свойства
+компьютеров.<span style="mso-spacerun: yes">  </span>Она расскажет вам
+
+<p><span
+style="mso-spacerun: yes">    </span>как компьютеры работают и почему они
+делают это именно так.<span style="mso-spacerun: yes">  </span>Неко-
+
+<p><span
+style="mso-spacerun: yes">    </span>торые положения могут оказаться знакомыми
+вам.<span style="mso-spacerun: yes">  </span>Если у вас нет опы-
+
+<p><span
+style="mso-spacerun: yes">    </span>та программирования на языке ассемблера,
+то многие операции будут
+
+<p><span
+style="mso-spacerun: yes">    </span>для вас новыми.
+
+<p><div align="center"><b><font size="+1"><i>
+<a name="2-1">Двоичная арифметика</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Все компьютеры используют для хранения
+информации двоичную систему.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это значит, что каждый элемент хранимой
+информации может иметь
+
+<p><span
+style="mso-spacerun: yes">    </span>только два состояния.<span
+style="mso-spacerun: yes">  </span>Эти состояния обозначаются как
+&quot;включен&quot; и
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;выключен&quot;, &quot;истина&quot; и
+&quot;ложь&quot;, или &quot;1&quot; и &quot;0&quot;.<span style="mso-spacerun:
+yes">  </span>Компьютер хранит эти
+
+<p><span
+style="mso-spacerun: yes">    </span>значения в виде уровней напряжения.<span
+style="mso-spacerun: yes">  </span>К счастью у нас нет нужды свя-
+
+<p><span
+style="mso-spacerun: yes">    </span>зываться с напряжением.<span
+style="mso-spacerun: yes">  </span>При написании программ мы имеем дело
+
+<p><span
+style="mso-spacerun: yes">    </span>только с числами.<span
+style="mso-spacerun: yes">  </span>Используя простейшие числа 0 и 1, можно
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнять очень сложные вычисления.<span
+style="mso-spacerun: yes">  </span>Из-за двоичного представления
+
+<p><span
+style="mso-spacerun: yes">    </span>данных компьютеры используют в своих
+вычислениях арифметику с
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичным основанием.<span
+style="mso-spacerun: yes">  </span>Арифметика с основанием 2 пользуется только
+
+<p><span
+style="mso-spacerun: yes">    </span>двумя цифрами:<span style="mso-spacerun:
+yes">  </span>0 и 1.<span style="mso-spacerun: yes">  </span>Мы обычно
+применяем систему исчисления по
+
+<p><span
+style="mso-spacerun: yes">    </span>основанию 10.<span style="mso-spacerun:
+yes">  </span>В десятичной арифметике употребляется десять
+
+<p><span
+style="mso-spacerun: yes">    </span>различных цифр - от 0 до 9.<span
+style="mso-spacerun: yes">  </span>Двоичную арифметику можно представить
+
+<p><span
+style="mso-spacerun: yes">    </span>себе как систему для людей, имеющих только
+два пальца.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Ограничение лишь десятью цифрами в
+десятичной арифметике не ме-
+
+<p><span
+style="mso-spacerun: yes">    </span>шает нам представлять более крупные числа.<span
+style='mso-tab-count:1'>  </span>Мы пользуемся
+
+<p><span
+style="mso-spacerun: yes">    </span>многозначными числами, в каждой позиции
+которых стоят разные
+
+<p><span
+style="mso-spacerun: yes">    </span>степени 10.<span style="mso-spacerun:
+yes">  </span>Самая правая цифра любого числа обозначает число
+
+<p><span
+style="mso-spacerun: yes">    </span>едениц, соседняя слева - количество
+десятков, следующая - число
+
+<p><span
+style="mso-spacerun: yes">    </span>сотен и т.д.<span style="mso-spacerun:
+yes">  </span>Прогрессия справа налево выстраивается такая:
+
+<p><span
+style="mso-spacerun: yes">    </span>10**0, 10**1, 10**2 и т.д.<span
+style='mso-tab-count:1'>      </span>Число 2368 в дейстительности
+
+<p><span
+style="mso-spacerun: yes">    </span>представляет 2 тысячи, 3 сотни, 6 десятков
+и 8 едениц.<span style="mso-spacerun: yes">  </span>Фиг.<span
+style="mso-spacerun: yes">  </span>2.1
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает ,говоря матическим языком,
+разложение числа 2368.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>_____________________________________________________
+
+<p><span
+style='mso-tab-count:1'>      </span>2368 = 2 * 10**3 + 3 * 10**2 + 6 * 10**1 +
+8 * 10**0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>= 2000<span style="mso-spacerun: yes">    </span>+<span
+style="mso-spacerun: yes">     </span>300<span style="mso-spacerun: yes">   
+</span>+<span style='mso-tab-count:1'> </span> 60<span style="mso-spacerun:
+yes">    </span>+<span style="mso-spacerun: yes">    </span>8
+
+<p><span
+style='mso-tab-count:1'>      </span>_____________________________________________________
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>Фиг. 2.1 Десятичное представление
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Арифметика с основанием 2 или двоичная
+система аналогична деся-
+
+<p><span
+style="mso-spacerun: yes">    </span>тичной, за исключением того, что разряды
+числа здесь соответствуют
+
+<p><span
+style="mso-spacerun: yes">    </span>степеням 2 а не 10.<span
+style="mso-spacerun: yes">  </span>Числа больше 1 представляются многозначными
+
+<p><span
+style="mso-spacerun: yes">    </span>числами, так же как в десятичной
+арифметике многозначное представ-
+
+<p><span
+style="mso-spacerun: yes">    </span>ление получают числа больше 9.<span
+style="mso-spacerun: yes">  </span>Каждая цифра в двоичной системе
+
+<p><span
+style="mso-spacerun: yes">    </span>называется бит от Binary digIT (двоичная
+цифра).<span style="mso-spacerun: yes">  </span>Позиция каждого
+
+<p><span
+style="mso-spacerun: yes">    </span>бита в числе соответствует некоторой
+степени 2.<span style="mso-spacerun: yes">  </span>Фиг.<span
+style="mso-spacerun: yes">  </span>2.2
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает значение двоичного числа
+101101B.
+
+<p><span
+style="mso-spacerun: yes">       </span>101101B = 1*2**5 + 0*2**4 + 1*2**3 +
+1*2**2 + 0*2**1 + 1*2**0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>=<span style="mso-spacerun: yes">   </span>32<span style='mso-tab-count:
+1'>     </span>+<span style="mso-spacerun: yes">   </span>0<span
+style='mso-tab-count:1'> </span> +<span style="mso-spacerun: yes">   </span>8<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>+<span style="mso-spacerun: yes">   </span>4<span style="mso-spacerun:
+yes">    </span>+<span style="mso-spacerun: yes">   </span>0<span
+style="mso-spacerun: yes">    </span>+<span style='mso-tab-count:1'>   </span>1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>=<span style="mso-spacerun: yes">  </span>45
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">     </span>____________________________________________________________
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>Фиг. 2.2 Двоичное представление
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Мы будем пользоваться суффиксом
+&quot;B&quot; для обозначения чисел в
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичном представлении.<span
+style="mso-spacerun: yes">  </span>Этим они будут отличаться от десятичных,
+
+<p><span
+style="mso-spacerun: yes">    </span>не имеющих суффикса.<span
+style="mso-spacerun: yes">  </span>Например, 2368 - это десятичное число, а
+
+<p><span
+style="mso-spacerun: yes">    </span>101101B - двоичное.<span
+style="mso-spacerun: yes">  </span>В математической литературе для обозначения
+
+<p><span
+style="mso-spacerun: yes">    </span>системы исчисления обычно используется
+индекс.<span style="mso-spacerun: yes">  </span>Мы будем
+
+<p><span
+style="mso-spacerun: yes">    </span>пользоваться символом &quot;B&quot;,
+поскольку ассемблер IBM для обозначения
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>двоичных чисел применяет именно его.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В таблице Фиг.<span style='mso-tab-count:
+1'>    </span>2.3 для представления максимального десятичного
+
+<p><span
+style="mso-spacerun: yes">    </span>числа требуется 4 бита.<span
+style="mso-spacerun: yes">  </span>Для более крупных чисел потребуется еще
+
+<p><span
+style="mso-spacerun: yes">    </span>больше бит.<span style="mso-spacerun:
+yes">  </span>Двоичным числом состоящим из n бит можно изобразить
+
+<p><span
+style="mso-spacerun: yes">    </span>число величиной 2**n-1.<span
+style="mso-spacerun: yes">  </span>То есть двоичное число в n бит длиной
+
+<p><span
+style="mso-spacerun: yes">    </span>может
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>Десятичное<span style="mso-spacerun: yes">   </span>Двоичное
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>-----------------------
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>1<span style='mso-tab-count:2'>          </span>1
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>2<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">       </span>10
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>3<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">       </span>11
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>4<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>100
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>5<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>101
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>6<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>110
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>7<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>111
+
+<p><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes"> </span>8<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">     </span>1000
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes"> </span>9<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">     </span>1001
+
+<p><span
+style='mso-tab-count:4'>                        </span>10<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    
+</span>1010
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>-----------------------
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">   </span>Фиг. 2.3 Первые 10 целых
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>единственным образом представить любое
+целое от 0 до 2**n-1.<span style="mso-spacerun: yes">  </span>Для
+
+<p><span
+style="mso-spacerun: yes">    </span>4-х битового примера на Фиг 2.3 самое
+большое такое число равно 15
+
+<p><span
+style="mso-spacerun: yes">    </span>(2**4-1).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для каждого конкретного микропроцессора
+сществует максмальный
+
+<p><span
+style="mso-spacerun: yes">    </span>размер двоичных чисел, которые могут быть
+в нем представлены.<span style="mso-spacerun: yes">  </span>Для
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088, используемого в IBM
+PC, внутренние операции
+
+<p><span
+style="mso-spacerun: yes">    </span>производятся над числами длиной 16
+бит.<span style="mso-spacerun: yes">  </span>Максимальное целое, кото-
+
+<p><span
+style="mso-spacerun: yes">    </span>рое можно представить в 16 битах, равно
+2**16-1 или 65 535.<span style="mso-spacerun: yes">  </span>Однако
+
+<p><span
+style="mso-spacerun: yes">    </span>такая беззнаковая арифметика допускает
+числа только от 0 до 65 535.
+
+<p><span
+style="mso-spacerun: yes">    </span>Для обозначения отрицательных чисел нам
+потребуются изменения в
+
+<p><span
+style="mso-spacerun: yes">    </span>этой схеме.
+<p><div align="center"><b><font size="+1" face="Arial"> </font></b></div></p>
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><a name="3-14-3">Регистр флагов</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Последний<span style="mso-spacerun: yes"> 
+</span>управляющий регистр<span style="mso-spacerun: yes">  </span>-
+16-битовый<span style="mso-spacerun: yes">  </span>регистр флагов.<span
+style="mso-spacerun: yes">  </span>Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр содержит<span style="mso-spacerun:
+yes">  </span>информацию, которая используется побитно,<span
+style="mso-spacerun: yes">  </span>а не в
+
+<p><span
+style="mso-spacerun: yes">    </span>качестве 16-битового числа. Биты<span
+style="mso-spacerun: yes">  </span>флагового регистра имеют значение
+
+<p><span
+style="mso-spacerun: yes">    </span>для процессора по-отдельности.
+Некоторые<span style="mso-spacerun: yes">  </span>из этих бит содержат коды
+
+<p><span
+style="mso-spacerun: yes">    </span>условий,<span style="mso-spacerun: yes"> 
+</span>установленные<span style="mso-spacerun: yes">  </span>последней<span
+style='mso-tab-count:1'>    </span>выполненой<span style="mso-spacerun: yes"> 
+</span>командой. Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>пользуется этими кодами для управления
+своим выполнением. Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>может<span style="mso-spacerun: yes"> 
+</span>тестировать коды<span style="mso-spacerun: yes">  </span>условий<span
+style="mso-spacerun: yes">  </span>и<span style="mso-spacerun: yes">  </span>на
+основе<span style="mso-spacerun: yes">  </span>полученных значений
+
+<p><span
+style="mso-spacerun: yes">    </span>выбирать<span style="mso-spacerun: yes"> 
+</span>последовательность<span style="mso-spacerun: yes"> 
+</span>выполнения.<span style="mso-spacerun: yes">  </span>Другие<span
+style="mso-spacerun: yes">  </span>биты<span style="mso-spacerun: yes"> 
+</span>в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>флагов<span style="mso-spacerun: yes"> 
+</span>показывают<span style='mso-tab-count:1'>  </span>состояние<span
+style="mso-spacerun: yes">  </span>процессора<span style="mso-spacerun: yes"> 
+</span>при<span style="mso-spacerun: yes">  </span>выполнении<span
+style='mso-tab-count:1'>    </span>текущей
+
+<p><span
+style="mso-spacerun: yes">    </span>команды. Эти биты управляются специальными
+командами.
+
+<p><span
+style='mso-tab-count:1'>      </span>Регистр флагов лучше всего описывать
+последовательно, по одному
+
+<p><span
+style="mso-spacerun: yes">    </span>биту. Структура регистра флагов<span
+style="mso-spacerun: yes">  </span>показано на Фиг. 3.10. Заметим,
+
+<p><span
+style="mso-spacerun: yes">    </span>что<span style="mso-spacerun: yes"> 
+</span>здесь определены<span style="mso-spacerun: yes">  </span>не все<span
+style="mso-spacerun: yes">  </span>биты. Остальные<span style="mso-spacerun:
+yes">  </span>зарезервированы, то
+
+<p><span
+style="mso-spacerun: yes">    </span>есть в<span style="mso-spacerun: yes"> 
+</span>настоящее время их<span style='mso-tab-count:1'>      </span>значение не
+определено.<span style="mso-spacerun: yes">  </span>Однако в даль-
+
+<p><span
+style="mso-spacerun: yes">    </span>нейших версиях<span style="mso-spacerun:
+yes">  </span>процессора они могут<span style="mso-spacerun: yes">  </span>быть
+использованы для<span style="mso-spacerun: yes">  </span>каких-
+
+<p><span
+style="mso-spacerun: yes">    </span>нибудь специальных целей. Поэтому никогда
+не следует расчитывать на
+
+<p><span
+style="mso-spacerun: yes">    </span>неизменность значения зарезервированных
+бит.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>номер бита<span style='mso-tab-count:1'>    </span>15
+14 13 12 11 10<span style="mso-spacerun: yes">  </span>9<span
+style="mso-spacerun: yes">  </span>8<span style="mso-spacerun: yes"> 
+</span>7<span style="mso-spacerun: yes">  </span>6<span style="mso-spacerun:
+yes">  </span>5<span style="mso-spacerun: yes">  </span>4<span
+style="mso-spacerun: yes">  </span>3<span style='mso-tab-count:1'>    </span>2<span
+style="mso-spacerun: yes">  </span>1<span style="mso-spacerun: yes">  </span>0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>ЪДДВДДВДДВДДВДДВДДВДДВДДВДДВДДВДДВДДВДДВДДВДДВДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>іXXіXXіXXіXXіOFіDFіIFіTFіSFіZFіXXіAFіXXіPFіXXіCFі
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>АДДБДДБДДБДДБДДБДДБДДБДДБДДБДДБДДБДДБДДБДДБДДБДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span>Фиг. 3.10 Регистр флагов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Все флаги младшего<span
+style="mso-spacerun: yes">  </span>байта регистра устанавливаются арифметичес-
+
+<p><span
+style="mso-spacerun: yes">    </span>кими или логическими операциями<span
+style="mso-spacerun: yes">  </span>процессора. Например, операция ADD
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает<span style="mso-spacerun:
+yes">  </span>все<span style='mso-tab-count:1'>  </span>флаги<span
+style="mso-spacerun: yes">  </span>в<span style="mso-spacerun: yes"> 
+</span>младшем<span style="mso-spacerun: yes">  </span>байте<span
+style="mso-spacerun: yes">  </span>в<span style="mso-spacerun: yes"> 
+</span>соответствии<span style="mso-spacerun: yes">  </span>с ее
+
+<p><span
+style="mso-spacerun: yes">    </span>результатом. За исключением флага<span
+style="mso-spacerun: yes">  </span>переполнения, все флаги старшего
+
+<p><span
+style="mso-spacerun: yes">    </span>байта устанавливаются специально<span
+style="mso-spacerun: yes">  </span>предназначенными для этого коман-
+
+<p><span
+style="mso-spacerun: yes">    </span>дами.<span style="mso-spacerun: yes"> 
+</span>Флаги старшего<span style="mso-spacerun: yes">  </span>байта отражают<span
+style="mso-spacerun: yes">  </span>состояние процессора<span
+style="mso-spacerun: yes">  </span>8088 и
+
+<p><span
+style="mso-spacerun: yes">    </span>будут влиять на режим выполнения
+программы. Флаги в младшем байте -
+
+<p><span
+style="mso-spacerun: yes">    </span>это<span style="mso-spacerun: yes"> 
+</span>коды условия<span style="mso-spacerun: yes">  </span>и могут<span
+style='mso-tab-count:1'>      </span>быть испольлзованы<span
+style="mso-spacerun: yes">  </span>в командах условных
+
+<p><span
+style="mso-spacerun: yes">    </span>переходов для изменения порядка выполнения
+программы.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

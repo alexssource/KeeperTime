@@ -1,0 +1,416 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="3-14-8">Дополнительный флаг переноса</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Возможно,<span style='mso-tab-count:1'>     </span>вам<span
+style="mso-spacerun: yes">    </span>никогда<span style='mso-tab-count:1'>    </span>
+не<span style="mso-spacerun: yes">   </span>придется<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">  </span>пользоваться<span
+style='mso-tab-count:1'>    </span> флагом
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительного<span style="mso-spacerun:
+yes">  </span>переноса (AUX),<span style="mso-spacerun: yes">  </span>по
+крайней<span style="mso-spacerun: yes">  </span>мере непосредственно.
+
+<p><span
+style="mso-spacerun: yes">    </span>Изучив команды условных переходов
+микропроцессора 8088, вы увидите,
+
+<p><span
+style="mso-spacerun: yes">    </span>что<span style="mso-spacerun: yes"> 
+</span>прямое<span style="mso-spacerun: yes">  </span>тестирование<span
+style="mso-spacerun: yes">  </span>этого<span style="mso-spacerun: yes"> 
+</span>флага<span style="mso-spacerun: yes">  </span>невозможно. Микропроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>имеет флаг дополнительного переноса<span
+style="mso-spacerun: yes">  </span>AUX для очень конкретной цели:
+
+<p><span
+style="mso-spacerun: yes">    </span>он<span style='mso-tab-count:1'>      </span>позволяет<span
+style="mso-spacerun: yes">  </span>микропроцессору<span style="mso-spacerun:
+yes">  </span>выполнять<span style="mso-spacerun: yes">  </span>десятичные<span
+style="mso-spacerun: yes">  </span>вычисления в
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичной кодировке (Binary-coded-decimal
+arithmetic - BCD - арифметика).
+
+<p><span
+style="mso-spacerun: yes">       </span>BCD - арифметика отличается от<span
+style="mso-spacerun: yes">  </span>той, которую мы обсудили в гл.2.
+
+<p><span
+style="mso-spacerun: yes">    </span>Она<span style="mso-spacerun: yes"> 
+</span>основана на<span style="mso-spacerun: yes">  </span>десятичной
+системе<span style="mso-spacerun: yes">  </span>счисления. При<span
+style="mso-spacerun: yes">  </span>осуществлении
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичной арифметики<span
+style="mso-spacerun: yes">  </span>в двоичной кодировке<span
+style="mso-spacerun: yes">  </span>любая дасятичная цифра
+
+<p><span
+style="mso-spacerun: yes">    </span>представляется четырьмя битами<span
+style="mso-spacerun: yes">  </span>(полубайтом). Каждый полубайт может
+
+<p><span
+style="mso-spacerun: yes">    </span>представлять<span style="mso-spacerun:
+yes">  </span>значения<span style="mso-spacerun: yes">  </span>от<span
+style='mso-tab-count:1'>      </span>0<span style="mso-spacerun: yes"> 
+</span>до<span style="mso-spacerun: yes">  </span>9;<span style="mso-spacerun:
+yes">  </span>значения<span style="mso-spacerun: yes">  </span>от<span
+style="mso-spacerun: yes">  </span>0AH<span style="mso-spacerun: yes"> 
+</span>до 0FH не
+
+<p><span
+style="mso-spacerun: yes">    </span>используются.<span style="mso-spacerun:
+yes">  </span>Это<span style='mso-tab-count:1'>  </span>означает,<span
+style="mso-spacerun: yes">  </span>что<span style='mso-tab-count:1'>    </span>один<span
+style="mso-spacerun: yes">  </span>байт<span style="mso-spacerun: yes"> 
+</span>может<span style="mso-spacerun: yes">  </span>представлять
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичные числа от 0 до 99.
+
+<p><span
+style='mso-tab-count:1'>      </span>На<span style="mso-spacerun: yes"> 
+</span>первый<span style="mso-spacerun: yes">  </span>взгляд<span
+style="mso-spacerun: yes">  </span>такой<span style="mso-spacerun: yes"> 
+</span>способ<span style="mso-spacerun: yes">  </span>хранения числовой информации
+
+<p><span
+style="mso-spacerun: yes">    </span>кажется<span style="mso-spacerun: yes"> 
+</span>расточительным,<span style="mso-spacerun: yes">  </span>двоичная<span
+style='mso-tab-count:1'>    </span>кодировка<span style="mso-spacerun: yes"> 
+</span>десятичныч<span style="mso-spacerun: yes">  </span>чисел не
+
+<p><span
+style="mso-spacerun: yes">    </span>использует 6 из 16 возможных состояний
+каждого полубайта. Однако во
+
+<p><span
+style="mso-spacerun: yes">    </span>многих<span style="mso-spacerun: yes">  
+</span>случаях<span style="mso-spacerun: yes">  </span>применения<span
+style="mso-spacerun: yes">   </span>микропроцессора<span style="mso-spacerun:
+yes">  </span>этот<span style="mso-spacerun: yes">   </span>способ<span
+style="mso-spacerun: yes">  </span>дает
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственное<span style='mso-tab-count:
+1'>    </span>представление<span style='mso-tab-count:1'>     </span>вводимых<span
+style="mso-spacerun: yes">    </span>оператором<span style='mso-tab-count:1'>  </span>
+чисел.
+
+<p><span
+style="mso-spacerun: yes">    </span>Большинство людей более подготовлено к
+работе с десятичными, а не с
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичными<span style="mso-spacerun: yes"> 
+</span>или шестнадцатеричными<span style="mso-spacerun: yes">  </span>числами.
+Как<span style="mso-spacerun: yes">  </span>только потребности
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода-вывода<span style="mso-spacerun:
+yes">  </span>могут<span style="mso-spacerun: yes">  </span>перевесить<span
+style="mso-spacerun: yes">  </span>аспекты<span style="mso-spacerun: yes"> 
+</span>хранения<span style='mso-tab-count:1'>      </span>и<span
+style="mso-spacerun: yes">  </span>вычислений в
+
+<p><span
+style="mso-spacerun: yes">    </span>приложениях, так удобнее становится<span
+style="mso-spacerun: yes">  </span>выстраивать информацию в виде,
+
+<p><span
+style="mso-spacerun: yes">    </span>легко<span style="mso-spacerun: yes"> 
+</span>преобразуемом<span style="mso-spacerun: yes">  </span>к<span
+style="mso-spacerun: yes">  </span>формату<span style="mso-spacerun: yes"> 
+</span>ввода-вывода.<span style="mso-spacerun: yes">  </span>Двоичная кодировка
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичных<span style='mso-tab-count:1'>    </span>чисел
+дает<span style="mso-spacerun: yes">  </span>такую возможность.<span
+style='mso-tab-count:1'>      </span>BCD -<span style="mso-spacerun: yes"> 
+</span>арифметика также
+
+<p><span
+style="mso-spacerun: yes">    </span>решает<span style="mso-spacerun: yes">  
+</span>возникающую<span style="mso-spacerun: yes">   </span>в<span
+style="mso-spacerun: yes">   </span>некоторых<span style="mso-spacerun: yes">  
+</span>двоичных<span style="mso-spacerun: yes">  </span>системах<span
+style="mso-spacerun: yes">  </span>проблему
+
+<p><span
+style="mso-spacerun: yes">    </span>представления<span style="mso-spacerun:
+yes">  </span>чисел. При<span style="mso-spacerun: yes">  </span>использовании
+чисел<span style="mso-spacerun: yes">  </span>с плавающей<span
+style="mso-spacerun: yes">  </span>точкой
+
+<p><span
+style="mso-spacerun: yes">    </span>иногда возникает<span style="mso-spacerun:
+yes">  </span>проблема округления, потому<span style="mso-spacerun: yes"> 
+</span>что двоичная система
+
+<p><span
+style="mso-spacerun: yes">    </span>счисления<span style='mso-tab-count:1'>     </span>не<span
+style="mso-spacerun: yes">  </span>полностью<span style='mso-tab-count:1'>     </span>соответствует<span
+style="mso-spacerun: yes">  </span>десятичной<span style="mso-spacerun: yes">  
+</span>системе.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторых случаях последняя цифра<span
+style="mso-spacerun: yes">  </span>в результате простого вычисления
+
+<p><span
+style="mso-spacerun: yes">    </span>может<span style="mso-spacerun: yes"> 
+</span>оказаться неверной.<span style='mso-tab-count:1'>      </span>Иногда
+это<span style="mso-spacerun: yes">  </span>называют проблемой<span
+style='mso-tab-count:1'>      </span>&quot;потери
+
+<p><span
+style="mso-spacerun: yes">    </span>пенни&quot;,<span style="mso-spacerun:
+yes">  </span>так<span style="mso-spacerun: yes">   </span>как<span
+style="mso-spacerun: yes">  </span>эти<span style="mso-spacerun: yes"> 
+</span>случаи<span style="mso-spacerun: yes">   </span>наиболее<span
+style="mso-spacerun: yes">  </span>заметны<span style="mso-spacerun: yes"> 
+</span>в<span style="mso-spacerun: yes">   </span>финансовых
+
+<p><span
+style="mso-spacerun: yes">    </span>приложениях. BCD - представление<span
+style="mso-spacerun: yes">  </span>чисел дает альтернативу для таких
+
+<p><span
+style="mso-spacerun: yes">    </span>вычислений.
+
+<p><span
+style='mso-tab-count:1'>      </span>Набор команд<span style="mso-spacerun:
+yes">  </span>микропроцессора 8088 не<span style="mso-spacerun: yes"> 
+</span>имеет специальных команд
+
+<p><span
+style="mso-spacerun: yes">    </span>сложения и вычитания для BCD-арифметики.
+Здесь используется обычное
+
+<p><span
+style="mso-spacerun: yes">    </span>сложение<span style="mso-spacerun: yes"> 
+</span>и<span style="mso-spacerun: yes">  </span>вычитание,<span
+style="mso-spacerun: yes">  </span>применяемые<span style="mso-spacerun: yes"> 
+</span>как<span style="mso-spacerun: yes">  </span>и<span style="mso-spacerun:
+yes">  </span>при<span style="mso-spacerun: yes">  </span>обычном двоичном
+
+<p><span
+style="mso-spacerun: yes">    </span>представлении.<span style="mso-spacerun:
+yes">  </span>Результат<span style='mso-tab-count:1'> </span>сложения<span
+style="mso-spacerun: yes">  </span>двух<span style='mso-tab-count:1'>    </span>BCD-чисел<span
+style="mso-spacerun: yes">   </span>на<span style='mso-tab-count:1'>    </span>обычном
+
+<p><span
+style="mso-spacerun: yes">    </span>математическом процессоре может<span
+style="mso-spacerun: yes">  </span>оказаться неправельным BCD-числом;
+
+<p><span
+style="mso-spacerun: yes">    </span>Для<span style="mso-spacerun: yes"> 
+</span>устранения этого<span style="mso-spacerun: yes">  </span>микропроцессор
+8088<span style='mso-tab-count:1'>  </span>имеет несколько команд,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые<span style="mso-spacerun: yes"> 
+</span>преобразуют<span style="mso-spacerun: yes">  </span>результат<span
+style="mso-spacerun: yes">  </span>к<span style='mso-tab-count:1'>    </span>правильной<span
+style="mso-spacerun: yes">  </span>двоичной<span style="mso-spacerun: yes"> 
+</span>кодировке
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичного числа. Для<span
+style="mso-spacerun: yes">  </span>корректного проведения этого преобразования
+
+<p><span
+style="mso-spacerun: yes">    </span>процессор<span style="mso-spacerun: yes"> 
+</span>должен знать,<span style="mso-spacerun: yes">  </span>был ли<span
+style="mso-spacerun: yes">  </span>перенос из<span style="mso-spacerun: yes"> 
+</span>младшего полубайта<span style="mso-spacerun: yes">  </span>в
+
+<p><span
+style="mso-spacerun: yes">    </span>старший во<span style='mso-tab-count:1'>    </span>время
+сложения. Пример на<span style="mso-spacerun: yes">  </span>Фиг. 3.13
+показывает, почему
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>38
+
+<p><span
+style='mso-tab-count:2'>            </span>+<span style="mso-spacerun: yes"> 
+</span>29
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>----
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>61<span style='mso-tab-count:2'>       </span>Фиг. 3.13 Десятичное
+сложение
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>это<span style="mso-spacerun: yes"> 
+</span>необходимо. Десятичная<span style="mso-spacerun: yes">  </span>сумма
+38<span style="mso-spacerun: yes">  </span>+ 29<span style="mso-spacerun:
+yes">  </span>равна 67.<span style="mso-spacerun: yes">  </span>Но двоичная
+
+<p><span
+style="mso-spacerun: yes">    </span>сумма<span style="mso-spacerun: yes"> 
+</span>38H<span style='mso-tab-count:1'>    </span>+<span style="mso-spacerun:
+yes">  </span>29H<span style='mso-tab-count:1'>      </span>равна<span
+style="mso-spacerun: yes">  </span>61H.<span style="mso-spacerun: yes"> 
+</span>Если<span style="mso-spacerun: yes">  </span>числа<span
+style="mso-spacerun: yes">  </span>38<span style="mso-spacerun: yes">  </span>и
+29 представляют
+
+<p><span
+style="mso-spacerun: yes">    </span>BCD-значения, то после операции сложения
+программа должна выполнить
+
+<p><span
+style="mso-spacerun: yes">    </span>коррекцию.<span style='mso-tab-count:1'>    </span>
+Команда<span style="mso-spacerun: yes">  </span>десятичной<span
+style="mso-spacerun: yes">   </span>коррекции<span style="mso-spacerun: yes"> 
+</span>для<span style='mso-tab-count:1'>     </span>сложения<span
+style="mso-spacerun: yes">  </span>(DAA)
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразует число в форму BCD.<span
+style="mso-spacerun: yes">  </span>В нашем случае число представлено в
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичной форме, т.е. оба полубайта<span
+style="mso-spacerun: yes">  </span>находятся в диапазоне от 0 до
+
+<p><span
+style="mso-spacerun: yes">    </span>9, однако результат неверен. В данном
+случае сложение устанавливает
+
+<p><span
+style="mso-spacerun: yes">    </span>флаг дополнительного<span
+style="mso-spacerun: yes">  </span>переноса, который показаывает,<span
+style="mso-spacerun: yes">  </span>что произошел
+
+<p><span
+style="mso-spacerun: yes">    </span>перенос из младшей<span style='mso-tab-count:
+1'>  </span>цифры (8 + 9). Этот<span style="mso-spacerun: yes">  </span>флаг
+сообщает команде DAA,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы она прибавила к результату 6, давая
+правильный результат 67.
+
+<p><span
+style='mso-tab-count:1'>      </span>Микропроцессор<span style='mso-tab-count:
+1'>    </span>также использует<span style="mso-spacerun: yes">  </span>флаг
+дополнительного переноса
+
+<p><span
+style="mso-spacerun: yes">    </span>при коррекции<span style="mso-spacerun:
+yes">  </span>десятичной арифметики вслед за<span style="mso-spacerun: yes"> 
+</span>вычитанием с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>команды<span style="mso-spacerun: yes"> 
+</span>десятичной коррекции<span style="mso-spacerun: yes">  </span>для
+вычитания<span style="mso-spacerun: yes">  </span>DAS. Существуют также
+
+<p><span
+style="mso-spacerun: yes">    </span>две<span style="mso-spacerun: yes"> 
+</span>другие команды,<span style="mso-spacerun: yes">  </span>которые
+используют<span style="mso-spacerun: yes">  </span>флаг AUX<span
+style='mso-tab-count:1'>      </span>для определения
+
+<p><span
+style="mso-spacerun: yes">    </span>правильности<span style="mso-spacerun:
+yes">  </span>действий.<span style="mso-spacerun: yes">  </span>Эти<span
+style="mso-spacerun: yes">   </span>команды,<span style="mso-spacerun: yes"> 
+</span>символьная<span style="mso-spacerun: yes">  </span>коррекция<span
+style="mso-spacerun: yes">  </span>для
+
+<p><span
+style="mso-spacerun: yes">    </span>вычитания AAS и символьная коррекция для
+сложения AAA, выполняют ту
+
+<p><span
+style="mso-spacerun: yes">    </span>же<span style='mso-tab-count:1'>      </span>BCD-коррекцию,
+что<span style="mso-spacerun: yes">  </span>и команды<span style="mso-spacerun:
+yes">  </span>DAA<span style="mso-spacerun: yes">  </span>и<span
+style="mso-spacerun: yes">  </span>DAS. Команды<span style="mso-spacerun:
+yes">  </span>AAA и<span style="mso-spacerun: yes">  </span>AAS
+
+<p><span
+style="mso-spacerun: yes">    </span>используются в программах для<span
+style="mso-spacerun: yes">  </span>работы с таким представлением чисел,
+
+<p><span
+style="mso-spacerun: yes">    </span>при<span style="mso-spacerun: yes"> 
+</span>котором<span style="mso-spacerun: yes">  </span>каждая<span
+style="mso-spacerun: yes">  </span>десятичная<span style="mso-spacerun: yes"> 
+</span>цифра<span style="mso-spacerun: yes">  </span>занимает<span
+style="mso-spacerun: yes">  </span>один<span style="mso-spacerun: yes"> 
+</span>байт.<span style="mso-spacerun: yes">  </span>Это
+
+<p><span
+style="mso-spacerun: yes">    </span>представление,<span style="mso-spacerun:
+yes">  </span>еще более<span style="mso-spacerun: yes">  </span>расточающее
+память,<span style="mso-spacerun: yes">  </span>чем BCD,<span
+style="mso-spacerun: yes">  </span>допускает
+
+<p><span
+style="mso-spacerun: yes">    </span>очень удобную перекодировку из<span
+style="mso-spacerun: yes">  </span>кода ASCII в числовое представление
+
+<p><span
+style="mso-spacerun: yes">    </span>и обратно. Числа от<span
+style="mso-spacerun: yes">  </span>0 до 9 представляются в<span
+style="mso-spacerun: yes">  </span>коде ASCII значениями
+
+<p><span
+style="mso-spacerun: yes">    </span>от<span style='mso-tab-count:1'>      </span>30H<span
+style="mso-spacerun: yes">  </span>до<span style="mso-spacerun: yes"> 
+</span>39H,<span style="mso-spacerun: yes">  </span>и<span style="mso-spacerun:
+yes">  </span>преобразование<span style="mso-spacerun: yes">  </span>в<span
+style="mso-spacerun: yes">  </span>этот<span style="mso-spacerun: yes"> 
+</span>код и обратно просто
+
+<p><span
+style="mso-spacerun: yes">    </span>означает<span style="mso-spacerun: yes">  
+</span>сложение<span style="mso-spacerun: yes">   </span>или<span
+style='mso-tab-count:1'> </span>вычитание<span style="mso-spacerun: yes">  
+</span>30H.<span style="mso-spacerun: yes">   </span>В<span
+style="mso-spacerun: yes">   </span>следующей<span style="mso-spacerun: yes"> 
+</span>главе
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматривается<span style="mso-spacerun:
+yes">   </span>использование<span style="mso-spacerun: yes"> 
+</span>команд<span style="mso-spacerun: yes">   </span>десятичной<span
+style="mso-spacerun: yes">  </span>и<span style="mso-spacerun: yes"> 
+</span>сомвольной
+
+<p><span
+style="mso-spacerun: yes">    </span>коррекции.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-4-7">Умножение
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Микропроцессор 8088 значительно мощнее
+предшествовавших ему
+
+<p><span
+style="mso-spacerun: yes">    </span>8=битовых устройств.<span
+style="mso-spacerun: yes">  </span>Одна из причин увеличения мощности -
+
+<p><span
+style="mso-spacerun: yes">    </span>добавление команд умножения и деления к
+набору команд
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора.<span style="mso-spacerun:
+yes">  </span>В прежних микропроцессорах выполнение операций
+
+<p><span
+style="mso-spacerun: yes">    </span>умножения и деления требовало вызова
+подпрограмм на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существует две команды умножения.
+Покоманде MUL умножаются два
+
+<p><span
+style="mso-spacerun: yes">    </span>целых числа без знака и дает результат без
+знака. По команде IMUL
+
+<p><span
+style="mso-spacerun: yes">    </span>умножаются целые числа со знаком. При
+умножении целых чисел в
+
+<p><span
+style="mso-spacerun: yes">    </span>качестве операндов используются числа,
+представленные в
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительном коде и получается
+результат, имеющий правильный знак
+
+<p><span
+style="mso-spacerun: yes">    </span>и значение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обе команды умножения работают как с
+байтами, так и со словами.
+
+<p><span
+style="mso-spacerun: yes">    </span>Однако диапазон форм представления
+операндов гораздо уже, чем для
+
+<p><span
+style="mso-spacerun: yes">    </span>команд сложения и вычитания. Фиг. 4.13
+иллюстрирует варианты
+
+<p><span
+style="mso-spacerun: yes">    </span>команды умножения. Чтобы умножить 8 бит на
+8 бит, один из операндов
+
+<p><span
+style="mso-spacerun: yes">    </span>должен быть в регистре AL, а результат
+всегда оказывается в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AX. Результат может иметь длину
+вплоть до 16 бит
+<p><span
+style="mso-spacerun: yes">    </span>(максимальное получаемое значение равно
+255 * 255 = 65025). Чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>умножить 16 бит на 16 бит, один из
+операндов нужно поместить в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AX. Результат, который может быть
+длиной до 32 бит
+
+<p><span
+style="mso-spacerun: yes">    </span>(максимальное значение 65535 * 65535 &lt;
+2+32) помещается в пару
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров; в регистре DX содержатся
+старшие 16 бит результата, а
+
+<p><span
+style="mso-spacerun: yes">    </span>врегистре AX - младшие 16 бит. Умножение
+не допускает
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственного операнда.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Установка флагов командой умножения
+несколько отличается от
+
+<p><span
+style="mso-spacerun: yes">    </span>других арифметических команд. Единственные
+имеющие смысл два флага
+
+<p><span
+style="mso-spacerun: yes">    </span>- это флаги переноса и переполнения, и они
+по=разному
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливаются двумя командами.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда умножения без знака MUL
+устанавливает оба флага, если
+
+<p><span
+style="mso-spacerun: yes">    </span>старшая половина резул в регистре AL
+получится 2AH; команда AAM
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразует этот результат, оставляя в
+регистре AH число 04H, и
+
+<p><span
+style="mso-spacerun: yes">    </span>02H в регистре AL - или распакованное
+десятичное число 42 в паре
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров AH:AL.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>AX<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>BX<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>CX<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>DX<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">      </span>ЪДДДДДДДДї<span style="mso-spacerun:
+yes">    </span>АДДДДДДДДЩ<span style='mso-tab-count:2'>            </span>ЪДДДДДДДДВДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">      </span>і<span style="mso-spacerun: yes">  
+</span>AX<span style="mso-spacerun: yes">   </span>і *<span
+style="mso-spacerun: yes">  </span>ЪДДДДДДДДї<span style='mso-tab-count:1'>      </span>ДДДДД&gt;<span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">  
+</span>DX<span style='mso-tab-count:1'>      </span> і<span
+style="mso-spacerun: yes">   </span>AX<span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style="mso-spacerun: yes">      </span>АДДДДДДДДЩ<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>   </span>SI<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>            </span>АДДДДДДДДБДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>DI<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>BP<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>SP<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>АДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і Память і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і(слова) і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>АДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>(a) Умножение слов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>AH<span style="mso-spacerun:
+yes">   </span><span style="mso-spacerun: yes"> </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>AL<span style="mso-spacerun:
+yes">    </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>BH<span style="mso-spacerun:
+yes">    </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>BL<span style="mso-spacerun:
+yes">    </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>CH<span style="mso-spacerun:
+yes">    </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>CL<span style="mso-spacerun:
+yes">    </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>DH<span style="mso-spacerun:
+yes">    </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>DL<span style="mso-spacerun:
+yes">    </span>і
+
+<p><span
+style="mso-spacerun: yes">      </span>ЪДДДДДДДДї<span style="mso-spacerun:
+yes">    </span>АДДДДДДДДДЩ <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>ЪДДДДДДДДВДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">      </span>і<span style="mso-spacerun: yes">  
+</span>AL<span style="mso-spacerun: yes">   </span>і *<span
+style="mso-spacerun: yes">  </span>ЪДДДДДДДДДї<span style="mso-spacerun: yes"> 
+</span>ДДДДД&gt;<span style="mso-spacerun: yes">  </span>і<span
+style="mso-spacerun: yes">   </span>AH<span style="mso-spacerun: yes">  
+</span>і<span style="mso-spacerun: yes">   </span>AL<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style="mso-spacerun: yes">      </span>АДДДДДДДДЩ<span style="mso-spacerun:
+yes">    </span>і Память<span style="mso-spacerun: yes">  </span>і <span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes"> </span>АДДДДДДДДБДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і(байты)<span style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>АДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>(b) умножение байтов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.13 Операции умножения
+<p><span
+style='mso-tab-count:1'>      </span>Целое умножение со знаком (IMUL)
+устанавливает флаги переноса и
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнения в соответствии с тем же
+критерием, т.е. эти флаги
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливаются в случае, когда результат
+не может быть представлен
+
+<p><span
+style="mso-spacerun: yes">    </span>тоько своей младшей половиной. Однако,
+поскольку число имеет знак,
+
+<p><span
+style="mso-spacerun: yes">    </span>то задача не сводится только к сравнению
+старшей половины
+
+<p><span
+style="mso-spacerun: yes">    </span>результата с нулем. Команда IMUL
+устанавливает флаги, если старшая
+
+<p><span
+style="mso-spacerun: yes">    </span>половина результата не является
+распространением знака младшей. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>значит, что в случае положительного
+результата проверка будет такой
+
+<p><span
+style="mso-spacerun: yes">    </span>же, как для команды MUL - установка флага
+происходит при ненулевой
+
+<p><span
+style="mso-spacerun: yes">    </span>старшей половине результата (но самый
+старший бит равен нулю,
+
+<p><span
+style="mso-spacerun: yes">    </span>указывая на положительность результата). В
+случае отрицательного
+
+<p><span
+style="mso-spacerun: yes">    </span>результата IMUL устанавливает флаги, если
+старшая половина
+
+<p><span
+style="mso-spacerun: yes">    </span>результата состоит не только из едениц (но
+старший бит равен 1,
+
+<p><span
+style="mso-spacerun: yes">    </span>указывая на отрицательность результата).
+Например, перемножение
+
+<p><span
+style="mso-spacerun: yes">    </span>байтов с отрицательным результатом
+устанавливает флаги когда
+
+<p><span
+style="mso-spacerun: yes">    </span>результат менше -128 - наименьшего числа,
+представимого в одном
+
+<p><span
+style="mso-spacerun: yes">    </span>байте. Другой пример, перемножение слов с
+положительным
+
+<p><span
+style="mso-spacerun: yes">    </span>результатом, устанавливает флаги, если
+результат превышает 32 767 -
+
+<p><span
+style="mso-spacerun: yes">    </span>наиболшее представимое одним словом число.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

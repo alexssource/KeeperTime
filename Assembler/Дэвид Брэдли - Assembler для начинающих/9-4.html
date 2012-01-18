@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-4">Драйверы доступа</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Драйверы устройств - это сердце BIOS. Эти
+программы дают
+
+<p><span
+style="mso-spacerun: yes">    </span>возможность программисту, работающему на
+языке ассемблера, работать
+
+<p><span
+style="mso-spacerun: yes">    </span>с устройствами IBM PC. Любая программа
+может управлять устройствами
+
+<p><span
+style="mso-spacerun: yes">    </span>с помощью соответствующих
+последовательностей команд на аппаратном
+
+<p><span
+style="mso-spacerun: yes">    </span>уровне. Тем не менее во многих случаях вы
+можете работать с
+
+<p><span
+style="mso-spacerun: yes">    </span>устройствами стандартным образом, не
+вникая в их специфические
+
+<p><span
+style="mso-spacerun: yes">    </span>особенности. Например, только небольшое
+число программ делают с
+
+<p><span
+style="mso-spacerun: yes">    </span>дискетой что-либо еще кроме чтения и
+записи. В гл.8 была написана
+
+<p><span
+style="mso-spacerun: yes">    </span>программа для чтения состояния дисковода.
+Если нужно прочитать
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторый сектор дискеты, можно
+использовать для этой цели BIOS и
+
+<p><span
+style="mso-spacerun: yes">    </span>не переписывать эти программы заново.
+Программист, работающий на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке ассемблера, должен рассматривать
+BIOS как инструмент,
+
+<p><span
+style="mso-spacerun: yes">    </span>сокращающий его работу.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Функции BIOS вызываются с помощью
+программного прерывания.
+
+<p><span
+style="mso-spacerun: yes">    </span>Параметры для функции передаются через
+регистры. Например,
+
+<p><span
+style="mso-spacerun: yes">    </span>следующие команды опрашивают текущий режим
+дисплея
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV<span style='mso-tab-count:5'>                           </span><span
+style="mso-spacerun: yes">   </span>AH,<span style='mso-tab-count:2'>            </span>15
+
+<p><span
+style="mso-spacerun: yes">      </span>INT<span style="mso-spacerun: yes">   
+</span>10H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда INT 10H вызывет драйыер
+обслуживания дисплея, входящий
+
+<p><span
+style="mso-spacerun: yes">    </span>в BIOS. Драйвер дисплея имеет большие
+возможности. Установка в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AH числа 15 сообщает ему, что
+программист хочет знать
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>текущее состояние дисплея. BIOS возвращает
+информацию о состоянии
+
+<p><span
+style="mso-spacerun: yes">    </span>через регистр AL.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Каждый драйвер устройства входящий в BIOS
+имеет свои
+
+<p><span
+style="mso-spacerun: yes">    </span>собственные входные и выходные параметры.
+В общем случае регистр AH
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет функцию для данного драйвера.
+Остальные регистры BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>использует для любых других принимаемых
+или возвращаемых
+
+<p><span
+style="mso-spacerun: yes">    </span>параметров. Каждая функция кратко описана
+в техническом описании
+
+<p><span
+style="mso-spacerun: yes">    </span>IBM PC, а также снабжена другими важными
+замечаниями. При разборе
+
+<p><span
+style="mso-spacerun: yes">    </span>драйверов мы вернемся к этим листингам, а
+перед этим рассмотрим
+
+<p><span
+style="mso-spacerun: yes">    </span>другие векторы прерываний.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

@@ -1,0 +1,761 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="4-9-5">Проверки кода условия
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Первая группа команд условного перехода
+проверяет текущее состояние
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра флагов.<span style="mso-spacerun:
+yes">  </span>Затем в зависимости от кодов условия команда
+
+<p><span
+style="mso-spacerun: yes">    </span>делает переход (или не делает).<span
+style="mso-spacerun: yes">  </span>Команды условного перехода не
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливают флаги, а только проверяют их
+текущее состояние.
+
+<p><span
+style="mso-spacerun: yes">    </span>Ранее рассмотренные арифметические и
+логические команды
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливают флаги.<span
+style="mso-spacerun: yes">  </span>В последующих примерах предположим, что
+
+<p><span
+style="mso-spacerun: yes">    </span>команда сравнения CMP уже установила
+флаги.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.4.29 показаны команды условного
+перехода и проверяемые
+
+<p><span
+style="mso-spacerun: yes">    </span>ими флаги. В строках рисунка перечислены
+команды условного
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода, а в пяти колонках показано
+состояние флагов. Буква X в
+
+<p><span
+style="mso-spacerun: yes">    </span>любой позиции означает, что команда не
+проверяет флаг. Цифра 0
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что этот флаг должен быть
+сброшен, чтобы условие было
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнено и переход произошел. Цифра 1
+означает, что флаг должен
+
+<p><span
+style="mso-spacerun: yes">    </span>быть установлен, чтобы переход произошел.
+Некоторые элементы
+
+<p><span
+style="mso-spacerun: yes">    </span>таблицы показывают выражение, которое
+должно быть истинно, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>переход произошел. Так сделано для
+арифметических переходов, и мы
+
+<p><span
+style="mso-spacerun: yes">    </span>обсудим их далее более подробно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.4.29 условные переходы разделены на
+три группы:
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно проверяющие один из
+флагов; делающие арифметическое
+
+<p><span
+style="mso-spacerun: yes">    </span>сравнение без знака; делающие
+арифметическое сравнение со знаком.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.4.29а показана проверка отдельных
+флагов. Условный
+
+<p><span
+style="mso-spacerun: yes">    </span>переход может проверить каждый из этих
+пяти флагов непосредственно
+
+<p><span
+style="mso-spacerun: yes">    </span>на 0 или 1. Проверка флага переноса
+показана на рисунке в группе
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметики без знака, поскольку она имеет
+еще и арифметический
+
+<p><span
+style="mso-spacerun: yes">    </span>смысл. Заметим, что многие команды
+условного перехода имеют более
+
+<p><span
+style="mso-spacerun: yes">    </span>одной мнемоники, если даже выполняется
+одна и та же проверка.
+
+<p><span
+style="mso-spacerun: yes">    </span>Например, проверку флага нуля осуществляет
+команда JZ (переход,
+
+<p><span
+style="mso-spacerun: yes">    </span>если результат операции равен нулю).
+Однако команда JE (переход,
+
+<p><span
+style="mso-spacerun: yes">    </span>если равно) также порождает ту же команду.
+Следующая
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательность поясняет смысл этого:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>CMP AX, BX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>JE
+LABEL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда CMP вычитает содержимое регистра
+BX из содержимого
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра AX, устанавливая флаги в соответствии
+с результатом. Так
+
+<p><span
+style="mso-spacerun: yes">    </span>как результат нулевой, если оба операнда
+равны, флаг нуля
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает равенство. Аналогично, команда
+JNZ (переход, если не
+
+<p><span
+style="mso-spacerun: yes">    </span>нуль) идентичен команде JNE (переход, если
+не равно). Команда JP
+
+<p><span
+style="mso-spacerun: yes">    </span>(переход по четности) - то же самое, что и
+команда JPE (переход при
+
+<p><span
+style="mso-spacerun: yes">    </span>наличии четности); команда JNP (переход по
+нечетности) - то же
+
+<p><span
+style="mso-spacerun: yes">    </span>самое, что команда JPO (переход при
+отсутствии четности).
+
+<p><span
+style="mso-spacerun: yes">     </span>Команды<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">       </span>Флаги
+
+<p><span
+style="mso-spacerun: yes">     </span>условного
+
+<p><span
+style="mso-spacerun: yes">     </span>перехода<span style='mso-tab-count:1'>     </span>OF<span
+style="mso-spacerun: yes">    </span>CY<span style="mso-spacerun: yes">    
+</span>Z<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">    </span>P<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">   </span>S<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>Комментарий
+
+<p><span
+style="mso-spacerun: yes">   
+</span>-------------------------------------------------------------------
+
+<p><span
+style="mso-spacerun: yes">     </span>JE/JZ<span style='mso-tab-count:1'>  </span>
+X<span style='mso-tab-count:1'>    </span>X<span style="mso-spacerun: yes">    
+</span>1<span style="mso-spacerun: yes">      </span>X<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">    </span>X
+
+<p><span
+style="mso-spacerun: yes">     </span>JP/JPE<span style='mso-tab-count:1'> </span>
+X<span style='mso-tab-count:1'>    </span>X<span style="mso-spacerun: yes">    
+</span>X<span style="mso-spacerun: yes">      </span>1<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">    </span>X
+
+<p><span
+style="mso-spacerun: yes">     </span>JO <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>1<span style='mso-tab-count:1'>    </span>X<span
+style="mso-spacerun: yes">     </span>X<span style="mso-spacerun: yes">     
+</span>X<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">    </span>X
+
+<p><span
+style="mso-spacerun: yes">     </span>JS <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>X<span style='mso-tab-count:1'>    </span>X<span
+style="mso-spacerun: yes">     </span>X<span style="mso-spacerun: yes">     
+</span>X<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">    </span>1
+
+<p><span
+style="mso-spacerun: yes">     </span>JNE/JNZ<span style='mso-tab-count:1'>      </span>
+X<span style='mso-tab-count:1'>    </span>X<span style="mso-spacerun: yes">    
+</span>0<span style="mso-spacerun: yes">      </span>X<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">    </span>X
+
+<p><span
+style="mso-spacerun: yes">     </span>JNP/JPO<span style='mso-tab-count:1'>      </span>
+X<span style='mso-tab-count:1'>    </span>X<span style="mso-spacerun: yes">    
+</span>X<span style="mso-spacerun: yes">      </span>0<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">    </span>X
+
+<p><span
+style="mso-spacerun: yes">     </span>JNO<span style='mso-tab-count:1'>    </span>
+0<span style='mso-tab-count:1'>    </span>X<span style="mso-spacerun: yes">    
+</span>X<span style="mso-spacerun: yes">      </span>X<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">    </span>X
+
+<p><span
+style="mso-spacerun: yes">     </span>JNS<span style='mso-tab-count:1'>    </span>
+X<span style='mso-tab-count:1'>    </span>X<span style="mso-spacerun: yes">    
+</span>X<span style="mso-spacerun: yes">      </span>X<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">    </span>0
+
+<p><span
+style='mso-tab-count:5'>                              </span>(a)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">     </span>JL/JNGE<span style='mso-tab-count:1'>      </span>
+a<span style='mso-tab-count:1'>    </span>X<span style="mso-spacerun:
+yes">      </span>X<span style="mso-spacerun: yes">     </span>X<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    </span>b<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">  </span>a NEQ
+b
+
+<p><span
+style="mso-spacerun: yes">     </span>JLE/JNG<span style='mso-tab-count:1'>      </span>
+a<span style='mso-tab-count:1'>    </span>X<span style="mso-spacerun: yes"> 
+</span><span style="mso-spacerun: yes">    </span>1<span style="mso-spacerun:
+yes">     </span>X<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>b<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>Z OR (A NEQ B)
+
+<p><span
+style="mso-spacerun: yes">     </span>JNL/JGE<span style='mso-tab-count:1'>      </span>
+a<span style='mso-tab-count:1'>    </span>X<span style="mso-spacerun:
+yes">      </span>X<span style="mso-spacerun: yes">     </span>X<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    </span>b<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">  </span>a = b
+
+<p><span
+style="mso-spacerun: yes">     </span>JNLE/JG<span style='mso-tab-count:1'>      </span>
+a<span style='mso-tab-count:1'>    </span>X<span style="mso-spacerun:
+yes">      </span>0<span style="mso-spacerun: yes">     </span>X<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    </span>b<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">  </span>(NOT
+Z) AND (a=b)
+
+<p><span
+style='mso-tab-count:5'>                              </span>(b)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">     </span>JB/JNAE/JC<span style="mso-spacerun:
+yes">  </span>X<span style='mso-tab-count:1'>      </span>1<span
+style="mso-spacerun: yes">      </span>X<span style="mso-spacerun: yes">    
+</span>X<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">    </span>X
+
+<p><span
+style="mso-spacerun: yes">     </span>JBE/JNA<span style='mso-tab-count:1'>      </span>
+X<span style='mso-tab-count:1'>    </span>1<span style="mso-spacerun:
+yes">      </span>1<span style="mso-spacerun: yes">     </span>X<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    </span>X<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">  </span>CY OR
+Z
+
+<p><span
+style="mso-spacerun: yes">     </span>JNB/JAE/JN<span style="mso-spacerun:
+yes">  </span>X<span style='mso-tab-count:1'>      </span>0<span
+style="mso-spacerun: yes">      </span>X<span style="mso-spacerun: yes">    
+</span>X<span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">    </span>X
+
+<p><span
+style="mso-spacerun: yes">     </span>JNBE/JA<span style='mso-tab-count:1'>      </span>
+X<span style='mso-tab-count:1'>    </span>0<span style="mso-spacerun:
+yes">      </span>0<span style="mso-spacerun: yes">     </span>X<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    </span>X<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">  </span>(NOT
+CY) AND (NOT Z)
+
+<p><span
+style='mso-tab-count:5'>                              </span>(c)
+
+<p><span
+style="mso-spacerun: yes">   
+</span>------------------------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">       </span>Фиг. 4.29 Проверка флагов перехода по
+условию. (a) Проверка флага
+
+<p><span
+style="mso-spacerun: yes">       </span>(b) Арифметика со знаком; (c)
+беззнаковая арифметика.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Следующую группу команд условного перехода
+на Фиг.4.29б
+
+<p><span
+style="mso-spacerun: yes">    </span>составляют арифметические сравнения со
+знаком. Существуют четыре
+
+<p><span
+style="mso-spacerun: yes">    </span>условия, которые могут быть проверены:
+меньше (JL), меньше или
+
+<p><span
+style="mso-spacerun: yes">    </span>равно (JLE), больше (JG), больше или равно
+(JGE). Другие четыре
+
+<p><span
+style="mso-spacerun: yes">    </span>мнемоники - отрицания этих четырех. В
+случае арифметики со знаком
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер использует мнемонику в названии
+команд &quot;меньше&quot; (less) и
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;больше&quot; (greater). Далее мы
+увидим, что для арифметики без знака
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер использует мнемонику
+&quot;выше&quot; (above) и &quot;ниже&quot; (below).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Арифметические выражения можно понять,
+используя их вместе с
+
+<p><span
+style="mso-spacerun: yes">    </span>командой CMP. Например,
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>CMP<span style="mso-spacerun: yes">  
+</span>AX,BX
+
+<p><span
+style='mso-tab-count:1'>      </span>JL<span style="mso-spacerun: yes">   
+</span>LABEL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Преход произойдет, если содержимое
+регистра AX меньше
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимого регистра BX. Вы можете читать
+комбинацию команд
+
+<p><span
+style="mso-spacerun: yes">    </span>сравнения и условного перехода вместе, как
+один оператор: операнд
+
+<p><span
+style="mso-spacerun: yes">    </span>результата встречается первым, затем идет
+условный оператор, а за
+
+<p><span
+style="mso-spacerun: yes">    </span>ним следует исходный операнд. Другой
+пример:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>CMP<span style="mso-spacerun: yes">   
+</span>CX,WORD_IN_MEMORY
+
+<p><span
+style='mso-tab-count:1'>      </span>JNLE<span style="mso-spacerun: yes">  
+</span>LABEL
+
+<p><span
+style='mso-tab-count:1'>      </span>- можно прочитать так: &quot;переход, если
+содержимое регистра CX не
+
+<p><span
+style="mso-spacerun: yes">    </span>меньше, чем, или равен содержимому ячейки
+памяти WORD_IN_MEMORY.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этот прием можно использовать для
+определения значения любой команды
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметического перехода, учитывающей знак
+или не учитывающей.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как показано на Фиг.4.29б арифметические
+сравнения со знаком
+
+<p><span
+style="mso-spacerun: yes">    </span>проверяют одновременно несколько флагов.
+Фактически каждая из этих
+
+<p><span
+style="mso-spacerun: yes">    </span>команд проверяет некоторую комбинацию
+флагов переполнения, знака,
+
+<p><span
+style="mso-spacerun: yes">    </span>и, возможно, флага нуля. Например, в
+команде JL требуется, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>флаги переполнения и знака имели разные
+значения. Если они имеют
+
+<p><span
+style="mso-spacerun: yes">    </span>одинаковое значение, первый операнд не был
+меньше второго.
+
+<p><span
+style="mso-spacerun: yes">    </span>Рассмотрим эту операцию несколько
+подробнее, чтобы понять работу
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметических сравнений.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда сравниваются два числа со знаком,
+возможны четыре
+
+<p><span
+style="mso-spacerun: yes">    </span>комбинации флагов знака и переполнения.
+Рассмотрим каждую из
+
+<p><span
+style="mso-spacerun: yes">    </span>четырех комбинаций, чтобы определить какое
+состояние операндов
+
+<p><span
+style="mso-spacerun: yes">    </span>привело к данному результату. Предположим,
+что в каждом случае
+
+<p><span
+style="mso-spacerun: yes">    </span>флаги установила команда CMP, вычитавшая
+два операнда.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Знак S = 0, переполнение O = 0.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Условие S=0 означает, что результат
+вычитания положителен.
+
+<p><span
+style="mso-spacerun: yes">    </span>Условие O=0 означает, что переполнения не
+было, т.е. результат,
+
+<p><span
+style="mso-spacerun: yes">    </span>представленный в дополнительном коде,
+правильный. Вычитание двух
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел, дающее положительный результат,
+показывает, что первое число
+
+<p><span
+style="mso-spacerun: yes">    </span>больше второго, и поэтому имеет место
+соотношение &quot;больше&quot;. Однако
+
+<p><span
+style="mso-spacerun: yes">    </span>вычитание двух равных чисел также дает
+положительный результат, так
+
+<p><span
+style="mso-spacerun: yes">    </span>что условие S=0, O=0 означает &quot;больше
+или равно&quot;.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>S=1, O=0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В этом случае O=0 означает, что результат
+верен, а S=1 говорит
+
+<p><span
+style="mso-spacerun: yes">    </span>о том, что он отрицателен. Чтобы получить
+отрицательный результат,
+
+<p><span
+style="mso-spacerun: yes">    </span>большее число должно вычитаться из
+меньшего, и соотношение означает
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;меньше&quot;.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>S = 0, O = 1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Здесь O=1 показывает, что результат
+неверен, т.е. вышел за
+
+<p><span
+style="mso-spacerun: yes">    </span>пределы возможностей разрядной сетки. Это
+значит, что сложение двух
+
+<p><span
+style="mso-spacerun: yes">    </span>положительных чисел дало отрицательный
+результат или наоборот. В
+
+<p><span
+style="mso-spacerun: yes">    </span>данном случае это сравнение показывает,
+что знак результата
+
+<p><span
+style="mso-spacerun: yes">    </span>неверен; поэтому результат этого сравнения
+идентичен случаю, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>S=1, O=0, что означает &quot;меньше&quot;.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>S = 1, O = 1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Снова O=1 говорит о том, что знак
+результата неверен. Поэтому
+
+<p><span
+style="mso-spacerun: yes">    </span>вычитание должно было привести к очень
+большому положительному
+
+<p><span
+style="mso-spacerun: yes">    </span>числу, и соотношение будет &quot;больше
+или равно&quot;.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В некоторых случаях также учитывается флаг
+нуля. Например,
+
+<p><span
+style="mso-spacerun: yes">    </span>команда JLE выполняется, если условие есть
+&quot;меньше&quot; (знак и
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнение разные) или &quot;равно&quot;
+(флаг нуля равен 1). Эти три флага
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяют микропроцессору 8088 проверить
+все возможные комбинации
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел со знаком.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Последняя часть таблицы (Фиг.4.29в)
+показывает условия,
+
+<p><span
+style="mso-spacerun: yes">    </span>проверяемые для арифметики без знака. Как
+и в случае арифметики со
+
+<p><span
+style="mso-spacerun: yes">    </span>знаком, существуют четыре возможные
+соотношения между операндами,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые может проверить микропроцессор.
+Для того чтобы отличить
+
+<p><span
+style="mso-spacerun: yes">    </span>команды условного перехода ориентированные
+на беззнаковую
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметику от знаковой арифметики,
+используются слова &quot;выше&quot; и
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;ниже&quot; в названии команд.
+Вероятно, этим выражается точка зрения
+
+<p><span
+style="mso-spacerun: yes">    </span>создателей набора команд, заключающаяся в
+том, что арифметика без
+
+<p><span
+style="mso-spacerun: yes">    </span>знака будет использоваться в программах
+для вычисления адресов, а
+
+<p><span
+style="mso-spacerun: yes">    </span>отрицательных адресов не бывает. &quot;Выше&quot;
+и &quot;ниже&quot; показывают
+
+<p><span
+style="mso-spacerun: yes">    </span>расположение значения адресов внутри
+адресного пространства, в то
+
+<p><span
+style="mso-spacerun: yes">    </span>время как &quot;больше&quot; и
+&quot;меньше&quot; говорит о соотношении чисел со
+
+<p><span
+style="mso-spacerun: yes">    </span>знаком. Здесь важно, что выполняется
+именно та команда, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>указана в программе на языке ассемблера,
+независимо от типов
+
+<p><span
+style="mso-spacerun: yes">    </span>сравниваемых операндов. Например,
+программа сравнивает два числа со
+
+<p><span
+style="mso-spacerun: yes">    </span>знаком, а использует команду JA (переход,
+если выше).
+
+<p><span
+style="mso-spacerun: yes">    </span>Микропроцессор выполняет условный переход
+в зависимости от
+
+<p><span
+style="mso-spacerun: yes">    </span>соотношения двух чисел, считая их числами
+без знака, т.е. именно
+
+<p><span
+style="mso-spacerun: yes">    </span>программист обязан выбрать правильную
+команду условного перехода.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Микропроцессор 8088 при сравнении двух
+чисел без знака
+
+<p><span
+style="mso-spacerun: yes">    </span>учитывает только два флага. Флаг переноса
+показывает, какое из
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел больше. Сравнение устанавливает флаг
+переноса, если первый
+
+<p><span
+style="mso-spacerun: yes">    </span>операнд ниже второго или сбрасывает флаг
+переноса, если первый
+
+<p><span
+style="mso-spacerun: yes">    </span>операнд либо выше, либо равен второму
+операнду, и флаг нуля
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет, что в данном случае верно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сравнения без знака можно читать так же,
+как и сравнения со
+
+<p><span
+style="mso-spacerun: yes">    </span>знаком. Например,
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>CMP<span style='mso-tab-count:1'>   </span>AX,BX
+
+<p><span
+style='mso-tab-count:1'>      </span>JA<span style='mso-tab-count:1'>    </span>LABEL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>- переход на метку LABEL происходит, если
+регистр AX выше
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра BX. Условный переход выполняется
+всегда, если объявленное
+
+<p><span
+style="mso-spacerun: yes">    </span>соотношение существует между первым и
+вторым операндами
+
+<p><span
+style="mso-spacerun: yes">    </span>предшествовавшей команды сравнения.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

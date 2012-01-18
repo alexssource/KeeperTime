@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-11">Предназначение сегментов</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Каждый из<span style="mso-spacerun: yes"> 
+</span>сегментных регистров имеет свое,<span style="mso-spacerun: yes"> 
+</span>отмеченное выше назна-
+
+<p><span
+style="mso-spacerun: yes">    </span>чение. В<span style="mso-spacerun: yes"> 
+</span>некоторых случаях, однако,<span style="mso-spacerun: yes">  </span>более
+удобна связь<span style="mso-spacerun: yes">  </span>с данными
+
+<p><span
+style="mso-spacerun: yes">    </span>вне<span style="mso-spacerun: yes"> 
+</span>сегмента<span style="mso-spacerun: yes">  </span>данных,<span
+style="mso-spacerun: yes">  </span>например,<span style="mso-spacerun: yes"> 
+</span>с<span style="mso-spacerun: yes">  </span>небольшой<span
+style="mso-spacerun: yes">  </span>областью<span style="mso-spacerun: yes"> 
+</span>данных в
+
+<p><span
+style="mso-spacerun: yes">    </span>программе. В большинстве случаев программа
+работает с данными в той
+
+<p><span
+style="mso-spacerun: yes">    </span>области,<span style="mso-spacerun: yes"> 
+</span>на<span style="mso-spacerun: yes">  </span>которую<span
+style="mso-spacerun: yes">  </span>указывает<span style="mso-spacerun: yes"> 
+</span>регистр<span style="mso-spacerun: yes">  </span>DS,<span
+style="mso-spacerun: yes">  </span>но иногда программе
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется<span style="mso-spacerun: yes"> 
+</span>ссылка на<span style="mso-spacerun: yes">  </span>локальную
+переменную,<span style="mso-spacerun: yes">  </span>находящуюся в<span
+style='mso-tab-count:1'>    </span>кодовом
+
+<p><span
+style="mso-spacerun: yes">    </span>сегменте<span style="mso-spacerun: yes"> 
+</span>программы.<span style="mso-spacerun: yes">  </span>Чтобы<span
+style="mso-spacerun: yes">   </span>осуществить<span style="mso-spacerun:
+yes">  </span>эту<span style="mso-spacerun: yes">  </span>ссылку,<span
+style="mso-spacerun: yes">  </span>приходится
+
+<p><span
+style="mso-spacerun: yes">    </span>изменять обычное использование<span
+style="mso-spacerun: yes">  </span>сегментов. Фиг.3.8 показывает такую
+
+<p><span
+style="mso-spacerun: yes">    </span>органзацию программы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДЕДДДДДД CS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span>Программа и<span
+style='mso-tab-count:1'> </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:3'>             </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style="mso-spacerun: yes">  </span>локальные данные і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:3'>             </span>ГДДДДДД
+CS:LOCAL_VALUE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:3'>             </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:3'>             </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:3'>             </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЕДДДДДДДДДДДДДДДДДДДЕДДДДДД DS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'> </span> Основная<span style='mso-tab-count:
+1'>   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:3'>             </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і область даных<span style='mso-tab-count:1'>     </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:3'>             </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ГДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:3'>             </span>і
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Фиг. 3.8 Переназначение CS на локальные данные.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вместо<span style='mso-tab-count:1'>      </span>изменения
+значения<span style="mso-spacerun: yes">  </span>регистра DS,<span
+style="mso-spacerun: yes">  </span>чтобы он<span style="mso-spacerun: yes"> 
+</span>указывал на
+
+<p><span
+style="mso-spacerun: yes">    </span>программный сегмент, команда изменяет<span
+style="mso-spacerun: yes">  </span>ссылку на данные, показывая,
+
+<p><span
+style="mso-spacerun: yes">    </span>что переменная расположена в сегменте
+кодов (Code Segment).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>INC<span style='mso-tab-count:1'>   </span>CS:LOCAL_VARIABLE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Это<span style="mso-spacerun: yes"> 
+</span>делается с<span style="mso-spacerun: yes">  </span>помощью префикса<span
+style="mso-spacerun: yes">  </span>&quot;CS:&quot;. В<span style="mso-spacerun:
+yes">  </span>машинном языке команда
+
+<p><span
+style="mso-spacerun: yes">    </span>переопределения<span style="mso-spacerun:
+yes">  </span>сегмента выглядит<span style='mso-tab-count:1'>    </span>как
+однобайтовый<span style="mso-spacerun: yes">  </span>префикс перед
+
+<p><span
+style="mso-spacerun: yes">    </span>обычной командой машинного языыка. 8088
+понимает этот префикс пере-
+
+<p><span
+style="mso-spacerun: yes">    </span>назначения<span style='mso-tab-count:1'>    </span>сегмента
+и<span style="mso-spacerun: yes">  </span>изменяет обычный<span
+style="mso-spacerun: yes">  </span>способ вычисления адреса.
+
+<p><span
+style="mso-spacerun: yes">    </span>Вместо регистра DS процессор<span
+style="mso-spacerun: yes">  </span>использует для вычисления физического
+
+<p><span
+style="mso-spacerun: yes">    </span>адреса<span style="mso-spacerun: yes"> 
+</span>данных<span style="mso-spacerun: yes">  </span>регистр<span
+style="mso-spacerun: yes">  </span>CS.<span style="mso-spacerun: yes">  
+</span>Одного<span style="mso-spacerun: yes">  </span>префикса<span
+style="mso-spacerun: yes">  </span>в<span style='mso-tab-count:1'>      </span>команде<span
+style="mso-spacerun: yes">  </span>всегда
+
+<p><span
+style="mso-spacerun: yes">    </span>достаточно, так<span style="mso-spacerun:
+yes">  </span>как 8088 может адресоваться<span style="mso-spacerun: yes"> 
+</span>в ней не более<span style="mso-spacerun: yes">  </span>чем к
+
+<p><span
+style="mso-spacerun: yes">    </span>одной ячейке памяти.
+
+<p><span
+style='mso-tab-count:1'>      </span>Для нормального<span style="mso-spacerun:
+yes">  </span>обращения к данным<span style="mso-spacerun: yes"> 
+</span>команда может использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>любой из<span style="mso-spacerun: yes"> 
+</span>четырех сегментных регистров. Регистр<span style="mso-spacerun: yes"> 
+</span>DS используется по
+
+<p><span
+style="mso-spacerun: yes">    </span>умолчанию,<span style='mso-tab-count:1'>    </span>то
+есть<span style="mso-spacerun: yes">  </span>когда в<span style="mso-spacerun:
+yes">  </span>команде не<span style="mso-spacerun: yes">  </span>указан
+другой<span style="mso-spacerun: yes">  </span>сегментный
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр,<span style="mso-spacerun: yes"> 
+</span>то<span style="mso-spacerun: yes">  </span>используется<span
+style='mso-tab-count:1'>      </span>DS.<span style="mso-spacerun: yes"> 
+</span>Помните,<span style="mso-spacerun: yes">  </span>что<span
+style="mso-spacerun: yes">  </span>при использовании в
+
+<p><span
+style="mso-spacerun: yes">    </span>адресных вычислениях регистра BP<span
+style="mso-spacerun: yes">  </span>сегментом по умолчанию становится
+
+<p><span
+style="mso-spacerun: yes">    </span>стековый сегмент.<span
+style="mso-spacerun: yes">  </span>Команда может определить и<span
+style="mso-spacerun: yes">  </span>любой из трех других
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментных<span style='mso-tab-count:1'>    </span>регистров,
+указав<span style="mso-spacerun: yes">  </span>его в<span style="mso-spacerun:
+yes">  </span>адресном выражении. Некоторые
+
+<p><span
+style="mso-spacerun: yes">    </span>команды, правда,<span style="mso-spacerun:
+yes">  </span>не могут пользоваться<span style="mso-spacerun: yes"> 
+</span>переназначением сегментов.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это - команды<span style="mso-spacerun:
+yes">   </span>обработки<span style='mso-tab-count:1'> </span>строк.<span
+style='mso-tab-count:1'>      </span> Строковая<span style="mso-spacerun:
+yes">  </span>команда<span style="mso-spacerun: yes">  </span>определяет
+
+<p><span
+style="mso-spacerun: yes">    </span>использование<span style="mso-spacerun:
+yes">  </span>регистров<span style="mso-spacerun: yes">  </span>неявным<span
+style="mso-spacerun: yes">  </span>образом,<span style="mso-spacerun: yes"> 
+</span>и<span style="mso-spacerun: yes">  </span>оно<span style="mso-spacerun:
+yes">  </span>не<span style="mso-spacerun: yes">  </span>может быть
+
+<p><span
+style="mso-spacerun: yes">    </span>изменено. В главе 4 мы обсудим строковые
+команды и их специфическое
+
+<p><span
+style="mso-spacerun: yes">    </span>пользование сегментами.
+<p><div align="center"><b><font size="+1" face="Arial"> 
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

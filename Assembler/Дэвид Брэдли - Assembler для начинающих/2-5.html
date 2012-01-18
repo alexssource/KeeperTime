@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="2-5">Синаксис языка Ассемблера</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Прежде чем двигаться дальше, обсудим
+синтаксис команд языка ассем-
+
+<p><span
+style="mso-spacerun: yes">    </span>блера.Мы должны выделить основные
+компоненты языка ассемблера,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы можно было затем обозначать эти
+компоненты с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>сиандартных терминов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда языка ассемблера состоит из
+четырех частей.<span style="mso-spacerun: yes">  </span>Фиг.<span
+style="mso-spacerun: yes">  </span>2.8
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает типичную команду ассемблера и
+названия этих частей.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">   
+</span>--------------------------------------------------------
+
+<p><span
+style="mso-spacerun: yes">    </span>PART1:<span style="mso-spacerun: yes">   
+</span>ADD<span style="mso-spacerun: yes">     </span>AX,BX<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">  
+</span>;Добавить к длине буфера
+
+<p><span
+style="mso-spacerun: yes">    </span>Метка<span style="mso-spacerun: yes">    
+</span>ОпКод<span style="mso-spacerun: yes">   </span>Операнды<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>Комментарий
+
+<p><span
+style="mso-spacerun: yes">   
+</span>--------------------------------------------------------
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">    </span>Фиг. 2.8 Синтаксис языка ассемблера
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Единственная обязательная часть команды
+языка ассемблера - ОпКод
+
+<p><span
+style="mso-spacerun: yes">    </span>(сокращение от ОПерационный КОД).<span
+style="mso-spacerun: yes">  </span>Программисты иногда называют ма-
+
+<p><span
+style="mso-spacerun: yes">    </span>шинные команды кодами операций.
+Операционный код в утверждении язы-
+
+<p><span
+style="mso-spacerun: yes">    </span>ка асемблера определяет, какую опреацию
+должен будет выполнить про-
+
+<p><span
+style="mso-spacerun: yes">    </span>цессор, в нашем примере - операцию
+сложения (по английски - add -
+
+<p><span
+style="mso-spacerun: yes">    </span>прим.<span style="mso-spacerun: yes"> 
+</span>перев.).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поле операндов содержит дополнительную
+информацию о команде,
+
+<p><span
+style="mso-spacerun: yes">    </span>например, какие значения участвуют в
+операции.<span style="mso-spacerun: yes">  </span>Поле операндов
+
+<p><span
+style="mso-spacerun: yes">    </span>определяется операционным кодом.<span
+style="mso-spacerun: yes">  </span>Каждому коду операции должно
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствовать определенное число
+операндов.<span style="mso-spacerun: yes">  </span>Для команды ADD
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется два операнда; операция перемены
+знака (NEG) обходится
+
+<p><span
+style="mso-spacerun: yes">    </span>лишь одним, а для некоторых команд,
+например, команды десятичной
+
+<p><span
+style="mso-spacerun: yes">    </span>коррекции DAA, операнды не нужны.<span
+style="mso-spacerun: yes">  </span>В главе 4 описаны эти команды и
+
+<p><span
+style="mso-spacerun: yes">    </span>их операнды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Метка и комментарий необязательны<span
+style="mso-spacerun: yes">  </span>в команде. Поле метки позво-
+
+<p><span
+style="mso-spacerun: yes">    </span>ляет<span style="mso-spacerun: yes"> 
+</span>обозначить какое-либо<span style="mso-spacerun: yes">  </span>конкретное
+место<span style="mso-spacerun: yes">  </span>в памяти компьютера.
+
+<p><span
+style="mso-spacerun: yes">    </span>Собственный<span style="mso-spacerun:
+yes">  </span>адрес имеется<span style='mso-tab-count:1'>      </span>у<span
+style="mso-spacerun: yes">  </span>любого<span style="mso-spacerun: yes"> 
+</span>участка памяти,<span style="mso-spacerun: yes">  </span>но выделить
+
+<p><span
+style="mso-spacerun: yes">    </span>адрес<span style="mso-spacerun: yes"> 
+</span>какой<span style="mso-spacerun: yes">  </span>либо<span
+style='mso-tab-count:1'>  </span>команды<span style="mso-spacerun: yes"> 
+</span>трудно,<span style="mso-spacerun: yes">  </span>если<span
+style='mso-tab-count:1'>  </span>вообще<span style='mso-tab-count:1'>      </span>возможно.
+Метка
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет<span style="mso-spacerun: yes"> 
+</span>идентифицировать<span style="mso-spacerun: yes"> 
+</span>определенное<span style="mso-spacerun: yes">  </span>место<span
+style="mso-spacerun: yes">  </span>в памяти заданным
+
+<p><span
+style="mso-spacerun: yes">    </span>программистом<span style="mso-spacerun:
+yes">  </span>именем.<span style="mso-spacerun: yes">  </span>Говоря<span
+style="mso-spacerun: yes">   </span>технически,<span style="mso-spacerun:
+yes">  </span>поле<span style='mso-tab-count:1'>      </span>метки<span
+style="mso-spacerun: yes">  </span>содержит
+
+<p><span
+style="mso-spacerun: yes">    </span>символический указатель<span
+style="mso-spacerun: yes">  </span>расположения команды. Если<span
+style="mso-spacerun: yes">  </span>мы хотим обра-
+
+<p><span
+style="mso-spacerun: yes">    </span>титься к<span style="mso-spacerun: yes"> 
+</span>этой команде позднее,<span style="mso-spacerun: yes">  </span>то мы
+делаем<span style="mso-spacerun: yes">  </span>это через символьное
+
+<p><span
+style="mso-spacerun: yes">    </span>имя и<span style="mso-spacerun: yes"> 
+</span>нам не требуетсся<span style="mso-spacerun: yes">  </span>указывать
+абсолютное расположение<span style="mso-spacerun: yes">  </span>данной
+
+<p><span
+style="mso-spacerun: yes">    </span>инструкции. Использование меток - одна из
+причин предпочтительности
+
+<p><span
+style="mso-spacerun: yes">    </span>языка<span style="mso-spacerun: yes"> 
+</span>ассемблера<span style="mso-spacerun: yes">  </span>перед<span
+style="mso-spacerun: yes">  </span>машинным<span style='mso-tab-count:1'>    </span>языком.<span
+style="mso-spacerun: yes">  </span>Превращением же симво-
+
+<p><span
+style="mso-spacerun: yes">    </span>лических имен в реальные адреса ведает
+ассемблер.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поле комментариев служит для удобства
+программиста.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программист может использовать это поле
+для сообщения
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительной информации о команде.<span
+style="mso-spacerun: yes">  </span>Комментарий не обязательно
+
+<p><span
+style="mso-spacerun: yes">    </span>жестко связан с командой.<span
+style="mso-spacerun: yes">  </span>Вы можете отвести под комментарий целую
+
+<p><span
+style="mso-spacerun: yes">    </span>строку, поставив в ее начале символ
+&quot;;&quot;.<span style="mso-spacerun: yes">  </span>Это позвляет
+программисту
+
+<p><span
+style="mso-spacerun: yes">    </span>в ключить в листинг ассембле- ра блок
+собственной информации, к
+
+<p><span
+style="mso-spacerun: yes">    </span>примеру, описание используемого алгоритма.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>У<span style="mso-spacerun: yes"> 
+</span>каждого есть<span style="mso-spacerun: yes">  </span>собственное
+представление<span style="mso-spacerun: yes">  </span>о том,<span
+style="mso-spacerun: yes">  </span>как следует
+
+<p><span
+style="mso-spacerun: yes">    </span>комментировать<span style="mso-spacerun:
+yes">  </span>программы, и<span style="mso-spacerun: yes">  </span>вы наверняка<span
+style='mso-tab-count:1'>  </span>тоже скоро<span style="mso-spacerun: yes"> 
+</span>выработаете
+
+<p><span
+style="mso-spacerun: yes">    </span>свое. Как<span style="mso-spacerun: yes"> 
+</span>правило, вы будете<span style="mso-spacerun: yes">  </span>пытаться
+включать в<span style='mso-tab-count:1'>      </span>них информацию,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая<span style="mso-spacerun: yes"> 
+</span>относится<span style='mso-tab-count:1'>  </span>непосредственно<span
+style="mso-spacerun: yes">  </span>к<span style="mso-spacerun: yes"> 
+</span>решаемой<span style="mso-spacerun: yes">  </span>проблеме.<span
+style="mso-spacerun: yes">  </span>В при-
+
+<p><span
+style="mso-spacerun: yes">    </span>веденном<span style="mso-spacerun: yes"> 
+</span>примере<span style="mso-spacerun: yes">  </span>было<span
+style="mso-spacerun: yes">   </span>бы<span style="mso-spacerun: yes"> 
+</span>бессмысленно<span style='mso-tab-count:1'>  </span>комментировать<span
+style='mso-tab-count:1'>    </span>команду
+
+<p><span
+style="mso-spacerun: yes">    </span>чем-нибудь вроде<span style="mso-spacerun:
+yes">  </span>&quot;сложить AX и<span style="mso-spacerun: yes"> 
+</span>BX&quot;. Это не<span style="mso-spacerun: yes">  </span>более, чем
+повторение
+
+<p><span
+style="mso-spacerun: yes">    </span>операционного кода и операндов (разве<span
+style="mso-spacerun: yes">  </span>что в переводе с английского
+
+<p><span
+style="mso-spacerun: yes">    </span>- прим.перев.). Если<span
+style="mso-spacerun: yes">  </span>уж вы намерены связаться<span
+style="mso-spacerun: yes">  </span>с комментариями, то
+
+<p><span
+style="mso-spacerun: yes">    </span>делайте их достойными труда их написания и
+чтения.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+
+
+</body>
+</html>

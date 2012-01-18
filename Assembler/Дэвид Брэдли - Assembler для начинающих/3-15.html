@@ -1,0 +1,349 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><font size="+1"><i>	<a name="3-15">Векторы прерываний</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Еще одна важная составная часть
+микропроцессора 8088 - механизм
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний. Эта компонента системы
+встроена в микропроцессор, и
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечивает эффективные методы обработки
+прерываний.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда микропроцессор 8088 получает сигнал
+о необходимости
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания, он определяет, какое из
+усройств требует обслуживания
+
+<p><span
+style="mso-spacerun: yes">    </span>посредством аппаратной процедуры,
+известной как цикл подтверждения
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания. В IBM PC для обслуживания
+внешних прерываний
+
+<p><span
+style="mso-spacerun: yes">    </span>используется контроллер прерываний 8259
+фирмы Intel. Контроллер
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний программируется так, чтобы
+выдавать однобайтовое число в
+
+<p><span
+style="mso-spacerun: yes">    </span>ответ на цикл подтверждения прерывания
+микропроцессора 8088. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>число, находящееся в диапазоне от 0 до
+255, - номер прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>внешнего усройства, вызвавшего прерывание.
+В персональной ЭВМ
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер прерываний обслуживает восемь
+внешних прерываний,
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>которым соответствуют номера от 8 до 15.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как только микропроцессор 8088 получает
+номер прерывания, он
+
+<p><span
+style="mso-spacerun: yes">    </span>должен передать управление соответствующей
+программе обработки
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания. Первые 1024 байт памяти
+микропроцессора 8088
+
+<p><span
+style="mso-spacerun: yes">    </span>зарезервированы для векторов прерываний.
+Каждому из 256 возможных
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний отводится четырехбайтовая
+область. Прерывание 0 имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>четыре байта по адресам от 0 до 3,
+прерывание 1 - от 4 до 7, и т.д.
+
+<p><span
+style="mso-spacerun: yes">    </span>Каждая четырехбайтовая ячейка содержит
+указатель на соответствующий
+
+<p><span
+style="mso-spacerun: yes">    </span>обработчик конкретного прерывания. Первые
+два байта содержат
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение адреса программы обработки
+прерывания, а последние два
+
+<p><span
+style="mso-spacerun: yes">    </span>байта - сегмент. Для задания значения
+этого поля может
+
+<p><span
+style="mso-spacerun: yes">    </span>использоваться оператор определения
+двойного слова DD.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Так же, как и вызов подпрограммы,
+прерывание должно сохранить в
+
+<p><span
+style="mso-spacerun: yes">    </span>стеке адрес возврата. Поскольку обработчик
+прерывания может
+
+
+<p><span
+style="mso-spacerun: yes">    </span>находиться в любом месте адресного
+пространства микропроцессора, он
+
+<p><span
+style="mso-spacerun: yes">    </span>должен обслужить прерывание, как вызов
+типа FAR, т.е. перед тем,
+
+<p><span
+style="mso-spacerun: yes">    </span>как микропроцесоор передаст управление
+обработчику прерывания, он
+
+<p><span
+style="mso-spacerun: yes">    </span>сохранит сегмент и смещение текущей
+команды в программе. Кроме того
+
+<p><span
+style="mso-spacerun: yes">    </span>возврат из программы обработки прерывания
+должен вернуть машину в
+
+<p><span
+style="mso-spacerun: yes">    </span>точности в то состояние, в котором она
+была в момент возникновения
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания. Чтобы помочь в этом,
+микропроцессор 8088 также
+
+<p><span
+style="mso-spacerun: yes">    </span>сохраняет регистр флагов в стеке. Это
+означает, что эти действия
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun: yes"> </span>уже
+не придется выполнять каждой программе обработки прерываний.
+
+<p><span
+style="mso-spacerun: yes">    </span>Сохранение регистра флагов означает также
+сохранение и текущего
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния флага разрешения прерываний.
+Принятие внешнего прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>сбрасывает флаг разрешения прерывания, так
+что программа обработки
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания уже не может быть прервана
+другим прерыванием. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>возврата из прерывания, которая
+восстанавливает регистр флагов,
+
+<p><span
+style="mso-spacerun: yes">    </span>автоматически деблокирует систему
+прерываний восстановлением флага
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний в состояние предшествующее
+возникновению прерывания.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда возникает прерывание, микропроцессор
+помещает в стек
+
+<p><span
+style="mso-spacerun: yes">    </span>региср флагов, за которым следуют регистры
+CS и IP. 8088 использует
+
+<p><span
+style="mso-spacerun: yes">    </span>номер прерывания, чтобы считать указатель
+на программу обработки
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания, и передать ей управление.
+Теперь уже эта программа
+
+<p><span
+style="mso-spacerun: yes">    </span>отвечает за сохранение регистров, которые
+она использует, и
+
+<p><span
+style="mso-spacerun: yes">    </span>восстановление их перед возвратом
+управления в прерванную
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуру. Для возврата из прерывания
+используется специальная
+
+<p><span
+style="mso-spacerun: yes">    </span>команда IRET. Она извлекает верхние три
+слова из стека и помещает
+
+<p><span
+style="mso-spacerun: yes">    </span>их в регистры IP, CS и регистр флагов. В
+следующих главах мы
+
+<p><span
+style="mso-spacerun: yes">    </span>приведем несколько примеров, использующих
+механизм прерываний.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программист может использовать механизм
+прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно, без запроса внешних
+прерываний. Существуют
+
+<p><span
+style="mso-spacerun: yes">    </span>команды, которые заставляют микропроцессор
+работать так, как будто
+
+<p><span
+style="mso-spacerun: yes">    </span>при их выполнения возникло внешнее
+прерывание. Такие действия
+
+<p><span
+style="mso-spacerun: yes">    </span>называются программными прерываниями, так
+как они порождаются
+
+<p><span
+style="mso-spacerun: yes">    </span>программами, но имитируют действия обычных
+прерываний. Процессор
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает все три управляющих регистра в
+стек и выбирает вектор
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания по указанному программой
+однобайтовому значению.
+
+<p><span
+style="mso-spacerun: yes">    </span>Микропроцессор использует записанный в
+начале памяти вектор
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания в качестве указателя
+подпрограммы обработки прерывания.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программные прерывания придают большую
+гибкость системе 8088.
+
+<p><span
+style="mso-spacerun: yes">    </span>В<span style="mso-spacerun: yes"> 
+</span>случае обычных вызовов подпрограммы программист до ее выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>обязан знать, где она находится. Но если
+программа вызывает под-
+
+<p><span
+style="mso-spacerun: yes">    </span>программу, используя программное
+прерывание, то подпрограмма может
+
+<p><span
+style="mso-spacerun: yes">    </span>находиться в любом месте адресного
+пространства, и вызывающей
+
+<p><span
+style="mso-spacerun: yes">    </span>программе нет нужды знать ее
+местонахождение. Единственным пара-
+
+<p><span
+style="mso-spacerun: yes">    </span>метром, котрый требуется от программиста,
+вызывающего подпрограмму,
+
+<p><span
+style="mso-spacerun: yes">    </span>является номер вектора прерываний.
+Управляющие программы и опера-
+
+<p><span
+style="mso-spacerun: yes">    </span>ционная система фирмы IBM очень выгодно
+используют этот механизм.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программные прерывания дают доступ к
+сервисным программам системы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программам пользователя не нужно знать
+точные адреса, которые могут
+
+<p><span
+style="mso-spacerun: yes">    </span>изменяться в разных версиях системного
+программного обеспечения.
+
+<p><span
+style="mso-spacerun: yes">    </span>Кроме того, сервисные подпрограммы могут
+быть подменены в любой
+
+<p><span
+style="mso-spacerun: yes">    </span>момент времени простой заменой
+четырехбайтового вектора,
+
+<p><span
+style="mso-spacerun: yes">    </span>указывающего на новую программу, без
+всякой модификации программ,
+
+<p><span
+style="mso-spacerun: yes">    </span>использующих эти подпрограммы. В гл.10 мы
+приведем несколько
+
+<p><span
+style="mso-spacerun: yes">    </span>примеров, которые покажут, использование
+такого подхода.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

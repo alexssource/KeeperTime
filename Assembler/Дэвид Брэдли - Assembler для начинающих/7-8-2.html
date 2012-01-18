@@ -1,0 +1,621 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="7-8-2">Десять в степени X
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Второй пример использования сопроцессора
+8087 гораздо глубже
+
+<p><span
+style="mso-spacerun: yes">    </span>раскрывает перед нами его работу.<span
+style="mso-spacerun: yes">  </span>Этот пример - подпрограмма,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая будет использоваться в дальнейшем.<span
+style='mso-tab-count:1'>  </span>Подпрограмма
+
+<p><span
+style="mso-spacerun: yes">    </span>предполагает, что исходное число находится
+в вершине стека; после
+
+<p><span
+style="mso-spacerun: yes">    </span>возврата из подпрограммы в вершине стека
+находится число, равное
+
+<p><span
+style="mso-spacerun: yes">    </span>десяти в степени X.<span
+style="mso-spacerun: yes">  </span>Исходный текст этой подпрограммы приведен на
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 7.24.
+
+<p><span
+style='mso-tab-count:1'>      </span>Сопроцессор 8087 не имеет команды
+возведения 10 в произвольную
+
+<p><span
+style="mso-spacerun: yes">    </span>степень, но мы можем возводить в любую
+степень двойки.<span style="mso-spacerun: yes">  </span>Поэтому
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>нужжно пользоваться формулой
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>10**X = 2**(X*Log2(10))
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первые две команды программы формируют
+показатель степени двух.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа загружает константу Log210, а
+затем умножает ее на
+
+<p><span
+style="mso-spacerun: yes">    </span>исходное число X, давая необходимую
+степень 2, называемую здесь E.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поле комментариев в примере используется
+для иллюстрации элементов
+
+<p><span
+style="mso-spacerun: yes">    </span>стека сопроцессора 8087.<span
+style="mso-spacerun: yes">  </span>Символ &quot;?&quot; означает, что значение
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">      
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span> <span style="mso-spacerun: yes">  </span>1/1/80 04:04:40
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 7.24 Вычисление 10**ST<span style='mso-tab-count:4'>                     </span><span
+style="mso-spacerun: yes">  </span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 7.24 Вычисление 10**ST
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT PUBLIC
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PUBLIC<span style="mso-spacerun: yes"> 
+</span>TEN_TO_X
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>????<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">      </span>OLD_CW<span
+style="mso-spacerun: yes">  </span>DW<span style="mso-spacerun: yes">     
+</span>?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0002<span style="mso-spacerun: yes">  </span>????<span style='mso-tab-count:
+2'>       </span><span style="mso-spacerun: yes">      </span>NEW_CW<span
+style="mso-spacerun: yes">  </span>DW<span style="mso-spacerun: yes">     
+</span>?
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     
+</span>;--------------------------------------------
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>; Эта программа извлекает число с
+вершины стека
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>сопроцессора 8087 и возводит 10 в эту степень.
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>; Параметры: X в ST(0)
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>; Результат: 10**X в ST(0)
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>; Эта программа использует две ячейки в
+стеке 8087
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>плюс параметр - всего три ячейки.
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     
+</span>;--------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0004<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>TEN_TO_X<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>PROC<span style="mso-spacerun: yes">   
+</span>NEAR
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">     
+</span>;----ST(0)------;-----ST(1)-----;--ST(2)--
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">      </span>; X<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">      </span>; ?<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">      </span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0004<span style="mso-spacerun: yes">  </span>9B D9 E9<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FLDL2T<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">      </span>; LOG2(10)<span style="mso-spacerun:
+yes">      </span>; X<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0007<span style="mso-spacerun: yes">  </span>9B DE C9<span
+style='mso-tab-count:2'>         </span><span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>FMULP<span style="mso-spacerun: yes">  
+</span>ST(1),ST(0)<span style="mso-spacerun: yes">     </span>;
+X*LOG2(10)=E<span style="mso-spacerun: yes">  </span>; ?<span style='mso-tab-count:
+1'>      </span><span style="mso-spacerun: yes">      </span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000A<span style="mso-spacerun: yes">  </span>D9 3E 0000 R<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">     
+</span>FNSTCW<span style="mso-spacerun: yes">  </span>OLD_CW<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>;---------------;---------------;--------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000E<span style="mso-spacerun: yes">  </span>9B <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>FWAIT<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">     
+</span>; Выборка текущего слова состояния
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000F<span style="mso-spacerun: yes">  </span>A1 0000 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AX,OLD_CW<span
+style="mso-spacerun: yes">      </span>; Сохранение слова сотояния
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0012<span style="mso-spacerun: yes">  </span>25 F3FF<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">      </span>AND<span style="mso-spacerun: yes">     </span>AX,NOT
+0C00H<span style="mso-spacerun: yes">   </span>; Установка способа округления к
+минус
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0015<span style="mso-spacerun: yes">  </span>0D 0400<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">      </span>OR<span style="mso-spacerun: yes">      </span>AX,0400H<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;<span
+style='mso-tab-count:1'>      </span>бесконечности
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0018<span style="mso-spacerun: yes">  </span>A3 0002 R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">     </span><span style="mso-spacerun: yes"> </span>MOV<span
+style="mso-spacerun: yes">     </span>NEW_CW,AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001B<span style="mso-spacerun: yes">  </span>9B D9 2E 0002 R<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>FLDCW<span style="mso-spacerun: yes">   </span>NEW_CW<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>;---------------;---------------;--------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0020<span style="mso-spacerun: yes">  </span>9B D9 E8<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FLD1<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">      </span>; 1<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">      </span>; E<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">      </span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0023<span style="mso-spacerun: yes">  </span>9B D9 E0<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FCHS<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">      </span>; -1<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>; E<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">      </span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0026<span style="mso-spacerun: yes">  </span>9B D9 C1<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FLD<span style="mso-spacerun: yes">     </span>ST(1)<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>; E<span style='mso-tab-count:1'>   </span><span style="mso-spacerun:
+yes">      </span>; -1<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>; E
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0029<span style="mso-spacerun: yes">  </span>9B D9 FC<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FRNDINT<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">      </span>; INT(E) = I<span style="mso-spacerun:
+yes">    </span>; -1<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>; E
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002C<span style="mso-spacerun: yes">  </span>9B D9 2E 0000 R<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>FLDCW<span style="mso-spacerun: yes">   </span>OLD_CW<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>; <span style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">      </span>; <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>;
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0031<span style="mso-spacerun: yes">  </span>9B D9 CA<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FXCH<span style="mso-spacerun: yes">    </span>ST(2)<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>; E<span style='mso-tab-count:1'>   </span><span style="mso-spacerun:
+yes">      </span>; -1<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>; I
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0034<span style="mso-spacerun: yes">  </span>9B D8 E2<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FSUB<span style="mso-spacerun: yes">   
+</span>ST(0),ST(2)<span style="mso-spacerun: yes">     </span>; E - I = F<span
+style="mso-spacerun: yes">     </span>; -1<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>; I
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0037<span style="mso-spacerun: yes">  </span>9B D9 FD<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FSCALE<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">      </span>; F*2**-1 = F/2 ; -1<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>; I
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>003A<span style="mso-spacerun: yes">  </span>9B D9 F0<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>F2XM1<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">      </span>; (2**F/2)-1<span style="mso-spacerun:
+yes">    </span>; -1<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>; I
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>003D<span style="mso-spacerun: yes">  </span>9B DE E1<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FSUBRP<span style="mso-spacerun: yes"> 
+</span>ST(1),ST(0)<span style="mso-spacerun: yes">     </span>; 2**F/2<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>; I<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">      </span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0040<span style="mso-spacerun: yes">  </span>9B D8 8E 0000 U<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>FMUL<span style="mso-spacerun: yes">    </span>ST(0)<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>; 2**F<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>; I<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0045<span style="mso-spacerun: yes">  </span>9B D9 FD<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FSCALE<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">      </span>; (2**F)*(2**I) ; I<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0048<span style="mso-spacerun: yes">  </span>9B D9 C9<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FXCH<span style="mso-spacerun: yes">    </span>ST(1)<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>; I<span style='mso-tab-count:1'>   </span><span style="mso-spacerun:
+yes">      </span>; 2**(I+F)<span style="mso-spacerun: yes">      </span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>004B<span style="mso-spacerun: yes">  </span>9B D8 D9<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">      </span>FCOMP<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">      </span>; 2**(I+F)<span style="mso-spacerun:
+yes">      </span>; ?<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">      </span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>004E<span style="mso-spacerun: yes">  </span>C3 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>RET<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; 10**X<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">      </span>; ?<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">      </span>; ?
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>004F<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>TEN_TO_X<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>004F<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>Фиг. 7.24 Вычисление 10**ST
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующего элемента стека
+неопределено.<span style="mso-spacerun: yes">  </span>В подпрограмме
+
+<p><span
+style="mso-spacerun: yes">    </span>используется всего три элемента стека, так
+что в поле комментариев
+
+<p><span
+style="mso-spacerun: yes">    </span>есть три колонки.
+
+<p><span
+style='mso-tab-count:1'>      </span>Хотя теперь мы имеем нужную степень двух,
+у сопроцессора 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>отсутствует команда, завершившая бы всю
+работу за один шаг.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда F2XM1 возводит 2 в степень X, но
+только если X меньше или
+
+<p><span
+style="mso-spacerun: yes">    </span>равен 1/2.<span style='mso-tab-count:1'>    </span>Это
+означает, что степень E мы должны разделить на
+
+<p><span
+style="mso-spacerun: yes">    </span>целую и дробную части; затем команда
+FSCALE сможет возвести 2 в
+
+<p><span
+style="mso-spacerun: yes">    </span>целую степень, а команда F2XM1 обработает
+дробную часть.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Перед разделением E на две части программа
+выполняет некоторые
+
+<p><span
+style="mso-spacerun: yes">    </span>вспомогательные действия.<span
+style="mso-spacerun: yes">  </span>Эти действия - команды сопроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8087, которые читают управляющее слово и
+устанавливают режим
+
+<p><span
+style="mso-spacerun: yes">    </span>округления в направлении меньшего
+числа.<span style="mso-spacerun: yes">  </span>Теперь, когда мы возьмем
+
+<p><span
+style="mso-spacerun: yes">    </span>целую часть показателя степени, его
+значение будет округляться
+
+<p><span
+style="mso-spacerun: yes">    </span>влево, в направлении минус
+бесконечности.<span style="mso-spacerun: yes">  </span>Дробная часть показателя
+
+<p><span
+style="mso-spacerun: yes">    </span>будет положительным числом, что также
+требуется для команды F2XM1.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обратите внимание на использование команды
+FWAIT после команды
+
+<p><span
+style="mso-spacerun: yes">    </span>FNSTCW.<span style="mso-spacerun: yes"> 
+</span>Ожидать окончания выполнения умножения перед записью
+
+<p><span
+style="mso-spacerun: yes">    </span>управляющего слова не надо, так как
+умножение не меняет код в
+
+<p><span
+style="mso-spacerun: yes">    </span>управляющем слове.<span style='mso-tab-count:
+1'>  </span>Но перед чтением управляющего слова из главной
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти и модификацией его нужна гарантия,
+что сопроцессор 8087 уже
+
+<p><span
+style="mso-spacerun: yes">    </span>завершил запись.<span style="mso-spacerun:
+yes">  </span>Значит, нужно выполнить команду ожидания FWAIT
+
+<p><span
+style="mso-spacerun: yes">    </span>перед чтением.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>После установки способа округления команда
+FRNDINT округляет
+
+<p><span
+style="mso-spacerun: yes">    </span>показатель степени E до целого
+значения.<span style="mso-spacerun: yes">  </span>Так как мы также
+
+
+<p><span
+style="mso-spacerun: yes">    </span>запомнили и исходное значение E в стеке,
+можно вычесть целую часть
+
+<p><span
+style="mso-spacerun: yes">    </span>из E и получить дробную часть показателя
+степени.<span style="mso-spacerun: yes">  </span>То есть теперь E
+
+<p><span
+style="mso-spacerun: yes">    </span>= I + F, и можно записать
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>2**E = 2**I*2**F
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Но перед тем обратим внимание на одну
+маленькую деталь.
+
+<p><span
+style="mso-spacerun: yes">    </span>Дробная часть F может оказаться значением
+большим 1/2, и поэтому не
+
+<p><span
+style="mso-spacerun: yes">    </span>может быть аргументом команды F2XM1.<span
+style="mso-spacerun: yes">  </span>Сейчас мы используем число
+
+<p><span
+style="mso-spacerun: yes">    </span>-1, ранее помещенное в стек, чтобы
+разделить F на 2, получив при
+
+<p><span
+style="mso-spacerun: yes">    </span>этом F/2.<span style="mso-spacerun: yes"> 
+</span>Чтобы это сделать, воспользуемся командой FSCALE, так
+
+<p><span
+style="mso-spacerun: yes">    </span>как эта команда умножает содержимое ST0 на
+2 в степени,
+
+<p><span
+style="mso-spacerun: yes">    </span>содержащейся в ST1.<span
+style="mso-spacerun: yes">  </span>Поскольку в элементе ST1 содержится -1,
+
+<p><span
+style="mso-spacerun: yes">    </span>результирующим эффектом будет умножение на
+1/2.<span style="mso-spacerun: yes">  </span>Теперь можно
+
+<p><span
+style="mso-spacerun: yes">    </span>утверждать, что содержимое регистра ST0
+меньше 1/2.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Далее команда F2XM1 возводит 2 в степень
+F/2, а -1 в стеке
+
+<p><span
+style="mso-spacerun: yes">    </span>помогает ликвидировать -1, порождаемую в
+результате работы команды
+
+<p><span
+style="mso-spacerun: yes">    </span>F2XM1.<span style="mso-spacerun: yes"> 
+</span>Обратное вычитание с извлечением из стека избавляется и от
+
+<p><span
+style="mso-spacerun: yes">    </span>-1 в стеке.<span style="mso-spacerun:
+yes">  </span>Затем 2F/2 умножается само на себя, в элементе ST0
+
+<p><span
+style="mso-spacerun: yes">    </span>получается число 2F.<span
+style="mso-spacerun: yes">  </span>Так как целая часть показателя степени
+теперь
+
+<p><span
+style="mso-spacerun: yes">    </span>переместилась в элементе ST1, команда
+FSCALE умножает 2I на число
+
+<p><span
+style="mso-spacerun: yes">    </span>2F, которое уже находится в элементе ST0,
+давая искомый результат.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда FCOMP удаляет из стека число I
+перед возвратом из
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

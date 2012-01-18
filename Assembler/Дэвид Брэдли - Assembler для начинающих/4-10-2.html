@@ -1,0 +1,394 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><a name="4-10-2">Специальные команды
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда NOP - еще одна удобная команда
+микропроцессора 8088.<span style="mso-spacerun: yes">  </span>Она
+
+<p><span
+style="mso-spacerun: yes">    </span>не делает ничего - &quot;нет
+операции&quot;.<span style="mso-spacerun: yes">  </span>Тщательный анализ
+машинных
+
+<p><span
+style="mso-spacerun: yes">    </span>команд показывает, что это в
+действительности команда XCHG.<span style="mso-spacerun: yes">  </span>А
+
+<p><span
+style="mso-spacerun: yes">    </span>именно, это
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>XCHG AX,AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>что эквивалентно &quot;ничего не
+выполнять&quot;, и бывают ситуации,
+
+<p><span
+style="mso-spacerun: yes">    </span>когда такую команду желательно
+использовать, чтобы выждать
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторое время. В небольшом цикле,
+предназначенном для
+
+<p><span
+style="mso-spacerun: yes">    </span>определенной временной задержки, можно
+использовать команды NOP для
+
+<p><span
+style="mso-spacerun: yes">    </span>заполнения тела цикла, достигая тем самым
+точной выдержки времени
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения цикла (хотя цикл - не лучший
+способ временной задержки,
+
+<p><span
+style="mso-spacerun: yes">    </span>если интервал не очень маленький).
+Разработчики IBM PC требуют
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать NOP в некоторых местах, чтобы
+удовлетворять
+
+<p><span
+style="mso-spacerun: yes">    </span>определенным временным требованиям.
+Например, программа не может
+
+<p><span
+style="mso-spacerun: yes">    </span>иметь доступ в схему таймера чаще, чем раз
+в одну микросекунду. Две
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательно идущие команды IN нарушают
+это требование, так что
+
+<p><span
+style="mso-spacerun: yes">    </span>между командами IN должно быть выполнено
+несколько команд NOP.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда HLP останавливает ЭВМ; после
+выполнеиня этой команды
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор останавливается. Если
+прерывания заблокированы во
+
+<p><span
+style="mso-spacerun: yes">    </span>время останова, ЭВМ полностью
+&quot;замирает&quot;. В этой сиутации
+
+<p><span
+style="mso-spacerun: yes">    </span>единственная возможность запустить ЭВМ
+заново - выключить питание и
+
+<p><span
+style="mso-spacerun: yes">    </span>включить его снова. Однако, если
+прерывания были разрешены в момент
+
+<p><span
+style="mso-spacerun: yes">    </span>останова микропроцессора, они продолжают
+восприниматься и
+
+<p><span
+style="mso-spacerun: yes">    </span>управление будет передаваться обработчику
+прерываний. После
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнеиня команды IRET в обработчике
+программа продолжает
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнение с ячейки, следующей за командой
+HLT. Команду HLT можно
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать в мультизадачных системах,
+чтобы завершить текущую
+
+<p><span
+style="mso-spacerun: yes">    </span>активную задачу, но это не всегда лучший
+способ такого завершения.
+
+<p><span
+style="mso-spacerun: yes">    </span>Разработчики персональной ЭВМ используют
+команду останова только
+
+<p><span
+style="mso-spacerun: yes">    </span>тогда, когда возникает катастрофическая
+ошибка оборудования и
+
+<p><span
+style="mso-spacerun: yes">    </span>дальнейшая работа бессмысленна.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда LOCK - это командный префикс,
+такой же, как подавление
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментации или REP-префикс. Она
+предназначена для
+
+<p><span
+style="mso-spacerun: yes">    </span>мультипроцессорных систем, в которых несколько
+микропроцессоров
+
+<p><span
+style="mso-spacerun: yes">    </span>могут одновременно работать с одними и
+теми же ячейками памяти.
+
+<p><span
+style="mso-spacerun: yes">    </span>Префикс LOCK вынуждает микропроцессор 8088
+захватить линии
+
+<p><span
+style="mso-spacerun: yes">    </span>управления, и тем самым получить
+исключительное право достура в
+
+<p><span
+style="mso-spacerun: yes">    </span>память на время обработки команды с
+префиксом. Лучший пример этого
+
+<p><span
+style="mso-spacerun: yes">    </span>- установка- проверка флага в общей
+памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV<span style='mso-tab-count:1'>   </span>AL,1
+
+<p><span
+style="mso-spacerun: yes">    </span>LOCK XCHG<span style='mso-tab-count:1'>     </span>AL,FLAG_BYTE
+
+<p><span
+style='mso-tab-count:1'>      </span>CMP<span style='mso-tab-count:1'>   </span>AL,1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В этом примере байт FLAG_BYTE содержит
+нулевой или единичный
+
+<p><span
+style="mso-spacerun: yes">    </span>индикатор. Микропроцессор устанавливает флаг
+равным единице, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>входит в &quot;критическую&quot; область
+программы, где он выполняет
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторые системные действия, которые
+может выполнять в данный
+
+<p><span
+style="mso-spacerun: yes">    </span>момент времени лишь один микропроцессор.
+Перед входом в
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;охраняемую&quot; область
+микропроцессор должен проверить, не работает
+
+<p><span
+style="mso-spacerun: yes">    </span>ли в ней другой микропроцессор. Если это
+так, он должен подождать
+
+<p><span
+style="mso-spacerun: yes">    </span>перед входом; иначе он может войти в
+область. В примере перед
+
+<p><span
+style="mso-spacerun: yes">    </span>командой XCHG используется префикс LOCK.
+Префикс LOCK дает
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессору право исключительного
+доступа в течение выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>команды XCHG, которая читает содержимое
+ячейки памяти, а затем
+
+<p><span
+style="mso-spacerun: yes">    </span>записывает данные в эту же ячейку. Команда
+XCHG записывает 1 из
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра AL в поле FLAG_BYTE, засылая его
+текущее значение в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AL. Теперь, если регистр AL
+содержит 1, то в &quot;охраняемой&quot;
+
+<p><span
+style="mso-spacerun: yes">    </span>области находится другой микропроцессор, и
+проверяющий
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор обязан ждать. Если регистр
+AL нулевой,
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор может войти в
+&quot;охраняемую&quot; область, а команда XCHG
+
+<p><span
+style="mso-spacerun: yes">    </span>уже установила поле FLAG_BYTE равным 1,
+чтобы больше ни один
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор не смог войти туда. Префикс
+LOCK препятствует любому
+
+<p><span
+style="mso-spacerun: yes">    </span>другому микропроцессору проверять поле
+FLAG_BYTE в течение
+
+<p><span
+style="mso-spacerun: yes">    </span>короткого интервала времени между
+проверкой и установкой ячейки
+
+<p><span
+style="mso-spacerun: yes">    </span>флага.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>К сожалению, описание работы префикса LOCK
+носит чисто
+
+<p><span
+style="mso-spacerun: yes">    </span>теоретический характер. IBM PC не
+реализует аппаратные средства,
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимые для работы LOCK.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда WAIT останавливает выполнение
+программы
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессором, аналогично команде HLT.
+Но в случае команды WAIT
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнение программы возобновляется, когда
+один из внешних выводов
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088, вывод TEST,
+становится активен. Если вывод
+
+<p><span
+style="mso-spacerun: yes">    </span>TEST активен во время выполнения команды
+WAIT, остановки не
+
+<p><span
+style="mso-spacerun: yes">    </span>возникает вообще. Если вывод TEST
+неактивен, микропроцессор ждет до
+
+<p><span
+style="mso-spacerun: yes">    </span>тех пор, пока он не станет активен.
+Микропроцессор 8088 использует
+
+<p><span
+style="mso-spacerun: yes">    </span>эту команду вместе с командой ESC, чтобы
+работать с арифметическим
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессором 8087.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда ESC дает возможность расширить
+набор команд
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088 без изменений самого
+микропроцессора. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит поле режима адресации и может
+указать любую ячейку памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>с помощью обычных способов адресации
+микропроцессора 8088. Однако
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор ничего не делает в случае
+этой команды, кроме того,
+
+<p><span
+style="mso-spacerun: yes">    </span>что читает данные из соответствующей
+ячейки и просто их
+
+<p><span
+style="mso-spacerun: yes">    </span>отбрасывает.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда ESC позволяет другому
+микропроцессору, или так
+
+<p><span
+style="mso-spacerun: yes">    </span>называемому сопроцессору, наблюдать за
+работой микропроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8088. Команда ESC активизирует
+сопроцессор, и он выполняет ее, как
+
+<p><span
+style="mso-spacerun: yes">    </span>собственную. Если сопроцессору нужен адрес
+памяти, микропроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 выдает этот адрес в цикле фиктивного
+чтения. Затем сопроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>может выполнять запись или чтение по этому
+адресу в зависимости от
+
+<p><span
+style="mso-spacerun: yes">    </span>того, что ему нужно. Эффективность команды
+ESC станет очевидна в
+
+<p><span
+style="mso-spacerun: yes">    </span>гл.7, где рассматривается арифметический
+сопроцессор 8087,
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессор микропроцессора 8088.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

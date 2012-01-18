@@ -1,0 +1,925 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="4-7">Операции сдвига и поворота</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Остальные логические команды на Фиг. 4.19
+выполняют сдвиги данных.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда сдвига перемещает все биты в поле
+данных либо вправо, либо
+
+<p><span
+style="mso-spacerun: yes">    </span>влево.<span style="mso-spacerun: yes"> 
+</span>Это можно проиллюстрировать церковной скамьей, на которой
+
+<p><span
+style="mso-spacerun: yes">    </span>сидят мужчины и женщины.<span
+style="mso-spacerun: yes">  </span>Каждый раз, когда приходит новый человек
+
+<p><span
+style="mso-spacerun: yes">    </span>и садится на край скамьи, остальные
+сидящие на ней сдвигаются на
+
+<p><span
+style="mso-spacerun: yes">    </span>одно место. Если скамья уже заполнена, то
+крайний в результате
+
+<p><span
+style="mso-spacerun: yes">    </span>такого сдвига вытесняется с нее. Команда
+сдвига делает в точности
+
+<p><span
+style="mso-spacerun: yes">    </span>то же самое, только вместо женщин и мужчин
+здесь выступают нули и
+
+<p><span
+style="mso-spacerun: yes">    </span>еденицы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.4.20 показаны восемь различных команд
+сдвига; у этих
+
+<p><span
+style="mso-spacerun: yes">    </span>команд имеются некоторые вариации.<span
+style='mso-tab-count:1'>    </span>Сначала мы рассмотрим общие для
+
+<p><span
+style="mso-spacerun: yes">    </span>этих команд черты.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как и другие логические команды, сдвиги
+работают с байтами и
+
+<p><span
+style="mso-spacerun: yes">    </span>словами. Каждая команда указывает
+единственный операнд. Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>операнд может быть либо регистром, либо
+ячейкой памяти. Все эти
+
+<p><span
+style="mso-spacerun: yes">    </span>команды используют байт mod=r/m для
+описания операнда.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ЪДДДДДДДДДДДДДї<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>ЪДДДДДДДДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">      </span>ЪДДДДї<span style="mso-spacerun: yes"> 
+</span>і ЪДДДДДДДДДї і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>і<span style="mso-spacerun: yes"> 
+</span>ЪДДДДДДДДДДї і<span style="mso-spacerun: yes">  </span>ЪДДДДї
+
+<p><span
+style="mso-spacerun: yes">      </span>і CY Г&lt;ДБДґ ДАННЫЕ<span
+style="mso-spacerun: yes">  </span>Г&lt;Щ<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>АД&gt;ґ<span style="mso-spacerun:
+yes">  </span>ДАННЫЕ<span style="mso-spacerun: yes">  </span>ГДБД&gt;ґ CY і
+
+<p><span
+style="mso-spacerun: yes">      </span>АДДДДЩ<span style='mso-tab-count:1'>      </span>АДДДДДДДДДЩ<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes"> 
+</span>АДДДДДДДДДДЩ<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>АДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>ROL<span style='mso-tab-count:4'>                    </span><span
+style="mso-spacerun: yes">  </span>ROR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">   </span>ЪДДДДДДДДДДДДДДДДДДДДДДДДДДї<span
+style="mso-spacerun: yes">      </span>ЪДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes"> 
+</span>ЪДДДДї<span style='mso-tab-count:1'>      </span>ЪДДДДДДДДДї<span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">     
+</span>і<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">  </span>ЪДДДДДДДДДДї<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>ЪДДДДї і
+
+<p><span
+style="mso-spacerun: yes">   </span>АДДґ CY Г&lt;ДДДґ ДАННЫЕ<span
+style="mso-spacerun: yes">  </span>Г&lt;ДДЩ<span style="mso-spacerun:
+yes">      </span>АДДД&gt;ґ<span style="mso-spacerun: yes">  </span>ДАННЫЕ<span
+style="mso-spacerun: yes">  </span>ГДДД&gt;ґ CY ГДЩ
+
+<p><span
+style="mso-spacerun: yes">      </span>АДДДДЩ<span style='mso-tab-count:1'>      </span>АДДДДДДДДДЩ<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes"> 
+</span>АДДДДДДДДДДЩ<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>АДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>RCL<span style='mso-tab-count:4'>                    </span><span
+style="mso-spacerun: yes">    </span>RCR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>ЪДДДДї<span style='mso-tab-count:1'>      </span>ЪДДДДДДДДДї<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes"> 
+</span>ЪДДДДДДДДДДї<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>ЪДДДДї
+
+<p><span
+style="mso-spacerun: yes">      </span>і CY Г&lt;ДДДґ ДАННЫЕ<span
+style="mso-spacerun: yes">  </span>Г&lt;ДДД 0<span style="mso-spacerun: yes">  
+</span>0 ДДД&gt;ґ<span style="mso-spacerun: yes">  </span>ДАННЫЕ<span
+style="mso-spacerun: yes">  </span>ГДДД&gt;ґ CY і
+
+<p><span
+style="mso-spacerun: yes">      </span>АДДДДЩ<span style='mso-tab-count:1'>      </span>АДДДДДДДДДЩ<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes"> 
+</span>АДДДДДДДДДДЩ<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>АДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>SHL<span style='mso-tab-count:4'>                    </span><span
+style="mso-spacerun: yes">  </span>SHR
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>ЪДДДДДДДї
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>і<span style="mso-spacerun: yes">      
+</span>і
+
+<p><span
+style="mso-spacerun: yes">      </span>ЪДДДДї<span style='mso-tab-count:1'>      </span>ЪДДДДДДДДДї<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">     
+</span>і<span style="mso-spacerun: yes">   </span>ЪДДДБДДДДДДї<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes"> 
+</span>ЪДДДДї
+
+<p><span
+style="mso-spacerun: yes">      </span>і CY Г&lt;ДДДґ ДАННЫЕ<span
+style="mso-spacerun: yes">  </span>Г&lt;ДДД 0<span style="mso-spacerun:
+yes">     </span>АДД&gt;ґ<span style="mso-spacerun: yes">  </span>ДАННЫЕ<span
+style="mso-spacerun: yes">  </span>ГДДД&gt;ґ CY і
+
+<p><span
+style="mso-spacerun: yes">      </span>АДДДДЩ<span style='mso-tab-count:1'>      </span>АДДДДДДДДДЩ<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes"> 
+</span>АДДДДДДДДДДЩ<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>АДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>SAL<span style='mso-tab-count:4'>                    </span><span
+style="mso-spacerun: yes">  </span>SAR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.20 Операции сдвига.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Во всех командах сдвига определяется
+счетчик сдвигов, т.е.
+
+<p><span
+style="mso-spacerun: yes">    </span>программа указывает число битов, на
+которое надо сделать сдвиг; это
+
+<p><span
+style="mso-spacerun: yes">    </span>число и есть счетчик сдвигов. Его наиболее
+распространенное
+
+<p><span
+style="mso-spacerun: yes">    </span>значение - единица. Такой счетчик сдвигает
+биты операнда на одну
+
+<p><span
+style="mso-spacerun: yes">    </span>позицию. Однако команда может задать
+произвольный счетчик сдвигов,
+
+<p><span
+style="mso-spacerun: yes">    </span>занося его значение в регистр CL пред
+сдвигом. Если в команде
+
+<p><span
+style="mso-spacerun: yes">    </span>указано, что счетчик сдвигов надо взять из
+регистра CL, значение
+
+<p><span
+style="mso-spacerun: yes">    </span>этого регистра определяет число сдвигов
+битов. Число в регистре CL
+
+<p><span
+style="mso-spacerun: yes">    </span>может быть любым от 0 до 255, но его
+практически имеющие смысл
+
+<p><span
+style="mso-spacerun: yes">    </span>значения лежат в пределах 0 - 16. Значение
+0 не вызывает сдвига, а
+
+<p><span
+style="mso-spacerun: yes">    </span>любое значение больше 16 сдвигает битов
+больше, чем содержит
+
+<p><span
+style="mso-spacerun: yes">    </span>операнд.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Другая общая черта команд сдвига - это
+установка флага
+
+<p><span
+style="mso-spacerun: yes">    </span>переноса. Бит, попадающий за пределы
+операнда, имеет специальное
+
+<p><span
+style="mso-spacerun: yes">    </span>место. Команды сдвига помещают последний
+выдвинутый из операнда бит
+
+<p><span
+style="mso-spacerun: yes">    </span>в флаг переноса. Если сдвиг был на один
+бит, то бит из дальнего
+
+<p><span
+style="mso-spacerun: yes">    </span>конца операнда становится новым значением
+флага переноса. В случае
+
+<p><span
+style="mso-spacerun: yes">    </span>многобитового сдвига, вдвигаемый в перенос
+бит появляется изнутри
+
+<p><span
+style="mso-spacerun: yes">    </span>операнда. Флаг переноса имеет значение для
+операций повышенной
+
+<p><span
+style="mso-spacerun: yes">    </span>точности. Поскольку операнд операции
+сдвига может иметь максимум 16
+
+<p><span
+style="mso-spacerun: yes">    </span>бит, программа может организовать работу с
+данными большего размера
+
+<p><span
+style="mso-spacerun: yes">    </span>с помощью нескольких сдвигов и флага
+переноса. Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;разрезает&quot; операнд на
+16=битовые куски, а затем сдвигает каждую
+
+<p><span
+style="mso-spacerun: yes">    </span>часть на один бит каждый раз. Флаг
+переноса используется программой
+
+<p><span
+style="mso-spacerun: yes">    </span>для передачи выдвинутой информации в
+следующую часть сдвигаемого
+
+<p><span
+style="mso-spacerun: yes">    </span>операнда.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Верхние четыре команды на Фиг.4.20 -
+команды циклического
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвига. На рисунке схематически
+представлена работа каждой команды.
+
+<p><span
+style="mso-spacerun: yes">    </span>Циклические сдвиги переносят появляющийся
+в конце операнда бит в
+
+<p><span
+style="mso-spacerun: yes">    </span>другой конец. Циклический сдвиг влево ROL
+и циклический сдвиг
+
+<p><span
+style="mso-spacerun: yes">    </span>вправо ROR различаются лишь направлением
+сдвига данных. Аналогично,
+
+<p><span
+style="mso-spacerun: yes">    </span>циклический сдвиг влево с переносом RCL и
+циклический сдвиг вправо
+
+<p><span
+style="mso-spacerun: yes">    </span>с переносом RCR являются зеркальным
+отражением друг друга. Команды
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun: yes">  </span>ROL
+и RCL различаются в трактовке флага переноса. Байтовая команда
+
+<p><span
+style="mso-spacerun: yes">    </span>RCL рассматривает данные как 9=битовые,
+причем роль девятого бита
+
+<p><span
+style="mso-spacerun: yes">    </span>играет флаг переноса. Если операнд -
+слово, команда ROL циклически
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвигает 16 бит, а команда RCL циклически
+сдвигает 17 бит.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команды снизу Фиг.4.20 не возвращают
+выдвигаемые из операнда
+
+<p><span
+style="mso-spacerun: yes">    </span>биты в свой операнд. Эти биты попадают в
+флаг переноса, а затем
+
+<p><span
+style="mso-spacerun: yes">    </span>просто исчезают. Значение, вдвигаемое в
+операнд, определяется типом
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвига. В случае логического сдвига
+вдвигаемый бит всегда 0;
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметический сдвиг выбирает вдвигаемый
+бит таким, чтобы сохранить
+
+<p><span
+style="mso-spacerun: yes">    </span>знак операнда.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Почему сдвиг называется арифметическим,
+если он входит в группу
+
+<p><span
+style="mso-spacerun: yes">    </span>логических команд? Сдвиг числа на одну
+позицию (бит) эквивалентен
+
+<p><span
+style="mso-spacerun: yes">    </span>умножению или делению этого числа на 2. В
+десятичной системе
+
+<p><span
+style="mso-spacerun: yes">    </span>счисления, добавление нуля в конце числа
+умножает его на 10. В
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичной арифметике добавление 0 в конце
+умножает число на 2. Так
+
+<p><span
+style="mso-spacerun: yes">    </span>как ЭВМ не может добавить другой бит в
+конце операнда, операция
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвига действует аналогично. Команда
+сдвига влево перемещает все
+
+<p><span
+style="mso-spacerun: yes">    </span>биты влево на одну позицию, а в младшую
+позицию помещает 0. Таким
+
+<p><span
+style="mso-spacerun: yes">    </span>образом, сдвиг влево умножает число на 2.
+Если величина сдвига
+
+<p><span
+style="mso-spacerun: yes">    </span>больше единицы, число умножается на 2,
+возведенное в степень,
+
+<p><span
+style="mso-spacerun: yes">    </span>равную содержимому счетчика сдвигов.
+Например, сдвиг влево на 3
+
+<p><span
+style="mso-spacerun: yes">    </span>бита эквивалентен умножению на 8.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сдвиг числа вправо - это то же самое
+деление на 2. Сдвинутый
+
+<p><span
+style="mso-spacerun: yes">    </span>операнд - частное, а флаг переноса -
+остаток. Если счетчик сдвигов
+
+<p><span
+style="mso-spacerun: yes">    </span>больше 1, операнд по=прежнему есть
+частное, а остаток теряется.
+
+<p><span
+style="mso-spacerun: yes">    </span>Таким образом, команды сдвига делают
+эффективным умножение и
+
+<p><span
+style="mso-spacerun: yes">    </span>деление на степень 2. Фактически,
+воэможность замены умножения
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвигом становится хорошим выходом в
+ситуациях, когда необходимо
+
+<p><span
+style="mso-spacerun: yes">    </span>исключить умножение, даже если множитель
+не есть степень 2.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При арифметическом сдвиге вместо деления
+на 2 отрицательного
+
+<p><span
+style="mso-spacerun: yes">    </span>числа возникает следующая проблема. Если
+команда вдвигает 0 в
+
+<p><span
+style="mso-spacerun: yes">    </span>старший бит, результат становится
+положительным. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметического сдвига вправо SAR решает
+эту проблему путем
+
+<p><span
+style="mso-spacerun: yes">    </span>восстановления значения старшего бита во
+время сдвига. Поэтому
+
+<p><span
+style="mso-spacerun: yes">    </span>отрицательное число остается
+отрицательным, а положительное -
+
+<p><span
+style="mso-spacerun: yes">    </span>положительным. Эта проблема не возникает в
+случае сдвига влево,
+
+<p><span
+style="mso-spacerun: yes">    </span>поскольку бит знака находится у операнда
+слева. Из=за этого команды
+
+<p><span
+style="mso-spacerun: yes">    </span>логического сдвига влево SHL и
+арифметического сдвига влево SAL
+
+<p><span
+style="mso-spacerun: yes">    </span>идентичны.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В связи с арифметической природой, все
+команды сдвогов влияют
+
+<p><span
+style="mso-spacerun: yes">    </span>на флаг переполнения так же, как и на флаг
+переноса. Флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнения не определен в случае
+счетчиков сдвига больших
+
+<p><span
+style="mso-spacerun: yes">    </span>единицы, но при единичных сдвигах команды
+устанавливают флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнения только в случае, если в
+результате операции изменился
+
+<p><span
+style="mso-spacerun: yes">    </span>знак числа. Если старший бит не изменился,
+флаг переполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>сбрасывается, т.е. флаг переполнения
+показывает, дает ли
+
+<p><span
+style="mso-spacerun: yes">    </span>подразумеваемое сдвигом умножение или
+деление правильный результат
+
+<p><span
+style="mso-spacerun: yes">    </span>в дополнительном коде.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 4.21 приведены два примера команд
+сдвига. Первый пример
+
+<p><span
+style="mso-spacerun: yes">    </span>демонстрирует умножение на число с помощью
+команд сдвига влево. В
+
+<p><span
+style="mso-spacerun: yes">    </span>примере выполняется умножение на 9, не
+являющееся степенью 2.
+
+<p><span
+style="mso-spacerun: yes">    </span>Сначала в примере данные сдвигаются влево
+на три позиции, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>умножить число на 8. Затем программа
+складывает полученное значение
+
+<p><span
+style="mso-spacerun: yes">    </span>с первоначальным, давая результат, равный
+первоначальному числу,
+
+<p><span
+style="mso-spacerun: yes">    </span>умноженному на 9.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Недостатки этого метода очевидны. Он
+требует много больше
+
+<p><span
+style="mso-spacerun: yes">    </span>команд, чем простое умножение - которое
+выглядело бы примерно так:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>PUSH<span style="mso-spacerun: yes">   
+</span>DX
+
+<p><span
+style="mso-spacerun: yes">      </span>MOV<span style="mso-spacerun: yes">    
+</span>DX,9
+
+<p><span
+style="mso-spacerun: yes">      </span>IMUL<span style="mso-spacerun: yes">   
+</span>DX
+
+<p><span
+style="mso-spacerun: yes">      </span>POP<span style="mso-spacerun: yes">    
+</span>DX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Кроме того, умножение на 9 с помощью
+сдвига дает 16=битовый
+
+<p><span
+style="mso-spacerun: yes">    </span>результат, а не 32=битовый, как команда
+IMUL.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Все же в программе умножение с помощью
+сдвига может оказаться
+
+<p><span
+style="mso-spacerun: yes">    </span>желательным в некоторых случаях. В первую
+очередь, его преимущество
+
+<p><span
+style="mso-spacerun: yes">    </span>- скорость выполнения. Команда IMUL требует
+много времени, тогда
+
+<p><span
+style="mso-spacerun: yes">    </span>как команда сдвига выполняется гораздо
+быстрее. В случае примера на
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 4.21, метод сдвига работает примерно
+на 25% быстрее. Выигрыш
+
+<p><span
+style="mso-spacerun: yes">    </span>небольшой, но может оказаться решающим для
+приложения, зависящего
+
+<p><span
+style="mso-spacerun: yes">    </span>от умножения целых чисел на 9. Умножения
+на степень 2 могут дать и
+
+<p><span
+style="mso-spacerun: yes">    </span>больший выигрыш в скорости выполнения.
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>1/1/80 04:01:21
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 4.21 Примеры инструкций сдвига <span style='mso-tab-count:3'>              </span>Page<span
+style='mso-tab-count:1'>  </span> 1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.21 Примеры инструкций сдвига
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">   
+</span>;--------------------------------------------------
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; Эта программа умножает число, заданное в
+регистре AX
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; на 9 без использования команды умножения
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">   
+</span>;--------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>MUL9<span style="mso-spacerun: yes">   
+</span>PROC<span style="mso-spacerun: yes">    </span>NEAR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>51<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>PUSH<span style="mso-spacerun: yes">    </span>CX<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">    </span>; Сохранение
+регистра CX в стеке
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0001<span style="mso-spacerun: yes">  </span>50<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>PUSH<span style="mso-spacerun: yes">    </span>AX<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">    </span>; Временное
+сохранение AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0002<span style="mso-spacerun: yes">  </span>B1 03<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>CL, 3<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">    </span>;
+Будем сдвигать регистр AX на 3 разряда,
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0004<span style="mso-spacerun: yes">  </span>D3 F8<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>SAR<span style="mso-spacerun: yes">     </span>AX, CL<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>;<span style="mso-spacerun: yes">  </span>тем самым уножая на 8
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0006<span style="mso-spacerun: yes">  </span>8B C8<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>CX, AX<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>; CX &lt;- AX * 8
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0008<span style="mso-spacerun: yes">  </span>58<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>POP<span style="mso-spacerun: yes">     </span>AX<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">    </span>; Восстановление
+AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0009<span style="mso-spacerun: yes">  </span>03 C1<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>ADD<span style="mso-spacerun: yes">     </span>AX, CX<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>; AX &lt;- исходное значение * 9
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000B<span style="mso-spacerun: yes">  </span>59<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>POP<span style="mso-spacerun: yes">     </span>CX<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">    </span>;
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000C<span style="mso-spacerun: yes">  </span>C3<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">    </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000D<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>MUL9<span style="mso-spacerun: yes">   
+</span>ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">   
+</span>;--------------------------------------------------
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; Эта программа программа выделяет один
+бит в
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; регистре AX, номер которого задан в
+регистре CL
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">   
+</span>;--------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000D<span style="mso-spacerun: yes">  </span>53<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>PUSH<span style="mso-spacerun: yes">    </span>BX<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">    </span>; Сохранение
+регистра BX в стеке
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000E<span style="mso-spacerun: yes">  </span>BB 0001<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>BX, 1<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">    </span>;
+Создание маски (1 в разряде 0 регистра BX)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0011<span style="mso-spacerun: yes">  </span>D3 C3<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>ROL<span style="mso-spacerun: yes">     </span>BX, CL<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>; Сдвиг маски
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0013<span style="mso-spacerun: yes">  </span>23 C3<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>AND<span style="mso-spacerun: yes">     </span>AX, BX<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>; Выделение требуемого разряда
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0015<span style="mso-spacerun: yes">  </span>5B<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>POP<span style="mso-spacerun: yes">     </span>BX<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">    </span>; Восстановление
+регистра BX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0016<span style="mso-spacerun: yes">  </span>C3<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">    </span>RET
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0017<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.21 Примеры сдвига
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Второй пример на Фиг. 4.21 показывает, как
+использовать сдвиг
+
+<p><span
+style="mso-spacerun: yes">    </span>на переменное число разрядов для выборки
+отдельного бита. Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>фрагмент предполагает, что исходная
+информация находится в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>AX, а регистр CL содержит номер бита,
+выбираемого из регистра AX:
+
+<p><span
+style="mso-spacerun: yes">    </span>если содержимое регистра CL равно 8, из
+регистра AX выбирается бит
+
+<p><span
+style="mso-spacerun: yes">    </span>8. Программа сдвигает маску в регистре BX
+на указанную в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>CL позицию, а команда AND изолирует
+выбранный бит.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для того чтобы этот пример работал
+правильно, число в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>CL должно быть в диапазоне 0 - 15. Можно
+было бы использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>команду AND, чтобы выделить младшие четыре
+бита значения сдвига в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре CL; команда AND CL, 0FH
+гарантирует, что число в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>CL находится в пределах 0 - 15. Вы можете
+изменить этот пример так,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы выделить более одного бита из слова.
+Можно было бы выделить
+
+<p><span
+style="mso-spacerun: yes">    </span>тетраду из 16=битового слова, заменив
+значение маски в регистре BX.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

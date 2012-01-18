@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-8-2">Префикс REP
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Существует специальный случай
+использования строковых команд.<span style="mso-spacerun: yes">  </span>Есть
+
+<p><span
+style="mso-spacerun: yes">    </span>префикс, специально предназначенный для
+строковых команд.<span style="mso-spacerun: yes">  </span>Также
+
+<p><span
+style="mso-spacerun: yes">    </span>как префикс подавления сегментации,
+используемый для порождения
+
+<p><span
+style="mso-spacerun: yes">    </span>специальной сегментной адресации, он
+предшествует обычной команде и
+
+<p><span
+style="mso-spacerun: yes">    </span>модифицирует ее работу.<span
+style="mso-spacerun: yes">  </span>А именно, этот префикс вводит строковую
+
+<p><span
+style="mso-spacerun: yes">    </span>команду в цикл.<span style="mso-spacerun:
+yes">  </span>Мнемоника префикса REP происходит от английского
+
+<p><span
+style="mso-spacerun: yes">    </span>слова Repeat - повторить.<span
+style="mso-spacerun: yes">  </span>Микропроцессор 8088 использует этот
+
+<p><span
+style="mso-spacerun: yes">    </span>префикс в тесной связи с регистром CX,
+который указывает число
+
+<p><span
+style="mso-spacerun: yes">    </span>повторений команды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Примером является команда STOSB. Команда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>REP STOSB
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>есть специальная форма команды записи
+байта. Эта команда
+
+<p><span
+style="mso-spacerun: yes">    </span>повторяется до тех пор, пока содержимое
+регистра CX не уменьшится
+
+<p><span
+style="mso-spacerun: yes">    </span>до 0. Команда STOSB записывает байт из
+регистра AL в ячейку памяти,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая указывается парой регистров ES:DI,
+а затем увеличивает или
+
+<p><span
+style="mso-spacerun: yes">    </span>уменьшает регистр DI на единицу так же,
+как и обычная команда
+
+<p><span
+style="mso-spacerun: yes">    </span>STOSB. Затем префикс REP уменьшает регистр
+CX, и если он теперь не
+
+<p><span
+style="mso-spacerun: yes">    </span>нуль, повторяет всю команду целиком.
+Запись строки повторяется до
+
+<p><span
+style="mso-spacerun: yes">    </span>тех пор, пока регистр CX не достигнет
+нуля.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Такая возможность превращает команду STOS
+в команду заполнения.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа помещает заполнитель в регистр
+AL, счетчик байта в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр CX, адрес блока в пару регистров
+ES:DI и сбрасывает флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>направления. Затем команда REP STOSB
+заполняет блок памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>значением из регистра AL. Такой фрагмент
+кода показан на Фиг. 4.23.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+3'>              </span>1/1/80 04:01:31
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 4.23 Заполнение области памяти <span style='mso-tab-count:3'>              </span>Page<span
+style='mso-tab-count:1'>  </span> 1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.23 Заполнение области памяти
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE,ES:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>;--------------------------------------
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; В этом примере область данных BYTE_BLOCK
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; заполняется значением 01H
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>;--------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>8D 3E 000C R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>LEA<span style="mso-spacerun: yes">     </span>DI, BYTE_BLOCK<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    </span>;
+DI &lt;- адрес области данных
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0004<span style="mso-spacerun: yes">  </span>B9 0032 90<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>CX,
+BYTE_BLOCK_LENGTH<span style="mso-spacerun: yes">   </span>; CX &lt;- размер
+заполняемой области
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0008<span style="mso-spacerun: yes">  </span>B0 01<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>AL, 01H<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">   
+</span>; Символ для заполнения
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000A<span style="mso-spacerun: yes">  </span>F3/ AA<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">   
+</span>REP<span style="mso-spacerun: yes">     </span>STOS<span
+style="mso-spacerun: yes">    </span>BYTE_BLOCK<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>; Заполнение
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000C<span style="mso-spacerun: yes">  </span>0032[<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">   
+</span>BYTE_BLOCK<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>DB<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>50 DUP(?)
+
+<p><span
+style='mso-tab-count:3'>                  </span>??
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">     </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>= 0032<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">    </span>BYTE_BLOCK_LENGTH<span style='mso-tab-count:
+1'>   </span><span style="mso-spacerun: yes">    </span>EQU<span
+style="mso-spacerun: yes">     </span>$-BYTE_BLOCK
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>003E<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.23 Заполнение блока
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В случае команды LODS префикс REP не имеет
+смысла. Загрузка
+
+<p><span
+style="mso-spacerun: yes">    </span>непрерывной строки данных в аккумулятор не
+дает программе
+
+<p><span
+style="mso-spacerun: yes">    </span>возможности иметь дело с данными по мере
+их поступления. Однако
+
+<p><span
+style="mso-spacerun: yes">    </span>префикс REP весьма полезен для работы с
+другими командами обработки
+
+<p><span
+style="mso-spacerun: yes">    </span>строк.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

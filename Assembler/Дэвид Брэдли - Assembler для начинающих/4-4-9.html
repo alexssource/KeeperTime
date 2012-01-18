@@ -1,0 +1,468 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-4-9">Команда деления
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Одна из арифметических операций
+микропроцессора 8088 - деление.
+
+<p><span
+style="mso-spacerun: yes">    </span>Как и в случае умножения, существует две
+формы деления - одна для
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичных чисел без знака DIV, а вторая для
+чисел в дополнительном
+
+<p><span
+style="mso-spacerun: yes">    </span>коде IDIV.<span style='mso-tab-count:1'>    </span>Любая
+форма деления может работать с байтами и словами.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда деления DIV выполняет деление без
+знака и дает как
+
+<p><span
+style="mso-spacerun: yes">    </span>частное, так и остаток. Как и в случае
+умножения, операнды должны
+
+<p><span
+style="mso-spacerun: yes">    </span>находиться на специфических местах. Также
+подобно умножению, для
+
+<p><span
+style="mso-spacerun: yes">    </span>деления одно из этих чисел в два раза
+длиннее обычного операнда:
+
+<p><span
+style="mso-spacerun: yes">    </span>делимое является операндом двойной длины.
+Байтовые команды делят
+
+<p><span
+style="mso-spacerun: yes">    </span>16=битовое делимое на 8=битовый делитель.
+В результате деления
+
+<p><span
+style="mso-spacerun: yes">    </span>получается два числа. Деление помещает
+частное в регистр AL, а
+
+<p><span
+style="mso-spacerun: yes">    </span>остаток в регистр AH. Такое расположение
+операндов делает команду
+
+<p><span
+style="mso-spacerun: yes">    </span>деления дополнительной к команде
+умножения; это означает, что
+
+<p><span
+style="mso-spacerun: yes">    </span>умножение регистра AL на байтовый операнд,
+а затем деление регистра
+
+<p><span
+style="mso-spacerun: yes">    </span>AX на тот же операнд возвращает регистр AL
+к его первоначальному
+
+<p><span
+style="mso-spacerun: yes">    </span>состоянию. Регистр AH будет содержать 0,
+поскольку остатка нет.
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 4.14 схематически иллюстрирует
+команду деления.
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>ЪДДДДДДДДї
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>AX<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>BX<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>CX<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>DX<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>            </span>Остаток
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes">  </span>ЪДДДДДДДДВДДДДДДДДї<span style="mso-spacerun: yes">   
+</span>АДДДДДДДДЩ<span style='mso-tab-count:2'>          </span>ЪДДДДДДДДВДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:1'>      </span>
+DX<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>AX<span style="mso-spacerun: yes">   </span>і *<span
+style="mso-spacerun: yes">  </span>ЪДДДДДДДДї<span style='mso-tab-count:1'>      </span>ДДДДД&gt;<span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">  
+</span>DX<span style='mso-tab-count:1'>      </span> і<span
+style="mso-spacerun: yes">   </span>AX<span style="mso-spacerun: yes">  
+</span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>АДДДДДДДДБДДДДДДДДЩ<span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span>SI<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:2'>            </span>АДДДДДДДДБДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>DI<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>BP<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>SP<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>АДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>ЪДДДДДДДДї
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і Память і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і(слова) і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>АДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>(a) Деление слов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>ЪДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>AH<span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>AL<span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>BH<span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>BL<span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>CH<span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>CL<span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>DH<span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'> </span>DL<span
+style="mso-spacerun: yes">    </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>Остаток
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ЪДДДДДДДДї<span style="mso-spacerun: yes">    </span>АДДДДДДДДДЩ <span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes"> </span>ЪДДДДДДДДВДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>і<span style="mso-spacerun: yes">   </span>AL<span style="mso-spacerun:
+yes">   </span>і *<span style="mso-spacerun: yes">  </span>ЪДДДДДДДДДї<span
+style="mso-spacerun: yes">  </span>ДДДДД&gt;<span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>AH<span style="mso-spacerun:
+yes">   </span>і<span style="mso-spacerun: yes">   </span>AL<span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>АДДДДДДДДЩ<span style="mso-spacerun: yes">    </span>і Память<span
+style="mso-spacerun: yes">  </span>і <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>АДДДДДДДДБДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>і(байты)<span style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>АДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>(b) Деление байтов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  
+</span><span style="mso-spacerun:yes"> </span>Фиг.4.14 Операции деления
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда, работающая со словами, делит
+32=битовое делимое на
+
+<p><span
+style="mso-spacerun: yes">    </span>16=битовый делитель. Делимое находится в
+паре регистров DX:AX,
+
+<p><span
+style="mso-spacerun: yes">    </span>причем регистр DX содержит старшую
+значащую часть, а регистр AX -
+
+<p><span
+style="mso-spacerun: yes">    </span>младшую. Деление слов помещает частное в
+регистр AX, а остаток в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр DX. Здесь опять=таки умножение и
+деление взаимно
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительны: умножение регистра AX на
+слово, а затем деление его
+
+<p><span
+style="mso-spacerun: yes">    </span>на то же слово возвращает регистр AX к его
+первоначальному
+
+<p><span
+style="mso-spacerun: yes">    </span>состоянию. Теперь регистр DX становится
+нулевым, так как остатка
+
+<p><span
+style="mso-spacerun: yes">    </span>нет.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Ни один из флагов состояния не определен
+после команды деления.
+
+<p><span
+style="mso-spacerun: yes">    </span>Однако во время деления может возникнуть
+ошибка значимости. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>частное больше, чем может быть помещено в
+регистр результата,
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор не может дать правильный
+результат. В случае деления
+
+<p><span
+style="mso-spacerun: yes">    </span>байтов частное должно быть меньше 256, и
+меньше 65535 в случае
+
+<p><span
+style="mso-spacerun: yes">    </span>операции со словами. Микропроцессор не
+устанавливает никаких флагов
+
+<p><span
+style="mso-spacerun: yes">    </span>для сигнализации при этой ошибке, вместо
+этого он выполняет
+
+<p><span
+style="mso-spacerun: yes">    </span>программное прерывание уровня 0. Как и в
+случае других программных
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний, это прерывание по делению на 0
+сохраняет флаги, регистр
+
+<p><span
+style="mso-spacerun: yes">    </span>кодового сегмента и указатель команды в
+стеке. Затем микропроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>передает управление в ячейку, на которую
+ссылается указатель по
+
+<p><span
+style="mso-spacerun: yes">    </span>адресу 0. Подпрограмма деления на 0 должна
+предпринять
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующие действия по обработке этой
+ошибки. (Прерывание 0
+
+<p><span
+style="mso-spacerun: yes">    </span>называется делением на 0 даже тогда, когда
+это прерывание возбудило
+
+<p><span
+style="mso-spacerun: yes">    </span>деление на число, отличное от нуля. В
+документации фирмы Intel это
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание называется делением на нуль,
+хотя более точно его надо
+
+<p><span
+style="mso-spacerun: yes">    </span>было бы назвать прерыванием по
+переполнению после деления).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Деление целых чисел со знаком IDIV
+отличается от команды DIV
+
+<p><span
+style="mso-spacerun: yes">    </span>только тем, что оно учитывает знаки обоих
+операндов. Если результат
+
+<p><span
+style="mso-spacerun: yes">    </span>положителен, все происходит так же, как
+было описано для команды
+
+<p><span
+style="mso-spacerun: yes">    </span>DIV, за исключением того, что максимальное
+значение частного
+
+<p><span
+style="mso-spacerun: yes">    </span>соответственно равно 127 и 32767 для
+байтов и слов. Если результат
+
+<p><span
+style="mso-spacerun: yes">    </span>отрицателен, частное усекается, а остаток
+имеет тот же знак, что и
+
+<p><span
+style="mso-spacerun: yes">    </span>делимое. Минимальные значения частных для
+отрицательных результатов
+
+<p><span
+style="mso-spacerun: yes">    </span>-128 и -32768 для байтов и слов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>Делимое (AX)<span style="mso-spacerun:
+yes">   </span>Делитель(MOD-R/M)<span style='mso-tab-count:1'>    </span>
+Частное (AL)<span style='mso-tab-count:1'>     </span>Остаток(AH)
+
+<p><span
+style="mso-spacerun: yes">   
+</span>------------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>7<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">     </span>2<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>3<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>7<span style='mso-tab-count:2'>        </span><span style="mso-spacerun:
+yes">    </span>-2<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>-3<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>-7<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">     </span>2<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>-3<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>-1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>-7<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">    </span>-2<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>3<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">   </span>-1
+
+<p><span
+style="mso-spacerun: yes">   
+</span>------------------------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.15 Примеры деления со знаком
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.<span style="mso-spacerun: yes"> 
+</span>4.15 показаны четыре примера деления, а также
+
+<p><span
+style="mso-spacerun: yes">    </span>полученные в них результаты.<span
+style="mso-spacerun: yes">  </span>Все примеры, приведенные здесь,
+
+<p><span
+style="mso-spacerun: yes">    </span>байтовые, т.е.<span style="mso-spacerun:
+yes">  </span>делимое находится в регистре AX, а делитель
+
+<p><span
+style="mso-spacerun: yes">    </span>указывается байтом mod=r/m.<span
+style="mso-spacerun: yes">  </span>Деление помещает частное в регистр AL,
+
+<p><span
+style="mso-spacerun: yes">    </span>а остаток в регистр AH.<span
+style="mso-spacerun: yes">  </span>Заметим, что знак остатка всегда тот же,
+
+<p><span
+style="mso-spacerun: yes">    </span>что и у делимого.<span
+style="mso-spacerun: yes">  </span>Значение частного всегда усекается в
+направлении
+
+<p><span
+style="mso-spacerun: yes">    </span>нуля.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

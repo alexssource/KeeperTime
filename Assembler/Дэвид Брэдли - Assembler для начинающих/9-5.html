@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-5">Область данных ROM BIOS</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Сегмент DATA, расположенный по адресу 40H,
+содержит переменные,
+
+<p><span
+style="mso-spacerun: yes">    </span>используемые в BIOS.<span
+style="mso-spacerun: yes">  </span>Мы не будем здесь перечислять все переменные
+
+<p><span
+style="mso-spacerun: yes">    </span>и их функции.<span style="mso-spacerun:
+yes">  </span>Все они указаны в описании соответствующего драйвера
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фирма IBM не меняет ни одну из этих ячеек
+без особой
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимости. Некоторые из драйверов,
+входящих в BIOS не только
+
+<p><span
+style="mso-spacerun: yes">    </span>читают эти ячейки. Но для программы может
+оказаться довольно важным
+
+<p><span
+style="mso-spacerun: yes">    </span>просматривать содержимое этих ячеек. В
+следующей главе приводится
+
+<p><span
+style="mso-spacerun: yes">    </span>пример, в котором требуется изменить одну
+из переменных,
+
+<p><span
+style="mso-spacerun: yes">    </span>поддерживаемых BIOS. Замена этого числа
+дает дополнительные
+
+<p><span
+style="mso-spacerun: yes">    </span>возможности при использовании системы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Так как, скорее всего, фирма IBM не
+изменит местоположение ни
+
+<p><span
+style="mso-spacerun: yes">    </span>одной из этих ячеек, разумнее использовать
+эти данные
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно, и это вполне возможно.
+Некоторые из переменных
+
+<p><span
+style="mso-spacerun: yes">    </span>могут потерять смысл по мере того, как люди
+будут разрабатывать
+
+<p><span
+style="mso-spacerun: yes">    </span>новые версии аппаратуры. Например, если
+фирма IBM разработает
+
+<p><span
+style="mso-spacerun: yes">    </span>систему, у которой не будет никакой памяти
+(что совершенно
+
+<p><span
+style="mso-spacerun: yes">    </span>невероятно), исчезнет необходимость в
+ячейках, которые содержат
+
+<p><span
+style="mso-spacerun: yes">    </span>текущий объем памяти. В этом случае фирма
+IBM могла бы найти другой
+
+<p><span
+style="mso-spacerun: yes">    </span>вид использования этой ячейки. Но если
+найдется функция, имеющая
+
+<p><span
+style="mso-spacerun: yes">    </span>форму, сходную с текущей, то вероятнее
+всего переменная будет
+
+<p><span
+style="mso-spacerun: yes">    </span>использоваться тем же способом.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="8-6-4">Графический режим
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Цветной графический адаптер имеет два
+режима отображения, в которых
+
+<p><span
+style="mso-spacerun: yes">    </span>можно управлять отдельными точками экрана.
+Эти режимы называются
+
+<p><span
+style="mso-spacerun: yes">    </span>режимами Полной Адресации точек (APA: All
+Points Addressable),
+
+<p><span
+style="mso-spacerun: yes">    </span>поскольку с помощью этих режимов можно
+адресовать и изменять все
+
+<p><span
+style="mso-spacerun: yes">    </span>точки. В действительности цветная плата
+допускает более двух
+
+<p><span
+style="mso-spacerun: yes">    </span>режимов APA, но мы рассмотрим только те
+два, которые поддерживаются
+
+<p><span
+style="mso-spacerun: yes">    </span>системой программирования. Используя
+информацию из технического
+
+<p><span
+style="mso-spacerun: yes">    </span>описания, вы можете попробовать и другие
+режимы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Графический режим среднего разрешения
+обеспечивает вывод
+
+<p><span
+style="mso-spacerun: yes">    </span>изображения из 320 точек и 200 строк
+растра. Каждая из этих точек
+
+<p><span
+style="mso-spacerun: yes">    </span>может иметь один из четырех цветов. Это
+означает, что для каждой
+
+<p><span
+style="mso-spacerun: yes">    </span>точки требуется для представления цвета 2
+бита. В каждом байте
+
+<p><span
+style="mso-spacerun: yes">    </span>графической памяти помещается четыре точки
+или пиксела (от англ.
+
+<p><span
+style="mso-spacerun: yes">    </span>picture element - графический элемент,
+которые называют также
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;пелами&quot;). Если вы умножите
+горизонтальный размер на вертикальный,
+
+<p><span
+style="mso-spacerun: yes">    </span>а затем разделите на 4 - число точек в
+байте, то увидите, что в
+
+<p><span
+style="mso-spacerun: yes">    </span>режиме среднего разрешения требуется 16000
+байт. Именно поэтому
+
+<p><span
+style="mso-spacerun: yes">    </span>цветная плата имеет память объемом 16K.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 8.13 показано расположение
+элементов в каждом байте.
+
+<p><span
+style="mso-spacerun: yes">    </span>Пара бит с номерами 6 и 7 отображается
+первой точкой (0), а биты 0
+
+<p><span
+style="mso-spacerun: yes">    </span>и 1 представляют последнюю точку (3),
+отображаемую из этого байта.
+
+<p><span
+style="mso-spacerun: yes">    </span>В<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>первых 80 байтах графической памяти
+содержится 320 точек
+
+<p><span
+style="mso-spacerun: yes">    </span>строки растра 0, т.е. первой строки
+экрана.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>7<span style="mso-spacerun: yes">   </span>6<span style="mso-spacerun:
+yes">     </span>5<span style='mso-tab-count:1'>    </span> 4<span
+style="mso-spacerun: yes">     </span>3<span style="mso-spacerun: yes">  
+</span>2<span style='mso-tab-count:1'>      </span> 1<span style="mso-spacerun:
+yes">   </span>0
+
+<p><span
+style='mso-tab-count:1'>      </span>ЪДДДДДДДДДВДДДДДДДДДВДДДДДДДДДВДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">      </span>і <span style='mso-tab-count:1'>    </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і точка 0 і точка 1 і точка 2 і точка 3 і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>і<span style="mso-spacerun: yes">    </span>і<span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:1'>     </span>
+і<span style="mso-spacerun: yes">    </span>і<span style="mso-spacerun:
+yes">    </span>і<span style='mso-tab-count:1'>      </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>АДДДДБДДДДБДДДДБДДДДБДДДДБДДДДБДДДДБДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 8.13 Битовая структура для графики 320*200
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Но байт 80 уже не содержит первые четыре
+точки строки 1. По
+
+<p><span
+style="mso-spacerun: yes">    </span>причинам, которые объясняются конструкцией
+аппаратуры, четные и
+
+<p><span
+style="mso-spacerun: yes">    </span>нечетные строки хранятся в разных концах
+графической памяти. Все
+
+<p><span
+style="mso-spacerun: yes">    </span>нечетные строки имеют смещение 2000H байт
+от соответствующих четных
+
+<p><span
+style="mso-spacerun: yes">    </span>строк. Поэтому строка 1 лежит в байтах от
+2000H до 204FH. Строка 2
+
+<p><span
+style="mso-spacerun: yes">    </span>- четная и находится по адресам от байта
+50H до 9FH; строка 3
+
+<p><span
+style="mso-spacerun: yes">    </span>находится по адресам от 2050H до 209FH, и
+так далее.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 8.12в изображена программа,
+которая иллюстрирует
+
+<p><span
+style="mso-spacerun: yes">    </span>структуру графической памяти. Эта
+программа рисует диагональную
+
+<p><span
+style="mso-spacerun: yes">    </span>линию на дисплее 320*200. Линия начинается
+в точке (0, 0), верхнем
+
+<p><span
+style="mso-spacerun: yes">    </span>левом углу, и идет до точки (199, 199), в
+самый низ и слегка правее
+
+<p><span
+style="mso-spacerun: yes">    </span>центра. Первая часть программы вводит
+дисплей в режим APA среднего
+
+<p><span
+style="mso-spacerun: yes">    </span>разрешения с помощью вызова программы
+BIOS. В следующей главе
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматривается, как это делается.
+
+<p><span
+style='mso-tab-count:1'>      </span>В программе регистр DI используется в
+качестве указателя
+
+<p><span
+style="mso-spacerun: yes">    </span>нужного байта в буфере дисплея. В целом
+программа выводит 200
+
+<p><span
+style="mso-spacerun: yes">    </span>точек. В регистр BL загружается число 50,
+так как внутренний цикл
+
+<p><span
+style="mso-spacerun: yes">    </span>пишет по четыре точки за одну итерацию. В
+регистр CL заносится 2 -
+
+<p><span
+style="mso-spacerun: yes">    </span>значение счетчика переключений. Цикл
+заносит в регистр AL код 0C0H,
+
+<p><span
+style="mso-spacerun: yes">    </span>что устанавливает старшие два бита на цвет
+3; остальные три точки
+
+<p><span
+style="mso-spacerun: yes">    </span>байта имеют цвет 0, т.е. цвет фона. После
+записи этого байта
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр AL сдвигается вправо на 2 бита, и
+теперь активизируется
+
+<p><span
+style="mso-spacerun: yes">    </span>вторая точка байта. Прибавление значения
+2000H к содержимому
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра DI смещает указатель на нечетную
+строку. Третья точка
+
+<p><span
+style="mso-spacerun: yes">    </span>снова получается сдвигом регистра AL и
+вычитанием числа (2000H -
+
+<p><span
+style="mso-spacerun: yes">    </span>80) из содержимого регистра DI. Это
+возвращает регистр DI назад в
+
+<p><span
+style="mso-spacerun: yes">    </span>четную строку, но уже на следующие 80
+байт. Наконец, после записи
+
+<p><span
+style="mso-spacerun: yes">    </span>четвертого байта, регистр DI снова
+возвращается в четное поле, но
+
+<p><span
+style="mso-spacerun: yes">    </span>еще и увеличивается, смещаясь тем самым на
+следующий байт строки
+
+<p><span
+style="mso-spacerun: yes">    </span>растра. В примере цикл работает с четырьмя
+байтами, так как на
+
+<p><span
+style="mso-spacerun: yes">    </span>каждый байт приходится четыре элемента.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

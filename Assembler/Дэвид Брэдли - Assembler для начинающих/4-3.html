@@ -1,0 +1,415 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="4-3">Передача параметров</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Стек также служит удобным местом для
+передачи информации в
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы и из них. Обычно программа
+передает параметры в
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмму, помещая их в регистры,
+однако в некоторых случаях
+
+<p><span
+style="mso-spacerun: yes">    </span>число параметров превышает размеры
+регистрового пространства. В
+
+<p><span
+style="mso-spacerun: yes">    </span>таких случаях програииа может поместить
+параметры в стек до
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения команды CALL (вызов
+подпрограммы). Как мы увидим в
+
+<p><span
+style="mso-spacerun: yes">    </span>гл.10, стек является единственным
+средством передачи параметров в
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы, написанные на языке
+ассемблера, из языков высокого
+
+<p><span
+style="mso-spacerun: yes">    </span>уровня Бейсик и Фортран.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Подпрограмма может очень эффективно
+загружать эти параметры из
+
+<p><span
+style="mso-spacerun: yes">    </span>стека. В обычных случаях программа читает
+информацию из стека
+
+<p><span
+style="mso-spacerun: yes">    </span>единственным способом - извлекая ее
+оттуда. Вместо этого
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмма может использовать регистр
+BP, как указатель на
+
+<p><span
+style="mso-spacerun: yes">    </span>область стека. Когда программа передает параметры
+через стек, одной
+
+<p><span
+style="mso-spacerun: yes">    </span>из первых команд в подпрограмме
+выполняется команда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV BP, SP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>которая загружвет регистр BP текущим
+значением указателя стека.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку регистр BP - адресный регистр,
+подпрограмма может
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать его при адресных вычислениях,
+а это означает, что все
+
+<p><span
+style="mso-spacerun: yes">    </span>параметры доступны как смещения
+относительно регистра BP.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Конструкторы микропроцессора 8088
+определенно помнили об
+
+<p><span
+style="mso-spacerun: yes">    </span>описанном выше методе передачи параметров,
+так как при доступе к
+
+<p><span
+style="mso-spacerun: yes">    </span>данным регистр BP использует по умолчанию
+регистр стекового
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента SS в качестве сегментного
+регистра. Во всех других
+
+<p><span
+style="mso-spacerun: yes">    </span>нормальных случаях доступа к данным
+микропроцессор использует
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр DS. Поскольку стек находится в
+стековом сегменте,
+
+<p><span
+style="mso-spacerun: yes">    </span>регистровую пару SS:BP очень естественно
+использовать для адресации
+
+<p><span
+style="mso-spacerun: yes">    </span>информации в стеке.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 4.7 изображен пример,
+демонстрирующий использование
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра BP для доступа к параметрам,
+переданным через стек. В этом
+
+<p><span
+style="mso-spacerun: yes">    </span>примере головная программа перед
+выполнением команды CALL поместила
+
+<p><span
+style="mso-spacerun: yes">    </span>четыре слова в стек. Подпрограмма
+загружает в BP указатель данных в
+
+<p><span
+style="mso-spacerun: yes">    </span>стеке. Заметим, что смещения, используемые
+для доступа к данным в
+
+<p><span
+style="mso-spacerun: yes">    </span>стеке, учитывают тот факт, что адрес
+возврата также был записан в
+
+<p><span
+style="mso-spacerun: yes">    </span>стек в результате выполнения команды CALL.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В подпрограмме этого примера в вершине
+стека лежит адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>возврата, и регистр BP содержит смещение
+этой ячейки. Двумя байтами
+
+<p><span
+style="mso-spacerun: yes">    </span>ниже в стеке лежит помещенный последним
+параметр, регистр DX;
+
+<p><span
+style="mso-spacerun: yes">    </span>далее, через двухбайтовые интервалы -
+регистры CX, BX и AX. Таким
+
+<p><span
+style="mso-spacerun: yes">    </span>образом, правильным адресом для чтения
+параметра, содержащегося в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре DX, будет [BP+2], а другие адреса
+следуют через
+
+<p><span
+style="mso-spacerun: yes">    </span>двухбайтовые интервалы. В данном примере
+значение, находившееся в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре DX, попадает в регистр AX, CX в
+BX и т.д.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Подпрограмма может использовать регистр BP
+для адресации стека
+
+<p><span
+style="mso-spacerun: yes">    </span>не только при передаче параметров.
+Подпрограмма может оказаться
+
+<p><span
+style="mso-spacerun: yes">    </span>длинной и запутанной настолько, что
+хранить все необходимые ей во
+
+<p><span
+style="mso-spacerun: yes">    </span>время выполнения значения в регистрах
+трудно. Помещение этих
+
+<p><span
+style="mso-spacerun: yes">    </span>значений в стек и загрузка указателя этой
+области в регистр BP
+
+<p><span
+style="mso-spacerun: yes">    </span>решает проблему.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Многим подпрограммам в течение их
+выполнения также необходима
+
+<p><span
+style="mso-spacerun: yes">    </span>локальная память, и подпрограммы могут
+динамически расположить ее в
+
+<p><span
+style="mso-spacerun: yes">    </span>стеке. Всякий раз, когда программа
+вызывается, она может вычесть
+
+<p><span
+style="mso-spacerun: yes">    </span>размер этой области памяти из содержимого
+указателя стека. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>стек растет по направлению к младшим
+адресам, вычитание числа из
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра SP идентично помещению в стек
+такого же количества данных
+
+<p><span
+style="mso-spacerun: yes">    </span>- за исключением тех данных, которые не
+инициализированы. После
+
+<p><span
+style="mso-spacerun: yes">    </span>этого подпрограмма может использовать
+регистр BP для адресации
+
+<p><span
+style="mso-spacerun: yes">    </span>такой области памяти. Когда наступает
+момент возврата, подпрограмма
+
+<p><span
+style="mso-spacerun: yes">    </span>может прибавить соответствующее значение к
+указателю стека, и тем
+
+<p><span
+style="mso-spacerun: yes">    </span>самым восстановить его прежнее значение.
+Динамическая организация
+
+<p><span
+style="mso-spacerun: yes">    </span>данных означает, что программа использует
+область памяти только
+
+<p><span
+style="mso-spacerun: yes">    </span>тогда, когда она необходима для работы, и
+не занимает эту память
+
+<p><span
+style="mso-spacerun: yes">    </span>все остальное время, поэтому программу
+можно выполнять на машине с
+
+<p><span
+style="mso-spacerun: yes">    </span>малым объемом памяти, что невозможно при
+другой организации данных.
+
+<p><span
+style="mso-spacerun: yes">    </span>Но лучшим является то, что программист не
+должен создавать сложную
+
+<p><span
+style="mso-spacerun: yes">    </span>подсистему управления памятью, так как все
+находится под
+
+<p><span
+style="mso-spacerun: yes">    </span>управлением стековой структуры.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Оператор возврата из подпрограммы на Фиг.
+4.7 демонстрирует еще
+
+<p><span
+style="mso-spacerun: yes">    </span>одну возможность набора команд
+микропроцессора 8088. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>возврата из подпрограммы RET может иметь
+операнд, который
+
+<p><span
+style="mso-spacerun: yes">    </span>представляет собой значение, прибавляемое
+микропроцессором к
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимому указателя стека после
+извлечения адреса возврата. В
+
+<p><span
+style="mso-spacerun: yes">    </span>примере используется значение 8; это
+означает, что восемь байт, или
+
+<p><span
+style="mso-spacerun: yes">    </span>четыре слова данных должны быть удалены из
+стека после возврата.
+
+<p><span
+style="mso-spacerun: yes">    </span>Эти значения исчезают навсегда. Результат
+тот же, какой был бы в
+
+<p><span
+style="mso-spacerun: yes">    </span>итоге извлечения значений из стека, чтобы
+уничтожить их; команда
+
+<p><span
+style="mso-spacerun: yes">    </span>возврата уже сделала это автоматически.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Такой метод удаления информации из стека
+срабатывает только в
+
+<p><span
+style="mso-spacerun: yes">    </span>случае параметров, которые вызывающая
+программа помешает в стек.
+
+<p><span
+style="mso-spacerun: yes">    </span>Подпрограмма обязана удалить все
+динамически распределенные области
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти из стека перед выполнением
+возврата. Она должна сделать это
+
+<p><span
+style="mso-spacerun: yes">    </span>явно, а не с помощью команды возврата, так
+как область данных лежит
+
+<p><span
+style="mso-spacerun: yes">    </span>между текущей вершиной стека и адресом
+возврата.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Подпрограмма может возвратить в стеке
+некоторую информацию
+
+<p><span
+style="mso-spacerun: yes">    </span>вызывающей программе. Если вызывающая
+программа помешает параметры
+
+<p><span
+style="mso-spacerun: yes">    </span>в стек, подпрограмма может изменить их
+значения и оставить в стеке,
+
+<p><span
+style="mso-spacerun: yes">    </span>а вызывающая программа может извлечь их
+после возврата. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмма возвращает только один
+параметр, но вызывалась с тремя
+
+<p><span
+style="mso-spacerun: yes">    </span>параметрами в стеке, то выполнить возврат
+она может с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>команды RET 4. При этом последние два
+параметра извлекаются из
+
+<p><span
+style="mso-spacerun: yes">    </span>стека и только возвращаемый параметр
+остается в стеке.
+<p><span style='mso-tab-count:1'>      </span><span
+style='mso-fareast-font-family:"MS Mincho"'>В гл.10, где мы используем
+подпрограммы на языке ассемблера с
+
+<p><span
+style="mso-spacerun: yes">    </span>языками высокого уровня, головная
+программа помещает параметры в
+
+<p><span
+style="mso-spacerun: yes">    </span>стек. Но эти параметры - адреса данных, а
+не собственно данные. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что ассемблерная подпрограмма не
+должна возвращать
+
+<p><span
+style="mso-spacerun: yes">    </span>параметры в стеке и обязана извлечь все
+параметры из стека при
+
+<p><span
+style="mso-spacerun: yes">    </span>возврате.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="5-10">Редактор связей</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа, полученная на выходе
+ассемблера, еще не готова к
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнению.<span style="mso-spacerun:
+yes">  </span>Прежде, чем сформированный ассемблером объектный код
+
+<p><span
+style="mso-spacerun: yes">    </span>может выполняться, должна быть выполнена
+его &quot;привязка&quot;.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа редактирования связей LINK
+(LINK.EXE), записанная на
+
+<p><span
+style="mso-spacerun: yes">    </span>той же дискете, что и другие
+распространенные в DOS программы,
+
+<p><span
+style="mso-spacerun: yes">    </span>фактически реализует две различные
+функции. Во-первых, она может
+
+<p><span
+style="mso-spacerun: yes">    </span>связать много различных объектных модулей
+в одну программу.
+
+<p><span
+style="mso-spacerun: yes">    </span>Во-вторых, на основе ассемблерного
+объектного модуля редактор связи
+
+<p><span
+style="mso-spacerun: yes">    </span>формирует выполняемый загружаемый модуль.
+Рассмотрим по отдельности
+
+<p><span
+style="mso-spacerun: yes">    </span>обе эти функции программы LINK.
+
+<p><div align="center"><b><a name="5-10-1">Многомодульность
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Как указывает само имя программы LINK, ее
+основное назначение
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;связать&quot;, или объединить,
+несколько объектных модулей в один
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняемый модуль.<span
+style="mso-spacerun: yes">  </span>Все рассмотренные до сих пор примеры
+
+<p><span
+style="mso-spacerun: yes">    </span>относились к одномодульным программам,
+т.е.<span style="mso-spacerun: yes">  </span>все, что они должны
+
+<p><span
+style="mso-spacerun: yes">    </span>были выполнять, реализовывалось в одном
+исходном модуле.<span style="mso-spacerun: yes">  </span>Однако
+
+<p><span
+style="mso-spacerun: yes">    </span>этот путь не всегда возможен или
+желателен.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Имеется ряд причин, в силу которых
+программа программа сожет
+
+<p><span
+style="mso-spacerun: yes">    </span>быть разбита на несколько модулей.
+Во-первых, размер программы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Редактирование очень большой программы
+становится весьма громоздким
+
+<p><span
+style="mso-spacerun: yes">    </span>и трудным делом, а ее ассемблирование
+занимает много времени.
+
+<p><span
+style="mso-spacerun: yes">    </span>Предположим, что вы допустили ошибку в
+единственной строке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблерной программы, состоящей из 5000
+строк. Чтобы изменить
+
+<p><span
+style="mso-spacerun: yes">    </span>одну эту строку, необходимо выполнить
+редактирование всей
+
+<p><span
+style="mso-spacerun: yes">    </span>программы. После этого нужно
+оттранслировать всю программу из 5000
+
+<p><span
+style="mso-spacerun: yes">    </span>строк, что занимает довольно много
+времени. После относительно
+
+<p><span
+style="mso-spacerun: yes">    </span>быстрого этапа редактирования связей
+программа готова к выполнению.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Предположим, теперь, что вместо того,
+чтобы иметь дело с
+
+<p><span
+style="mso-spacerun: yes">    </span>программой, состоящей из 5000 строк, вы
+разбиваете ее на десять
+
+<p><span
+style="mso-spacerun: yes">    </span>программых модулей, по 500 строк в каждом.
+Для внесения изменений в
+
+<p><span
+style="mso-spacerun: yes">    </span>единственную строку вам необходимо
+выполнить редактирование только
+
+<p><span
+style="mso-spacerun: yes">    </span>исходного файла из 500 строк.
+Ассемблирование программы из 500
+
+<p><span
+style="mso-spacerun: yes">    </span>строк занимает значительно меньше времени,
+чем программы из 5000
+
+<p><span
+style="mso-spacerun: yes">    </span>строк. Этап редактирования связей все так
+же будет занимать
+
+<p><span
+style="mso-spacerun: yes">    </span>относительно немного времени, особенно по
+сравнению с
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблированием большой программы.
+Уменьшение размеров отдельных
+
+<p><span
+style="mso-spacerun: yes">    </span>модулей позволяет более быстро осуществить
+процесс
+
+<p><span
+style="mso-spacerun: yes">    </span>редактирования-ассемблирования.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Другая причина разбиения программы на
+меньшие модули связана с
+
+<p><span
+style="mso-spacerun: yes">    </span>этапом ее разработки. В случае больших
+программных средств в их
+
+<p><span
+style="mso-spacerun: yes">    </span>разработке, как правило, участвуют
+несколько человек. Если имеется
+
+<p><span
+style="mso-spacerun: yes">    </span>один исходный файл, то отдельные
+программисты вынуждены работать с
+
+<p><span
+style="mso-spacerun: yes">    </span>ним по очереди. Такой подход очень быстро
+становится неудобным.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>И последняя из причин создания модульных
+программ заключается в
+
+<p><span
+style="mso-spacerun: yes">    </span>возможности их универсального
+использования. Предположим, что
+
+<p><span
+style="mso-spacerun: yes">    </span>созданная вами программа включает
+несколько подпрограмм. Если вы
+
+<p><span
+style="mso-spacerun: yes">    </span>хорошо справились с этим, то каждая из
+подпрограмм выполняет у вас
+
+<p><span
+style="mso-spacerun: yes">    </span>особую функцию с хорошо документированной
+спецификацией входа и
+
+<p><span
+style="mso-spacerun: yes">    </span>выхода. Через некоторое время при
+написании новой программы вы
+
+<p><span
+style="mso-spacerun: yes">    </span>захотите использовать в ней ту же самую
+подпрограмму. Если эта
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмма оформлена в виде отдельного
+программного модуля, то
+
+<p><span
+style="mso-spacerun: yes">    </span>включить ее в новую программу не составляет
+труда. В противном
+
+<p><span
+style="mso-spacerun: yes">    </span>случае вам придется как-то выделить этот
+фрагмент из исходной
+
+<p><span
+style="mso-spacerun: yes">    </span>программы и перенести его в новую
+программу. После одной-двух
+
+<p><span
+style="mso-spacerun: yes">    </span>попыток вам, возможно, захочется поискать
+другой способ.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Разбиение программы на модули требует от
+программиста ряда
+
+<p><span
+style="mso-spacerun: yes">    </span>действий. Во-первых, нужно тщательно
+продумать, как ваша программа
+
+<p><span
+style="mso-spacerun: yes">    </span>будет строиться из меньших компонентов.
+Во-вторых, нужно определить
+
+<p><span
+style="mso-spacerun: yes">    </span>как входные, так и выходные параметры этих
+меньших программ. И
+
+<p><span
+style="mso-spacerun: yes">    </span>наконец, должна быть возможность обмена
+данными между программными
+
+<p><span
+style="mso-spacerun: yes">    </span>модулями. Первые два пункта относятся к
+основам программирования и
+
+<p><span
+style="mso-spacerun: yes">    </span>мы их здесь касаться не будем. Последний
+же пункт связан с
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблированием и редактором связей,
+поэтому его мы рассмотрим.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если разработанная вами программа состоит
+из нескольких
+
+<p><span
+style="mso-spacerun: yes">    </span>модулей, то в этом случае у ведущей, или
+основной программы должна
+
+<p><span
+style="mso-spacerun: yes">    </span>быть возможность вызывать эти
+подпрограммы. Это реализуется
+
+<p><span
+style="mso-spacerun: yes">    </span>командой CALL, имеющей один операнд - метку
+соответствующей
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы. Во всех рассмотренных до сих
+пор примерах
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмма была частью того же самого
+программного модуля, так
+
+<p><span
+style="mso-spacerun: yes">    </span>что ассемблеру было точно известно, каким
+будет адрес подпрограммы
+
+<p><span
+style="mso-spacerun: yes">    </span>в момент ее выполнения. Это позволяло
+ассемблеру определять
+
+<p><span
+style="mso-spacerun: yes">    </span>правильное значение смещения для поля
+адреса в команде.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Теперь мы сталкиваемся с ситуацией, когда
+ассемблирование
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы осуществляется отдельно от
+ассемблирования команды
+
+<p><span
+style="mso-spacerun: yes">    </span>CALL. Это означает, что ассемблер не может
+определить правильный
+
+<p><span
+style="mso-spacerun: yes">    </span>адрес для процедуры вызова, т.е. из-за
+того, что ассемблирование
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы и основной программы
+осуществляется раздельно, у
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера нет способа предсказать
+правильное значение адреса.
+
+<p><span
+style="mso-spacerun: yes">    </span>Однако эту задачу может выполнить
+программа LINK. Определение
+
+<p><span
+style="mso-spacerun: yes">    </span>адресов производится на этапе
+редактирования связей. Так как при
+
+<p><span
+style="mso-spacerun: yes">    </span>работе программы LINK ее входом являются
+все программные модули, то
+
+<p><span
+style="mso-spacerun: yes">    </span>редактору связей известно, где будет конец
+каждой из подпрограмм.
+
+<p><span
+style="mso-spacerun: yes">    </span>После этого редактор связей может
+определить значения тех адресов,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые были известны ассемблеру.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1" face="Arial"><a name="chapter8">Глава 8</a> </font></b></div></p>
+<p><div align="center"><b><font size="+1" face="Arial">Персональный компьютер IBM </font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта глава описывает устройство
+персонального компьютера фирмы
+
+<p><span
+style="mso-spacerun: yes">    </span>IBM (IBM PC). Поскольку данная книга
+посвящена программированию на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке ассемблера для IBM PC, вполне
+уместно рассмотреть аппаратное
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечение машины. Эта глава не
+предназначена для инженеров и
+
+<p><span
+style="mso-spacerun: yes">    </span>техников; она скорее для тех, кто пишет на
+языке ассемблера
+
+<p><span
+style="mso-spacerun: yes">    </span>программы, которые выполняются на IBM PC.
+
+<p><span
+style='mso-tab-count:1'>      </span>Выше говорилось, что язык ассемблера не
+всегда самый подходящий
+
+<p><span
+style="mso-spacerun: yes">    </span>язык программирования. Умение
+программировать непосредственно на
+
+<p><span
+style="mso-spacerun: yes">    </span>машинном уровне позволяет программисту
+иметь много больше
+
+<p><span
+style="mso-spacerun: yes">    </span>возможностей для управления машиной. Но в
+случае большого проекта
+
+<p><span
+style="mso-spacerun: yes">    </span>подавляющее количество подробностей,
+которое требуется языком
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера, затрудняет сосредоточие усилий
+на главной цели. Поэтому
+
+<p><span
+style="mso-spacerun: yes">    </span>лучше всего использовать ассемблер только
+по мере необходмости.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Желание использовать преимущества
+непосредственного управления
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратурой - одна из причин, по которой
+спользуются языком
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера. Чтобы корректно решить эту
+задачу, вам необхдимо знать,
+
+<p><span
+style="mso-spacerun: yes">    </span>что из себя представляет аппаратура и
+какие у нее возможности. Вот
+
+<p><span
+style="mso-spacerun: yes">    </span>зачем нужна эта глава. Информация в данной
+главе адресуется
+
+<p><span
+style="mso-spacerun: yes">    </span>программисту, а не инженеру. Мы рассмотрим
+здесь различные узлы
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратуры, и как ими можно управлять.
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта глава - дополнение к Техническому
+Описанию Персонального
+
+<p><span
+style="mso-spacerun: yes">    </span>Компьютера. Вы будете также пользоваться
+им для уточнения
+
+<p><span
+style="mso-spacerun: yes">    </span>специфических аспектов программирования
+аппаратуры. Кроме тогно
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительную информацию можно получить
+из справочных листков к
+
+<p><span
+style="mso-spacerun: yes">    </span>отдельным микросхемам. В этой главе данные
+из этих источников не
+
+<p><span
+style="mso-spacerun: yes">    </span>повторяются. Всюду где это нужно, в тексте
+воспроизводятся
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторые данные аппаратуры,
+иллюстрирующие отдельные программные
+
+<p><span
+style="mso-spacerun: yes">    </span>возможности. Будут, конечно, приводиться и
+примеры работы
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратуры.
+
+<p><span
+style='mso-tab-count:1'>      </span>Описание базовой системы ввода-вывода BIOS
+(Basic Input/Output
+
+<p><span
+style="mso-spacerun: yes">    </span>System), которая находится в постоянном
+запоминающем устройстве
+
+<p><span
+style="mso-spacerun: yes">    </span>(ПЗУ) ЭВМ, будет отложено до следующей
+главы. Программы BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняют управление на аппаратном уровне
+устройствами IBM PC. В
+
+<p><span
+style="mso-spacerun: yes">    </span>этой главе объясняется, что может делать
+аппаратура; следующая
+
+<p><span
+style="mso-spacerun: yes">    </span>глава детализирует, что происходит с
+аппаратным обеспечением в
+
+<p><span
+style="mso-spacerun: yes">    </span>процессе работы, а последняя глава поможет
+добиться от него того,
+
+<p><span
+style="mso-spacerun: yes">    </span>что не реализовано в ПЗУ с программой
+BIOS.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

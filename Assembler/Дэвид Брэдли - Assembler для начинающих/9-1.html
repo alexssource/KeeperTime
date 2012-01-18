@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-1">Замечания по листингу ROM BIOS</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Листинг BIOS дан в приложении A
+технического описания IBM PC.<span style="mso-spacerun: yes">  </span>Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>листинг - описание модуля ПЗУ объемом 8K,
+расположенного по
+
+<p><span
+style="mso-spacerun: yes">    </span>адресам, начиная с 0FE000H в адресном
+пространстве микропроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8088.<span style="mso-spacerun: yes"> 
+</span>Этот модуль ПЗУ - один из пяти модулей, размещенных на
+
+<p><span
+style="mso-spacerun: yes">    </span>системной плате фирмой IBM.<span
+style="mso-spacerun: yes">  </span>Другие четыре модуля ПЗУ содержат в
+
+<p><span
+style="mso-spacerun: yes">    </span>себе интерпретатор с языка Бейсик.<span
+style='mso-tab-count:1'>    </span>Исходные тексты программ
+
+<p><span
+style="mso-spacerun: yes">    </span>Бейсика, так же, как и DOS, являются
+частной собственностью фирмы и
+
+<p><span
+style="mso-spacerun: yes">    </span>не печатаются в техническом описании.<span
+style="mso-spacerun: yes">  </span>Но тексты программ входящих
+
+<p><span
+style="mso-spacerun: yes">    </span>в BIOS фирма IBM опубликовала, так что
+каждый может изучить
+
+<p><span
+style="mso-spacerun: yes">    </span>интерфейсы с BIOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Листинг ассемблера в приложении A - это
+полный листинг
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимого ПЗУ. Это не листинг
+Макроассемблера фирмы IBM потому,
+
+<p><span
+style="mso-spacerun: yes">    </span>что в то время, когда фирма IBM
+разрабатывала BIOS, Макроассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>не существовал. Для разработки BIOS
+использовался Макроассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>фирмы Intel, с помощью которого получился
+данный листинг. Ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>фирмы Intel идентичен ассемблеру фирмы IBM
+в использовании и
+
+<p><span
+style="mso-spacerun: yes">    </span>синтаксисе. Как вы видите, ассемблер фирмы
+Intel не печатает в том
+
+<p><span
+style="mso-spacerun: yes">    </span>же виде адресное поле, а также отличается
+некоторыми
+
+<p><span
+style="mso-spacerun: yes">    </span>псевдооперациями ассемблера. Но с этими
+небольшими отличиями
+
+<p><span
+style="mso-spacerun: yes">    </span>работать будет не сложно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В листинге программы BIOS описаны шесть
+различных сегментов. Из
+
+<p><span
+style="mso-spacerun: yes">    </span>них по-настоящему интересны для нас лишь
+три. Сегмент ABS0,
+
+<p><span
+style="mso-spacerun: yes">    </span>расположенный по адресу 0, содержит
+векторы прерываний, с которыми
+
+<p><span
+style="mso-spacerun: yes">    </span>имеет дело BIOS и процедура POST. В этом
+сегменте нет никаких
+
+<p><span
+style="mso-spacerun: yes">    </span>определений данных; он просто отводит
+место векторам. Эта область
+
+<p><span
+style="mso-spacerun: yes">    </span>попадает в ОЗУ, и поэтому программа BIOS
+должна инициализировать ее
+
+<p><span
+style="mso-spacerun: yes">    </span>после включения питания. Сегмент DATA,
+расположенный в параграфе
+
+<p><span
+style="mso-spacerun: yes">    </span>40H или по абсолютному адресу 400H,
+определяет все поля данных,
+
+<p><span
+style="mso-spacerun: yes">    </span>используемых в BIOS. Аналогично этот
+сегмент определяет места
+
+<p><span
+style="mso-spacerun: yes">    </span>переменных, но не их начальные значения.
+Наконец, сегмент CODE
+
+<p><span
+style="mso-spacerun: yes">    </span>начинается в параграфе 0F000H. В первых
+56K байтах этого сегмента
+
+<p><span
+style="mso-spacerun: yes">    </span>ничего нет, первый байт сегмента CODE
+имеет абсолютный адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>0FE000H или смещение 0E000H в сегменте.
+Эти данные, от 0FE000H до
+
+<p><span
+style="mso-spacerun: yes">    </span>0FFFFFH, представляют содержимое модуля
+ПЗУ с BIOS объемом 8K. Эти
+
+<p><span
+style="mso-spacerun: yes">    </span>программы вместе с ПЗУ с Бейсиком -
+единственные, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>содержатся в машине в момент начала
+работы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Еще одно замечание. Фирма IBM не
+разрабатывала BIOS в виде
+
+<p><span
+style="mso-spacerun: yes">    </span>одного большого исходного текста. Каждая
+функция была разработана в
+
+<p><span
+style="mso-spacerun: yes">    </span>виде отдельного модуля, а затем модули
+были связаны вместе,
+
+<p><span
+style="mso-spacerun: yes">    </span>сформировав BIOS. Возможно вы увидите
+некоторые связки в программе.
+
+<p><span
+style="mso-spacerun: yes">    </span>Для публикации фирма IBM скомбинировала
+все исходные тексты в один
+
+<p><span
+style="mso-spacerun: yes">    </span>большой исходный текст и ассемблировала
+его. Такое единое
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблирование позволило показать
+абсолютные адреса каждой функции
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

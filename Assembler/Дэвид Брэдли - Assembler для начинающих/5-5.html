@@ -1,0 +1,621 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="5-5">Функции DOS</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Интерпретатор командных строк обеспечивает
+средства, необходимые
+
+<p><span
+style="mso-spacerun: yes">    </span>для того, чтобы программа, написанная на
+языке ассемблера, начала
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняться.<span style="mso-spacerun:
+yes">  </span>Кроме того, DOS уже во время выполнения программы
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечивает доступ к файловой системе с
+помощью механизма функций
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS.<span style="mso-spacerun: yes"> 
+</span>В данном разделе объясняется, что представляют собой эти
+
+<p><span
+style="mso-spacerun: yes">    </span>функции и как они могут быть использованы
+в программе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа использует функции DOS
+посредством программного
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания. Благодаря этому, программа
+может вызывать
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующую служебную программу, не
+зная ее адреса. Нужное
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание задается программистом. А во
+время инициализации DOS
+
+<p><span
+style="mso-spacerun: yes">    </span>векторы прерывания для функций системы
+определяются таким образом,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы они указывали на соответствующие
+подпрограммы. Следовательно,
+
+<p><span
+style="mso-spacerun: yes">    </span>по мере получения других версий DOS нет
+необходимости вносить
+
+<p><span
+style="mso-spacerun: yes">    </span>изменения в программы. На Фиг.5.3
+приводятся векторы прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Прерывание<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">     </span>Действие
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>----------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>20H<span style='mso-tab-count:1'> </span> Окончание программы
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>21H<span style='mso-tab-count:1'> </span> Вызов функции (см. Фиг. 5.5)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>22H<span style='mso-tab-count:1'> </span> Адрес завершения
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>23H<span style='mso-tab-count:1'> </span> Адрес CTRL-BREAK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>24H<span style='mso-tab-count:1'> </span> Обработчик кртической ошибки
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>25H<span style='mso-tab-count:1'> </span> Чтение с диска по абсолютному
+адресу
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>26H<span style='mso-tab-count:1'> </span> Запись на диск по абсолютному
+адресу
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>27H<span style='mso-tab-count:1'> </span> Завершить, но остаться
+резидентно
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>----------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>Фиг. 5.3 Прерывания DOS
+
+<p><span
+style='mso-tab-count:1'>      </span>Некоторые прерывания фактически
+предназначены для
+
+<p><span
+style="mso-spacerun: yes">    </span>пользовательских подпрограмм. Прерывания
+22H, 23H и 24H являются
+
+<p><span
+style="mso-spacerun: yes">    </span>указателями на подпрограммы, которые могут
+быть в программе
+
+<p><span
+style="mso-spacerun: yes">    </span>пользователя. Эти векторы определяют
+программу, которая должна
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняться при наступлении
+соответствующей ситуации. Например, при
+
+<p><span
+style="mso-spacerun: yes">    </span>нажатии клавиши CTRL-BREAK DOS выполняет
+прерывание 23H. Обычно
+
+<p><span
+style="mso-spacerun: yes">    </span>нажатие этой клавиши вызывает останов
+программы. Обычно DOS
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняет стандартную обработку
+соответствующих ситуаций. Если же
+
+<p><span
+style="mso-spacerun: yes">    </span>программе нужно обрабатывать их иначе, то
+она может изменить вектор
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В качестве примера рассмотрим прерывание
+24H - обработку
+
+<p><span
+style="mso-spacerun: yes">    </span>неустранимой ошибки. Всякий раз
+обнаруживая ошибку система
+
+<p><span
+style="mso-spacerun: yes">    </span>инициирует прерывание. Обычно
+соответствующий вектор указывает на
+
+<p><span
+style="mso-spacerun: yes">    </span>программу в DOS, которая выводит на
+дисплей сообщение об ошибке. В
+
+<p><span
+style="mso-spacerun: yes">    </span>случае ошибки, связанной с диском, DOS
+выводит сообщение о дисковой
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибке. Пользователь может по своему
+усмотрению сделать повторную
+
+<p><span
+style="mso-spacerun: yes">    </span>попытку выполнения операции, вызвавшей
+ошибку, либо закончить
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнение, либо пропустить операцию,
+вызвавшую ошибку.
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>Предположим, например, что вы пишите программу форматирования
+
+<p><span
+style="mso-spacerun: yes">    </span>дискет. Это операция, в ходе которой на
+поверхности дискеты
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит физическая разметка дорожек и
+секторов. Вместе с
+
+<p><span
+style="mso-spacerun: yes">    </span>форматированием дискеты проверяется
+отсутствие сбойных участков.
+
+<p><span
+style="mso-spacerun: yes">    </span>Последняя операция называется верификацией
+дискеты. Так как при
+
+<p><span
+style="mso-spacerun: yes">    </span>верификации допускается присутствие на
+дискете одно-двух сбойных
+
+<p><span
+style="mso-spacerun: yes">    </span>участков, то вы специальным образом
+помечаете эти участки, чтобы в
+
+<p><span
+style="mso-spacerun: yes">    </span>дальнейшем их случайно не использовать.
+Данная программа
+
+<p><span
+style="mso-spacerun: yes">    </span>форматирования заменяет обработку
+неустранимых ошибок. Вам не
+
+<p><span
+style="mso-spacerun: yes">    </span>нужно, чтобы DOS выводила для пользователя
+сообщение об ошибке.
+
+<p><span
+style="mso-spacerun: yes">    </span>Вместо этого вы хотите, чтобы обработка
+ошибки верификации
+
+<p><span
+style="mso-spacerun: yes">    </span>происходила в самой программе, и
+соответствующий участок на диске
+
+<p><span
+style="mso-spacerun: yes">    </span>помечался как сбойный. Для этого вы
+заменяете вектор прерывания в
+
+<p><span
+style="mso-spacerun: yes">    </span>ячейке 0:0090H(24H*4) указателем на свою
+подпрограмму обработки
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибок. Когда DOS зафиксирует дисковую
+ошибку, ваша подпрограмма
+
+<p><span
+style="mso-spacerun: yes">    </span>может пометить это место как сбойный
+участок, никак не уведомляя об
+
+<p><span
+style="mso-spacerun: yes">    </span>этом пользователя.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прерывания 25H и 26H связывают между собой
+две части системы. С
+
+<p><span
+style="mso-spacerun: yes">    </span>точки зрения своей файловой структуры DOS
+фактически состоит из
+
+<p><span
+style="mso-spacerun: yes">    </span>двух компонент. Одна из них, IBMBIO.COM,
+включает программы
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственного доступа к аппаратным
+средствам. Другая,
+
+<p><span
+style="mso-spacerun: yes">    </span>IBMDOS.COM реализует файловую систему.
+Упомянутые два прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>используются, когда компонента DOS,
+относящаяся к файловой системе,
+
+<p><span
+style="mso-spacerun: yes">    </span>обращается к другой компоненте - BIO. Хотя
+эти прерывания и могут
+
+<p><span
+style="mso-spacerun: yes">    </span>использоваться программистом, основное их
+назначение - разделить
+
+<p><span
+style="mso-spacerun: yes">    </span>две части DOS. Прерывание 25H осуществляет
+чтение, а прерывание 26H
+
+<p><span
+style="mso-spacerun: yes">    </span>- запись информации с абсолютной
+адресацией диска. На этом уровне
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечивается доступ к определенным
+участкам диска, а не записям в
+
+<p><span
+style="mso-spacerun: yes">    </span>файле.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прерывания 20H и 27H обеспечивают механизм
+возврата управления
+
+<p><span
+style="mso-spacerun: yes">    </span>к DOS после выполнения программы.
+Прерывание 20H соответствует
+
+<p><span
+style="mso-spacerun: yes">    </span>нормальному завершению работы программы.
+Прерывание 27H интересно
+
+<p><span
+style="mso-spacerun: yes">    </span>тем, что хотя оно связано с завершением
+программы, занимаемая
+
+<p><span
+style="mso-spacerun: yes">    </span>программой область памяти не возвращается
+обратно в распоряжение
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS. Все содержимое данной области
+сохраняется неизменным до тех
+
+<p><span
+style="mso-spacerun: yes">    </span>пор, пока не будет выключено питание или
+выполнена переустановка
+
+<p><span
+style="mso-spacerun: yes">    </span>системы в начальное состояние. Это удобно
+в тех случаях, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>нужно ввести специальную обработку
+прерываний, либо аналогичную
+
+<p><span
+style="mso-spacerun: yes">    </span>функцию, которая должна сохраниться как
+часть системного
+
+<p><span
+style="mso-spacerun: yes">    </span>программного обеспечения. В гл.10 будет
+приведен пример
+
+<p><span
+style="mso-spacerun: yes">    </span>использования прерывания INT 27H для
+расширения системы. В DOS
+
+<p><span
+style="mso-spacerun: yes">    </span>имеется особенность работы с прерываниями
+20H и 27H. Их
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Значение
+
+<p><span
+style='mso-tab-count:2'>            </span>в AH<span style='mso-tab-count:3'>              </span>Функция
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>----------------------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span>0<span style='mso-tab-count:1'>     </span>Завершение
+программы
+
+<p><span
+style='mso-tab-count:2'>            </span>1<span style='mso-tab-count:1'>     </span>Ввод
+с клавиатуры
+
+<p><span
+style='mso-tab-count:2'>            </span>2<span style='mso-tab-count:1'>     </span>Вывод
+на экран
+
+<p><span
+style='mso-tab-count:2'>            </span>3<span style='mso-tab-count:1'>     </span>Дополнительный
+ввод (асинхронная коммуникация)
+
+<p><span
+style='mso-tab-count:2'>            </span>4<span style='mso-tab-count:1'>     </span>дополнительный
+вывод
+
+<p><span
+style='mso-tab-count:2'>            </span>5<span style='mso-tab-count:1'>     </span>Вывод
+на принтер
+
+<p><span
+style='mso-tab-count:2'>            </span>6<span style='mso-tab-count:1'>     </span>Прямой
+ввод/вывод с консоли
+
+<p><span
+style='mso-tab-count:2'>            </span>7<span style='mso-tab-count:1'>     </span>Прямой
+ввод с консоли без эха
+
+<p><span
+style='mso-tab-count:2'>            </span>8<span style='mso-tab-count:1'>     </span>Ввод
+с консоли без эха
+
+<p><span
+style='mso-tab-count:2'>            </span>9<span style='mso-tab-count:1'>     </span>вывод
+строки
+
+<p><span
+style='mso-tab-count:2'>            </span>OAH<span style='mso-tab-count:1'>   </span>Буферизованный
+ввод с клавиатуры
+
+<p><span
+style='mso-tab-count:2'>            </span>0BH<span style='mso-tab-count:1'>   </span>Проверка
+состояния клавиатуры
+
+<p><span
+style='mso-tab-count:2'>            </span>0CH<span style='mso-tab-count:1'>   </span>Очистка
+буфера клавиатуры и функция # в AL
+
+<p><span
+style='mso-tab-count:2'>            </span>0DH<span style='mso-tab-count:1'>   </span>Переустановка
+диска
+
+<p><span
+style='mso-tab-count:2'>            </span>0EH<span style='mso-tab-count:1'>   </span>Выбор
+диска
+
+<p><span
+style='mso-tab-count:2'>            </span>0FH<span style='mso-tab-count:1'>   </span>Открытие
+файла
+
+<p><span
+style='mso-tab-count:2'>            </span>10H<span style='mso-tab-count:1'>   </span>Закрытие
+файла
+
+<p><span
+style='mso-tab-count:2'>            </span>11H<span style='mso-tab-count:1'>   </span>Поиск
+первого
+
+<p><span
+style='mso-tab-count:2'>            </span>12H<span style='mso-tab-count:1'>   </span>Поиск
+следующего
+
+<p><span
+style='mso-tab-count:2'>            </span>13H<span style='mso-tab-count:1'>   </span>Уничтожение
+файла
+
+<p><span
+style='mso-tab-count:2'>            </span>14H<span style='mso-tab-count:1'>   </span>Последовательное
+чтение
+
+<p><span
+style='mso-tab-count:2'>            </span>15H<span style='mso-tab-count:1'>   </span>Последовательная
+запись
+
+<p><span
+style='mso-tab-count:2'>            </span>16H<span style='mso-tab-count:1'>   </span>Создание
+файйла
+
+<p><span
+style='mso-tab-count:2'>            </span>17H<span style='mso-tab-count:1'>   </span>Переименование
+файла
+
+<p><span
+style='mso-tab-count:2'>            </span>19H<span style='mso-tab-count:1'>   </span>Текущий
+диск
+
+<p><span
+style='mso-tab-count:2'>            </span>1AH<span style='mso-tab-count:1'>   </span>Установка
+адреса обмена с диском
+
+<p><span
+style='mso-tab-count:2'>            </span>1BH<span style='mso-tab-count:1'>   </span>Адрес
+таблицы размещения
+
+<p><span
+style='mso-tab-count:2'>            </span>21H<span style='mso-tab-count:1'>   </span>Прямое
+чтение
+
+<p><span
+style='mso-tab-count:2'>            </span>22H<span style='mso-tab-count:1'>   </span>Прямая
+запись
+
+<p><span
+style='mso-tab-count:2'>            </span>23H<span style='mso-tab-count:1'>   </span>Размер
+файла
+
+<p><span
+style='mso-tab-count:2'>            </span>24H<span style='mso-tab-count:1'>   </span>Установка
+записи для прямого обращения
+
+<p><span
+style='mso-tab-count:2'>            </span>25H<span style='mso-tab-count:1'>   </span>Установка
+вектора прерывания
+
+<p><span
+style='mso-tab-count:2'>            </span>26H<span style='mso-tab-count:1'>   </span>Создание
+нового програмного сегмента
+
+<p><span
+style='mso-tab-count:2'>            </span>27H<span style='mso-tab-count:1'>   </span>Прямое
+чтение блока
+
+<p><span
+style='mso-tab-count:2'>            </span>28H<span style='mso-tab-count:1'>   </span>Прямая
+запись блока
+
+<p><span
+style='mso-tab-count:2'>            </span>29H<span style='mso-tab-count:1'>   </span>Анализ
+имени файла
+
+<p><span
+style='mso-tab-count:2'>            </span>2AH<span style='mso-tab-count:1'>   </span>Чтение
+даты
+
+<p><span
+style='mso-tab-count:2'>            </span>2BH<span style='mso-tab-count:1'>   </span>Установка
+даты
+
+<p><span
+style='mso-tab-count:2'>            </span>2CH<span style='mso-tab-count:1'>   </span>Получение
+времени
+
+<p><span
+style='mso-tab-count:2'>            </span>2DH<span style='mso-tab-count:1'>   </span>Установка
+времени
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>-------------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>Фиг. 5.4 Функции прерывания DOS 21H
+<p><span
+style="mso-spacerun: yes">    </span>использование предпочтительней в файле
+типа .COM, так как файл типа
+
+<p><span
+style="mso-spacerun: yes">    </span>.EXE имеет существенно другой формат и
+использование в нем этих
+
+<p><span
+style="mso-spacerun: yes">    </span>функций DOS немного сложнее. В следующем
+разделе будут рассмотрены
+
+<p><span
+style="mso-spacerun: yes">    </span>различия между файлами типа .COM и типа
+.EXE и то, почему
+
+<p><span
+style="mso-spacerun: yes">    </span>упомянутые прерывания, связанные с
+завершением работы программы,
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняются в них по-разному.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прерывание 21H является прерыванием, через
+которое происходи
+
+<p><span
+style="mso-spacerun: yes">    </span>обращение к основным функциям DOS. Это
+прерывание обеспечивает
+
+<p><span
+style="mso-spacerun: yes">    </span>доступ к системе ввода-вывода, управляемой
+DOS. На Фиг.5.4
+
+<p><span
+style="mso-spacerun: yes">    </span>представлены все возможные функции,
+использующие это прерывание.
+
+<p><span
+style="mso-spacerun: yes">    </span>Выбор функции в программе осуществляется с
+помощью записи в регистр
+
+<p><span
+style="mso-spacerun: yes">    </span>AH нужного значения перед выполнением
+прерывания 21H.
+
+<p><span
+style='mso-tab-count:1'>      </span>Параметры этих функций приводятся в
+приложении D руководства по
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS. Вместо подробного ознакомления мы
+разберем пример, в котором
+
+<p><span
+style="mso-spacerun: yes">    </span>использованы некоторые из них. В
+частности, этот пример включает
+
+<p><span
+style="mso-spacerun: yes">    </span>функции DOS, связанные с диском.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

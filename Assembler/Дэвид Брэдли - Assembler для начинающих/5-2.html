@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="5-2">Файловая система</a></i></font></b></div></p>
+<p><span
+style="mso-spacerun: yes">    </span>На каждой дискете, используемой в IBM PC,
+может храниться от 160 до
+
+<p><span
+style="mso-spacerun: yes">    </span>360 Кбайт информации, а на жестком диске -
+более 107 байт.
+
+<p><span
+style="mso-spacerun: yes">    </span>Очевидным образом возникает задача ведения
+архива.<span style='mso-tab-count:1'>      </span>При таких
+
+<p><span
+style="mso-spacerun: yes">    </span>объемах информации необходим способ
+полного упорядочения хранимой
+
+<p><span
+style="mso-spacerun: yes">    </span>информации.<span style="mso-spacerun:
+yes">  </span>В качестве пользователя DOS вы заинтересованы в том,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы данные представляли отдельную
+совокупность, как, например,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа на языке ассемблера.<span
+style="mso-spacerun: yes">  </span>Вас не интересует, где эти данные
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>будут располагаться на дискете.<span style="mso-spacerun: yes"> 
+</span>Физическое распределение этих
+
+<p><span
+style="mso-spacerun: yes">    </span>данных на поверхности дискеты - это заботы
+системы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Основной единицей хранения данных является
+файл. Файл - это
+
+<p><span
+style="mso-spacerun: yes">    </span>совокупность данных, интерпретируемых
+некоторым образом. Владелец,
+
+<p><span
+style="mso-spacerun: yes">    </span>или создатель файла присваивает ему имя.
+Это имя может быть
+
+<p><span
+style="mso-spacerun: yes">    </span>использовано при любых ссылках на эти
+данные для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечить к ним доступ. Ссылка на данные
+не требует никаких
+
+<p><span
+style="mso-spacerun: yes">    </span>указаний в программе на то, где они
+физически располагаются.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Любой файл состоит из записей. Каждая
+запись - это отдельный
+
+<p><span
+style="mso-spacerun: yes">    </span>элемент данных, но не обязательно один
+байт. Чтобы понять, что
+
+<p><span
+style="mso-spacerun: yes">    </span>такое файлы и записи, лучше всего
+вспомнить, в каком значении эти
+
+<p><span
+style="mso-spacerun: yes">    </span>слова употребляются в делопроизводстве.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Файл - это большой ящик или папка, в
+которой хранится множество
+
+<p><span
+style="mso-spacerun: yes">    </span>документов. На файловой папке обычно
+указано ее название - имя
+
+<p><span
+style="mso-spacerun: yes">    </span>файла. В папке собраны отдельные записи.
+Например, в файле
+
+<p><span
+style="mso-spacerun: yes">    </span>преподаватели могут хранить контрольные
+работы, написанные
+
+<p><span
+style="mso-spacerun: yes">    </span>студентами. Каждая отдельная контрольная
+работа, входящая в файл,
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствует одной записи. Собранные и
+храняшиеся у преподавателя
+
+<p><span
+style="mso-spacerun: yes">    </span>записи содержательно именуются, например
+&quot;первая контрольная
+
+<p><span
+style="mso-spacerun: yes">    </span>работа&quot;. Чтобы отыскать чью-то
+контрольную работу, преподаватель
+
+<p><span
+style="mso-spacerun: yes">    </span>сначала находит нужный файл, а затем
+просматривает этот файл в
+
+<p><span
+style="mso-spacerun: yes">    </span>поисках требуемой записи.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как все это соотносится теперь с файлами,
+обрабатываемыми ЭВМ?
+
+<p><span
+style="mso-spacerun: yes">    </span>Файл представляет собой совокупность
+связанных между собой данных,
+
+<p><span
+style="mso-spacerun: yes">    </span>и у файла есть имя. Записи - это то, что
+составляет файл, Размер и
+
+<p><span
+style="mso-spacerun: yes">    </span>содержание записей определяются
+программистом, DOS не проверяет
+
+<p><span
+style="mso-spacerun: yes">    </span>формат записей, а просто помещает их в
+файл. Для системы DOS любая
+
+<p><span
+style="mso-spacerun: yes">    </span>запись - это совокупность байтов в файле.
+Содержание байтов,
+
+<p><span
+style="mso-spacerun: yes">    </span>составляющих запись, определяется
+программистом.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Рассмотрим тепрь программу на языке
+ассемблера как пример
+
+<p><span
+style="mso-spacerun: yes">    </span>файла. У программы есть имя, и это имя станет
+именем
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующего файла. Файл состоит из
+записей, где каждая запись
+
+<p><span
+style="mso-spacerun: yes">    </span>представляет собой один оператор языка
+ассемблера. Формат любой
+
+<p><span
+style="mso-spacerun: yes">    </span>записи ни о чем не говорит DOS, он понятен
+только ассемблеру.
+
+<p><span
+style="mso-spacerun: yes">    </span>Отдельные части одной записи соответствуют
+полям оператора языка
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера. Для DOS не важно, как записи
+разбиваются на поля, это
+
+<p><span
+style="mso-spacerun: yes">    </span>дело прикладной программы, в данном случае
+- ассемблера.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+
+</body>
+</html>

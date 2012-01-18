@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1" face="Arial"><a name="chapter9">Глава 9</a> </font></b></div></p>
+<p><div align="center"><b><font size="+1" face="Arial">Базовая система ввода/вывода </font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>В предыдущей главе изучалась аппаратура
+IBM PC. Фирма IBM
+
+<p><span
+style="mso-spacerun: yes">    </span>поставляет стандартные управляющие
+программы для рассмотренных выше
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратных компонент. Эти программы
+находятся в ПЗУ на системной
+
+<p><span
+style="mso-spacerun: yes">    </span>плате и носят название BIOS (Basic
+Input/Output System, базовая
+
+<p><span
+style="mso-spacerun: yes">    </span>система ввода-вывода). В этой главе
+объясняются функции,
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечиваемые BIOS. Материалом этой главы
+нужно пользоваться
+
+<p><span
+style="mso-spacerun: yes">    </span>вместе с гл.3 и приложением A технического
+описания IBM PC. В гл.3
+
+<p><span
+style="mso-spacerun: yes">    </span>описана базовая системы ввода-вывода, в
+частности некоторые ее
+
+<p><span
+style="mso-spacerun: yes">    </span>функции, а в приложении A приведен полный
+ассемблерный листинг BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>IBM PC.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В данной книге программы BIOS изучаются по
+двум причинам: их
+
+<p><span
+style="mso-spacerun: yes">    </span>использование дает пример техники
+программирования на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера, особенно в случае управления
+системной аппаратурой, и
+
+<p><span
+style="mso-spacerun: yes">    </span>еще существенней то, что программы BIOS
+играют важную роль в
+
+<p><span
+style="mso-spacerun: yes">    </span>разработке программ на языке ассемблера
+для IBM PC. В предыдущих
+
+<p><span
+style="mso-spacerun: yes">    </span>главах уже использовались некоторые
+функции программы BIOS; и,
+
+<p><span
+style="mso-spacerun: yes">    </span>поскольку фирма IBM внесла эти функции в
+BIOS, дублировать их не
+
+<p><span
+style="mso-spacerun: yes">    </span>стоит. Их надо использовать всюду, где это
+возможно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вторая причина использования BIOS - это
+транспорта- бельность.
+
+<p><span
+style="mso-spacerun: yes">    </span>Фирма IBM, поставляя BIOS, диктует уровень
+системного интерфейса
+
+<p><span
+style="mso-spacerun: yes">    </span>программисту, работающему на языке
+ассемблера. Когда фирма IBM
+
+<p><span
+style="mso-spacerun: yes">    </span>разрабатывала свою персональную ЭВМ,
+системные конструкторы знали,
+
+<p><span
+style="mso-spacerun: yes">    </span>что не важно, насколько хорошо делается их
+работа первый раз, так
+
+<p><span
+style="mso-spacerun: yes">    </span>как ее всегда можно сделать лучше. Время
+идет, и эволюция
+
+<p><span
+style="mso-spacerun: yes">    </span>технологии позволяет делать ту же работу
+лучше.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>По мере того, как разрабатывается новая
+аппаратура для
+
+<p><span
+style="mso-spacerun: yes">    </span>персональной ЭВМ, появляются и новые
+программные интерфейсы для
+
+<p><span
+style="mso-spacerun: yes">    </span>нее. И если вы пишите программы, используя
+непосредственно
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратуру, вам придется корректировать
+программы каждый раз, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>изменяется системная аппаратура. Это не имеет
+особого значения в
+
+<p><span
+style="mso-spacerun: yes">    </span>случае индивидуального использования ваших
+программ, но важно, если
+
+<p><span
+style="mso-spacerun: yes">    </span>вы пишите программы, которые будут
+использоваться многими. Или,
+
+<p><span
+style="mso-spacerun: yes">    </span>если вы собираетесь тиражировать вашу
+программу, вам бы хотелось,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы она использовалась длительное время;
+т.е. вы не захотите
+
+<p><span
+style="mso-spacerun: yes">    </span>поставлять новые версии программы всякий
+раз, когда кто-то создает
+
+<p><span
+style="mso-spacerun: yes">    </span>новую системную аппаратуру.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Интерфейс с BIOS - попытка разрешить эту
+проблему. Фирма IBM
+
+<p><span
+style="mso-spacerun: yes">    </span>определила интерфейс с различными
+компонентами системы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Изготовители стараются поддерживать такой
+интерфейс для своей новой
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратуры, а это означает, что даже если
+аппаратура и изменится,
+
+<p><span
+style="mso-spacerun: yes">    </span>интерфейс с BIOS останется прежним. Ваша
+программа не потребует
+
+<p><span
+style="mso-spacerun: yes">    </span>изменений.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>По мере того, как будут появляться новые
+аппаратные функции,
+
+<p><span
+style="mso-spacerun: yes">    </span>вам нужно будет изменять программу для
+того, чтобы воспользоваться
+
+<p><span
+style="mso-spacerun: yes">    </span>ими. В этом случае, вероятно, фирма IBM
+расщирит интерфейсы с BIOS.
+
+<p><span
+style="mso-spacerun: yes">    </span>Но ваши старые программы, которые хорошо
+работали на старых
+
+<p><span
+style="mso-spacerun: yes">    </span>машинах, будут продолжать работать и на
+новых машинах. Конечно, они
+
+<p><span
+style="mso-spacerun: yes">    </span>не будут использовать новые функции, но
+если раньше ваша программа
+
+<p><span
+style="mso-spacerun: yes">    </span>была полезной, весьма вероятно, что будет
+использоваться и далее.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Предположим теперь, что фирма IBM решила
+модифицировать плату
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллера дисковода. Это могло бы
+потребоваться по разным
+
+<p><span
+style="mso-spacerun: yes">    </span>причинам. Или фирма захотела уменьшить
+стоимость изготовления
+
+<p><span
+style="mso-spacerun: yes">    </span>платы, или расширить возможности платы
+контроллера. В любом случае
+
+<p><span
+style="mso-spacerun: yes">    </span>программный интерфейс с платой, который мы
+рассматривали в
+
+<p><span
+style="mso-spacerun: yes">    </span>предыдущей главе, может оказаться другим.
+Но ПЗУ с BIOS, которое
+
+<p><span
+style="mso-spacerun: yes">    </span>фирма IBM будет поставлять с таким новым
+контроллером, будет иметь
+
+<p><span
+style="mso-spacerun: yes">    </span>тот же самый интерфейс. Это означает, что
+вызывающая
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательность и передача параметров
+через интерфейс останутся
+
+<p><span
+style="mso-spacerun: yes">    </span>теми же. Если вы написали программу,
+использующую дискеты, и
+
+<p><span
+style="mso-spacerun: yes">    </span>обращаетесь к BIOS при всех видах доступа
+к дискете, ваша программа
+
+<p><span
+style="mso-spacerun: yes">    </span>будет выполняться правильно. Если же вы
+написали эту программу так,
+
+<p><span
+style="mso-spacerun: yes">    </span>что она непосредственно работает с
+контроллером дисковода, скорее
+
+<p><span
+style="mso-spacerun: yes">    </span>всего, она не будет работать с новым
+контроллером.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>BIOS состоит из нескольких различных
+частей. Первая часть -
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура самопроверки при включении
+питания POST. Эта программа
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняется всякий раз, когда включается
+питание, или когда
+
+<p><span
+style="mso-spacerun: yes">    </span>делается системный сброс (одновременное
+нажатие клавиш
+
+<p><span
+style="mso-spacerun: yes">    </span>CTL-ALT-DEL). Программа POST проверяет аппаратуру
+системы и
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализирует для нормальной работы
+некоторые узлы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>BIOS также содержит драйверы устройств.
+Эти программы управляют
+
+<p><span
+style="mso-spacerun: yes">    </span>работой устройств. Фирма IBM поставляет
+программы управления для
+
+<p><span
+style="mso-spacerun: yes">    </span>всех часто используемых устройств. Но
+вообще для всех устройств
+
+<p><span
+style="mso-spacerun: yes">    </span>фирмы IBM драйверы не поставляются. Кроме
+того, не все желательные
+
+<p><span
+style="mso-spacerun: yes">    </span>функции доступны. Просто в ПЗУ нет места,
+чтобы реализовать все
+
+<p><span
+style="mso-spacerun: yes">    </span>нужные вам функции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>И наконец, BIOS содержит ряд программ
+системного сервиса. Эти
+
+<p><span
+style="mso-spacerun: yes">    </span>программы непосредственно не управляют ни
+одним устройством, но они
+
+<p><span
+style="mso-spacerun: yes">    </span>многое делают для работы системы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта глава описывает различные компоненты
+BIOS. Мы начнем с
+
+<p><span
+style="mso-spacerun: yes">    </span>программы POST, поскольку она - первая в
+листинге ассемблера и
+
+<p><span
+style="mso-spacerun: yes">    </span>первой выполняется при включении питания.
+Программы системного
+
+<p><span
+style="mso-spacerun: yes">    </span>сервиса все связаны с системной платой, и
+поэтому они будут
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматриваться далее. И в конце мы
+рассмотрим, как фирма IBM
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечивает работу различных функций
+ввода-вывода системы.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

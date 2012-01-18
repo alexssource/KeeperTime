@@ -1,0 +1,1429 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="8-4">Время суток</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Канал 0 таймера 8253 имеет специальное
+назначение в IBM PC. Выход
+
+<p><span
+style="mso-spacerun: yes">    </span>этого канала таймера подключен к уровню
+прерывания 0 микросхемы
+
+<p><span
+style="mso-spacerun: yes">    </span>8259. Это означает, что всякий раз, когда
+выход канала 0 имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>активный уровень сигнала, возникает
+прерывание (при условии, что
+
+<p><span
+style="mso-spacerun: yes">    </span>все остальное установлено корректно).
+Процедура самопроверки при
+
+<p><span
+style="mso-spacerun: yes">    </span>включении питания инициализирует канал 0
+таймера, загружая в него
+
+<p><span
+style="mso-spacerun: yes">    </span>число 0. Это дает наибольшее (не
+наименьшее) значение счетчика,
+
+<p><span
+style="mso-spacerun: yes">    </span>которое может записать в него программа.
+Имея на входе частоту 1.19
+
+<p><span
+style="mso-spacerun: yes">    </span>МГц, счетчик считает обратно к нулю чуть
+быстрее, чем за 55
+
+<p><span
+style="mso-spacerun: yes">    </span>миллисекунд. Программа инициализации
+устанавливает таймер таким
+
+<p><span
+style="mso-spacerun: yes">    </span>образом, что он считает непрерывно. Это
+означает, что прерывание 0
+
+<p><span
+style="mso-spacerun: yes">    </span>возникает 18.2 раза в секунду.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как мы увидим в следующей главе,
+встроенная система программ
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS использует это постоянное прерывание
+от таймера, чтобы следить
+
+<p><span
+style="mso-spacerun: yes">    </span>за текущим временем. BIOS продвигает часы
+текущего времени вперед
+
+<p><span
+style="mso-spacerun: yes">    </span>всякий раз, когда возникает прерывание.
+Затем, с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующих вычислений, Вы можете
+преобразовать число циклов
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера в часы, минуты и секунды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Почему же выбрано значение 18.2? Почему
+счетчик не
+
+<p><span
+style="mso-spacerun: yes">    </span>программируется так, чтобы давать
+прерывание 20 раз в секунду, или
+
+<p><span
+style="mso-spacerun: yes">    </span>другое &quot;хорошее&quot; число раз? Это
+объясняет следующий пример.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Системный таймер может выполнять функцию
+измерения времени
+
+<p><span
+style="mso-spacerun: yes">    </span>отличного от времени дня. Время дня
+прекрасно подходит для
+
+<p><span
+style="mso-spacerun: yes">    </span>определения интервалов времени, измеряемых
+в секундах или минутах.
+
+<p><span
+style="mso-spacerun: yes">    </span>Но в некоторых ситуациях, возникающих при
+управлении
+
+<p><span
+style="mso-spacerun: yes">    </span>вводом-выводом, нужно определять интервалы
+времени порядка одной -
+
+<p><span
+style="mso-spacerun: yes">    </span>двух миллисекунд. Обычно программы
+отсчитывают такие интервалы с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью временного цикла. Программа для
+такого цикла выглядит
+
+<p><span
+style="mso-spacerun: yes">    </span>примерно так:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV<span style="mso-spacerun: yes">  
+</span>CX, LOOP_VALUE
+
+<p><span
+style='mso-tab-count:1'>      </span>HERE:LOOP<span style="mso-spacerun: yes"> 
+</span>HERE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вы выбираете константу LOOP_VALUE так, что
+цикл выполняется в
+
+<p><span
+style="mso-spacerun: yes">    </span>точности нужное число раз. Это очень
+хороший метод, если вам нужна
+
+<p><span
+style="mso-spacerun: yes">    </span>задержка на определенное время. В выше
+приведенном примере
+
+<p><span
+style="mso-spacerun: yes">    </span>начальное значение константы LOOP_VALUE,
+равное 0FFFFH, дает время
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения около 250-миллисекунд.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Но предположим, что вы хотите понаблюдать
+за внешним событием,
+
+<p><span
+style="mso-spacerun: yes">    </span>и определить, сколко времени займет его
+наступление. Можно использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>вариант временного цикла такого, например,
+вида:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV<span style='mso-tab-count:1'>   </span>CX,
+0
+
+<p><span
+style='mso-tab-count:1'>      </span>HERE:
+
+<p><span
+style='mso-tab-count:1'>      </span>; --- проверка возникновения события
+
+<p><span
+style='mso-tab-count:1'>      </span>IN<span style='mso-tab-count:1'>    </span>AL,
+DX
+
+<p><span
+style='mso-tab-count:1'>      </span>TEST<span style='mso-tab-count:1'>  </span>AL,
+MASK_BIT
+
+<p><span
+style='mso-tab-count:1'>      </span>LOOPNE<span style='mso-tab-count:1'>      </span>HERE
+
+<p><span
+style='mso-tab-count:1'>      </span>DONE:
+
+<p><span
+style='mso-tab-count:1'>      </span>; --- CX содержит число итераций цикла
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Таким способом вы считаете число итераций
+цикла, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>вычислить затраченное на него время. Этот
+метод предполагает, что
+
+<p><span
+style="mso-spacerun: yes">    </span>событие возникнет до того, как содержимое
+регистра CX второй раз
+
+<p><span
+style="mso-spacerun: yes">    </span>достигнет 0. Но если вам нужно измерить
+что-то с точностью до
+
+<p><span
+style="mso-spacerun: yes">    </span>микросекунд, этот метод не удобен, так как
+каждая итерация цикла
+
+<p><span
+style="mso-spacerun: yes">    </span>требует от 10 до 20 микросекунд. Системный
+таймер дает лучшее
+
+<p><span
+style="mso-spacerun: yes">    </span>решение. Поскольку он изменяет свое
+значение каждые 840 наносекунд,
+
+<p><span
+style="mso-spacerun: yes">    </span>вы сможете определить длительность события
+с точностью до
+
+<p><span
+style="mso-spacerun: yes">    </span>микросекунды.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 8.5 показан пример программы,
+вычисляющей время события
+
+<p><span
+style="mso-spacerun: yes">    </span>с помощью системного таймера. В этом
+примере в качестве
+
+<p><span
+style="mso-spacerun: yes">    </span>регистрируемого события используется канал
+2 таймера. В первой
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>1/1/80 04:05:19
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 8.5 Управление системным таймером<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">  </span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 8.5 Управление системным таймером
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>STACK<span style="mso-spacerun: yes">  
+</span>SEGMENT STACK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>0040[<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>DW<span style="mso-spacerun: yes">      </span>64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>????
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">       </span>]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0080<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>STACK<span style="mso-spacerun: yes">  
+</span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>TIMER<span style="mso-spacerun: yes">  
+</span>PROC<span style="mso-spacerun: yes">    </span>FAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>1E <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>PUSH<span
+style="mso-spacerun: yes">    </span>DS<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>; Занесение адреса возврата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0001<span style="mso-spacerun: yes">  </span>B8 0000<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AX, 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0004<span style="mso-spacerun: yes">  </span>50 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>PUSH<span
+style="mso-spacerun: yes">    </span>AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0005<span style="mso-spacerun: yes">  </span>B0 B6<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL,
+10110110B<span style="mso-spacerun: yes">   </span>; Выборка таймера 2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0007<span style="mso-spacerun: yes">  </span>E6 43<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OUT<span style="mso-spacerun: yes">     </span>43H, AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0009<span style="mso-spacerun: yes">  </span>B8 0500<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AX, 500H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000C<span style="mso-spacerun: yes">  </span>E6 42<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OUT<span style="mso-spacerun: yes">     </span>42H, AL<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Таймер 2 установлен на 500 отсчетов
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000E<span style="mso-spacerun: yes">  </span>8A C4<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL, AH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0010<span style="mso-spacerun: yes">  </span>E6 42<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OUT<span style="mso-spacerun: yes">     </span>42H, AL
+
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]><span
+style='mso-fareast-font-family:"MS Mincho"'>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0012<span style="mso-spacerun: yes">  </span>E8 001D R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>CALL<span style="mso-spacerun: yes">   
+</span>LOW_TO_HIGH<span style="mso-spacerun: yes">     </span>; Выборка времени
+первого перехода с 0 на 1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0015<span style="mso-spacerun: yes">  </span>8B D8<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>BX, AX<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>; Сохранение значения в регистре BX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0017<span style="mso-spacerun: yes">  </span>E8 001D R<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>CALL<span style="mso-spacerun: yes">   
+</span>LOW_TO_HIGH<span style="mso-spacerun: yes">     </span>; Выборка времени
+второго перехода с 0 на 1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001A<span style="mso-spacerun: yes">  </span>2B D8<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>SUB<span style="mso-spacerun: yes">     </span>BX, AX<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>; Вычитая получаем длину цикла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001C<span style="mso-spacerun: yes">  </span>CB <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001D<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>TIMER<span style="mso-spacerun: yes">  
+</span>ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>Фиг. 8.5 Управление системным таймером (начало)
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     
+</span>;--------------------------------------------
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>; Эта подпрограмма ждет перехода с
+нижнего уровня
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>сигнала на верхний (с 0 на 1) в таймере 2
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>и возвращает в регистре AX значение счетчика таймера 0
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     
+</span>;--------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001D<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>LOW_TO_HIGH<span style="mso-spacerun:
+yes">     </span>PROC<span style="mso-spacerun: yes">    </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001D<span style="mso-spacerun: yes">  </span>E4 62<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>IN<span style="mso-spacerun: yes">      </span>AL, 62H<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Проверка разряда таймера 2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>001F<span style="mso-spacerun: yes">  </span>A8 20<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>TEST<span style="mso-spacerun: yes">    </span>AL, 20H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0021<span style="mso-spacerun: yes">  </span>75 FA<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JNZ<span style="mso-spacerun: yes">    
+</span>LOW_TO_HIGH<span style="mso-spacerun: yes">     </span>; Цикл: сигнал
+таймера 2 на
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>нижнем уровне
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0023<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>WAIT_HIGH:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0023<span style="mso-spacerun: yes">  </span>E4 62<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>IN<span style="mso-spacerun: yes">      </span>AL, 62H<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Проверка разряда таймера 2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0025<span style="mso-spacerun: yes">  </span>A8 20<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>TEST<span style="mso-spacerun: yes">    </span>AL, 20H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0027<span style="mso-spacerun: yes">  </span>74 FA<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JZ<span style="mso-spacerun: yes">      </span>WAIT_HIGH<span
+style="mso-spacerun: yes">       </span>; Цикл: сигнал таймера 2 на
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">      </span>;<span style="mso-spacerun: yes"> 
+</span>верхнем уровне
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0029<span style="mso-spacerun: yes">  </span>B0 00<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL, 0<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>; Послать команду в регистр управления тай-
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002B<span style="mso-spacerun: yes">  </span>E6 43<span
+style='mso-tab-count:3'>                  </span> <span style="mso-spacerun:
+yes">     </span>OUT<span style="mso-spacerun: yes">     </span>43H, AL<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>;<span style="mso-spacerun: yes">  </span>мером 2, которая
+&quot;замораживает&quot; таймер 2
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002D<span style="mso-spacerun: yes">  </span>90 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>NOP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002E<span style="mso-spacerun: yes">  </span>90 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>NOP<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Задержка, необходимая для 8253
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>002F<span style="mso-spacerun: yes">  </span>E4 40<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>IN<span style="mso-spacerun: yes">      </span>AL, 40H<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Чтение младшего байта счетчика
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0031<span style="mso-spacerun: yes">  </span>8A E0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0033<span style="mso-spacerun: yes">  </span>90 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>NOP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0034<span style="mso-spacerun: yes">  </span>E4 40<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>IN<span style="mso-spacerun: yes">      </span>AL, 40H<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Чтение старшего байта счетчика
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0036<span style="mso-spacerun: yes">  </span>86 E0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>XCHG<span style="mso-spacerun: yes">    </span>AH, AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0038<span style="mso-spacerun: yes">  </span>C3 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>RET<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">     
+</span>; Возвращение значения в AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0039<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>LOW_TO_HIGH<span style="mso-spacerun:
+yes">     </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0039<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 8.5 Системный таймер
+(продолжение)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>части программы этот канал таймера
+загружается известным значением.
+
+<p><span
+style="mso-spacerun: yes">    </span>Здесь мы произвольно выбрали число 500H.
+Обратите внимание, что эта
+
+<p><span
+style="mso-spacerun: yes">    </span>часть программы идентична способу
+генерации звуков с помощью втого
+
+<p><span
+style="mso-spacerun: yes">    </span>канала таймера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Наша программа вызывает подпрограмму
+LOW_TO_HIGH, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>возвращает значение таймера в тот момент,
+когда на выходе канала 2
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера отмечается переход от низкого к
+высокому уровню. Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>рследит именно за переходом; если бы она
+регистрировала только
+
+<p><span
+style="mso-spacerun: yes">    </span>высокий уровень, было бы неизвестно, стал
+ли сигнал высоким только
+
+<p><span
+style="mso-spacerun: yes">    </span>что или уже готов стать низким.
+Подпрограмма посылает нуль в
+
+<p><span
+style="mso-spacerun: yes">    </span>управляющий регистр таймера (порт 43H),
+чтобы &quot;заморозить&quot; текущее
+
+<p><span
+style="mso-spacerun: yes">    </span>значение канала 0. Это позволяет ей
+прочитать текущее значение
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера, продолжающего счет. Если бы
+программа временно не
+
+<p><span
+style="mso-spacerun: yes">    </span>зафиксировала таймер, она не смогла бы
+прочитать без ошибки его
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовое значение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обратим внимание на то, что подпрограмма
+на Фиг. 8.5 содержит
+
+<p><span
+style="mso-spacerun: yes">    </span>несколько команд NOP. Эти команды записаны
+в программе для выдержки
+
+<p><span
+style="mso-spacerun: yes">    </span>временных соотношений. Если очень
+внимательно прочитать инструкции
+
+<p><span
+style="mso-spacerun: yes">    </span>по микросхеме 8253, мы заметим, что между
+командами IN и OUT,
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняемыми этой микросхемой, проходит не
+меньше 1 микросекунды.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда NOP занимает как раз достаточно
+времени, чтобы исключить
+
+<p><span
+style="mso-spacerun: yes">    </span>нарушение требований микросхемы по
+времени.
+
+<p><span
+style='mso-tab-count:1'>      </span>После возврата из подпрограммы программа
+сохраняет в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>BX значение счетчика таймера во время
+первого перехода с низкого
+
+<p><span
+style="mso-spacerun: yes">    </span>уровня на высокий. Затем программа снова
+вызывает подпрограмму,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы зарегистрировать следующий переход с
+низкого уровня на
+
+<p><span
+style="mso-spacerun: yes">    </span>высокий на выходе канала 2 таймера. Потом
+она вычитает одно число
+
+<p><span
+style="mso-spacerun: yes">    </span>из другого, чтобы определить время цикла
+канала 2.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Мы уже говорили о том, что загрузка
+регистра 0 таймера
+
+<p><span
+style="mso-spacerun: yes">    </span>значением счета 0 - очень полезна. Данная
+программа подтверждает
+
+<p><span
+style="mso-spacerun: yes">    </span>это, так как она вычитает два значения
+таймера, не обращая внимания
+
+<p><span
+style="mso-spacerun: yes">    </span>на то, какое из них больше, а какое
+меньше. Так как канал 0 таймера
+
+<p><span
+style="mso-spacerun: yes">    </span>работает асинхронно по отношению к этой
+программе, нет никакой
+
+<p><span
+style="mso-spacerun: yes">    </span>гарантии, что первое читаемое из него
+число больше второго.
+
+<p><span
+style="mso-spacerun: yes">    </span>Например, предположим, что первый переход
+с низкого на высокий
+
+<p><span
+style="mso-spacerun: yes">    </span>уровень происходит, когда таймер 0 имеет
+значение 100H. После 500H
+
+<p><span
+style="mso-spacerun: yes">    </span>циклов значение числа в таймере будет
+0FC00H. Счетчик таймера 0
+
+<p><span
+style="mso-spacerun: yes">    </span>автоматически &quot;проскочил&quot; от
+значения 0 к значению 0FFFFH, и
+
+<p><span
+style="mso-spacerun: yes">    </span>значение прочитанное вторым оказалось
+численно больше первого. Но
+
+<p><span
+style="mso-spacerun: yes">    </span>из-за того, что регистр таймера снова
+начинает счет со значения
+
+<p><span
+style="mso-spacerun: yes">    </span>0FFFFH, мы всегда можем вычитать эти два
+числа. При этом иногда
+
+<p><span
+style="mso-spacerun: yes">    </span>будет появляться перенос, иногда нет, но
+разность этих двух чисел
+
+<p><span
+style="mso-spacerun: yes">    </span>всегда будет равна числу отсчетов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Чтобы убедить вас в правильности этого
+положения, рассмотрим
+
+<p><span
+style="mso-spacerun: yes">    </span>случай, когда счетчик загружается числом
+8000H. Если первый переход
+
+<p><span
+style="mso-spacerun: yes">    </span>возникает при значении 6000H, второй
+появится при значении 5B00H, и
+
+<p><span
+style="mso-spacerun: yes">    </span>разница между ними составляет 500H. Но
+если первый переход
+
+<p><span
+style="mso-spacerun: yes">    </span>возникает при значении 100H, второй
+возникает при значении 7C00H, и
+
+<p><span
+style="mso-spacerun: yes">    </span>разница станет равна 8500H. Чтобы
+правильно отреагировать на эту
+
+<p><span
+style="mso-spacerun: yes">    </span>ситуацию, программа должна была бы
+проверить, не произошло ли
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнение счетчика за время отсчета.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При выполнении этой программы вы
+обнаружите, что значение в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре BX составляет около 0A00H, и не
+равно ожидаемому значению
+
+<p><span
+style="mso-spacerun: yes">    </span>500H. Так происходит потому, что таймер
+работает в режиме
+
+<p><span
+style="mso-spacerun: yes">    </span>уменьшения содержимого счетчика на два по
+каждому временному
+
+<p><span
+style="mso-spacerun: yes">    </span>импульсу. Чтобы разобраться в работе
+микросхемы 8253, нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>ознакомиться с инструкцией по ее
+программированию.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 8.6 дает сводку для управляющего
+слова микросхемы 8253.
+
+<p><span
+style="mso-spacerun: yes">    </span>Для настройки одного из каналов на
+конкретный режим работы вы
+
+<p><span
+style="mso-spacerun: yes">    </span>выводите это управляющее слово в порт 43H.
+Мы уже встречались с
+
+<p><span
+style="mso-spacerun: yes">    </span>выводом некотрых значений в порт 43H.
+Чтобы &quot;заморозить&quot; счетчик,
+
+<p><span
+style="mso-spacerun: yes">    </span>мы послали в этот порт нуль, а для
+настройки генератора тональности
+
+<p><span
+style="mso-spacerun: yes">    </span>- код 0B6H. Посмотрим, откуда берутся эти
+значения.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Два старших бита управляющего слова
+определяют канал таймера.
+
+<p><span
+style="mso-spacerun: yes">    </span>Следующие два бита - выполняемую операцию.
+Когда мы выводим
+
+<p><span
+style="mso-spacerun: yes">    </span>значение 0, выбирается таймер 0 и
+запирание данных в счетчике.
+
+<p><span
+style="mso-spacerun: yes">    </span>Следующие 3 бита задают режим работы
+выбранного таймера. Эти биты
+
+<p><span
+style="mso-spacerun: yes">    </span>не играют роли, когда счетчик заперт, но
+нужны при инициализации
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера. Оставшийся бит определяет, будет
+ли счетчик работать как
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовое двоичное число или как
+четырехзначное десятичное в
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичном представлении.
+
+<p>A<br
+style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Формат управляющего слова
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>D7<span style="mso-spacerun: yes">   </span>D6<span style="mso-spacerun:
+yes">   </span>D5<span style='mso-tab-count:1'>    </span> D4<span
+style="mso-spacerun: yes">   </span>D3<span style="mso-spacerun: yes">  
+</span>D2<span style='mso-tab-count:1'>     </span>D1<span style="mso-spacerun:
+yes">   </span>D0
+
+<p><span
+style='mso-tab-count:1'>      </span>ЪДДДДВДДДДВДДДДВДДДДВДДДДВДДДДВДДДДВДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span>і SC1і SC0і RL1і RL0і M2 і M1 і M0 і BCDі
+
+<p><span
+style='mso-tab-count:1'>      </span>АДДДДБДДДДБДДДДБДДДДБДДДДБДДДДБДДДДБДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Определение управления
+
+<p><span
+style='mso-tab-count:1'>      </span>SC - выбор счетчика:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>SC1<span style="mso-spacerun: yes">       </span>SC0
+
+<p><span
+style='mso-tab-count:1'>      </span>ЪДДДДДДДДДВДДДДДДДДДВДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>і<span style="mso-spacerun: yes">    </span>0<span
+style="mso-spacerun: yes">    </span>і<span style="mso-spacerun: yes"> 
+</span>задать счетчик 0<span style="mso-spacerun: yes">       </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДДДДДДДЕДДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>і<span style="mso-spacerun: yes">    </span>1<span
+style="mso-spacerun: yes">    </span>і<span style="mso-spacerun: yes"> 
+</span>задать счетчик 1<span style="mso-spacerun: yes">       </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДДДДДДДЕДДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>і<span style="mso-spacerun: yes">    </span>0<span
+style="mso-spacerun: yes">    </span>і<span style="mso-spacerun: yes"> 
+</span>задать счетчик 2<span style="mso-spacerun: yes">       </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДДДДДДДЕДДДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>і<span style="mso-spacerun: yes">    </span>1<span
+style="mso-spacerun: yes">    </span>і<span style="mso-spacerun: yes"> 
+</span>неопределено<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">      </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>АДДДДДДДДДБДДДДДДДДДБДДДДДДДДДДДДДДДДДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>RL - чтение/загрузка:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>RL1<span style="mso-spacerun: yes">  </span>RL0
+
+<p><span
+style='mso-tab-count:1'>      </span>ЪДДДДВДДДДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes"> 
+</span>0 і<span style='mso-tab-count:1'>      </span>0 і Операция запирания
+счетчика (см.<span style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>і раздел процедуры READ/WRITE)<span style="mso-spacerun:
+yes">      </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДДЕДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes"> 
+</span>1 і<span style='mso-tab-count:1'>      </span>0 і Считать/загрузить
+старший байт<span style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДДЕДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes"> 
+</span>0 і<span style='mso-tab-count:1'>      </span>1 і Считать/загрузить
+младший байт<span style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДДЕДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes"> 
+</span>1 і<span style='mso-tab-count:1'>      </span>1 і Считать/загрузить
+младший байт,<span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">   
+</span>і<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">  </span>і затем - старший<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>АДДДДБДДДДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>M - режим:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>M2<span style="mso-spacerun: yes">  </span>M1<span style="mso-spacerun:
+yes">  </span>M0
+
+<p><span
+style='mso-tab-count:1'>      </span>ЪДДДВДДДВДДДВДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span>і 0 і 0 і 0 і Режим 0<span
+style='mso-tab-count:1'>   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДЕДДДЕДДДЕДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і 0 і 0 і 0 і Режим 1<span
+style='mso-tab-count:1'>   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДЕДДДЕДДДЕДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і X і 1 і 0 і Режим 2<span
+style='mso-tab-count:1'>   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДЕДДДЕДДДЕДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і X і 1 і 1 і Режим 3<span
+style='mso-tab-count:1'>   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДЕДДДЕДДДЕДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і 1 і 0 і 0 і Режим 4<span
+style='mso-tab-count:1'>   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДЕДДДЕДДДЕДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і 1 і 0 і 1 і Режим 5<span
+style='mso-tab-count:1'>   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>АДДДБДДДБДДДБДДДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>BCD:
+
+<p><span
+style='mso-tab-count:1'>      </span>ЪДДДДДДДВДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">  
+</span>0<span style='mso-tab-count:1'> </span>і 16-битовый двоичный счетчик<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">       </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>ГДДДДДДДЕДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style="mso-spacerun: yes">  
+</span>1<span style='mso-tab-count:1'> </span>і десятичный в двоичном
+представлении<span style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>і<span style='mso-tab-count:1'>     </span>і
+(BCD) счетчик (4-х разрядный)<span style="mso-spacerun: yes">        </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span>АДДДДДДДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 8.6 Программирование таймера/счетчика
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>(с разрешения фирмы Intel; приоритет Intel 1981г.)A
+
+<p><span
+style='mso-tab-count:1'>      </span>Управляющий код 0B6H, который
+использовался для генерации
+
+<p><span
+style="mso-spacerun: yes">    </span>тональности, можно расписать таким
+образом:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>0B6H = 10110110B = 01 11 011 0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Это управляющее слово выбирает канал 2.
+Счетчик этого канала
+
+<p><span
+style="mso-spacerun: yes">    </span>работает с 16-битовым значением, младший
+байт которого загружается
+
+<p><span
+style="mso-spacerun: yes">    </span>в<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>счетчик первым. Последный бит показывает,
+что счет будет
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичным. Можно видеть также, что
+выбирается третий режим работы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Микросхема 8253 может работать в шести
+разных режимах. Но для
+
+<p><span
+style="mso-spacerun: yes">    </span>наших целей, в конфигурации системы IBM,
+удобны только два из них.
+
+<p><span
+style="mso-spacerun: yes">    </span>Режим 3 устанавливается по умолчанию для
+всех трех каналов таймера.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это режим работы генератора прямоугольных
+импульсов: половину
+
+<p><span
+style="mso-spacerun: yes">    </span>периода выход канала дает нижний уровень,
+а другую половину периода
+
+<p><span
+style="mso-spacerun: yes">    </span>- верхний. Счетчик работает в этом режиме,
+вычитая из своего
+
+<p><span
+style="mso-spacerun: yes">    </span>значения по два, а не по одному. Во время
+первого обратного счета
+
+<p><span
+style="mso-spacerun: yes">    </span>выход низкий, а затем, во время второго
+счета - высокий. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>счетчик считает по два, выход имеет
+высокий уровень точно половину
+
+<p><span
+style="mso-spacerun: yes">    </span>заданного времени, и низкий тоже точно
+половину. Из-за того, что
+
+<p><span
+style="mso-spacerun: yes">    </span>канал 0 таймера обычно работает в режиме
+3, пример на Фиг. 8.5
+
+<p><span
+style="mso-spacerun: yes">    </span>заканчивает счет со значением счетчика
+0A00H, а не 500H, как
+
+<p><span
+style="mso-spacerun: yes">    </span>ожидалось. Каждый отсчет таймера уменьшает
+содержимое счетчика на
+
+<p><span
+style="mso-spacerun: yes">    </span>два.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Так как счетчик считает двойками, он
+переполняется каждые 27
+
+<p><span
+style="mso-spacerun: yes">    </span>микросекунд. Если вы хотите измерять
+события более длительные, то
+
+<p><span
+style="mso-spacerun: yes">    </span>вам придется воспользоваться другим
+способом измерения времени.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Другой режим таймера, который используется
+в IBM PC - это режим
+
+<p><span
+style="mso-spacerun: yes">    </span>0. Этот режим называют прерыванием по
+завершению счета. В этом
+
+<p><span
+style="mso-spacerun: yes">    </span>режиме таймер не работает непрерывно.
+После его установки таймер до
+
+<p><span
+style="mso-spacerun: yes">    </span>тех пор не начинает считать (единицами),
+пока в него полностью не
+
+<p><span
+style="mso-spacerun: yes">    </span>будет загружено число. Затем счетчик
+считает в сторону уменьшения с
+
+<p><span
+style="mso-spacerun: yes">    </span>частотой синхроимпульсов, пока не
+достигнет нуля. В этот момент его
+
+<p><span
+style="mso-spacerun: yes">    </span>выход становится высоким. Поскольку выход
+канала 0 таймера
+
+<p><span
+style="mso-spacerun: yes">    </span>подключен к прерыванию 0 контроллера 8259,
+в системе возникает
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание.
+
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]><span
+style='mso-fareast-font-family:"MS Mincho"'>
+
+<p><span
+style='mso-tab-count:1'>      </span>Режим прерывания по завершению счета
+полезен, если вы хотите в
+
+<p><span
+style="mso-spacerun: yes">    </span>определенный момент подать программе
+сигнал с помощью прерывания.
+
+<p><span
+style="mso-spacerun: yes">    </span>Так как счетчик ограничен шестнадцатью
+битами, максимальный
+
+<p><span
+style="mso-spacerun: yes">    </span>отсчитываемый интервал времени составляет
+55 миллисекунд. Если этот
+
+<p><span
+style="mso-spacerun: yes">    </span>интервал слишком мал, нужен другой метод
+измерения времени.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если вы хотите измерять интервал времени в
+секундах, нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>оставить таймер в его обычном режиме
+работы. Система BIOS позволяет
+
+<p><span
+style="mso-spacerun: yes">    </span>захватывать управление системой каждые 55
+миллисекунд, и в каждый
+
+<p><span
+style="mso-spacerun: yes">    </span>такой момент вы можете решить, не
+исчерпался ли нужный промежуток
+
+<p><span
+style="mso-spacerun: yes">    </span>времени.
+
+<p><span
+style='mso-tab-count:1'>      </span>Если время нужной вам задержки находится
+между 55
+
+<p><span
+style="mso-spacerun: yes">    </span>миллисекундами и 5 секундами, можно
+использовать метод без
+
+<p><span
+style="mso-spacerun: yes">    </span>использования программ BIOS. Например, вам
+хочется сделать задержку
+
+<p><span
+style="mso-spacerun: yes">    </span>на 150 миллисекунд. Используя режим
+прерывания по завершению счета,
+
+<p><span
+style="mso-spacerun: yes">    </span>вы настраиваете таймер на прерывание через
+50 миллисекунд (этому
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>соответствует значенние счетчика около 59500). Обработчик
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания программируется так, чтобы,
+получая управление первые
+
+<p><span
+style="mso-spacerun: yes">    </span>два раза, он заново устанавливал таймер на
+50 миллисекунд. По
+
+<p><span
+style="mso-spacerun: yes">    </span>третьему прерыванию от таймера, когда 150
+миллисекунд исчерпаны,
+
+<p><span
+style="mso-spacerun: yes">    </span>можно предпринять нужные действия.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При организации задержек через таймер
+всегда нужна некоторая
+
+<p><span
+style="mso-spacerun: yes">    </span>осторожность. Как упоминалось выше, канал
+1 таймера выполняет одну
+
+<p><span
+style="mso-spacerun: yes">    </span>важную аппаратную функцию. Если вы
+модифицируете число в канале 1,
+
+<p><span
+style="mso-spacerun: yes">    </span>ваша программа может немедленно
+разрушиться. Использование канала 2
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера безопасно. Этот канал подключен
+только к динамику и выходу
+
+<p><span
+style="mso-spacerun: yes">    </span>кассетного магнитофона. Отсюда, очевидно,
+следует, что нельзя
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать канал 2 таймера для отсчета
+промежутков времени в одно
+
+<p><span
+style="mso-spacerun: yes">    </span>время с попытками воспроизводить мелодии
+через динамик. И наконец,
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS пользуется услугами таймера 0 для
+различных системных функций.
+
+<p><span
+style="mso-spacerun: yes">    </span>При обсуждении BIOS будет видно, что
+прерывание по времени суток
+
+<p><span
+style="mso-spacerun: yes">    </span>управляет не только текущим временем, но
+также обслуживает и
+
+<p><span
+style="mso-spacerun: yes">    </span>двигатель накопителя на дискетах. Перед
+тем, как изменять настройку
+
+<p><span
+style="mso-spacerun: yes">    </span>канала 0 таймера для любых целей, нужно
+понять, какие существующие
+
+<p><span
+style="mso-spacerun: yes">    </span>функции вы можете при этом изменить.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

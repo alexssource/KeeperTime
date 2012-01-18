@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="4-9-4">Переходы по условию
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Условные переходы делятся на две
+группы:<span style="mso-spacerun: yes">  </span>проверяющие результаты
+
+<p><span
+style="mso-spacerun: yes">    </span>предыдущей арифметической или логической
+команды, и управляющие
+
+<p><span
+style="mso-spacerun: yes">    </span>итерациями фрагмента программы.<span
+style="mso-spacerun: yes">  </span>Все условные преходы имеют
+
+<p><span
+style="mso-spacerun: yes">    </span>однобайтовое смещение.<span
+style="mso-spacerun: yes">  </span>Если условный переход осуществляется на
+
+<p><span
+style="mso-spacerun: yes">    </span>место, находящееся дальше 128 байт, нужно
+использовать специальную
+
+<p><span
+style="mso-spacerun: yes">    </span>конструкцию.<span style="mso-spacerun:
+yes">  </span>Например, допустим, что программе надо перейти к
+
+<p><span
+style="mso-spacerun: yes">    </span>метке ZERO, если установлен флаг нуля; эта
+метка находится дальше
+
+<p><span
+style="mso-spacerun: yes">    </span>128 байт от текущего места.<span
+style="mso-spacerun: yes">  </span>Программа в этом случае выглядит
+
+<p><span
+style="mso-spacerun: yes">    </span>примерно так:
+
+<p><span
+style='mso-tab-count:1'>      </span>JNZ<span style="mso-spacerun: yes">   
+</span>CONTINUE
+
+<p><span
+style='mso-tab-count:1'>      </span>JMP<span style="mso-spacerun: yes">   
+</span>ZERO
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>CONTINUE:
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>1/1/80 04:01:56
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 4.28 Таблица переходов<span style='mso-tab-count:4'>                      </span>
+Page<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.28 Таблица переходов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;----------------------------------------
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>; В этом примере демонстрируется программа,
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>; осуществляющая переход в зависимости от
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>; значения регистра AL. В регистре
+находится
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>; индекс в таблице переходов необходимой
+программы
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;----------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>2A FF<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>SUB<span style="mso-spacerun: yes">     </span>BH, BH<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>; BH &lt;- 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0002<span style="mso-spacerun: yes">  </span>8A D8<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>BL, AL<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>; Индекс загружается в регистр BL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0004<span style="mso-spacerun: yes">  </span>D1 E3<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>SHL<span style="mso-spacerun: yes">     </span>BX, 1<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>; * 2 для получения смещения
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0006<span style="mso-spacerun: yes">  </span>2E: FF A7 000B R<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">    
+</span>JMP<span style="mso-spacerun: yes">     </span>CS:[BX + BRANCH_TABLE]<span
+style="mso-spacerun: yes">  </span>; Косвенный близкий переход
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000B<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>BRANCH_TABLE<span style="mso-spacerun:
+yes">    </span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000B<span style="mso-spacerun: yes">  </span>0011 R<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>DW<span style="mso-spacerun: yes">      </span>ROUTINE_ONE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000D<span style="mso-spacerun: yes">  </span>0011 R<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>DW<span style="mso-spacerun: yes">      </span>ROUTINE_TWO
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000F<span style="mso-spacerun: yes">  </span>0011 R<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>DW<span style="mso-spacerun: yes">      </span>ROUTINE_THREE
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>; ...
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0011<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>ROUTINE_ONE<span style="mso-spacerun:
+yes">     </span>LABEL<span style="mso-spacerun: yes">   </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0011<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>ROUTINE_TWO<span style="mso-spacerun:
+yes">     </span>LABEL<span style="mso-spacerun: yes">   </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0011<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>ROUTINE_THREE<span style="mso-spacerun:
+yes">   </span>LABEL<span style="mso-spacerun: yes">   </span>NEAR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0011<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.28 Таблица переходов
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Здесь используется условный переход с
+противоположным условием.
+
+<p><span
+style="mso-spacerun: yes">    </span>На метку ZERO управление передает команда
+безусловного перехода,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая может использовать смещение вплоть
+до 32768 байт, а в
+
+<p><span
+style="mso-spacerun: yes">    </span>условном переходе используется метка
+CONTINUE.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если целью является минимизация программ,
+этого метода нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>избегать, так как он превращает команду
+условного перехода в
+
+<p><span
+style="mso-spacerun: yes">    </span>пятибайтовую последовательность. Иногда
+реорганизация программы
+
+<p><span
+style="mso-spacerun: yes">    </span>приводит к тому, что место перехода
+попадает в нужный диапазон.
+
+<p><span
+style="mso-spacerun: yes">    </span>Однако не стоит особенно стараться
+минимизировать программу. В
+
+<p><span
+style="mso-spacerun: yes">    </span>большинстве случаев не имеет особого
+значения, насколько у
+
+<p><span
+style="mso-spacerun: yes">    </span>программы большой объем, лишь бы он не
+превышал заданного. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>имело бы смысл, если бы вы пытались
+сделать нечто помещающееся в
+
+<p><span
+style="mso-spacerun: yes">    </span>модуль ПЗУ постоянного объема, но обычно
+усилия, затрачиваемые на
+
+<p><span
+style="mso-spacerun: yes">    </span>изменения программы, не дают ощутимого
+выигрыша.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

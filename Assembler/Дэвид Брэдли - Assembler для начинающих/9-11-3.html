@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<b><p><div align="center"><a name="9-11-3">Команда проверки
+</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда проверки аналогична команде
+чтения, за исключением того,
+
+<p><span
+style="mso-spacerun: yes">    </span>что данные не записываются в память, а
+просто отбрасываются.<span style="mso-spacerun: yes">  </span>У
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллера ПДП есть специальная команда,
+называемая командой
+
+<p><span
+style="mso-spacerun: yes">    </span>проверки, выполняя которую ПДП отвечает на
+запросы контроллера
+
+<p><span
+style="mso-spacerun: yes">    </span>дисковода и переключает шину ЭВМ в
+необходимый режим.<span style="mso-spacerun: yes">  </span>Но в этом
+
+<p><span
+style="mso-spacerun: yes">    </span>случае ПДП не выполняет другую часть
+своего цикла, в которой данные
+
+<p><span
+style="mso-spacerun: yes">    </span>записываются в память.<span
+style="mso-spacerun: yes">  </span>Команда проверки используется для проверки
+
+<p><span
+style="mso-spacerun: yes">    </span>того, правильно ли записались данные на
+дискету.<span style="mso-spacerun: yes">  </span>Операционная
+
+<p><span
+style="mso-spacerun: yes">    </span>система использует операцию проверки во
+время выполнения команды
+
+<p><span
+style="mso-spacerun: yes">    </span>FORMAT.<span style="mso-spacerun: yes"> 
+</span>Проверка в этом случае ищет дефектные места на дискете, и
+
+<p><span
+style="mso-spacerun: yes">    </span>когда выявляет эти дефектные области,
+операционная система помещает
+
+<p><span
+style="mso-spacerun: yes">    </span>их за пределами справочника дискеты.<span
+style="mso-spacerun: yes">  </span>Это позволяет использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>дефектную дискету, а не выбрасывать ее.
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда проверки, хотя и может определить,
+что в данных на
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>дискете есть ошибка, не гарантирует, что данные записались
+
+<p><span
+style="mso-spacerun: yes">    </span>правильно. Предположим, что в цепи записи
+на дискету есть
+
+<p><span
+style="mso-spacerun: yes">    </span>неисправность. Такая ошибка не вызовет
+появления ошибочной ситуации
+
+<p><span
+style="mso-spacerun: yes">    </span>во время записи, но на дискету данные не
+запишутся. Если вы
+
+<p><span
+style="mso-spacerun: yes">    </span>проверите область данных, команда проверки
+прочитает ранее
+
+<p><span
+style="mso-spacerun: yes">    </span>записанные данные (которые вы хотели
+модифицировать) без ошибки, и
+
+<p><span
+style="mso-spacerun: yes">    </span>вы будете считать, что все прошло
+нормально. Если вы хотите
+
+<p><span
+style="mso-spacerun: yes">    </span>удостовериться в том, что данные записаны
+верно, вы должны
+
+<p><span
+style="mso-spacerun: yes">    </span>прочитать данные назад в другой буфер
+после записи и затем сравнить
+
+<p><span
+style="mso-spacerun: yes">    </span>оба буфера. Это гарантирует, что данные
+записались верно.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

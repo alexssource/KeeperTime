@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="6-4">Макрокоманды повторения</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Для тех случаев, когда нужно несколько раз
+повторять один и тот же
+
+<p><span
+style="mso-spacerun: yes">    </span>фрагмент программы в макроассемблере
+имеется несколько специальных
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманд. Это операторы REPT, IRT и
+IRPC. Каждый из них
+
+<p><span
+style="mso-spacerun: yes">    </span>действует как макрокоманда в макрокоманде
+и приводит к генерации
+
+<p><span
+style="mso-spacerun: yes">    </span>следующего за ним участка программы, пока
+ассемблеру не встретится
+
+<p><span
+style="mso-spacerun: yes">    </span>операнд ENDM.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для простого повторения<span
+style="mso-spacerun: yes">  </span>последрвательности команд используется
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокоманда REPT. Последовательность
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>REPT<span style='mso-tab-count:1'>  </span>выражение
+
+<p><span
+style='mso-tab-count:1'>      </span>;... тело макрокоманды REPT
+
+<p><span
+style='mso-tab-count:1'>      </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">     </span>дублирует команды, составляющих тело
+данной макрокоманды. Значение
+
+<p><span
+style="mso-spacerun: yes">    </span>выражения определяет число повторений
+текста.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>С помощью макрокоманды IRP можно при
+каждом повторении
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать разные параметры. При использовании
+конструкции
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>IRP<span style="mso-spacerun: yes">   
+</span>фиктивный параметр,&lt;список&gt;
+
+<p><span
+style="mso-spacerun: yes">      </span>;... тело макрокоманды IRP
+
+<p><span
+style="mso-spacerun: yes">      </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер осуществляет столько проходов
+тела макрокоманды,
+
+<p><span
+style="mso-spacerun: yes">    </span>сколько указано элементов в списке. При
+каждом проходе ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>подставляет вместо фиктивного параметра
+следующий по порядку
+
+<p><span
+style="mso-spacerun: yes">    </span>элемент списка. Элементы списка должны
+быть числовыми выражениями.
+
+<p><span
+style='mso-tab-count:1'>      </span>Если вы хотите использовать в списке
+символьные значения,
+
+<p><span
+style="mso-spacerun: yes">    </span>применяйте макрокоманду IRPC.
+Последователность
+
+<p><span
+style="mso-spacerun: yes">      </span>IRPC<span style="mso-spacerun: yes">  
+</span><span style="mso-spacerun: yes">  </span>фиктивный параметр, строка
+символов
+
+<p><span
+style="mso-spacerun: yes">      </span>;... тело макрокоманды IRPC
+
+<p><span
+style="mso-spacerun: yes">      </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>осуществляет по одному проходу тела
+макрокоманды для каждого
+
+<p><span
+style="mso-spacerun: yes">    </span>символа. При этом фиктивный параметр
+ассемблер каждый раз заменяет
+
+<p><span
+style="mso-spacerun: yes">    </span>следующим по порядку символом из строки.
+На Фиг. 6.7 показаны
+
+<p><span
+style="mso-spacerun: yes">    </span>примеры применения описанных макрокоманд
+повтора.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">   </span>4/2/89 16:06:54
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Фиг. 6.7 Макроповторения <span style='mso-tab-count:4'>                      </span><span
+style="mso-spacerun: yes">   </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 6.7 Макроповторения
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>REPT<span style="mso-spacerun: yes">   
+</span>3<span style="mso-spacerun: yes">    </span>; Повторить команду 3 раза
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>INC<span style="mso-spacerun: yes">    
+</span>AX
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ENDM
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style="mso-spacerun:
+yes">  </span>40<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>INC<span style="mso-spacerun: yes">    
+</span>AX
+
+<p><span
+style='mso-tab-count:2'>            </span>0001<span style="mso-spacerun:
+yes">  </span>40<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>INC<span style="mso-spacerun: yes">    
+</span>AX
+
+<p><span
+style='mso-tab-count:2'>            </span>0002<span style="mso-spacerun:
+yes">  </span>40<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>INC<span style="mso-spacerun: yes">    
+</span>AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>IRP<span style="mso-spacerun: yes">    
+</span>VALUE,&lt;5,10,15,20&gt;
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ADD<span style="mso-spacerun: yes">    
+</span>AX,VALUE
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ENDM
+
+<p><span
+style='mso-tab-count:2'>            </span>0003<span style="mso-spacerun:
+yes">  </span>05 0005<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ADD<span style="mso-spacerun: yes">    
+</span>AX,5
+
+<p><span
+style='mso-tab-count:2'>            </span>0006<span style="mso-spacerun:
+yes">  </span>05 000A<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ADD<span style="mso-spacerun: yes">    
+</span>AX,10
+
+<p><span
+style='mso-tab-count:2'>            </span>0009<span style="mso-spacerun:
+yes">  </span>05 000F<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ADD<span style="mso-spacerun: yes">    
+</span>AX,15
+
+<p><span
+style='mso-tab-count:2'>            </span>000C<span style="mso-spacerun:
+yes">  </span>05 0014<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ADD<span style="mso-spacerun: yes">    
+</span>AX,20
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>IRPC<span style="mso-spacerun: yes">   
+</span>CHAR, ABCD
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ADD<span style="mso-spacerun: yes">    
+</span>AX,CHAR&amp;X
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ENDM
+
+<p><span
+style='mso-tab-count:2'>            </span>000F<span style="mso-spacerun:
+yes">  </span>03 C0<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ADD<span style="mso-spacerun: yes">    
+</span>AX,AX
+
+<p><span
+style='mso-tab-count:2'>            </span>0011<span style="mso-spacerun:
+yes">  </span>03 C3<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ADD<span style="mso-spacerun: yes">    
+</span>AX,BX
+
+<p><span
+style='mso-tab-count:2'>            </span>0013<span style="mso-spacerun:
+yes">  </span>03 C1<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ADD<span style="mso-spacerun: yes">    
+</span>AX,CX
+
+<p><span
+style='mso-tab-count:2'>            </span>0015<span style="mso-spacerun:
+yes">  </span>03 C2<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>ADD<span style="mso-spacerun: yes">    
+</span>AX,DX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0017<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>END&#18;
+
+<p><span
+style='mso-tab-count:3'>                  </span>Фиг. 6.7 Макрокоманды повтора
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

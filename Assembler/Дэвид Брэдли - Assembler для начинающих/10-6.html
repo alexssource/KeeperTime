@@ -1,0 +1,760 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="10-6">Вставка короткой программы</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>В предыдущем примере рассматривалась
+довольно большая программа
+
+<p><span
+style="mso-spacerun: yes">    </span>на языке ассемблера, хранящаяся в
+собственном объектном файле и
+
+<p><span
+style="mso-spacerun: yes">    </span>загружаемая в память интерпретатором
+Бейсика. А как в случае очень
+
+<p><span
+style="mso-spacerun: yes">    </span>маленькой программы. Представляется, что
+для такой программы
+
+<p><span
+style="mso-spacerun: yes">    </span>тратилось бы слишком много усилий на одну
+только загрузку ее из
+
+<p><span
+style="mso-spacerun: yes">    </span>собственного файйла. В приложении C
+справочника по языку Бейсик
+
+<p><span
+style="mso-spacerun: yes">    </span>приведен способ &quot;упаковки&quot;
+программы на машинном языке в область
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти за пределами рабочей области
+интерпретатора. Приведем пример
+
+<p><span
+style="mso-spacerun: yes">    </span>применения другого способа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 10.8 показана программа,
+написанная на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера, которой мы воспользуемся. Эта
+программа обращается к
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS для сдвига изображения на экране.
+Рассмотрев параметры,
+
+<p><span
+style="mso-spacerun: yes">    </span>хранящиеся в регистрах CX и DX, можно
+увидеть, что сдвигаемое окно
+
+<p><span
+style="mso-spacerun: yes">    </span>отображает лишь часть экрана. Мы будем
+исползовать приведенную
+
+<p><span
+style="mso-spacerun: yes">    </span>программу для разбиения экрана на
+несколько окон, в каждом из
+
+<p><span
+style="mso-spacerun: yes">    </span>которых сдвиг может производиться
+независимо. Поскольку средства
+
+<p><span
+style="mso-spacerun: yes">    </span>реализации этого в языке Бейсик
+отсутствуют, понадобится процедура
+
+<p><span
+style="mso-spacerun: yes">    </span>на языке ассемблера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes"> 
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">      </span>1/1/80
+04:07:03
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 10.8 Программа прокрутки окон на дисплее<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">    
+</span>Page<span style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 10.8 Программа прокрутки окон на дисплее
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span>
+SCROLL<span style="mso-spacerun: yes">  </span>PROC<span style='mso-tab-count:
+1'>     </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>55<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> BP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0001<span style='mso-tab-count:1'>      </span>8B EC<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> BP, SP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0003<span style='mso-tab-count:1'>      </span>8B 76 06<span
+style='mso-tab-count:3'>                </span> MOV<span style='mso-tab-count:
+1'>  </span> SI, [BP+6]<span style='mso-tab-count:1'> </span> ; Загрузка адреса
+параметра
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0006<span style='mso-tab-count:1'>      </span>8B 0C<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> CX, [SI]<span style='mso-tab-count:1'>   </span> ; Загрузка параметра
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0008<span style='mso-tab-count:1'>      </span>0A C0<span
+style='mso-tab-count:4'>                   </span> OR<span style='mso-tab-count:
+1'>   </span> AL, AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000A<span style='mso-tab-count:1'>      </span>B7 07<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> BH, 7
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000C<span style='mso-tab-count:1'>      </span>B8 0601 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> AX, 601h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000F<span style='mso-tab-count:1'>      </span>75 0C<span
+style='mso-tab-count:4'>                   </span> JNZ<span style='mso-tab-count:
+1'>  </span> WINDOW1<span style='mso-tab-count:1'>    </span> ; Определение
+требуемого окна
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0011<span style='mso-tab-count:1'>      </span>B9 0200 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> CX, 200h<span
+style='mso-tab-count:1'>   </span> ; Окно 1
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0014<span style='mso-tab-count:1'>      </span>BA 1010 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX, 1010h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0017<span style='mso-tab-count:4'>                        </span>
+DO_SCROLL:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0017<span style='mso-tab-count:1'>      </span>CD 10<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 10h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0019<span style='mso-tab-count:1'>      </span>5D<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> BP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001A<span style='mso-tab-count:1'>      </span>CA 0002 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>RET<span style='mso-tab-count:1'>  </span> 2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001D<span style='mso-tab-count:4'>                        </span>
+WINDOW1:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001D<span style='mso-tab-count:1'>      </span>B9 0514 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> CX, 514h<span
+style='mso-tab-count:1'>   </span> ; Окно 2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0020<span style='mso-tab-count:1'>      </span>BA 1224 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX, 1224h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0023<span style='mso-tab-count:1'>      </span>EB F2<span
+style='mso-tab-count:4'>                   </span> JMP<span style='mso-tab-count:
+1'>  </span> DO_SCROLL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0025<span style='mso-tab-count:4'>                        </span>
+SCROLL<span style="mso-spacerun: yes">  </span>ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0025<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 10.8 Процедура сдвига изображения для Бэйсика
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как можно увидеть на листинге
+ассемблирования на Фиг. 10.8, для
+
+<p><span
+style="mso-spacerun: yes">    </span>определения, в каком из двух окон должен
+производиться сдвиг,
+
+<p><span
+style="mso-spacerun: yes">    </span>используется входной параметр. Программа,
+написанная на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>Бейсик, передает этот параметр в
+ассемблерную подпрограмму
+
+<p><span
+style="mso-spacerun: yes">    </span>оператором CALL. На Фиг.10.9(а) показано
+содержимое стека в момент
+
+<p><span
+style="mso-spacerun: yes">    </span>вызова в Бэйсике процедуры SCROLL.
+Оператор CALL помещает в стек
+
+<p><span
+style="mso-spacerun: yes">    </span>адрес параметра перед выполнением дальнего
+вызова (FAR CALL)
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы на машинном языке. Адрес в
+стеке является смещением
+
+<p><span
+style="mso-spacerun: yes">    </span>параметра относительно регистра DS. Первые
+команды процедуры SCROLL
+
+<p><span
+style="mso-spacerun: yes">    </span>извлекают этот адрес из регистра SI для
+того, чтобы загрузить
+
+<p><span
+style="mso-spacerun: yes">    </span>истинное значение в регистр CX. На
+Фиг.10.9(b) показано содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>стека после того, как процедура SCROLL
+поместила содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра BP в стек, а затем переслала
+содержимое регистра SP в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр BP. Обратите внимание, что
+параметр находится в шести
+
+<p><span
+style="mso-spacerun: yes">    </span>байтах от вершины стека. Если бы программа
+на языке Бейсик
+
+<p><span
+style="mso-spacerun: yes">    </span>передавала более одного параметра, перед
+вызовом они были бы
+
+<p><span
+style="mso-spacerun: yes">    </span>аналогичным образом помещены в стек.
+Забегая вперед, заметим, что
+
+<p><span
+style="mso-spacerun: yes">    </span>перед возвратом процедура, используя
+команду RET 2, извлекает
+
+<p><span
+style="mso-spacerun: yes">    </span>параметры из стека. Интерпретатор Бейсика
+предполагает, что перед
+
+<p><span
+style="mso-spacerun: yes">    </span>возвратом подпрограмма удаляет параметры
+из стека.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДДДДДДДДДґ<span style='mso-tab-count:2'>          </span>ГДДДДДДДДДДДДґ
+
+<p><span
+style="mso-spacerun: yes">      </span>SPДДДДД&gt;і Смещение<span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span>
+SPДДДД&gt;і Старое зна-і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>і возврата<span style="mso-spacerun: yes">   </span>і<span
+style='mso-tab-count:2'>          </span>і чение BP<span style="mso-spacerun:
+yes">   </span>і&lt;ДДДДBP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДДДДДДДДДґ<span style='mso-tab-count:2'>          </span>ГДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>і Сегмент<span style="mso-spacerun: yes">    </span>і<span
+style='mso-tab-count:2'>          </span>і Смещение<span style="mso-spacerun:
+yes">   </span>і [BP+2]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>і возврата<span style="mso-spacerun: yes">   </span>і<span
+style='mso-tab-count:2'>          </span>і возврата<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДДДДДДДДДґ<span style='mso-tab-count:2'>          </span>ГДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>і Смещение<span style="mso-spacerun: yes">   </span>і<span
+style='mso-tab-count:2'>          </span>і Сегмент<span style="mso-spacerun:
+yes">    </span>і [BP+4]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>і аргумента<span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:2'>          </span>і возврата<span style="mso-spacerun:
+yes">   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДДДДДДДДДДґ<span style='mso-tab-count:2'>          </span>ГДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:5'>                              </span>і Смещение<span
+style="mso-spacerun: yes">   </span>і [BP+6]
+
+<p><span
+style='mso-tab-count:5'>                              </span>і аргумента<span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:5'>                              </span>ГДДДДДДДДДДДДґ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>(a)<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">      </span>(b)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 10.9 Стек при вызове процедуры
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Подпрограмма SCROLL в зависимости от
+значения параметра
+
+<p><span
+style="mso-spacerun: yes">    </span>обрабатывает одно из двух окон
+экрана.<span style="mso-spacerun: yes">  </span>Если параметр равен нулю,
+
+<p><span
+style="mso-spacerun: yes">    </span>то изображение в окне, заданном
+координатами (2, 0) и (16, 16)
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвигается вверх на одну строку.<span
+style="mso-spacerun: yes">  </span>Если параметр не равен нулю, то
+
+<p><span
+style="mso-spacerun: yes">    </span>на одну строку вверх сдвигается
+изображение в окне (5, 20), (18,
+
+<p><span
+style="mso-spacerun: yes">    </span>36).<span style="mso-spacerun: yes"> 
+</span>Перемещается текст только в заданном окне, остальной текст
+
+<p><span
+style="mso-spacerun: yes">    </span>или данные на экране остаются
+неподвижными.<span style="mso-spacerun: yes">  </span>Реализация такого
+
+<p><span
+style="mso-spacerun: yes">    </span>оконного режима входит в функцию сдвига
+BIOS.<span style="mso-spacerun: yes">  </span>Для ее использования
+
+<p><span
+style="mso-spacerun: yes">    </span>требуется лишь вызвать BIOS с правильно
+заданными параметрами.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.<span style="mso-spacerun: yes"> 
+</span>10.10 представлена программа на языке Бейсик,
+
+<p><span
+style="mso-spacerun: yes">    </span>обращающаяся к процедуре SCROLL.<span
+style="mso-spacerun: yes">  </span>В этом простом примере в каждое
+
+<p><span
+style="mso-spacerun: yes">    </span>окно записывается строка символов, а затем
+вызывается процедура
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвига текста вверх.<span
+style="mso-spacerun: yes">  </span>Эта Бэйсик-программа не более чем
+
+<p><span
+style="mso-spacerun: yes">    </span>иллюстрирует использование сдвига окон.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первое, на что следует обратить внимание,
+это - способ загрузки
+
+<p><span
+style="mso-spacerun: yes">    </span>программы на машинном языке в
+систему.<span style="mso-spacerun: yes">  </span>Программа содержится в
+
+<p><span
+style="mso-spacerun: yes">    </span>символьной строке P$.<span
+style="mso-spacerun: yes">  </span>Каждый символ в строке соответствует одному
+
+<p><span
+style="mso-spacerun: yes">    </span>байту объектного кода из Фиг.<span
+style="mso-spacerun: yes">  </span>10.8.<span style="mso-spacerun: yes"> 
+</span>В программу на Бэйсике эта
+
+<p><span
+style="mso-spacerun: yes">    </span>программа вводится с клавиатуры по
+листингу ассемблирования.<span style="mso-spacerun: yes">  </span>Это -
+
+<p><span
+style="mso-spacerun: yes">    </span>одна из причин, по которой применение
+рассмотренного способа
+
+<p><span
+style="mso-spacerun: yes">    </span>ограничено лишь короткими
+программами.<span style="mso-spacerun: yes">  </span>При вводе программы таким
+
+<p><span
+style="mso-spacerun: yes">    </span>способом очень легко сделать ошибки.
+
+<p>A<span
+style='mso-tab-count:1'>    </span>
+
+<p><span
+style='mso-tab-count:2'>            </span>1 CLS
+
+<p><span
+style='mso-tab-count:2'>            </span>5 DEFINT A-Z
+
+<p><span
+style='mso-tab-count:2'>            </span>10
+P$=CHR$(&amp;H55)+CHR$(&amp;H8B)+CHR$(&amp;HEC)+CHR$(&amp;H8B)+CHR$(&amp;H76)+CHR$(&amp;H6)
+
+<p><span
+style='mso-tab-count:2'>            </span>20
+P$=P$+CHR$(&amp;H8B)+CHR$(&amp;HC)+CHR$(&amp;HA)+CHR$(&amp;HC9)+CHR$(&amp;HB7)+CHR$(&amp;H7)
+
+<p><span
+style='mso-tab-count:2'>            </span>30
+P$=P$+CHR$(&amp;HB8)+CHR$(&amp;H1)+CHR$(&amp;H6)+CHR$(&amp;H75)+CHR$(&amp;HC)+CHR$(&amp;HB9)
+
+<p><span
+style='mso-tab-count:2'>            </span>40
+P$=P$+CHR$(&amp;H0)+CHR$(&amp;H2)+CHR$(&amp;HBA)+CHR$(&amp;H10)+CHR$(&amp;H10)+CHR$(&amp;HCD)
+
+<p><span
+style='mso-tab-count:2'>            </span>50
+P$=P$+CHR$(&amp;H10)+CHR$(&amp;H5D)+CHR$(&amp;HCA)+CHR$(&amp;H2)
+
+<p><span
+style='mso-tab-count:2'>            </span>60
+P$=P$+CHR$(&amp;H0)+CHR$(&amp;HB9)+CHR$(&amp;H14)
+
+<p><span
+style='mso-tab-count:2'>            </span>70
+P$=P$+CHR$(&amp;H5)+CHR$(&amp;HBA)+CHR$(&amp;H24)+CHR$(&amp;H12)+CHR$(&amp;HEB)+CHR$(&amp;HF2)
+
+<p><span
+style='mso-tab-count:2'>            </span>100
+ENTRY!=(PEEK(VARPTR(P$)+1))+(PEEK(VARPTR(P$)+2))*256
+
+<p><span
+style='mso-tab-count:2'>            </span>110 IF ENTRY!&gt;32768! THEN
+ENTRY%=ENTRY!-65536! ELSE ENTRY%=ENTRY!
+
+<p><span
+style='mso-tab-count:2'>            </span>120 A$=&quot;АБВГДЕЖЗИК&quot;
+
+<p><span
+style='mso-tab-count:2'>            </span>130 L=0:R=1
+
+<p><span
+style='mso-tab-count:2'>            </span>140 LOCATE 1,1:PRINT &quot;Пример
+сдвига окна . . .э
+
+<p><span
+style='mso-tab-count:2'>            </span>200 LOCATE 15,1:PRINT A$;
+
+<p><span
+style='mso-tab-count:2'>            </span>210 CALL ENTRY%(L)
+
+<p><span
+style='mso-tab-count:2'>            </span>220 LOCATE 18,21:PRINT A$;
+
+<p><span
+style='mso-tab-count:2'>            </span>230 CALL ENTRY%(R)
+
+<p><span
+style='mso-tab-count:2'>            </span>240 A$=RIGHT$(A$,9)+LEFT$(A$,1)
+
+<p><span
+style='mso-tab-count:2'>            </span>250 GOTO 200
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 10.10 Бэйсик-программа для сдвига окон
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку программа на машинном языке
+задана в строке P$, то
+
+<p><span
+style="mso-spacerun: yes">    </span>для определения адреса этой строки
+программа на языке Бейсик
+
+<p><span
+style="mso-spacerun: yes">    </span>использует функцию VARPTR.<span
+style='mso-tab-count:1'>      </span>Для оператора CALL необходим адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы, поэтому для его нахождения и
+используется функция
+
+<p><span
+style="mso-spacerun: yes">    </span>VARPTR.<span style="mso-spacerun: yes"> 
+</span>Воспользовавшись информацией из приложения C справочника
+
+<p><span
+style="mso-spacerun: yes">    </span>по Бейсику, можно найти адрес строки во
+втором и третьем байтах
+
+<p><span
+style="mso-spacerun: yes">    </span>дескриптора строки.<span
+style="mso-spacerun: yes">  </span>Возвращаемое функцей VARPTR значение
+является
+
+<p><span
+style="mso-spacerun: yes">    </span>адресом дескриптора строки для P$.<span
+style='mso-tab-count:1'>    </span>Программа извлекает адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>строки из дескриптора и присваивает его
+значение переменной ENTRY!.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку это значение может находиться в
+диапазоне от 0 до 65536,
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмма должна преобразовать его в
+целое значение длиной в
+
+<p><span
+style="mso-spacerun: yes">    </span>одно слово, со значением от от -32768 до
+32767.<span style="mso-spacerun: yes">  </span>Это слово
+
+<p><span
+style="mso-spacerun: yes">    </span>помещается в переменную ENTRY%.<span
+style="mso-spacerun: yes">  </span>В остальных строках программы в
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвигаемые окна записывается символьная
+строка, а затем для
+
+<p><span
+style="mso-spacerun: yes">    </span>перемещения текста вызывается подпрограмма
+SCROLL.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При запуске этой программы вы увидите, что
+данные в двух окнах
+
+<p><span
+style="mso-spacerun: yes">    </span>перемещаются независимо.<span
+style="mso-spacerun: yes">  </span>Такой прием позволяет задать два
+
+<p><span
+style="mso-spacerun: yes">    </span>различных окна на экране и перемещать в
+них текст независимо друг
+
+<p><span
+style="mso-spacerun: yes">    </span>от друга.<span style="mso-spacerun: yes"> 
+</span>Если написать немного более длинную программу, можно
+
+<p><span
+style="mso-spacerun: yes">    </span>было бы ограничить каждое окно рамкой,
+чтобы деиствительно отделить
+
+<p><span
+style="mso-spacerun: yes">    </span>их друг от друга.<span
+style="mso-spacerun: yes">  </span>Применение подобных методов построения окон
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет писать довольно симпатичные
+программы с одновременным
+
+<p><span
+style="mso-spacerun: yes">    </span>выводом на экран наскольких фрагментов
+текста.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прежде чем покончить с этой программой,
+давайте просмотрим
+
+<p><span
+style="mso-spacerun: yes">    </span>через отладчик часть программы, написанную
+на машинном языке.<span style="mso-spacerun: yes">  </span>Для
+
+<p><span
+style="mso-spacerun: yes">    </span>этого надо иметь готовую к выполнению
+программу ДОС DEBUG.<span style='mso-tab-count:1'>    </span>Это
+
+<p><span
+style="mso-spacerun: yes">    </span>достигается следующим образом:<span
+style="mso-spacerun: yes">  </span>сначала загружается программа
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG, а затем загружается BASIC.COM (или
+BASICA.COM, если
+
+<p><span
+style="mso-spacerun: yes">    </span>используется расширенный Бейсик).<span
+style="mso-spacerun: yes">  </span>После загрузки программы Бейсик
+
+<p><span
+style="mso-spacerun: yes">    </span>замените первый символ в P$ (и
+соответственно, первый байт
+
+<p><span
+style="mso-spacerun: yes">    </span>программы на машинном языке), на
+CHR$($HCC).<span style="mso-spacerun: yes">  </span>Это - код для
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания INT 3 прерывания по точке
+прерывания.<span style="mso-spacerun: yes">  </span>Теперь, когда во
+
+<p><span
+style="mso-spacerun: yes">    </span>время выполнения программы на языке Бейсик
+она вызывает
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмму на машинном языке, управление
+получает программа
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG.<span style="mso-spacerun: yes"> 
+</span>Теперь можно вновь заменить код 0CCH на исходное значение
+
+<p><span
+style="mso-spacerun: yes">    </span>(в данном случае 055H).<span
+style="mso-spacerun: yes">  </span>Программу DEBUG можно использовать для
+
+<p><span
+style="mso-spacerun: yes">    </span>трассировки программы на машинном
+языке.<span style="mso-spacerun: yes">  </span>Конечно, если программа
+
+<p><span
+style="mso-spacerun: yes">    </span>на языке ассемблера хорошо написана и
+коротка, то такая отладка не
+
+<p><span
+style="mso-spacerun: yes">    </span>так необходима.<span style="mso-spacerun:
+yes">  </span>На самом же деле вы, вероятно, заметите, что в
+
+<p><span
+style="mso-spacerun: yes">    </span>большинстве случаев из-за ошибок при вводе
+с клавиатуры программы
+
+<p><span
+style="mso-spacerun: yes">    </span>на машинном языке в строку интерпретатора
+Бейсик возникает
+
+<p><span
+style="mso-spacerun: yes">    </span>множество проблем.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-10">Кассета</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа управления кассетным
+магнитофоном в BIOS - это пример
+
+<p><span
+style="mso-spacerun: yes">    </span>работы с последовательным устройством с
+помощью временных циклов.
+
+<p><span
+style="mso-spacerun: yes">    </span>Но из-за отличий временных параметров
+команд, программа
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживания кассетного магнитофона BIOS
+во всех критических
+
+<p><span
+style="mso-spacerun: yes">    </span>случаях использует таймер-счетчик
+8253.<span style="mso-spacerun: yes">  </span>Здесь будут рассмотрены
+
+<p><span
+style="mso-spacerun: yes">    </span>только две программы использующие таймер -
+READ_HALF_BIT и
+
+<p><span
+style="mso-spacerun: yes">    </span>WRITE_BIT.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В техническом описании содержится вся
+информация о методе
+
+<p><span
+style="mso-spacerun: yes">    </span>кодировки данных, записываемых на кассету.
+Программа WRITE_BIT
+
+<p><span
+style="mso-spacerun: yes">    </span>записывает на ленту один бит данных. Выход
+канала 2
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера/счетчика непосредственно
+подключается к выводному порту
+
+<p><span
+style="mso-spacerun: yes">    </span>кассетного адаптера. Поэтому запись бита
+данных заключается в
+
+<p><span
+style="mso-spacerun: yes">    </span>установке правильной частоты канала 2
+таймера и ожидании одного
+
+<p><span
+style="mso-spacerun: yes">    </span>полного цикла. Программа WRITE_BIT делает
+именно это, но в обратном
+
+<p><span
+style="mso-spacerun: yes">    </span>порядке. Когда программа WRITE_BIT
+получает управление, предыдущий
+
+<p><span
+style="mso-spacerun: yes">    </span>бит еще находится в процессе записи. Два
+цикла ожидания в программе
+
+<p><span
+style="mso-spacerun: yes">    </span>WRITE_BIT обеспечивают задержку на
+пол-цикла, необходимую для
+
+<p><span
+style="mso-spacerun: yes">    </span>завершения записи предыдущего бита. Когда
+запись бита завершена,
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS заносит новое значение частоты в
+канал 2 таймера. Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>WRITE_BIT возвращает управление вызвавшей
+программе тогда, когда
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>новая частота начала выдаваться на ленту. Программа управления
+
+<p><span
+style="mso-spacerun: yes">    </span>кассетным магнитофоном достаточно быстрая
+(или скорость выдачи бит
+
+<p><span
+style="mso-spacerun: yes">    </span>в кассету достаточно медленная - это
+зависит от вашей точки
+
+<p><span
+style="mso-spacerun: yes">    </span>зрения), чтобы программа WRITE_BIT
+вызвалась снова до того, как
+
+<p><span
+style="mso-spacerun: yes">    </span>таймер завершит первые полцикла записи
+бита.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа READ_HALF_BIT выполняет
+противоположную работу. Эта
+
+<p><span
+style="mso-spacerun: yes">    </span>программа ждет до тех пор, пока бит ввода
+с кассетного механизма
+
+<p><span
+style="mso-spacerun: yes">    </span>(бит 4 порта 62H) не изменит состояние.
+Каждая смена состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>этого бита соответствует чтению половины
+бита. Программа кассетного
+
+<p><span
+style="mso-spacerun: yes">    </span>механизма вычитает текущее значение
+таймера из его значения при
+
+<p><span
+style="mso-spacerun: yes">    </span>предыдущей смене бита. Это число
+соответствует времени, которое
+
+<p><span
+style="mso-spacerun: yes">    </span>потребовалось сигналу кассеты, чтобы
+перейти из одного состояния в
+
+<p><span
+style="mso-spacerun: yes">    </span>другое. Сложение двух полубитовых
+переходов дает общую длительность
+
+<p><span
+style="mso-spacerun: yes">    </span>цикла этого бита. Так как времена циклов у
+нулей и единиц разные,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа READ_BYTE может определить
+значение текущего бита. Из
+
+<p><span
+style="mso-spacerun: yes">    </span>восьми прочтенных битов она формирует
+байт.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа READ_HALF_BIT иллюстрирует
+использование канала 0
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера для целей измерения времени. BIOS
+замораживает значение
+
+<p><span
+style="mso-spacerun: yes">    </span>счетчика таймера, а затем читает его в
+регистр AX. Использование
+
+<p><span
+style="mso-spacerun: yes">    </span>значения 0, загружаемого в счетчик 0
+таймера позволяет вычитать
+
+<p><span
+style="mso-spacerun: yes">    </span>любые два значения таймера, не анализируя,
+какое из них больше; в
+
+<p><span
+style="mso-spacerun: yes">    </span>любом случае получится верная разность.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа управления кассетным
+магнитофоном BIOS содержит в
+
+<p><span
+style="mso-spacerun: yes">    </span>себе подпрограммы, выполняющие четыре
+функции. Две из них - блочные
+
+<p><span
+style="mso-spacerun: yes">    </span>операции ввода-вывода, чтение блока и
+запись блока. Для
+
+<p><span
+style="mso-spacerun: yes">    </span>эффективного использования ленты данные
+записываются на нее блоками
+
+<p><span
+style="mso-spacerun: yes">    </span>по 256 байт. BIOS проверяет правильность
+ввода этих блоков с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью циклического избыточного кода CRC
+(Cyclic Redundacy Check).
+
+<p><span
+style="mso-spacerun: yes">    </span>Проверка ошибок с помощью CRC выявляет
+почти все ошибки, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>могут возникнуть на ленте. Это позволяет
+IBM PC использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>кассеты в качестве средства памяти с
+уверенностью, что вновь
+
+<p><span
+style="mso-spacerun: yes">    </span>читаемые с них данные правильны. Кроме
+того, BIOS помещает данные в
+
+<p><span
+style="mso-spacerun: yes">    </span>блоки в связи с несовершенством механизма
+кассетного магнитофона,
+
+<p><span
+style="mso-spacerun: yes">    </span>проявляющемся при записи блоков любого
+размера. Программа обязана
+
+<p><span
+style="mso-spacerun: yes">    </span>ждать до тех пор, пока двигатель
+кассетного магнитофона не
+
+<p><span
+style="mso-spacerun: yes">    </span>включится и разгонится до нужной скорости.
+Программа также должна
+
+<p><span
+style="mso-spacerun: yes">    </span>записывать на ленту синхронизирующие
+импульсы для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор вошел в синхронизацию с
+данными тогда, когда они
+
+<p><span
+style="mso-spacerun: yes">    </span>будут читаться. Наконец, BIOS записывает
+слово CRC и конечный байт
+
+<p><span
+style="mso-spacerun: yes">    </span>в конце каждого блока. Вся эта
+дополнительная работа происходит с
+
+<p><span
+style="mso-spacerun: yes">    </span>любым блоком данных, независимо от того,
+один это байт или 10000
+
+<p><span
+style="mso-spacerun: yes">    </span>байт. Фирма IBM выбрала размер блока,
+равный 256, как компромисс
+
+<p><span
+style="mso-spacerun: yes">    </span>между слижком большим размером блока и
+нерациональным
+
+<p><span
+style="mso-spacerun: yes">    </span>использованием ленты.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Другие две функции программы управления
+кассетным магнитофоном
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS - просто включают двигатель
+ммагнитофона и выключают его. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>вы думаете о разработке простого способа
+подсоединения вашей
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратуры к IBM PC, имейте в виду, что
+кассетный порт очень удобен
+
+<p><span
+style="mso-spacerun: yes">    </span>для этой цели. С помощью разъема
+кассетного магнитофона,
+
+<p><span
+style="mso-spacerun: yes">    </span>расположенного сзади корпуса машины, вы
+можете подключиться к
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательной линии ввода-вывода.
+Существует также реле, которое
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет управлять низковольтным
+слаботочным двигателем. Но есть
+
+<p><span
+style="mso-spacerun: yes">    </span>одна вещь, о которой надо помнить.
+Выходной бит подключается прямо
+
+<p><span
+style="mso-spacerun: yes">    </span>к входному биту, когда реле двигателя
+включено. Такое соединение
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет диагностическим программам фирмы
+IBM проверять входные и
+
+<p><span
+style="mso-spacerun: yes">    </span>выходные цепи кассетного механизма без
+записи и чтения данных. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>вы отдельно используете последовательные
+вход и выход, нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>включить реле двигателя - даже если
+двигателя нет.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

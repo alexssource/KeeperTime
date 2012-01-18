@@ -1,0 +1,481 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="6-5">Макрооператоры</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">     </span>Пример макрокоманды IRPC на Фиг. 6.7
+иллюстрирует, в частности,
+
+<p><span
+style="mso-spacerun: yes">    </span>применение символа &quot;&amp;&quot;. Это
+- оператор макрокоманд, который служит
+
+<p><span
+style="mso-spacerun: yes">    </span>для соединения двух элементов. В данном
+примере оператор &quot;&amp;&quot;
+
+<p><span
+style="mso-spacerun: yes">    </span>соединяет параметр CHAR со
+строкой-константой &quot;X&quot;. Как вы видите,
+
+<p><span
+style="mso-spacerun: yes">    </span>при этом формируется действительное имя
+регистра.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Еще одним удобным средством при
+программировании макрокоманд
+
+<p><span
+style="mso-spacerun: yes">    </span>является оператор LOCAL. Оператор LOCAL
+задает метку, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>используется только в данной макрокоманде.
+Эта метка должна быть
+
+<p><span
+style="mso-spacerun: yes">    </span>уникальной для каждого вызова данной
+макрокоманды. Предположим, что
+
+<p><span
+style="mso-spacerun: yes">    </span>вы хотите написать макрокоманду, в которой
+должен быть кусок
+
+<p><span
+style="mso-spacerun: yes">    </span>программы следующего вида:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>AAAAA:<span style='mso-tab-count:1'>      </span>ADD<span
+style='mso-tab-count:1'>   </span>AL,[BX]
+
+<p><span
+style='mso-tab-count:2'>            </span>INC<span style='mso-tab-count:1'>   </span>BX
+
+<p><span
+style='mso-tab-count:2'>            </span>LOOP<span style='mso-tab-count:1'>  </span>AAAAA
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>При первом вызове этой макрокоманды
+никаких сложностей не
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>           </span>Microsoft (R) Macro Assembler Version
+5.00<span style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>4/2/89 16:06:59
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Фиг. 6.8 Использование команды LOCAL<span style='mso-tab-count:3'>                 </span><span
+style="mso-spacerun: yes">   </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 6.8 Использование команды LOCAL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">       </span>PAUSE<span style="mso-spacerun: yes">  
+</span>MACRO<span style="mso-spacerun: yes">   </span>TIME
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>LOCAL<span style="mso-spacerun: yes">  
+</span>LABEL
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>MOV<span style="mso-spacerun: yes">    
+</span>CX,TIME
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">       </span>LABEL:<span style="mso-spacerun: yes"> 
+</span>LOOP<span style="mso-spacerun: yes">    </span>LABEL
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>PAUSE<span style="mso-spacerun: yes">  
+</span>100
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style="mso-spacerun:
+yes">  </span>B9 0064<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>MOV<span style="mso-spacerun: yes">    
+</span>CX,100
+
+<p><span
+style='mso-tab-count:2'>            </span>0003<span style="mso-spacerun:
+yes">  </span>E2 FE<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>1<span style="mso-spacerun: yes"> 
+</span>??0000: LOOP<span style="mso-spacerun: yes">    </span>??0000
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>PAUSE<span style="mso-spacerun: yes">  
+</span>1000
+
+<p><span
+style='mso-tab-count:2'>            </span>0005<span style="mso-spacerun:
+yes">  </span>B9 03E8<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>MOV<span style="mso-spacerun: yes">    
+</span>CX,1000
+
+<p><span
+style='mso-tab-count:2'>            </span>0008<span style="mso-spacerun:
+yes">  </span>E2 FE<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">    </span>1<span style="mso-spacerun: yes"> 
+</span>??0001: LOOP<span style="mso-spacerun: yes">    </span>??0001
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>000A<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span><span style="mso-spacerun:
+yes"> </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 6.8 Использование команды LOCAL
+
+<p><span
+style="mso-spacerun: yes">    </span>возникает. Однако при ее повторном
+использовании в той же
+
+<p><span
+style="mso-spacerun: yes">    </span>программе, метка AAAAA появляется второй
+раз. Ассемблер не может
+
+<p><span
+style="mso-spacerun: yes">    </span>допустить двух меток с одним и тем же
+именем в одной программе и
+
+<p><span
+style="mso-spacerun: yes">    </span>отмечает это как ошибку.
+
+<p><span
+style='mso-tab-count:1'>      </span>Проблема будет разрешена, если объявить
+метку AAAAA локальной
+
+<p><span
+style="mso-spacerun: yes">    </span>(LOCAL) для данной макрокоманды. Тогда
+ассемблер установит сформи-
+
+<p><span
+style="mso-spacerun: yes">    </span>рованное им уникальное имя для каждого
+случая применения метки
+
+<p><span
+style="mso-spacerun: yes">    </span>AAAAA. Встретив имя типа LOCAL впервые,
+ассемблер меняет его на имя
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;??0000&quot;. Во второй раз - на имя
+&quot;??0001&quot; и т.д. Каждое имя в
+
+<p><span
+style="mso-spacerun: yes">    </span>транслируемой программе будет уникальным,
+поэтому никаких ошибок не
+
+<p><span
+style="mso-spacerun: yes">    </span>возникнет. На Фиг. 6.8 показано
+использование оператора LOCAL.
+
+<p><span
+style="mso-spacerun: yes">    </span>Здесь макрокоманда PAUSE устанавливает
+счетчик цикла и затем орга-
+
+<p><span
+style="mso-spacerun: yes">    </span>низует цикл с помощью метки, объявленной
+LOCAL. Данная макрокоманда
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет организовывать в выполнении
+программы паузу переменной
+
+<p><span
+style="mso-spacerun: yes">    </span>длительности. Если в макрокоманде
+необходимо использовать описатель
+
+<p><span
+style="mso-spacerun: yes">    </span>LOCAL, то он должен быть первым оператором
+макрокоманды, сразу же
+
+<p><span
+style="mso-spacerun: yes">    </span>следуя за оператором MACRO.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Символ<span style='mso-tab-count:3'>                  </span>Значение
+
+<p><span
+style="mso-spacerun: yes">    
+</span>---------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>;;<span style='mso-tab-count:1'>    </span>Комментарий,
+имспользуемый только в макроопределении
+
+<p><span
+style='mso-tab-count:1'>      </span>&amp;<span style='mso-tab-count:1'>     </span>Соединение
+текста с параметром
+
+<p><span
+style='mso-tab-count:1'>      </span>!<span style='mso-tab-count:1'>     </span>Вводить
+следующий символ без интерпретации
+
+<p><span
+style='mso-tab-count:1'>      </span>%<span style='mso-tab-count:1'>     </span>Преобразовать
+следующее выражение в значение
+
+<p><span
+style="mso-spacerun: yes">     </span>---------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:3'>                  </span>Фиг. 6.9 Макросимволы
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существуют специальные символы, которые
+помогут вам управлять
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокомандами и их параметрами. В таблице
+на Фиг. 6.9 показаны
+
+<p><span
+style="mso-spacerun: yes">    </span>четыре таких символов с объяснением их
+значений.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.6.10 приведен ассемблерный листинг
+программы, в которой
+
+<p><span
+style="mso-spacerun: yes">    </span>эти символы применяются. Мы уже видели
+символ &quot;;;&quot; в некоторых
+
+<p><span
+style="mso-spacerun: yes">    </span>макрокомандах сопроцессора 8087. Этот
+специальный указатель поля
+
+<p><span
+style="mso-spacerun: yes">    </span>комментариев указывает макропроцессору на
+необходимость исключить
+
+<p><span
+style="mso-spacerun: yes">    </span>поле комментариев при расширении данной
+макрокоманды. Это позволит
+
+<p><span
+style="mso-spacerun: yes">    </span>включать в макрокоманду комментарии, не
+допуская их появления при
+
+<p><span
+style="mso-spacerun: yes">    </span>каждом расширении данной макрокоманды.
+Применение символа &quot;&amp;&quot; мы
+
+<p><span
+style="mso-spacerun: yes">    </span>также встречали в программе на Фиг. 6.7.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Символ &quot;!&quot; позволяет вам в
+качестве следующего за ним знака
+
+<p><span
+style="mso-spacerun: yes">    </span>поставить любой символ. Это понадобится,
+если вы захотите включить
+
+<p><span
+style="mso-spacerun: yes">    </span>в макрокоманду какой-либо специальный
+символ, например, &quot;%&quot;, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>он не вызывал при этом никакой макрооперации.
+И наконец, оператор
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;%&quot; преобразует символическое
+имя в числовое значение, которое это-
+
+<p><span
+style="mso-spacerun: yes">    </span>му имени в данный момент соответствует. Вы
+можете воспользоваться
+
+<p><span
+style="mso-spacerun: yes">    </span>этой возможностью для ведения нумерации
+при генерации макрокоманды.
+
+<p><span
+style="mso-spacerun: yes">    </span>В нашем примере на Фиг. 6.10 макрокоманда
+нумерует выводимые
+
+<p><span
+style="mso-spacerun: yes">    </span>сообщения в соответствии со значением
+символического имени VALUE.
+
+<p><span
+style='mso-tab-count:2'>           </span>Microsoft (R) Macro Assembler Version
+5.00<span style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>1/1/80 04:03:15
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Фиг. 6.10 Специальные символы в макрокомандах<span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">   </span>Page<span
+style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 6.10 Специальные символы в макрокомандах
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>= 0000<span style='mso-tab-count:
+3'>                  </span><span style="mso-spacerun: yes">      
+</span>VALUE<span style="mso-spacerun: yes">   </span>EQU<span
+style="mso-spacerun: yes">     </span>0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">       </span>EXAMPLE MACRO<span style="mso-spacerun:
+yes">   </span>PARAMETER
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>DB<span style="mso-spacerun: yes">     
+</span>'MSG&amp;PARAMETER' ;; Комментарий появится только в определении
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>INC<span style="mso-spacerun: yes">    
+</span>AX
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ENDM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>EXAMPLE %VALUE
+
+<p><span
+style='mso-tab-count:2'>            </span>0000<span style="mso-spacerun:
+yes">  </span>4D 53 47 30<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>DB<span style="mso-spacerun: yes">    
+</span><span style="mso-spacerun: yes"> </span>'MSG0' ;
+
+<p><span
+style='mso-tab-count:2'>            </span>0004<span style="mso-spacerun:
+yes">  </span>40<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">    </span>1<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">       </span>INC<span style="mso-spacerun: yes">    
+</span>AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>0005<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">       </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 6.10 Специальные символы в макрокомандах
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

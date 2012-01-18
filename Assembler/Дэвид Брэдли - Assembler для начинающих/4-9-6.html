@@ -1,0 +1,543 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="4-9-6">Управление циклами
+</a></b></div></p>
+<p><span
+style="mso-spacerun: yes">    </span>Существует несколько команд условного
+перехода, предназначенных для
+
+<p><span
+style="mso-spacerun: yes">    </span>управления циклами в программах.<span
+style="mso-spacerun: yes">  </span>Поскольку программые циклы
+
+<p><span
+style="mso-spacerun: yes">    </span>используются часто, желательно эффективное
+управление циклом.<span style="mso-spacerun: yes">  </span>На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 4.30 показаны четыре команды,
+созданные для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>облегчить программирование циклов на языке
+ассемблера
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора 8088.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Так же, как строковые команды используют
+регистр CX в качестве
+
+<p><span
+style="mso-spacerun: yes">    </span>счетчика, команды цикла LOOP используют
+регистр CX в качестве
+
+<p><span
+style="mso-spacerun: yes">    </span>счетчика цикла. Все эти команды неявно
+рассматривают регистр CX как
+
+<p><span
+style="mso-spacerun: yes">    </span>счетчик итераций цикла. Простейшая команда
+среди них - команда
+
+<p><span
+style="mso-spacerun: yes">    </span>LOOP. Команда LOOP уменьшает регистр CX и
+передает управление на
+
+<p><span
+style="mso-spacerun: yes">    </span>метку, если содержимое регистра CX не
+равно 0. Если вычитание
+
+<p><span
+style="mso-spacerun: yes">    </span>единицы из регистра CX не привело к
+нулевому результату, команда
+
+<p><span
+style="mso-spacerun: yes">    </span>LOOP не делает перехода, и выполняется
+следующая команда.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Приведенный ниже программный фрагмент
+демонстрирует обычное
+
+<p><span
+style="mso-spacerun: yes">    </span>использование команды LOOP.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">      </span>MOV<span style="mso-spacerun: yes">   
+</span>CX,LOOP_COUNT
+
+<p><span
+style="mso-spacerun: yes">      </span>BEGIN_LOOP:
+
+<p><span
+style="mso-spacerun: yes">      </span>; ...<span style="mso-spacerun: yes"> 
+</span>тело цикла
+
+<p><span
+style="mso-spacerun: yes">      </span>LOOP<span style="mso-spacerun: yes">  
+</span>BEGIN_LOOP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+3'>              </span>1/1/80 04:02:01
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 4.30 Команды цикла<span style='mso-tab-count:5'>                           </span>Page<span
+style='mso-tab-count:1'>  </span> 1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.30 Команды цикла
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>;----------------------------------------
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; В этом примере демонстрируются команды
+цикла.
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; Команды в примере не являются
+законченной программой.
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>;----------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>E3 06<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>JCXZ<span style="mso-spacerun: yes">    </span>END_OF_LOOP<span
+style="mso-spacerun: yes">     </span>; Конец цикла, если CX равно 0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0002<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>BEGIN_LOOP:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; ....<span style="mso-spacerun: yes"> 
+</span>Тело цикла
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0002<span style="mso-spacerun: yes">  </span>E2 FE<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>LOOP<span style="mso-spacerun: yes">    </span>BEGIN_LOOP<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    </span>;
+Переход пока регистр CX не станет равен 0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; ....<span style="mso-spacerun: yes"> 
+</span>Если проверяется какое-либо условие, то
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0004<span style="mso-spacerun: yes">  </span>E1 FC<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>LOOPE<span style="mso-spacerun: yes">   </span>BEGIN_LOOP<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    </span>;
+Переход по равенству в условии и
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">    </span>;<span style="mso-spacerun: yes"> 
+</span>значение регистра CX не равно 0
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; ....<span style="mso-spacerun: yes"> 
+</span>Или
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0006<span style="mso-spacerun: yes">  </span>E0 FA<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>LOOPNE<span style="mso-spacerun: yes">  </span>BEGIN_LOOP<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    </span>;
+Переход по неравенству в условиии и
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">    </span>;<span style="mso-spacerun: yes"> 
+</span>значение регистра CX не равно 0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0008<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>END_OF_LOOP:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0008<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.30 Команда цикла
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа помещает число итераций цикла в
+регистр CX перед
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнением цикла. Затем выполняется тело
+цикла, а следом за ним
+
+<p><span
+style="mso-spacerun: yes">    </span>команда LOOP. Она уменьшает счетчик на
+единицу, что соответствует
+
+<p><span
+style="mso-spacerun: yes">    </span>единственной, только что выполненной
+итерации цикла. Если теперь
+
+<p><span
+style="mso-spacerun: yes">    </span>счетчик в регистре CX равен 0, программа продолжает
+выполняться
+
+<p><span
+style="mso-spacerun: yes">    </span>после команды LOOP. Если счетчик не равен
+0, управление
+
+<p><span
+style="mso-spacerun: yes">    </span>возвращается к началу цикла, чтобы
+совершить еще один проход по
+
+<p><span
+style="mso-spacerun: yes">    </span>телу цикла. Тело цикла выполняется столько
+раз, сколько было
+
+<p><span
+style="mso-spacerun: yes">    </span>сначала задано содержимым регистра CX.
+Единственное важное
+
+<p><span
+style="mso-spacerun: yes">    </span>замечание: если программа внутри цикла
+изменяет регистр CX, число
+
+<p><span
+style="mso-spacerun: yes">    </span>итераций цикла не будет соответствовать
+начальному значению в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре CX.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Описанный метод одинаково хорошо работает,
+когда число циклов
+
+<p><span
+style="mso-spacerun: yes">    </span>известно во время ассемблирования (как в
+примере, где LOOP_COUNT -
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно заносимое значение), и
+когда число циклов
+
+<p><span
+style="mso-spacerun: yes">    </span>определяется во время выполнения. Если
+вычисленное число оказалось
+
+<p><span
+style="mso-spacerun: yes">    </span>равным 0, цикл выполнится 65536 раз. Когда
+микропроцессор 8088
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняет первую команду LOOP, он
+уменьшает CX от 0 до 0FFFFH, и
+
+<p><span
+style="mso-spacerun: yes">    </span>поскольку теперь регистр CX ненулевой,
+повторяет цикл. Таким
+
+<p><span
+style="mso-spacerun: yes">    </span>образом, загрузка нулевого значения
+счетчика циклов - специальный
+
+<p><span
+style="mso-spacerun: yes">    </span>случай. Этот специальный случай обрабатывается
+командой JCXZ
+
+<p><span
+style="mso-spacerun: yes">    </span>(переход, если содержимое регистра CX
+равно 0). Эта команда
+
+<p><span
+style="mso-spacerun: yes">    </span>проверяет текущее содержимое регистра CX,
+и делает переход, если
+
+<p><span
+style="mso-spacerun: yes">    </span>оно равно нулю. Команда не проверяет ни
+одного флага, и не влияет
+
+<p><span
+style="mso-spacerun: yes">    </span>ни на один из них. Следующий пример
+аналогичен предыдущему, за
+
+<p><span
+style="mso-spacerun: yes">    </span>исключением того, что он загружает регистр
+CX из ячейки памяти,
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое которой вычисляется во время
+выполнения программы. По
+
+<p><span
+style="mso-spacerun: yes">    </span>этой причине может оказаться, что счетчик
+циклов нулевой, и пример
+
+<p><span
+style="mso-spacerun: yes">    </span>использует команду JCXZ, чтобы проверить,
+нужно ли полностью
+
+<p><span
+style="mso-spacerun: yes">    </span>пропустить тело цикла.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>MOV<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">   </span>CX,LOOP_COUNT_WORD
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>JCXZ<span style="mso-spacerun: yes">    </span>END_OF_LOOP
+
+<p><span
+style="mso-spacerun: yes">      </span>BEGIN_LOOP:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>;<span style="mso-spacerun: yes">   </span>... тело цикла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>LOOP<span style="mso-spacerun: yes">    </span>BEGIN_LOOP
+
+<p><span
+style="mso-spacerun: yes">      </span>END_OF_LOOP:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В программе не нужно использовать команду
+JCXZ в каждом цикле с
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисляемым счетчиком. Если программист
+знает, что счетчик циклов
+
+<p><span
+style="mso-spacerun: yes">    </span>никогда не будет равен нулю, проверка не
+нужна. Однако опыт
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает, что значение, которое
+&quot;никогда&quot; не должно появиться,
+
+<p><span
+style="mso-spacerun: yes">    </span>обычно появляется в первую очередь, как
+только вы начинаете
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнять программу.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Оставшиеся две команды цикла предоставляют
+еще большие
+
+<p><span
+style="mso-spacerun: yes">    </span>возможностей при управлении циклами. Эти
+команды аналогичны
+
+<p><span
+style="mso-spacerun: yes">    </span>префиксам REPE и REPNE. Если команда LOOP
+выходит из цикла, только
+
+<p><span
+style="mso-spacerun: yes">    </span>когда в регистре CX оказывается нуль, то
+команда LOOPE (цикл, пока
+
+<p><span
+style="mso-spacerun: yes">    </span>равно) выходит из цикла, если установлен
+флаг нуля, или если в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре CX получился 0. Тем самым
+становится возможным
+
+<p><span
+style="mso-spacerun: yes">    </span>двойственное завершение цикла. Программа
+может загрузить в регистр
+
+<p><span
+style="mso-spacerun: yes">    </span>CX максимальное число итераций цикла, а
+затем проверять флаг нуля в
+
+<p><span
+style="mso-spacerun: yes">    </span>конце каждого цикла на условие завершения.
+Команда LOOPNE (цикл,
+
+<p><span
+style="mso-spacerun: yes">    </span>пока не равно) выполняет обратную к
+описанной проверку флага нуля:
+
+<p><span
+style="mso-spacerun: yes">    </span>цикл здесь завершается, если регистр
+достиг нуля, или если
+
+<p><span
+style="mso-spacerun: yes">    </span>установлен флаг нуля.
+
+<p><span
+style='mso-tab-count:1'>      </span>Следующий пример показывает использование
+команды LOOPNE. В
+
+<p><span
+style="mso-spacerun: yes">    </span>примере складываются два списка чисел,
+чтобы найти пару элементов,
+
+<p><span
+style="mso-spacerun: yes">    </span>сумма которых точно равна 100. Так как в
+каждой итерации перед
+
+<p><span
+style="mso-spacerun: yes">    </span>проверкой складываются два чила, команду
+REPNE CMPSB использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>нельзя.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В примере предполагается, что пары
+регистров DS:SI и ES:DI
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализированы так, чтобы указывать на
+эти списки.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>MOV<span style='mso-tab-count:1'>   </span>CX,MAX_LOOP_COUNT
+;максимальное число заходов
+
+<p><span
+style="mso-spacerun: yes">      </span>BEGIN_LOOP:
+
+<p><span
+style='mso-tab-count:1'>      </span>LODSB<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">  </span>;чтение числа из первого списка
+
+<p><span
+style='mso-tab-count:1'>      </span>ADD<span style='mso-tab-count:1'>   </span>AL,ES:[DI]<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes"> 
+</span>;прибавить из второго списка
+
+<p><span
+style='mso-tab-count:1'>      </span>INC<span style='mso-tab-count:1'>   </span>DI<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes"> 
+</span>;указатель на следующий элемент
+
+<p><span
+style='mso-tab-count:1'>      </span>CMP<span style='mso-tab-count:1'>   </span>AL,100<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>;проверка на нужное значение
+
+<p><span
+style="mso-spacerun: yes">      </span>LOOPNE<span style='mso-tab-count:1'>      </span>BEGIN_LOOP<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes"> 
+</span>;снова, если не равно и не все
+
+<p><span
+style='mso-tab-count:1'>      </span>JE<span style='mso-tab-count:1'>    </span>MATCH_FOUND<span
+style="mso-spacerun: yes">    </span>;переход сюда, чтобы определить конец
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

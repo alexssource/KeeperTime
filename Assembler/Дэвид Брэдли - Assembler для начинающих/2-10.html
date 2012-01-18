@@ -1,0 +1,468 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="2-10">Принципы работы компьютера</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Ниже описаны некоторые основные принципы
+работы компьютера.<span style="mso-spacerun: yes">  </span>Эти
+
+<p><span
+style="mso-spacerun: yes">    </span>принципы важны для понимания 8088 и его
+работы.<span style="mso-spacerun: yes">  </span>Все, что говорится
+
+<p><span
+style="mso-spacerun: yes">    </span>в этом разделе, верно и для других
+компьютеов.<span style="mso-spacerun: yes">  </span>В соответствующих
+
+<p><span
+style="mso-spacerun: yes">    </span>местах мы будем специально оговариваться,
+что речь идет об Intel
+
+<p><span
+style="mso-spacerun: yes">    </span>8088, хотя основная часть сведений,
+относящихся только к 8088,
+
+<p><span
+style="mso-spacerun: yes">    </span>появится в следующей главе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Работа компьютера состоит в выборке команд
+из памяти и их
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнении.<span style="mso-spacerun:
+yes">  </span>Каждая команда проходит через этот двухшаговый
+
+<p><span
+style="mso-spacerun: yes">    </span>процесс.<span style="mso-spacerun: yes"> 
+</span>Выборкой очередной порции в этом цикле управляет один из
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров процессора.<span
+style="mso-spacerun: yes">  </span>Этот регистр называют счетчиком программы
+
+<p><span
+style="mso-spacerun: yes">    </span>или указателем команды.<span
+style="mso-spacerun: yes">  </span>Он является &quot;маркером&quot; текущей
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняемой команды.<span
+style="mso-spacerun: yes">  </span>То место в памяти, на которое указывает этот
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр, содержит следующую команду,
+которую должен будет выбрать и
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнить процессор.<span
+style="mso-spacerun: yes">  </span>Процессор читает в этом месте один или
+
+<p><span
+style="mso-spacerun: yes">    </span>несколько байтов, интерпретирует их как
+комнду и выполняет ее.
+
+<p><span
+style="mso-spacerun: yes">    </span>Затем процессор увеличивает указатель в
+соответствии с числом
+
+<p><span
+style="mso-spacerun: yes">    </span>байтов в команде.<span
+style="mso-spacerun: yes">  </span>Теперь счетчик программы указывает на
+следующую
+
+<p><span
+style="mso-spacerun: yes">    </span>команду.<span style="mso-spacerun: yes"> 
+</span>Этот цикл повторяется для всех без исключения команд.
+
+<p><span
+style="mso-spacerun: yes">    </span>Нормальное выполнение программы является
+последовательным, от одной
+
+<p><span
+style="mso-spacerun: yes">    </span>команды к другой, расположенной следом.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Процессор может изменить последовательный
+цикл выборки-исполне-
+
+<p><span
+style="mso-spacerun: yes">    </span>ния при выполнении команды, которая
+помещает в указатель команд но-
+
+<p><span
+style="mso-spacerun: yes">    </span>вое значение.<span style="mso-spacerun:
+yes">  </span>Такие команды являются командами передачи
+
+<p><span
+style="mso-spacerun: yes">    </span>управления, поскольку выполнение программы
+переходит в новую
+
+<p><span
+style="mso-spacerun: yes">    </span>область.<span style="mso-spacerun: yes"> 
+</span>Инструкция перехода или выбора варианта является самым
+
+<p><span
+style="mso-spacerun: yes">    </span>распространенным способом передачи
+управления.<span style="mso-spacerun: yes">  </span>Команда перехода
+
+<p><span
+style="mso-spacerun: yes">    </span>задает адрес команды, которая должна
+выполняться следующей.<span style="mso-spacerun: yes">  </span>Цикл в
+
+<p><span
+style="mso-spacerun: yes">    </span>программе является примером использования
+команды перехода.<span style="mso-spacerun: yes">  </span>Пример
+
+<p><span
+style="mso-spacerun: yes">    </span>на Фиг.<span style="mso-spacerun: yes"> 
+</span>2.16 на языке ассемблера 8088 показывает сохранение одного
+
+<p><span
+style="mso-spacerun: yes">    </span>и того же значения в последовательных
+байтах памяти.<span style="mso-spacerun: yes">  </span>Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода в конце цикла приводит к
+повторному выполнению его команд.
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes">  </span>11/2/88 21:30:42
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 2.16 Команда перехода<span style='mso-tab-count:4'>                      </span><span
+style="mso-spacerun: yes">  </span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>1<span style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>2<span style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 2.16 Команда перехода
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>3 0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>4<span style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>5
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>6 0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>MEM<span style="mso-spacerun: yes">    
+</span>LABEL<span style="mso-spacerun: yes">   </span>BYTE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>7
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>8 0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>FIG2_16:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>9 0000<span style="mso-spacerun: yes">  </span>2E: C6 87 0000 R 00<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>MOV<span style="mso-spacerun: yes">     </span>MEM[BX],0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>10 0006<span style="mso-spacerun: yes">  </span>43 <span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">      </span>INC<span style="mso-spacerun: yes">     </span>BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>11 0007<span style="mso-spacerun: yes">  </span>EB F7<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>JMP<span style="mso-spacerun: yes">     </span>FIG2_16
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>12
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>13 0009<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>14<span style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>END
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>Фиг. 2.16 Команда перехода&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обратите внимание, что в команде JMP для
+определения сле-
+
+<p><span
+style="mso-spacerun: yes">    </span>дующего выполняемого адреса используется
+метка, в данном случае
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;FIG2_16&quot;.<span
+style="mso-spacerun: yes">  </span>Это - еще одна из возможностей
+ассемблера.<span style="mso-spacerun: yes">  </span>Хотя в
+
+<p><span
+style="mso-spacerun: yes">    </span>машинном языке требуется абсолютный адрес
+следующей команды, язык
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера требует лишь программно
+определенную метку.<span style="mso-spacerun: yes">  </span>Ассемблер
+
+<p><span
+style="mso-spacerun: yes">    </span>сам определяет абсолютный адрес и ставит
+правильное значение в
+
+<p><span
+style="mso-spacerun: yes">    </span>команду машинного языка.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда перехода не обязательно должна
+быть безусловной как в
+
+<p><span
+style="mso-spacerun: yes">    </span>приведенном примере.<span
+style="mso-spacerun: yes">  </span>8088 располагает множством команд перехода,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые выполняются в соответствии с
+некоторым кодом условия.
+
+<p><span
+style="mso-spacerun: yes">    </span>Значение кода условия устанавливают другие
+команды при их
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнении процессором.<span
+style="mso-spacerun: yes">  </span>Условие, указанное в команде условного
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода, сравнивается с кодом условия,
+сохраненного в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>состояний.<span style='mso-tab-count:1'>    </span>Если
+условия совпадают, то процессор переходит по
+
+<p><span
+style="mso-spacerun: yes">    </span>указанному адресу.<span style='mso-tab-count:
+1'>  </span>В противном случае процессор игнорирует
+
+<p><span
+style="mso-spacerun: yes">    </span>переход, и выполнение программы
+продолжается в обычном
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательном порядке.<span
+style="mso-spacerun: yes">  </span>На Фиг.<span style='mso-tab-count:1'>    </span>2.17
+предыдущий пример изменен.
+
+<p><span
+style="mso-spacerun: yes">    </span>Цикл в этом примере прерывается, когда
+значение BX становится
+
+<p><span
+style="mso-spacerun: yes">    </span>равным 1000.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.<span style="mso-spacerun: yes"> 
+</span>2.17 появляется новая команда сравнения, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает коды состояния.<span
+style="mso-spacerun: yes">  </span>Команда условного перехода (JNE
+
+<p><span
+style="mso-spacerun: yes">    </span>(Jump if Not Equal) переход, если не
+равны) выполняет переход на
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;FIG2_17&quot;, если условие
+выполнено.<span style="mso-spacerun: yes">  </span>Если условие не выполняется,
+
+<p><span
+style="mso-spacerun: yes">    </span>8088 выполняет команду, следующую за
+условным переходом, в данном
+
+<p><span
+style="mso-spacerun: yes">    </span>случае команду NOP.<span
+style="mso-spacerun: yes">  </span>Команда условного перехода позволяет
+проверить
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">   </span>11/2/88 22:31:33
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Фиг. 2.17 Команда условного перехода<span style='mso-tab-count:3'>                 </span><span
+style="mso-spacerun: yes">   </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>1 <span style='mso-tab-count:4'>                      </span><span
+style="mso-spacerun: yes">       </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>2 <span style='mso-tab-count:4'>                      </span><span
+style="mso-spacerun: yes">       </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 2.17 Команда условного перехода
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>3 0000<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>4 <span style='mso-tab-count:4'>                      </span><span
+style="mso-spacerun: yes">       </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>5
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>6 0000<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">       </span>MEM<span style="mso-spacerun: yes">    
+</span>LABEL<span style="mso-spacerun: yes">   </span>BYTE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>7
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>8 0000<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">       </span>FIG2_17:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>9 0000<span style="mso-spacerun: yes">  </span>2E: C6 87 0000
+R 00<span style='mso-tab-count:1'>   </span><span style="mso-spacerun:
+yes">       </span>MOV<span style="mso-spacerun: yes">     </span>MEM[BX],0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>10 0006<span style="mso-spacerun: yes">  </span>43<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">       </span>INC<span style="mso-spacerun: yes">     </span>BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>11 0007<span style="mso-spacerun: yes">  </span>81 FB 03E8<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>CMP<span style="mso-spacerun: yes">     </span>BX,1000
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>12 000B<span style="mso-spacerun: yes">  </span>EB F3<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">       </span>JMP<span style="mso-spacerun: yes">     </span>FIG2_17
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>13
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>14 000D<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">       </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>15 <span style='mso-tab-count:4'>                      </span><span
+style="mso-spacerun: yes">       </span>END
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">       </span>Фиг. 2.17 Команда условного
+перехода&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>значения данных в процессе выполнения
+программы.<span style="mso-spacerun: yes">  </span>Ход выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>программы может меняться в зависимости от
+результатов этой
+
+<p><span
+style="mso-spacerun: yes">    </span>проверки.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

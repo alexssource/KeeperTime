@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="4-8">Команды обработки строк</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Одной из функций, в которой в наборе
+команд микропроцессора 8088
+
+<p><span
+style="mso-spacerun: yes">    </span>уделено особое внимание, является
+обработка строк.<span style='mso-tab-count:1'>      </span>Строка символов
+
+<p><span
+style="mso-spacerun: yes">    </span>или чисел, с которыми программа работает,
+как с группой, является
+
+<p><span
+style="mso-spacerun: yes">    </span>обычным типом данных.<span
+style="mso-spacerun: yes">  </span>Программа пересылает строку из одного места
+
+<p><span
+style="mso-spacerun: yes">    </span>в другое, сравнивает ее с другими
+строками, а также ищет в ней
+
+<p><span
+style="mso-spacerun: yes">    </span>заданное значение.<span style='mso-tab-count:
+1'>  </span>Обычным типом данных является строка символов.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа представляет каждое слово,
+предложение либо другую
+
+<p><span
+style="mso-spacerun: yes">    </span>структуру строкой символов в памяти.<span
+style="mso-spacerun: yes">  </span>Функции редактирования,
+
+<p><span
+style="mso-spacerun: yes">    </span>например, в большой степени используют
+операции поиска и пересылки.
+
+<p><span
+style="mso-spacerun: yes">    </span>Строковые команды микропроцессора 8088
+выполняют эти операции с
+
+<p><span
+style="mso-spacerun: yes">    </span>минимальными программными затратами, а
+также при минимальном
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>времени исполнения.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сначала давайте обсудим принципы работы со
+строками. Программа
+
+<p><span
+style="mso-spacerun: yes">    </span>может выполнять строковые операции как над
+байтами, так и над
+
+<p><span
+style="mso-spacerun: yes">    </span>словами; отдельные элементы строк могут
+иметь 8 либо 16 бит.
+
+<p><span
+style="mso-spacerun: yes">    </span>Строковые команды не используют способы
+адресации, используемые
+
+<p><span
+style="mso-spacerun: yes">    </span>остальными командами обработки. Фактически
+строковые команды очень
+
+<p><span
+style="mso-spacerun: yes">    </span>конкретны в адресации и не допускают
+каких=либо вариаций. Строковые
+
+<p><span
+style="mso-spacerun: yes">    </span>команды адресуют операнды комбинациями
+регистров DS:SI либо ES:DI.
+
+<p><span
+style="mso-spacerun: yes">    </span>Операнды источника используют регистровую
+пару DS:SI, а операнды
+
+<p><span
+style="mso-spacerun: yes">    </span>результата регистровую пару ES:DI, откуда
+и названия
+
+<p><span
+style="mso-spacerun: yes">    </span>индекс=регистров источника и результата.
+Все строковые команды
+
+<p><span
+style="mso-spacerun: yes">    </span>имеют встроенную коррекцию адреса после
+выполнения операции. Строка
+
+<p><span
+style="mso-spacerun: yes">    </span>состоит из многих элементов, но строковые
+команды обработки строк
+
+<p><span
+style="mso-spacerun: yes">    </span>могут работать только с одним элементом в
+каждый момент времени,
+
+<p><span
+style="mso-spacerun: yes">    </span>поэтому программа тоже работает со строкой
+по одному элементу в
+
+<p><span
+style="mso-spacerun: yes">    </span>момент времени. Автоматическое увеличение
+или уменьшение адреса
+
+<p><span
+style="mso-spacerun: yes">    </span>дает возможность быстрой обработки
+строковых данных. Флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>направления в регистре состояния управляет
+направлением обработки.
+
+<p><span
+style="mso-spacerun: yes">    </span>Когда он установлен равным 1, адрес
+уменьшается, если флаг сброшен
+
+<p><span
+style="mso-spacerun: yes">    </span>в 0, то увеличивается. Размер операнда
+определяет количество
+
+<p><span
+style="mso-spacerun: yes">    </span>увеличений=уменьшений. Байтовые команды
+обработки строк изменяют
+
+<p><span
+style="mso-spacerun: yes">    </span>адрес на 1 после каждой операции, а
+команды обработки строк над
+
+<p><span
+style="mso-spacerun: yes">    </span>словами изменяют адрес на 2. Тем самым
+после выполнения операции
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель ссылается на следующий элемент
+строки.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

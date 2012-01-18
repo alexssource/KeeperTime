@@ -1,0 +1,294 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="7-6-3">Слово состояния
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Слово состояния микросхемы 8087 содержит
+текущее состояние
+
+<p><span
+style="mso-spacerun: yes">    </span>процессора.<span style="mso-spacerun:
+yes">  </span>Расположение отдельных битов слова состояния показано
+
+<p><span
+style="mso-spacerun: yes">    </span>на Фиг. 7.8.<span style="mso-spacerun:
+yes">  </span>В слове состояния имеются биты, показывающие особые
+
+<p><span
+style="mso-spacerun: yes">    </span>ситуации, так что обработчик прерывания
+сможет определить суть
+
+<p><span
+style="mso-spacerun: yes">    </span>возникшей ситуации.<span
+style="mso-spacerun: yes">  </span>Также в слове состояния имеется бит,
+
+<p><span
+style="mso-spacerun: yes">    </span>показывающий, занят сопроцессор или
+нет.<span style="mso-spacerun: yes">  </span>Это тот же самый бит,
+
+<p><span
+style="mso-spacerun: yes">    </span>который выведен наружу для синхронизации с
+микропроцессором 8088.
+
+<p><span
+style="mso-spacerun: yes">    </span>Слово состояния содержит и указатель на
+текущую вершину стека
+
+<p><span
+style="mso-spacerun: yes">    </span>внутри набора регистров процессора 8087.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>15<span
+style='mso-tab-count:4'>                     </span><span style="mso-spacerun:
+yes">  </span>7<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">      </span>0
+
+<p><span
+style='mso-tab-count:1'>      </span>ЪДДДВДДДВДДДДДДДДДДДВДДДВДДДВДДДВДДДВДДДВДДДВДДДВДДДВДДДВДДДВДДДї
+
+<p><span
+style='mso-tab-count:1'>      </span>і B іC3 і<span style="mso-spacerun:
+yes">    </span>ST<span style="mso-spacerun: yes">     </span>іC2 і C1іC0 іIR і<span
+style='mso-tab-count:1'>     </span>іPE іUE іOE іZE іDE іIE і
+
+<p><span
+style='mso-tab-count:1'>      </span>АДДДБДДДБДДДБДДДБДДДБДДДБДДДБДДДБДДДБДДДБДДДБДДДБДДДБДДДБДДДБДДДЩ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">  </span>ДДДДДВДДДДД ДДДДДВДДДДД<span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">   </span>і<span style="mso-spacerun: yes">   </span>і<span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">    </span>і ФЛАГИ ИСКЛЮЧИТЕЛЬНЫХ СОСТОЯНИЙ (1=ЕСТЬ)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">       </span>і <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>і<span style="mso-spacerun: yes">  
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">   </span>і<span style="mso-spacerun: yes">   </span>і<span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes"> </span>і<span style="mso-spacerun: yes">   </span>і<span
+style="mso-spacerun: yes">    </span>АД<span style="mso-spacerun: yes"> 
+</span>НЕВЕРНАЯ ОПЕРАЦИЯ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">       </span>і <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>і<span style="mso-spacerun: yes">  
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">   </span>і<span style="mso-spacerun: yes">   </span>і<span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes">  
+</span>АДДДДДД<span style="mso-spacerun: yes">  </span>НЕНОРМАЛИЗОВАННЫЙ
+ОПЕРАНД
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">       </span>і <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>і<span style="mso-spacerun: yes">  
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">   </span>і<span style="mso-spacerun: yes">   </span>і<span
+style="mso-spacerun: yes">   </span>АДДДДДДДДДД<span style="mso-spacerun:
+yes">  </span>ДЕЛЕНИЕ НА НОЛЬ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">       </span>і <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>і<span style="mso-spacerun: yes">  
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">   </span>і<span style="mso-spacerun: yes">   </span>АДДДДДДДДДДДДДД<span
+style="mso-spacerun: yes">  </span>ПЕРЕПОЛНЕНИЕ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">       </span>і <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>і<span style="mso-spacerun: yes">  
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">   </span>АДДДДДДДДДДДДДДДДДД<span style="mso-spacerun: yes"> 
+</span>ИСЧЕЗАНИЕ ПОРЯДКА
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">       </span>і <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>і<span style="mso-spacerun: yes">  
+</span>і<span style="mso-spacerun: yes">   </span>АДДДДДДДДДДДДДДДДДДДДДД<span
+style="mso-spacerun: yes">  </span>ТОЧНОСТЬ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">       </span>і <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>і<span style="mso-spacerun: yes">  
+</span>АДДДДДДДДДДДДДДДДДДДДДДДДДД(ЗАРЕЗЕРВИРОВАНО)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">   </span>і<span style="mso-spacerun:
+yes">       </span>і <span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>АДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЗАПРОС НА
+ПРЕРЫВАНИЕ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>і<span style="mso-spacerun: yes">  
+</span>АДДДДДДДЕДДДДДДДДДДДБДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДСОД УСЛОВИЯ
+(1)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>АДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДУКАЗАТЕЛЬ ВЕРШИНЫ
+СТЕКА (2)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>АДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДЗАНЯТО
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>(1) См. описание команды сравнения,
+тестирования, опроса, и остатка в разделе
+
+<p><span
+style='mso-tab-count:3'>                  </span>S.7 для прерывания по коду
+состояния
+
+<p><span
+style='mso-tab-count:2'>            </span>(2) Значения ST:
+
+<p><span
+style='mso-tab-count:3'>                  </span>000 = Вершина стека - регистр
+0
+
+<p><span
+style='mso-tab-count:3'>                  </span>001 = Вершина стека - регистр
+1
+
+<p><span
+style='mso-tab-count:3'>                  </span>*
+
+<p><span
+style='mso-tab-count:3'>                  </span>*
+
+<p><span
+style='mso-tab-count:3'>                  </span>111 = Вершина стека - регистр
+7
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p>&#18;<span
+style='mso-tab-count:2'>           </span>Фиг. 7.8 Формат слова состояния INTEL
+8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вероятно, наиболее используемая часть
+слова состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхемы 8087 - это поле кода
+условия.<span style="mso-spacerun: yes">  </span>В слове состояния есть
+
+<p><span
+style="mso-spacerun: yes">    </span>четыре бита, которые могут устанавливаться
+командами сопроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8087.<span style="mso-spacerun: yes"> 
+</span>Два из этих битов кода условия непосредственно соответствуют
+
+<p><span
+style="mso-spacerun: yes">    </span>флагам переноса и нуля микропроцессора
+8088; фактически, они
+
+<p><span
+style="mso-spacerun: yes">    </span>расположены на тех же позициях в старшем
+байте слова состояния
+
+<p><span
+style="mso-spacerun: yes">    </span>процессора 8087.<span style="mso-spacerun:
+yes">  </span>Преимущества такого расположения этих бит можно
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать, записав слово состояния в
+память; затем загрузить
+
+<p><span
+style="mso-spacerun: yes">    </span>старший байт слова состояния в регистр AH,
+и с помощью команды SAHF
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливаете флаги переноса и нуля в
+соответствии с результатом
+
+<p><span
+style="mso-spacerun: yes">    </span>операции сравнения в сопроцессоре
+8087.<span style="mso-spacerun: yes">  </span>Так как все числа в
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессоре 8087 - действительные со
+знаком, этих двух флагов
+
+<p><span
+style="mso-spacerun: yes">    </span>достаточно для сравнения любых двух чисел.<span
+style='mso-tab-count:1'>  </span>Далее мы будем иметь
+
+<p><span
+style="mso-spacerun: yes">    </span>дело с примерами, которые используют слово
+состояния для сравнения
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел.<span style="mso-spacerun: yes"> 
+</span>Оставшиеся два бита регистра кода условия используются
+
+<p><span
+style="mso-spacerun: yes">    </span>специальной командой процессора 8087 для
+проверки появления любого
+
+<p><span
+style="mso-spacerun: yes">    </span>из чисел, соответствующих специальным
+условиям, которые известны
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессору 8087.<span style='mso-tab-count:
+1'>  </span>Поскольку многие из этих чисел требуют
+
+<p><span
+style="mso-spacerun: yes">    </span>индивидуальных способов обработки, регистр
+кода условия
+
+<p><span
+style="mso-spacerun: yes">    </span>предоставляет способ распознавания таких
+чисел.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

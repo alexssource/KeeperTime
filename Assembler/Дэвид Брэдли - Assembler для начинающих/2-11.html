@@ -1,0 +1,429 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="2-11">Процедуры</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Другая форма команды перехода - переход к
+подпрограмме.<span style="mso-spacerun: yes">  </span>Некоторая
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательность команд образует
+процедуру.<span style="mso-spacerun: yes">  </span>Эта последователь-
+
+<p><span
+style="mso-spacerun: yes">    </span>ность реализует функцию, которая
+выполняется в программе
+
+<p><span
+style="mso-spacerun: yes">    </span>неоднократно и в разных местах.<span
+style="mso-spacerun: yes">  </span>Вместо многократного повторения
+
+<p><span
+style="mso-spacerun: yes">    </span>этой последовательности во всех
+необходимых местах, программист
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает эти команды в одном месте.<span
+style="mso-spacerun: yes">  </span>Такая часть программы
+
+<p><span
+style="mso-spacerun: yes">    </span>становится подпрограммой или процедурой.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Каждый раз как в программе потребуется
+выполняемая процедурой
+
+<p><span
+style="mso-spacerun: yes">    </span>функция, она передает управление в эту
+процедуру командой перехода
+
+<p><span
+style="mso-spacerun: yes">    </span>на нее.<span style="mso-spacerun: yes"> 
+</span>Переход на процедуру называется вызовом процедуры или
+
+<p><span
+style="mso-spacerun: yes">    </span>командой вызова.<span style="mso-spacerun:
+yes">  </span>Вызов процедуры отличается от команды перехода.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда вызова сохраняет адрес следующей
+за ней команды.<span style="mso-spacerun: yes">  </span>Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>адрес, называемый адресом возврата,
+указывает дорогу обратно к
+
+<p><span
+style="mso-spacerun: yes">    </span>исходной последовательности команд.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Давайте посмотрим, как работает вызов
+процедуры.<span style="mso-spacerun: yes">  </span>Пусть, напри-
+
+<p><span
+style="mso-spacerun: yes">    </span>мер, нам надо написать программу, которая
+складывает в нескольких
+
+<p><span
+style="mso-spacerun: yes">    </span>местах 32-битовые числа.<span
+style="mso-spacerun: yes">  </span>У микропроцессора 8088 нет команд,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые выполняли бы такое сложение.<span
+style="mso-spacerun: yes">  </span>Мы можем написать короткую
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательность команд, которая будет
+выполнять сложение
+
+<p><span
+style="mso-spacerun: yes">    </span>32-битовых чисел.<span
+style="mso-spacerun: yes">  </span>Эта часть программы будет процедурой.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программист пишет эту подпрограмму точно
+также как любую другую
+
+<p><span
+style="mso-spacerun: yes">    </span>часть программы.<span style="mso-spacerun:
+yes">  </span>Она является частью программы на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера.<span style="mso-spacerun:
+yes">  </span>При написании основной части прикладной программы
+
+<p><span
+style="mso-spacerun: yes">    </span>программист будет иногда сталкиваться с
+необходимостью сложить два
+
+<p><span
+style="mso-spacerun: yes">    </span>32-битовых числа.<span
+style="mso-spacerun: yes">  </span>Вместо того, чтобы писать команды для выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>этого сложения, в программу включают вызов
+процедуры 32-битового
+
+<p><span
+style="mso-spacerun: yes">    </span>сложения.<span style="mso-spacerun: yes"> 
+</span>Сразу после него продолжаются команды основной части
+
+<p><span
+style="mso-spacerun: yes">    </span>программы.<span style='mso-tab-count:1'>    </span>Вызов
+этой процедуры производит впечатление мощной
+
+<p><span
+style="mso-spacerun: yes">    </span>команды 8088, так как один такой вызов
+выполняет 32-битовое
+
+<p><span
+style="mso-spacerun: yes">    </span>сложение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При выполнении программы выозов процедуры
+выполняет не само
+
+<p><span
+style="mso-spacerun: yes">    </span>сложение с двойной точностью, а передачу
+управления соответствующей
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуре.<span style='mso-tab-count:1'>    </span>Процессор
+выполняет команды процедуры, реализующей
+
+<p><span
+style="mso-spacerun: yes">    </span>сложение.<span style="mso-spacerun: yes"> 
+</span>Последняя команда процедуры является специальной
+
+<p><span
+style="mso-spacerun: yes">    </span>командой для процедур и называется
+возвратом.<span style="mso-spacerun: yes">  </span>Команда возврата
+
+<p><span
+style="mso-spacerun: yes">    </span>берет адрес, который был сохранен командой
+вызова и помещает его
+
+<p><span
+style="mso-spacerun: yes">    </span>обратно в указатель команд.<span
+style="mso-spacerun: yes">  </span>Это заставляет программу вернуться к
+
+<p><span
+style="mso-spacerun: yes">    </span>команде, следующей за вызовом
+процедуры.<span style="mso-spacerun: yes">  </span>Вызов процедуры как бы
+
+<p><span
+style="mso-spacerun: yes">    </span>временно отводит течение программы в русло
+процедуры.<span style="mso-spacerun: yes">  </span>После
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения процедуры выполнение
+возвращается к основной программе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команды, которые обеспечивают выполнение процедуры
+- CALL и
+
+<p><span
+style="mso-spacerun: yes">    </span>RETURN.<span style="mso-spacerun: yes"> 
+</span>CALL - это переход на процедуру.<span style="mso-spacerun: yes"> 
+</span>CALL сохраняет текущее
+
+<p><span
+style="mso-spacerun: yes">    </span>значение указателя команд в специальном
+месте памяти.<span style="mso-spacerun: yes">  </span>Это
+
+<p><span
+style="mso-spacerun: yes">    </span>сохраненное значение указателя команд
+является адресом возврата.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда RETURN читает сохраненное значение
+указателя команд, поме-
+
+<p><span
+style="mso-spacerun: yes">    </span>щает его в указатель команд процессора и
+возвращает управление в
+
+<p><span
+style="mso-spacerun: yes">    </span>точку, следующую за командой CALL.<span
+style='mso-tab-count:1'>    </span>Пример на Фиг.<span style='mso-tab-count:
+1'>    </span>2.18 показывает
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуру, вызываемую из двух различных
+точек программы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку программа начинает свое
+выполнение с самого начала,
+
+<p><span
+style="mso-spacerun: yes">    </span>она сразу же попадает на команду A1.<span
+style="mso-spacerun: yes">  </span>Команда CALL передает
+
+<p><span
+style="mso-spacerun: yes">    </span>управление в точку SOBROUTINE.<span
+style="mso-spacerun: yes">  </span>Выполняя команду CALL, процессор
+
+<p><span
+style="mso-spacerun: yes">    </span>в том числе сохраняет адрес точки A2.<span
+style="mso-spacerun: yes">  </span>После выполнения процедуры
+
+<p><span
+style="mso-spacerun: yes">    </span>команда RET (от английского return -
+возврат) восстанавливает
+
+<p><span
+style="mso-spacerun: yes">    </span>сохраненное значение A2.<span
+style="mso-spacerun: yes">  </span>Управление возвращается к главной
+
+<p><span
+style="mso-spacerun: yes">    </span>программе.<span style='mso-tab-count:1'>    </span>Дальше
+в главной прграмме выполняется CALL в точке A3,
+
+<p><span
+style="mso-spacerun: yes">    </span>что приводит к повторному выполнению
+подпрограммы.<span style='mso-tab-count:1'>      </span>На этот раз
+
+<p><span
+style="mso-spacerun: yes">    </span>процессор сохраняет значение A4.<span
+style="mso-spacerun: yes">  </span>После выполнения процедуры во
+
+<p><span
+style="mso-spacerun: yes">    </span>второй раз управление возвращается в
+A4.<span style="mso-spacerun: yes">  </span>Обратите внимание, что
+
+<p><span
+style="mso-spacerun: yes">    </span>оба раза выполнялась одна процедура.<span
+style="mso-spacerun: yes">  </span>В первый раз возврат после ее
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span>5/11/80 16:25:59
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 2.18 Использование процедуры<span style='mso-tab-count:4'>                      </span>
+Page<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 2.18 Использование процедуры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>E8 0008 R<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>A1:<span style="mso-spacerun: yes">     </span>CALL<span
+style="mso-spacerun: yes">    </span>SUBROUTINE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0003<span style="mso-spacerun: yes">  </span>40<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">     </span>A2:<span
+style="mso-spacerun: yes">     </span>INC<span style="mso-spacerun: yes">    
+</span>AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0004<span style="mso-spacerun: yes">  </span>E8 0008 R<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>A3:<span style="mso-spacerun: yes">     </span>CALL<span
+style="mso-spacerun: yes">    </span>SUBROUTINE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0007<span style="mso-spacerun: yes">  </span>43<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">     </span>A4:<span
+style="mso-spacerun: yes">     </span>INC<span style="mso-spacerun: yes">    
+</span>BX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;-----<span style="mso-spacerun: yes"> 
+</span>Здесь программа продолжается . . .
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0008<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>SUBROUTINE<span style="mso-spacerun:
+yes">      </span>PROC<span style="mso-spacerun: yes">    </span>NEAR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0008<span style="mso-spacerun: yes">  </span>B8 0000<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX,0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000B<span style="mso-spacerun: yes">  </span>BB 0000<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>BX,0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000E<span style="mso-spacerun: yes">  </span>C3<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>RET
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000F<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>SUBROUTINE<span style="mso-spacerun:
+yes">      </span>ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000F<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>Фиг. 2.18 Использование процедуры&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения осуществлялся на A2, во второй
+раз - на A4.
+
+<p><span
+style="mso-spacerun: yes">    </span>Преимущество процедуры заключается в ее
+способности вызываться из
+
+<p><span
+style="mso-spacerun: yes">    </span>множества различных мест и каждый раз
+правильно находоить точку
+
+<p><span
+style="mso-spacerun: yes">    </span>возврата.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Где же хранится адрес возврата во время
+выполнения процедуры?
+
+<p><span
+style="mso-spacerun: yes">    </span>Существует множество возможностей, но
+микропроцессор 8088
+
+<p><span
+style="mso-spacerun: yes">    </span>использует для хранения этого значения
+стек.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

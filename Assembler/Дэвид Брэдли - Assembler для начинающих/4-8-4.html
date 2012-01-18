@@ -1,0 +1,708 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="4-8-4">Команды сканирования и сравнения
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Две оставшиеся строковые команды
+используются в программах для
+
+<p><span
+style="mso-spacerun: yes">    </span>сравнения строковой информации.<span
+style="mso-spacerun: yes">  </span>Первая из них - команда,
+
+<p><span
+style="mso-spacerun: yes">    </span>сканирование строки SCAS.<span
+style="mso-spacerun: yes">  </span>Эта команда сравнивает значение в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AL или регистре AX с операндом в
+памяти, на который
+
+<p><span
+style="mso-spacerun: yes">    </span>ссылается пара регистров ES:DI.<span
+style="mso-spacerun: yes">  </span>Команда SCAS устанавливает флаги
+
+<p><span
+style="mso-spacerun: yes">    </span>нуля, переноса и переполнения, показывая
+результат сравнения
+
+<p><span
+style="mso-spacerun: yes">    </span>аккумулятора и ячейки памяти, и изменяет
+регистр DI так, чтобы он
+
+<p><span
+style="mso-spacerun: yes">    </span>указывал на следующий операнд в строке.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команда SCAS не может использовать обычный
+префикс REP для
+
+<p><span
+style="mso-spacerun: yes">    </span>сканирования длинной строки информации.
+Точно так же, как команда
+
+<p><span
+style="mso-spacerun: yes">    </span>REP LODS не имеет смысла, команда REP SCAS
+не позволяет программе
+
+<p><span
+style="mso-spacerun: yes">    </span>контролировать каждое сравнение. Вместо
+этого существует два
+
+<p><span
+style="mso-spacerun: yes">    </span>варианта префикса REP - &quot;повторять
+пока равно&quot; REPE и &quot;повторять
+
+<p><span
+style="mso-spacerun: yes">    </span>пока не равно&quot; REPNE. Как и в случае
+обычного префикса REP,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа загружает в регистр CX длину
+строки. Если указан префикс
+
+<p><span
+style="mso-spacerun: yes">    </span>REPE, команда выполняется ло тех пор, пока
+содержимое регистра AL
+
+<p><span
+style="mso-spacerun: yes">    </span>(или AX) не перестанет совпадать с
+ячейками памяти, или пока
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимое регистра CX не станет равно 0.
+Пока аккумулятор
+
+<p><span
+style="mso-spacerun: yes">    </span>совпадает с ячейкой памяти, сканирование
+продолжается. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>REPNE в точности противоположна команде
+REPE. Сканирование
+
+<p><span
+style="mso-spacerun: yes">    </span>продолжается до тех пор, пока аккумулятор
+не совпадает с ячейкой
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Комбинация команд SCAS и REPNE позволяет
+программе выполнять
+
+<p><span
+style="mso-spacerun: yes">    </span>быстрый поиск по таблице. Чтобы найти
+объект в таблице, программа
+
+<p><span
+style="mso-spacerun: yes">    </span>должна перебрать каждую ячейку для
+сравнения с аргументом. На
+
+
+
+<p><span
+style="mso-spacerun: yes">   </span>Фиг. 4.24 показано, как команда SCAS
+выполняет эту функцию. В
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре AL содержится аргумент сравнения.
+Таблица SCAN_TABLE
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит значения, среди которых ведется
+поиск, а в регистре CX
+
+<p><span
+style="mso-spacerun: yes">    </span>находится длина таблицы. Команда REPNE
+SCASB сканирует таблицу до
+
+<p><span
+style="mso-spacerun: yes">    </span>тех пор, пока содержимое аккумулятора не
+станет равно элементу
+
+<p><span
+style="mso-spacerun: yes">    </span>строки. В этом месте регистр DI указывает
+на байт таблицы,
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно следующий за сравнением.
+Вы можете определить
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение совпавшего объекта, вычитая
+единицу из регистра DI после
+
+<p><span
+style="mso-spacerun: yes">    </span>метки FOUND. Программа может использовать
+эту информацию для
+
+<p><span
+style="mso-spacerun: yes">    </span>доступа к другой таблице, или таблицам,
+которые содержат
+
+<p><span
+style="mso-spacerun: yes">    </span>информацию, соответствующую этим исходным
+данным. Нужно обратить
+
+<p><span
+style="mso-spacerun: yes">    </span>особое внимание на команду JE после
+команды сканирования.
+
+<p><span
+style="mso-spacerun: yes">    </span>Существуют два случая, в которых
+управление передается этой
+
+<p><span
+style="mso-spacerun: yes">    </span>команде: байт в строке совпал с регистром
+AL и условие, задаваемое
+
+<p><span
+style="mso-spacerun: yes">    </span>префиксом REPNE, больше не выполняется;
+либо регистр CX достиг
+
+<p><span
+style="mso-spacerun: yes">    </span>нулевого значения без нахождения
+соответствующего числа в таблице.
+
+<p><span
+style="mso-spacerun: yes">    </span>В некоторых случаях создаются ситуации,
+исключающие появление
+
+<p><span
+style="mso-spacerun: yes">    </span>второго условия. Но в большинстве
+программ, необходимо учитывать
+
+<p><span
+style="mso-spacerun: yes">    </span>возможность неверных исходных данных.
+Программа перейдет на метку
+
+<p><span
+style="mso-spacerun: yes">    </span>FOUND после команды сканирования, если
+команда установила флаг нуля
+
+<p><span
+style="mso-spacerun: yes">    </span>(или равенства). Тем самым гарантируется,
+что сравнение найдено.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если же регистр CX достиг нуля, последняя
+итерация сканирования
+
+<p><span
+style="mso-spacerun: yes">    </span>сбросила флаг нуля, показывая, что
+соответствия нет.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>1/1/80 04:01:36
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 4.24 Поиск в таблице<span style='mso-tab-count:5'>                              </span>
+Page<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.24 Поиск в таблице
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE,ES:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;--------------------------------------
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>; Поиск значения AL в таблице
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;--------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>8D 3E 000C R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">     </span>DI, SCAN_TABLE<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Адрес таблицы
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0004<span style="mso-spacerun: yes">  </span>B9 000B 90<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>CX,
+SCAN_TABLE_LENGTH<span style="mso-spacerun: yes">   </span>; Длина таблицы
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0008<span style="mso-spacerun: yes">  </span>F2/ AE<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>REPNE<span style="mso-spacerun: yes">   </span>SCASB<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>; Поиск
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000A<span style="mso-spacerun: yes">  </span>74 00<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>JE<span style="mso-spacerun: yes">      </span>FOUND<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>; Если равно, то значение найдено
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>; ...<span style='mso-tab-count:4'>                    </span><span
+style="mso-spacerun: yes">     </span>; Иначе значение не найдено
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000C<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>FOUND:
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;-----<span style="mso-spacerun: yes"> 
+</span>продолжение программы
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000C<span style="mso-spacerun: yes">  </span>89 96 93 8A 85 8D 83<span
+style="mso-spacerun: yes">     </span>SCAN_TABLE<span style="mso-spacerun:
+yes">      </span>DB<span style="mso-spacerun: yes">      </span>'ЙЦУКЕНГШЩЗХ'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>98 99 87 95
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>= 000B<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes">     </span>SCAN_TABLE_LENGTH<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">     </span>EQU<span
+style="mso-spacerun: yes">     </span>$-SCAN_TABLE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0017<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.24 Сканирование таблицы
+
+<p><span
+style='mso-tab-count:1'>      </span>Последняя строковая команда - сравнение
+строк CMPS. Подобно
+
+<p><span
+style="mso-spacerun: yes">    </span>сканированию строки, это - команда
+сравнения. Подобно команде MOVS,
+
+<p><span
+style="mso-spacerun: yes">    </span>она работает с двумя операндами памяти.
+Команда CMPS сравнивает
+
+<p><span
+style="mso-spacerun: yes">    </span>строку по адресу DS:SI со строкой по
+адресу ES:DI, и соответственно
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает флаги. Как и для команды
+SCAS, в данном случае
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать префикс REP нельзя, а
+префиксы REPE и REPNE можно
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать беспрепятственно.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+3'>              </span>1/1/80 04:01:41
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 4.25 Сравнение строк<span style='mso-tab-count:5'>                         </span>Page<span
+style='mso-tab-count:1'>  </span> 1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.25 Сравнение строк
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE,ES:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>;--------------------------------------
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; Сравнивается 5-символьная строка с
+таблицей
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">   </span>;
+таких 5-символьных строк. Выход из программы
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>; если найдена искомая строка в таблице
+строк.
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">    </span>;--------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>FIG4_25 PROC<span style="mso-spacerun:
+yes">    </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0000<span style="mso-spacerun: yes">  </span>8D 36 001D R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>LEA<span style="mso-spacerun: yes">     </span>SI, ARGUMENT<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>; Адрес строки
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0004<span style="mso-spacerun: yes">  </span>8D 3E 0022 R <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">    </span>LEA<span style="mso-spacerun: yes">     </span>DI,
+COMPARE_TABLE<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">    </span>; Адрес таблицы
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0008<span style="mso-spacerun: yes">  </span>BB 0000<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>BX, 0<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">   
+</span>; В BX cчетчик просмотренных строк
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000B<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>COMPARE_LOOP:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000B<span style="mso-spacerun: yes">  </span>56<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>PUSH<span style="mso-spacerun: yes">    </span>SI<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">    </span>;
+Сохранение адреса строки
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000C<span style="mso-spacerun: yes">  </span>57<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>PUSH<span style="mso-spacerun: yes">    </span>DI<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">    </span>;
+Сохранение адреса таблицы
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>000D<span style="mso-spacerun: yes">  </span>B9 0005<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>MOV<span style="mso-spacerun: yes">     </span>CX, 5<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">   
+</span>; Сравниваются 5 байт
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0010<span style="mso-spacerun: yes">  </span>F3/ A6<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">   
+</span>REPE<span style="mso-spacerun: yes">    </span>CMPS<span
+style="mso-spacerun: yes">    </span>ARGUMENT,COMPARE_TABLE<span
+style="mso-spacerun: yes">  </span>; Сравнение
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0012<span style="mso-spacerun: yes">  </span>5F<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>POP<span style="mso-spacerun: yes">     </span>DI<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">    </span>;
+Восстановление
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0013<span style="mso-spacerun: yes">  </span>5E<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>POP<span style="mso-spacerun: yes">     </span>SI<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">    </span>;<span
+style="mso-spacerun: yes">  </span>регистров
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0014<span style="mso-spacerun: yes">  </span>74 06<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>JE<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>FOUND<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">    </span>; Искомая строка найдена
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0016<span style="mso-spacerun: yes">  </span>83 C7 05<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">    </span>ADD<span style="mso-spacerun: yes">     </span>DI, 5<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">   
+</span>; Сдвиг указателя на следующую
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes">    </span>;<span style="mso-spacerun: yes"> 
+</span>строку в таблице
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0019<span style="mso-spacerun: yes">  </span>43<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">   
+</span>INC<span style="mso-spacerun: yes">     </span>BX<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">    </span>; Номер
+текущей строки в таблице
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001A<span style="mso-spacerun: yes">  </span>EB EF<span
+style='mso-tab-count:3'>              </span><span style="mso-spacerun:
+yes">    </span>JMP<span style="mso-spacerun: yes">     </span>COMPARE_LOOP<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>; Цикл
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001C<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>FOUND:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001C<span style="mso-spacerun: yes">  </span>C3<span style='mso-tab-count:
+4'>                       </span><span style="mso-spacerun: yes">    </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001D<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>FIG4_25 ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>001D<span style="mso-spacerun: yes">  </span>41 42 43 44 45<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">   
+</span>ARGUMENT<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>DB<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>'ABCDE'
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0022<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>COMPARE_TABLE<span style="mso-spacerun:
+yes">   </span>LABEL<span style="mso-spacerun: yes">   </span>BYTE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0022<span style="mso-spacerun: yes">  </span>51 57 45 52 54 50 4F <span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">    </span>DB<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>'QWERT','POIUY','ASDFG','LKJHG'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>49 55 59 41 53 44 46
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>47 4C 4B 4A 48 47
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>0036<span style="mso-spacerun: yes">  </span>5A 58 43 56 42 4D 4E <span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun:
+yes">    </span>DB<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">    </span>'ZXCVB','MNBVC','VWXYZ','ABCDE'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>42 56 43 56 57 58 59
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>5A 41 42 43 44 45
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>004A<span style='mso-tab-count:3'>               </span><span
+style="mso-spacerun: yes">    </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 4.25 Сравнение строк
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 4.25 демонстрирует пример
+использования команды CMPS.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этот пример сравнивает пятисимвольную
+исходную строку с таблицей
+
+<p><span
+style="mso-spacerun: yes">    </span>строк символов. Программа пытается найти
+соответствие исходной
+
+<p><span
+style="mso-spacerun: yes">    </span>строки с элементом таблицы. Когда строка
+найдена, в регистре BX
+
+<p><span
+style="mso-spacerun: yes">    </span>нахолится индекс строки. В программе
+используется префикс REPE, так
+
+<p><span
+style="mso-spacerun: yes">    </span>что команда сравненния строк выполняется
+до тех пор, пока один из
+
+<p><span
+style="mso-spacerun: yes">    </span>символов аргумента не совпадает с символом
+таблицы. Если все пять
+
+<p><span
+style="mso-spacerun: yes">    </span>символов совпали, программа находит
+правильный элемент. Команда JE
+
+<p><span
+style="mso-spacerun: yes">    </span>(&quot;переход, если равно&quot;)
+проверяет результат команды CMPS. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>сравнение завершилось из=за несоответствия
+символов, флаг нуля
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает ненулевое состояние. Если же
+команда CMPS завершилась
+
+<p><span
+style="mso-spacerun: yes">    </span>потому, что счетчик CX стал нулевым, флаг
+нуля покажет совпадение и
+
+<p><span
+style="mso-spacerun: yes">    </span>произойдет переход на метку FOUND. Вы
+можете заметить, что в этом
+
+<p><span
+style="mso-spacerun: yes">    </span>примере отсутствуют некоторые необходимые
+детали, которые смогли бы
+
+<p><span
+style="mso-spacerun: yes">    </span>сделать его хорошей программой. Например,
+он никак не обрабатывает
+
+<p><span
+style="mso-spacerun: yes">    </span>случай, когда исходная строка не совпала
+ни с одним элементм
+
+<p><span
+style="mso-spacerun: yes">    </span>таблицы. Любой хороший программист скажет
+вам, что исключительные
+
+<p><span
+style="mso-spacerun: yes">    </span>ситуации нужно обрабатывать всегда.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

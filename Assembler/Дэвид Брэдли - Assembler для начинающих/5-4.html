@@ -1,0 +1,878 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="5-4">Командный процессор</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Наряду с файловой системой DOS
+обеспечивает операционную среду для
+
+<p><span
+style="mso-spacerun: yes">    </span>прикладных программ.<span
+style="mso-spacerun: yes">  </span>Первый компонент DOS с которым сталкивается
+
+<p><span
+style="mso-spacerun: yes">    </span>пользователь, - это командный
+процессор.<span style="mso-spacerun: yes">  </span>Эта часть DOS берет на
+
+<p><span
+style="mso-spacerun: yes">    </span>себя обработку вводимых пользователем
+команд и запуск прикладных
+
+<p><span
+style="mso-spacerun: yes">    </span>программ.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В первый момент после включения питания
+&quot;интеллектуаль- ность&quot;
+
+<p><span
+style="mso-spacerun: yes">    </span>IBM PC невысока: возможно и имеется
+большой потенциал, но
+
+<p><span
+style="mso-spacerun: yes">    </span>способностей хоть как-то реализовать его
+немного. В постоянной
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти ЭВМ хранятся программы тестирования
+компонентов системы -
+
+<p><span
+style="mso-spacerun: yes">    </span>POST (Power=On Self=Test - самопроверка
+при включении) и установки
+
+<p><span
+style="mso-spacerun: yes">    </span>в начальное состояние устройств
+ввода-вывода. Остальная часть
+
+<p><span
+style="mso-spacerun: yes">    </span>записанной в ПЗУ базовой системы
+ввода-вывода BIOS (Basic Input
+
+<p><span
+style="mso-spacerun: yes">    </span>Output System) предоставляет программисту,
+работающему с языком
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера, набор средств, которые
+помогают ему обращаться к
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратным средствам, не беспокоясь о том,
+как технически они
+
+<p><span
+style="mso-spacerun: yes">    </span>реализованы. Но этого не достаточно, чтобы
+обеспечить среду для
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения серьезных прикладных программ.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Последнее является функцией DOS. После
+установки ЭВМ в
+
+<p><span
+style="mso-spacerun: yes">    </span>начальное состояние программа POST
+выполныет загрузку DOS с диска
+
+<p><span
+style="mso-spacerun: yes">    </span>или дискеты в оперативную память. Этот
+процесс называется загрузкой
+
+<p><span
+style="mso-spacerun: yes">    </span>системы. Первое, что делает DOS, -
+загружает минимальную программу,
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимую для загрузки остальной части
+DOS. По окончании процесса
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузки на дисплей выводтися название
+операционной системы и
+
+<p><span
+style="mso-spacerun: yes">    </span>указание на авторские права. Помимо всего
+прочего в названии указан
+
+<p><span
+style="mso-spacerun: yes">    </span>номер соответствующей версии операционной
+системы. Иногда этот
+
+<p><span
+style="mso-spacerun: yes">    </span>номер играет важную роль, так как каждая
+новая версия означает
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительные функциональные возможности
+операционной системы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>После операции загрузки система готова к
+приему команд от
+
+<p><span
+style="mso-spacerun: yes">    </span>оператора (за исключением специального
+случая, о котором будет
+
+<p><span
+style="mso-spacerun: yes">    </span>сказано ниже). На этом этапе управление
+передается командному
+
+<p><span
+style="mso-spacerun: yes">    </span>процессору - DOS произвела загрузку в
+память командного процессора,
+
+<p><span
+style="mso-spacerun: yes">    </span>файловой системы и других служебных
+программ, и все они готовы
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнять свои функции. Передача
+управления командному процессору
+
+<p><span
+style="mso-spacerun: yes">    </span>индицируется им следующим запросом к
+оператору
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Этот запрос содержит двоякий смысл. Символ
+&quot;&gt;&quot; означает
+
+<p><span
+style="mso-spacerun: yes">    </span>готовность командного процессора к приему
+команды. Префикс &quot;A&quot;
+<p><span
+style="mso-spacerun: yes">    </span>указывает на выбранный по умолчанию
+дисковод с гибким диском. Так
+
+<p><span
+style="mso-spacerun: yes">    </span>как DOS может обрабатывать файлы,
+расположенные только на каком-то
+
+<p><span
+style="mso-spacerun: yes">    </span>одном диске, то в случае одновременной
+работы с несколькими дисками
+
+<p><span
+style="mso-spacerun: yes">    </span>или дискетами пользователь должен указать,
+к какому из дисководов
+
+<p><span
+style="mso-spacerun: yes">    </span>следует обратиться системе. В персональной
+ЭВМ дисководы
+
+<p><span
+style="mso-spacerun: yes">    </span>обозначаются буквами латинского алфавита.
+У вычислительной системы
+
+<p><span
+style="mso-spacerun: yes">    </span>с двумя накопителями на гибких дисках
+имеется дисковод A: и
+
+<p><span
+style="mso-spacerun: yes">    </span>дисковод B:. Жесткий диск обычно
+обозначается C: (После
+
+<p><span
+style="mso-spacerun: yes">    </span>наименования дисковода следует двоеточие.)
+Обычно файлы,
+
+<p><span
+style="mso-spacerun: yes">    </span>используемые системой DOS, считываются с
+дисковода, выбранного
+
+<p><span
+style="mso-spacerun: yes">    </span>системой по умолчанию, если только
+оператор не изменит этот
+
+<p><span
+style="mso-spacerun: yes">    </span>порядок. Для того чтобы считать файл с
+выбранного по умолчанию
+
+<p><span
+style="mso-spacerun: yes">    </span>дисковода, системе требуется только имя
+этого файла. Для считывания
+
+
+<p><span
+style="mso-spacerun: yes">    </span>файла с любого другого дисковода нужно
+кроме имени файла указать
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS наименование дисковода.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Только в ответ на команды, которые
+поступают от пользователя
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS выполняет какие-то действия. Все
+команды, относящиеся к DOS,
+
+<p><span
+style="mso-spacerun: yes">    </span>вводятся в ответ на запрос с ее стороны,
+индицируемый символом &quot;&gt;&quot;.
+
+<p><span
+style="mso-spacerun: yes">    </span>Пользователь вводит имя нужной ему
+команды, после чего поступившая
+
+<p><span
+style="mso-spacerun: yes">    </span>заявка обрабатывается командным
+процессором. Как он обрабатывает
+
+<p><span
+style="mso-spacerun: yes">    </span>эту заявку, зависит от команды, которую
+ввел пользователь. Имеются
+
+<p><span
+style="mso-spacerun: yes">    </span>встроенные, или резидентные команды,
+которые всегда доступны. Либо
+
+<p><span
+style="mso-spacerun: yes">    </span>команда может инициировать нерезидентное,
+или транзитное
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнение. Для выполнения таких команд
+должен существовать
+
+<p><span
+style="mso-spacerun: yes">    </span>определенный файл на диске.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Встроенные команды обеспечивают поддержку
+файловой системы. Они
+
+<p><span
+style="mso-spacerun: yes">    </span>сделаны резидентными в DOS, поскольку
+часто используются при работе
+
+<p><span
+style="mso-spacerun: yes">    </span>с данными, хранящимися на дисках. После
+того, как пользователь ввел
+
+<p><span
+style="mso-spacerun: yes">    </span>команду, интерпретатор командных строк
+передает управление
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующей программе DOS. Программа
+реализует свою функцию,
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующую спецификации введенной
+команды, затем возвращает
+
+<p><span
+style="mso-spacerun: yes">    </span>управление DOS. На Фиг.5.1 приведены
+резидентные команды дисковой
+
+<p><span
+style="mso-spacerun: yes">    </span>операционной системы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Команда <span style='mso-tab-count:
+2'>          </span>Действие
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>--------------------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span>COPY<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>Копирует файл с одного места в другое
+
+<p><span
+style='mso-tab-count:2'>            </span>DATE<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>Вывод/модификация текущей даты
+
+<p><span
+style='mso-tab-count:2'>            </span>DIR<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>Вывод каталога дискеты
+
+<p><span
+style='mso-tab-count:2'>            </span>ERASE<span style='mso-tab-count:
+1'> </span><span style="mso-spacerun: yes">  </span>Удаление файла с дискеты
+
+<p><span
+style='mso-tab-count:2'>            </span>PAUSE<span style='mso-tab-count:
+1'> </span><span style="mso-spacerun: yes">  </span>Система ждет нажатия
+клавиши
+
+<p><span
+style='mso-tab-count:2'>            </span>REM<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>Вывод комментария
+
+<p><span
+style='mso-tab-count:2'>            </span>RENAME<span style='mso-tab-count:
+1'>      </span><span style="mso-spacerun: yes">  </span>Изменить имя файла
+
+<p><span
+style='mso-tab-count:2'>            </span>TIME<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>Вывод/модификация текущего времени
+
+<p><span
+style='mso-tab-count:2'>            </span>TYPE<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>Вывод содержимого файла
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>--------------------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 5.1 Резидентные команды DOS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Примером резидентной команды может служить
+команда DIR, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>выводит на дисплей справочник дискеты. На
+Фиг.5.2 показаны выходные
+
+<p><span
+style="mso-spacerun: yes">    </span>данные, полученные в результате выполнения
+команды чтения каталога.
+
+<p><span
+style="mso-spacerun: yes">    </span>Обратите внимание, что в справочнике
+дискеты для каждого
+
+<p><span
+style="mso-spacerun: yes">    </span>записанного на ней файла уазываются его
+имя и тип, а также длина в
+<p><span
+style="mso-spacerun: yes">    </span>байтах, дата и время его создания. Так как
+для загрузки любой
+
+<p><span
+style="mso-spacerun: yes">    </span>программы DOS необходимо выполнить команду
+чтения каталога, то эта
+
+<p><span
+style="mso-spacerun: yes">    </span>команда являеися встроенной.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>----------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span>A&gt;dir
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Volume in drive A has no label
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Directory of<span style="mso-spacerun: yes">  </span>A:\
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>COMMAND<span style="mso-spacerun:
+yes">  </span>COM<span style='mso-tab-count:1'>      </span>37637<span
+style="mso-spacerun: yes">  </span>17/06/88<span style="mso-spacerun: yes"> 
+</span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>AUTOEXEC BAT<span style='mso-tab-count:
+1'>      </span><span style="mso-spacerun: yes">   </span>38<span
+style='mso-tab-count:1'> </span>4/03/89<span style="mso-spacerun: yes"> 
+</span>17:33
+
+<p><span
+style='mso-tab-count:2'>            </span>CONFIG<span style='mso-tab-count:
+1'>      </span> SYS<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">   </span>96<span style="mso-spacerun: yes"> 
+</span>17/06/88<span style="mso-spacerun: yes">  </span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>COUNTRY<span style="mso-spacerun:
+yes">  </span>SYS<span style='mso-tab-count:1'>      </span>12838<span
+style="mso-spacerun: yes">  </span>17/06/88<span style="mso-spacerun: yes"> 
+</span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>DISKCOPY COM<span style='mso-tab-count:
+1'>      </span>10428<span style="mso-spacerun: yes">  </span>17/06/88<span
+style="mso-spacerun: yes">  </span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>DISPLAY<span style="mso-spacerun:
+yes">  </span>SYS<span style='mso-tab-count:1'>      </span>15741<span
+style="mso-spacerun: yes">  </span>17/06/88<span style="mso-spacerun: yes"> 
+</span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>FDISK<span style='mso-tab-count:
+1'> </span> COM<span style='mso-tab-count:1'>  </span>70151<span
+style="mso-spacerun: yes">  </span>17/06/88<span style="mso-spacerun: yes"> 
+</span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>FORMAT<span style='mso-tab-count:
+1'>      </span> COM<span style='mso-tab-count:1'>  </span>22923<span
+style="mso-spacerun: yes">  </span>17/06/88<span style="mso-spacerun: yes"> 
+</span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>KEYB<span style='mso-tab-count:1'>  </span>
+COM<span style='mso-tab-count:1'>  </span>14759<span style="mso-spacerun:
+yes">  </span>17/06/88<span style="mso-spacerun: yes">  </span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>KEYBOARD SYS<span style='mso-tab-count:
+1'>      </span>23360<span style='mso-tab-count:1'> </span>3/08/88<span
+style="mso-spacerun: yes">  </span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>REPLACE<span style="mso-spacerun:
+yes">  </span>EXE<span style='mso-tab-count:1'>      </span>17199<span
+style="mso-spacerun: yes">  </span>17/06/88<span style="mso-spacerun: yes"> 
+</span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>SELECT<span style='mso-tab-count:
+1'>      </span> COM<span style='mso-tab-count:1'>  </span> 3674<span
+style='mso-tab-count:1'> </span>3/08/88<span style="mso-spacerun: yes"> 
+</span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>SELECT<span style='mso-tab-count:
+1'>      </span> HLP<span style='mso-tab-count:1'>  </span>27562<span
+style='mso-tab-count:1'> </span>3/08/88<span style="mso-spacerun: yes"> 
+</span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>SELECT<span style='mso-tab-count:
+1'>      </span> PRT<span style='mso-tab-count:1'>  </span> 1594<span
+style='mso-tab-count:1'> </span>3/08/88<span style="mso-spacerun: yes"> 
+</span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>SYS<span style='mso-tab-count:1'>   </span>
+COM<span style='mso-tab-count:1'>  </span>11472<span style="mso-spacerun:
+yes">  </span>17/06/88<span style="mso-spacerun: yes">  </span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span>012345<span style='mso-tab-count:
+1'>      </span> 678<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>109<span style="mso-spacerun: yes">  </span>17/06/88<span
+style="mso-spacerun: yes">  </span>12:00
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>16 File(s)<span style="mso-spacerun: yes">     </span>17408
+bytes free
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>Фиг. 5.2 Каталог дискеты
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если пользователь введет нерезидентную
+команду, то командный
+
+<p><span
+style="mso-spacerun: yes">    </span>процессор попытается загрузить ее с диска
+или дискеты. В этом
+
+<p><span
+style="mso-spacerun: yes">    </span>случае он выступает в роли загрузчика
+программы. Предполагая, что
+
+<p><span
+style="mso-spacerun: yes">    </span>имя файла совпадает с именем команды,
+интерпретатор просматривает
+
+<p><span
+style="mso-spacerun: yes">    </span>справочник в поисках такого файла, а когда
+находит, загружает его в
+
+<p><span
+style="mso-spacerun: yes">    </span>память. Затем интерпретатор передает
+управление загруженной
+
+<p><span
+style="mso-spacerun: yes">    </span>программе, которая теперь может
+реализовывать свои функции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Но не каждый файл может быть загружен с
+помощью командного
+
+<p><span
+style="mso-spacerun: yes">    </span>процессора. Тип файла должен быть либо
+.COM, либо .EXE, что
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствует либо файлу команды, либо
+выполняемому файлу. Конечным
+
+<p><span
+style="mso-spacerun: yes">    </span>продуктом выполнения операций
+ассемблирования и редактирования
+
+<p><span
+style="mso-spacerun: yes">    </span>связей является файл типа .EXE. Отсюда
+вытекает возможность
+
+<p><span
+style="mso-spacerun: yes">    </span>написания собственной системной команды.
+Если написали,
+
+<p><span
+style="mso-spacerun: yes">    </span>странслировали и скомпоновали программу на
+языке ассемблера, а
+
+<p><span
+style="mso-spacerun: yes">    </span>затем оставили эту программу на дискете,
+то ее можно загружать и
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнять так же, как и любую другую
+программу DOS. Именно это
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет писать программы, которые будут
+выполняться под
+
+<p><span
+style="mso-spacerun: yes">    </span>управлением DOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существуют различия между файлами типа
+.COM и типа .EXE. Они
+
+<p><span
+style="mso-spacerun: yes">    </span>имеют различные структуры и управление им
+передается по- разному.
+
+<p><span
+style="mso-spacerun: yes">    </span>Хотя обычно после этапа редактирования
+связей получаются файлы типа
+
+<p><span
+style="mso-spacerun: yes">    </span>.EXE, существуют некоторые причины для
+использования и файлов типа
+
+<p><span
+style="mso-spacerun: yes">    </span>.COM. В следующем разделе будут
+обсуждаться различия между типами
+
+<p><span
+style="mso-spacerun: yes">    </span>файлов и тем, как преобразовывать файл
+типа .EXE в файл типа .COM.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Рассмотрим теперь пример вызова программы.
+Хорошей иллюстрацией
+
+<p><span
+style="mso-spacerun: yes">    </span>здесь может служить ассемблер. Чтобы
+вызвать ассемблер, нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>ввести команду
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;ASM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Каталог дискеты содержит файл с именем
+ASM.EXE. Это и есть
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблер. После ввода команды ASM, он
+просматривает дискету в
+
+<p><span
+style="mso-spacerun: yes">    </span>дисководе A: (выбранном по умолчанию).
+Найдя файл с именем ASM.EXE,
+
+<p><span
+style="mso-spacerun: yes">    </span>командный процессор загружает и передает
+управление ассемблеру.
+
+<p><span
+style="mso-spacerun: yes">    </span>Теперь вычислительная система находится
+под управлением ассемблера.
+
+<p><span
+style="mso-spacerun: yes">    </span>При благополучном завершении трансляции
+ассемблер вернет управление
+
+<p><span
+style="mso-spacerun: yes">    </span>командному процессору. Заметьте, что файл,
+содержащий ассемблер -
+
+<p><span
+style="mso-spacerun: yes">    </span>это файл типа .EXE, поэтому он может быть
+загружен командным
+
+<p><span
+style="mso-spacerun: yes">    </span>процессором.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если ассемблер находится на дискете,
+установленной в дисководе
+
+<p><span
+style="mso-spacerun: yes">    </span>A:, то пользователь может обратиться к
+другому дисководу следующим
+
+<p><span
+style="mso-spacerun: yes">    </span>образом:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;B:ASM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Префикс B: указывает DOS, что файл
+находится на дискете в
+
+<p><span
+style="mso-spacerun: yes">    </span>дисководе B:. Файл полностью определяется
+не только указанием его
+
+<p><span
+style="mso-spacerun: yes">    </span>имени, но и дисковода, с которого он будет
+считан. Одного имени
+
+<p><span
+style="mso-spacerun: yes">    </span>файла достаточно только при считывании
+файла с дисковода,
+
+<p><span
+style="mso-spacerun: yes">    </span>выбранного по умолчанию. Для того чтобы
+оттранслировать файл,
+
+<p><span
+style="mso-spacerun: yes">    </span>расположенный на носителе в дисководе B: с
+помощью ассемблера,
+
+<p><span
+style="mso-spacerun: yes">    </span>который находится на дискете в дисководе
+A:, нужно ввести следующую
+
+<p><span
+style="mso-spacerun: yes">    </span>команду:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;ASM B:FILE.ASM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В этой команде одновременно задаются
+программы ASM, считываемые
+
+<p><span
+style="mso-spacerun: yes">    </span>с дисковода, который выбран по умолчанию,
+и исходный файл FILE.ASM,
+
+<p><span
+style="mso-spacerun: yes">    </span>считываемый с дисковода B:.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Это можно сделать и другим способом:
+задать команду B:, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>предписывает DOS сделать дисководом,
+выбираемым по умолчанию,
+
+<p><span
+style="mso-spacerun: yes">    </span>дисковод B:.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;B:
+
+<p><span
+style='mso-tab-count:1'>      </span>B&gt;A:ASM FILE.ASM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Заметьте, что после этого запрос со
+стороны системы меняется на
+
+<p><span
+style="mso-spacerun: yes">    </span>B&gt;. Приведенная в этом примере команда
+по своему действию полностью
+
+<p><span
+style="mso-spacerun: yes">    </span>идентична команде из предыдущего примера.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Кроме того, интерпретатор командных строк
+может работать с
+
+<p><span
+style="mso-spacerun: yes">    </span>файлом, называемом файлом с пакетом
+команд, с расширением имени
+
+<p><span
+style="mso-spacerun: yes">    </span>.BAT. Этот тип файла совершенно отличен лт
+файлов типа .COM и типа
+
+<p><span
+style="mso-spacerun: yes">    </span>.EXE. Файл типа .BAT не содержит
+выполняемого машинного кода, а
+
+<p><span
+style="mso-spacerun: yes">    </span>состоит из нетранслированных команд,
+которые интерпретируются
+
+<p><span
+style="mso-spacerun: yes">    </span>командным процессором. Все содержащиеся в
+этом файле команды
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняются DOS по очереди. Можно считать,
+что файл типа .BAT
+
+<p><span
+style="mso-spacerun: yes">    </span>заменяет процедуру ввода команд с
+клавиатуры, так как они
+
+<p><span
+style="mso-spacerun: yes">    </span>содержатся непосредственно в
+соответствующем файле. После того,
+
+<p><span
+style="mso-spacerun: yes">    </span>как система закончила обработку пакетного
+файла, она обращается за
+
+<p><span
+style="mso-spacerun: yes">    </span>следующей командой к клавиатуре. Все эти
+особенности делают файл
+
+<p><span
+style="mso-spacerun: yes">    </span>типа .BAT удобным средством выполнения
+повторяющихся заданий. После
+
+<p><span
+style="mso-spacerun: yes">    </span>того, как такой файл уже создан,
+единственная команда обращения к
+
+<p><span
+style="mso-spacerun: yes">    </span>нему заменяет ввод всех содержащихся в нем
+команд.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В системе допускается специальный файл с
+именем AUTOEXEC.BAT.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если такой файл имеется на диске, то сразу
+же после своей загрузки
+
+<p><span
+style="mso-spacerun: yes">    </span>DOS обращается к нему, передавая
+управление командам, составляющим
+
+<p><span
+style="mso-spacerun: yes">    </span>пакет команд этого файла. Это позволяет
+автоматически загружать с
+
+<p><span
+style="mso-spacerun: yes">    </span>диска нужную пользователю программу.
+Предположим, что вы написали
+
+<p><span
+style="mso-spacerun: yes">    </span>прикладную программу, использующую DOS.
+(При этом говорят, что
+
+<p><span
+style="mso-spacerun: yes">    </span>программа была написана с &quot;привязкой
+к DOS&quot;.) В случае создания
+
+<p><span
+style="mso-spacerun: yes">    </span>файла AUTOEXEC.BAT, инициирующего
+выполнение прикладной программы,
+
+<p><span
+style="mso-spacerun: yes">    </span>оператору, работающему с этой прикладной
+программой, совершенно не
+
+<p><span
+style="mso-spacerun: yes">    </span>нужно будет знать, как работает
+интерпретатор командных строк. Он
+
+<p><span
+style="mso-spacerun: yes">    </span>знает, что управление осуществляет
+программа и это главное.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

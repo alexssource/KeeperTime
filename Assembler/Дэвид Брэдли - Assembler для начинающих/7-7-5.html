@@ -1,0 +1,699 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="7-7-5">Степенные и тригонометрические функции
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Оставшаяся группа команд сопроцессора 8087
+выполняет вычисления
+
+<p><span
+style="mso-spacerun: yes">    </span>сложных математических функций.<span
+style="mso-spacerun: yes">  </span>Эти команды позволяют микросхеме
+
+<p><span
+style="mso-spacerun: yes">    </span>8087 вычислять арифметические выражения,
+требующие логарифмов,
+
+<p><span
+style="mso-spacerun: yes">    </span>экспонент и тригонометрических
+функций.<span style="mso-spacerun: yes">  </span>На Фиг. 7.22 изображен
+
+<p><span
+style="mso-spacerun: yes">    </span>список этих команд.<span
+style="mso-spacerun: yes">  </span>В этом списке нет тех операций, которые есть
+у
+
+<p><span
+style="mso-spacerun: yes">    </span>карманного калькулятора.<span
+style="mso-spacerun: yes">  </span>Конструкторы процессора 8087 не смогли
+
+<p><span
+style="mso-spacerun: yes">    </span>реализовать все нужные функции на одном
+кристале, так как это
+
+<p><span
+style="mso-spacerun: yes">    </span>оказалось слишком сложным.<span
+style='mso-tab-count:1'>      </span>Вместо этого они создали набор функций
+
+<p><span
+style="mso-spacerun: yes">    </span>более низкого уровня, из которых можно
+программно построить функции
+
+<p><span
+style="mso-spacerun: yes">    </span>калькулятора.<span style="mso-spacerun:
+yes">  </span>Например, таких тригонометрических функций как синус
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>1/1/80 04:04:28
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 7.22 Арифметические команды над вершиной стека 8087<span
+style='mso-tab-count:1'>     </span> Page<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 7.22 Арифметические команды над вершиной стека 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>9B D9 FA<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FSQRT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0003<span style="mso-spacerun: yes">  </span>9B D9 FD<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FSCALE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0006<span style="mso-spacerun: yes">  </span>9B D9 F8<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FPREM
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0009<span style="mso-spacerun: yes">  </span>9B D9 FC<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FRNDINT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000C<span style="mso-spacerun: yes">  </span>9B D9 F4<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FXTRACT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000F<span style="mso-spacerun: yes">  </span>9B D9 E1<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FABS
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0012<span style="mso-spacerun: yes">  </span>9B D9 E0<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FCHS
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0015<span style="mso-spacerun: yes">  </span>9B D9 F2<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FPTAN
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0018<span style="mso-spacerun: yes">  </span>9B D9 F3<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FPATAN
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001B<span style="mso-spacerun: yes">  </span>9B D9 F0<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>F2XM1
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>001E<span style="mso-spacerun: yes">  </span>9B D9 F1<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FYL2X
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0021<span style="mso-spacerun: yes">  </span>9B D9 F9<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FYL2XP1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0024<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 7.22 Арифметические команды над вершиной стека 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>и косинус нет; вместо этих функций есть
+функция частичного
+
+<p><span
+style="mso-spacerun: yes">    </span>тангенса.<span style="mso-spacerun: yes"> 
+</span>Эта функция вычисляет отношение, равное тангенсу угла.
+
+<p><span
+style="mso-spacerun: yes">    </span>Из этого отношения программа может
+определить синус, косинус,
+
+<p><span
+style="mso-spacerun: yes">    </span>тангенс и любую другую тригонометрическую
+функцию.<span style='mso-tab-count:1'>      </span>Из обратных
+
+<p><span
+style="mso-spacerun: yes">    </span>тригонометрических функций есть операция
+частичного арктангенса,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая берет значения отношения чисел и
+вычисляет угол этого
+
+<p><span
+style="mso-spacerun: yes">    </span>тангенса.<span style="mso-spacerun: yes"> 
+</span>Эта частичная функция позволяет сконструировать
+
+<p><span
+style="mso-spacerun: yes">    </span>арксинус, арккосинус и другие функции, не
+имея их в явном виде.
+
+<p><span
+style='mso-tab-count:1'>      </span>Ниже приведен список команд этой группы с
+коротким комментарием
+
+<p><span
+style="mso-spacerun: yes">    </span>работы каждой команды.<span
+style="mso-spacerun: yes">  </span>Ни у одной из этих команд не пишутся
+
+<p><span
+style="mso-spacerun: yes">    </span>операнды, так как все они работают с
+вершиной стека, и возможно,
+
+<p><span
+style="mso-spacerun: yes">    </span>также с элементом ST1.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">    </span>FSQRT<span style="mso-spacerun: yes">   </span>(квадратный<span
+style="mso-spacerun: yes">  </span>корень)
+
+<p><span
+style="mso-spacerun: yes">      </span>ST<span style='mso-tab-count:1'>    </span>квадратный
+корень из (ST)
+
+<p><span
+style="mso-spacerun: yes">      </span>ST<span style="mso-spacerun: yes">     
+</span>должно быть неотрицательно.
+
+<p><span
+style="mso-spacerun: yes">      </span>FSCALE<span style="mso-spacerun: yes"> 
+</span>(масштабирование) ST &lt;- ST * 2ST1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта команда необходима для возведения в
+степень.<span style="mso-spacerun: yes">  </span>Другая, и
+
+<p><span
+style="mso-spacerun: yes">    </span>притом единственная, функция возведения в
+степень имеет ограничения
+
+<p><span
+style="mso-spacerun: yes">    </span>на значение показателя.<span
+style="mso-spacerun: yes">  </span>Эта команда возводит 2 в степень, равную
+
+<p><span
+style="mso-spacerun: yes">    </span>целому числу.<span style="mso-spacerun:
+yes">  </span>Далее будет приведен пример возведения 10 в
+
+<p><span
+style="mso-spacerun: yes">    </span>произвольную степень.
+
+<p><span
+style='mso-tab-count:1'>      </span>FPREM<span style='mso-tab-count:1'> </span>
+(частичный остаток)
+
+<p><span
+style='mso-tab-count:1'>      </span>ST &lt;- ST mod ST1<span
+style="mso-spacerun: yes">  </span>(частичный)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Полностью операцию деления по заданному
+модулю команда FPREM не
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняет.<span style='mso-tab-count:1'>    </span>Эта
+команда за один раз уменьшает содержимое вершины
+
+<p><span
+style="mso-spacerun: yes">    </span>стека максимум на 264.<span
+style="mso-spacerun: yes">  </span>Команда выполняет нахождение истинного
+
+<p><span
+style="mso-spacerun: yes">    </span>остатка и требует очень много времени для
+уменьшения большого числа
+
+<p><span
+style="mso-spacerun: yes">    </span>по очень маленькому основанию.<span
+style="mso-spacerun: yes">  </span>Максимально уменьшая число в
+
+<p><span
+style="mso-spacerun: yes">    </span>течение каждого выполнения команды,
+программист может разрешить
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания в течение всей операции поиска
+остатка.<span style='mso-tab-count:1'>      </span>Если функция не
+
+<p><span
+style="mso-spacerun: yes">    </span>завершена, команда FPREM устанавливает
+флаг C2 равным 1, а когда
+
+<p><span
+style="mso-spacerun: yes">    </span>завершает вычисление остатка, то
+устанавливает другие три флага C3,
+
+<p><span
+style="mso-spacerun: yes">    </span>C1 и C0 равными трем младшим битам
+частного.<span style="mso-spacerun: yes">  </span>Когда команда FPREM
+
+<p><span
+style="mso-spacerun: yes">    </span>используется в тригонометрических
+примитивах для ограничения
+
+<p><span
+style="mso-spacerun: yes">    </span>величины угла, это оказывается необходимым
+для определения октанта
+
+<p><span
+style="mso-spacerun: yes">    </span>первоначального угла.<span
+style="mso-spacerun: yes">  </span>Чтобы продемонстрировать работу этой
+
+<p><span
+style="mso-spacerun: yes">    </span>команды, мы далее приведем пример
+тригонометрических вычислений.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FRNDIN<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>T<span style='mso-tab-count:1'>  </span>(округление
+до целого)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">  </span>ST &lt;- Integer(ST)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта команда округляет текущее содержимое
+вершины стека до
+
+<p><span
+style="mso-spacerun: yes">    </span>целого числа.<span style="mso-spacerun:
+yes">  </span>Текущее управляющее слово определяет направление
+
+<p><span
+style="mso-spacerun: yes">    </span>округления.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FXTRACT<span style="mso-spacerun: yes">   
+</span>(извлечение)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ST &lt;- дробная часть ST
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>ST1<span style="mso-spacerun: yes">   </span>показатель степени двойки
+ST
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта команда разбивает текущую вершину
+стека на компоненты.
+
+<p><span
+style="mso-spacerun: yes">    </span>Аргументом этой функции является вершина
+стека.<span style="mso-spacerun: yes">  </span>Значение
+
+<p><span
+style="mso-spacerun: yes">    </span>показателя степени замещает содержимое
+вершины стека, а затем
+
+<p><span
+style="mso-spacerun: yes">    </span>дробная часть аргумента помещается в стек
+и становится новой
+
+<p><span
+style="mso-spacerun: yes">    </span>вершиной стека.<span style="mso-spacerun:
+yes">  </span>Действия этой команды FXTRACT обратны действиям
+
+<p><span
+style="mso-spacerun: yes">    </span>команды FSCALE.<span style="mso-spacerun:
+yes">  </span>Если в вершине стека находится некоторое число, то
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнение последовательно команд FXTRACT
+и FSCALE оставляет в
+
+<p><span
+style="mso-spacerun: yes">    </span>вершине стека то же число.<span
+style='mso-tab-count:1'>      </span>Но команда FSCALE не удаляет из стека
+
+<p><span
+style="mso-spacerun: yes">    </span>показатель степени, так что теперь в стеке
+дополнительно окажется
+
+<p><span
+style="mso-spacerun: yes">    </span>еще одно число.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FABS<span style="mso-spacerun: yes">  
+</span>(абсолютная величина)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>ST &lt;- абсолютное значение ST
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта команда устанавливает у числа в
+вершине стека знаковый
+
+<p><span
+style="mso-spacerun: yes">    </span>разряю в нуль (что соответствует
+положительному значению).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FCHS<span style="mso-spacerun: yes">  
+</span>(смена знака)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>ST &lt;- -ST
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта команда изменяет знак у вершины стека.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Следующие команды выполняют также
+трансцендентные функции, как
+
+<p><span
+style="mso-spacerun: yes">    </span>тригонометрические, а также
+логарифмические и возведение в степень.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FPTAN<span style="mso-spacerun: yes"> 
+</span>(частичный тангенс)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>ST &lt;- X
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>ST1 &lt;- Y, где Y/X = TAN(угол)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта команда позволяет вычислить все
+тригонометрические функции.
+
+<p><span
+style="mso-spacerun: yes">    </span>Исходное число - угол, выраженный в
+радианах, значение которого
+
+<p><span
+style="mso-spacerun: yes">    </span>должно быть в интервале 0 &lt; угол &lt;
+PI/4, - помещается в вершину
+
+<p><span
+style="mso-spacerun: yes">    </span>стека.<span style="mso-spacerun: yes"> 
+</span>Уменьшить угол до правильного значения можно с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>команды FPREM.<span style="mso-spacerun:
+yes">  </span>Результатом является отношение Y/X, которое равно
+
+<p><span
+style="mso-spacerun: yes">    </span>тангенсу угла; Y замещает вершину стека, а
+затем в стек помещается
+
+<p><span
+style="mso-spacerun: yes">    </span>X.<span style='mso-tab-count:1'>      </span>Другие
+тригонометрические функции можно вычислить с
+
+<p><span
+style="mso-spacerun: yes">    </span>использованием этих значений; например,
+косинус COS(угол) =
+
+<p><span
+style="mso-spacerun: yes">    </span>X/SQRT(X2 + Y2).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FPATAN<span style='mso-tab-count:1'>      </span>(частичный
+арктангенс)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>ST &lt;- Arctan(Y/X) = Arctan(ST1/ST)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта функция дополняет предыдущую,
+FPTAN.<span style="mso-spacerun: yes">  </span>Команда FPATAN
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисляет угол в соответствии с отношением
+чисел ST1 и ST0.<span style="mso-spacerun: yes">  </span>Она
+
+<p><span
+style="mso-spacerun: yes">    </span>извлекает из стека число X, а затем
+записывает результирующий угол
+
+<p><span
+style="mso-spacerun: yes">    </span>вместо числа Y в качестве новой вершины
+стека.<span style="mso-spacerun: yes">  </span>Исходные значения
+
+<p><span
+style="mso-spacerun: yes">    </span>должны подчиняться неравенству
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>0 &lt; Y &lt; X &lt; бесконечность
+
+<p><span
+style='mso-tab-count:1'>      </span>F2XM1<span style="mso-spacerun: yes"> 
+</span>(два в степени X минус 1)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>ST &lt;- 2ST - 1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта функция выполняет возведение в
+степень; она возводит 2 в
+
+<p><span
+style="mso-spacerun: yes">    </span>степень, указанную в вершине стека.<span
+style="mso-spacerun: yes">  </span>Исходное число должно
+
+<p><span
+style="mso-spacerun: yes">    </span>находиться в диапазоне 0 &lt;= ST
+&lt;=0.5, и чтобы вычислить два в
+
+<p><span
+style="mso-spacerun: yes">    </span>степени, большей 0.5, эту команду нужно
+использовать вместе с
+
+<p><span
+style="mso-spacerun: yes">    </span>командой FSCALF.<span style="mso-spacerun:
+yes">  </span>С помощью команд FLD, загружающих специальные
+
+<p><span
+style="mso-spacerun: yes">    </span>константы, программа может возвести в
+заданную степень также числа,
+
+<p><span
+style="mso-spacerun: yes">    </span>отличные от 2, для этого используются
+следующие формулы:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>10**X = 2**(X*Log2(10))
+
+<p><span
+style='mso-tab-count:1'>      </span>e**X = 2**(X*Log2(e))
+
+<p><span
+style='mso-tab-count:1'>      </span>Y**X = 2**(X*Log2(Y))
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Далее приводится пример возведения 10 в
+произвольную степень.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FYL2X (Y умножить на логарифм по основанию
+2 от X)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>ST &lt;- Y*Log2(X) = ST1*Log2(ST)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта функция выполняет операцию
+логарифмирования.<span style="mso-spacerun: yes">  </span>Она берет
+
+<p><span
+style="mso-spacerun: yes">    </span>логарифм по основанию 2 от содержимого
+вершины стека и затем
+
+<p><span
+style="mso-spacerun: yes">    </span>умножает его на элемент ST1.<span
+style="mso-spacerun: yes">  </span>Команда FYL2X извлекает из стека
+
+<p><span
+style="mso-spacerun: yes">    </span>число X и замещает результат числом
+Y.<span style="mso-spacerun: yes">  </span>Исходные числа должны
+
+<p><span
+style="mso-spacerun: yes">    </span>удовлетворять следующим соотношениям:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>0 &lt; X &lt; бесконечности и - бесконечность
+&lt; Y &lt; бесконечности.
+
+<p><span
+style="mso-spacerun: yes">    </span>Эта функция позволяет вычислять логарифмы
+и по основаниям, отличным
+
+<p><span
+style="mso-spacerun: yes">    </span>от 2.<span style="mso-spacerun: yes"> 
+</span>Следующая формула:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Logn(2) * Log2(X)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>вычисляет логарифм числа X по основанию n;
+значение Logn2
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисляется как 1/(Log2n).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FYL2XP1<span style="mso-spacerun: yes"> 
+</span>(Y умножить на логарифм по основанию 2 от X+1)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>ST &lt;- Y*Log2(X+1) = ST1*Log2(ST+1)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эта функция идентична функции FYL2X за
+исключением того, что к
+
+<p><span
+style="mso-spacerun: yes">    </span>X прибавляется 1.<span
+style="mso-spacerun: yes">  </span>Функция FYL2XP1 накладывает более жесткие
+
+<p><span
+style="mso-spacerun: yes">    </span>ограничения на X, и предназначена для
+вычисления логарифмов чисел,
+
+<p><span
+style="mso-spacerun: yes">    </span>значения которых очень близки к 1.<span
+style='mso-tab-count:1'>    </span>Эта функция дает наиболее
+
+<p><span
+style="mso-spacerun: yes">    </span>высокую точность, если
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>0 &lt; ABS(X) &lt; 1 - (корень из 2 )/2
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

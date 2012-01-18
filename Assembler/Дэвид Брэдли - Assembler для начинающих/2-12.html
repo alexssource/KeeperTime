@@ -1,0 +1,711 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="2-12">Стек</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Стек - это структура данных, которая
+используется для временного
+
+<p><span
+style="mso-spacerun: yes">    </span>хранения информации.<span
+style="mso-spacerun: yes">  </span>Программа может поместить данные в стек
+
+<p><span
+style="mso-spacerun: yes">    </span>(PUSH) или забрать их оттуда (POP).<span
+style="mso-spacerun: yes">  </span>Стековая структура данных
+
+<p><span
+style="mso-spacerun: yes">    </span>предполагает упорядочивание помещенных в
+него данных специальным
+
+<p><span
+style="mso-spacerun: yes">    </span>образом.<span style="mso-spacerun: yes"> 
+</span>Во всех случаях первым из стека извлекается то, что было
+
+<p><span
+style="mso-spacerun: yes">    </span>в нем сохранено последним.<span
+style='mso-tab-count:1'>      </span>Такая организация хранения данных
+
+<p><span
+style="mso-spacerun: yes">    </span>сокращенно обозначается LIFO (last in,
+first out - последний
+
+<p><span
+style="mso-spacerun: yes">    </span>введенный первым выводится).<span
+style="mso-spacerun: yes">  </span>Если мы поместили в стек сначала A,
+
+<p><span
+style="mso-spacerun: yes">    </span>затем B, то первое, что мы извлечем из
+него будет B.<span style="mso-spacerun: yes">  </span>Следующая
+
+<p><span
+style="mso-spacerun: yes">    </span>команда извлечения (POP) вернет A.<span
+style='mso-tab-count:1'>    </span>Информация возвращается из
+
+<p><span
+style="mso-spacerun: yes">    </span>стека в порядке, строго противоположном
+порядку ее помещения в
+
+<p><span
+style="mso-spacerun: yes">    </span>стек.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Стек противоположен очереди.<span
+style="mso-spacerun: yes">  </span>Очередь - это обычная последова-
+
+<p><span
+style="mso-spacerun: yes">    </span>тельность, подобная очередям на почте или
+в магазине.<span style="mso-spacerun: yes">  </span>Это
+
+<p><span
+style="mso-spacerun: yes">    </span>структура данных типа &quot;первым вошел -
+первым вышел&quot; (first in,
+
+<p><span
+style="mso-spacerun: yes">    </span>first out:<span style='mso-tab-count:1'>    </span>FIFO).<span
+style='mso-tab-count:1'>      </span>Тот, кто первым встал в очередь, первым и
+
+<p><span
+style="mso-spacerun: yes">    </span>покинет ее.<span style="mso-spacerun:
+yes">  </span>Стек и очередь - очень разные вещи.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Компьютер снабжает стек зарезервированным
+участком памяти и
+
+<p><span
+style="mso-spacerun: yes">    </span>указателем, называемым указателем
+стека.<span style="mso-spacerun: yes">  </span>Программа использует ука-
+
+<p><span
+style="mso-spacerun: yes">    </span>затель стека для того, чтобы фиксировать
+последние помещенные в
+
+<p><span
+style="mso-spacerun: yes">    </span>стек данные, в отличие от почты, где сами
+элементы очереди продви-
+
+<p><span
+style="mso-spacerun: yes">    </span>гаются вперед по мере движения
+очереди.<span style="mso-spacerun: yes">  </span>В компьютере намного легче
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать для слежения за данными
+указатель и при записи или
+
+<p><span
+style="mso-spacerun: yes">    </span>считывании данных из стека изменять только
+его.<span style="mso-spacerun: yes">  </span>В ответ на
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнение операций POP и PUSH указатель
+стека соответственно
+
+<p><span
+style="mso-spacerun: yes">    </span>увеличивается или уменьшается.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг.<span style="mso-spacerun: yes"> 
+</span>2.19 дает пример стека.<span style="mso-spacerun: yes">  </span>В части
+(a) изображен стек после
+
+<p><span
+style="mso-spacerun: yes">    </span>того как в него последовательно помещены
+значения A, B, C.<span style='mso-tab-count:1'>    </span>Ука-
+
+<p><span
+style="mso-spacerun: yes">    </span>затель стека указывает на текущую вершину
+стека, в данном случае на
+
+<p><span
+style="mso-spacerun: yes">    </span>C.<span style='mso-tab-count:1'>      </span>В
+части (b) в стек помещается еще одно значение:<span style="mso-spacerun: yes"> 
+</span>D.<span style="mso-spacerun: yes">  </span>Операция
+
+<p><span
+style="mso-spacerun: yes">    </span>PUSH уменьшает указатель стека SP (от
+Stack Pointer - указатель
+
+<p><span
+style="mso-spacerun: yes">    </span>стека), который теперь указывает на новую
+вершину D.<span style="mso-spacerun: yes">  </span>Указатель
+
+<p><span
+style="mso-spacerun: yes">    </span>стека всегда фиксирует то, что было
+последним помещено в стек.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг.<span style="mso-spacerun: yes"> 
+</span>2.19(c) показывает состояние стека после операции POP.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этой операцией значение D было извлечено
+из стека.<span style='mso-tab-count:1'>      </span>Команда POP
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает извлеченное из стека значение в
+указанное место.<span style="mso-spacerun: yes">  </span>Если в
+
+<p><span
+style="mso-spacerun: yes">    </span>части (c) выполнялась команда POP AX, то
+процессор поместил
+
+<p><span
+style="mso-spacerun: yes">    </span>значение D в регистр AX (это уже
+дополнительный аспект, который мы
+
+<p><span
+style="mso-spacerun: yes">    </span>обсудим в следующей главе).<span
+style="mso-spacerun: yes">  </span>POP увеличивает указатель стека.
+
+<p><span
+style="mso-spacerun: yes">    </span>Теперь он указывает на новую вершину,
+C.<span style="mso-spacerun: yes">  </span>Заметим, что элементы
+
+<p><span
+style="mso-spacerun: yes">    </span>извлекаются из стека по описанному
+принципу LIFO.<span style="mso-spacerun: yes">  </span>Последним
+
+<p><span
+style="mso-spacerun: yes">    </span>помещенным в стек элементом был D и он же
+первым извлечен из стека.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обратите также внимание, что D так и
+осталось в памяти, однако
+
+<p><span
+style="mso-spacerun: yes">    </span>теперь уже не является частью стека.<span
+style="mso-spacerun: yes">  </span>Логическая граница стека
+
+<p><span
+style="mso-spacerun: yes">    </span>находится по адресу, хранящемуся в его
+указателе.<span style="mso-spacerun: yes">  </span>В данном случае
+
+<p><span
+style="mso-spacerun: yes">    </span>вершина стека оказывается ниже ячейки со
+значением D.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.<span style="mso-spacerun: yes"> 
+</span>2.19(d) видно, что происходит с D при помещении в сетк
+
+<p><span
+style="mso-spacerun: yes">    </span>нового элемента E.<span style='mso-tab-count:
+1'>  </span>Элемент E записывается на место D и становится
+
+<p><span
+style="mso-spacerun: yes">    </span>новой вершиной стека.<span
+style="mso-spacerun: yes">  </span>Мораль из этой истории такова, что хотя
+
+<p><span
+style="mso-spacerun: yes">    </span>извлеченные из стека значения могут
+оставаться в памяти, полагаться
+
+<p><span
+style="mso-spacerun: yes">    </span>на это не следует.
+
+<p><span
+style="mso-spacerun: yes">       </span>ГДДДґ<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>ГДДДґ<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">     </span>ГДДДґ<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>ГДДДґ
+
+<p><span
+style="mso-spacerun: yes">       </span>і<span style="mso-spacerun: yes">  
+</span>і<span style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes">      </span>і D і&lt;ДД SP<span style="mso-spacerun: yes">    </span>і D
+і<span style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">   
+</span>і E і&lt;ДД SP
+
+<p><span
+style="mso-spacerun: yes">       </span>ГДДДґ<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>ГДДДґ<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">     </span>ГДДДґ<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>ГДДДґ
+
+<p><span
+style="mso-spacerun: yes">       </span>і C і&lt;ДД SP<span
+style="mso-spacerun: yes">    </span>і C і<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">     </span>і C і&lt;ДД SP<span style="mso-spacerun:
+yes">    </span>і C і
+
+<p><span
+style="mso-spacerun: yes">       </span>ГДДДґ<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>ГДДДґ<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">     </span>ГДДДґ<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>ГДДДґ
+
+<p><span
+style="mso-spacerun: yes">       </span>і B і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>і B і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">     </span>і B і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і B і
+
+<p><span
+style="mso-spacerun: yes">       </span>ГДДДґ<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>ГДДДґ<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">     </span>ГДДДґ<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>ГДДДґ
+
+<p><span
+style="mso-spacerun: yes">       </span>і A і<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>і A і<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">     </span>і A і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>і A і
+
+<p><span
+style="mso-spacerun: yes">       </span>ГДДДґ<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">      </span>ГДДДґ<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">     </span>ГДДДґ<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">    </span>ГДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span>(a)<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">       </span>(b)<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>(c)<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">     </span>(d)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 2.19<span style="mso-spacerun:
+yes">  </span>Пример работы стека
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>В приведенном примере подразумевался
+принцип построения стека
+
+<p><span
+style="mso-spacerun: yes">    </span>процессора 8088.<span style="mso-spacerun:
+yes">  </span>Указатель стека постоянно указывает на текущую
+
+<p><span
+style="mso-spacerun: yes">    </span>вершину стека.<span style="mso-spacerun:
+yes">  </span>Операция PUSH уменьшает указатель стека, POP
+
+<p><span
+style="mso-spacerun: yes">    </span>увеличивает его.<span style="mso-spacerun:
+yes">  </span>Стек растет в направлении уменьшения адресов в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.<span style="mso-spacerun: yes"> 
+</span>Основание стека располагается в памяти по большему адресу,
+
+<p><span
+style="mso-spacerun: yes">    </span>чем его вершина.<span style="mso-spacerun:
+yes">  </span>Если вы нарисуете изображения стека с наименьшим
+
+<p><span
+style="mso-spacerun: yes">    </span>адресом сверху, как на Фиг.<span
+style="mso-spacerun: yes">  </span>2.19, то вершина стека окажется в
+
+<p><span
+style="mso-spacerun: yes">    </span>верхней части рисунка.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Мы занялись обсуждением стека потому, что
+стек используется для
+
+<p><span
+style="mso-spacerun: yes">    </span>хранения адреса возврата из процедуры.<span
+style="mso-spacerun: yes">  </span>Как это делается?
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Каждая команда CALL вызывает как бы
+выполнению команды PUSH для
+
+<p><span
+style="mso-spacerun: yes">    </span>стека - сохраняет в стеке адрес
+возврата.<span style="mso-spacerun: yes">  </span>Команда RET извлекает из
+
+<p><span
+style="mso-spacerun: yes">    </span>стека, подобно команде POP, адрес возврата
+и помещает его в
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель команд.<span
+style="mso-spacerun: yes">  </span>8088 использует стек для хранения адресов
+
+<p><span
+style="mso-spacerun: yes">    </span>возврата потому, что это позволяет
+вкладывать процедуры одна в
+
+<p><span
+style="mso-spacerun: yes">    </span>другую.<span style="mso-spacerun: yes"> 
+</span>Что такое вложение?<span style="mso-spacerun: yes">  </span>На Фиг.<span
+style="mso-spacerun: yes">  </span>2.20 показан пример
+
+<p><span
+style="mso-spacerun: yes">    </span>вложенных процедур.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.<span style="mso-spacerun: yes"> 
+</span>2.20 показана абсурдная программа, которую мы
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>используем как пример вложения процедур.<span style="mso-spacerun:
+yes">  </span>Часть (a) показывает
+
+<p><span
+style="mso-spacerun: yes">    </span>стек перед выполнением программы.<span
+style="mso-spacerun: yes">  </span>Как только начинает выполняться
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура MAIN, она вызывает процедуру
+SUBROUTINE_A.<span style="mso-spacerun: yes">  </span>В это время
+
+<p><span
+style="mso-spacerun: yes">    </span>процессор сохраняет в стек адрес возврата.<span
+style='mso-tab-count:1'>  </span>Часть (b) показывает
+
+<p><span
+style="mso-spacerun: yes">    </span>адрес возврата 103 помещенным в стек.<span
+style="mso-spacerun: yes">  </span>SUBROUTINE_A в процессе
+
+<p><span
+style="mso-spacerun: yes">    </span>своего выполнения вызывает
+SUBROUNINE_B.<span style="mso-spacerun: yes">  </span>Команда этого вызова
+
+<p><span
+style="mso-spacerun: yes">    </span>сохраняет адрес возврата 108 в
+SUBROUNINE_A.<span style="mso-spacerun: yes">  </span>Когда SUBROUNINE_B
+
+<p><span
+style="mso-spacerun: yes">    </span>заканчивается, команда возврата извлекает
+из стека значение 108,
+
+<p><span
+style="mso-spacerun: yes">    </span>как показано в части (d).<span
+style="mso-spacerun: yes">  </span>Процессор помещает это значение в
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель команд, как требуется при
+команде возврата.<span style="mso-spacerun: yes">  </span>Как видно на
+
+<p><span
+style="mso-spacerun: yes">    </span>листинге ассемблера, адрес 108 относится к
+SUBROUNINE_A и следует
+
+<p><span
+style="mso-spacerun: yes">    </span>сразу за вызовом SUBROUNINE_B.<span
+style="mso-spacerun: yes">  </span>Затем SUBROUNINE_A заканчивается.
+
+<p><span
+style="mso-spacerun: yes">    </span>Команда возврата извлекает из стека
+значение 103 для указателя
+
+<p><span
+style="mso-spacerun: yes">    </span>команд.<span style="mso-spacerun: yes"> 
+</span>Адрес 103 относится к процедуре MAIN и следует сразу за
+
+<p><span
+style="mso-spacerun: yes">    </span>вызовом SUBROUNINE_A.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Наиболее важным в примере на Фиг.<span
+style="mso-spacerun: yes">  </span>2.20 является вложение
+
+<p><span
+style="mso-spacerun: yes">    </span>процедур.<span style="mso-spacerun: yes"> 
+</span>Одна процедура может вызывать другую, а команда возврата
+
+<p><span
+style="mso-spacerun: yes">    </span>всегда обеспечивает правильный возврат
+управления.<span style='mso-tab-count:1'>      </span>Единственное,
+
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>11/10/88 23:18:17
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 2.20 Вызов вложенных процедур <span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes"> </span>Page<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 2.20 Вызов вложенных процедур
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0100<span style='mso-tab-count:4'>                    </span><span
+style="mso-spacerun: yes">     </span>ORG<span style="mso-spacerun: yes">    
+</span>100H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0100<span style="mso-spacerun: yes">  </span>E8 0104 R<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>MAIN:<span style="mso-spacerun: yes">   </span>CALL<span
+style="mso-spacerun: yes">    </span>SUBROUTINE_A
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0103<span style="mso-spacerun: yes">  </span>40<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">     </span>;----- Здесь главная процедура
+продолжается . . .
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0104<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>SUBROUTINE_A<span style="mso-spacerun:
+yes">    </span>PROC<span style="mso-spacerun: yes">    </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0104<span style="mso-spacerun: yes">  </span>43<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>BX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0105<span style="mso-spacerun: yes">  </span>E8 0109 R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>CALL<span style="mso-spacerun: yes">    </span>SUBROUTINE_B
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0108<span style="mso-spacerun: yes">  </span>C3<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0109<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>SUBROUTINE_A<span style="mso-spacerun:
+yes">    </span>ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0109<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>SUBROUTINE_B<span style="mso-spacerun:
+yes">    </span>PROC<span style="mso-spacerun: yes">    </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0109<span style="mso-spacerun: yes">  </span>41<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>CX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>010A<span style="mso-spacerun: yes">  </span>C3<span style='mso-tab-count:
+3'>                </span><span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">     </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>010B<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>SUBROUTINE_B<span style="mso-spacerun:
+yes">    </span>ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>010B<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДґ<span style='mso-tab-count:
+1'> </span><span style="mso-spacerun: yes">       </span>ГДДДґ<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДґ<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>ГДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes">  
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">       </span>і<span style="mso-spacerun: yes">   </span>і<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>і108і&#17;ДД SP<span style="mso-spacerun: yes">    </span>і108і
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДґ<span style='mso-tab-count:
+1'> </span><span style="mso-spacerun: yes">       </span>ГДДДґ<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДґ<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>ГДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style="mso-spacerun: yes">  
+</span>і<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">       </span>і103і&#17;ДД SP<span style="mso-spacerun: yes">   
+</span>і103і<span style='mso-tab-count:1'>   </span><span style="mso-spacerun:
+yes">     </span>і103і&#17;ДД SP
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДґ<span style='mso-tab-count:
+1'> </span><span style="mso-spacerun: yes">       </span>ГДДДґ<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДґ<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>ГДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>іxxxі&#17;ДД SP<span
+style="mso-spacerun: yes">    </span>іxxxі<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>іxxxі<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">     </span>іxxxі
+
+<p><span
+style='mso-tab-count:2'>            </span>ГДДДґ<span style='mso-tab-count:
+1'> </span><span style="mso-spacerun: yes">       </span>ГДДДґ<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>ГДДДґ<span style='mso-tab-count:1'> </span><span style="mso-spacerun:
+yes">     </span>ГДДДґ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>(a)<span style='mso-tab-count:2'>        </span>(b)<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">      
+</span>(c)<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">      </span>(d)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>Фиг. 2.20 Вызов вложенных процедур&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>что ограничивает глубину вложения процедур
+(сколько процедур может
+
+<p><span
+style="mso-spacerun: yes">    </span>вызывать другие) - это размер стека.<span
+style="mso-spacerun: yes">  </span>Пока в стеке имеется место
+
+<p><span
+style="mso-spacerun: yes">    </span>для очередного адреса возврата, можно
+производить вложенный вызов
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуры.<span style='mso-tab-count:1'>    </span>Структура
+стека LIFO дает гарантию правильной
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательности возвратов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Пример программы на Фиг.<span
+style="mso-spacerun: yes">  </span>2.20 показывает также использование
+
+<p><span
+style="mso-spacerun: yes">    </span>еще одной псевдооперации ассемблера -
+PROC.<span style="mso-spacerun: yes">  </span>Оператор PROC
+
+<p><span
+style="mso-spacerun: yes">    </span>используется ассемблером для идентификации
+процедур.<span style="mso-spacerun: yes">  </span>Как мы
+
+<p><span
+style="mso-spacerun: yes">    </span>дальше увидим, ассемблер должен знать, как
+далеко располагается
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура и как возвращаться к точке ее
+вызова.<span style="mso-spacerun: yes">  </span>Операнд NEAR
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет процедуру как расположенную в
+пределах легкой
+
+<p><span
+style="mso-spacerun: yes">    </span>досигаемости вызывающей программы.<span
+style='mso-tab-count:1'>    </span>Мы еще вернемся к оператору
+
+<p><span
+style="mso-spacerun: yes">    </span>PROC, когда будем обсуждать реальное
+действие команд CALL и JMP.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

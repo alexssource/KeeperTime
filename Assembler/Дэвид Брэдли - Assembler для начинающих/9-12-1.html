@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-12">Дисплей</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Видеопрограмма BIOS управляет работой двух
+дисплейных адаптеров,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые могут быть установлены в IBM
+PC.<span style="mso-spacerun: yes">  </span>Мы оставили ее для
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотрения в последнюю очередь, так как
+она самая большая и
+
+<p><span
+style="mso-spacerun: yes">    </span>сложная из всех программ, входящих в
+базовую систему ввода-вывода.
+
+<b><p><div align="center"><a name="9-12-1">Области данных дисплея
+</a></div></p>
+</b>
+<p><span
+style="mso-spacerun: yes">    </span>Секция поля данных BIOS, озаглавленная
+VIDEO DISPLAY DATA AREA и
+
+<p><span
+style="mso-spacerun: yes">    </span>начинающаяся со смещения 49H, содержит
+переменные, используемые
+
+<p><span
+style="mso-spacerun: yes">    </span>видеопрограммой.<span style="mso-spacerun:
+yes">  </span>Все эти ячейки данных содержат значения,
+
+<p><span
+style="mso-spacerun: yes">    </span>используемые для работы с дисплейным
+адаптером в текущий момент
+
+<p><span
+style="mso-spacerun: yes">    </span>времени.<span style="mso-spacerun: yes"> 
+</span>Многие из этих значений копируют данные, находящихся в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистрах дисплейных адаптеров, из которых
+запрещено чтение.
+
+<p><span
+style="mso-spacerun: yes">    </span>Видеопрограмма BIOS должна знать текущее
+значение таких переменных,
+
+<p><span
+style="mso-spacerun: yes">    </span>как CRT_MODE_SET и CRT_PALETTE при
+модификации регистров.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>отличие от порта вывода на системной плате
+(порт 61H), BIOS не
+
+<p><span
+style="mso-spacerun: yes">    </span>может прочитать эти регистры перед их
+изменением.<span style="mso-spacerun: yes">  </span>Это означает,
+
+<p><span
+style="mso-spacerun: yes">    </span>что BIOS должна поддерживать в памяти
+образ регистра.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Все поля данных имеют содержательные
+комментарии, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>поясняют назначение данных во время вашей
+работы с текстом BIOS.
+
+<p><span
+style="mso-spacerun: yes">    </span>Отдельного комментария заслуживает поле
+CURSOR_POSN. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>цветной графический адаптер может
+поддерживать более одной страницы
+
+<p><span
+style="mso-spacerun: yes">    </span>изображения в текстовом режиме, на каждой
+странице имеется свое
+
+<p><span
+style="mso-spacerun: yes">    </span>место для курсора. Контроллер CRT 6845
+обслуживает только курсор
+
+
+<p><span
+style="mso-spacerun: yes">    </span>текущей страницы. Когда BIOS переключается
+со страницы на страницу,
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер запоминает положение курсора на
+соответствующей
+
+<p><span
+style="mso-spacerun: yes">    </span>странице. Так как цветная плата может
+содержать максимум восемь
+
+<p><span
+style="mso-spacerun: yes">    </span>страниц в 40-символьном режиме, имеется
+восемь ячеек для хранения
+
+<p><span
+style="mso-spacerun: yes">    </span>текущего положения курсора на каждой
+странице.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

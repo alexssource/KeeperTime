@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<b><p><div align="center"><a name="9-12-3">Установка режима
+</a></div></p></b>
+
+<p><span
+style="mso-spacerun: yes">    </span>Когда программа выполняет прерывание INT
+10H при AH = 0, она
+
+<p><span
+style="mso-spacerun: yes">    </span>вызывает функцию установки режима
+видеопрограммы BIOS.<span style="mso-spacerun: yes">  </span>Если в
+
+<p><span
+style="mso-spacerun: yes">    </span>переменной EQUIP_FLAG отмечено, что в
+системе есть монохромная
+
+<p><span
+style="mso-spacerun: yes">    </span>плата, не важно, какое значение оказалось
+в регистре AL.<span style="mso-spacerun: yes">  </span>В этом
+
+<p><span
+style="mso-spacerun: yes">    </span>случае программа BIOS настраивает
+монохромный адаптер на режим 7,
+
+<p><span
+style="mso-spacerun: yes">    </span>что означает текстовый режим 80*50,
+поддерживаемый черно-белой
+
+<p><span
+style="mso-spacerun: yes">    </span>платой.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В случае цветной графической платы
+значение в регистре AL
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет, в какой из двух графических
+или двух текстовых режимов
+
+<p><span
+style="mso-spacerun: yes">    </span>введет программа BIOS дисплейный адаптер.
+Вы видите, что имеются
+
+<p><span
+style="mso-spacerun: yes">    </span>черно-белые режимы наряду с цветными для
+текста, а также графика
+
+<p><span
+style="mso-spacerun: yes">    </span>320*200. Эти черно-белые режимы на самом
+деле не выключают цвета,
+
+<p><span
+style="mso-spacerun: yes">    </span>они только выключают сигнал цветности,
+который используется в
+
+<p><span
+style="mso-spacerun: yes">    </span>телевизоре для определения цвета каждой
+точки. Если вы используете
+
+<p><span
+style="mso-spacerun: yes">    </span>RGB-монитор, цвета останутся на местах.
+Если же вы используете
+
+<p><span
+style="mso-spacerun: yes">    </span>цветной (или черно-белый) видеомонитор или
+телевизор, установка
+
+<p><span
+style="mso-spacerun: yes">    </span>черно-белого режима цветной платы выключит
+цвета и даст более
+
+<p><span
+style="mso-spacerun: yes">    </span>четкое изображение на экране. Если вы
+занимаетесь задачей, в
+
+<p><span
+style="mso-spacerun: yes">    </span>которой цвета не нужны, то получите
+несколько лучшее изображение,
+
+<p><span
+style="mso-spacerun: yes">    </span>выбрав один из черно-белых режимов вместо
+цветного.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда выполняется программа установки
+режима, она настраивает
+
+<p><span
+style="mso-spacerun: yes">    </span>адаптер и поля данных видеопрограммы BIOS
+на обслуживание нужного
+
+<p><span
+style="mso-spacerun: yes">    </span>режима работы. Программа установки режима
+заполняет пробелами буфер
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея и помещает курсор в верхнем левом
+углу экрана. До тех пор,
+
+<p><span
+style="mso-spacerun: yes">    </span>пока вы не будете достаточно знакомы с
+устройством дисплея, вы
+
+<p><span
+style="mso-spacerun: yes">    </span>должны использовать программу установки
+режима BIOS. Хотя и нет
+
+<p><span
+style="mso-spacerun: yes">    </span>ничего плохого в смене кодов дисплея на
+ваши собственные, очень
+
+<p><span
+style="mso-spacerun: yes">    </span>трудно отлаживать программу, которая
+модифицирует дисплей. Если вы
+
+<p><span
+style="mso-spacerun: yes">    </span>сделаете что-либо неверно, дисплей станет
+неработоспособным, и
+
+<p><span
+style="mso-spacerun: yes">    </span>исчезнет возможность определить, что же
+неверно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Функции видеопрограммы, соответствующие
+номерам от 1 до 5
+
+<p><span
+style="mso-spacerun: yes">    </span>служат для работы с регистрами микросхемы
+6845. Как вы помните из
+
+<p><span
+style="mso-spacerun: yes">    </span>описания системной аппаратуры, микросхема
+6845 содержит регистры,
+
+<p><span
+style="mso-spacerun: yes">    </span>управляющие формой и положением курсора, а
+также временными
+
+<p><span
+style="mso-spacerun: yes">    </span>характеристиками отображения. Эти
+подпрограммы видеопрограммы BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяют модифицировать отображение, не
+зная базового адреса
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхемы 6845. Эти подпрограммы входят в
+число сервисных программ
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

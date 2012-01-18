@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-9-1">Близкие и далекие переходы
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Команды перехода модифицируют указатель
+команды IP, и, возможно,
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр сегмента кодов CS.<span
+style='mso-tab-count:1'>      </span>Эти регистры показывают, какая
+
+<p><span
+style="mso-spacerun: yes">    </span>следующая команда должна быть
+выполнена.<span style="mso-spacerun: yes">  </span>Команда перехода является
+
+<p><span
+style="mso-spacerun: yes">    </span>специальным случаем пересылки MOV данных в
+регистр или пару
+
+<p><span
+style="mso-spacerun: yes">    </span>регистров; и некоторые ЭВМ действительно
+выполняют команду перехода
+
+<p><span
+style="mso-spacerun: yes">    </span>именно таким способом.<span
+style="mso-spacerun: yes">  </span>Однако способы загрузки пары регистров
+
+<p><span
+style="mso-spacerun: yes">    </span>CS:IP в микропроцессоре 8088 во многом
+отличаются от способов,
+
+<p><span
+style="mso-spacerun: yes">    </span>используемых для других регистров.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прежде всего мы должны ввести некоторые
+определения. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>команда перехода изменяет только регистр
+IP, это близкий переход
+
+<p><span
+style="mso-spacerun: yes">    </span>(NEAR=переход), так как переход происходит
+внутри сегмента. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>переход изменяет регистр CS, это далекий
+FAR=переход.
+
+<p><span
+style='mso-tab-count:1'>      </span>Аттрибуты NEAR и FAR используются при
+работе ассемблера. Любая
+
+<p><span
+style="mso-spacerun: yes">    </span>программная метка в программе на языке
+ассемблера имеет атрибут
+
+<p><span
+style="mso-spacerun: yes">    </span>либо NEAR, либо FAR, так же, как данные
+имеют атрибуты BYTE или
+
+<p><span
+style="mso-spacerun: yes">    </span>WORD. В некоторых примерах этой главы
+имеются процедуры, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>используют атрибут NEAR в операторе PROC.
+Это означает, что метка,
+
+<p><span
+style="mso-spacerun: yes">    </span>связанная с оператором PROC (имя
+процедуры) имеет атрибут NEAR.
+
+<p><span
+style="mso-spacerun: yes">    </span>Ассемблер использует эту информацию для
+того, чтобы определить,
+
+<p><span
+style="mso-spacerun: yes">    </span>какой тип команды перехода или вызова
+породить при переходе к этой
+
+<p><span
+style="mso-spacerun: yes">    </span>метке. Поскольку большинство процедур -
+подпрограммы, атрибут NEAR
+
+<p><span
+style="mso-spacerun: yes">    </span>или FAR оператора PROC также определяет
+тип порождаемой команды
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>возврата. Вызов FAR=процедуры сохраняет значения как регистра CS,
+
+<p><span
+style="mso-spacerun: yes">    </span>так и регистра IP, тогда как вызов
+NEAR=процедуры оставляет в стеке
+
+<p><span
+style="mso-spacerun: yes">    </span>только значение регистра IP. Команда
+возврата должна учитывать,
+
+<p><span
+style="mso-spacerun: yes">    </span>какой тип вызова юыл сделан, чтобы
+подпрограмма могла вернуться к
+
+<p><span
+style="mso-spacerun: yes">    </span>правильному месту.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

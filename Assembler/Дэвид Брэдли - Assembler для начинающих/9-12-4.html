@@ -1,0 +1,270 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<b><p><div align="center"><a name="9-12-4">Сдвиг изображения
+</a></div></p></b>
+<p><span
+style="mso-spacerun: yes">    </span>Программы сдвига перемещают текстовую
+информацию либо вверх, либо
+
+<p><span
+style="mso-spacerun: yes">    </span>вниз, в зависимости от вызванной
+функции.<span style="mso-spacerun: yes">  </span>Программы сдвига также
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечивают некоторые средства
+организации окон (фрагментов
+
+<p><span
+style="mso-spacerun: yes">    </span>экрана) на экране дисплея - т.е.<span
+style="mso-spacerun: yes">  </span>BIOS может сдвигать только часть
+
+<p><span
+style="mso-spacerun: yes">    </span>содержимого экрана.<span
+style="mso-spacerun: yes">  </span>Входные параметры программы сдвига
+определяют
+
+<p><span
+style="mso-spacerun: yes">    </span>прямоугольник, расположенный на
+экране.<span style="mso-spacerun: yes">  </span>Он задает верхний левый и
+
+<p><span
+style="mso-spacerun: yes">    </span>правый нижний углы области сдвига.<span
+style='mso-tab-count:1'>    </span>Видеопрограмма BIOS сдвигает
+
+<p><span
+style="mso-spacerun: yes">    </span>данные только в этой области.<span
+style="mso-spacerun: yes">  </span>Остальная часть экрана не меняется.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Мы уже видели пользу сдвига окон при
+изучении операционной
+
+<p><span
+style="mso-spacerun: yes">    </span>системы и языка Бейсик, которые
+использовали для сдвига BIOS. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>работает 80-символьный дисплей, DOS
+устанавливает верхний левый
+
+<p><span
+style="mso-spacerun: yes">    </span>угол окна сдвига равным (0, 0), а нижний
+правый угол (24, 79). Так
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвигается весь экран. Но Бейсик
+использует двадцать пятую строку
+
+<p><span
+style="mso-spacerun: yes">    </span>для индикации состояния дисплея, и только
+24 строки отводит под
+
+<p><span
+style="mso-spacerun: yes">    </span>изображение программы. Когда Бейсик
+сдвигает экран с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>базовой системы ввода-вывода, он
+устанавливает верхний левый угол в
+
+<p><span
+style="mso-spacerun: yes">    </span>точке (0, 0), а правый нижний угол - в
+точке (23, 79). Из-за того,
+
+<p><span
+style="mso-spacerun: yes">    </span>что последняя строка остается за пределами
+сдвига, она не
+
+<p><span
+style="mso-spacerun: yes">    </span>перемещается во время сдвига. В следующей
+главе приведен пример
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвига окна, вызываемого из программы на
+Бейсике.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Видеопрограмма BIOS выполняет сдвиги с
+помощью переноса
+
+<p><span
+style="mso-spacerun: yes">    </span>символов и атрибутов в дисплейном буфере.
+Программа сдвига не
+
+<p><span
+style="mso-spacerun: yes">    </span>меняет стартового адреса дисплейного
+буфера; такой метод сдвига был
+
+<p><span
+style="mso-spacerun: yes">    </span>бы быстрее, но не позволяет прикладной
+программе определять, куда
+
+<p><span
+style="mso-spacerun: yes">    </span>должны попасть отдельные символы. Способ
+сдвига, реализуемый в
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS, подходит для обычной работы экрана.
+Заметим также, что
+
+<p><span
+style="mso-spacerun: yes">    </span>программа сдвигает изображение при
+необходимости более чем на одну
+
+<p><span
+style="mso-spacerun: yes">    </span>строку. Обычно программа сдвигает
+изображение на одну строку.
+
+<p><span
+style="mso-spacerun: yes">    </span>Функция сдвига видеопрограммы BIOS
+позволяет сдвинуть содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>экрана на несколько строк. Если же
+количество строк сдвига равно
+
+<p><span
+style="mso-spacerun: yes">    </span>нулю, программа BIOS очищает экран. Это -
+быстрый способ очистки
+
+<p><span
+style="mso-spacerun: yes">    </span>всего экрана или его части.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда программа работает в 80-символьном
+режиме на цветном
+
+<p><span
+style="mso-spacerun: yes">    </span>графическом адаптере, она не может
+записывать или читать его текст
+
+<p><span
+style="mso-spacerun: yes">    </span>в произвольные моменты времени. Если
+программа будет модифицировать
+
+<p><span
+style="mso-spacerun: yes">    </span>буфер не в строго определенные моменты
+времени, на экране появятся
+
+<p><span
+style="mso-spacerun: yes">    </span>помехи. Так как программа сдвига читает и
+записывает большие
+
+<p><span
+style="mso-spacerun: yes">    </span>количества данных, она должна быть
+написана с учетом проблемы
+
+<p><span
+style="mso-spacerun: yes">    </span>помех. Если посмотреть текст программы
+обслуживания операции
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвига, то можно увидеть, что BIOS
+обслуживает режим 80*25 цветной
+
+<p><span
+style="mso-spacerun: yes">    </span>платы (переменная CRT_MODE равна 2 или 3),
+как специальный случай.
+
+<p><span
+style="mso-spacerun: yes">    </span>В случае операций сдвига эта подпрограмма
+BIOS ждет до тех пор,
+
+<p><span
+style="mso-spacerun: yes">    </span>пока не возникнет вертикальный обратный
+ход луча дисплея. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что аппаратура адаптера выдала
+на экран все содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>буфера и готова начать новый кадр.
+(Аппаратура адаптера повторяет
+
+<p><span
+style="mso-spacerun: yes">    </span>этот процесс регенерации экрана 60 раз в
+секунду). При появлении
+
+<p><span
+style="mso-spacerun: yes">    </span>вертикального обратного хода программа
+BIOS выключает дисплей и
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняет сдвиг. Когда программа сдвига
+переместит все символы, она
+
+<p><span
+style="mso-spacerun: yes">    </span>снова включает дисплей. Это вызывает
+короткое мигание дисплея. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>вы внимательно посмотрите на экран во
+время сдвига, то заметите,
+
+<p><span
+style="mso-spacerun: yes">    </span>что верхние его шесть строк несколько
+темнее остальных. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>происходит из-за того, что операция сдвига
+занимает несколько
+
+<p><span
+style="mso-spacerun: yes">    </span>большее время, чем один период регенерации
+экрана. Поэтому верхние
+
+<p><span
+style="mso-spacerun: yes">    </span>шесть строк выключаются на два интервала
+регенерации, а весь
+
+<p><span
+style="mso-spacerun: yes">    </span>остальной экран - только на один интервал.
+Метод, допускающий
+
+<p><span
+style="mso-spacerun: yes">    </span>появление помех на экране, настолько
+непригляден, что описанный
+
+<p><span
+style="mso-spacerun: yes">    </span>метод предпочтительнее. Вы можете написать
+несколько программ,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы попробовать другие методы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда экран находится в графическом
+режиме, начинает работать
+
+<p><span
+style="mso-spacerun: yes">    </span>другая часть программы сдвига. Хотя это и
+существенная часть
+
+<p><span
+style="mso-spacerun: yes">    </span>программы BIOS, ее обсуждение отложим до
+тех пор, пока не
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотрим чтение и запись символов на
+экран.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

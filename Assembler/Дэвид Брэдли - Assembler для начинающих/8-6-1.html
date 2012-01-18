@@ -1,0 +1,649 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="8-6-1">Адаптер монохромного дисплея и принтера
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сначала поговорим о монохромном дисплее,
+он - простейший из
+
+<p><span
+style="mso-spacerun: yes">    </span>двух адаптеров. Мы отложим описание той
+части платы, которая
+
+<p><span
+style="mso-spacerun: yes">    </span>работает с печатающим устройством, пока не
+дойдем до адаптера
+
+<p><span
+style="mso-spacerun: yes">    </span>печатающего устройства. Схема адаптера
+печатающего устройства на
+
+<p><span
+style="mso-spacerun: yes">    </span>монохромной плате идентична схеме
+отдельного адаптера печатающего
+
+<p><span
+style="mso-spacerun: yes">    </span>устройства, поэтому способы
+программирования их также одинаковы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Черно-белая плата работает в одном режиме.
+Этот видео адаптер
+
+<p><span
+style="mso-spacerun: yes">    </span>предназначен для вывода 25 строк символов
+по 80 символов в строке.
+
+<p><span
+style="mso-spacerun: yes">    </span>Такое построение изображения называют
+режимом 80*25. Вы помещаете
+
+<p><span
+style="mso-spacerun: yes">    </span>символы на экран, записывая коды ASCII в
+буфер дисплея. Буфер
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея - это специальная область памяти,
+расположенная в адресном
+
+<p><span
+style="mso-spacerun: yes">    </span>пространстве по адресу 0B0000H. Эта память
+- часть платы адаптера,
+
+<p><span
+style="mso-spacerun: yes">    </span>а не системной памяти. Всякий раз, когда
+вы записываете символ в
+
+<p><span
+style="mso-spacerun: yes">    </span>коде ASCII в буфер дисплея, он появляется
+в соответствующем месте
+
+<p><span
+style="mso-spacerun: yes">    </span>экрана. Преобразование символа из кода
+ASCII в точки на экране
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняется аппаратно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Каждый символ на дисплее имеет атрибут.
+Атрибуты символов
+
+<p><span
+style="mso-spacerun: yes">    </span>определяют вид, в которым адаптер выводит
+символы на экран. На Фиг.
+
+<p><span
+style="mso-spacerun: yes">    </span>8.7 показаны атрибуты символов и их
+значения. Вам нужно знать эти
+
+<p><span
+style="mso-spacerun: yes">    </span>значения, так как их тоже надо помещать в
+буфер дисплея. Позиция
+
+<p><span
+style="mso-spacerun: yes">    </span>каждого символа в буфере дисплея занимает
+два байта. Четный байт
+
+<p><span
+style="mso-spacerun: yes">    </span>пары содержит код символа, а нечетный -
+значение атрибута. По Фиг.
+
+<p><span
+style="mso-spacerun: yes">    </span>8.7 можно определить значение атрибута, с
+которым выводить на экран
+
+<p><span
+style="mso-spacerun: yes">    </span>символ. Обычно выводится белый (на самом
+деле зеленый) символ на
+
+<p><span
+style="mso-spacerun: yes">    </span>черном фоне. Для этого случая значение
+атрибута равно 07H. Чтобы
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>сделать изображение негативным, нужно изменить значение атрибута
+на
+
+<p><span
+style="mso-spacerun: yes">    </span>70H. Атрибут 00H делает символ невидимым.
+Хотя код ASCII символа и
+
+<p><span
+style="mso-spacerun: yes">    </span>записан в байт символа, значение атрибута
+не дает символу появиться
+
+<p><span
+style="mso-spacerun: yes">    </span>на экране.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Дисплейный буфер черно-белой платы
+содержит 4K байта памяти.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этого достаточно, чтобы иметь байты
+символов и атрибутов для каждой
+
+<p><span
+style="mso-spacerun: yes">    </span>из 2000 позиций экрана. Первый символ
+буфера дисплея появляется в
+
+<p><span
+style="mso-spacerun: yes">    </span>верхнем левом углу экрана, следующие два
+байта изображают следующий
+
+
+<p><span
+style="mso-spacerun: yes">    </span>символ справа, и так далее. Первый символ
+второй строки находится в
+
+<p><span
+style="mso-spacerun: yes">    </span>байтах 160 и 161. Теперь можно определить
+адрес любого символа на
+
+<p><span
+style="mso-spacerun: yes">    </span>экране. Сначала определим позицию в
+верхнем левом углу экрана, как
+
+<p><span
+style="mso-spacerun: yes">    </span>находящуюся в строке 0 и колонке 0; нижний
+правый угол находится в
+
+<p><span
+style="mso-spacerun: yes">    </span>строке 24 и колонке 79. Тогда формулой
+вычисления адреса для
+
+<p><span
+style="mso-spacerun: yes">    </span>произвольной строки и позиции будет
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>адрес = 2*(строка*80 + колонка) + 0B0000H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Умножение на 2 выравнивает адрес к двум
+байтам на позицию.
+
+<p><span
+style="mso-spacerun: yes">    </span>Прибавление значения 0B0000H отражает
+начальный адрес буфера
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея. Обычно в программе либо регистр
+DS, либо регистр ES
+
+<p><span
+style="mso-spacerun: yes">    </span>загружается значением 0B0000H, и в
+остальном программа работает со
+
+<p><span
+style="mso-spacerun: yes">    </span>смещениями в буфере дисплея.
+
+<p><span
+style='mso-tab-count:1'>      </span>Значение<span style='mso-tab-count:3'>                </span>Атрибут
+
+<p><span
+style="mso-spacerun: yes">     
+</span>----------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>00H<span style='mso-tab-count:2'>         </span>ничего
+не выводится
+
+<p><span
+style='mso-tab-count:1'>      </span>01H<span style='mso-tab-count:2'>         </span>подчеркнутые
+символы
+
+<p><span
+style='mso-tab-count:1'>      </span>07H<span style='mso-tab-count:2'>         </span>белый
+символ на черном фоне
+
+<p><span
+style='mso-tab-count:1'>      </span>0FH<span style='mso-tab-count:2'>         </span>ярко-белый
+символ, черный фон
+
+<p><span
+style='mso-tab-count:1'>      </span>70H<span style='mso-tab-count:2'>         </span>черный
+символ, белый фон
+
+<p><span
+style='mso-tab-count:1'>      </span>80H<span style='mso-tab-count:2'>         </span>при
+добавлении к любому другому символ
+
+<p><span
+style='mso-tab-count:3'>                  </span>мигает
+
+<p><span
+style="mso-spacerun: yes">     
+</span>----------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 8.7 Символьные атрибуты для
+монохромного адаптера
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 8.8 в качестве примера для
+монохромного дисплея
+
+<p><span
+style="mso-spacerun: yes">    </span>приведена программа, которая перемещает
+содержимое экрана на одну
+
+<p><span
+style="mso-spacerun: yes">    </span>позицию вправо. Она выбрасывает крайнюю
+справа колонку, а слева
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает колонку из пробелов. Если вы
+хотите испытать эту
+
+<p><span
+style="mso-spacerun: yes">    </span>программу, но имеете в своей системе
+только цветную плату, то
+
+<p><span
+style="mso-spacerun: yes">    </span>программа работает при установке сегмента
+DISPLAY на адрес 0B800H.
+
+<p><span
+style="mso-spacerun: yes">    </span>Оба видео адаптера очень похожи при работе
+в текстовом режиме, и
+
+<p><span
+style="mso-spacerun: yes">    </span>различаются только адресами памяти и
+ввода-вывода.
+
+<p>
+
+<p><span
+style='mso-tab-count:2'>            </span>Microsoft (R) Macro Assembler
+Version 5.00<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>1/1/80 04:05:26
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 8.8 Горизонтальный сдвиг вправо<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>Page<span style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span>PAGE<span
+style='mso-tab-count:1'>  </span>,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span>TITLE<span
+style='mso-tab-count:1'> </span>Фиг. 8.8 Горизонтальный сдвиг вправо
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>STACK<span
+style='mso-tab-count:1'> </span>SEGMENT STACK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style="mso-spacerun: yes">  </span>0040[<span
+style='mso-tab-count:4'>                        </span>DW<span
+style='mso-tab-count:1'>    </span>64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">   </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes"> </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0080<span style='mso-tab-count:4'>                   </span>STACK<span
+style='mso-tab-count:1'> </span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>DISPLAY
+SEGMENT AT<span style='mso-tab-count:1'>      </span>0B800H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>DISPLAY_START<span
+style='mso-tab-count:1'>     </span>LABEL<span style='mso-tab-count:1'> </span>WORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0FA0<span style='mso-tab-count:5'>                         </span>ORG<span
+style='mso-tab-count:1'>   </span>4000
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0FA0<span style='mso-tab-count:4'>                   </span>DISPLAY_END<span
+style='mso-tab-count:1'> </span>LABEL<span style='mso-tab-count:1'> </span>WORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0FA0<span style='mso-tab-count:4'>                   </span>DISPLAY
+ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>CODE<span
+style='mso-tab-count:1'>  </span>SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span>ASSUME<span
+style='mso-tab-count:1'>      </span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>SIDE_SCROLL<span
+style='mso-tab-count:1'> </span>PROC<span style='mso-tab-count:1'>  </span>FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style="mso-spacerun: yes">  </span>1E<span
+style='mso-tab-count:4'>                     </span>PUSH<span style='mso-tab-count:
+1'>  </span>DS
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0001<span style="mso-spacerun: yes">  </span>B8 0000<span
+style='mso-tab-count:4'>                      </span>MOV<span style='mso-tab-count:
+1'>   </span>AX, 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0004<span style="mso-spacerun: yes">  </span>50<span
+style='mso-tab-count:4'>                     </span>PUSH<span style='mso-tab-count:
+1'>  </span>AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0005<span style="mso-spacerun: yes">  </span>B8 ---- R<span
+style='mso-tab-count:3'>              </span>MOV<span style='mso-tab-count:
+1'>   </span>AX, DISPLAY
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0008<span style="mso-spacerun: yes">  </span>8E D8<span
+style='mso-tab-count:4'>                        </span>MOV<span
+style='mso-tab-count:1'>   </span>DS, AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>000A<span style="mso-spacerun: yes">  </span>8E C0<span
+style='mso-tab-count:4'>                        </span>MOV<span
+style='mso-tab-count:1'>   </span>ES, AX
+
+<p><span
+style='mso-tab-count:7'>                                          </span>ASSUME<span
+style='mso-tab-count:1'>      </span>DS:DISPLAY, ES:DISPLAY
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span>;-----<span
+style='mso-tab-count:1'>      </span>Заполнение столбца 79 пробелами
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>Фиг. 8.8 Горизонтальный сдвиг вправо
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>000C<span style="mso-spacerun: yes">  </span>B9 0019<span
+style='mso-tab-count:4'>                      </span>MOV<span style='mso-tab-count:
+1'>   </span>CX, 25
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>000F<span style="mso-spacerun: yes">  </span>8D 3E 004E R<span
+style='mso-tab-count:3'>                 </span>LEA<span style='mso-tab-count:
+1'>   </span>DI, DISPLAY_START+78
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0013<span style="mso-spacerun: yes">  </span>B8 0720<span
+style='mso-tab-count:4'>                      </span>MOV<span style='mso-tab-count:
+1'>   </span>AX, 720H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0016<span style='mso-tab-count:4'>                   </span>BLANK:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0016<span style="mso-spacerun: yes">  </span>89 05<span
+style='mso-tab-count:4'>                        </span>MOV<span
+style='mso-tab-count:1'>   </span>[DI], AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0018<span style="mso-spacerun: yes">  </span>81 C7 00A0<span
+style='mso-tab-count:3'>             </span>ADD<span style='mso-tab-count:1'>   </span>DI,
+160
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>001C<span style="mso-spacerun: yes">  </span>E2 F8<span
+style='mso-tab-count:4'>                        </span>LOOP<span
+style='mso-tab-count:1'>  </span>BLANK
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span>;-----<span
+style='mso-tab-count:1'>      </span>Сдвиг вправо
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>001E<span style="mso-spacerun: yes">  </span>B9 07D0<span
+style='mso-tab-count:4'>                      </span>MOV<span style='mso-tab-count:
+1'>   </span>CX, 2000
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0021<span style="mso-spacerun: yes">  </span>8D 36 0F9E R<span
+style='mso-tab-count:3'>                 </span>LEA<span style='mso-tab-count:
+1'>   </span>SI, DISPLAY_END-2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0025<span style="mso-spacerun: yes">  </span>8D 3E 0FA0 R<span
+style='mso-tab-count:3'>                 </span>LEA<span style='mso-tab-count:
+1'>   </span>DI, DISPLAY_END
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0029<span style="mso-spacerun: yes">  </span>FD<span
+style='mso-tab-count:3'>               </span><span style='mso-tab-count:1'>      </span>STD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>002A<span style="mso-spacerun: yes">  </span>F3/ A5<span
+style='mso-tab-count:4'>                       </span>REP<span
+style='mso-tab-count:1'>   </span>MOVSW
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>002C<span style="mso-spacerun: yes">  </span>A3 0000 R<span
+style='mso-tab-count:3'>              </span>MOV<span style='mso-tab-count:
+1'>   </span>DISPLAY_START, AX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>002F<span style="mso-spacerun: yes">  </span>CB<span
+style='mso-tab-count:4'>                     </span>RET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0030<span style='mso-tab-count:4'>                   </span>SIDE_SCROLL<span
+style='mso-tab-count:1'> </span>ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0030<span style='mso-tab-count:4'>                   </span>CODE<span
+style='mso-tab-count:1'>  </span>ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>Фиг. 8.8 Горизонтальный сдвиг направо
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа на Фиг. 8.8 делает этот
+горизонтальный сдвиг очень
+
+<p><span
+style="mso-spacerun: yes">    </span>простым способом. Правая колонка
+заполняется пробелами в результате
+
+<p><span
+style="mso-spacerun: yes">    </span>записи 25 пробелов через каждые 160 байт
+памяти. Затем программа
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвигает весь дисплейный буфер по памяти
+на один байт вверх.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку буфер дисплея непрерывно
+продолжается строка за строкой,
+
+<p><span
+style="mso-spacerun: yes">    </span>символ, который был в колонке 79 строки 0,
+после сдвига оказывается
+
+<p><span
+style="mso-spacerun: yes">    </span>в колонке 0 строки 1. Наконец, программа
+заменяет первый символ
+
+<p><span
+style="mso-spacerun: yes">    </span>буфера пробелом.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Монохромный адаптер имеет также несколько
+портов ввода-вывода,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые можно использовать при
+программаровании дисплея, но они
+
+<p><span
+style="mso-spacerun: yes">    </span>будут рассмотрены очень бегло. Конструкция
+монохромного адаптера
+
+<p><span
+style="mso-spacerun: yes">    </span>использует эти порты ввода-вывода в первую
+очередь для удобства
+
+<p><span
+style="mso-spacerun: yes">    </span>аппаратной организации. Кроме того,
+программирование черно-белой
+
+<p><span
+style="mso-spacerun: yes">    </span>платы в общих чертах аналогично цветной
+плате. Поскольку цветная
+
+<p><span
+style="mso-spacerun: yes">    </span>плата имеет намного больше специальных
+возможностей в использовании
+
+<p><span
+style="mso-spacerun: yes">    </span>портов ввода-вывода, мы поговорим о них в
+основном в следующем
+
+<p><span
+style="mso-spacerun: yes">    </span>разделе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Монохромный адаптер порождает сигналы
+вертикальной и
+
+<p><span
+style="mso-spacerun: yes">    </span>горизонтальной синхронизации, необходимые
+для нормального
+
+<p><span
+style="mso-spacerun: yes">    </span>изображения, с помощью контроллера
+электронно-лучевой трубки 6845
+
+<p><span
+style="mso-spacerun: yes">    </span>фирмы Motorola. Эта микрсхема содержит два
+порта ввода-вывода,
+
+<p><span
+style="mso-spacerun: yes">    </span>имеющих адреса 3B4H и 3B5H. Адаптер также
+имеет управляющий порт
+
+<p><span
+style="mso-spacerun: yes">    </span>3B8H и порт состояния 3BAH. После
+инициализации адаптера
+
+<p><span
+style="mso-spacerun: yes">    </span>модифицировать коды в этих портах вряд ли
+стоит. Существуют и
+
+<p><span
+style="mso-spacerun: yes">    </span>другие режимы работы, возможные для
+монохромной платы, но мы
+
+<p><span
+style="mso-spacerun: yes">    </span>сконцентрируем наше внимание на цветной
+плате. Полное, детальное
+
+<p><span
+style="mso-spacerun: yes">    </span>описание портов ввода-вывода монохромного
+адаптера можно найти в
+
+<p><span
+style="mso-spacerun: yes">    </span>техническом описании.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

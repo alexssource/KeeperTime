@@ -1,0 +1,353 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><a name="3-14-9"><b>Флаг переполнения</b>
+</a></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Флаг переполнения<span
+style="mso-spacerun: yes">  </span>OF - единственный флаг<span
+style="mso-spacerun: yes">  </span>в старшем байте регистра
+
+<p><span
+style="mso-spacerun: yes">    </span>флагов,<span style="mso-spacerun: yes">   
+</span>который<span style='mso-tab-count:1'>  </span><span style="mso-spacerun:
+yes">  </span>устанавливается<span style="mso-spacerun: yes">   
+</span>обычными<span style='mso-tab-count:1'> </span>арифметическими
+
+<p><span
+style="mso-spacerun: yes">    </span>операциями.<span style="mso-spacerun:
+yes">  </span>Остальные флаги<span style="mso-spacerun: yes">  </span>старшего
+байта<span style="mso-spacerun: yes">  </span>находятся под<span
+style="mso-spacerun: yes">  </span>прямым
+
+<p><span
+style="mso-spacerun: yes">    </span>управлением<span style="mso-spacerun:
+yes">   </span>программиста.<span style="mso-spacerun: yes">   </span>Флаг<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes"> 
+</span>переполнения<span style='mso-tab-count:1'>    </span> -<span
+style="mso-spacerun: yes">   </span>еще<span style="mso-spacerun: yes">  
+</span>один
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметический флаг,<span
+style="mso-spacerun: yes">  </span>как флаг нуля<span style="mso-spacerun:
+yes">  </span>и переноса. Флаг<span style="mso-spacerun: yes"> 
+</span>переполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>необходим для арифметики в
+дополнительном<span style="mso-spacerun: yes">  </span>коде в такой же степени,
+
+<p><span
+style="mso-spacerun: yes">    </span>как флаг переноса для арифметики
+повышенной точности.
+
+<p><span
+style='mso-tab-count:1'>      </span>В<span style="mso-spacerun: yes"> 
+</span>арифметике<span style="mso-spacerun: yes">  </span>чисел,<span
+style="mso-spacerun: yes">  </span>представленных<span style="mso-spacerun:
+yes">  </span>в<span style="mso-spacerun: yes">  </span>дополнительном<span
+style="mso-spacerun: yes">  </span>коде,
+
+<p><span
+style="mso-spacerun: yes">    </span>старший<span style="mso-spacerun: yes"> 
+</span>бит<span style="mso-spacerun: yes">  </span>используется<span
+style='mso-tab-count:1'>      </span>для<span style="mso-spacerun: yes">  
+</span>хранения<span style='mso-tab-count:1'>    </span>знака<span
+style="mso-spacerun: yes">  </span>числа.<span style="mso-spacerun: yes"> 
+</span>Сумматор
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессора<span style="mso-spacerun:
+yes">  </span>работает как<span style="mso-spacerun: yes">  </span>со
+знакопеременными<span style='mso-tab-count:1'>      </span>числами, так<span
+style="mso-spacerun: yes">  </span>и
+
+<p><span
+style="mso-spacerun: yes">    </span>беззнаковыми.<span style="mso-spacerun:
+yes">   </span>Обычно<span style="mso-spacerun: yes">  </span>сложение<span
+style="mso-spacerun: yes">   </span>чисел<span style="mso-spacerun: yes"> 
+</span>со<span style="mso-spacerun: yes">   </span>знаком<span
+style="mso-spacerun: yes">  </span>дает<span style="mso-spacerun: yes"> 
+</span>верный
+
+<p><span
+style="mso-spacerun: yes">    </span>результат.<span style='mso-tab-count:1'>    </span>Однако
+накоторые<span style="mso-spacerun: yes">  </span>из чисел,<span
+style="mso-spacerun: yes">  </span>представленных в<span style="mso-spacerun:
+yes">  </span>дополни-
+
+<p><span
+style="mso-spacerun: yes">    </span>тельном коде, при сложении дают<span
+style="mso-spacerun: yes">  </span>неверный результат. Пример на Фиг.
+
+<p><span
+style="mso-spacerun: yes">    </span>3.14<span style="mso-spacerun: yes"> 
+</span>-<span style="mso-spacerun: yes">  </span>сложение<span
+style="mso-spacerun: yes">  </span>двух<span style="mso-spacerun: yes"> 
+</span>8-битовых<span style='mso-tab-count:1'>    </span>чисел,<span
+style='mso-tab-count:1'>      </span>представленных<span style='mso-tab-count:
+1'>    </span>в<span style="mso-spacerun: yes">  </span>коде
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичного дополнения, - иллюстрирует
+этот<span style="mso-spacerun: yes">  </span>случай. Если 72H и 53H -
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Шестнадцатеричное<span style='mso-tab-count:
+1'> </span>Десятичный эквивалент
+
+<p><span
+style="mso-spacerun: yes">    
+</span>------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>72H<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">       </span>114
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>+ 53H<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">     </span>+<span style='mso-tab-count:1'>      </span>83
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>------<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">     </span>------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>0C5H<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">       </span>197
+
+<p><span
+style="mso-spacerun: yes">    
+</span>------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:5'>                              </span>Фиг. 3.14
+8-битовое сложение
+
+<p><span
+style='mso-tab-count:6'>                                    </span>с
+переполнением
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>числа без знака, то результат их сложения
+верен. Если же это числа,
+
+<p><span
+style="mso-spacerun: yes">    </span>представленные<span style="mso-spacerun:
+yes">  </span>в<span style="mso-spacerun: yes">  </span>дополнительном<span
+style="mso-spacerun: yes">  </span>коде<span style="mso-spacerun: yes"> 
+</span>со<span style="mso-spacerun: yes">  </span>знаком,<span
+style="mso-spacerun: yes">  </span>то<span style="mso-spacerun: yes"> 
+</span>результат
+
+<p><span
+style="mso-spacerun: yes">    </span>сложения 0C5H<span style="mso-spacerun:
+yes">  </span>неверен, в коде<span style="mso-spacerun: yes">  </span>двоичного
+дополнения он<span style="mso-spacerun: yes">  </span>равен -59.
+
+<p><span
+style="mso-spacerun: yes">    </span>сложение<span style="mso-spacerun: yes"> 
+</span>положительных чисел<span style="mso-spacerun: yes">  </span>никогда
+не<span style="mso-spacerun: yes">  </span>дает в<span style="mso-spacerun:
+yes">  </span>результате отри-
+
+<p><span
+style="mso-spacerun: yes">    </span>цательное. Результат сложения<span
+style="mso-spacerun: yes">  </span>оказался непредставиммым в диапазоне
+
+<p><span
+style="mso-spacerun: yes">    </span>значений<span style="mso-spacerun: yes"> 
+</span>8-битовых чисел<span style="mso-spacerun: yes">  </span>в двоичном<span
+style="mso-spacerun: yes">  </span>коде (от<span style="mso-spacerun: yes"> 
+</span>127 до -128). Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>эффект<span style="mso-spacerun: yes"> 
+</span>принято<span style="mso-spacerun: yes">  </span>называть<span
+style="mso-spacerun: yes">  </span>переполнением,<span style="mso-spacerun:
+yes">  </span>так<span style="mso-spacerun: yes">  </span>как<span
+style="mso-spacerun: yes">  </span>сумма вышла за
+
+<p><span
+style="mso-spacerun: yes">    </span>пределы диапазона чисел, представимых в
+дополнительном коде.
+
+<p><span
+style='mso-tab-count:1'>      </span>Важно<span style="mso-spacerun: yes"> 
+</span>заметить, что<span style="mso-spacerun: yes">  </span>переполнение<span
+style="mso-spacerun: yes">  </span>и<span style="mso-spacerun: yes"> 
+</span>перенос -<span style="mso-spacerun: yes">  </span>два различных
+
+<p><span
+style="mso-spacerun: yes">    </span>флага и имеют<span style="mso-spacerun:
+yes">  </span>разное значение. На Фиг. 3.14<span style="mso-spacerun: yes"> 
+</span>нет переноса, так как
+
+<p><span
+style="mso-spacerun: yes">    </span>сложение без знака дает<span
+style="mso-spacerun: yes">  </span>правильный результат, а есть переполнение:
+
+<p><span
+style="mso-spacerun: yes">    </span>что сложение<span style="mso-spacerun:
+yes">  </span>со знаком дает неверный<span style="mso-spacerun: yes"> 
+</span>результат. Возможен и случай
+
+<p><span
+style="mso-spacerun: yes">    </span>одновременно переноса<span
+style="mso-spacerun: yes">  </span>и переполнения, как<span style='mso-tab-count:
+1'>  </span>показано на Фиг.<span style="mso-spacerun: yes">  </span>3.15.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">       </span>Шестнадцатеричное<span
+style="mso-spacerun: yes">   </span>Двоичное дополнение<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">   </span>Беззнаковое
+
+<p><span
+style="mso-spacerun: yes">    
+</span>------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span>8EH<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">  </span>-114<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">      </span>142
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0ADH<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">  </span>- 83<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">      </span>173
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>-----<span style='mso-tab-count:2'>       </span> -----<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>----
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>1 3BH<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">  </span>-197<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">      </span>315
+
+<p><span
+style="mso-spacerun: yes">    
+</span>------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 3.15 8-битовое сложение с
+переносом и перепонением
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Здесь показан<span style="mso-spacerun:
+yes">  </span>пример сложения двух<span style="mso-spacerun: yes"> 
+</span>отрицательных чисел. Результат
+
+<p><span
+style="mso-spacerun: yes">    </span>-197 выходит<span style="mso-spacerun:
+yes">  </span>за пределы диапазона<span style='mso-tab-count:1'>    </span>представимости
+в дополнительном
+
+<p><span
+style="mso-spacerun: yes">    </span>коде. Это показано тем, что 8-битовый
+результат 3BH - положительное
+
+<p><span
+style="mso-spacerun: yes">    </span>число.<span style="mso-spacerun: yes"> 
+</span>Кроме того<span style='mso-tab-count:1'>  </span>в этом<span
+style='mso-tab-count:1'>      </span>примере устанавливается<span
+style="mso-spacerun: yes">  </span>флаг переноса,
+
+<p><span
+style="mso-spacerun: yes">    </span>означающий,<span style="mso-spacerun:
+yes">   </span>что<span style='mso-tab-count:1'>   </span>сложение<span
+style="mso-spacerun: yes">   </span>без<span style='mso-tab-count:1'>    </span>
+знака<span style='mso-tab-count:1'>      </span> дало<span style='mso-tab-count:
+1'> </span>число,<span style='mso-tab-count:1'>      </span>большее
+
+<p><span
+style="mso-spacerun: yes">    </span>максимального представимого. В<span
+style="mso-spacerun: yes">  </span>случае 8-битовых чисел максимальное
+
+<p><span
+style="mso-spacerun: yes">    </span>число равно 255.
+
+<p><span
+style='mso-tab-count:1'>      </span>Вообще говоря, операция сложения<span
+style="mso-spacerun: yes">  </span>в процессоре
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняется одинаково над числами и со
+знаком, и без знака, а также
+
+<p><span
+style="mso-spacerun: yes">    </span>с десятичными<span style="mso-spacerun:
+yes">  </span>числами.<span style="mso-spacerun: yes">  </span>Флаги переноса,
+дополнительного переноса и
+
+<p><span
+style="mso-spacerun: yes">    </span>переполнения содержат<span
+style="mso-spacerun: yes">  </span>информацию о выполненной<span
+style="mso-spacerun: yes">  </span>операции, позволяя
+
+<p><span
+style="mso-spacerun: yes">    </span>программе<span style="mso-spacerun: yes"> 
+</span>определить<span style="mso-spacerun: yes">  </span>верный<span
+style="mso-spacerun: yes">   </span>результат<span style="mso-spacerun: yes"> 
+</span>в<span style="mso-spacerun: yes">  </span>используемой<span
+style='mso-tab-count:1'>    </span>системе
+
+<p><span
+style="mso-spacerun: yes">    </span>счисления.<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">  </span>Флаг<span style='mso-tab-count:1'>      </span>
+переполнения<span style='mso-tab-count:1'>     </span> показывает,<span
+style="mso-spacerun: yes">   </span>что<span style="mso-spacerun: yes">   
+</span>результат
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметической<span style="mso-spacerun:
+yes">  </span>операции<span style="mso-spacerun: yes">   </span>выходит<span
+style='mso-tab-count:1'>    </span>за<span style="mso-spacerun: yes"> 
+</span>пределы<span style="mso-spacerun: yes">   </span>диапазона<span
+style="mso-spacerun: yes">  </span>чисел,
+
+<p><span
+style="mso-spacerun: yes">    </span>представленных<span style="mso-spacerun:
+yes">  </span>в дополнительном<span style="mso-spacerun: yes">  </span>виде.
+Переполнение<span style="mso-spacerun: yes">  </span>отличается от
+
+<p><span
+style="mso-spacerun: yes">    </span>переноса,<span style="mso-spacerun: yes"> 
+</span>который показывает,<span style="mso-spacerun: yes">  </span>что
+произошел<span style="mso-spacerun: yes">  </span>перенос из<span
+style="mso-spacerun: yes">  </span>старшего
+
+<p><span
+style="mso-spacerun: yes">    </span>бита результата.
+
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

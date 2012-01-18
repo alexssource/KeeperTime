@@ -1,0 +1,430 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="4-8-1">Загрузка и запись
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Листинг ассемблера на Фиг. 4.22 показывает
+различные строковые
+
+<p><span
+style="mso-spacerun: yes">    </span>команды.<span style="mso-spacerun: yes"> 
+</span>Загрузка строки LODS и запись строки STOS являются
+
+<p><span
+style="mso-spacerun: yes">    </span>простейшими строковыми командами.<span
+style="mso-spacerun: yes">  </span>Если программа указывает
+
+<p><span
+style="mso-spacerun: yes">    </span>байтовый операнд в команде LODS, то она
+загружает в регистр AL
+
+<p><span
+style="mso-spacerun: yes">    </span>байт, на который указывает пара регистров
+DS:SI.<span style="mso-spacerun: yes">  </span>Затем она
+
+<p><span
+style="mso-spacerun: yes">    </span>изменяет регистр SI на единицу; он
+увеличивается, либо уменьшается,
+
+<p><span
+style="mso-spacerun: yes">    </span>в зависимости от состояния флага
+направления.<span style="mso-spacerun: yes">  </span>Если команда LODS
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает на слово, то она загружает
+регистр AX и изменяет регистр
+
+<p><span
+style="mso-spacerun: yes">    </span>SI на 2.<span style="mso-spacerun: yes"> 
+</span>Команда STOS строго противоположна, и записывает байт из
+<p><span
+style="mso-spacerun: yes">    </span>регистра AL либо слово из регистра AX в
+ячейку памяти.<span style="mso-spacerun: yes">  </span>В случае
+
+<p><span
+style="mso-spacerun: yes">    </span>записи ячейка определяется парой регистров
+ES:DI.<span style="mso-spacerun: yes">  </span>Команда записи
+
+<p><span
+style="mso-spacerun: yes">    </span>изменяет регистр DI либо на единицу, либо
+на 2, в зависимости от
+
+<p><span
+style="mso-spacerun: yes">    </span>типа операнда.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программист может писать на ассемблере
+команду LODS (а также и
+
+<p><span
+style="mso-spacerun: yes">    </span>все другие строковые команды) различными
+способами. Тип операнда
+
+<p><span
+style="mso-spacerun: yes">    </span>можно указать частью кода операции, либо
+ассемдлер может определить
+
+<p><span
+style="mso-spacerun: yes">    </span>тип элемента строки, основываясь на
+операнде, присутствующем в
+
+<p><span
+style="mso-spacerun: yes">    </span>команде. Как показано на Фиг. 4.22,
+команда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>LODS EXBYTE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>порождает команду загрузки строк байтов,
+так же как и команда
+
+<p><span
+style='mso-tab-count:1'>      </span>LODSB.
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>1/1/80 04:01:26
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 4.22 Команды обработки строк<span style='mso-tab-count:4'>                      </span>
+Page<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 4.22 Команды обработки строк
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE,DS:CODE,ES:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>EXBYTE<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>BYTE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>EXWORD<span style="mso-spacerun: yes"> 
+</span>LABEL<span style="mso-spacerun: yes">   </span>WORD
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>EXBYTE1 LABEL<span style="mso-spacerun:
+yes">   </span>BYTE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>EXWORD1 LABEL<span style="mso-spacerun:
+yes">   </span>WORD
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>AC<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>LODS<span style="mso-spacerun: yes">    </span>EXBYTE<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Загрузка AL из DS:SI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0001<span style="mso-spacerun: yes">  </span>AD<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>LODS<span style="mso-spacerun: yes">    </span>EXWORD<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Загрузка AX из DS:SI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0002<span style="mso-spacerun: yes">  </span>AC<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>LODSB<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">     </span>; Загрузка AL из DS:SI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0003<span style="mso-spacerun: yes">  </span>AA<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>STOS<span style="mso-spacerun: yes">    </span>EXBYTE<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Сохранение AL в ES:DI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0004<span style="mso-spacerun: yes">  </span>AB<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>STOS<span style="mso-spacerun: yes">    </span>EXWORD<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>; Сохранение AX в ES:DI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0005<span style="mso-spacerun: yes">  </span>AB<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>STOSW<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">     </span>; Сохранение AX в ES:DI
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0006<span style="mso-spacerun: yes">  </span>F3/ AA<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>REP<span style="mso-spacerun: yes">     </span>STOSB<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Сохранение AL в ES:DI в цикле CX раз
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0008<span style="mso-spacerun: yes">  </span>A4<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>MOVS<span style="mso-spacerun: yes">    </span>EXBYTE1, EXBYTE ;
+Пересылка байта [ES:DI] &lt;- [DS:SI]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0009<span style="mso-spacerun: yes">  </span>A5<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>MOVS<span style="mso-spacerun: yes">    </span>EXWORD1, EXWORD ;
+Пересылка слова [ES:DI] &lt;- [DS:SI]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000A<span style="mso-spacerun: yes">  </span>A4<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>MOVSB<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">     </span>; Пересылка байта [ES:DI] &lt;- [DS:SI]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000B<span style="mso-spacerun: yes">  </span>F3/ A5<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>REP<span style="mso-spacerun: yes">     </span>MOVSW<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Пересылка CX слов [ES:DI] &lt;- [DS:SI]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000D<span style="mso-spacerun: yes">  </span>AE<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>SCAS<span style="mso-spacerun: yes">    </span>EXBYTE1<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    
+</span>; Сравнение AL с [ES:DI]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000E<span style="mso-spacerun: yes">  </span>F3/ AE<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>REPE<span style="mso-spacerun: yes">    </span>SCASB<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Сравнение AL с [ES:DI] пока равно
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0010<span style="mso-spacerun: yes">  </span>F2/ AF<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>REPNE<span style="mso-spacerun: yes">   </span>SCASW<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Сравнение AX с [ES:DI] пока не равно
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0012<span style="mso-spacerun: yes">  </span>A7<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>CMPS<span style="mso-spacerun: yes">    </span>EXWORD, EXWORD1 ;
+Сравнение слова [DS:SI] с [ES:DI]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0013<span style="mso-spacerun: yes">  </span>F3/ A7<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>REPE<span style="mso-spacerun: yes">    </span>CMPSW<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Сравнение слов [DS:SI] с [ES:DI] пока
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">     </span>;<span style='mso-tab-count:1'>      </span>равно
+в цикле CX раз
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0015<span style="mso-spacerun: yes">  </span>F2/ A6<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>REPNE<span style="mso-spacerun: yes">   </span>CMPSB<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Сравнение байт [DS:SI] с [ES:DI] пока
+
+<p><span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">     </span>;<span style='mso-tab-count:1'>      </span>не
+равно в цикле CX раз
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0017<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг.4.22 Строковые команды
+
+<p><span
+style='mso-tab-count:1'>      </span>В первом случае ассемблер определяет, что
+строка состоит из
+
+<p><span
+style="mso-spacerun: yes">    </span>байта, поскольку EXBYTE - переменная типа
+BYTE. Во втором случае
+
+<p><span
+style="mso-spacerun: yes">    </span>программист непосредственно указывает, что
+работает с байтами.
+
+<p><span
+style="mso-spacerun: yes">    </span>Собственно ассемблер не требует поля
+операнда. Программисты чаще
+
+<p><span
+style="mso-spacerun: yes">    </span>используют вторую форму, так как не имеют
+имени переменной,
+
+<p><span
+style="mso-spacerun: yes">    </span>связанной со строкой. Программа
+динамически располагает строку в
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, для нее не существует
+фиксированного места, и,
+
+<p><span
+style="mso-spacerun: yes">    </span>следовательно, нет и имени переменной.
+Команда STOS аналогична.
+
+<p><span
+style="mso-spacerun: yes">    </span>Чтобы непосредственно указать строку слов,
+а не байтов,
+
+<p><span
+style="mso-spacerun: yes">    </span>используются коды операций LODSW и STOSW.
+Ассемблер должен знать,
+
+<p><span
+style="mso-spacerun: yes">    </span>для байтовой строки или строки слов
+написана команда, поскольку
+
+<p><span
+style="mso-spacerun: yes">    </span>машинные команды различны для различных
+типов строк. Эта разница
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет значение, на которое надо
+изменить индексный регистр.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Операнд в команде должен быть указан в том
+случае, если в
+
+<p><span
+style="mso-spacerun: yes">    </span>программе используются основные формы
+команд LODS и STOS. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>программа не имеет удобной метки для
+строки, она может использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>формы LODSB и STOSB. Преимущество
+использования основной формы LODS
+
+<p><span
+style="mso-spacerun: yes">    </span>и указания операнда заключается в том, что
+ассемблер при этом
+
+<p><span
+style="mso-spacerun: yes">    </span>проверяет не только тип операнда, но и
+возможность его адресации.
+
+<p><span
+style="mso-spacerun: yes">    </span>Так как команда LODS работает с объектами
+только в сегменте DS,
+
+<p><span
+style="mso-spacerun: yes">    </span>оператор ASSUME должен соответственно
+описывать расположение
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента поименованной переменной.
+Аналогично, ассемблер проверяет
+
+<p><span
+style="mso-spacerun: yes">    </span>основную форму команды STOS на адресацию
+сегмента ES. Любая форма
+
+<p><span
+style="mso-spacerun: yes">    </span>приемлема для ассемблера, но лучше
+использовать основную форму,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы позволить ассемблеру наилучшим
+способом проверить наличие
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибок в программе до выполнения.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

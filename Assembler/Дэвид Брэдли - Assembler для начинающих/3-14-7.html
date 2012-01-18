@@ -1,0 +1,505 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><a name="3-14-7"><b>Флаг переноса</b>
+</a></div></p>
+
+
+<p><span
+style="mso-spacerun: yes">    </span>Флаг переноса (CF) служит<span
+style="mso-spacerun: yes">  </span>для поддержания процессором многоразряд-
+
+<p><span
+style="mso-spacerun: yes">    </span>ной арифметики. Обычно при выполнении
+арифметических операций вроде
+
+<p><span
+style="mso-spacerun: yes">    </span>сложения<span style="mso-spacerun: yes"> 
+</span>или<span style="mso-spacerun: yes">  </span>вычитания<span
+style="mso-spacerun: yes">  </span>8088<span style="mso-spacerun: yes"> 
+</span>может<span style="mso-spacerun: yes">   </span>работать<span
+style="mso-spacerun: yes">  </span>с<span style="mso-spacerun: yes"> 
+</span>не<span style="mso-spacerun: yes">  </span>более<span
+style="mso-spacerun: yes">  </span>чем
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовыми<span style="mso-spacerun:
+yes">   </span>числами.<span style="mso-spacerun: yes">  </span>Однако<span
+style="mso-spacerun: yes">   </span>в<span style='mso-tab-count:1'>    </span>некоторых<span
+style="mso-spacerun: yes">   </span>случаях<span style="mso-spacerun: yes"> 
+</span>приходится
+
+<p><span
+style="mso-spacerun: yes">    </span>манипулировать с числами превышающими
+2**16. Например, для сложения
+
+<p><span
+style="mso-spacerun: yes">    </span>двух<span style="mso-spacerun: yes"> 
+</span>32-битовых чисел<span style="mso-spacerun: yes">  </span>программе
+придется<span style='mso-tab-count:1'>  </span>сложить сначала младшие
+
+<p><span
+style="mso-spacerun: yes">    </span>части<span style="mso-spacerun: yes"> 
+</span>чисел, а<span style="mso-spacerun: yes">  </span>затем -<span
+style="mso-spacerun: yes">   </span>старшие. На<span style="mso-spacerun:
+yes">  </span>Фиг 3.11<span style="mso-spacerun: yes">  </span>показано
+сложение
+
+<p><span
+style="mso-spacerun: yes">    </span>32-битовых чисел 22223333H и 44445555H.
+
+<p><span
+style='mso-tab-count:1'>      </span>В этом примере складываются<span
+style="mso-spacerun: yes">  </span>сначала младшие 16-битовые згначе-
+
+<p><span
+style="mso-spacerun: yes">    </span>ния с<span style="mso-spacerun: yes"> 
+</span>получением результата 8888H. Затем<span style="mso-spacerun: yes"> 
+</span>складываются старшие 16-
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>второе сложение<span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">    </span>первое сложение
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>---------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>2222<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">       </span>3333
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>4444<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">       </span>5555
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>----<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">       </span>----
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>6666<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">       </span>8888<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">    </span>Фиг. 3.11
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>--------------------------------------- 32-битовое сложение
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>битовые<span style="mso-spacerun: yes"> 
+</span>значения с<span style="mso-spacerun: yes">  </span>результатом
+6666H.<span style="mso-spacerun: yes">  </span>32-битовый результат равен
+
+<p><span
+style="mso-spacerun: yes">    </span>66668888H.<span style='mso-tab-count:1'>    </span>Для<span
+style="mso-spacerun: yes">  </span>получения<span style='mso-tab-count:1'>    </span>32-битового<span
+style="mso-spacerun: yes">  </span>результата<span style="mso-spacerun: yes"> 
+</span>требуется<span style="mso-spacerun: yes">  </span>два
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовых<span style='mso-tab-count:1'>    </span>сложения.<span
+style="mso-spacerun: yes">  </span>Для<span style='mso-tab-count:1'>    </span>48-битового<span
+style="mso-spacerun: yes">  </span>числа<span style="mso-spacerun: yes"> 
+</span>потребуется уже три
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовых сложения и т.д. Для выполнения
+сложения программа должна
+
+<p><span
+style="mso-spacerun: yes">    </span>расчленять каждое большое число на
+16-бтовые куски.
+
+<p><span
+style='mso-tab-count:1'>      </span>Однако, приведенный пример<span
+style="mso-spacerun: yes">  </span>достаточно прост. Результат первого
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битового сложения не влиял на второе. В
+общем же случае сложения
+
+<p><span
+style="mso-spacerun: yes">    </span>возможен<span style="mso-spacerun: yes"> 
+</span>перенос<span style="mso-spacerun: yes">  </span>из<span
+style="mso-spacerun: yes">  </span>одной<span style="mso-spacerun: yes"> 
+</span>позиции<span style="mso-spacerun: yes">  </span>в<span
+style="mso-spacerun: yes">  </span>другую.<span style="mso-spacerun: yes"> 
+</span>Когда<span style="mso-spacerun: yes">  </span>процессор
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняет слоожение двух 16-битовых<span
+style="mso-spacerun: yes">  </span>чисел, он автоматически выпол-
+
+<p><span
+style="mso-spacerun: yes">    </span>няет переносы. Когда же<span
+style="mso-spacerun: yes">  </span>программа складывает два 32-битовых числа,
+
+<p><span
+style="mso-spacerun: yes">    </span>как в нашем<span style="mso-spacerun:
+yes">  </span>примере, то ей приходится запоминать<span style="mso-spacerun:
+yes">  </span>перенос в первом
+
+<p><span
+style="mso-spacerun: yes">    </span>сложении<span style="mso-spacerun: yes"> 
+</span>и<span style="mso-spacerun: yes">   </span>использовать<span
+style='mso-tab-count:1'>      </span>его<span style="mso-spacerun: yes"> 
+</span>при<span style="mso-spacerun: yes">   </span>сложении<span
+style="mso-spacerun: yes">  </span>вторых<span style="mso-spacerun: yes"> 
+</span>16-битовых
+
+<p><span
+style="mso-spacerun: yes">    </span>значений.<span style="mso-spacerun: yes"> 
+</span>На<span style="mso-spacerun: yes">  </span>Фиг.<span
+style="mso-spacerun: yes">  </span>3.12<span style='mso-tab-count:1'> </span>показано<span
+style="mso-spacerun: yes">  </span>сложение<span style="mso-spacerun: yes"> 
+</span>чисел<span style="mso-spacerun: yes">  </span>22224444H<span
+style="mso-spacerun: yes">  </span>и
+
+<p><span
+style="mso-spacerun: yes">    </span>3333EEEEH. В этом примере перенос от
+первого сложения отражается на
+
+<p><span
+style="mso-spacerun: yes">    </span>втором сложении.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>втоорое сложение<span style='mso-tab-count:
+1'>  </span><span style="mso-spacerun: yes">     </span>первое сложение
+
+<p><span
+style='mso-tab-count:1'>      </span>--------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>2222<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">    </span>4444
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>3333<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">    </span>EEEE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">     </span>1 (перенос от первого)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>----<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">   </span>-----
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>5556<span style='mso-tab-count:3'>                </span><span
+style="mso-spacerun: yes">   </span>13332
+
+<p><span
+style='mso-tab-count:1'>      </span>--------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>Фиг. 3.12 32-битовое сложение с переносом
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первое 16-битовое сложение 4444H и EEEEH
+дает результат 13332H.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку результат имеет длину 17
+бит,<span style="mso-spacerun: yes">  </span>он не может быть помещен в
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовый<span style='mso-tab-count:1'>    </span>регистр.
+Флаг<span style="mso-spacerun: yes">  </span>переноса регистра<span
+style="mso-spacerun: yes">  </span>состояний примет этот
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительный бит арифметической
+информации. При втором 16-битовом
+
+<p><span
+style="mso-spacerun: yes">    </span>сложении складываются не только числа<span
+style="mso-spacerun: yes">  </span>2222H и 3333H, но и значение
+
+<p><span
+style="mso-spacerun: yes">    </span>флага переноса. Существует две<span
+style="mso-spacerun: yes">  </span>формы команды сложения: команда ADD
+
+<p><span
+style="mso-spacerun: yes">    </span>складывает<span style='mso-tab-count:1'>    </span>два<span
+style="mso-spacerun: yes">  </span>16-битовых<span style="mso-spacerun: yes"> 
+</span>числа,<span style="mso-spacerun: yes">  </span>давая<span
+style='mso-tab-count:1'>      </span>17-битовый результат, а
+
+<p><span
+style="mso-spacerun: yes">    </span>команда сложения с переносом ADC<span
+style="mso-spacerun: yes">  </span>складывает два 16-битовых числа и
+
+<p><span
+style="mso-spacerun: yes">    </span>значение<span style="mso-spacerun: yes"> 
+</span>флага<span style="mso-spacerun: yes">  </span>переноса,<span
+style='mso-tab-count:1'>      </span>давая<span style="mso-spacerun: yes"> 
+</span>также<span style="mso-spacerun: yes">  </span>17-битовый<span
+style="mso-spacerun: yes">  </span>результат.<span style="mso-spacerun: yes"> 
+</span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>примере<span style="mso-spacerun: yes"> 
+</span>на рис.3.12<span style="mso-spacerun: yes">  </span>для первой<span
+style="mso-spacerun: yes">  </span>операции сложения<span style="mso-spacerun:
+yes">  </span>использовалась
+
+<p><span
+style="mso-spacerun: yes">    </span>команда ADD, а для второй операции
+сложения команда ADC.
+
+<p><span
+style='mso-tab-count:1'>      </span>Оба приведенных примера используют флаг
+переноса для выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметики<span style='mso-tab-count:1'>    </span>повышенной
+точности.<span style="mso-spacerun: yes">  </span>В первом<span
+style='mso-tab-count:1'>      </span>примере после<span style="mso-spacerun:
+yes">  </span>сложения
+
+<p><span
+style="mso-spacerun: yes">    </span>3333H<span style="mso-spacerun: yes"> 
+</span>и<span style="mso-spacerun: yes">  </span>5555H<span
+style="mso-spacerun: yes">  </span>получился<span style='mso-tab-count:1'>      </span>
+нулевой<span style="mso-spacerun: yes">  </span>перенос;<span
+style="mso-spacerun: yes">  </span>когда<span style="mso-spacerun: yes"> 
+</span>команда<span style="mso-spacerun: yes">  </span>ADC
+
+<p><span
+style="mso-spacerun: yes">    </span>прибавляет<span style='mso-tab-count:1'>    </span>значение
+переноса<span style="mso-spacerun: yes">  </span>к числам<span
+style="mso-spacerun: yes">  </span>2222H и<span style="mso-spacerun: yes"> 
+</span>4444H, получается
+
+<p><span
+style="mso-spacerun: yes">    </span>правильный<span style='mso-tab-count:1'>    </span>результат
+6666H.<span style="mso-spacerun: yes">  </span>Во втором<span
+style="mso-spacerun: yes">  </span>примере флаг<span style="mso-spacerun:
+yes">  </span>переноса был
+
+<p><span
+style="mso-spacerun: yes">    </span>установлен,так как был перенос из младшей
+части суммы в старшую.
+
+<p><span
+style='mso-tab-count:1'>      </span>В случае арифметики еще<span
+style="mso-spacerun: yes">  </span>большей точности программа может снова
+
+<p><span
+style="mso-spacerun: yes">    </span>и снова<span style="mso-spacerun: yes"> 
+</span>использовать<span style="mso-spacerun: yes">  </span>в<span
+style="mso-spacerun: yes">  </span>процессе<span style='mso-tab-count:1'>    </span>сложения<span
+style="mso-spacerun: yes">  </span>флаг переноса. Каждое
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовое<span style='mso-tab-count:1'>    </span>сложение
+устанавливает<span style='mso-tab-count:1'>  </span>флаг переноса<span
+style="mso-spacerun: yes">  </span>в соответствии с
+
+<p><span
+style="mso-spacerun: yes">    </span>его результатом, а программа может сложить
+следующие по старшинству
+
+<p><span
+style="mso-spacerun: yes">    </span>части чисел с полученным значением<span
+style='mso-tab-count:1'>    </span>флага переноса. В каждом случае
+
+<p><span
+style="mso-spacerun: yes">    </span>флаг<span style="mso-spacerun: yes"> 
+</span>переноса содержит<span style="mso-spacerun: yes">  </span>семнадцатый
+бит<span style="mso-spacerun: yes">  </span>предыдущего результата, и
+
+<p><span
+style="mso-spacerun: yes">    </span>программа должна использовать это<span
+style="mso-spacerun: yes">  </span>значение при сложении следующих,
+
+<p><span
+style="mso-spacerun: yes">    </span>более старших, частей чисел.
+
+<p><span
+style='mso-tab-count:1'>      </span>Флаг переноса служит и для<span
+style="mso-spacerun: yes">  </span>другой важной цели. Когда программа
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняет вычитание, существует
+возможность<span style="mso-spacerun: yes">  </span>заема из одной позиции
+
+<p><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun: yes">  </span>в
+другую.<span style="mso-spacerun: yes">  </span>Флаг<span style="mso-spacerun:
+yes">  </span>переноса<span style="mso-spacerun: yes">  </span>показывает<span
+style="mso-spacerun: yes">  </span>при<span style='mso-tab-count:1'>  </span>вычитании
+необходимость
+
+<p><span
+style="mso-spacerun: yes">    </span>заема из одной части числа в другую.
+
+<p><span
+style='mso-tab-count:1'>      </span>Вычитать целые<span style='mso-tab-count:
+1'>    </span>числа, в несколько слов<span style="mso-spacerun: yes"> 
+</span>длиной программа может
+
+<p><span
+style="mso-spacerun: yes">    </span>таким же путем, как и<span
+style="mso-spacerun: yes">  </span>складывать. Сначала вычитаются младшие части
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел, с получением 16-битового
+результата. Команда вычитания (SUB)
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает<span style="mso-spacerun:
+yes">  </span>флаг<span style="mso-spacerun: yes">  </span>переноса,<span
+style="mso-spacerun: yes">  </span>отражая<span style="mso-spacerun: yes"> 
+</span>заем. Следующее 16-битовое
+
+<p><span
+style="mso-spacerun: yes">    </span>вычитание программа выполняет с<span
+style="mso-spacerun: yes">  </span>заемом. Команда вычитания с заемом
+
+<p><span
+style="mso-spacerun: yes">    </span>(SBB)<span style="mso-spacerun: yes"> 
+</span>наряду<span style="mso-spacerun: yes">  </span>с<span
+style="mso-spacerun: yes">  </span>обычным<span style="mso-spacerun: yes"> 
+</span>вычитанием<span style="mso-spacerun: yes">  </span>вычитает<span
+style="mso-spacerun: yes">  </span>из результата флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>переноса. Как и при сложении программа
+может осуществлять вычитание
+
+<p><span
+style="mso-spacerun: yes">    </span>целых чисел произвольной длины,<span
+style="mso-spacerun: yes">  </span>используя флаг переноса в качестве
+
+<p><span
+style="mso-spacerun: yes">    </span>значения заема.
+
+<p><span
+style='mso-tab-count:1'>      </span>Микропроцессор 8088<span
+style="mso-spacerun: yes">  </span>трактует флаг переноса<span
+style="mso-spacerun: yes">  </span>как истинный заем,
+
+<p><span
+style="mso-spacerun: yes">    </span>то есть если в результате вычитания
+появляется заем, микропроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает флаг переноса равным<span
+style='mso-tab-count:1'>    </span>1. Он показывает, что программа
+
+<p><span
+style="mso-spacerun: yes">    </span>должна вычесть 1 из результата вычитания
+старших частей чисел. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>заема<span style="mso-spacerun: yes"> 
+</span>нет,<span style="mso-spacerun: yes">  </span>процессор<span
+style="mso-spacerun: yes">  </span>сбрасывает<span style='mso-tab-count:1'>    </span>
+флаг<span style="mso-spacerun: yes">  </span>переноса<span style="mso-spacerun:
+yes">  </span>на<span style="mso-spacerun: yes">  </span>ноль.<span
+style="mso-spacerun: yes">  </span>Это
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что программе не нужно вычитать
+1 из старшей части числа.
+
+<p><span
+style='mso-tab-count:1'>      </span>Микропроцессор устанавливает флаг<span
+style="mso-spacerun: yes">  </span>переноса как индикатор заема
+
+<p><span
+style="mso-spacerun: yes">    </span>при расширенном вычитании. Наряду<span
+style="mso-spacerun: yes">  </span>с расширением точности программа
+
+<p><span
+style="mso-spacerun: yes">    </span>может сипользовать<span style='mso-tab-count:
+1'>  </span>флаг переноса для<span style="mso-spacerun: yes"> 
+</span>определения соотношения двух
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел.<span style="mso-spacerun: yes"> 
+</span>Если флаг<span style="mso-spacerun: yes">  </span>переноса
+установлен,<span style="mso-spacerun: yes">  </span>вычитаемое значение больше
+
+<p><span
+style="mso-spacerun: yes">    </span>уменьшаемого; если флаг переноса не
+установлен, вычитаемое значение
+
+<p><span
+style="mso-spacerun: yes">    </span>меньше<span style="mso-spacerun: yes"> 
+</span>или равно<span style="mso-spacerun: yes">  </span>уменьшаемому.<span
+style="mso-spacerun: yes">  </span>Это<span style="mso-spacerun: yes"> 
+</span>означает, что<span style="mso-spacerun: yes">  </span>флаг переноса
+
+<p><span
+style="mso-spacerun: yes">    </span>становится первичным<span
+style="mso-spacerun: yes">  </span>индикатором при определении<span
+style="mso-spacerun: yes">  </span>соотношения двух
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел: после того, как программа<span
+style="mso-spacerun: yes">  </span>вычитает два числа, флаг переноса
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает,<span style='mso-tab-count:1'>    </span>какое
+из<span style="mso-spacerun: yes">  </span>них<span style="mso-spacerun: yes"> 
+</span>больше.<span style='mso-tab-count:1'>  </span>Таким способом<span
+style='mso-tab-count:1'>    </span>программа может
+
+<p><span
+style="mso-spacerun: yes">    </span>проверять<span style="mso-spacerun: yes"> 
+</span>целые числа<span style="mso-spacerun: yes">  </span>без<span
+style="mso-spacerun: yes">  </span>знака,<span style="mso-spacerun: yes"> 
+</span>включая такие<span style='mso-tab-count:1'>      </span>приложения, как
+
+<p><span
+style="mso-spacerun: yes">    </span>сортировка строк символов. В случае чисел
+со знаком для определения
+
+<p><span
+style="mso-spacerun: yes">    </span>соотношения<span style="mso-spacerun:
+yes">  </span>чисел<span style='mso-tab-count:1'>  </span>программе<span
+style="mso-spacerun: yes">  </span>нужна<span style="mso-spacerun: yes"> 
+</span>дополнительная<span style="mso-spacerun: yes">  </span>информация. В
+
+<p><span
+style="mso-spacerun: yes">    </span>следующей<span style="mso-spacerun: yes"> 
+</span>главе<span style="mso-spacerun: yes">  </span>в<span
+style="mso-spacerun: yes">  </span>разделе<span style="mso-spacerun: yes"> 
+</span>&quot;Условные<span style="mso-spacerun: yes"> 
+</span>переходы&quot;<span style="mso-spacerun: yes">  </span>обсуждаются все
+
+<p><span
+style="mso-spacerun: yes">    </span>способы тестирования чисел.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

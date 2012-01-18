@@ -1,0 +1,1062 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="8-3">Клавиатура</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Следующее устройство ввода-вывода, которое
+мы рассмотрим, -
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатура. Клавиатура отделена от ЭВМ и
+подключено к системе
+
+<p><span
+style="mso-spacerun: yes">    </span>четырехжильным проводом. Хотя внутри
+клавиатуры и находится
+
+<p><span
+style="mso-spacerun: yes">    </span>отдельный микропроцессор, для его
+программирования нет простого
+
+<p><span
+style="mso-spacerun: yes">    </span>способа, так что мы оставим эту задачу
+инженерам фирмы IBM. Мы же
+
+<p><span
+style="mso-spacerun: yes">    </span>можем заняться информацией, которую
+клавиатура посылает в систему.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Цепь обслуживания клавиатуры на системной
+плате подключена к
+
+<p><span
+style="mso-spacerun: yes">    </span>системе прерываний. Кадый раз, как эта
+цепь регистрирует нажатие
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиши, она возбуждает прерывание в
+системе. Это прерывание
+
+<p><span
+style="mso-spacerun: yes">    </span>передает управление обработчику прерываний
+от клавиатуры. Эта
+
+<p><span
+style="mso-spacerun: yes">    </span>процедура получает от клавиатуры данные и
+сохраняет их для
+
+<p><span
+style="mso-spacerun: yes">    </span>дальнейшего использования. Обработчик
+прерываний клавиатуры
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживает также специальные случаи,
+например, перезагрузка
+
+<p><span
+style="mso-spacerun: yes">    </span>системы (CTL-ALT-DEL) и снятие програмы
+(CTL-BREAK). Но мы не будем
+
+<p><span
+style="mso-spacerun: yes">    </span>рассказывать, как это делается, до
+следующей главы, поскольку все
+
+<p><span
+style="mso-spacerun: yes">    </span>это обслуживает встроенная система
+программ BIOS. Пока же осмотрим,
+
+<p><span
+style="mso-spacerun: yes">    </span>как можно управлять аппаратурой
+обслуживания клавиатуры.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда клавиатура посылает сигнал
+прерывания, он, прежде, чем
+
+<p><span
+style="mso-spacerun: yes">    </span>попадет в микропроцессор 8088, проходит
+через контроллер прерываний
+
+<p><span
+style="mso-spacerun: yes">    </span>8259. Этот контроллер обслуживает систему
+прерываний IBM PC почти
+
+<p><span
+style="mso-spacerun: yes">    </span>во всех ее аспектах.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Микросхема 8259 может обслужить до восьми
+прерывающих
+
+<p><span
+style="mso-spacerun: yes">    </span>устройств. К линиям прерываний в IBM PC
+подключен системный таймер,
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатура, адаптер асинхронной связи,
+фиксированный диск
+
+<p><span
+style="mso-spacerun: yes">    </span>(винчестер), накопитель на гибких
+магнитных дисках и печатающее
+
+<p><span
+style="mso-spacerun: yes">    </span>устройство. Остальные уровни прерываний
+доступны другим устройствам
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода-вывода, подключенным к системному
+каналу ввода-вывода.
+
+<p><span
+style="mso-spacerun: yes">    </span>Конструктивно каждое из прерывающих
+устройств назначено к своему
+
+<p><span
+style="mso-spacerun: yes">    </span>входу прерывания микросхемы 8259. Вход
+прерывания, к которому
+
+<p><span
+style="mso-spacerun: yes">    </span>подключено прерывающее устройство,
+называется уровнем прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>этого устройства. Как мы сейчас увидим,
+микросхема 8259
+
+<p><span
+style="mso-spacerun: yes">    </span>упорядочивает приоритеты прерываний в
+соответствии с уровнем. На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 8.3 показаны уровни прерываний
+каждого устройства ЭВМ.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Прерывание от каждого устройства можно
+по-отдельности
+
+<p><span
+style="mso-spacerun: yes">    </span>заблокировать или разблокировать.
+Микросхема 8259 работает точно
+
+<p><span
+style="mso-spacerun: yes">    </span>так же, как микропроцессор 8088, который
+имеет флаг прерываний,
+
+<p><span
+style="mso-spacerun: yes">    </span>разрешающий или запрещающий прерывания по
+командам STI и CLI. Но
+
+<p><span
+style="mso-spacerun: yes">    </span>8259 имеет восемь флагов прерываний - по
+одному на каждое возможное
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывающее устройство. Эти флаги содержит
+регистр маски прерываний
+
+<p><span
+style="mso-spacerun: yes">    </span>IMR (Interrupt Mask Register),
+расположенный в порту по адресу 21H.
+
+<p><span
+style="mso-spacerun: yes">    </span>Бит 7 соответствует прерыванию 7, бит 6 -
+прерыванию 6, и так
+
+<p><span
+style="mso-spacerun: yes">    </span>далее. Если вы установите бит в 1,
+устройство не может вызвать
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание; если же бит сброшен в 0,
+контроллер прерываний передает
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание дальше, микропроцессору 8088.
+Разумеется, даже если
+
+<p><span
+style="mso-spacerun: yes">    </span>какое-либо прерывание разблокировано в
+регистре IMR, прежде чем это
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание сможет произойти, необходимо
+также сбросить флаг
+
+<p><span
+style="mso-spacerun: yes">    </span>прерываний в микропроцессоре 8088.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В зависимости от уровня прерывания контроллер
+назначает
+
+<p><span
+style="mso-spacerun: yes">    </span>приоритеты каждому прерывающему
+устройству. Уровень прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>определяется аппаратным подключением и не
+может быть изменен
+
+<p><span
+style="mso-spacerun: yes">    </span>программным путем. Прерывание номер 0
+имеет высший приоритет,
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание номер 7 - низший. Если любые
+два устройства пытаются
+
+<p><span
+style="mso-spacerun: yes">    </span>одновременно возбудить прерывание,
+обслуживается устройство более
+
+<p><span
+style="mso-spacerun: yes">    </span>высокого приоритета. Обслуживание
+устройства более низкого
+
+<p><span
+style="mso-spacerun: yes">    </span>приоритета откладывается до тех пор, пока
+не будет обслужено
+
+<p><span
+style="mso-spacerun: yes">    </span>устройство с более высоким приоритетом.
+Микросхема 8259
+
+<p><span
+style="mso-spacerun: yes">    </span>автоматически реализует такое разбиение по
+приоритетам, но в
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">     </span>Уровень<span style='mso-tab-count:2'>            </span>Устройство
+
+<p><span
+style="mso-spacerun: yes">   
+</span>--------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style='mso-tab-count:1'>     </span>Канал
+таймера 0
+
+<p><span
+style='mso-tab-count:1'>      </span>1<span style='mso-tab-count:1'>     </span>Клавиатура
+
+<p><span
+style='mso-tab-count:1'>      </span>2<span style='mso-tab-count:1'>     </span>-
+
+<p><span
+style='mso-tab-count:1'>      </span>3<span style='mso-tab-count:1'>     </span>Асинхронные
+коммуникации
+
+<p><span
+style='mso-tab-count:1'>      </span>4<span style='mso-tab-count:1'>     </span>Упорядоченные
+асинхронные коммуникации
+
+<p><span
+style='mso-tab-count:1'>      </span>5<span style='mso-tab-count:1'>     </span>Фиксированный
+диск
+
+<p><span
+style='mso-tab-count:1'>      </span>6<span style='mso-tab-count:1'>     </span>Дискета
+
+<p><span
+style='mso-tab-count:1'>      </span>7<span style='mso-tab-count:1'>     </span>Принтер
+
+<p><span
+style="mso-spacerun: yes">   
+</span>--------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 8.3 Уровни прерываний для микросхемы
+8259
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>управлении прерываниями должна принимать
+участие и ваша программа;
+
+<p><span
+style="mso-spacerun: yes">    </span>именно, она должна сообщить контроллеру
+8259 о том, что она
+
+<p><span
+style="mso-spacerun: yes">    </span>закончила работу с текущим прервавшим
+устройством. Такая команда
+
+<p><span
+style="mso-spacerun: yes">    </span>называется EOI (конец прерывания), она
+сообщает микросхеме 8259,
+
+<p><span
+style="mso-spacerun: yes">    </span>что обработка прерывания от устройства с
+наивысшим приоритетом
+
+<p><span
+style="mso-spacerun: yes">    </span>закончилась, и теперь вызвать прерывание в
+системе может устройство
+
+<p><span
+style="mso-spacerun: yes">    </span>с более низким приоритетом.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Контроллер 8259 также предотвращает
+прерывание микропроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>устройством с более низким приоритетом,
+если система в этот момент
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживает прерывание с более высоким
+приоритетом. Микросхема 8259
+
+<p><span
+style="mso-spacerun: yes">    </span>запоминает текущее активное прерывание, и
+считает, что
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор обслуживает это прерывание
+до тех пор, пока не
+
+<p><span
+style="mso-spacerun: yes">    </span>получит команду EOI. Микросхема 8259
+делает это с помощью двух
+
+<p><span
+style="mso-spacerun: yes">    </span>внутренних регистров. Первый из них
+идентифицирует устройства,
+
+<p><span
+style="mso-spacerun: yes">    </span>которые к настоящему моменту выдали запрос
+на прерывание; этот
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр называется регистром запросов
+прерываний IRR. Другой
+
+<p><span
+style="mso-spacerun: yes">    </span>регистр следит за текущими обслуживаемыми
+прерываниями, и
+
+<p><span
+style="mso-spacerun: yes">    </span>называется регистром обслуживаемых
+прерываний ISR. Если вы забыли
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнить команду EOI, микропроцессор
+сможет прерывать только
+
+<p><span
+style="mso-spacerun: yes">    </span>программы обработки прерываний от
+устройств с боле высоким
+
+<p><span
+style="mso-spacerun: yes">    </span>приоритетом. Если вы не выполнили команду
+EOI после прерывания от
+
+<p><span
+style="mso-spacerun: yes">    </span>таймера, система попадает в останов. Так
+как таймер имеет наивысший
+
+<p><span
+style="mso-spacerun: yes">    </span>приоритет, отсутствие завершения его
+прерывания блокирует
+
+<p><span
+style="mso-spacerun: yes">    </span>возбуждение всех других прерываний.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Контроллер 8259, кроме того, упорядочивает
+все прерывания. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что контроллер заставляет
+микропроцессор правильно
+
+<p><span
+style="mso-spacerun: yes">    </span>выбирать обработчик прерываний. Когда
+контроллер распознает
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание, он вынуждвет микропроцессор
+8088 начинать работу по
+
+<p><span
+style="mso-spacerun: yes">    </span>адресу, указанному в одном из 256 векторов
+прерываний в первом
+
+<p><span
+style="mso-spacerun: yes">    </span>килобайте памяти. IBM PC отображает восемь
+уровней прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллера 8259 на вектора прерываний от
+8 до 0FH включительно.
+
+<p><span
+style="mso-spacerun: yes">    </span>Так, если поступает прерывание от
+клавиатуры (уровень 1),
+
+<p><span
+style="mso-spacerun: yes">    </span>начинается выполнение программы по адресу
+CS:IP, определенному
+
+<p><span
+style="mso-spacerun: yes">    </span>двойным словом в векторе прерываний 9,
+лежащему по адресам от 24H
+
+<p><span
+style="mso-spacerun: yes">    </span>до 27H.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Давайте посмотрим, как все это вместе
+происходит в IBM PC.
+
+<p><span
+style="mso-spacerun: yes">    </span>Сначала процедура самопроверки при
+включении питания (POST)
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализирует контроллер 8259 с
+соответствующей управляющей и
+
+<p><span
+style="mso-spacerun: yes">    </span>упорядочивающей информацией. В это же
+время процедура POST снимает
+
+<p><span
+style="mso-spacerun: yes">    </span>маску прерываний от таймера, клавиатуры, а
+также прерываний от
+
+<p><span
+style="mso-spacerun: yes">    </span>дискет в регистре маски прерываний
+микросхемы 8259. После
+
+<p><span
+style="mso-spacerun: yes">    </span>завершения процедуры POST включается
+система прерываний по команде
+
+<p><span
+style="mso-spacerun: yes">    </span>STI. Теперь система готова к приему
+прерываний.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вы нажимаете клавишу на клавиатуре.
+Клавиатура посылает символ
+
+<p><span
+style="mso-spacerun: yes">    </span>в системную плату, где он записывается в
+регистр и возбуждает
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание уровня 1. Далее начинает работу
+микросхема 8259. Она
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает бит 1 в регистре IRR,
+отмечая запрос на прерывание.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если не установлены ни нулевой, ни первый
+биты регистра ISR,
+
+<p><span
+style="mso-spacerun: yes">    </span>показывающие обслуживание прерывания с
+более высоким приоритетом,
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллер возбуждает вход прерывания
+микропроцессора 8088. Когда
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор окажется готов к приему
+прерывания, он выполнит цикл
+
+<p><span
+style="mso-spacerun: yes">    </span>подтверждения прерывания. Микропроцессор
+8088 поместит в стек
+
+<p><span
+style="mso-spacerun: yes">    </span>текущее содержимое регистра флагов, CS и
+IP. Контроллер 8259
+
+<p><span
+style="mso-spacerun: yes">    </span>отвечает на цикл подтверждения прерывания
+номером прерывания, в
+
+<p><span
+style="mso-spacerun: yes">    </span>данном случае это 9; затем контроллер установит
+равным единице бит
+
+<p><span
+style="mso-spacerun: yes">    </span>1 в регистре ISR, показывая, что
+прерывание 1 обслуживается. Тем
+
+<p><span
+style="mso-spacerun: yes">    </span>временем микропроцессор 8088 загружает
+пару регистров CS:IP из
+
+<p><span
+style="mso-spacerun: yes">    </span>ячеек 24H- 27H и начинает работу с
+указанного в них адреса.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Затем микропроцессор выполняет программу
+обработки прерываний
+
+<p><span
+style="mso-spacerun: yes">    </span>от клавиатуры. На Фиг. 8.4 показана схема
+обработчика прерывания от
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатуры. Обратите внимание, что первая
+команда, которую должна
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнить эта программа, сохраняет
+содержимое регистра AX в стеке.
+
+
+<p><span
+style="mso-spacerun: yes">    </span>Это делается потому, что программа
+изменяет содержимое регистра AX.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если обработчик прерываний не восстановит
+первоначальное значение
+
+<p><span
+style="mso-spacerun: yes">    </span>этого регистра перед возвратом в
+прерванную программу, возникнет
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибка выполнения. Это ведь очень трудно -
+писать верно работающие
+
+<p><span
+style="mso-spacerun: yes">    </span>программы, если во время их выполнения
+содержимое регистров будет
+
+<p><span
+style="mso-spacerun: yes">    </span>произвольно изменяться другими
+программами. Если обработчику
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания потребуется больше регистров,
+то он должен все их
+
+<p><span
+style="mso-spacerun: yes">    </span>сохранить, а затем восстановить.
+
+<p><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">      
+</span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">   </span>1/1/80 04:05:14
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 8.4<span style='mso-tab-count:1'>    </span>Управление клавиатурой<span
+style='mso-tab-count:4'>                    </span><span style="mso-spacerun:
+yes">  </span>Page<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">   </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 8.4<span style='mso-tab-count:1'>  </span>Управление клавиатурой
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>KEYBOARD_INTERRUPT<span
+style="mso-spacerun: yes">      </span>PROC<span style="mso-spacerun: yes">   
+</span>FAR
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0000<span style="mso-spacerun: yes">  </span>50 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>PUSH<span
+style="mso-spacerun: yes">    </span>AX<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>; Сохранение регистра AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0001<span style="mso-spacerun: yes">  </span>E4 60<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>IN<span style="mso-spacerun: yes">      </span>AL, 60H<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Выборка номера клавиши
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0003<span style="mso-spacerun: yes">  </span>50 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>PUSH<span
+style="mso-spacerun: yes">    </span>AX<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>; Сохранение номера клавиши
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0004<span style="mso-spacerun: yes">  </span>E4 61<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>IN<span style="mso-spacerun: yes">      </span>AL, 61H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0006<span style="mso-spacerun: yes">  </span>8A E0<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AH, AL<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">     
+</span>; Сохранение текущего значения регистра AL
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0008<span style="mso-spacerun: yes">  </span>0C 80<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OR<span style="mso-spacerun: yes">      </span>AL, 80H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000A<span style="mso-spacerun: yes">  </span>E6 61<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OUT<span style="mso-spacerun: yes">     </span>61H, AL<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Сигнал об успешном получении символа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000C<span style="mso-spacerun: yes">  </span>8A C4<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL, AH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>000E<span style="mso-spacerun: yes">  </span>E6 61<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OUT<span style="mso-spacerun: yes">     </span>61H, AL<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Возврат Клавиатуры в нормальный режим
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0010<span style="mso-spacerun: yes">  </span>58 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>POP<span
+style="mso-spacerun: yes">     </span>AX
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">      </span>; ...
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0011<span style="mso-spacerun: yes">  </span>B0 20<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>MOV<span style="mso-spacerun: yes">     </span>AL, 20H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0013<span style="mso-spacerun: yes">  </span>E6 20<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">      </span>OUT<span style="mso-spacerun: yes">     </span>20H, AL<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     
+</span>; Сигнал об окончании прерывания
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0015<span style="mso-spacerun: yes">  </span>58 <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>POP<span
+style="mso-spacerun: yes">     </span>AX<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>; Восстановление регистра AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0016<span style="mso-spacerun: yes">  </span>CF <span style='mso-tab-count:
+3'>              </span><span style="mso-spacerun: yes">      </span>IRET<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">     
+</span>; Возвращение в прерванную программу
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0017<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>KEYBOARD_INTERRUPT<span
+style="mso-spacerun: yes">      </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>0017<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">      </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">      </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 8.4 Контроль клавиатуры
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Обработчик прерывания читает код клавиши,
+так называемый код
+
+<p><span
+style="mso-spacerun: yes">    </span>сканирования, из порта 60H. Программа
+доложна &quot;убрать&quot; прерывание,
+
+<p><span
+style="mso-spacerun: yes">    </span>сообщив устройству ввода-вывода, что оно
+должно снять запрос на
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание. Программа сбрасывает
+прерывание от клавиатуры,
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливая бит 7 порта 61H. Это не
+только отменяет запрос на
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывание, но и сообщает клавиатуре, что
+она может присылать
+
+<p><span
+style="mso-spacerun: yes">    </span>следующий символ в микропроцессор 8088.
+Теперь программа прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>может обработать код от клавиши.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда обслуживание прерывания завершено,
+обработчик прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>посылает в микросхему 8259 команду EOI.
+Она сбрасывает в 0 бит 1 в
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре ISR, и теперь могут произойти
+любые ожидающие обслуживания
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания с меньшими приоритетами.
+Выполнение команды EOI состоит
+
+<p><span
+style="mso-spacerun: yes">    </span>в посылке в порт 20H кода 20H. Программа
+обработки прерывания
+
+<p><span
+style="mso-spacerun: yes">    </span>восстанавливает содержимое регистра AX,
+команда IRET
+
+<p><span
+style="mso-spacerun: yes">    </span>восстанавливает регистры флагов IP, CS, а
+также приводит флаги к их
+
+<p><span
+style="mso-spacerun: yes">    </span>первоначальному виду до прерывания.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Точно такая же последовательность событий
+происходит в случае
+
+<p><span
+style="mso-spacerun: yes">    </span>любого прерывания, исходящего от
+микросхемы 8259 и обслуживаемого
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессором 8088. Единственная
+разница заключается в том,
+
+<p><span
+style="mso-spacerun: yes">    </span>какое именно прерывание возникает. От
+этого изменяется установка
+
+<p><span
+style="mso-spacerun: yes">    </span>битов в регистрах IRR и ISR, и номер
+вектора прерывания,
+
+<p><span
+style="mso-spacerun: yes">    </span>выдаваемого микропроцессору 8088.
+Обработчик прерывания должен все
+
+<p><span
+style="mso-spacerun: yes">    </span>также сохранять состояние микропроцессора
+в момент прерывания, а
+
+<p><span
+style="mso-spacerun: yes">    </span>программа должна выполнить команду EOI в
+конце обработки
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания, или когда определит, что
+выполняемая программа может
+
+<p><span
+style="mso-spacerun: yes">    </span>принять прерывание меньшего приоритета. И
+еще одно предостережение.
+
+<p><span
+style="mso-spacerun: yes">    </span>Ваша программа обработки прерывания не
+должена посылать две команды
+
+<p><span
+style="mso-spacerun: yes">    </span>EOI. Если выполняющаяся программа
+обработки прерывания прервала
+
+<p><span
+style="mso-spacerun: yes">    </span>работу обработчика с меньшим приоритетом,
+вторая команда EOI
+
+<p><span
+style="mso-spacerun: yes">    </span>поступит вместо этой команды от
+обработчика с меньшим приоритетом.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это может привести к неприемлимым
+последствиям, почему вам и не
+
+<p><span
+style="mso-spacerun: yes">    </span>следует допускать такого наложения.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Итак, мы обработали прерывание от
+клавиатуры, правильно
+
+<p><span
+style="mso-spacerun: yes">    </span>установили все биты и выполнили все
+команды. Что же мы получили?
+
+<p><span
+style="mso-spacerun: yes">    </span>Клавиатура посылает в микропроцессор
+&quot;коды сканирования&quot;. Их
+
+<p><span
+style="mso-spacerun: yes">    </span>значения отражают расположение клавиш на
+клавиатуре и не имеют
+
+<p><span
+style="mso-spacerun: yes">    </span>никакого отношения к символу,
+изображенному на клавише. Например,
+
+<p><span
+style="mso-spacerun: yes">    </span>клавише ESC возвращает код сканирования 1,
+клавиша &quot;1&quot; - код 2, и
+
+<p><span
+style="mso-spacerun: yes">    </span>так далее. Клавише DEL соответствует код
+сканирования 83. Каждая
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиша имеет свой собственный уникальный
+код сканирования. Так что
+
+<p><span
+style="mso-spacerun: yes">    </span>данные из порта 60H не могут
+рассматриваться как символ кода ASCII.
+
+<p><span
+style="mso-spacerun: yes">    </span>Код сканирования нужно еще перекодировать
+в правильный код
+
+<p><span
+style="mso-spacerun: yes">    </span>символа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Клавиатура передает несколько больше, чем
+только эти 83 кода
+
+<p><span
+style="mso-spacerun: yes">    </span>сканирования. Первые коды, от 1 до 83,
+известные как &quot;коды нажатия&quot;
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиатура посылает, при нажатии клавиши.
+Когда клавиша
+
+<p><span
+style="mso-spacerun: yes">    </span>отпускается, клавиатура посылает другой
+код сканирования, &quot;код
+
+<p><span
+style="mso-spacerun: yes">    </span>отпускания&quot;. Код отпускания
+формируется прибавлением числа 128 к
+
+<p><span
+style="mso-spacerun: yes">    </span>коду нажатия. То есть коды отпускания
+попадают в диапазон от 129 до
+
+<p><span
+style="mso-spacerun: yes">    </span>211; их легко распознать по 7-му биту,
+равному 1.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку клавиатура посылает различные
+коды для каждого
+
+<p><span
+style="mso-spacerun: yes">    </span>нажатия и отпускания клавиши, программа
+может отследить состояние
+
+<p><span
+style="mso-spacerun: yes">    </span>каждой клавиши. Вы узнаете о нажатии
+клавиши, получив от клавиатуры
+
+<p><span
+style="mso-spacerun: yes">    </span>код нажатия. Клавиша нажата, пока вы не
+получите код отпускания,
+
+<p><span
+style="mso-spacerun: yes">    </span>сообщающий, что клавиша отпущена. Для
+большинства клавиш эта
+
+<p><span
+style="mso-spacerun: yes">    </span>информация не важна, но для регистровых
+клавиш (например, клавиши
+
+<p><span
+style="mso-spacerun: yes">    </span>верхнего регистра) она решающая. Например,
+большие буквы
+
+<p><span
+style="mso-spacerun: yes">    </span>формируются только тогда, когда клавиша
+верхнего регистра нажата.
+
+<p><span
+style="mso-spacerun: yes">    </span>Так как такая информация доступна от любой
+клавиши клавиатуры IBM,
+
+<p><span
+style="mso-spacerun: yes">    </span>работа с регистровыми клавишами не
+составляет труда. Если вы
+
+<p><span
+style="mso-spacerun: yes">    </span>пожелаете изменить кодировку клавиатуры,
+устроив свое собственное
+
+<p><span
+style="mso-spacerun: yes">    </span>расположение клавиш, любая клавиша может
+трактоваться вами как
+
+<p><span
+style="mso-spacerun: yes">    </span>регистровая.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>И наконец, каждая клавиша клавиатуры IBM
+имеет встроенный
+
+<p><span
+style="mso-spacerun: yes">    </span>механизм автоповторения. Если вы держите
+любую клавишу нажатой
+
+<p><span
+style="mso-spacerun: yes">    </span>более 1/2 секунды, клавиатура начинает
+посылать коды нажатия со
+
+<p><span
+style="mso-spacerun: yes">    </span>скоростью 10 раз в секунду. Это удобно для
+обычных клавиш, особенно
+
+<p><span
+style="mso-spacerun: yes">    </span>для клавиш управления курсором. Вы просто
+держите их нажатыми, и
+
+<p><span
+style="mso-spacerun: yes">    </span>курсор движется в нужное место. Но если у
+вас есть клавиши,
+
+<p><span
+style="mso-spacerun: yes">    </span>выполняющие некоторую работу только в
+момент первого нажатия (и не
+
+<p><span
+style="mso-spacerun: yes">    </span>может использовать автоповторение), вы
+опять-таки должны
+
+<p><span
+style="mso-spacerun: yes">   </span>отслеживать нажатия и отпускания этой
+клавиши. Только первый код
+
+<p><span
+style="mso-spacerun: yes">    </span>нажатия должен вызывать ее срабатывание, а
+остальные коды нажатия
+
+<p><span
+style="mso-spacerun: yes">    </span>вы должны игнорировать.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

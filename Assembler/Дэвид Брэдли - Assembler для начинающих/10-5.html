@@ -1,0 +1,1390 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="10-5">Процедура Бэйсика BLOAD</a></i></font></b></div></p>
+<p><span
+style='mso-tab-count:1'>      </span>При первом способе подпрограмма на
+машинном языке добавляется к
+
+<p><span
+style="mso-spacerun: yes">    </span>программе для интерпретатора Бэйсика.
+Пожалуй, использование
+
+<p><span
+style="mso-spacerun: yes">    </span>интерпретатора Бейсика является наиболее
+распространенным методом
+
+<p><span
+style="mso-spacerun: yes">    </span>написания программ для персональной ЭВМ.
+Подпрограмма на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера, которую предполагается
+включить в разрабатываемую
+
+<p><span
+style="mso-spacerun: yes">    </span>программу, довольно велика - более 100
+байт. Ассемблерную процедуру
+
+<p><span
+style="mso-spacerun: yes">    </span>такой длины трудно вставить в текст
+программы на языке Бейсик,
+
+<p><span
+style="mso-spacerun: yes">    </span>способ, позволяющий сделать это будет
+рассмотрен в следующем
+
+<p><span
+style="mso-spacerun: yes">    </span>примере.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Функция, которую мы добавляем к программе
+на языке Бейсик
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет выводить на принтер графические
+изображения. IBM PC
+
+<p><span
+style="mso-spacerun: yes">    </span>снабжена графическими средствами.
+Графические команды позволяют
+
+<p><span
+style="mso-spacerun: yes">    </span>программно управлять отдельными точками,
+выводимыми на принтер, во
+
+<p><span
+style="mso-spacerun: yes">    </span>многом подобно тому, как в графическом
+режиме адаптер цветного
+
+<p><span
+style="mso-spacerun: yes">    </span>дисплея дает программисту возможность
+управлять отдельными точками
+
+<p><span
+style="mso-spacerun: yes">    </span>растра. На Фиг. 10.4 представлены
+графические команды, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>потребуются в рассматриваемом примере.
+Практически, графические
+
+<p><span
+style="mso-spacerun: yes">    </span>функции реализуются на принтере через
+управляющие последователь-
+
+<p><span
+style="mso-spacerun: yes">    </span>ности символов. Вместо символа в коде
+ASCII программа выдает на
+
+<p><span
+style="mso-spacerun: yes">    </span>принтер служебный символ (27 в коде
+ASCII). Следующие за ним
+
+<p><span
+style="mso-spacerun: yes">    </span>символы задают уже не символы для вывода
+на печать, а определенные
+
+<p><span
+style="mso-spacerun: yes">    </span>действия принтера. Как видно из Фиг. 10.4,
+существуют команды для
+
+<p><span
+style="mso-spacerun: yes">    </span>вывода на принтер изображения точки, в
+результате выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>которых печатается определенная точка
+изображения.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Команда <span style='mso-tab-count:
+2'>          </span>Действие
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>ESC + &quot;3&quot; + n<span style="mso-spacerun:
+yes">                 </span>Установка промежутка между
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>строками n/216
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Esc + &quot;K&quot; +n1+n2+v1...vk<span style="mso-spacerun:
+yes">    </span>Печатать образы точек v1...vk
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>(k = n1 + 256*n2)<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>как 480 точек поперек страницы
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг.10.4 Графические команды для принтера
+
+<p><span
+style='mso-tab-count:1'>      </span>Приведенная на Фиг. 10.5 программа
+использует указанные команды
+
+<p><span
+style="mso-spacerun: yes">    </span>для вывода на принтер образа экрана
+графического дисплея размером
+
+<p><span
+style="mso-spacerun: yes">    </span>320*200 точек. Каждая точка растра
+передается на принтер. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>точка на экране имеет цвет фона, то
+соответствующая точка на печать
+
+<p><span
+style="mso-spacerun: yes">    </span>не выдается. Если точка окрашена в один из
+трех основных цветов, то
+
+<p><span
+style="mso-spacerun: yes">    </span>программа выводит на печать черную точку.
+Эта программа не
+
+<p><span
+style="mso-spacerun: yes">    </span>масштабирует изображение, поэтому
+окружность на экране может
+
+<p><span
+style="mso-spacerun: yes">    </span>отобразиться в эллипс на принтере. Между
+тремя основными цветами не
+
+<p><span
+style="mso-spacerun: yes">    </span>проводится различий. Цветное изображение
+превращается в
+
+<p><span
+style="mso-spacerun: yes">    </span>черно-белое.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Подпрограмма PRINT_SCREEN является
+процедурой типа FAR. Вызов
+
+<p><span
+style="mso-spacerun: yes">    </span>ее из языка Бейсик является вызовом типа
+FAR, поэтому и возврат в
+
+<p><span
+style="mso-spacerun: yes">    </span>программу должен быть соответствующего
+типа. Последовательность ESC
+
+<p><span
+style="mso-spacerun: yes">    </span>+ &quot;3&quot; + 24 устанавливает такой
+интервал между строками печати, что
+
+<p><span
+style="mso-spacerun: yes">    </span>один ряд точек вплотную примыкает к
+другому. В печатающей головке
+
+<p><span
+style="mso-spacerun: yes">    </span>имеется восемь иголок, расстояние между
+которыми равно 1/72 дюйма.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если сделать интервал между строками
+равным 8/72 дюйма (или 24/216
+
+<p><span
+style="mso-spacerun: yes">    </span>дюйма), то ряды точек соединятся.
+Приведенный фрагмент программы
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает способ пересылки на устройство
+печати последовательности
+
+<p><span
+style="mso-spacerun: yes">    </span>служебных символов. Управляющая
+последовательность символов и чисел
+
+<p><span
+style="mso-spacerun: yes">    </span>пересылается на принтер как обычные
+символы. Остальное обеспечивает
+
+<p><span
+style="mso-spacerun: yes">    </span>устройство печати.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При каждом проходе печатающей головки на
+бумаге остается по
+
+<p><span
+style="mso-spacerun: yes">    </span>восемь рядов точек (по одному на каждую
+иголку печатающей головки)
+
+<p><span
+style="mso-spacerun: yes">    </span>в<span style='mso-tab-count:1'> </span><span
+style="mso-spacerun: yes">  </span>каждой из 320 колонок. От метки NEXT_ROW в
+программе
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательность ESC + &quot;K&quot; +
+64 + 1 пересылается на принтер. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что последующие 320 байт (64 +
+1*256) являются образами
+
+<p><span
+style="mso-spacerun: yes">    </span>точек для получения графического
+изображения на принтере. В
+
+<p><span
+style="mso-spacerun: yes">    </span>графическом режиме &quot;K&quot; на
+принтере можно получить изображение
+
+<p><span
+style="mso-spacerun: yes">    </span>шириной до 480 точек.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для считывания точек с дисплея программа
+использует видео
+
+<p><span
+style="mso-spacerun: yes">    </span>функцию BIOS . Эта функция считывает
+восемь рядов точек текущнго
+
+<p><span
+style="mso-spacerun: yes">    </span>столбца и собирает их в один байт:
+&quot;1&quot; означает, что точка имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>основной цвет и должна появиться на
+бумаге. Цикл продолжается через
+
+<p><span
+style="mso-spacerun: yes">    </span>метку NEXT_COLUMN - до тех пор, пока все
+320 столбцов (что
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствует 320 байтам) не будут
+переданы на принтер . После
+
+<p><span
+style="mso-spacerun: yes">    </span>перехода принтера на новую строку при
+помощи служебных символов
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;возврат каретки&quot; и
+&quot;перевод строки&quot; (13 и 10 в коде ASCII),
+
+<p><span
+style="mso-spacerun: yes">    </span>программа пересылает следующую группу из
+восьми рядов. За 25
+
+<p><span
+style="mso-spacerun: yes">    </span>проходов печатающей головки выводятся все
+200 рядов. Возврат в
+
+<p><span
+style="mso-spacerun: yes">    </span>интерпретатор Бейсика производится при
+помощи возврата типа FAR.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В рассматриваемой программе было бы удобно
+использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуру PRINT. Эта процедура выдает один
+байт на принтер при
+
+<p><span
+style="mso-spacerun: yes">    </span>помощи функции печати BIOS. Функция
+помещает необходиые для базовой
+
+<p><span
+style="mso-spacerun: yes">    </span>системы ввода-вывода установки регистров в
+определенное место. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>не использовать указанную функцию, то
+программа сама должна была бы
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливать регистры AH и DX равными
+нулю перед каждым вызовом
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуры PRINT.
+
+<p>A<br>
+<span style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">     </span>Microsoft (R) Macro Assembler Version 5.00 <span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>1/1/80 04:06:57
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 10.5 Печать графической копии дисплея<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">     </span>Page<span
+style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 10.5 Печать графической копии дисплея
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>= 001B<span style='mso-tab-count:3'>                </span> ESC<span
+style='mso-tab-count:1'>  </span> EQU<span style='mso-tab-count:1'>  </span> 27<span
+style='mso-tab-count:2'>         </span> ; Символ Escape
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span>
+PRINT_SCREEN<span style='mso-tab-count:1'>     </span> PROC<span
+style='mso-tab-count:1'> </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>B0 1B<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, ESC<span style='mso-tab-count:1'>    </span> ; Установка
+перевода строки на 1/8 дюйма
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0002<span style='mso-tab-count:1'>      </span>E8 0060 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0005<span style='mso-tab-count:1'>      </span>B0 33<span
+style='mso-tab-count:1'> </span><span style='mso-tab-count:3'>                  </span>
+MOV<span style='mso-tab-count:1'>  </span> AL, '3'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0007<span style='mso-tab-count:1'>      </span>E8 0060 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000A<span style='mso-tab-count:1'>      </span>B0 18<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 24 <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; 1/8 = 24/216 дюйма
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000C<span style='mso-tab-count:1'>      </span>E8 0060 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000F<span style='mso-tab-count:1'>      </span>BA 0000 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX, 0<span
+style='mso-tab-count:2'>            </span> ; Номер строки
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0012<span style='mso-tab-count:4'>                        </span>
+NEXT_ROW:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0012<span style='mso-tab-count:1'>      </span>B0 1B<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, ESC
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0014<span style='mso-tab-count:1'>      </span>E8 0060 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0017<span style='mso-tab-count:1'>      </span>B0 4B<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 'K'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0019<span style='mso-tab-count:1'>      </span>E8 0060 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001C<span style='mso-tab-count:1'>      </span>B0 40<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 320-256
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001E<span style='mso-tab-count:1'>      </span>E8 0060 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0021<span style='mso-tab-count:1'>      </span>B0 01<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 1
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0023<span style='mso-tab-count:1'>      </span>E8 0060 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0026<span style='mso-tab-count:1'>      </span>B9 0000 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> CX, 0<span
+style='mso-tab-count:2'>            </span> ; Номер столбца
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0029<span style='mso-tab-count:4'>                        </span>
+NEXT_COLUMN:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0029<span style='mso-tab-count:1'>      </span>52<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DX<span
+style='mso-tab-count:2'>         </span> ; Сохранение номера строки
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002A<span style='mso-tab-count:1'>      </span>BB 0008 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> BX, 8<span
+style='mso-tab-count:2'>            </span> ; Число одновлеменно обрабатываемых
+точек
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002D<span style='mso-tab-count:4'>                        </span>
+NEXT_DOT:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002D<span style='mso-tab-count:1'>      </span>D0 E7<span
+style='mso-tab-count:4'>                   </span> SHL<span style='mso-tab-count:
+1'>  </span> BH, 1<span style='mso-tab-count:2'>            </span> ;
+Освобождение младшего разряда
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002F<span style='mso-tab-count:1'>      </span>B4 0D<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH, 13 <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Чтение цвета точки из памяти дисплея
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0031<span style='mso-tab-count:1'>      </span>CD 10<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 10h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0033<span style='mso-tab-count:1'>      </span>0A C0<span
+style='mso-tab-count:4'>                   </span> OR<span style='mso-tab-count:
+1'>   </span> AL, AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0035<span style='mso-tab-count:1'>      </span>74 03<span
+style='mso-tab-count:4'>                   </span> JZ<span style='mso-tab-count:
+1'>   </span> BACKGROUND<span style='mso-tab-count:1'> </span> ; Проверка на
+цвет фона
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0037<span style='mso-tab-count:1'>      </span>80 CF 01<span
+style='mso-tab-count:3'>                </span> OR<span style='mso-tab-count:
+1'>   </span> BH, 1<span style='mso-tab-count:2'>            </span> ; Не фон,
+необходимо вывести точку на печать
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003A<span style='mso-tab-count:4'>                        </span>
+BACKGROUND:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003A<span style='mso-tab-count:1'>      </span>42<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> DX<span
+style='mso-tab-count:2'>         </span> ; Переключение на следующую строку
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003B<span style='mso-tab-count:1'>      </span>FE CB<span
+style='mso-tab-count:4'>                   </span> DEC<span style='mso-tab-count:
+1'>  </span> BL<span style='mso-tab-count:2'>         </span> ; Уменьшение
+счетчика строк в данном проходе
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003D<span style='mso-tab-count:1'>      </span>75 EE<span
+style='mso-tab-count:4'>                   </span> JNZ<span style='mso-tab-count:
+1'>  </span> NEXT_DOT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003F<span style='mso-tab-count:1'>      </span>8A C7<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, BH <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Печать 8-ми точек
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0041<span style='mso-tab-count:1'>      </span>E8 0060 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT<span style='mso-tab-count:2'>            </span> ; Вывод на
+печать
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0044<span style='mso-tab-count:1'>      </span>5A<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DX<span
+style='mso-tab-count:2'>         </span> ; Восстановление номера строки начала
+прохода
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0045<span style='mso-tab-count:1'>      </span>41<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> CX<span
+style='mso-tab-count:2'>         </span> ; Переключение на следуюий столбец
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0046<span style='mso-tab-count:1'>      </span>81 F9 0140<span
+style='mso-tab-count:3'>              </span> CMP<span style='mso-tab-count:
+1'>  </span> CX, 320<span style='mso-tab-count:1'>    </span> ; Все столбцы
+выведены?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004A<span style='mso-tab-count:1'>      </span>75 DD<span
+style='mso-tab-count:4'>                   </span> JNZ<span style='mso-tab-count:
+1'>  </span> NEXT_COLUMN
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004C<span style='mso-tab-count:1'>      </span>B0 0D<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 13 <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes"> </span>; Переход на следующую строку на принтере
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>004E<span style='mso-tab-count:1'>      </span>E8 0060 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0051<span style='mso-tab-count:1'>      </span>B0 0A<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL, 10
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0053<span style='mso-tab-count:1'>      </span>E8 0060 R<span
+style='mso-tab-count:3'>               </span> CALL<span style='mso-tab-count:
+1'> </span> PRINT
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0056<span style='mso-tab-count:1'>      </span>83 C2 08<span
+style='mso-tab-count:3'>                </span> ADD<span style='mso-tab-count:
+1'>  </span> DX, 8<span style='mso-tab-count:2'>            </span> ;
+Переключение на слдующую группу из 8 строк
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0059<span style='mso-tab-count:1'>      </span>81 FA 00C8<span
+style='mso-tab-count:3'>              </span> CMP<span style='mso-tab-count:
+1'>  </span> DX, 200<span style='mso-tab-count:1'>    </span> ; Все строки
+выведены?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>005D<span style='mso-tab-count:1'>      </span>72 B3<span
+style='mso-tab-count:4'>                   </span> JB<span style='mso-tab-count:
+1'>   </span> NEXT_ROW
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>005F<span style='mso-tab-count:1'>      </span>CB<span style='mso-tab-count:
+4'>                      </span> RET<span style='mso-tab-count:3'>              </span>
+; Возврат в BASIC
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>Фиг. 10.5<span style="mso-spacerun: yes">  </span>Печать
+графического экрана (начало)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0060<span style='mso-tab-count:4'>                        </span>
+PRINT_SCREEN<span style='mso-tab-count:1'>     </span> ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0060<span style='mso-tab-count:4'>                        </span> PRINT<span
+style='mso-tab-count:1'>      </span> PROC<span style='mso-tab-count:1'> </span>
+NEAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0060<span style='mso-tab-count:1'>      </span>52<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0061<span style='mso-tab-count:1'>      </span>B4 00<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AH, 0<span style='mso-tab-count:2'>            </span> ; Печать
+символа, находящегося в регистре AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0063<span style='mso-tab-count:1'>      </span>BA 0000 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX, 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0066<span style='mso-tab-count:1'>      </span>CD 17<span
+style='mso-tab-count:4'>                   </span> INT<span style='mso-tab-count:
+1'>  </span> 17h
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0068<span style='mso-tab-count:1'>      </span>5A<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0069<span style='mso-tab-count:1'>      </span>C3<span style='mso-tab-count:
+4'>                      </span> RET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>006A<span style='mso-tab-count:4'>                        </span> PRINT<span
+style='mso-tab-count:1'>      </span> ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>006A<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ENDA
+
+<p>&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 10.5<span style="mso-spacerun:
+yes">  </span>Печать графического экрана (продолжение)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как же обратиться к этой процедуре из
+программы, написанной на
+
+<p><span
+style="mso-spacerun: yes">    </span>языке Бейсик? В языке Бейсик существуют
+два способа подключения
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмм. Во время работы интерпретатор
+Бейсика использует
+
+<p><span
+style="mso-spacerun: yes">    </span>оставшуюся память системы (до 64 кбайт) в
+качестве рабочей области.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если в системе более 96 кбайт памяти,
+часть памяти будет не
+
+<p><span
+style="mso-spacerun: yes">    </span>доступна для интерпретатора Бейсика. Лучше
+всего поместить нашу
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуру в эту область. Если свободной
+области памяти нет, то
+
+<p><span
+style="mso-spacerun: yes">    </span>можно специально выделить некоторый объем
+памяти из рабочей области
+
+<p><span
+style="mso-spacerun: yes">    </span>интерпретатора Бейсика для хранения
+подпрограммы. В данном примере
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмма будет храниться вне рабочей
+области интерпретатора
+
+<p><span
+style="mso-spacerun: yes">    </span>Бейсика. В следующем примере будет
+показано, как включить процедуру
+
+<p><span
+style="mso-spacerun: yes">    </span>в контролируемую интерпретатором Бейсика
+область памяти.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 10.6 показана последовательность
+действий для
+
+<p><span
+style="mso-spacerun: yes">    </span>подготовки подпрограммы к дальнейшему
+использованию.
+
+<p><span
+style="mso-spacerun: yes">    </span>Соответствующая информация приведена в
+приложении C справочника по
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>языку Бейсик. Программа (на Фиг. 10.6) предназначена для машины с
+
+<p><span
+style="mso-spacerun: yes">    </span>оперативной памятью 96 кбайт и более.
+Программа ассемблируется
+
+<p><span
+style="mso-spacerun: yes">    </span>обычным образом. При редактировании связей
+задается опция /H.
+
+<p><span
+style="mso-spacerun: yes">    </span>Редактор связей создает файл типа .EXE
+таким образом, что программа
+
+<p><span
+style="mso-spacerun: yes">    </span>загружается в верхние адреса оперативной
+памяти, а не с самого
+
+<p><span
+style="mso-spacerun: yes">    </span>низкого из доступных адресов.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Чтобы подключить процедуру к программе,
+написанной на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>Бейсик, нам потребуется программа DEBUG.
+После загрузки программы
+
+<p><span
+style="mso-spacerun: yes">    </span>на языке Бейсик во время работы программы
+DEBUG и уточнения
+
+<p><span
+style="mso-spacerun: yes">    </span>значений регистров, загружаем процедуру на
+языке ассемблера.
+
+<p><span
+style="mso-spacerun: yes">    </span>Приведенный пример реализован на машине с
+памятью 128 кбайт.
+
+<p><span
+style="mso-spacerun: yes">    </span>Значение регистра CS, равное 1FF9H,
+указывает на то, что программа
+
+<p><span
+style="mso-spacerun: yes">    </span>помещена в 70H байт от конца оперативной
+памяти. Заметим, что
+
+<p><span
+style="mso-spacerun: yes">    </span>рассматриваемая программа имеет объем
+около 6AH байт, так что
+
+<p><span
+style="mso-spacerun: yes">    </span>редактор связей разместил программу с
+самого старшего адреса
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, допускающего выравнивание по границе
+параграфа. Следует
+
+<p><span
+style="mso-spacerun: yes">    </span>также заметить, что эта программа является
+сегментно -
+
+<p><span
+style="mso-spacerun: yes">    </span>перемещаемой. Это означает, что ее можно
+перемещать в памяти,
+
+<p><span
+style="mso-spacerun: yes">    </span>поскольку первая ее команда имеет смещение
+0 относительно текущего
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента кода. При переносе этой программы
+на машину с большим или
+
+<p><span
+style="mso-spacerun: yes">    </span>меньшим объемом памяти эта особенность
+оказывается решающей.
+
+<p>A<br>
+<![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>B&gt;A:MASM FIG10-5,,,;
+
+<p><span
+style='mso-tab-count:1'>      </span>The IBM Persona Computer MACRO Assembler
+
+<p><span
+style='mso-tab-count:1'>      </span>Version 1.00 (C)Copyright IBM Corp 1981
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Warning Severe
+
+<p><span
+style='mso-tab-count:1'>      </span>Errors<span style='mso-tab-count:1'>      </span>Errors
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style='mso-tab-count:1'>     </span>0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>B&gt;A:LINK FIG10-5,,,/H;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>IBM Personal Computer Linker
+
+<p><span
+style='mso-tab-count:1'>      </span>Version 1.10 (C)Copyright IBM Corp 1982
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Warning: No STACK segment
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>There was 1 error detected
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>B&gt;A:DEBUG A:BASIC.COM
+
+<p><span
+style='mso-tab-count:1'>      </span>-R
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>AX=0000 BX=0000 CX=2B80 DX=0000 SP=FFF0
+BP=0000 SI=0000 DI=0000
+
+<p><span
+style='mso-tab-count:1'>      </span>DS=04B5 ES=04B5 SS=04B5 CS=04B5 IP=0100 NV
+UP DI PL NZ NA PO NC
+
+<p><span
+style='mso-tab-count:1'>      </span>04B5:0100 E91329<span style="mso-spacerun:
+yes">       </span>JMP<span style='mso-tab-count:1'>    </span>2A16
+
+<p><span
+style='mso-tab-count:1'>      </span>-NFIG10-5.EXE
+
+<p><span
+style='mso-tab-count:1'>      </span>-L
+
+<p><span
+style='mso-tab-count:1'>      </span>-R
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>AX=0000 BX=0000 CX=006A DX=0000 SP=0000
+BP=0000 SI=0000 DI=0000
+
+<p><span
+style='mso-tab-count:1'>      </span>DS=04B5 ES=04B5 SS=1FF9 CS=1FF9 IP=0000 NV
+UP DI PL NZ NA PO NC
+
+<p><span
+style='mso-tab-count:1'>      </span>1FF9:0000 B01B<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">       </span>MOV<span
+style='mso-tab-count:1'>  </span>AL,1B
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>-RSS
+
+<p><span
+style='mso-tab-count:1'>      </span>SS 1FF9
+
+<p><span
+style='mso-tab-count:1'>      </span>:4B5
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>-RCS
+
+<p><span
+style='mso-tab-count:1'>      </span>CS 1FF9
+
+<p><span
+style='mso-tab-count:1'>      </span>:4B5
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>-RIP
+
+<p><span
+style='mso-tab-count:1'>      </span>IP 0000
+
+<p><span
+style='mso-tab-count:1'>      </span>:100
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>-G
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>---- В интерпретаторе Бэйсика введите
+команды
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DEF SEG = &amp;H1FF9
+
+<p><span
+style='mso-tab-count:1'>      </span>BSAVE &quot;FIG10-5&quot;,0,&amp;H70
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">  
+</span>Фиг. 10.6 (а) Создание подпрограммы для Бэйсика
+
+<p><span
+style='mso-tab-count:1'>      </span>B&gt;A:MASM FIG10-5,,,;
+
+<p><span
+style='mso-tab-count:1'>      </span>The IBM Persona Computer MACRO Assembler
+
+<p><span
+style='mso-tab-count:1'>      </span>Version 1.00 (C)Copyright IBM Corp 1981
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Warning Severe
+
+<p><span
+style='mso-tab-count:1'>      </span>Errors<span style='mso-tab-count:1'>      </span>Errors
+
+<p><span
+style='mso-tab-count:1'>      </span>0<span style='mso-tab-count:1'>     </span>0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>B&gt;A:LINK FIG10-5,,,/H;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>IBM Personal Computer Linker
+
+<p><span
+style='mso-tab-count:1'>      </span>Version 1.10 (C)Copyright IBM Corp 1982
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Warning: No STACK segment
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>There was 1 error detected
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>B&gt;A:DEBUG A:BASIC.COM /M:&amp;H8000
+
+<p><span
+style='mso-tab-count:1'>      </span>-R
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>AX=0000 BX=0000 CX=2B80 DX=0000 SP=FFF0
+BP=0000 SI=0000 DI=0000
+
+<p><span
+style='mso-tab-count:1'>      </span>DS=04B5 ES=04B5 SS=04B5 CS=04B5 IP=0100 NV
+UP DI PL NZ NA PO NC
+
+<p><span
+style='mso-tab-count:1'>      </span>04B5:0100 E91329<span style="mso-spacerun:
+yes">       </span>JMP<span style='mso-tab-count:1'>    </span>2A16
+
+<p><span
+style='mso-tab-count:1'>      </span>-NFIG10-5.EXE
+
+<p><span
+style='mso-tab-count:1'>      </span>-L
+
+<p><span
+style='mso-tab-count:1'>      </span>-R
+
+<p><span
+style='mso-tab-count:1'>      </span>AX=0000 BX=0000 CX=006A DX=0000 SP=0000
+BP=0000 SI=0000 DI=0000
+
+<p><span
+style='mso-tab-count:1'>      </span>DS=04B5 ES=04B5 SS=0FF9 CS=0FF9 IP=0000 NV
+UP DI PL NZ NA PO NC
+
+<p><span
+style='mso-tab-count:1'>      </span>0FF9:0000 B01B<span style='mso-tab-count:
+1'>    </span><span style="mso-spacerun: yes">       </span>MOV<span
+style='mso-tab-count:1'>  </span>AL,1B
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>-RSS
+
+<p><span
+style='mso-tab-count:1'>      </span>SS 0FF9
+
+<p><span
+style='mso-tab-count:1'>      </span>:4B5
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>-RCS
+
+<p><span
+style='mso-tab-count:1'>      </span>CS 1FF9
+
+<p><span
+style='mso-tab-count:1'>      </span>:4B5
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>-RIP
+
+<p><span
+style='mso-tab-count:1'>      </span>IP 0000
+
+<p><span
+style='mso-tab-count:1'>      </span>:100
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>-G
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>---- В интерпретаторе Бэйсика; введите
+команды
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DEF SEG = &amp;H0FF9
+
+<p><span
+style='mso-tab-count:1'>      </span>BSAVE &quot;FIG10-5&quot;,0,&amp;H70
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">   </span>(b)
+
+<p>A
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 10.6 (а) Создание подпрограммы для
+Бэйсика; (b) Создание
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>подпрограммы для Бэйсика на машине с 64K
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Теперь мы имеем дело с интерпретатором
+Бейсика. Нам необходимо
+
+<p><span
+style="mso-spacerun: yes">    </span>восстановить содержимое регистров таким,
+каким оно было после
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузки Бейсика. После того, как
+интерпретатор Бейсика запущен,
+
+<p><span
+style="mso-spacerun: yes">    </span>для локализации подпрограммы используется
+команда DEF SEG. Команда
+
+<p><span
+style="mso-spacerun: yes">    </span>BSAVE помещает обратно на дискету
+объектный код, готовый к новой
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузке из Бейсика при помощи команды
+BLOAD.
+
+<p><span
+style='mso-tab-count:1'>      </span>В части (b) Фиг. 10.6, повторяются
+действия из части (а), но
+
+<p><span
+style="mso-spacerun: yes">    </span>для машины с объемом памяти 64 кбайт.
+Различие здесь состоит в том,
+
+<p><span
+style="mso-spacerun: yes">    </span>что интерпретатор Бейсика не может
+использовать всю память под
+
+<p><span
+style="mso-spacerun: yes">    </span>рабочую область. Опция /M в командной
+строке Бейсика ограничивает
+
+<p><span
+style="mso-spacerun: yes">    </span>рабочую область Бейсика и оставляет место
+для подпрограммы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Аналогичная команда потребуется и при
+запуске программы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программой DEBUG можно воспользоваться для
+вашей ассемблерной
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуры и при работе интерпретатора
+Бейсика .<span style="mso-spacerun: yes">  </span>Включите в команду
+
+<p><span
+style="mso-spacerun: yes">    </span>G при запуске программы Бейсика установку
+контрольной точки в
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмме.<span style="mso-spacerun:
+yes">  </span>По достижении контрольной точки работа
+
+<p><span
+style="mso-spacerun: yes">    </span>интерпретатора Бейсика приостанавливается,
+и производится обычная
+
+<p><span
+style="mso-spacerun: yes">    </span>для программы DEBUG выдача содержимого
+регистров.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Теперь все готово для выполнения
+подпрограммы на языке
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблера как части программы на языке
+Бейсик. Снова предположим,
+
+<p><span
+style="mso-spacerun: yes">    </span>что система располагает 128 кбайтами
+памяти, и выполним следующую
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательность действий:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>введите &quot;BASIC&quot; на уровне команд
+DOS;
+
+<p><span
+style='mso-tab-count:1'>      </span>введите &quot;SCREEN1&quot; во время
+работы интерпретатора Бейсика.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 10.7 Печатная копия экрана
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Эти действия вводят нас в интерпретатор и
+переводят режим
+
+<p><span
+style="mso-spacerun: yes">    </span>изображения на размер 320*200 точек. На
+Фиг. 10.7. показаны
+
+<p><span
+style="mso-spacerun: yes">    </span>оставшиеся события этой истории. Команда
+BLOAD загружает процедуру
+
+<p><span
+style="mso-spacerun: yes">    </span>в ту же область памяти, из которой она
+была сохранена. При желании
+
+<p><span
+style="mso-spacerun: yes">    </span>в команде BLOAD можно задать параметры,
+обеспечивающие загрузку
+
+<p><span
+style="mso-spacerun: yes">    </span>программы в другую область памяти.
+Оператор LINE дает процедуре
+
+<p><span
+style="mso-spacerun: yes">    </span>графической распечатки экрана информацию
+для печати. Для вызова
+
+<p><span
+style="mso-spacerun: yes">    </span>этой процедуры мы используем команду DEF
+SEG, чтобы установить
+
+<p><span
+style="mso-spacerun: yes">    </span>значение регистра CS на процедуру.
+Значение регистра IP для
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуры помещается в простую переменную.
+Оператор CALL
+
+<p><span
+style="mso-spacerun: yes">    </span>осуществляет дальний вызов по заданному
+адресу. Фиг. 10.7
+
+<p><span
+style="mso-spacerun: yes">    </span>представляет собой копию реальной
+распечатки, полученной при
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнении приведенной программы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если в системе 64Кбайт памяти, то
+программа будет отлична в
+
+<p><span
+style="mso-spacerun: yes">    </span>двух аспектах. Для вызова интерпретатора
+Бейсика используется
+
+<p><span
+style="mso-spacerun: yes">    </span>команда BASIC/M:&amp;H8000, резервирующая
+верхнюю часть памяти для
+
+<p><span
+style="mso-spacerun: yes">    </span>нашей ассемблерной процедуры, а команда
+DEF SEG задает адрес
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы, как это было сделано в части
+(b) Фиг. 10.6.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

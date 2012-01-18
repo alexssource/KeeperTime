@@ -1,0 +1,896 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="7-3">Представление данных с плавающей точкой</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для изображения чисел с плавающей точкой в
+процессоре 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>существует три формата данных.<span
+style="mso-spacerun: yes">  </span>Два из них совпадают с предложенным
+
+<p><span
+style="mso-spacerun: yes">    </span>ИИЭР стандартом для таких чисел.<span
+style="mso-spacerun: yes">  </span>Короткий формат имеет 32 бита, а
+
+<p><span
+style="mso-spacerun: yes">    </span>длинный - 64 бита.<span style='mso-tab-count:
+1'>  </span>Третий формат определяет 80-битовые числа, и не
+
+<p><span
+style="mso-spacerun: yes">    </span>совпадает со стандартом ИИЭР.<span
+style="mso-spacerun: yes">  </span>Сопроцессор 8087 использует такой
+
+<p><span
+style="mso-spacerun: yes">    </span>формат &quot;промежуточного
+действительного числа&quot;, чтобы обеспечить
+
+<p><span
+style="mso-spacerun: yes">    </span>очень высокую точность для промежуточных
+результатов вычислений.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Оставшаяся часть этого раздела
+предназначена для тех, кто не
+
+<p><span
+style="mso-spacerun: yes">    </span>имел дела с вещественными числами в
+ЭВМ.<span style="mso-spacerun: yes">  </span>Вы можете пропустить этот
+
+<p><span
+style="mso-spacerun: yes">    </span>раздел, если понимаете о общих чертах
+способы представления
+
+<p><span
+style="mso-spacerun: yes">    </span>вещественных чисел - как на бумаге, так и
+в ЭВМ; а в следующем
+
+<p><span
+style="mso-spacerun: yes">    </span>разделе мы рассмотрим конкретный способ,
+используемый в
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессоре 8087.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Целые числа - лучший способ представления
+многих величин.
+
+<p><span
+style="mso-spacerun: yes">    </span>Целые чила просто понимать и использовать,
+а также легко
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразовывать в двоичное
+представление.<span style="mso-spacerun: yes">  </span>Однако с целыми числами
+
+<p><span
+style="mso-spacerun: yes">    </span>плохо работать в случае очень больших
+значений.<span style="mso-spacerun: yes">  </span>Очень большое
+
+<p><span
+style="mso-spacerun: yes">    </span>целое число обычно оканчивается длинной
+строкой нулей.<span style="mso-spacerun: yes">  </span>Например:
+
+<p><span
+style="mso-spacerun: yes">    </span>Солнце находится на расстоянии около
+93000000 миль от Земли.<span style="mso-spacerun: yes">  </span>Целые
+
+<p><span
+style="mso-spacerun: yes">    </span>числа, кроме того, не способны представить
+значение, содержащее
+
+<p><span
+style="mso-spacerun: yes">    </span>дробную часть, то есть ЭВМ не может
+запомнить число 1/2 в целом
+
+<p><span
+style="mso-spacerun: yes">    </span>представлении.<span style="mso-spacerun:
+yes">  </span>Любые другие дроби, меньшие 1, также невозможно
+
+<p><span
+style="mso-spacerun: yes">    </span>представить, используя целые числа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Ученые и математики давным-давно
+разработали способ
+
+<p><span
+style="mso-spacerun: yes">    </span>представления этих чисел в достаточно
+удобном виде.<span style="mso-spacerun: yes">  </span>На первом
+
+<p><span
+style="mso-spacerun: yes">    </span>этапе вводится десяточная точка.<span
+style="mso-spacerun: yes">  </span>Этот символ, &quot;.&quot; показывает
+
+<p><span
+style="mso-spacerun: yes">    </span>границу между целой и дробной частью
+числа.<span style="mso-spacerun: yes">  </span>В случае целого числа
+
+<p><span
+style="mso-spacerun: yes">    </span>позиция, представляющая единицы, всегда
+находится на рпавом краю
+
+<p><span
+style="mso-spacerun: yes">    </span>числа; в случае, когда используется
+десятичная точка, цифры справа
+
+<p><span
+style="mso-spacerun: yes">    </span>от нее представляют значения, меньшие
+единицы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>У целых чисел каждая позиция числа
+соответствует степени 10.
+
+<p><span
+style="mso-spacerun: yes">    </span>То есть число 1234 есть
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>1234=1000+200+30+4=1*10**3+2*10**2+3*10**1+4*10**0
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Десятичная точка показывает границу между
+позицией,
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующей 100, и дробной
+частью.<span style="mso-spacerun: yes">  </span>В дробной части позиции
+
+<p><span
+style="mso-spacerun: yes">    </span>снова являются сиепенями 10, но теперь эти
+степени 10 -
+
+<p><span
+style="mso-spacerun: yes">    </span>отрицательные.<span style="mso-spacerun:
+yes">  </span>Поэтому число 1.234 есть
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>1.234=1+0.2+0.03+0.004=
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>1*10**0+2*10**-1+3*10**-2+4*10**-3
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Десятичная точка позволяет записывать
+дроби.<span style="mso-spacerun: yes">  </span>Число 1/2 теперь
+
+<p><span
+style="mso-spacerun: yes">    </span>выглядит как 1.5, а 1/4 выглядит как 0.25,
+и 1/5 выглядит как 0.2.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку каждая позиция десятичного числа
+отличается от
+
+<p><span
+style="mso-spacerun: yes">    </span>соседней на степень 10, умножение числа на
+10 эквивалентно сдвигу
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичной точки на одну позицию
+вправо.<span style="mso-spacerun: yes">  </span>Аналогично деление на 10
+
+<p><span
+style="mso-spacerun: yes">    </span>сдвигает десятичную точку на позицию
+влево.<span style="mso-spacerun: yes">  </span>Это свойсто можно
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать для сдвига десятичной точки
+на соответствующее место:
+
+<p><span
+style="mso-spacerun: yes">    </span>мы сдвигаем десятичную точку и
+одновременно корректируем число на
+
+<p><span
+style="mso-spacerun: yes">    </span>же степень 10.<span style="mso-spacerun:
+yes">  </span>Такое представление чисел называется представление
+
+<p><span
+style="mso-spacerun: yes">    </span>&quot;с плавающей точкой&quot;, поскольку
+десятичная точка &quot;плавает&quot; в числе;
+
+<p><span
+style="mso-spacerun: yes">    </span>она больше не помечает абсолютное место
+между целой и дробной
+
+<p><span
+style="mso-spacerun: yes">    </span>частями.<span style="mso-spacerun: yes"> 
+</span>Положение десятичной точки можно выбрать из соображений
+
+<p><span
+style="mso-spacerun: yes">    </span>удобства, а затем умножить число на нужную
+степень 10, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>получить правильное значение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Например, Солнце находится на расстоянии
+примерно 93000000 миль
+
+<p><span
+style="mso-spacerun: yes">    </span>от Земли.<span style="mso-spacerun: yes"> 
+</span>С такой формой записи тяжело работать из-за обилия
+
+<p><span
+style="mso-spacerun: yes">    </span>нулей.<span style="mso-spacerun: yes"> 
+</span>Можно записать это число в формате с плавающей точкой:
+
+<p><span
+style="mso-spacerun: yes">    </span>9.3*107.<span style="mso-spacerun: yes"> 
+</span>То есть 93000000 эквивалентно 9.3, умноженному на 10 в
+
+<p><span
+style="mso-spacerun: yes">    </span>седьмой степени.<span style="mso-spacerun:
+yes">  </span>Фактически,
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>93000000=9.3*10**7=93*10**6=930*10**5
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>и так далее.<span style="mso-spacerun:
+yes">  </span>Мы можем двигать десятичную точку куда угодно,
+
+<p><span
+style="mso-spacerun: yes">    </span>меняя степень 10.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Десятичное число с плавающей точкой
+состоит из двух частей.
+
+<p><span
+style="mso-spacerun: yes">    </span>Значащая часть числа называется мантиссой.<span
+style='mso-tab-count:1'>  </span>В предыдущем примере
+
+<p><span
+style="mso-spacerun: yes">    </span>число 9.3 есть мантисса.<span
+style="mso-spacerun: yes">  </span>На практике мантисса обычно находится в
+
+<p><span
+style="mso-spacerun: yes">    </span>пределах 1&lt;=мантисса&lt;10; т.е.<span
+style="mso-spacerun: yes">  </span>она может быть равна 1.3, 7.6 или
+
+<p><span
+style="mso-spacerun: yes">    </span>9.97.<span style="mso-spacerun: yes"> 
+</span>Другая часть числа с плавающей точкой - это порядок,
+
+<p><span
+style="mso-spacerun: yes">    </span>степень, в которую нужно возвести 10 перед
+умножением его на
+
+<p><span
+style="mso-spacerun: yes">    </span>мантиссу.<span style="mso-spacerun: yes"> 
+</span>То есть 9.3*107 имеет мантиссу 9.3 и порядок 7.<span style='mso-tab-count:
+1'>    </span>Если
+
+<p><span
+style="mso-spacerun: yes">    </span>основание системы счисления определено раз
+и навсегда, в нашем
+
+<p><span
+style="mso-spacerun: yes">    </span>случае это 10, то для восстановления
+первоначального числа должны
+
+<p><span
+style="mso-spacerun: yes">    </span>быть заданы только два числа - мантисса и
+порядок.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Представление с плавающей точкой позволяет
+записявать в
+
+<p><span
+style="mso-spacerun: yes">    </span>компактном виде как очень большие
+(например, 1.234*1085) так и
+
+<p><span
+style="mso-spacerun: yes">    </span>очень малые (1.234*10-85) числа.<span
+style="mso-spacerun: yes">  </span>Чтобы записать те же числа без
+
+<p><span
+style="mso-spacerun: yes">    </span>использования степени десяти,
+потребовались бы длинные строки,
+
+<p><span
+style="mso-spacerun: yes">    </span>состоящие из нулей.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Двоичные числа с плавающей точкой
+изображаются аналогично
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичным; отличие заключается в том, что
+основание системы
+
+<p><span
+style="mso-spacerun: yes">    </span>счисления здесь 2, а не 10.<span
+style="mso-spacerun: yes">  </span>Мантисса имеет значение 1&lt;=мантисса&lt;2,
+
+<p><span
+style="mso-spacerun: yes">    </span>а порядок показывает степень 2.<span
+style="mso-spacerun: yes">  </span>То есть число 1.101*10100 в
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичной форме означает, что мантисса
+1.101 умножается на 24, или
+
+<p><span
+style="mso-spacerun: yes">    </span>16.<span style="mso-spacerun: yes"> 
+</span>Значение мантиссы определяется таким же позиционным способом,
+
+<p><span
+style="mso-spacerun: yes">    </span>как и для десятичного числа, за
+исключением того, что основание
+
+<p><span
+style="mso-spacerun: yes">    </span>теперь равно 2.<span style="mso-spacerun:
+yes">  </span>Позиции, находящиеся справа от двоичной точки,
+
+<p><span
+style="mso-spacerun: yes">    </span>представляют отрицательные степени двойки.<span
+style='mso-tab-count:1'>  </span>Таблица на Фиг. 7.4
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает значения первых пяти позиций.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Теперь мы можем вычислить десятичное
+значение числа из примера:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>1.101b=1+1/2+1/8=15/8=1.625
+
+<p><span
+style="mso-spacerun: yes">      </span>10**100b=2**4=16
+
+<p><span
+style="mso-spacerun: yes">      </span>1.101*10**100B = (1+5/8)*16 = 26
+
+<p><span
+style='mso-tab-count:1'>      </span>Кроме того, мы могли бы вычислить это
+значение точно так же,
+
+<p><span
+style="mso-spacerun: yes">    </span>как в случае десятичных чисел.<span
+style="mso-spacerun: yes">  </span>Значение порядка показывает, на
+
+<p><span
+style="mso-spacerun: yes">    </span>сколько позиций надо сдвинуть двоичную
+точку.<span style="mso-spacerun: yes">  </span>В этом случае,
+
+<p><span
+style="mso-spacerun: yes">    </span>поскольку значение порядка равно 4,
+двоичную точку надо сдвинуть на
+
+<p><span
+style="mso-spacerun: yes">    </span>четыре позиции вправо.<span
+style="mso-spacerun: yes">  </span>Поэтому
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>1.101*10**100B=11010B=26
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Оба метода правильные и дают идентичные
+результаты.<span style="mso-spacerun: yes">  </span>В первом
+
+<p><span
+style="mso-spacerun: yes">    </span>случае вычисляется мантисса, затем она
+умножается на основание,
+
+<p><span
+style="mso-spacerun: yes">    </span>возведенное в степень порядка; во втором
+случае сначала выполняется
+
+<p><span
+style="mso-spacerun: yes">    </span>умножение, а затем вычисляется мантисса.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Двоичное значение<span
+style="mso-spacerun: yes">   </span>Десятичное значение
+
+<p><span
+style="mso-spacerun: yes">    
+</span>-------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>0.1<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">      </span>1/2
+
+<p><span
+style='mso-tab-count:1'>      </span>0.01<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">      </span>1/4
+
+<p><span
+style='mso-tab-count:1'>      </span>0.001<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">      </span>1/8
+
+<p><span
+style='mso-tab-count:1'>      </span>0.0001<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">      </span>1/16
+
+<p><span
+style='mso-tab-count:1'>      </span>0.00001 <span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span>1/32
+
+<p><span
+style="mso-spacerun: yes">     </span>-----------------------------------------
+Фиг. 7.4 Отрицательные
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">    </span>степени двух
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как же эти числа представляются в ЭВМ?<span
+style='mso-tab-count:1'>    </span>Место, отводимое для
+
+<p><span
+style="mso-spacerun: yes">    </span>числа с плавающей точкой, делится на два
+поля.<span style="mso-spacerun: yes">  </span>Одно поле содержит
+
+<p><span
+style="mso-spacerun: yes">    </span>знак и значение мантиссы, а другое
+содержит знак и значение
+
+<p><span
+style="mso-spacerun: yes">    </span>порядка.<span style="mso-spacerun: yes"> 
+</span>Размер поля мантиссы определяет точность представления
+
+<p><span
+style="mso-spacerun: yes">    </span>числа.<span style="mso-spacerun: yes"> 
+</span>Чем большее число бит отводится в ЭВМ под поле мантиссы,
+
+<p><span
+style="mso-spacerun: yes">    </span>тем выше точность.<span style='mso-tab-count:
+1'>  </span>Например, десятичная мантисса 1.234 более
+
+<p><span
+style="mso-spacerun: yes">    </span>точная, чем мантисса 1.2.<span
+style="mso-spacerun: yes">  </span>Две дополнительные цифры мантиссы дают
+
+<p><span
+style="mso-spacerun: yes">    </span>возможность более точно передавать
+значение числа.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Для того, чтобы сохранить максимальную
+точность, вычислительные
+
+<p><span
+style="mso-spacerun: yes">    </span>машины почти всегда хранят мантиссу в
+нормализованном виде.<span style="mso-spacerun: yes">  </span>Это
+
+<p><span
+style="mso-spacerun: yes">    </span>означает, что мантисса есть число, лежащее
+между 1 и 2
+
+<p><span
+style="mso-spacerun: yes">    </span>(1&lt;=мантисса&lt;2).<span
+style="mso-spacerun: yes">  </span>Два соображения говорят в пользу
+нормализации.
+
+<p><span
+style="mso-spacerun: yes">    </span>Во-первых, ни один незначащий нуль не дает
+никакого вклада в
+
+<p><span
+style="mso-spacerun: yes">    </span>точность числа.<span style="mso-spacerun:
+yes">  </span>(Это несправедливо для нулей, лежащих в конце
+
+<p><span
+style="mso-spacerun: yes">    </span>числа; мы считаем, что число 1.000 более
+точно, чем число 1.0).
+
+<p><span
+style="mso-spacerun: yes">    </span>Если в мантиссе с плавающей точкой
+появились незначащие нули,
+
+<p><span
+style="mso-spacerun: yes">    </span>точность числа падает.<span
+style="mso-spacerun: yes">  </span>Во-вторых, способ хранения мантиссы с
+
+<p><span
+style="mso-spacerun: yes">    </span>плавающей точкой подразумевает, что
+двоичная точка находится на
+
+<p><span
+style="mso-spacerun: yes">    </span>фиксированном месте.<span
+style="mso-spacerun: yes">  </span>Фактически подразумевается, что двоичная
+
+<p><span
+style="mso-spacerun: yes">    </span>точка следует после первой двоичной цифры.<span
+style='mso-tab-count:1'>  </span>То есть нормализация
+
+<p><span
+style="mso-spacerun: yes">    </span>мантиссы делает единичным первый бит,
+помещая тем самым значение
+
+<p><span
+style="mso-spacerun: yes">    </span>мантиссы между 1 и 2.<span
+style="mso-spacerun: yes">  </span>Для выполнения нормализации ЭВМ корректирует
+
+<p><span
+style="mso-spacerun: yes">    </span>порядок числа на соответствующее значение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При нормализации встречаются
+исключения.<span style="mso-spacerun: yes">  </span>Наиболее очквидное
+
+<p><span
+style="mso-spacerun: yes">    </span>исключение - нуль.<span style='mso-tab-count:
+1'>  </span>В этом случае вся мантисса нулевая.<span style="mso-spacerun:
+yes">  </span>Второе
+
+<p><span
+style="mso-spacerun: yes">    </span>исключение не так очевидно, и возникает в
+случае приближения числа
+
+<p><span
+style="mso-spacerun: yes">    </span>к нижней границе своего диапазона.<span
+style='mso-tab-count:1'>    </span>Давайте разберемся, что это
+
+<p><span
+style="mso-spacerun: yes">    </span>означает.
+
+<p><span
+style='mso-tab-count:1'>      </span>Точно так же, как длина мантиссы числа
+определяет его точность,
+
+<p><span
+style="mso-spacerun: yes">    </span>длина поля порядка определяет диапазон
+числа.<span style="mso-spacerun: yes">  </span>Поле порядка
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит степень двойки, и чем больше бит
+в этом поле, тем большее
+
+<p><span
+style="mso-spacerun: yes">    </span>число может быть представлено.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если под поле порядка (представленного в
+дополнительном коде)
+
+<p><span
+style="mso-spacerun: yes">    </span>отведено три двоичных цмфры, наибольшее
+представимое число есть
+
+<p><span
+style="mso-spacerun: yes">    </span>1.111 ...<span style="mso-spacerun: yes"> 
+</span>* 10011B.<span style="mso-spacerun: yes">  </span>Мантисса - это число,
+чуть меньше двух, а
+
+<p><span
+style="mso-spacerun: yes">    </span>множитель мантиссы равен 23, или 8.<span
+style="mso-spacerun: yes">  </span>Поэтому максимальное число
+
+<p><span
+style="mso-spacerun: yes">    </span>чуть меньше 16.<span style="mso-spacerun:
+yes">  </span>Наименьшее ненулевое положительное число есть
+
+<p><span
+style="mso-spacerun: yes">    </span>1.000 ...<span style="mso-spacerun: yes"> 
+</span>* 10100B, или 1*2-4, или 1/16.<span style="mso-spacerun: yes"> 
+</span>Поскольку в числах с
+
+<p><span
+style="mso-spacerun: yes">    </span>плавающей точкой для представления
+мантиссы не используется
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительный код, диапазон отрицательных
+чисел такой же.<span style='mso-tab-count:1'>    </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>случае 3-битового порядка диапазон
+положительных чисел от 1/16 до
+
+<p><span
+style="mso-spacerun: yes">    </span>16, а отрицательных - от -16 до -1/16.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Если для поля порядка используется 4 бита,
+наибольшее число
+
+<p><span
+style="mso-spacerun: yes">    </span>равно 1.111...<span style="mso-spacerun:
+yes">  </span>*100111B&lt;2*27=256.<span style='mso-tab-count:1'>    </span>Наименьшее
+ненулевое
+
+<p><span
+style="mso-spacerun: yes">    </span>положительное число 1.000...<span
+style="mso-spacerun: yes">  </span>*101000B=1*2-8=1/256.<span
+style="mso-spacerun: yes">  </span>Таким образом
+
+<p><span
+style="mso-spacerun: yes">    </span>четыре бита порядка допускают диапазон
+изменения чисел от 1/256 до
+
+<p><span
+style="mso-spacerun: yes">    </span>256.<span style="mso-spacerun: yes"> 
+</span>Чем большее число бит в поле порядка, тем шире диапазон
+
+<p><span
+style="mso-spacerun: yes">    </span>представимых чисел.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Важно отметить, что хотя диапазон и
+расширяется с увеличением
+
+<p><span
+style="mso-spacerun: yes">    </span>числа бит порядка, точность не
+увеличивается.<span style="mso-spacerun: yes">  </span>В только что
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотренных примерах предполагалось, что
+имеется 4 бита мантиссы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если выбрать конкретное число, попадающее
+в диапазон обоих
+
+<p><span
+style="mso-spacerun: yes">    </span>примеров, то оно будут иметь одну и ту же
+точность независимо от
+
+<p><span
+style="mso-spacerun: yes">    </span>диапазона порядка.<span style='mso-tab-count:
+1'>  </span>Например, число 1.010*10001B=21/2.<span style="mso-spacerun: yes"> 
+</span>Увеличение
+
+<p><span
+style="mso-spacerun: yes">    </span>количества бит порядка не увеличивает
+точность числа.<span style="mso-spacerun: yes">  </span>Размер
+
+<p><span
+style="mso-spacerun: yes">    </span>мантиссы есть единственное ограничение
+точности данного числа в
+
+<p><span
+style="mso-spacerun: yes">    </span>пределах системы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Значение порядка хранится не как число,
+представленное в
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнительном коде.<span
+style="mso-spacerun: yes">  </span>Для упрощения вычислений значение порядка в
+
+<p><span
+style="mso-spacerun: yes">    </span>ЭВМ хранится в виде смещенного числа.<span
+style="mso-spacerun: yes">  </span>Это означает, что к
+
+<p><span
+style="mso-spacerun: yes">    </span>действительному значению порядка
+прибавляется смещение перед
+
+<p><span
+style="mso-spacerun: yes">    </span>записью его в память.<span
+style="mso-spacerun: yes">  </span>Смещенным значение порядка делается для
+
+<p><span
+style="mso-spacerun: yes">    </span>того, чтобы можно было сравнивать значения
+порядка с помощью
+
+<p><span
+style="mso-spacerun: yes">    </span>обычной операции сравнения чисел с
+фиксированной точкой без знака.
+
+<p><span
+style="mso-spacerun: yes">    </span>В частности, это полезно при сравнении
+двух чисел с плавающей
+
+<p><span
+style="mso-spacerun: yes">    </span>точкой.<span style="mso-spacerun: yes"> 
+</span>Значения порядка и мантиссы записываются в одном элементе
+
+<p><span
+style="mso-spacerun: yes">    </span>данных, причем порядок записывается перед
+мантиссой.<span style="mso-spacerun: yes">  </span>В случае
+
+<p><span
+style="mso-spacerun: yes">    </span>смещенного значения порыдка программа
+может сравнивать числа
+
+<p><span
+style="mso-spacerun: yes">    </span>побитно, начиная со старших позиций.<span
+style="mso-spacerun: yes">  </span>Первое же неравенство
+
+<p><span
+style="mso-spacerun: yes">    </span>показывает соотношение чисел, и больше не
+нужно учитывать никакие
+
+<p><span
+style="mso-spacerun: yes">    </span>части чисел.<span style="mso-spacerun:
+yes">  </span>Значение смещения определяется размером поля порядка.
+
+<p><span
+style="mso-spacerun: yes">    </span>Давайте это рассмотрим на примере форматов
+данных сопроцессора
+
+<p><span
+style="mso-spacerun: yes">    </span>8087.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В сопроцессоре 8087 формат короткого
+действительного числа
+
+<p><span
+style="mso-spacerun: yes">    </span>использует 32 бита, восемь из которых
+содержат значение порядка;
+
+<p><span
+style="mso-spacerun: yes">    </span>таким образом, оно может находиться в
+пределах от - 128 до 127.
+
+<p><span
+style="mso-spacerun: yes">    </span>Однако значение -128 зарезервировано для
+обозначения некоторого
+
+<p><span
+style="mso-spacerun: yes">    </span>специального, а именно, неопределенного
+числа, так что значения
+
+<p><span
+style="mso-spacerun: yes">    </span>порядка находятся в диапазоне от -127 до
+127.<span style="mso-spacerun: yes">  </span>Значение порядка -
+
+<p><span
+style="mso-spacerun: yes">    </span>это не число, представленное в
+дополнительном коде.<span style="mso-spacerun: yes">  </span>Сопроцессор
+
+<p><span
+style="mso-spacerun: yes">    </span>8087 прибавляет значение смещения 127 к
+значению порядка
+
+<p><span
+style="mso-spacerun: yes">    </span>действительного числа перед тем, как его
+запомнить.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Значение порядка<span style="mso-spacerun:
+yes">  </span>Хранимое значение
+
+<p><span
+style="mso-spacerun: yes">      </span>---------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>-127<span style='mso-tab-count:3'>             </span>000H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>-1<span style='mso-tab-count:3'>             </span>07EH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>0<span style='mso-tab-count:3'>             </span>07FH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>1<span style='mso-tab-count:3'>             </span>080H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>127<span style='mso-tab-count:3'>             </span>0FEH
+
+<p><span
+style="mso-spacerun: yes">      </span>-------------------------------------
+Фиг. 7.5 Хранение порядка
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В таблице на Фиг. 7.5 показаны некоторые
+возможные значения
+
+<p><span
+style="mso-spacerun: yes">    </span>порядка и его запоминаемое значение.<span
+style="mso-spacerun: yes">  </span>Как видно из рисунка,
+
+<p><span
+style="mso-spacerun: yes">    </span>смещение меняет содержимое поля порядка
+так, чтобы наименьшему
+
+<p><span
+style="mso-spacerun: yes">    </span>значению порядка соответствовало
+наименьшее действительное число;
+
+<p><span
+style="mso-spacerun: yes">    </span>аналогично, наибольшему значению порядка
+соответствовало наибольшее
+
+<p><span
+style="mso-spacerun: yes">    </span>число.<span style="mso-spacerun: yes"> 
+</span>Если два числа с плавающей точкой различаются значением
+
+<p><span
+style="mso-spacerun: yes">    </span>порядка, простое сравнение полей порядка
+упорядочивает оюа числа.
+
+<p><span
+style="mso-spacerun: yes">    </span>Поскольку такое сравнение можно продолжать
+и дальше с полями
+
+<p><span
+style="mso-spacerun: yes">    </span>мантисс, программа может легко сравнить
+два числа с плавающей
+
+<p><span
+style="mso-spacerun: yes">    </span>точкой.<span style="mso-spacerun: yes"> 
+</span>И вся эта простота - только благодаря смещению порядка.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

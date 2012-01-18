@@ -1,0 +1,755 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="5-8">Создание программы на языке Ассемблера</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Путь от идеи к готовой для выполнения
+программы состоит из
+
+<p><span
+style="mso-spacerun: yes">    </span>нескольких этапов.<span style='mso-tab-count:
+1'>  </span>В данном разделе рассматриваются этапы создания
+
+<p><span
+style="mso-spacerun: yes">    </span>программы на языке ассемблера для IBM
+PC.<span style="mso-spacerun: yes">  </span>К обсуждаемым здесь
+
+<p><span
+style="mso-spacerun: yes">    </span>средствам относятся:<span
+style="mso-spacerun: yes">  </span>строковый редактор, ассмеблер, редактор
+
+<p><span
+style="mso-spacerun: yes">    </span>связей (компоновщик) и отладчик.<span
+style="mso-spacerun: yes">  </span>С помощью редактора создаются
+
+<p><span
+style="mso-spacerun: yes">    </span>исходные программы на языке
+ассемблера.<span style="mso-spacerun: yes">  </span>Ассемблер преобразует
+
+<p><span
+style="mso-spacerun: yes">    </span>исходную программу в объектный код,
+который очень близок к
+
+<p><span
+style="mso-spacerun: yes">    </span>машинному языку.<span style="mso-spacerun:
+yes">  </span>Редактор связей трансформирует объектный код в
+
+<p><span
+style="mso-spacerun: yes">    </span>файл типа .EXE, содержащий программу, которая
+готова к выполнению.
+
+<p><span
+style="mso-spacerun: yes">    </span>И наконец, программа-отладчик может
+оказать помощь в выявлении
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибок в программе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p>СТРОКОВЫЙ
+РЕДАКТОР ДОС
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">    </span>Редактор строк формирует текстовые
+файлы.<span style="mso-spacerun: yes">  </span>Содержимое текстового
+
+<p><span
+style="mso-spacerun: yes">    </span>файла представлено в коде ASCII.<span
+style="mso-spacerun: yes">  </span>Редактор позволяет вводить нужный
+
+<p><span
+style="mso-spacerun: yes">    </span>вам текст в файл.<span
+style="mso-spacerun: yes">  </span>Если затем понадобится изменить файл, то для
+
+<p><span
+style="mso-spacerun: yes">    </span>этого опять используется редактор.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Редактор строк (EDLIN) входит в состав DOS
+IBM PC. Файл
+
+<p><span
+style="mso-spacerun: yes">    </span>EDLIN.COM является внешней командой, т.е.
+загружается в память
+
+<p><span
+style="mso-spacerun: yes">    </span>только по запросу. Для запуска редактора
+должна быть выполнена
+
+<p><span
+style="mso-spacerun: yes">    </span>следующая команда:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;EDLIN FILE.ASM
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>где FILE.ASM - имя текстового файла, с
+которым будет работать
+
+<p><span
+style="mso-spacerun: yes">    </span>редактор. Файл FILE.ASM уже может
+существовать, как в случае, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>вы вносите изменения в сформированную
+программу. Если же такого
+
+<p><span
+style="mso-spacerun: yes">    </span>файла еще нет, то он будет создан с
+помощью редактора EDLIN. По
+
+<p><span
+style="mso-spacerun: yes">    </span>окончании редактирования результирующий
+текст помещается в файл
+
+<p><span
+style="mso-spacerun: yes">    </span>FILE.ASM. Если в данном редактировании
+файл не создавался, то
+
+<p><span
+style="mso-spacerun: yes">    </span>редактор EDLIN выполняет переименование
+старого варианта файла
+
+<p><span
+style="mso-spacerun: yes">    </span>FILE.ASM в файл FILE.BAK (backup - копия).
+Создание копии файла
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет с ее помощью устранить любые
+серьезные ошибки, допущенные
+
+<p><span
+style="mso-spacerun: yes">    </span>при редактировании файла. Вы ликвидируете
+файл со внесенными при
+
+<p><span
+style="mso-spacerun: yes">    </span>редактировании ошибками и переименовываете
+файл .BAK в файл .ASM.
+
+<p><span
+style="mso-spacerun: yes">    </span>Таким образом, это служит подстраховкой
+при редактировании текста.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Редактор EDLIN является редактором строк.
+Каждую строку текста
+
+<p><span
+style="mso-spacerun: yes">    </span>он обрабатывает отдельно и этим отличается
+от экранного редактора,
+
+<p><span
+style="mso-spacerun: yes">    </span>который выводит на экран целый фрагмент
+редактируемого текстового
+
+<p><span
+style="mso-spacerun: yes">    </span>файла. При работе с экранным редактором,
+таким как Персональный
+
+<p><span
+style="mso-spacerun: yes">    </span>Редактор (Personal Editor), разработанный
+фирмой IBM, вы
+
+<p><span
+style="mso-spacerun: yes">    </span>перемещаете курсор и осуществляете
+редактирование в любом месте
+
+<p><span
+style="mso-spacerun: yes">    </span>экрана в то время, как с помошью редактора
+EDLIN каждый раз
+
+<p><span
+style="mso-spacerun: yes">    </span>редактируется только одна строчка текста.
+Если вы собираетесь
+
+<p><span
+style="mso-spacerun: yes">    </span>основательно заняться программированием на
+языке ассемблера, то вам
+
+<p><span
+style="mso-spacerun: yes">    </span>лучше пользоваться экранным редактором.
+Поставляемый фирмой IBM
+
+<p><span
+style="mso-spacerun: yes">    </span>Персональный Редактор является очень
+хорошим экранным редактором
+
+<p><span
+style="mso-spacerun: yes">    </span>текста. Именно с его помощью были
+подготовлены все примеры в этой
+
+<p><span
+style="mso-spacerun: yes">    </span>книге. Редактор EDLIN рассматривается
+здесь только потому, что он
+
+<p><span
+style="mso-spacerun: yes">    </span>входит в состав DOS. Однако учмтывая, что
+это не лучший вариант
+
+<p><span
+style="mso-spacerun: yes">    </span>редактора, описание редактора EDLIN
+включает только краткое
+
+<p><span
+style="mso-spacerun: yes">    </span>упоминание его команд и соответствующий
+пример. Для того, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>подробней ознакомиться с командами
+редактора EDLIN, следует
+
+<p><span
+style="mso-spacerun: yes">    </span>обратиться к руководству по DOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг.5.7 подытожены сведения о командах
+редактора EDLIN. При
+
+<p><span
+style="mso-spacerun: yes">    </span>разборе примера мы будеи на них ссылаться.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun:
+yes"> </span>Действие<span style='mso-tab-count:2'>         </span> Синтаксис
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>--------------------------------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Изменение строки<span style='mso-tab-count:2'>         </span>[n] A
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Уничтожение строки <span style='mso-tab-count:1'>      </span>[строка][,строка]
+D
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Редактировать строку<span style='mso-tab-count:1'>     </span>[строка]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Конец редактирования<span style='mso-tab-count:1'>     </span>E
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Вставка строки<span style='mso-tab-count:2'>           </span>[строка] I
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Просмотр строк<span style='mso-tab-count:2'>           </span>[строка][,строка]
+L
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Выход из редактора <span style='mso-tab-count:1'>      </span>Q
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Замена контекста<span style='mso-tab-count:2'>         </span>[строка][,строка]
+[?] ЗаменяемаяСтрока [&lt;F6&gt;Строка]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Поиск контекста<span style='mso-tab-count:2'>          </span>[строка][,строка]
+[?] СтрокаПоиска
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Записать строки<span style='mso-tab-count:2'>          </span>[n] W
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>--------------------------------------------------------------------------------
+
+<p>&#18;
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 5.7 Команды EDLIN (Copyright
+IBM 1981)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг. 5.8 иллюстрирует выполнение двух
+этапов редактирования
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">   </span>с
+использованием редактора EDLIN. В первой части редактирования
+
+<p><span
+style="mso-spacerun: yes">    </span>создается файл с именем FIG5=8.ASM.
+Сообщение &quot;New file&quot; (&quot;новый
+
+<p><span
+style="mso-spacerun: yes">    </span>файл&quot;) указывает на то, что файла с
+таким именем до этого не было.
+
+<p><span
+style="mso-spacerun: yes">    </span>Символом &quot;*&quot; обозначается запрос
+со стороны редактора EDLIN. Всякий
+
+<p><span
+style="mso-spacerun: yes">    </span>раз, когда на дисплее появляется этот
+символ, можно вводить любую
+
+<p><span
+style="mso-spacerun: yes">    </span>из команд, приведенных на Фиг.5.7. Команда
+&quot;I&quot; позволяет вводить
+
+<p><span
+style="mso-spacerun: yes">    </span>текст в файл. По мере ввода текста
+редактор EDLIN указывает на
+
+<p><span
+style="mso-spacerun: yes">    </span>экране номера строк. Ввод порции текста
+завершается нажатием
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиши Control=Z (на листинге - ^Z).
+Команда E завершает этап
+
+<p><span
+style="mso-spacerun: yes">    </span>редактирования, записывает файл и
+возвращает управление DOS.
+
+<p><span
+style='mso-tab-count:1'>      </span>На второй части Фиг. 5.8 показано
+редактирование файла,
+
+<p><span
+style="mso-spacerun: yes">    </span>созданного в первой чати. Редактор
+вызывается той же самой
+
+<p><span
+style="mso-spacerun: yes">    </span>командной строкой, а сообщение &quot;End
+of input file&quot; (&quot;конец ввода
+
+<p><span
+style="mso-spacerun: yes">    </span>файла&quot;) указывает на то, что данный
+файл уже существует. Команда L
+
+<p><span
+style="mso-spacerun: yes">    </span>выводит на экран текущее содержимое файла.
+В данном примере
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>вносятся изменения в некоторые строки программы при выполнении
+
+<p><span
+style="mso-spacerun: yes">    </span>команды редактирования. Если ввести символ
+&quot;3&quot;, то на дисплей будет
+
+<span style='font-size:10.0pt;font-family:"Courier New";mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:RU;mso-fareast-language:RU;mso-bidi-language:
+AR-SA'><br clear=all style='page-break-before:always'>
+</span>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]><span
+style='mso-fareast-font-family:"MS Mincho"'>
+
+<p><span style='mso-tab-count:1'>      </span><span
+style='mso-fareast-font-family:"MS Mincho"'>A&gt;EGLIN FIG5_8.ASM
+
+<p><span
+style='mso-tab-count:1'>      </span>New file
+
+<p><span
+style='mso-tab-count:1'>      </span>*I
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>1:*<span style='mso-tab-count:1'>    </span>PAGE<span style='mso-tab-count:
+1'>  </span>,132
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>2:*CODE<span style='mso-tab-count:1'>      </span>SEGMENT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>3:*<span style='mso-tab-count:1'>    </span>ASSUME<span
+style='mso-tab-count:1'>      </span>CS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>4:*
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>5:*START:<span style='mso-tab-count:1'>    </span>PROC<span
+style='mso-tab-count:1'>  </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>6:*<span style='mso-tab-count:1'>    </span>MOV<span style='mso-tab-count:
+1'>   </span>AX,CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>8:*<span style='mso-tab-count:1'>    </span>MOV<span style='mso-tab-count:
+1'>   </span>DS,AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>8:*<span style='mso-tab-count:1'>    </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>9:*START:<span style='mso-tab-count:1'>    </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>10:*END
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>11:*^C
+
+<p><span
+style='mso-tab-count:1'>      </span>*E
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;
+
+<p><span
+style='mso-tab-count:1'>      </span>A&gt;EDLIN FIG5_8.ASM
+
+<p><span
+style='mso-tab-count:1'>      </span>End of input file
+
+<p><span
+style='mso-tab-count:1'>      </span>*L
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>1:*<span style='mso-tab-count:1'>    </span>PAGE<span style='mso-tab-count:
+1'>  </span>,132
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>2: CODE<span style='mso-tab-count:1'>      </span>SEGMENT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>3: <span style='mso-tab-count:1'>    </span>ASSUME<span
+style='mso-tab-count:1'>      </span>CS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>4:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>5: START<span style='mso-tab-count:1'>     </span>PROC<span
+style='mso-tab-count:1'>  </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>6: <span style='mso-tab-count:1'>    </span>MOV<span style='mso-tab-count:
+1'>   </span>DS,AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>8: <span style='mso-tab-count:1'>    </span>MOV<span style='mso-tab-count:
+1'>   </span>DS,AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>8: <span style='mso-tab-count:1'>    </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>9: START<span style='mso-tab-count:1'>     </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>10: END
+
+<p><span
+style='mso-tab-count:1'>      </span>*3
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>2:*CODE<span style='mso-tab-count:1'>      </span>SEGMENT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>2:*CODE<span style='mso-tab-count:1'>      </span>SEGMENT,DS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span>*5
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>5:*START:<span style='mso-tab-count:2'>          </span>PROC<span
+style='mso-tab-count:1'>  </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>5:*START:<span style='mso-tab-count:1'>    </span>PROC<span
+style='mso-tab-count:1'>  </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span>*6
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>6:*<span style='mso-tab-count:1'>    </span>MOV<span style='mso-tab-count:
+1'>   </span>AX,CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>6:*<span style='mso-tab-count:1'>    </span>MOV<span style='mso-tab-count:
+1'>   </span>AX,CS
+
+<p><span
+style='mso-tab-count:1'>      </span>*9I
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>9:*
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>10:*^C
+
+<p><span
+style='mso-tab-count:1'>      </span>*L
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>1:*<span style='mso-tab-count:1'>    </span>PAGE<span style='mso-tab-count:
+1'>  </span>,132
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>2: CODE<span style='mso-tab-count:1'>      </span>SEGMENT
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>3: <span style='mso-tab-count:1'>    </span>ASSUME<span
+style='mso-tab-count:1'>      </span>CS:CODE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>4:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>5: START<span style='mso-tab-count:1'>     </span>PROC<span
+style='mso-tab-count:1'>  </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>6: <span style='mso-tab-count:1'>    </span>MOV<span style='mso-tab-count:
+1'>   </span>DS,AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>8: <span style='mso-tab-count:1'>    </span>MOV<span style='mso-tab-count:
+1'>   </span>DS,AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>8: <span style='mso-tab-count:1'>    </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>9:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>10: START<span style='mso-tab-count:1'>     </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>11: END
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>*E
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>A&gt;
+
+<p><span
+style='mso-tab-count:1'>      </span>--------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 5.8 Пример работы с EDLIN
+
+<p><span
+style="mso-spacerun: yes">    </span>выведена третья строка, готовая для
+редактирования. У системы
+
+<p><span
+style="mso-spacerun: yes">    </span>имеется набор встроенных команд
+построчного редактирования, которые
+
+<p><span
+style="mso-spacerun: yes">    </span>приведены на Фиг.5.9. Эти команды
+редактирования можно использовать
+
+<p><span
+style="mso-spacerun: yes">    </span>как при работе с редактором EDLIN, как и
+всегда, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>осуществляется ввод символов с клавиатуры
+под управлением DOS, в
+
+<p><span
+style="mso-spacerun: yes">    </span>частности, при вводе команд, относящизся к
+командному процессору.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вернемся к примеру, приведенному на Фиг.
+5.8. После того, как
+
+<p><span
+style="mso-spacerun: yes">    </span>строка с указанным номером выведена на
+дисплей, ее можно
+
+<p><span
+style="mso-spacerun: yes">    </span>отредактировать с помощью команд DOS.
+Клавиша F3 позволяет повторно
+
+<p><span
+style="mso-spacerun: yes">    </span>вывести строку на дисплей и вносить
+изменения, начиная с конца
+
+<p><span
+style="mso-spacerun: yes">    </span>строки. На примере редактирования строки 5
+показано использование
+
+<p><span
+style="mso-spacerun: yes">    </span>клавиша DEL для удаления из поля метки
+символа &quot;:&quot;. При
+
+<p><span
+style="mso-spacerun: yes">    </span>редактировании строки 6 используется
+клавиша (курсор вправо) для
+
+<p><span
+style="mso-spacerun: yes">    </span>установки курсора после &quot;,&quot;.
+Вслед за этим код &quot;CODE&quot; заменяется на
+
+<p><span
+style="mso-spacerun: yes">    </span>символ &quot;CS&quot;. Кроме того, для
+наглядности текста в данном примере
+
+<p><span
+style="mso-spacerun: yes">    </span>производится вставка пустой строки перед
+строчкой 9. После этого
+
+<p><span
+style="mso-spacerun: yes">    </span>опять выдается листинг файла для того,
+чтобы были видны внесенные
+
+<p><span
+style="mso-spacerun: yes">    </span>при редактировании изменения. Команда E -
+окончание редактирования
+
+<p><span
+style="mso-spacerun: yes">    </span>- возвращает управление DOS.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>----------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>DEL - Уничтожение следующего символа в хранимой строке
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>ESC - Отмена редактирования хранимой строки
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>F1
+или -&gt; Копировать символ из хранимой строки
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>F2
+- Копировать все символы до заданного
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>F3
+- Копировать оставшиеся символы на экран
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>F4
+- Пропустить все символы до заданного
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>F5
+- Принять отредактированную строку для продолжения
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>INS - Вставить символ в строку (отмена - INS повторно)
+
+<p><span
+style='mso-tab-count:1'>      </span>----------------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 5.9 Клавиши редактирования в
+DOS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Имеется и ряд других операций, которые
+можно выполнять с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью редактора EDLIN и команж редактирования,
+вхадящих в DOS.
+
+<p><span
+style="mso-spacerun: yes">    </span>Лучший способ изучить их - это просмотреть
+руководство по DOS и
+
+<p><span
+style="mso-spacerun: yes">    </span>затем все операции попробовать. Однако в
+случае серьезных
+
+<p><span
+style="mso-spacerun: yes">    </span>программных разработок лучше обратиться к
+экранному редактору.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

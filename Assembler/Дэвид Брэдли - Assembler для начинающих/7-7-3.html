@@ -1,0 +1,545 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="7-7-3">Арифметические команды
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Настоящим &quot;сердцем&quot; микросхемы
+8087 является блок выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметических команд.<span
+style="mso-spacerun: yes">  </span>Сопроцессор 8087 быстро и точно выполняет
+
+<p>
+
+<p><span
+style='mso-tab-count:2'>            </span>Microsoft (R) Macro Assembler
+Version 5.00<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>4/2/89 16:07:21
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 7.16 Арифметические команды
+сопроцессора 8087<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span>PAGE<span
+style='mso-tab-count:1'>  </span>,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span>TITLE<span
+style='mso-tab-count:1'> </span>Фиг. 7.16 Арифметические команды сопроцессора
+8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>CODE<span
+style='mso-tab-count:1'>  </span>SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span>ASSUME<span
+style='mso-tab-count:1'>      </span>CS:CODE,DS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>WORD_INTEGER<span
+style='mso-tab-count:1'>      </span>LABEL<span style='mso-tab-count:1'> </span>WORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>SHORT_INTEGER<span
+style='mso-tab-count:1'>     </span>LABEL<span style='mso-tab-count:1'> </span>DWORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>SHORT_REAL<span
+style='mso-tab-count:1'>  </span>LABEL<span style='mso-tab-count:1'> </span>DWORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style='mso-tab-count:4'>                   </span>LONG_REAL<span
+style='mso-tab-count:1'>   </span>LABEL<span style='mso-tab-count:1'> </span>QWORD
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0000<span style="mso-spacerun: yes">  </span>9B D8 C1 <span
+style='mso-tab-count:3'>              </span>FADD<span style='mso-tab-count:
+1'>  </span>st(0),ST(1)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0003<span style="mso-spacerun: yes">  </span>9B D8 C2 <span
+style='mso-tab-count:3'>              </span>FADD<span style='mso-tab-count:
+1'>  </span>st(0),ST(2)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0006<span style="mso-spacerun: yes">  </span>9B D8 C2 <span
+style='mso-tab-count:2'>        </span><span style='mso-tab-count:1'>      </span>FADD<span
+style='mso-tab-count:1'>  </span>ST(0),ST(2)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0009<span style="mso-spacerun: yes">  </span>9B DC C2 <span
+style='mso-tab-count:3'>              </span>FADD<span style='mso-tab-count:
+1'>  </span>ST(2),ST(0)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>000C<span style="mso-spacerun: yes">  </span>9B DE 06 0000 R<span
+style='mso-tab-count:3'>              </span>FIADD<span style='mso-tab-count:
+1'> </span>WORD_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0011<span style="mso-spacerun: yes">  </span>9B DA 06 0000 R<span
+style='mso-tab-count:3'>              </span>FIADD<span style='mso-tab-count:
+1'> </span>SHORT_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0016<span style="mso-spacerun: yes">  </span>9B D8 06 0000 R<span
+style='mso-tab-count:3'>              </span>FADD<span style='mso-tab-count:
+1'>  </span>SHORT_REAL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>001B<span style="mso-spacerun: yes">  </span>9B DC 06 0000 R<span
+style='mso-tab-count:3'>              </span>FADD<span style='mso-tab-count:
+1'>  </span>LONG_REAL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0020<span style="mso-spacerun: yes">  </span>9B DE C2 <span
+style='mso-tab-count:3'>              </span>FADDP<span style='mso-tab-count:
+1'> </span>ST(2),ST(0)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0023<span style="mso-spacerun: yes">  </span>9B D8 E2 <span
+style='mso-tab-count:3'>              </span>FSUB<span style='mso-tab-count:
+1'>  </span>st(0),ST(2)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0026<span style="mso-spacerun: yes">  </span>9B DE 26 0000 R<span
+style='mso-tab-count:3'>              </span>FISUB<span style='mso-tab-count:
+1'> </span>WORD_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>002B<span style="mso-spacerun: yes">  </span>9B DE EA <span
+style='mso-tab-count:3'>              </span>FSUBP<span style='mso-tab-count:
+1'> </span>ST(2),ST(0)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>002E<span style="mso-spacerun: yes">  </span>9B DC E2 <span
+style='mso-tab-count:3'>              </span>FSUBR<span style='mso-tab-count:
+1'> </span>ST(2),ST(0)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0031<span style="mso-spacerun: yes">  </span>9B DA 2E 0000 R<span
+style='mso-tab-count:3'>              </span>FISUBR<span style='mso-tab-count:
+1'>      </span>SHORT_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0036<span style="mso-spacerun: yes">  </span>9B DE E2 <span
+style='mso-tab-count:3'>              </span>FSUBRP<span style='mso-tab-count:
+1'>      </span>ST(2),ST(0)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0039<span style="mso-spacerun: yes">  </span>9B D8 0E 0000 R<span
+style='mso-tab-count:3'>              </span>FMUL<span style='mso-tab-count:
+1'>  </span>SHORT_REAL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>003E<span style="mso-spacerun: yes">  </span>9B DE 0E 0000 R<span
+style='mso-tab-count:3'>              </span>FIMUL<span style='mso-tab-count:
+1'> </span>WORD_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0043<span style="mso-spacerun: yes">  </span>9B DE CA <span
+style='mso-tab-count:3'>              </span>FMULP<span style='mso-tab-count:
+1'> </span>ST(2),ST(0)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0046<span style="mso-spacerun: yes">  </span>9B D8 F2 <span
+style='mso-tab-count:3'>              </span>FDIV<span style='mso-tab-count:
+1'>  </span>ST(0),ST(2)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0049<span style="mso-spacerun: yes">  </span>9B DA 36 0000 R<span
+style='mso-tab-count:3'>              </span>FIDIV<span style='mso-tab-count:
+1'> </span>SHORT_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>004E<span style="mso-spacerun: yes">  </span>9B DE FA <span
+style='mso-tab-count:3'>              </span>FDIVP<span style='mso-tab-count:
+1'> </span>ST(2),ST(0)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0051<span style="mso-spacerun: yes">  </span>9B D8 FA <span
+style='mso-tab-count:3'>              </span>FDIVR<span style='mso-tab-count:
+1'> </span>st(0),ST(2)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0054<span style="mso-spacerun: yes">  </span>9B DE 3E 0000 R<span
+style='mso-tab-count:3'>              </span>FIDIVR<span style='mso-tab-count:
+1'>      </span>WORD_INTEGER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>0059<span style="mso-spacerun: yes">  </span>9B DE F2 <span
+style='mso-tab-count:3'>              </span>FDIVRP<span style='mso-tab-count:
+1'>      </span>ST(2),ST(0)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>005C<span style='mso-tab-count:4'>                   </span>CODE<span
+style='mso-tab-count:1'>  </span>ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span>END&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг. 7.16 Арифметические команды сопроцессора 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>вычислительные операции, и не только
+четыре основных действия -
+
+<p><span
+style="mso-spacerun: yes">    </span>сложение, вычитание, умножение и деление,
+но также трансцендентные
+
+<p><span
+style="mso-spacerun: yes">    </span>и тригонометрические функции.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 7.16 показан ассемблерный листинг
+программы, состоящей
+
+<p><span
+style="mso-spacerun: yes">    </span>из некоторых команд для выполнения
+основных четырех действий.
+
+<p><span
+style="mso-spacerun: yes">    </span>Данный пример иллюстрирует только работу
+команды FADD, во всех
+
+<p><span
+style="mso-spacerun: yes">    </span>возможных комбинациях.<span
+style="mso-spacerun: yes">  </span>Прежде чем рассматривать команды, разберем
+
+<p><span
+style="mso-spacerun: yes">    </span>возможные варианты их работы.<span
+style="mso-spacerun: yes">  </span>Как видно из Фиг. 7.17, существует
+
+<p><span
+style="mso-spacerun: yes">    </span>пять различных методов выполнения
+арифметических команд.<span style="mso-spacerun: yes">  </span>На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 7.17а показаны пять способов
+использования данных в
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметических командах.<span
+style="mso-spacerun: yes">  </span>В случае 1 указывается только код
+
+<p><span
+style="mso-spacerun: yes">    </span>операции команды.<span
+style="mso-spacerun: yes">  </span>В операции принимают участие вершина стека и
+
+<p><span
+style="mso-spacerun: yes">    </span>элемент ST1, а результат замещает вершину
+стека.<span style="mso-spacerun: yes">  </span>Заметим, что на
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 7.17а приведены примеры для каждого
+случая с использованием
+
+<p><span
+style="mso-spacerun: yes">    </span>команды сложения.<span
+style="mso-spacerun: yes">  </span>На рисунке также показаны схемы выполнения
+
+<p><span
+style="mso-spacerun: yes">    </span>вычислительных операций.
+
+<p><span
+style='mso-tab-count:1'>      </span>Случай 2 иллюстрирует операцию,
+выполняемую с двумя регистрами
+
+<p><span
+style="mso-spacerun: yes">    </span>стека сопроцессора 8087.<span
+style="mso-spacerun: yes">  </span>Одним из этих регистров должна быть
+
+<p><span
+style="mso-spacerun: yes">    </span>вершина стека.<span style="mso-spacerun:
+yes">  </span>Если вершина стека - приемник результата, ее можно
+
+<p><span
+style="mso-spacerun: yes">    </span>не упоминать, указав только регистр
+источника.<span style="mso-spacerun: yes">  </span>Если же приемником
+
+<p><span
+style="mso-spacerun: yes">    </span>результата служит какой=то другой регистр,
+нужно указывать и
+
+<p><span
+style="mso-spacerun: yes">    </span>источник, и приемник.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Форма команды<span style='mso-tab-count:
+1'>     </span><span style="mso-spacerun: yes">      </span>Пример FADD<span
+style="mso-spacerun: yes">      </span>Действие
+
+<p><span
+style="mso-spacerun: yes">     </span>-----------------------------------------------------------------
+
+<p><span
+style="mso-spacerun: yes">     </span>1. Fop<span style='mso-tab-count:3'>             </span>FADD<span
+style='mso-tab-count:2'>        </span>ST0&lt;-ST0+ST1
+
+<p><span
+style="mso-spacerun: yes">     </span>2. Fop<span style='mso-tab-count:1'> </span>STi<span
+style='mso-tab-count:2'>         </span>FADD<span style='mso-tab-count:1'>  </span>ST2<span
+style='mso-tab-count:1'>   </span>ST0&lt;-ST0+STi
+
+<p><span
+style='mso-tab-count:1'>      </span>Fop<span style='mso-tab-count:1'>   </span>ST0,STi
+<span style='mso-tab-count:1'>    </span>FADD<span style='mso-tab-count:1'>  </span>ST0,ST2
+ST0&lt;-ST0+STi
+
+<p><span
+style='mso-tab-count:1'>      </span>Fop<span style='mso-tab-count:1'>   </span>STi,ST0
+<span style='mso-tab-count:1'>    </span>FADD<span style='mso-tab-count:1'>  </span>ST2,ST0
+ST2&lt;-ST0+ST2
+
+<p><span
+style="mso-spacerun: yes">     </span>3. FopP<span style='mso-tab-count:1'>      </span>STi,ST0
+<span style='mso-tab-count:1'>    </span>FADDP<span style='mso-tab-count:1'> </span>ST2,ST0
+ST2&lt;-ST0+ST2,Извлечь из стека
+
+<p><span
+style="mso-spacerun: yes">     </span>4. Fop<span style='mso-tab-count:1'> </span>вещ.пам.<span
+style='mso-tab-count:1'>    </span>FADD<span style='mso-tab-count:1'>  </span>ВЕЩЕСТ<span
+style='mso-tab-count:1'>      </span>ST0&lt;-ST0+ВЕЩЕСТ
+
+<p><span
+style="mso-spacerun: yes">     </span>5. Flop<span style='mso-tab-count:1'>      </span>целоеПам<span
+style='mso-tab-count:1'>    </span>FIADD<span style='mso-tab-count:1'> </span>ЦЕЛОЕ<span
+style='mso-tab-count:1'> </span>ST0&lt;-ST0+ЦЕЛОЕ
+
+<p><span
+style='mso-tab-count:4'>                        </span>(a)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Операция<span style='mso-tab-count:
+2'>          </span>Действие
+
+<p><span
+style='mso-tab-count:2'>            </span>----------------------------------------------------------
+
+<p><span
+style='mso-tab-count:2'>            </span>ADD<span style='mso-tab-count:2'>         </span>назначение
+&lt;- назначение + источник
+
+<p><span
+style='mso-tab-count:2'>            </span>SUB<span style='mso-tab-count:2'>         </span>назначение
+&lt;- назначение - источник
+
+<p><span
+style='mso-tab-count:2'>            </span>SUBR<span style='mso-tab-count:2'>        </span>назначение
+&lt;- источник - назначение
+
+<p><span
+style='mso-tab-count:2'>            </span>MUL<span style='mso-tab-count:2'>         </span>назначение
+&lt;- назначение * источник
+
+<p><span
+style='mso-tab-count:2'>            </span>DIV<span style='mso-tab-count:2'>         </span>назначение
+&lt;- назначение / источник
+
+<p><span
+style='mso-tab-count:2'>            </span>DIVR<span style='mso-tab-count:2'>        </span>назначение
+&lt;- источник / назначение
+
+<p><span
+style='mso-tab-count:2'>            </span>----------------------------------------------------------
+
+<p><span
+style='mso-tab-count:4'>                        </span>(b)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style="mso-spacerun: yes">       </span>Фиг. 7.17 Арифметические операции (a)
+Комбинации данных
+
+<p><span
+style='mso-tab-count:1'>      </span>(b) Арифметические функции для NDP 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Случай 3 представляет собой стековую
+операцию.<span style='mso-tab-count:1'>  </span>Команда такого
+
+<p><span
+style="mso-spacerun: yes">    </span>формата выполняет операцию с двумя
+стековыми операндами, а затем
+
+<p><span
+style="mso-spacerun: yes">    </span>уничтожает вершину стека.<span
+style="mso-spacerun: yes">  </span>Так как данные из вершины стека
+
+<p><span
+style="mso-spacerun: yes">    </span>извлекаются из него после операции, она не
+может быть приемником
+
+<p><span
+style="mso-spacerun: yes">    </span>результата этой операции.<span
+style="mso-spacerun: yes">  </span>Если приемник результата - элемент ST1,
+
+<p><span
+style="mso-spacerun: yes">    </span>то операция становится классической
+стековой.<span style="mso-spacerun: yes">  </span>Классическая
+
+<p><span
+style="mso-spacerun: yes">    </span>стековая операция удаляет из вершины стека
+два верхних элемента,
+
+<p><span
+style="mso-spacerun: yes">    </span>использует их в требуемой операции, а
+затем помещает результат
+
+<p><span
+style="mso-spacerun: yes">    </span>назад в стек.<span style="mso-spacerun:
+yes">  </span>Конечно в качестве приемника результата этой
+
+<p><span
+style="mso-spacerun: yes">    </span>операции может быть указан любой из
+регистров.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Два оставшихся варианта используют
+операнды в памяти.<span style="mso-spacerun: yes">  </span>В случае
+
+<p><span
+style="mso-spacerun: yes">    </span>4 операнд в памяти - это короткое или
+длинное действительное число.
+
+<p><span
+style="mso-spacerun: yes">    </span>В случае 5 операнд - это короткое целое
+или целое слово.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вернувшись к Фиг. 7.16 можно заметить, что
+в команде FADD
+
+<p><span
+style="mso-spacerun: yes">    </span>определены только четыре операнда в
+памяти.<span style="mso-spacerun: yes">  </span>Это два целых числа -
+
+<p><span
+style="mso-spacerun: yes">    </span>короткое и слово, и два действительных
+числа - короткое и длинное.
+
+<p><span
+style="mso-spacerun: yes">    </span>Арифметические команды не могут
+непосредственно работать с
+
+<p><span
+style="mso-spacerun: yes">    </span>десятичным, длинным целым и временным
+действительным форматами
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел, и перед использованием их в счете
+программа должна загрузить
+
+<p><span
+style="mso-spacerun: yes">    </span>такие числа в регистр.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>На Фиг. 7.17 показаны шесть существующих
+арифметических команд.
+
+<p><span
+style="mso-spacerun: yes">    </span>В процессоре 8087 стандартные четыре
+арифметические операции
+
+<p><span
+style="mso-spacerun: yes">    </span>дополнены обратными операциями деления и
+вычитания.<span style="mso-spacerun: yes">  </span>Поскольку
+
+<p><span
+style="mso-spacerun: yes">    </span>сложение и умножение коммутативны,
+обратных операций для них
+
+<p><span
+style="mso-spacerun: yes">    </span>вводить не надо; порядок же операндов у
+вычитания и деления
+
+<p><span
+style="mso-spacerun: yes">    </span>критичен.<span style="mso-spacerun: yes"> 
+</span>И иногда бывает, что число, находящееся в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>источника - не то число, которое нужно
+вычитать из
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра=приемника; в этом случае
+вычитание правильно выполнит
+
+<p><span
+style="mso-spacerun: yes">    </span>обратная операция.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

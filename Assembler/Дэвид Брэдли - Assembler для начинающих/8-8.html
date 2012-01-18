@@ -1,0 +1,1092 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="8-8">Адаптер синхронных коммуникаций</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Адаптер асинхронных коммуникаций дает
+возможность связываться с
+
+<p><span
+style="mso-spacerun: yes">    </span>IBM PC по последовательному интерфейсу.
+Этот адаптер дает
+
+<p><span
+style="mso-spacerun: yes">    </span>возможность связываться с другими ЭВМ,
+службами баз данных, а также
+
+<p><span
+style="mso-spacerun: yes">    </span>с другими источниками информации. Мы не
+будем обсуждать принципы
+
+<p><span
+style="mso-spacerun: yes">    </span>работы этого канала, а поговорим о методах
+программирования этого
+
+<p><span
+style="mso-spacerun: yes">    </span>конкретного адаптера IBM PC.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Интегральная микросхема коммуникаций
+проделывает всю работу по
+
+<p><span
+style="mso-spacerun: yes">    </span>приему и передаче символов по асинхронной
+линии. Элемент
+
+<p><span
+style="mso-spacerun: yes">    </span>асинхронной связи ACE (Asynchronous
+Communication Element) 8250
+
+<p><span
+style="mso-spacerun: yes">    </span>можно запрограммировать для управления
+самыми различными аспектами
+
+<p><span
+style="mso-spacerun: yes">    </span>связи. При инициализации элемента ACE под
+пограммным контролем
+
+<p><span
+style="mso-spacerun: yes">    </span>оказываются размер символа, частота
+передачи, символы останова и
+
+<p><span
+style="mso-spacerun: yes">    </span>биты четности. Адаптер также позволяет
+проверять и задавать
+
+<p><span
+style="mso-spacerun: yes">    </span>стандартные сигналы управления модемом
+(модулятора -
+
+<p><span
+style="mso-spacerun: yes">    </span>демодулятора).
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>С помощью элемента ACE символ передается
+просто посредством его
+
+<p><span
+style="mso-spacerun: yes">    </span>записи в регистр передачи. Микросхема
+далее выполняет все, что
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствует кодам, которые вы передали
+ей при инициализации.
+
+<p><span
+style="mso-spacerun: yes">    </span>Чтобы принять символ, вы просто читаете
+его из буфера приема.
+
+<p><span
+style="mso-spacerun: yes">    </span>Существует регистр состояния, называемый
+регистром состояния линии,
+
+<p><span
+style="mso-spacerun: yes">    </span>который показывает, когда буфер передачи
+пуст и может принять
+
+<p><span
+style="mso-spacerun: yes">    </span>другой символ. Другой бит регистра
+состояния сообщает, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>элемент ACE уже принял символ из другой
+системы.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В техническом описании приводятся и другие
+регистры, входящие в
+
+<p><span
+style="mso-spacerun: yes">    </span>элемент ACE 8250. Эти регистры дают
+возможность управления модемом
+
+<p><span
+style="mso-spacerun: yes">    </span>и определения его состояния. Вы также
+можете разрешить выработку
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания при возникновении в элементе
+ACE различных условий. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>позволяет вашей программе быстро
+реагировать на любую смену внешних
+
+<p><span
+style="mso-spacerun: yes">    </span>условий.
+east-font-family:"MS Mincho"'>
+
+<p>Программа
+на Фиг. 8.16 демонстрирует основные механизмы,
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимые для инициирования элемента
+ACE, посылки и приема
+
+<p><span
+style="mso-spacerun: yes">    </span>символа. Базовый адрес ввода-вывода платы
+адаптера равен 3F8H, так
+
+<p><span
+style="mso-spacerun: yes">    </span>что регистры элемента ACE расположены по
+адресам от 3F8H до 3FEH.
+
+<p><span
+style="mso-spacerun: yes">    </span>Можно также модифицировать адаптер
+асинхронной связи фирмы IBM так,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы его регистры соответствовали адресам
+ввода-вывода от 2F8H до
+
+<p><span
+style="mso-spacerun: yes">    </span>2FEH. С помощью такой модификации можно
+установить в персональную
+
+<p><span
+style="mso-spacerun: yes">    </span>ЭВМ второй адаптер и связаться с двумя
+различными внешними
+
+<p><span
+style="mso-spacerun: yes">    </span>устройствами. Фактически, можно подключить
+печатающее устройство к
+
+<p><span
+style="mso-spacerun: yes">    </span>системе с помощью последовательного, а не
+параллельного сопряжения.
+
+<p><span
+style="mso-spacerun: yes">    </span>В этом случае нужны два адаптера: один из
+них работает с печатающим
+
+<p><span
+style="mso-spacerun: yes">    </span>устройством, а другой обслуживает внешние
+связи.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Один из портов ввода-вывода элемента ACE
+выполняет несколько
+
+<p><span
+style="mso-spacerun: yes">    </span>функций. Оба буфера, передачи и приема,
+находятся по адресу 3F8H,
+
+<p><span
+style="mso-spacerun: yes">    </span>так что когда что-либо записывается по
+этому адресу, информация
+
+<p><span
+style="mso-spacerun: yes">    </span>попадает в буфер передачи, но при чтении
+по этому адресу, вы
+
+<p><span
+style="mso-spacerun: yes">    </span>получаете последний символ, принятый
+микросхемой ACE. Этот же порт
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода-вывода выполняет и третью функцию.
+Значение делителя,
+
+<p><span
+style="mso-spacerun: yes">    </span>определяющее скорость работы адаптера,
+записывается в этот порт
+
+<p><span
+style="mso-spacerun: yes">    </span>ввода-вывода. Микросхема ACE делит входную
+частоту на число,
+
+<p><span
+style="mso-spacerun: yes">    </span>помещенное в регистр делителя, позволяя
+тем самым выбрать скорость
+
+<p><span
+style="mso-spacerun: yes">    </span>от 50 до 9600 бод. Режим использования
+порта 3F8H задает один из
+
+<p><span
+style="mso-spacerun: yes">    </span>битов управляющего регистра.
+
+<p>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">     </span>1/1/80
+04:05:45
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 8.16 Управление последовательным каналом<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">    
+</span>Page<span style="mso-spacerun: yes">     </span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 8.16 Управление последовательным каналом
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> SEGMENT STACK
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>0040[<span
+style='mso-tab-count:4'>                   </span> DW<span style='mso-tab-count:
+1'>   </span> 64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0080<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>= 03F8<span style='mso-tab-count:3'>                </span> SERIAL<span
+style="mso-spacerun: yes">  </span>EQU<span style='mso-tab-count:1'>      </span>
+03F8H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> ASYNC<span
+style='mso-tab-count:1'>      </span> PROC<span style='mso-tab-count:1'> </span>
+FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>1E<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DS<span
+style='mso-tab-count:2'>         </span> ; Адрес возврата в ДОС
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0001<span style='mso-tab-count:1'>      </span>2B C0<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> AX,AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0003<span style='mso-tab-count:1'>      </span>50<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0004<span style='mso-tab-count:1'>      </span>BA 03FB <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,SERIAL+3<span
+style='mso-tab-count:1'>      </span>; Управляющий регистр
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0007<span style='mso-tab-count:1'>      </span>B0 80<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,80H
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0009<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span>
+DX,AL<span style='mso-tab-count:2'>            </span>; Настройка на установку
+скорости
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000A<span style='mso-tab-count:1'>      </span>B8 0180 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> AX,384 <span
+style='mso-tab-count:1'>    </span>; Делитель частоты для скорости 300 бод
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000D<span style='mso-tab-count:1'>      </span>BA 03F8 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,SERIAL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0010<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span>
+DX,AL<span style='mso-tab-count:2'>            </span>; Младшая часть делителя
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0011<span style='mso-tab-count:1'>      </span>8A C4<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,AH
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>Фиг. 8.16 Управление
+последовательным каналом (начало)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0013<span style='mso-tab-count:1'>      </span>42<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0014<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span>
+DX,AL<span style='mso-tab-count:2'>            </span>; Старшая часть делителя
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0015<span style='mso-tab-count:1'>      </span>BA 03FB <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,SERIAL+3<span
+style='mso-tab-count:1'>      </span>; Управляющий регистр
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0018<span style='mso-tab-count:1'>      </span>B0 03<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,00000011b<span style='mso-tab-count:1'>     </span>; Режим без
+проверки на четность,8 бит
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001A<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span>
+DX,AL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Вывод символа в канал
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001B<span style='mso-tab-count:1'>      </span>BA 03FD <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,SERIAL+5<span
+style='mso-tab-count:1'>      </span>; Регистр состояния канала
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001E<span style='mso-tab-count:4'>                        </span> SEND:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001E<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span>
+AL,DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001F<span style='mso-tab-count:1'>      </span>A8 20<span
+style='mso-tab-count:4'>                   </span> TEST<span style='mso-tab-count:
+1'> </span> AL,20H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">  </span>0021<span style='mso-tab-count:1'>      </span>74
+FB<span style='mso-tab-count:4'>                   </span> JZ<span
+style='mso-tab-count:1'>   </span> SEND
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0023<span style='mso-tab-count:1'>      </span>B0 41<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,'A'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0025<span style='mso-tab-count:1'>      </span>BA 03F8 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,SERIAL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0028<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span>
+DX,AL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Прием символа
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0029<span style='mso-tab-count:1'>      </span>BA 03FD <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,SERIAL+5<span
+style='mso-tab-count:1'>      </span>; Регистр состояния канала
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002C<span style='mso-tab-count:4'>                        </span> RECV:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002C<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span>
+AL,DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002D<span style='mso-tab-count:1'>      </span>A8 02<span
+style='mso-tab-count:4'>                   </span> TEST<span style='mso-tab-count:
+1'> </span> AL,2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002F<span style='mso-tab-count:1'>      </span>74 FB<span
+style='mso-tab-count:4'>                   </span> JZ<span style='mso-tab-count:
+1'>   </span> RECV
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0031<span style='mso-tab-count:1'>      </span>BA 03F8 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,SERIAL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0034<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span>
+AL,DX
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0035<span style='mso-tab-count:1'>      </span>CB<span style='mso-tab-count:
+4'>                      </span> RET
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0036<span style='mso-tab-count:4'>                        </span> ASYNC<span
+style='mso-tab-count:1'>      </span> ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0036<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END<span style='mso-tab-count:1'>  </span>
+ASYNC&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Фиг.8.16 Установка, пересылка и получение
+данных по
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>асинхронному каналу (продолжение)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первая часть программы примера
+инициализирует микросхему ACE
+
+<p><span
+style="mso-spacerun: yes">    </span>8250. Первым делом программа настраивает
+скорость работы адаптера.
+
+<p><span
+style="mso-spacerun: yes">    </span>Значение делителя, равное 384,
+устанавливает скорость 300 бод.
+
+<p><span
+style="mso-spacerun: yes">    </span>Обратите внимание, что перед записью
+значения делителя программа
+
+<p><span
+style="mso-spacerun: yes">    </span>заносит 1 в бит 7 управляющего регистра по
+адресу 3FBH.
+
+<p><span
+style="mso-spacerun: yes">    </span>Окончательный вывод в порт 3FBH задает
+характеристики линии. В этом
+
+<p>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Microsoft (R) Macro Assembler Version 5.00<span style='mso-tab-count:
+2'>           </span><span style="mso-spacerun: yes">     </span>1/1/80
+04:05:50
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 8.17 Обработка прерываний от последовательного канала<span
+style="mso-spacerun: yes">  </span>Page<span style="mso-spacerun: yes">    
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>PAGE<span style='mso-tab-count:1'> </span>
+,132
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>TITLE<span style='mso-tab-count:1'>      </span>
+Фиг. 8.17 Обработка прерываний от последовательного канала
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> ABS0<span
+style='mso-tab-count:1'> </span> SEGMENT AT 0
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002C<span style='mso-tab-count:5'>                              </span>
+ORG<span style='mso-tab-count:1'>  </span> 0BH*4
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002C<span style='mso-tab-count:4'>                        </span>
+ASYNC_INTERRUPT LABEL<span style='mso-tab-count:1'>  </span> WORD
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002C<span style='mso-tab-count:4'>                        </span> ABS0<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> SEGMENT STACK
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>Фиг. 8.17 Обработка прерываний от последовательного канала
+(начало)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>0040[<span
+style='mso-tab-count:4'>                   </span> DW<span style='mso-tab-count:
+1'>   </span> 64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">    </span>????
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0080<span style='mso-tab-count:4'>                        </span> STACK<span
+style='mso-tab-count:1'>      </span> ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> SEGMENT
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0000<span style='mso-tab-count:1'>      </span>0049 R<span
+style='mso-tab-count:3'>                  </span> BUFFER_POINTER<span
+style="mso-spacerun: yes">  </span>DW<span style='mso-tab-count:1'>     </span>
+BUFFER
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0002<span style='mso-tab-count:4'>                        </span>
+SET_INTERRUPT<span style='mso-tab-count:1'>    </span> PROC<span
+style='mso-tab-count:1'> </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0002<span style='mso-tab-count:1'>      </span>2B C0<span
+style='mso-tab-count:4'>                   </span> SUB<span style='mso-tab-count:
+1'>  </span> AX,AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0004<span style='mso-tab-count:1'>      </span>8E D8<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> DS,AX
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>DS:ABS0<span style='mso-tab-count:1'>  </span> ; Адресация по
+сегментному регистру DS
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes"> </span>;<span style="mso-spacerun: yes">  </span>в
+область векторов прерываний
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Установка прерывания
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0006<span style='mso-tab-count:1'>      </span>C7 06 002C R 0024 R<span
+style='mso-tab-count:2'>           </span> MOV<span style='mso-tab-count:1'>  </span>
+ASYNC_INTERRUPT,offset INT_HANDLER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>000C<span style='mso-tab-count:1'>      </span>8C 0E 002C R<span
+style='mso-tab-count:3'>                  </span> MOV<span style='mso-tab-count:
+1'>  </span> ASYNC_INTERRUPT,CS<span style='mso-tab-count:1'>     </span>;
+Занесение вектора прерывания
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0010<span style='mso-tab-count:1'>      </span>BA 03F9 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,03F9H<span
+style='mso-tab-count:1'>   </span>; Регистр разрешения прерываний
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0013<span style='mso-tab-count:1'>      </span>B0 04<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,04H <span style='mso-tab-count:1'>    </span>; Прерывание по
+приему из канала
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0015<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span>
+DX,AL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0016<span style='mso-tab-count:1'>      </span>E4 21<span
+style='mso-tab-count:4'>                   </span> IN<span style='mso-tab-count:
+1'>   </span> AL,21H <span style='mso-tab-count:1'>    </span>; Регистр маски
+прерываний 8259
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0018<span style='mso-tab-count:1'>      </span>24 F7<span
+style='mso-tab-count:4'>                   </span> AND<span style='mso-tab-count:
+1'>  </span> AL,0F7H<span style='mso-tab-count:1'>    </span>; Занесение 0 в
+разряд 3
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001A<span style='mso-tab-count:1'>      </span>E6 21<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> 21H,AL <span style='mso-tab-count:1'>    </span>; Прерывание не
+маскируется
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001C<span style='mso-tab-count:1'>      </span>BA 03FC <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,3FCH<span
+style='mso-tab-count:1'>    </span>; Регистр управления модемом
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>001F<span style='mso-tab-count:1'>      </span>B0 08<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,08H <span style='mso-tab-count:1'>    </span>; разряд OUT2
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0021<span style='mso-tab-count:1'>      </span>EE<span style='mso-tab-count:
+4'>                      </span> OUT<span style='mso-tab-count:1'>  </span>
+DX,AL
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0022<span style='mso-tab-count:1'>      </span>EB FE<span
+style='mso-tab-count:3'>             </span> HERE:<span style='mso-tab-count:
+1'>      </span> JMP<span style='mso-tab-count:1'>  </span> HERE<span
+style='mso-tab-count:2'>       </span> ; Конец задания режима работы
+последователь-
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0024<span style='mso-tab-count:4'>                        </span>
+SET_INTERRUPT<span style='mso-tab-count:1'>    </span> ENDP<span
+style='mso-tab-count:2'>       </span> ;<span style="mso-spacerun: yes"> 
+</span>ного канала,ожидание прерывания
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes"> </span>;-----<span style="mso-spacerun: yes"> 
+</span>Программа обработки прерываний от последовательного канала по приему
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0024<span style='mso-tab-count:4'>                        </span>
+INT_HANDLER<span style='mso-tab-count:1'>      </span> PROC<span
+style='mso-tab-count:1'> </span> FAR
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0024<span style='mso-tab-count:1'>      </span>50<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> AX<span
+style='mso-tab-count:2'>         </span> ; Сохрание используемых регистров
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0025<span style='mso-tab-count:1'>      </span>53<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0026<span style='mso-tab-count:1'>      </span>52<span style='mso-tab-count:
+4'>                      </span> PUSH<span style='mso-tab-count:1'> </span> DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0027<span style='mso-tab-count:1'>      </span>BA 03FD <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,3FDH<span
+style='mso-tab-count:1'>    </span>; Регистр состояния канала
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002A<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span>
+AL,DX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002B<span style='mso-tab-count:1'>      </span>A8 01<span
+style='mso-tab-count:4'>                   </span> TEST<span style='mso-tab-count:
+1'> </span> AL,01H <span style='mso-tab-count:1'>    </span>; Был ли получен
+символ?
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002D<span style='mso-tab-count:1'>      </span>74 12<span
+style='mso-tab-count:4'>                   </span> JZ<span style='mso-tab-count:
+1'>   </span> INT_RETURN<span style='mso-tab-count:1'> </span> ; Нет,возврат из
+прерывания
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>002F<span style='mso-tab-count:1'>      </span>BA 03F8 <span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes"> </span>MOV<span style='mso-tab-count:1'>  </span> DX,3F8H<span
+style='mso-tab-count:1'>    </span>; Регистр приема данных
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0032<span style='mso-tab-count:1'>      </span>EC<span style='mso-tab-count:
+4'>                      </span> IN<span style='mso-tab-count:1'>   </span>
+AL,DX<span style='mso-tab-count:2'>            </span>; Выбор символа из канала
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0033<span style='mso-tab-count:1'>      </span>2E: 8B 1E 0000 R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+BX,BUFFER_POINTER
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0038<span style='mso-tab-count:1'>      </span>2E: 88 07<span
+style='mso-tab-count:3'>               </span> MOV<span style='mso-tab-count:
+1'>  </span> CS:[BX],AL<span style='mso-tab-count:1'> </span>; Сохранение в
+буфере
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003B<span style='mso-tab-count:1'>      </span>43<span style='mso-tab-count:
+4'>                      </span> INC<span style='mso-tab-count:1'>  </span> BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>003C<span style='mso-tab-count:1'>      </span>2E: 89 1E 0000 R<span
+style='mso-tab-count:2'>        </span> MOV<span style='mso-tab-count:1'>  </span>
+BUFFER_POINTER,BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0041<span style='mso-tab-count:4'>                        </span>
+INT_RETURN:
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0041<span style='mso-tab-count:1'>      </span>5A<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> DX<span
+style='mso-tab-count:2'>         </span> ; Восстановление регистров
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0042<span style='mso-tab-count:1'>      </span>5B<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> BX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0043<span style='mso-tab-count:1'>      </span>B0 20<span
+style='mso-tab-count:4'>                   </span> MOV<span style='mso-tab-count:
+1'>  </span> AL,20H <span style='mso-tab-count:1'>    </span>; Сброс
+контроллера прерываний
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes"> </span>Фиг. 8.17 Обработка прерываний от последовательного канала<span
+style="mso-spacerun: yes">  </span>(продолжение)
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0045<span style='mso-tab-count:1'>      </span>E6 20<span
+style='mso-tab-count:4'>                   </span> OUT<span style='mso-tab-count:
+1'>  </span> 20H,AL
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0047<span style='mso-tab-count:1'>      </span>58<span style='mso-tab-count:
+4'>                      </span> POP<span style='mso-tab-count:1'>  </span> AX
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0048<span style='mso-tab-count:1'>      </span>CF<span style='mso-tab-count:
+4'>                      </span> IRET<span style='mso-tab-count:3'>             </span>
+; Возврат из прерывания
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0049<span style='mso-tab-count:4'>                        </span>
+INT_HANDLER<span style='mso-tab-count:1'>      </span> ENDP
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>0049<span style='mso-tab-count:1'>      </span>0080[<span
+style='mso-tab-count:3'>             </span> BUFFER<span style="mso-spacerun:
+yes">  </span>DB<span style='mso-tab-count:1'> </span> 128 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>??
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">  </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes"> 
+</span>00C9<span style='mso-tab-count:4'>                        </span> CODE<span
+style='mso-tab-count:1'> </span> ENDS
+
+<p><span
+style='mso-tab-count:7'>                                          </span><span
+style="mso-spacerun: yes"> </span>END<span style='mso-tab-count:1'>  </span>
+SET_INTERRUPT&#18;
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 8.17 Асинхронные прерывания
+(окончание)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Оставшиеся две части примера посылают и
+принимают символ. В
+
+<p><span
+style="mso-spacerun: yes">    </span>регистре состояния линии по адресу
+ввода-вывода 3FDH есть биты
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния буферов передачи и приема.
+Посылать символ до тех пор,
+
+<p><span
+style="mso-spacerun: yes">    </span>пока буфер передачи не опустеет, нельзя; и
+естественно, нельзя
+
+<p><span
+style="mso-spacerun: yes">    </span>читать символ до того, как он принят.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Адаптер асинхронной связи также работает с
+прерываниями. Сигнал
+
+<p><span
+style="mso-spacerun: yes">    </span>OUT2 в регистре управления модемом
+передает сигнал прерывания от
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхемы ACE системе. Регистр разрешения
+прерываний в микросхеме
+
+<p><span
+style="mso-spacerun: yes">    </span>ACE выбирает те возможные изменения
+состояний, которые приведут к
+
+<p><span
+style="mso-spacerun: yes">    </span>возбуждению внешнего прерывания. Адаптер
+асинхронной связи
+
+<p><span
+style="mso-spacerun: yes">    </span>возбуждает прерывание уровня 3 контроллера
+прерываний 8259.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Давайте посмотрим, как можно использовать
+прерывание от
+
+<p><span
+style="mso-spacerun: yes">    </span>асинхронной платы для того, чтобы
+принимать символы. На Фиг. 8.17
+
+<p><span
+style="mso-spacerun: yes">    </span>показана последовательность событий,
+необходимых для включения
+
+<p><span
+style="mso-spacerun: yes">    </span>системы прерываний. В случае аппаратного
+прерывания, программа
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает вектор прерывания,
+соответствующий уровню 3
+
+<p><span
+style="mso-spacerun: yes">    </span>контроллера 8259 (прерывание 0BH по адресу
+58H), на адрес процедуры
+
+<p><span
+style="mso-spacerun: yes">    </span>обслуживания прерывания. Затем она
+сбрасывает бит регистра маски,
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующий прерыванию от платы связи.
+В микросхеме ACE 8250
+
+<p><span
+style="mso-spacerun: yes">    </span>программа загружает регистр разрешения
+прерывания так, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>разрешить прерывания по состоянию приемной
+линии. И наконец,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа включает линию OUT2, чтобы в
+систему поступали
+
+<p><span
+style="mso-spacerun: yes">    </span>прерывания. Когда все это работает, не
+возникает никаких проблем о
+
+<p><span
+style="mso-spacerun: yes">    </span>бработке символов по мере их получения
+системой. Программа на Фиг.
+
+<p><span
+style="mso-spacerun: yes">    </span>8.17 помещает эти символы в буфер, где их
+может не торопясь
+
+<p><span
+style="mso-spacerun: yes">    </span>просматривать другая программа.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

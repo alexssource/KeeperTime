@@ -1,0 +1,974 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="7-8">Примеры</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Этот раздел главы с помощью примеров
+исполльзования наиболее
+
+<p><span
+style="mso-spacerun: yes">    </span>распространенных операций научит вас
+применять сопроцессор 8087,
+
+<p><span
+style="mso-spacerun: yes">    </span>предполагая, что вы этого совсем не
+умеете.<span style="mso-spacerun: yes">  </span>Все примеры просты,
+
+<p><span
+style="mso-spacerun: yes">    </span>т.е.<span style="mso-spacerun: yes"> 
+</span>в них не делается попыток обработки всех возможных ошибок или
+
+<p><span
+style="mso-spacerun: yes">    </span>реакции на какие=либо специальные числа, с
+которыми может работать
+
+<p><span
+style="mso-spacerun: yes">    </span>микросхема 8087.<span style="mso-spacerun:
+yes">  </span>Сопроцессор 8087, конечно же, имеет такие
+
+<p><span
+style="mso-spacerun: yes">    </span>возможности, но эти действия относятся к
+более сложным.<span style="mso-spacerun: yes">  </span>Когда вы
+
+<p><span
+style="mso-spacerun: yes">    </span>освоите основы техники, вы сможете
+добавить к этим примерам
+
+<p><span
+style="mso-spacerun: yes">    </span>некоторые фрагменты, которые превратят их
+в настоящие подпрограммы
+
+<p><span
+style="mso-spacerun: yes">    </span>общего назначения.
+<p><div align="center"><b><a name="7-8-1">Степени десяти
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первый пример - исходный текст программы
+на Фиг. 7.23.<span style='mso-tab-count:1'>      </span>Эта
+
+<p><span
+style="mso-spacerun: yes">    </span>программа распечатывает короткое
+действительное представление
+
+<p><span
+style="mso-spacerun: yes">    </span>степеней 10 от 103 до 1039.<span
+style="mso-spacerun: yes">  </span>Как мы уже видели в разделе,
+
+<p><span
+style="mso-spacerun: yes">    </span>посвященном представлению данных,
+Макроассемблер фирмы IBM не имеет
+
+<p><span
+style="mso-spacerun: yes">    </span>возможностей непосредственно генерировать
+действительные числа.
+
+<p><span
+style="mso-spacerun: yes">    </span>Наличие такой таблицы чисел облегчит вам
+представление в виде
+
+<p><span
+style="mso-spacerun: yes">    </span>констант степеней 10.<span
+style="mso-spacerun: yes">  </span>По этой таблице вы сможете определить
+
+<p><span
+style="mso-spacerun: yes">    </span>шестнадцатеричное представление числа,
+которое нужно использовать в
+
+<p><span
+style="mso-spacerun: yes">    </span>программе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Программа вычисляет только каждую третью
+степень 10, и
+
+<p><span
+style="mso-spacerun: yes">    </span>использует короткий действительный формат.<span
+style='mso-tab-count:1'>  </span>Если вы работаете с
+
+<p><span
+style="mso-spacerun: yes">    </span>много большими числами, или вам нужна
+большая точность, тогда нужно
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнить этот пример, используя длинный
+действительный формат
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел, а также построить каждую степень
+10.<span style="mso-spacerun: yes">  </span>Выполните это в
+
+<p><span
+style="mso-spacerun: yes">    </span>качестве упражнения.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первоочередная цель этого примера -
+введение в программирование
+
+<p><span
+style="mso-spacerun: yes">    </span>и работу на сопроцессоре 8087.<span
+style="mso-spacerun: yes">  </span>Это отдельная самостоятельная
+
+<p><span
+style="mso-spacerun: yes">    </span>программа, предназначенная для выполнения
+в виде файла типа .EXE.
+
+<p><span
+style="mso-spacerun: yes">    </span>Прежде чем разобраться в самой программе,
+заметим, что в нее входит
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмент STACK, необходимый в файле типа
+.EXE.<span style="mso-spacerun: yes">  </span>Сначала в сегменте
+
+<p><span
+style="mso-spacerun: yes">    </span>CODE записаны поля данных, а выполнение
+программы начинается с
+
+<p><span
+style="mso-spacerun: yes">    </span>метки CALCULATE_POWER.<span
+style="mso-spacerun: yes">  </span>Заглянув вперед, на оператор END, вы
+
+<p><span
+style="mso-spacerun: yes">    </span>увидите, что первой выполняемой командой
+будет команда, помеченная
+
+<p><span
+style="mso-spacerun: yes">    </span>CALCULATE_POWER, так как она указана в
+операторе END.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Первая часть программы выполняет
+инициализацию.<span style="mso-spacerun: yes">  </span>Перед
+
+<p><span
+style="mso-spacerun: yes">    </span>загрузкой указателя на сегмент CODE в
+регистр DS программа помещает
+
+<p><span
+style="mso-spacerun: yes">    </span>в стек адрес возврата из файла типа
+.EXE.<span style="mso-spacerun: yes">  </span>Затем с помощью команды
+
+<p><span
+style="mso-spacerun: yes">    </span>FINIT инициализируется сопроцессор 8087,
+что аналогично аппаратному
+
+<p><span
+style="mso-spacerun: yes">    </span>сбросу.<span style="mso-spacerun: yes"> 
+</span>Тем самым сопроцессор 8087 оказывается настроенным на
+
+<p><span
+style="mso-spacerun: yes">    </span>обработку особых ситуаций по умолчанию,
+что наилучшим образом
+
+<p><span
+style="mso-spacerun: yes">    </span>подходит для примеров этой книги.<span
+style="mso-spacerun: yes">  </span>Команда FINIT также сбрасывает
+
+<p><span
+style="mso-spacerun: yes">    </span>регистровый стек сопроцессора 8087,
+освобождая все его восемь
+
+<p><span
+style="mso-spacerun: yes">    </span>позиций.<span style="mso-spacerun: yes"> 
+</span>Программа должна использовать команду FINIT только в
+
+<p><span
+style="mso-spacerun: yes">    </span>момент запуска.<span style="mso-spacerun:
+yes">  </span>Команда FINIT никогда не должна быть использована
+
+<p><span
+style="mso-spacerun: yes">    </span>внутри подпрограммы для сопроцессора 8087.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Следующие команды загружают число 1000 в
+регистр ST1 и число 1
+
+<p><span
+style="mso-spacerun: yes">    </span>в регистр ST0.<span style="mso-spacerun:
+yes">  </span>Все следующие команды сопроцессора 8087 используют
+
+<p><span
+style="mso-spacerun: yes">    </span>эти два регистра стека.<span
+style="mso-spacerun: yes">  </span>В регистре ST0 находится текущая степень
+
+<p><span
+style="mso-spacerun: yes">    </span>десяти, а в регистре ST1 находится
+значение 103.<span style="mso-spacerun: yes">  </span>Мы будем
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать число в регистре ST1 для
+увеличения числа в регистре
+
+<p><span
+style="mso-spacerun: yes">    </span>ST0 после каждой итерации программы.<span
+style="mso-spacerun: yes">  </span>Целая переменная POWER
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит текущую степень 10, находящуюся в
+регистре ST0.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>После метки POWER_LOOP элемент ST0
+умножается на элемент ST1,
+
+<p><span
+style="mso-spacerun: yes">    </span>(в котором содержится число 1000), чтобы
+увеличить содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>регистра ST0 в 103 раз.<span
+style="mso-spacerun: yes">  </span>Команда FST записывает результат в память.
+
+<p><span
+style="mso-spacerun: yes">    </span>Оставшаяся часть программы после метки
+POWER_LOOP печатает
+
+<p><span
+style="mso-spacerun: yes">    </span>результаты вычислений.<span
+style="mso-spacerun: yes">  </span>В подпрограмме TRANSLATE шестнадцатеричный
+
+<p><span
+style="mso-spacerun: yes">    </span>байт преобразуется в двухбайтовую строку в
+коде ASCII так, что
+
+<p><span
+style="mso-spacerun: yes">    </span>программа может его распечатать.<span
+style="mso-spacerun: yes">  </span>Текущее значение POWER (степень
+
+<p><span
+style="mso-spacerun: yes">    </span>десяти), а также шестнадцатеричная строка,
+записанная процессором
+
+<p><span
+style="mso-spacerun: yes">    </span>8087, преобразуются в код ASCII.<span
+style="mso-spacerun: yes">  </span>Затем функция DOS печатает строку
+
+<p><span
+style="mso-spacerun: yes">    </span>на дисплее.<span style="mso-spacerun:
+yes">  </span>Цикл POWER_LOOP продолжается до тех пор, пока
+
+<p><span
+style="mso-spacerun: yes">    </span>последнее напечатанное значение не станет
+больше 1038.<span style="mso-spacerun: yes">  </span>Это
+
+<p><span
+style="mso-spacerun: yes">    </span>значение выбрано потому, что 1038 - это
+максимальное число, которое
+
+<p><span
+style="mso-spacerun: yes">    </span>может быть представлено в коротком
+действительном формате.<span style='mso-tab-count:1'>    </span>Если бы
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>использовался длинный действительный формат чисел, это значение
+
+<p><span
+style="mso-spacerun: yes">    </span>было бы равно 10308.<span
+style="mso-spacerun: yes">  </span>Заключительная часть Фиг. 7.23 показывает,
+
+<p><span
+style="mso-spacerun: yes">    </span>как выглядит результат работы этой
+программы на дисплее.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Microsoft (R) Macro Assembler Version 5.00 <span style='mso-tab-count:
+2'>            </span><span style="mso-spacerun: yes"> </span>1/1/80 04:04:33
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг. 7.23 Степени 10<span style='mso-tab-count:5'>                             </span>
+Page<span style='mso-tab-count:1'> </span><span style="mso-spacerun: yes"> 
+</span>1-1
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>PAGE<span style="mso-spacerun: yes">   
+</span>,132
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>TITLE<span style="mso-spacerun: yes">  
+</span>Фиг. 7.23 Степени 10
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>STACK<span style="mso-spacerun: yes">  
+</span>SEGMENT STACK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>0040[<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>DW<span style="mso-spacerun: yes">      </span>64 DUP (?)
+
+<p><span
+style='mso-tab-count:3'>                  </span>????
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0080<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>STACK<span style="mso-spacerun: yes">  
+</span>ENDS
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>SEGMENT
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>CS:CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0000<span style="mso-spacerun: yes">  </span>????????<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>POWER_OF_TEN<span style="mso-spacerun: yes">    </span>DD<span
+style="mso-spacerun: yes">      </span>?<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">     </span>; Область данных для 10**x,
+
+<p><span
+style='mso-tab-count:10'>                                                            </span><span
+style="mso-spacerun: yes">     </span>;<span style='mso-tab-count:1'>      </span>короткое
+плавающее
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0004<span style="mso-spacerun: yes">  </span>0002[<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">    
+</span>OUTPUT_POWER<span style="mso-spacerun: yes">    </span>DB<span
+style="mso-spacerun: yes">      </span>2 DUP (' ')<span style="mso-spacerun:
+yes">     </span>; Текстовый буфер для значения
+
+<p><span
+style='mso-tab-count:3'>                  </span>20
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>]
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0006<span style="mso-spacerun: yes">  </span>48 20 20 20 20<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>DB<span style="mso-spacerun: yes">      </span>'H<span
+style="mso-spacerun: yes">    </span>'<span style="mso-spacerun: yes">        
+</span>;<span style="mso-spacerun: yes">  </span>степени
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>000B<span style="mso-spacerun: yes">  </span>0008[<span
+style='mso-tab-count:2'>       </span><span style="mso-spacerun: yes">    
+</span>OUTPUT_STRING<span style="mso-spacerun: yes">   </span>DB<span
+style="mso-spacerun: yes">      </span>8 DUP ('<span style="mso-spacerun:
+yes">         </span>')<span style="mso-spacerun: yes">     </span>; Текстовый
+буфер для результата -
+
+<p><span
+style='mso-tab-count:3'>                  </span>20 20 20 20 20
+
+<p><span
+style='mso-tab-count:3'>                  </span>20 20 20 20
+
+<p><span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">      </span>]
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0053<span style="mso-spacerun: yes">  </span>48 0D 0A 24 <span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">     </span>DB<span style="mso-spacerun: yes">     
+</span>'H',13,10,'$'<span style="mso-spacerun: yes">   </span>; Конец строки
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0057<span style="mso-spacerun: yes">  </span>00<span style='mso-tab-count:
+3'>                </span><span style="mso-spacerun: yes">     </span>POWER<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">    
+</span>DB<span style="mso-spacerun: yes">      </span>0<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">     </span>; Текущая
+степень 10
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0058<span style="mso-spacerun: yes">  </span>03E8<span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">     </span>THOUSAND<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>DW<span style="mso-spacerun: yes">      </span>1000<span
+style='mso-tab-count:1'> </span><span style="mso-spacerun: yes">     </span>;
+Константа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>005A<span style="mso-spacerun: yes">  </span>03BF<span style='mso-tab-count:
+2'>        </span><span style="mso-spacerun: yes">     </span>CONTROL_87<span
+style="mso-spacerun: yes">      </span>DW<span style="mso-spacerun: yes">     
+</span>03BFH
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>005C<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CALCULATE_POWER PROC<span
+style="mso-spacerun: yes">    </span>FAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>005C<span style="mso-spacerun: yes">  </span>1E<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>DS <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Занесение в стек адреса возврата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>005D<span style="mso-spacerun: yes">  </span>B8 0000<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AX, 0
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0060<span style="mso-spacerun: yes">  </span>50<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">   </span>PUSH<span style="mso-spacerun: yes">   
+</span>AX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0061<span style="mso-spacerun: yes">  </span>0E<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>CS
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0062<span style="mso-spacerun: yes">  </span>1F<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>POP<span style="mso-spacerun: yes">     </span>DS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>ASSUME<span style="mso-spacerun: yes"> 
+</span>DS:CODE<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">     </span>; Адресация области данных
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0063<span style="mso-spacerun: yes">  </span>9B DB E3<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FINIT<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">     </span>; Инициализация сопроцессора 8087
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>Фиг. 7.23 (а) (начало)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0066<span style="mso-spacerun: yes">  </span>9B DF 06 0058 R<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>FILD<span style="mso-spacerun: yes">    </span>THOUSAND<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Загрузка 10**3 в стек сопроцессора 8087
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>006B<span style="mso-spacerun: yes">  </span>9B D9 E8<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FLD1<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">     </span>; Загрузка начального значения в стек
+8087
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>006E<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">   </span>POWER_LOOP:
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>006E<span style="mso-spacerun: yes">  </span>9B DC 8E 0000<span
+style='mso-tab-count:2'>           </span><span style="mso-spacerun: yes">    
+</span>FMUL<span style="mso-spacerun: yes">    </span>ST(1)<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>; Умножение ST(0) на ST(1)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0073<span style="mso-spacerun: yes">  </span>9B D9 16 0000 R<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>FST<span style="mso-spacerun: yes">     </span>POWER_OF_TEN<span
+style="mso-spacerun: yes">    </span>; Сохранение в памяти результата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0078<span style="mso-spacerun: yes">  </span>80 06 0057 R 03<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>ADD<span style="mso-spacerun: yes">     </span>POWER, 3<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Увеличение показателя степени
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>007D<span style="mso-spacerun: yes">  </span>A0 0057 R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AL, POWER<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Выборка показателя степени
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0080<span style="mso-spacerun: yes">  </span>8D 1E 0004 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">     </span>BX, OUTPUT_POWER
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0084<span style="mso-spacerun: yes">  </span>E8 00AC R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>CALL<span style="mso-spacerun: yes">    </span>TRANSLATE
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0087<span style="mso-spacerun: yes">  </span>B9 0004<span
+style='mso-tab-count:3'>                 </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>CX, 4
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>008A<span style="mso-spacerun: yes">  </span>8D 1E 000B R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">     </span>BX, OUTPUT_STRING
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>008E<span style="mso-spacerun: yes">  </span>8D 36 0003 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">     </span>SI, POWER_OF_TEN+3
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0092<span style="mso-spacerun: yes">  </span>FD<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>STD<span
+style='mso-tab-count:2'>          </span><span style="mso-spacerun: yes">    
+</span>; Установка пересылки с уменьшением адреса
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0093<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>VALUE_OUTPUT:
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0093<span style="mso-spacerun: yes">  </span>AC<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>LODSB<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">     </span>; Выборка байта результата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0094<span style="mso-spacerun: yes">  </span>E8 00AC R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>CALL<span style="mso-spacerun: yes">    </span>TRANSLATE<span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Занесение символа в выводимую строку
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0097<span style="mso-spacerun: yes">  </span>E2 FA<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>LOOP<span style="mso-spacerun: yes">   
+</span>VALUE_OUTPUT<span style="mso-spacerun: yes">    </span>; Цикл по всем
+байтам результата
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0099<span style="mso-spacerun: yes">  </span>8D 16 0004 R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA <span style="mso-spacerun: yes">    </span>DX, OUTPUT_POWER
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>009D<span style="mso-spacerun: yes">  </span>B4 09<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>AH, 9H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>009F<span style="mso-spacerun: yes">  </span>CD 21<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>INT<span style="mso-spacerun: yes">     </span>21H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00A1<span style="mso-spacerun: yes">  </span>80 3E 0057 R 26<span
+style='mso-tab-count:2'>         </span><span style="mso-spacerun: yes">    
+</span>CMP<span style="mso-spacerun: yes">     </span>POWER, 38
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00A6<span style="mso-spacerun: yes">  </span>72 C6<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>JB<span style="mso-spacerun: yes">      </span>POWER_LOOP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00A8<span style="mso-spacerun: yes">  </span>9B DE D9<span
+style='mso-tab-count:3'>                </span><span style="mso-spacerun:
+yes">     </span>FCOMPP<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">     </span>; Удаление из стека двух чисел
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00AB<span style="mso-spacerun: yes">  </span>CB<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00AC<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CALCULATE_POWER ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00AC<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>TRANSLATE<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">     </span>PROC<span style="mso-spacerun: yes">   
+</span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00AC<span style="mso-spacerun: yes">  </span>50<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>AX <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Сохранение исходного значения
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00AD<span style="mso-spacerun: yes">  </span>51<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>CX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span><span style="mso-spacerun: yes">  </span>00AE<span style="mso-spacerun:
+yes">  </span>B1 04<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">     </span>MOV<span style="mso-spacerun: yes">    
+</span>CL, 4<span style='mso-tab-count:1'>      </span><span
+style="mso-spacerun: yes">     </span>; Сдвиг старшей цифры выводимого числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00B0<span style="mso-spacerun: yes">  </span>D2 E8<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>SHR<span style="mso-spacerun: yes">     </span>AL, CL<span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes">    
+</span>;<span style='mso-tab-count:1'>      </span>на место младшей цифры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00B2<span style="mso-spacerun: yes">  </span>59<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>POP<span style="mso-spacerun: yes">     </span>CX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00B3<span style="mso-spacerun: yes">  </span>E8 00CB R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>CALL<span style="mso-spacerun: yes">   
+</span>XLAT_OUTPUT<span style="mso-spacerun: yes">     </span>; Вывод старшей
+цифры выводимого числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00B6<span style="mso-spacerun: yes">  </span>58<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>POP<span style="mso-spacerun: yes">     </span>AX <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Восстановление младшей цифры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00B7<span style="mso-spacerun: yes">  </span>E8 00CB R<span
+style='mso-tab-count:3'>               </span><span style="mso-spacerun:
+yes">     </span>CALL<span style="mso-spacerun: yes">   
+</span>XLAT_OUTPUT<span style="mso-spacerun: yes">     </span>; Вывод младшей
+цифры выводимого числа
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00BA<span style="mso-spacerun: yes">  </span>C3<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00BB<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>TRANSLATE<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">     </span>ENDP
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00BB<span style="mso-spacerun: yes">  </span>30 31 32 33 34 35 36<span
+style="mso-spacerun: yes">     </span>ASCII_TABLE<span style="mso-spacerun:
+yes">     </span>DB<span style="mso-spacerun: yes">     
+</span>'0123456789ABCDEF'
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>37 38 39 41 42 43 44
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>45 46
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00CB<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>XLAT_OUTPUT<span style="mso-spacerun:
+yes">     </span>PROC<span style="mso-spacerun: yes">    </span>NEAR
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00CB<span style="mso-spacerun: yes">  </span>24 0F<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>AND<span style="mso-spacerun: yes">     </span>AL, 0FH<span
+style='mso-tab-count:1'>    </span><span style="mso-spacerun: yes">    
+</span>; Выделение младшей цифры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00CD<span style="mso-spacerun: yes">  </span>53<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>PUSH<span style="mso-spacerun: yes">    </span>BX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00CE<span style="mso-spacerun: yes">  </span>8D 1E 00BB R<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>LEA<span style="mso-spacerun: yes">     </span>BX, ASCII_TABLE ; Адрес
+таблицы трансляции
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00D2<span style="mso-spacerun: yes">  </span>D7<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>XLAT<span style="mso-spacerun: yes">    </span>ASCII_TABLE<span
+style="mso-spacerun: yes">     </span>; Преобразование в символьную форму
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00D3<span style="mso-spacerun: yes">  </span>5B<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>POP<span style="mso-spacerun: yes">     </span>BX
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00D4<span style="mso-spacerun: yes">  </span>88 07<span
+style='mso-tab-count:3'>             </span><span style="mso-spacerun:
+yes">     </span>MOV<span style="mso-spacerun: yes">     </span>[BX], AL<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">     </span>;
+Сохранение очередного символа результата
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00D6<span style="mso-spacerun: yes">  </span>43<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">    
+</span>INC<span style="mso-spacerun: yes">     </span>BX <span
+style='mso-tab-count:1'>  </span><span style="mso-spacerun: yes">     </span>;
+Переключение на следующий символ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00D7<span style="mso-spacerun: yes">  </span>C3<span style='mso-tab-count:
+4'>                      </span><span style="mso-spacerun: yes">     </span>RET
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00D8<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>XLAT_OUTPUT<span style="mso-spacerun:
+yes">     </span>ENDP
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>00D8<span style='mso-tab-count:3'>              </span><span
+style="mso-spacerun: yes">     </span>CODE<span style="mso-spacerun: yes">   
+</span>ENDS
+
+<p><span
+style='mso-tab-count:6'>                                    </span><span
+style="mso-spacerun: yes">     </span>END<span style="mso-spacerun: yes">    
+</span>CALCULATE_POWER&#18;
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>Фиг. 7.23 (а) (продолжение)
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>A&gt;PRINT10
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>03H<span style='mso-tab-count:1'>   </span>447A0000H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>06H<span style='mso-tab-count:1'>   </span>49742400H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>09H<span style='mso-tab-count:1'>   </span>4E6E6B28H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0CH<span style='mso-tab-count:1'>   </span>5368D4A5H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>0FH<span style='mso-tab-count:1'>   </span>58635FA9H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>12H<span style='mso-tab-count:1'>   </span>5D5E0B6BH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>15H<span style='mso-tab-count:1'>   </span>6258D727H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>18H<span style='mso-tab-count:1'>   </span>6753C21CH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>1BH<span style='mso-tab-count:1'>   </span>6C4ECB8FH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>1EH<span style='mso-tab-count:1'>   </span>7149F2CAH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>21H<span style='mso-tab-count:1'>   </span>76453719H
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>24H<span style='mso-tab-count:1'>   </span>7B4097CEH
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>27H<span style='mso-tab-count:1'>   </span>7F800000H
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>Фиг. 7.23 (b)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 7.23 (a) Степени 10; (b) Вывод процедуры степеней 10
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вам нужно посмотреть часть программы
+TRANSLATE, несмотря на то,
+
+<p><span
+style="mso-spacerun: yes">    </span>что она не использует ни одной команды
+сопроцессора 8087.<span style="mso-spacerun: yes">  </span>Эта
+
+<p><span
+style="mso-spacerun: yes">    </span>часть - пример подготовки чисел к
+печати.<span style="mso-spacerun: yes">  </span>В частности, команда
+
+<p><span
+style="mso-spacerun: yes">    </span>XLAT преобразует для печати шестнадцатеричную
+тетраду (значение от
+
+<p><span
+style="mso-spacerun: yes">    </span>0 до 0FH) в правильный символ кода ASCII
+(от 0 до F).<span style="mso-spacerun: yes">  </span>Просто
+
+<p><span
+style="mso-spacerun: yes">    </span>прибавлять значение тетрады к значению 0
+нельзя, так как в коде
+
+<p><span
+style="mso-spacerun: yes">    </span>ASCII символы от A до F не следуют
+непосредственно за символами от
+
+<p><span
+style="mso-spacerun: yes">    </span>0 до 9; преобразование прекрасно выполняет
+команда перекодировки.
+
+<p><span
+style="mso-spacerun: yes">    </span>Мы используем аналогичный метод, когда
+преобразуем число с
+
+<p><span
+style="mso-spacerun: yes">    </span>плавающей точкой в пригодную для печати
+десятичную форму.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

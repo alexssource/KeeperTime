@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="7-7">Набор команд сопроцессора 8087</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Команды сопроцессора 8087 должны
+рассматриваться как расширение
+
+<p><span
+style="mso-spacerun: yes">    </span>набора команд микропроцессора 8088,
+т.е.<span style="mso-spacerun: yes">  </span>микросхема 8087 добавляет
+
+<p><span
+style="mso-spacerun: yes">    </span>команды к общему набору.<span
+style="mso-spacerun: yes">  </span>Адресация памяти выполняется так же, как
+
+<p><span
+style="mso-spacerun: yes">    </span>и в микропроцессоре 8088.<span
+style="mso-spacerun: yes">  </span>Как мы уже видели ранее, так происходит
+
+<p><span
+style="mso-spacerun: yes">    </span>потому, что в действительности
+микропроцессор 8088 сам порождает
+
+<p><span
+style="mso-spacerun: yes">    </span>адреса памяти, а сопроцессор 8087 только
+выполняет требуемые
+
+<p><span
+style="mso-spacerun: yes">    </span>опреции над данными.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Сороцессор 8087 имеет набор регистров для
+чисел с плавающей
+
+<p><span
+style="mso-spacerun: yes">   </span><span style="mso-spacerun:
+yes"> </span>точкой, организованный в виде стека.<span style="mso-spacerun:
+yes">  </span>Вершину стека микросхема 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>локализует с помощью 3=битового указателя,
+содержащегося в слове
+
+<p><span
+style="mso-spacerun: yes">    </span>состояния.<span style='mso-tab-count:1'>    </span>Прочитав
+слово состояния, вы сможете узнать, какой из
+
+<p><span
+style="mso-spacerun: yes">    </span>восьми регистров является текущей вершиной
+стека; но, как будет
+
+<p><span
+style="mso-spacerun: yes">    </span>видно далее, эта информация в программе
+требуется редко.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вся адресация регистрового стека
+микросхемы 8087 делается
+
+<p><span
+style="mso-spacerun: yes">    </span>относительно текущей вершины стека.<span
+style="mso-spacerun: yes">  </span>Мнемонически на ассемблере
+
+<p><span
+style="mso-spacerun: yes">    </span>вершина стека называется ST(0) или просто
+ST.<span style="mso-spacerun: yes">  </span>Элемент, лежащий
+
+<p><span
+style="mso-spacerun: yes">    </span>прямо под вершиной стека, называется
+ST(1), второй элемент - ST(2),
+
+<p><span
+style="mso-spacerun: yes">    </span>и так далее, вплоть до последнего
+элемента, ST(7).<span style='mso-tab-count:1'>      </span>Для простоты
+
+<p><span
+style="mso-spacerun: yes">    </span>использования мы будем опускать скобки в
+обозначениях элементов
+
+<p><span
+style="mso-spacerun: yes">    </span>стека, используя ST0, ST1, ST2 и так
+далее.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>А теперь давайте посмотрим, как программа
+может добраться к
+
+<p><span
+style="mso-spacerun: yes">    </span>элементам стека.<span style="mso-spacerun:
+yes">  </span>Команда
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>FADD<span style="mso-spacerun: yes">  
+</span>ST0, ST3
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>складывает вершину стека и четвертый его
+элемент, помещая
+
+<p><span
+style="mso-spacerun: yes">    </span>результат в вершину стека.<span
+style='mso-tab-count:1'>      </span>На Фиг. 7.9а показаны действия этой
+
+<p><span
+style="mso-spacerun: yes">    </span>команды.<span style="mso-spacerun: yes"> 
+</span>Ссылка на регистры ST0 и ST3 жестко связана с указателем
+
+<p><span
+style="mso-spacerun: yes">    </span>стека.<span style="mso-spacerun: yes"> 
+</span>На рисунке складываются значения A и D, а результат A + D
+
+<p><span
+style="mso-spacerun: yes">    </span>замещает значение A, так как оно лежит в
+вершине стека.<span style="mso-spacerun: yes">  </span>На
+
+<p><span
+style="mso-spacerun: yes">    </span>Фиг. 7.9б до выполнения той же самой
+команды в стек был помещен
+
+<p><span
+style="mso-spacerun: yes">    </span>элемент E.<span style='mso-tab-count:1'>    </span>Команда
+по=прежнему складывает содержимое вершины стека
+
+<p><span
+style="mso-spacerun: yes">    </span>с его четвертым элементом; но, как
+показано на Фиг. 7.9б, она теперь
+
+<p><span
+style="mso-spacerun: yes">    </span>складывает значения E и C, замещая
+результатом E + C зеачение E.<span style="mso-spacerun: yes">  </span>В
+
+<p><span
+style="mso-spacerun: yes">    </span>результате помещения элемента E в стек
+перераспределения операндов
+
+<p><span
+style="mso-spacerun: yes">    </span>внутри сопроцессора 8087 не произошло, но
+произошло их перемещение
+
+<p><span
+style="mso-spacerun: yes">    </span>по отношению к вершине стека.<span
+style="mso-spacerun: yes">  </span>То есть элемент ST3 всегда является
+
+<p><span
+style="mso-spacerun: yes">    </span>четвертым элементом стека, независимо от
+того, где расположен
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель стека.
+
+<p><span
+style='mso-tab-count:1'>      </span>Мы можем разбить команды сопроцессора 8087
+на три широкие
+
+<p><span
+style="mso-spacerun: yes">    </span>группы.<span style="mso-spacerun: yes"> 
+</span>В первой группе находятся пересылки данных - загрузки и
+
+<p><span
+style="mso-spacerun: yes">    </span>записи данных в сопроцессор 8087 и из
+него.<span style="mso-spacerun: yes">  </span>Вторая группа -
+
+<p><span
+style="mso-spacerun: yes">    </span>управление сопроцессором, команды, которые
+служат для нужд
+
+<p><span
+style="mso-spacerun: yes">    </span>внутреннего сервиса 8087.<span
+style="mso-spacerun: yes">  </span>В третьей группе команд сосредоточены
+
+<p><span
+style="mso-spacerun: yes">    </span>все возможности сопроцессора 8087, это
+команды числовой обработки.
+
+<p><span
+style="mso-spacerun: yes">    </span>Далее мы рассмотрим каждую группу
+детальнее.<span style="mso-spacerun: yes">  </span>Этот текст не
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит исчерпывающего описания команд
+микросхемы 8087.<span style="mso-spacerun: yes">  </span>Мы будем
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать примеры, чтобы с их помощью
+сообщить достаточное
+
+<p><span
+style="mso-spacerun: yes">    </span>количество информации о значении той или
+иной команды, а
+
+<p><span
+style="mso-spacerun: yes">    </span>рассмотрение всех вычислительных возможностей
+сопроцессора 8087
+
+<p><span
+style="mso-spacerun: yes">    </span>выходит за рамки данной книги.
+
+<p><span
+style="mso-spacerun: yes">       </span>ЪДДДДДДДДДДДДДДДДДДДДДї<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>ЪДДДДДДДДДДДДДДДДДДДДДї
+
+<p><span
+style="mso-spacerun: yes">       </span>і<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes">    </span>і<span style='mso-tab-count:3'>             </span><span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style="mso-spacerun: yes">       </span>і<span style="mso-spacerun: yes"> 
+</span>ЪДДДДДДДДДДДДї<span style="mso-spacerun: yes">     </span>і<span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">   
+</span>і<span style="mso-spacerun: yes">  </span>ЪДДДДДДДДДДДДї<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">  </span>і
+
+<p><span
+style="mso-spacerun: yes">       </span>АДДґ<span style='mso-tab-count:1'> </span>
+A<span style="mso-spacerun: yes">     </span>ГДДДД +<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">    </span>АДДґ<span
+style="mso-spacerun: yes">      </span>E<span style="mso-spacerun: yes">    
+</span>ГДДДД +
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>ГДДДДДДДДДДДДґ<span style="mso-spacerun: yes">     </span>і<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">      
+</span>ГДДДДДДДДДДДДґ<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>   </span> B<span style="mso-spacerun: yes">    
+</span>і<span style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">       </span>і<span
+style="mso-spacerun: yes">      </span>A<span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:1'>   </span><span style="mso-spacerun:
+yes">  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>ГДДДДДДДДДДДДґ<span style="mso-spacerun: yes">     </span>і<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">      
+</span>ГДДДДДДДДДДДДґ<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>   </span> C<span style="mso-spacerun: yes">    
+</span>і<span style="mso-spacerun: yes">     </span>і<span style='mso-tab-count:
+2'>          </span><span style="mso-spacerun: yes">       </span>і<span
+style="mso-spacerun: yes">      </span>B<span style="mso-spacerun: yes">    
+</span>і<span style='mso-tab-count:1'>   </span><span style="mso-spacerun:
+yes">  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>ГДДДДДДДДДДДДґ<span style="mso-spacerun: yes">     </span>і<span
+style='mso-tab-count:2'>        </span><span style="mso-spacerun: yes">      
+</span>ГДДДДДДДДДДДДґ<span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>   </span> D<span style="mso-spacerun: yes">    
+</span>ГДДДДДЩ<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">       </span>і<span style="mso-spacerun: yes">     
+</span>C<span style="mso-spacerun: yes">     </span>ГДДДДДЩ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> 
+</span>ГДДДДДДДДДДДДґ<span style='mso-tab-count:2'>        </span><span
+style="mso-spacerun: yes">       </span>ГДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>і<span
+style='mso-tab-count:1'>   </span><span style="mso-spacerun: yes">      
+</span>і<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">       </span>і<span style="mso-spacerun: yes">     
+</span>D<span style="mso-spacerun: yes">     </span>і
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">       </span>ГДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:5'>                              </span><span
+style="mso-spacerun: yes">       </span>і<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">    </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>(a)<span style='mso-tab-count:4'>                     </span><span
+style="mso-spacerun: yes">     </span>(b)
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:3'>                  </span>Фиг. 7.9 Действие FADD ST0,ST3
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><a name="5-10-4">Карта связей
+</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>На Фиг. 5.16 приведена полученная в
+результате редактирования карта
+
+<p><span
+style="mso-spacerun: yes">    </span>связей.<span style="mso-spacerun: yes"> 
+</span>Так как рассматриваемый пример прост, то и карта не очень
+
+<p><span
+style="mso-spacerun: yes">    </span>содержательна.<span style="mso-spacerun:
+yes">  </span>Каждому сегменту в исполняемом файле соответствует
+
+<p><span
+style="mso-spacerun: yes">    </span>отдельная строка карты.<span
+style="mso-spacerun: yes">  </span>В строке последовательно указаны значения
+
+<p><span
+style="mso-spacerun: yes">    </span>начального и конечного адресов каждого
+сегмента в том виде, в каком
+
+<p><span
+style="mso-spacerun: yes">    </span>они будут загружены в память.<span
+style="mso-spacerun: yes">  </span>Заметьте, что размер сегмента CODE
+
+<p><span
+style="mso-spacerun: yes">    </span>равен 3CH.<span style='mso-tab-count:1'>    </span>Это
+является суммарным размером сегментов CODE в двух
+
+<p><span
+style="mso-spacerun: yes">    </span>программных модулях.<span
+style="mso-spacerun: yes">  </span>Другой сегмент в нашем примере - это сегмент
+
+<p><span
+style="mso-spacerun: yes">    </span>STACK размером 80H байт.
+
+<p><span
+style='mso-tab-count:1'>      </span>По поводу адресов, приведенных в карте
+связи, нужно сделать
+
+<p><span
+style="mso-spacerun: yes">    </span>следующие замечания. Во-первых, все они
+являются 20- битовыми
+
+<p><span
+style="mso-spacerun: yes">    </span>адресами и отсчитываются от ячейки 0. Так
+как загрузка программы
+
+<p><span
+style="mso-spacerun: yes">    </span>будет осуществляться DOS, то занрузчик
+изменит значения этих
+
+<p><span
+style="mso-spacerun: yes">    </span>адресов. Однако относительно друг друга их
+значения останутся
+
+<p><span
+style="mso-spacerun: yes">    </span>такими же. В отношении сегментов следует
+еще отметить, что в памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>они не располагаются последовательно. Хотя
+длина сегмента CODE
+
+<p><span
+style="mso-spacerun: yes">    </span>равняется только 3CH, сегмент STACK
+начинается с адреса 40H.
+
+<p><span
+style="mso-spacerun: yes">    </span>Сегменты должны располагаться на границах
+параграфов для того,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы адреса смещения сохраняли правильные
+значения. Благодаря
+
+<p><span
+style="mso-spacerun: yes">    </span>привязке к границам параграфов, сегментные
+регистры указывают точно
+
+<p><span
+style="mso-spacerun: yes">    </span>на первую ячейку сегмента. Следовательно,
+в нашем случае редактор
+
+<p><span
+style="mso-spacerun: yes">    </span>связей расположил сегмент STACK на первой
+границе параграфа сразу
+
+<p><span
+style="mso-spacerun: yes">    </span>же после конечного адреса сегмента CODE. С
+учетом того, что конец
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмента CODE равен 3BH, следующий адрес
+ячейки, который делится на
+
+<p><span
+style="mso-spacerun: yes">    </span>16, будет равен 40H.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>----------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>Start<span style="mso-spacerun: yes">  </span>Stop<span
+style="mso-spacerun: yes">   </span>Length Name<span style='mso-tab-count:2'>          </span><span
+style="mso-spacerun: yes">   </span>Class
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>00000H 0007FH 00080H STACK
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>00080H 000CEH 0004FH CODE
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Program entry point at 0008:0000
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>----------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">   
+</span>Фиг. 5_16 Карта связей для Фиг. 5.13 и 5.14
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Возможно вы заметили, что общая длина
+сегментов CODE в
+
+<p><span
+style="mso-spacerun: yes">    </span>действительности не равна 3CH. В
+отсутствие других спецификаций
+
+<p><span
+style="mso-spacerun: yes">    </span>редактор связей поместил начало каждой
+части сегмента CODE на
+
+<p><span
+style="mso-spacerun: yes">    </span>границах параграфов. Длина первого модуля
+FIG5=13 равняется 2BH.
+
+<p><span
+style="mso-spacerun: yes">    </span>Следующий модуль, FIG5=14, редактор связей
+поместил на следующей
+
+<p><span
+style="mso-spacerun: yes">    </span>границе параграфа, в данном случае по
+адресу 30H. Так как длина
+
+<p><span
+style="mso-spacerun: yes">    </span>второго модуля равна 0CH, общий размер
+сегмента CODE будет равен
+
+<p><span
+style="mso-spacerun: yes">    </span>03CH. Выравнивание по границам параграфов
+выполняется по умолчанию
+
+<p><span
+style="mso-spacerun: yes">    </span>совместно с ассемблированием и
+редактированием связей. Оператор
+
+<p><span
+style="mso-spacerun: yes">    </span>языка ассемблера SEGMENT может, если
+нужно, изменить это
+
+<p><span
+style="mso-spacerun: yes">    </span>выравнивание на побайтовое (BYTE), либо
+пословно (WORD). При
+
+<p><span
+style="mso-spacerun: yes">    </span>выравнивании типа BYTE программные
+программные упаковываются в один
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмент. В смысле экономии памяти это
+наиболее эффективный способ
+
+<p><span
+style="mso-spacerun: yes">    </span>объединения модулей. Однако выравнивание
+по границе параграфа
+
+<p><span
+style="mso-spacerun: yes">    </span>гарантирует, что во время выполнения
+программы не возникает никаких
+
+<p><span
+style="mso-spacerun: yes">    </span>трудностей с адресацией сегментов. Если в
+программе производятся
+
+<p><span
+style="mso-spacerun: yes">    </span>вычисления адресов и выравнивание
+производилось не по границам
+
+<p><span
+style="mso-spacerun: yes">    </span>параграфов, то возможно возникновение
+ошибок.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В конце карты связей указывается входная
+точка исполняемого
+
+<p><span
+style="mso-spacerun: yes">    </span>файла. Этот адрес, как и другие,
+вычисляется по отношению к началу
+
+<p><span
+style="mso-spacerun: yes">    </span>исполняемого модуля и перераспределяется
+загрузчиком. Имеется
+
+<p><span
+style="mso-spacerun: yes">    </span>несколько способов указания стартового
+адреса для программы типа
+
+<p><span
+style="mso-spacerun: yes">    </span>.EXE. При одном из способов программа
+выполняется, начиная с
+
+<p><span
+style="mso-spacerun: yes">    </span>первого байта программного модуля. При
+этом вы должны следить за
+
+<p><span
+style="mso-spacerun: yes">    </span>тем, чтобы в первом байте первого сегмента
+рабочего файла
+
+<p><span
+style="mso-spacerun: yes">    </span>содержалась команда, с которой вы хотите
+начать выполнение. Более
+
+<p><span
+style="mso-spacerun: yes">    </span>предпочтительным является способ задания
+входной точки в операторе
+
+<p><span
+style="mso-spacerun: yes">    </span>END головной программы. На Фиг. 5.13
+последним в программе является
+
+<p><span
+style="mso-spacerun: yes">    </span>оператор
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>END START
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>где START - это метка первой выполняемой
+команды. Так как
+
+<p><span
+style="mso-spacerun: yes">    </span>модули связаны друг с другом в
+определенном порядке, то эта же
+
+<p><span
+style="mso-spacerun: yes">    </span>команда будет первой и в программе. Однако
+если модули связать в
+
+<p><span
+style="mso-spacerun: yes">    </span>обратном порядке, то входная точка будет
+располодена правильным
+
+<p><span
+style="mso-spacerun: yes">    </span>образом. В этом можно убедиться на
+практике.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При любой операции связывания должен быть
+только один оператор
+
+<p><span
+style="mso-spacerun: yes">    </span>END с указанием стартового адреса.
+Обратите внимание, что в
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограмме FIG5=14 в операторе END
+входная точка не указана. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>имеется более одной входной точки, то
+редактор связей обычно
+
+<p><span
+style="mso-spacerun: yes">    </span>выбирает ту, которая указана последней.
+Лучше непосредственно
+
+<p><span
+style="mso-spacerun: yes">    </span>задавать входную точку, чем допускать
+вероятность того, что
+
+<p><span
+style="mso-spacerun: yes">    </span>редактор связей выберет не ту входную
+точку. Имейте в виду, что
+
+<p><span
+style="mso-spacerun: yes">    </span>этот способ задания входной точки
+программы пригоден только в
+
+<p><span
+style="mso-spacerun: yes">    </span>случае файла типа .EXE. Программа типа
+.COM всегда выполняется,
+
+<p><span
+style="mso-spacerun: yes">    </span>начиная со смещения 100H сегмента команд.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+
+</body>
+</html>

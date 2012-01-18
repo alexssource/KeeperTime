@@ -1,0 +1,490 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><a name="7-8-6">Отладка программ с использованием 8087
+</a></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Перед тем, как мы окончим обсуждение
+процессора 8087, хотелось
+
+<p><span
+style="mso-spacerun: yes">    </span>бы немного поговорить об отладке
+написанных для него программ.
+
+<p><span
+style="mso-spacerun: yes">    </span>Проблема, с которой мы сталкиваемся здесь,
+заключается в том, что
+
+<p><span
+style="mso-spacerun: yes">    </span>утилита DEBUG (отладчик) в DOS не
+поддерживает процессор 8087.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это означает, что при обнаружении
+отладчиком контрольной точки он
+
+<p><span
+style="mso-spacerun: yes">    </span>не отображает на экране содержимого
+регистров сопроцессора 8087.
+
+<p><span
+style="mso-spacerun: yes">    </span>Это сильно затрудняет отладку программы,
+изменяющей регистры
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>В книге предлагается метод, который можно
+применять для отладки
+
+<p><span
+style="mso-spacerun: yes">    </span>программ сопроцессора 8087, используя
+отладчик DOS.<span style="mso-spacerun: yes">  </span>Этот метод
+
+<p><span
+style="mso-spacerun: yes">    </span>может быть и не наилучший, но он
+использовался при отладке программ
+
+<p><span
+style="mso-spacerun: yes">    </span>приведенных в этой главе.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Основное препятствие заключается в
+неспособности программы
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG показывать содержимое регистрового
+стека сопроцессора 8087.
+
+<p><span
+style="mso-spacerun: yes">    </span>Без переписывания заново программы DEBUG
+этот метод дает
+
+<p><span
+style="mso-spacerun: yes">    </span>существенную иинформацию, необходимую при
+отладке программы
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессора 8087.<span style='mso-tab-count:
+1'>  </span>Этот метод отладки требует, чтобы программа
+
+<p><span
+style="mso-spacerun: yes">    </span>была написана, как отдельно выполняемая,
+либо как файл типа .EXE,
+
+<p><span
+style="mso-spacerun: yes">    </span>либа типа .COM.<span style="mso-spacerun:
+yes">  </span>Даже если вы пишете подпрограмму, отладьте ее
+
+<p><span
+style="mso-spacerun: yes">    </span>сначала, как головную программу.<span
+style="mso-spacerun: yes">  </span>Одной из первых команд программы
+
+<p><span
+style="mso-spacerun: yes">    </span>должна быть команда FINIT, сбрасывающая
+процессор 8087 в состояние,
+
+<p><span
+style="mso-spacerun: yes">    </span>в которое он попадает при включении
+питания.<span style="mso-spacerun: yes">  </span>Это надо сделать,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы можно было прогонять программу снова
+и снова, всегда начиная
+
+<p><span
+style="mso-spacerun: yes">    </span>сначала.<span style="mso-spacerun: yes"> 
+</span>Рассматриваемый здесь метод отладки не позволит вам
+
+<p><span
+style="mso-spacerun: yes">    </span>остановиться, проанализироваь регистры
+сопроцессора 8087, а затем
+
+<p><span
+style="mso-spacerun: yes">    </span>продолжить программу с этого же
+места.<span style="mso-spacerun: yes">  </span>Этот метод основывается на
+
+<p><span
+style="mso-spacerun: yes">    </span>возможности начинать все сначала после
+каждой контрольной точки.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Вы должны организовать все параметры
+подпрограммы в виде ячеек
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти, и программа должна загружать все
+эти числа в
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствующие регистры вслед за командой
+FINIT.<span style="mso-spacerun: yes">  </span>Это необходимо,
+
+<p><span
+style="mso-spacerun: yes">    </span>даже если идет работа с программой, принимающей
+параметры,
+
+<p><span
+style="mso-spacerun: yes">    </span>переданные через стековые регистры.<span
+style="mso-spacerun: yes">  </span>Сначала отлаживаемая программа
+
+<p><span
+style="mso-spacerun: yes">    </span>работает с параметрами, лежащими в памяти.<span
+style='mso-tab-count:1'>  </span>После того, как
+
+<p><span
+style="mso-spacerun: yes">    </span>арифметика и логика программы будет
+отлажена, можно будет изменить
+
+<p><span
+style="mso-spacerun: yes">    </span>программу так, чтобы она принимала
+параметры из регистрового стека.
+
+<p><span
+style='mso-tab-count:1'>      </span>Цель всех этих действий - позволить
+программе выполняться без
+
+<p><span
+style="mso-spacerun: yes">    </span>внешнего вмешательства.<span
+style="mso-spacerun: yes">  </span>Это означает, что можно запустить
+
+<p><span
+style="mso-spacerun: yes">    </span>программу сначала и выполнять ее до
+некоторой команды, и перезапуск
+
+<p><span
+style="mso-spacerun: yes">    </span>программы приведет к точно такому же ее
+выполнению.<span style="mso-spacerun: yes">  </span>Такое свойство
+
+<p><span
+style="mso-spacerun: yes">    </span>необходимо, так как предлагаемый метод
+индикации регистров
+
+<p><span
+style="mso-spacerun: yes">    </span>разрушает содержимое стека процессора
+8087, и когда это произошло,
+
+<p><span
+style="mso-spacerun: yes">    </span>продолжать выполнение программы с этого же
+места уже нельзя.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программу надо перезапустить с самого
+начала и остановить ее уже в
+
+<p><span
+style="mso-spacerun: yes">    </span>другом месте, а это возможно благодаря
+принятым мерам.<span style="mso-spacerun: yes">  </span>Последние
+
+<p><span
+style="mso-spacerun: yes">    </span>два примера, квадратное уравнение и
+функция синуса, устроены именно
+
+<p><span
+style="mso-spacerun: yes">    </span>таким образом:<span style="mso-spacerun:
+yes">  </span>их параметры находятся в памяти, и программы
+
+<p><span
+style="mso-spacerun: yes">    </span>начинаются с команды FINIT.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Следующий этап процедуры отладки требует
+размещения
+
+<p><span
+style="mso-spacerun: yes">    </span>специального программного фрагмента в
+заранее фиксированном месте
+
+<p><span
+style="mso-spacerun: yes">    </span>вашей программы.<span style="mso-spacerun:
+yes">  </span>Для отладки примеров был выбран адрес 200, так
+
+<p><span
+style="mso-spacerun: yes">    </span>как ни один из этих примеров не занимает
+более 500 байт.<span style="mso-spacerun: yes">  </span>Этот
+
+<p><span
+style="mso-spacerun: yes">    </span>программный фрагмент предназначен только
+для отладки, и вы удалите
+
+<p><span
+style="mso-spacerun: yes">    </span>его перед получением окончательной версии
+программы.<span style="mso-spacerun: yes">  </span>Такой
+
+<p><span
+style="mso-spacerun: yes">    </span>фрагмент показан на Фиг. 7.29.<span
+style="mso-spacerun: yes">  </span>Как вы видите, он очень короток и
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит только три команды и два поля
+данных.<span style="mso-spacerun: yes">  </span>Первое поле данных
+
+<p><span
+style="mso-spacerun: yes">    </span>содержит константу, в данном случае 106,
+или 1000000.<span style="mso-spacerun: yes">  </span>Выбор этого
+
+<p><span
+style="mso-spacerun: yes">    </span>значения остается за вами; другое значение
+может оказаться
+
+<p><span
+style="mso-spacerun: yes">    </span>подходящим, если ваша программа работает с
+числами, меньшими 10-6,
+
+<p><span
+style="mso-spacerun: yes">    </span>или большими 1012.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Смысл этого программного фрагмента
+заключается в том, что он
+
+<p><span
+style="mso-spacerun: yes">    </span>преобразует содержимое вершины стека в
+число, которое вы сможете
+
+<p><span
+style="mso-spacerun: yes">    </span>увидеть.<span style="mso-spacerun: yes"> 
+</span>Этот фрагмент умножает содержимое текущей вершины стека
+
+<p><span
+style="mso-spacerun: yes">    </span>на число с массой нулей, а это
+эквивалентно сдвигу десятичной точки
+
+<p><span
+style="mso-spacerun: yes">    </span>вправо.<span style="mso-spacerun: yes"> 
+</span>В данном случае, если вершина стека содержит 1/2,
+
+<p><span
+style="mso-spacerun: yes">    </span>умножение преобразует ее в 500000.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>После того, как число преобразовано в
+большое целое (вместо
+
+<p><span
+style="mso-spacerun: yes">    </span>дробного), команда FBSTP записывает его в
+упакованной десятичной
+
+<p><span
+style="mso-spacerun: yes">    </span>форме в поле, также находящееся в этом
+специальном программном
+
+<p><span
+style="mso-spacerun: yes">    </span>фрагменте.<span style='mso-tab-count:1'>    </span>Затем
+команда INT 3 возвращает управление программе
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG.<span style="mso-spacerun: yes"> 
+</span>Теперь можно использовать команду Display программы DEBUG,
+
+<p><span
+style="mso-spacerun: yes">    </span>чтобы посмотреть на 10 байт, записанных
+командой FBSTP.<span style="mso-spacerun: yes">  </span>Конечно,
+
+<p><span
+style="mso-spacerun: yes">    </span>читать показанное значение нужно наоборот,
+так как это - способ,
+
+<p><span
+style="mso-spacerun: yes">    </span>которым сопроцессор 8087 записывает
+десятичные числа.<span style="mso-spacerun: yes">  </span>Также надо
+
+<p><span
+style="mso-spacerun: yes">    </span>учесть модификацию десятичнлй точки,
+которую выполнило умножение.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span>TEN6<span style='mso-tab-count:1'>  </span>DD<span
+style='mso-tab-count:1'>    </span>1000000
+
+<p><span
+style='mso-tab-count:2'>            </span>ORG<span style='mso-tab-count:1'>   </span>200H
+
+<p><span
+style='mso-tab-count:1'>      </span>BCD_TEMP<span style='mso-tab-count:1'>    </span>DT<span
+style='mso-tab-count:1'>    </span>?
+
+<p><span
+style='mso-tab-count:2'>            </span>ORG<span style='mso-tab-count:1'>   </span>210H
+
+<p><span
+style='mso-tab-count:2'>            </span>FIMUL<span style='mso-tab-count:
+1'> </span>TEN6
+
+<p><span
+style='mso-tab-count:2'>            </span>FBSTR<span style='mso-tab-count:
+1'> </span>BCD_TEMP
+
+<p><span
+style='mso-tab-count:2'>            </span>INT<span style='mso-tab-count:1'>   </span>3
+
+<p><span
+style='mso-tab-count:1'>      </span>--------------------------- Фиг. 7.29
+Отладка процедуры
+
+<p><span
+style='mso-tab-count:5'>                              </span>для числового
+сопроцессора
+
+<p><span
+style='mso-tab-count:1'>      </span>Отладка программы для сопроцессора 8087
+осуществляется
+
+<p><span
+style="mso-spacerun: yes">    </span>следующим образом.<span style='mso-tab-count:
+1'>  </span>Как только вы решили, что программа работает
+
+<p><span
+style="mso-spacerun: yes">    </span>неверно, вы находите место контрольной
+точки по листингу программы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Использование команды Unassemble многого
+не даст, так как все
+
+<p><span
+style="mso-spacerun: yes">    </span>команды сопроцессора 8087
+дезассемблируются как команды ESC.<span style="mso-spacerun: yes">  </span>Так
+
+<p><span
+style="mso-spacerun: yes">    </span>что использование литсинга программы
+существенно.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Теперь вы выполняете программу с начала до
+контрольной точки;
+
+<p><span
+style="mso-spacerun: yes">    </span>именно для этого вы сконструировали
+программу так, чтобы ее можно
+
+<p><span
+style="mso-spacerun: yes">    </span>было перезапустить с начала баз какой=либо
+подготовки.<span style="mso-spacerun: yes">  </span>Всякий раз,
+
+<p><span
+style="mso-spacerun: yes">    </span>когда вы вновь устанавливаете контрольную
+точку, нужно выполнять
+
+<p><span
+style="mso-spacerun: yes">    </span>программу с начала.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Когда программа попадает на контрольную
+точку, управление
+
+<p><span
+style="mso-spacerun: yes">    </span>передается в отладчик.<span
+style="mso-spacerun: yes">  </span>Теперь вы можете выполнить тот специальный
+
+<p><span
+style="mso-spacerun: yes">    </span>фрагмент кода, который помещен в
+программу.<span style="mso-spacerun: yes">  </span>Команда INT 3 в конце
+
+<p><span
+style="mso-spacerun: yes">    </span>этого фрагмента возвращает управление в
+программу DEBUG, так что вы
+
+<p><span
+style="mso-spacerun: yes">    </span>можете увидеть, что за число находилось в
+вершине стека, когда
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнялась исходная контрольная
+точка.<span style="mso-spacerun: yes">  </span>Так как была использована
+
+<p><span
+style="mso-spacerun: yes">    </span>команда FBSTP, она извлекла число из
+вершины стека, записав аго в
+
+<p><span
+style="mso-spacerun: yes">    </span>память.<span style="mso-spacerun: yes"> 
+</span>Поэтому, чтобы увидеть второе число стека, ST1, вы можете
+
+<p><span
+style="mso-spacerun: yes">    </span>еще раз выполнить отладочный фрагмент; все
+это можно повторять
+
+<p><span
+style="mso-spacerun: yes">    </span>столько раз, сколько вы хотите.<span
+style="mso-spacerun: yes">  </span>Когда по этому методу будет
+
+<p><span
+style="mso-spacerun: yes">    </span>получено десятичное число, содержащее
+значение 0FFH как в старшем,
+
+<p><span
+style="mso-spacerun: yes">    </span>так и в знаковом байтах, знайте, что из
+стека извлеклось пустое
+
+<p><span
+style="mso-spacerun: yes">    </span>значение.<span style="mso-spacerun: yes"> 
+</span>Далее в программе можно установить новую контрольную
+
+<p><span
+style="mso-spacerun: yes">    </span>точку, и снова выполнить программу
+сначала.<span style="mso-spacerun: yes">  </span>Таким образом вы
+
+<p><span
+style="mso-spacerun: yes">    </span>можете пройти путь по всей программе, пока
+не найдется место
+
+<p><span
+style="mso-spacerun: yes">    </span>ошибки.<span style="mso-spacerun: yes"> 
+</span>Как только ошибка найдена, можно либо исправить ее на
+
+<p><span
+style="mso-spacerun: yes">    </span>месте (&quot;залатать&quot; ошибку), или
+выйти назад в DOS, чтобы
+
+<p><span
+style="mso-spacerun: yes">    </span>отредактировать и заново ассемблировать
+программу.<span style='mso-tab-count:1'>      </span>Когда, наконец,
+
+<p><span
+style="mso-spacerun: yes">    </span>программа выполняется верно, и вам больше
+уже не нужна программа
+
+<p><span
+style="mso-spacerun: yes">    </span>DEBUG, можно удалить отладочный фрагмент
+из программы.<span style="mso-spacerun: yes">  </span>В этот же
+
+<p><span
+style="mso-spacerun: yes">    </span>момент вы можете изменить программу так,
+чтобы принимать параметры
+
+<p><span
+style="mso-spacerun: yes">    </span>через регистры стека, а не через память.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+
+</html>

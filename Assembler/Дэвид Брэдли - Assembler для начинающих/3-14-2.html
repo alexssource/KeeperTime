@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+
+<p><div align="center"><b><a name="3-14-2">Указатель стека</a></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Регистр<span style="mso-spacerun: yes"> 
+</span>указателя стека<span style="mso-spacerun: yes">  </span>(SP)<span
+style="mso-spacerun: yes">  </span>-<span style="mso-spacerun: yes"> 
+</span>это 16-битовый<span style="mso-spacerun: yes">  </span>регистр, который
+
+<p><span
+style="mso-spacerun: yes">    </span>определяет<span style='mso-tab-count:1'>    </span>текущее<span
+style="mso-spacerun: yes">  </span>смещение<span style="mso-spacerun: yes"> 
+</span>вершины<span style="mso-spacerun: yes">  </span>стека. Процессор
+использует
+
+<p><span
+style="mso-spacerun: yes">    </span>указатель стека совместно с регистром
+сегмента стека для формирова-
+
+<p><span
+style="mso-spacerun: yes">    </span>ния физического<span style="mso-spacerun:
+yes">  </span>адреса. Процессор использует<span style="mso-spacerun: yes"> 
+</span>пару регистров SS:SP
+
+<p><span
+style="mso-spacerun: yes">    </span>для всех<span style="mso-spacerun: yes"> 
+</span>стековых ссылок, включая<span style='mso-tab-count:1'>    </span>PUSH,
+POP, CALL<span style="mso-spacerun: yes">  </span>и RETURN. Пара
+
+<p><span
+style="mso-spacerun: yes">    </span>SS:SP<span style="mso-spacerun: yes"> 
+</span>всегда<span style="mso-spacerun: yes">  </span>указывает<span
+style="mso-spacerun: yes">  </span>текущую<span style='mso-tab-count:1'>     </span>вершину<span
+style="mso-spacerun: yes">  </span>стека.<span style="mso-spacerun: yes"> 
+</span>Когда<span style='mso-tab-count:1'>  </span>команда
+
+<p><span
+style="mso-spacerun: yes">    </span>помещает в стек слово, регистр<span
+style="mso-spacerun: yes">  </span>SP уменьшается на два. При извлече-
+
+<p><span
+style="mso-spacerun: yes">    </span>нии из<span style="mso-spacerun: yes"> 
+</span>стека слова процессор<span style="mso-spacerun: yes"> 
+</span>увеличивает регистр SP<span style="mso-spacerun: yes">  </span>на два.
+Стек
+
+<p><span
+style="mso-spacerun: yes">    </span>растет в<span style="mso-spacerun: yes"> 
+</span>направлении меньших адресов<span style="mso-spacerun: yes"> 
+</span>памяти. Все стековые<span style="mso-spacerun: yes">  </span>опера-
+
+<p><span
+style="mso-spacerun: yes">    </span>ции используют<span style="mso-spacerun:
+yes">  </span>значения размером в слово.<span style='mso-tab-count:1'>  </span>Отдельный
+байт не может
+
+<p><span
+style="mso-spacerun: yes">    </span>быть ни помещен в стек ни взят из него.
+
+<p><span
+style='mso-tab-count:1'>      </span>Процессор изменяет регистр SP<span
+style="mso-spacerun: yes">  </span>для того чтобы отразить действия
+
+<p><span
+style="mso-spacerun: yes">    </span>над стеком. На<span style="mso-spacerun:
+yes">  </span>регистр SS ни одна из<span style="mso-spacerun: yes"> 
+</span>стековых операций не влияет.
+
+<p><span
+style="mso-spacerun: yes">    </span>Программа устанавливает регистр SS<span
+style='mso-tab-count:1'>    </span>независимо от какой либо опера-
+
+<p><span
+style="mso-spacerun: yes">    </span>ции<span style="mso-spacerun: yes"> 
+</span>PUSH<span style="mso-spacerun: yes">  </span>(поместить<span
+style="mso-spacerun: yes">  </span>в<span style="mso-spacerun: yes"> 
+</span>стек)<span style="mso-spacerun: yes">  </span>или<span
+style="mso-spacerun: yes">  </span>POP<span style="mso-spacerun: yes"> 
+</span>(извлечь), после чего он
+
+<p><span
+style="mso-spacerun: yes">    </span>указывает<span style="mso-spacerun: yes"> 
+</span>на<span style="mso-spacerun: yes">  </span>сегмент<span
+style="mso-spacerun: yes">  </span>стека.<span style="mso-spacerun: yes"> 
+</span>Это<span style="mso-spacerun: yes">  </span>означает,<span
+style="mso-spacerun: yes">  </span>что<span style="mso-spacerun: yes"> 
+</span>системный стек
+
+<p><span
+style="mso-spacerun: yes">    </span>ограничен<span style="mso-spacerun: yes"> 
+</span>в<span style="mso-spacerun: yes">  </span>размере<span
+style="mso-spacerun: yes">  </span>64<span style="mso-spacerun: yes"> 
+</span>килобайтами.<span style="mso-spacerun: yes">  </span>Например,<span
+style='mso-tab-count:1'>      </span>если<span style="mso-spacerun: yes"> 
+</span>программа
+
+<p><span
+style="mso-spacerun: yes">    </span>устанавливает регистр SS<span
+style="mso-spacerun: yes">  </span>в 1000H, а регистр SP -<span
+style="mso-spacerun: yes">  </span>на 0, то первое,
+
+<p><span
+style="mso-spacerun: yes">    </span>что<span style="mso-spacerun: yes"> 
+</span>будет помещено<span style="mso-spacerun: yes">  </span>в стек,<span
+style="mso-spacerun: yes">  </span>разместится по<span style="mso-spacerun:
+yes">  </span>адресам 1000:FFFFH<span style="mso-spacerun: yes">  </span>и
+
+<p><span
+style="mso-spacerun: yes">    </span>1000:FFFEH.<span style="mso-spacerun:
+yes">   </span>Последовательно<span style="mso-spacerun: yes"> 
+</span>помещаемые<span style='mso-tab-count:1'>   </span>в<span
+style="mso-spacerun: yes">  </span>стек<span style="mso-spacerun: yes">  
+</span>данные<span style="mso-spacerun: yes">  </span>будут
+
+<p><span
+style="mso-spacerun: yes">    </span>размещаться<span style="mso-spacerun:
+yes">  </span>в<span style="mso-spacerun: yes">  </span>нем<span
+style="mso-spacerun: yes">  </span>по<span style="mso-spacerun: yes"> 
+</span>все<span style="mso-spacerun: yes">  </span>более<span
+style="mso-spacerun: yes">  </span>младшим адресам, пока последий
+
+<p><span
+style="mso-spacerun: yes">    </span>объект<span style="mso-spacerun: yes"> 
+</span>не<span style='mso-tab-count:1'>    </span>будет<span
+style="mso-spacerun: yes">  </span>расположен<span style="mso-spacerun: yes">  
+</span>в<span style="mso-spacerun: yes">  </span>1000:0001H<span
+style="mso-spacerun: yes">  </span>и<span style="mso-spacerun: yes"> 
+</span>1000:0000H.<span style="mso-spacerun: yes">  </span>Если
+
+<p><span
+style="mso-spacerun: yes">    </span>программа<span style="mso-spacerun: yes"> 
+</span>поместит в<span style="mso-spacerun: yes">  </span>стек в<span
+style="mso-spacerun: yes">  </span>этот момент<span style='mso-tab-count:1'>  </span>еще
+что-нибудь,<span style="mso-spacerun: yes">  </span>то оно
+
+<p><span
+style="mso-spacerun: yes">    </span>разместится<span style="mso-spacerun:
+yes">  </span>в 1000:FFFFH<span style="mso-spacerun: yes">  </span>и
+1000:FFFEH,<span style="mso-spacerun: yes">  </span>то есть<span
+style="mso-spacerun: yes">  </span>в первых<span style="mso-spacerun: yes"> 
+</span>байтах
+
+<p><span
+style="mso-spacerun: yes">    </span>используемых<span style="mso-spacerun:
+yes">  </span>стеком.<span style="mso-spacerun: yes">  </span>Поскольку<span
+style="mso-spacerun: yes">  </span>стек<span style="mso-spacerun: yes"> 
+</span>теперь<span style="mso-spacerun: yes"> 
+</span>&quot;замкнулся&quot;,<span style="mso-spacerun: yes">  </span>ранее
+
+<p><span
+style="mso-spacerun: yes">    </span>помещенные в него данные разрушены.
+
+<p><span
+style='mso-tab-count:1'>      </span>При нормальном использовании длина стека
+не достигает 64K. Если
+
+<p><span
+style="mso-spacerun: yes">    </span>программа<span style="mso-spacerun: yes"> 
+</span>устанавливает стек<span style="mso-spacerun: yes">  </span>в 512<span
+style="mso-spacerun: yes">  </span>байт, например,<span style="mso-spacerun:
+yes">  </span>то она может
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализировать<span style="mso-spacerun:
+yes">  </span>пару SS:SP<span style="mso-spacerun: yes">  </span>как
+1000:2000H.<span style="mso-spacerun: yes">  </span>Первая ячейка<span
+style="mso-spacerun: yes">  </span>стека
+
+<p><span
+style="mso-spacerun: yes">    </span>будет 1000:01FFH, а последняя доступная -
+1000:0000H. Если програм-
+
+<p><span
+style="mso-spacerun: yes">    </span>ма поместит в<span style="mso-spacerun:
+yes">  </span>стек более 256 слов, уменьшение<span style="mso-spacerun: yes"> 
+</span>регистра SP вызовет
+
+<p><span
+style="mso-spacerun: yes">    </span>проход<span style="mso-spacerun: yes"> 
+</span>его<span style="mso-spacerun: yes">  </span>значения<span
+style="mso-spacerun: yes">  </span>через<span style="mso-spacerun: yes"> 
+</span>нуль<span style='mso-tab-count:1'>    </span>и<span style="mso-spacerun:
+yes">  </span>приведет к размещению данных
+
+<p><span
+style="mso-spacerun: yes">    </span>сначала<span style="mso-spacerun: yes"> 
+</span>сегмента<span style="mso-spacerun: yes">  </span>стека.<span
+style="mso-spacerun: yes">  </span>После<span style="mso-spacerun: yes"> 
+</span>этого<span style="mso-spacerun: yes">  </span>программа<span
+style='mso-tab-count:1'>      </span>будет<span style="mso-spacerun: yes"> 
+</span>помещать
+
+<p><span
+style="mso-spacerun: yes">    </span>стековые<span style="mso-spacerun: yes">  
+</span>данные<span style='mso-tab-count:1'>   </span>в<span
+style="mso-spacerun: yes">   </span>область,<span style="mso-spacerun: yes">  
+</span>которая<span style='mso-tab-count:1'>  </span> в<span
+style="mso-spacerun: yes">   </span>данном<span style="mso-spacerun: yes"> 
+</span>случае<span style="mso-spacerun: yes">  </span>не
+
+<p><span
+style="mso-spacerun: yes">    </span>предназначалась для<span
+style="mso-spacerun: yes">  </span>стека - начиная<span style="mso-spacerun:
+yes">  </span>с 1000:FFFFH. При<span style="mso-spacerun: yes">  </span>этом
+может
+
+<p><span
+style="mso-spacerun: yes">    </span>произойти одна из двух неприятных<span
+style="mso-spacerun: yes">  </span>вещей. Стек может перекрыть коды
+
+
+<p><span
+style="mso-spacerun: yes">    </span>или<span style="mso-spacerun: yes"> 
+</span>данные программы<span style="mso-spacerun: yes">  </span>и разрушить<span
+style='mso-tab-count:1'>    </span>их, либо<span style="mso-spacerun: yes"> 
+</span>стековые данные будут
+
+<p><span
+style="mso-spacerun: yes">    </span>направляться<span style="mso-spacerun:
+yes">  </span>в пространство,<span style="mso-spacerun: yes">  </span>которое
+не<span style="mso-spacerun: yes">  </span>имеет физической памяти.
+
+<p><span
+style="mso-spacerun: yes">    </span>Любую из этих вещей очень<span
+style="mso-spacerun: yes">  </span>трудно обнаружить при отладке программы,
+
+<p><span
+style="mso-spacerun: yes">    </span>поэтому единственный<span
+style="mso-spacerun: yes">  </span>выход - оставлять для<span
+style="mso-spacerun: yes">  </span>стека как можно больше
+
+<p><span
+style="mso-spacerun: yes">    </span>места.<span style="mso-spacerun: yes"> 
+</span>В<span style='mso-tab-count:1'>     </span>случае<span style='mso-tab-count:
+1'>      </span>персонального<span style="mso-spacerun: yes"> 
+</span>компьютера<span style="mso-spacerun: yes">   </span>IBM,<span
+style="mso-spacerun: yes">  </span>использующего
+
+<p><span
+style="mso-spacerun: yes">    </span>дисковую<span style="mso-spacerun: yes"> 
+</span>операционную систему<span style="mso-spacerun: yes">  </span>IBM
+рекомендуется<span style="mso-spacerun: yes">  </span>размер стека<span
+style="mso-spacerun: yes">  </span>не
+
+<p><span
+style="mso-spacerun: yes">    </span>меньше<span style="mso-spacerun: yes"> 
+</span>128<span style="mso-spacerun: yes">  </span>байт.<span style='mso-tab-count:
+1'>  </span>Это<span style="mso-spacerun: yes">  </span>дает<span
+style="mso-spacerun: yes">  </span>достаточно<span style="mso-spacerun: yes"> 
+</span>места для удовлетворения
+
+<p><span
+style="mso-spacerun: yes">    </span>потребностей<span style="mso-spacerun:
+yes">  </span>в стеке<span style="mso-spacerun: yes">  </span>различных
+служебных<span style='mso-tab-count:1'>  </span>программ DOS<span
+style="mso-spacerun: yes">  </span>и системы
+
+<p><span
+style="mso-spacerun: yes">    </span>вместе с обычными запросами самой
+программы.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>

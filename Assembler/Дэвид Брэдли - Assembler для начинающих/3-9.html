@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="3-9">Физическая адресация</a></i></font></b></div></p>
+
+<p><span
+style="mso-spacerun: yes">    </span>Все,<span style="mso-spacerun: yes"> 
+</span>что до сих пор говорилось об адресации, относится к генерации
+
+<p><span
+style="mso-spacerun: yes">    </span>так называемого смещения (offset) адреса.
+Смещение имеет 16-битовое
+
+<p><span
+style="mso-spacerun: yes">    </span>значение. 8088 сегментирует память таким
+образом, что можно адресо-
+
+<p><span
+style="mso-spacerun: yes">    </span>ваться к памяти большей чем 64K. В этом
+пункте бует показан<span style="mso-spacerun: yes">  </span>способ
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментауии 8088.
+
+<p><span
+style='mso-tab-count:1'>      </span>Поскольку размер слова в микропроцессоре
+8088 равен 16 бит, для
+
+<p><span
+style="mso-spacerun: yes">    </span>него естественно<span style="mso-spacerun:
+yes">  </span>генерировать адреса в<span style="mso-spacerun: yes">  </span>16
+бит длиной.<span style="mso-spacerun: yes">  </span>Это делает
+
+<p><span
+style="mso-spacerun: yes">    </span>доступными для<span style="mso-spacerun:
+yes">  </span>прямой адрессации 2**16<span style="mso-spacerun: yes"> 
+</span>элементов или 65<span style="mso-spacerun: yes">  </span>535 байт
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти.<span style="mso-spacerun: yes">  
+</span>Однако<span style="mso-spacerun: yes">   </span>для<span
+style="mso-spacerun: yes">   </span>некоторых<span style='mso-tab-count:1'>    </span>
+программ<span style="mso-spacerun: yes">   </span>64K<span style="mso-spacerun:
+yes">   </span>ячеек<span style="mso-spacerun: yes">  </span>памяти
+
+
+<p><span
+style="mso-spacerun: yes">    </span>недостаточно.<span style="mso-spacerun:
+yes">   </span>Поэтому<span style="mso-spacerun: yes">  </span>фирма<span
+style="mso-spacerun: yes">   </span>INTEL<span style="mso-spacerun: yes"> 
+</span>сконструировала<span style="mso-spacerun: yes">   </span>8088<span
+style="mso-spacerun: yes">  </span>для
+
+<p><span
+style="mso-spacerun: yes">    </span>адресации 2**20 байт или одного мегабайта
+памяти.
+
+<p><span
+style='mso-tab-count:1'>      </span>Для<span style="mso-spacerun: yes"> 
+</span>получения 20-битовой адресации требуется еще четыре бита к
+
+<p><span
+style="mso-spacerun: yes">    </span>имеющимся 16-ти. Добавочные 4 бита
+адресной информации<span style="mso-spacerun: yes">  </span>берутся<span
+style="mso-spacerun: yes">  </span>из
+
+<p><span
+style="mso-spacerun: yes">    </span>сегментных регистров. Сегментные регистры
+сами имеют размер 16 бит.
+
+<p><span
+style="mso-spacerun: yes">    </span>8088<span style="mso-spacerun: yes"> 
+</span>комбинирует<span style="mso-spacerun: yes">  </span>16-битовый<span
+style="mso-spacerun: yes">  </span>адрес<span style="mso-spacerun: yes"> 
+</span>смещения и 16-битовый регистр
+
+<p><span
+style="mso-spacerun: yes">    </span>сегмета как показано на Фиг.3.5. Процессор
+дополняет сегментный ре-
+
+<p><span
+style="mso-spacerun: yes">    </span>гистр 4-мя нулевыми битами, что составляет
+вместе полное 20-битовое
+
+<p><span
+style="mso-spacerun: yes">    </span>значение.<span style="mso-spacerun: yes"> 
+</span>К расширенному значению сегмента процессор добавляет ад-
+
+<p><span
+style="mso-spacerun: yes">    </span>рес сммещения, определяемый через
+вычисление адреса. 20-битовый ре-
+
+<p><span
+style="mso-spacerun: yes">    </span>зультат является указателем на
+исполнительный адрес.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>ЪДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>і Сегмент і<span style="mso-spacerun: yes">  </span>0000
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>АДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>ЪДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>+<span style="mso-spacerun: yes">   </span>і Смещение<span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes">  </span>АДДДДДДДДДДДЩ
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">       </span>----------------
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>ЪДДДДДДДДДДДДДДДДї
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>і20-битовый адресі
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun:
+yes">      </span>АДДДДДДДДДДДДДДДДЩ
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">     
+</span>Фиг.3.5 Вычисление адреса с сегментом и смещением
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Каждая обращающаяся к памяти<span
+style="mso-spacerun: yes">  </span>команда может сформировать только
+
+<p><span
+style="mso-spacerun: yes">    </span>16-битовый адрес<span style="mso-spacerun:
+yes">  </span>операнда. В действительности<span style="mso-spacerun: yes"> 
+</span>процессор применяет
+
+<p><span
+style="mso-spacerun: yes">    </span>этот<span style="mso-spacerun: yes"> 
+</span>адрес внутри<span style='mso-tab-count:1'>  </span>определенного
+сегмента.<span style="mso-spacerun: yes">  </span>Фиг. 3.6 иллюстриирует
+
+<p><span
+style="mso-spacerun: yes">    </span>такой способ применения сегментации.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>ЕДДДДДДДДДДДДДДДДДДґ
+ДДДДДВДДДДСегментный регистр
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>іі<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>іі<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">   </span>і<span style="mso-spacerun: yes"> 
+</span>смещение
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>іі<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">   </span>і<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">  </span>і
+
+<p><span
+style="mso-spacerun: yes">     </span>Сегмент<span style="mso-spacerun: yes">  
+</span>іГДДДДДДДДДДДДДДДДДДЕ ДДДДДБДДДДАдресуемая область
+
+<p><span
+style="mso-spacerun: yes">       </span>64К<span style='mso-tab-count:1'>  </span>ГДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>іі<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>іі<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">      
+</span>іі<span style='mso-tab-count:2'>         </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:2'>            </span>ЕДДДДДДДДДДДДДДДДДДґ
+
+<p><span
+style='mso-tab-count:2'>            </span>і<span style='mso-tab-count:2'>           </span><span
+style="mso-spacerun: yes">   </span>і
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">    
+</span>Фиг.3.6 Сегментация.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Начальный адрес<span style="mso-spacerun:
+yes">  </span>сегмента всегда имеет<span style='mso-tab-count:1'>    </span>нули
+в младших<span style='mso-tab-count:1'>    </span>четырех
+
+<p><span
+style="mso-spacerun: yes">    </span>битах.<span style="mso-spacerun: yes"> 
+</span>Адрес с<span style="mso-spacerun: yes">  </span>этим<span
+style="mso-spacerun: yes">  </span>свойством<span style="mso-spacerun: yes"> 
+</span>имеет каждая<span style="mso-spacerun: yes">  </span>шестнадцатая ячейка
+
+<p><span
+style="mso-spacerun: yes">    </span>памяти. Конструируя расположение данных<span
+style="mso-spacerun: yes">  </span>в своей программе помните,
+
+<p><span
+style="mso-spacerun: yes">    </span>что сегмент всегда должен<span
+style="mso-spacerun: yes">  </span>приходиться на такую 16-битовую границу.
+
+<p><span
+style="mso-spacerun: yes">    </span>Эти границы называются также границами
+параграфов.
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+
+</body>
+</html>

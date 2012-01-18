@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+<body background="../bgrwhite.gif">
+<p><div align="center"><b><font size="+1"><i>	
+<a name="7-5">Определение действительных чисел</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>Ассемблер отдельно порождает поля данных
+дествительных чисел с
+
+<p><span
+style="mso-spacerun: yes">    </span>помощью четырех-, восьми- и десятибайтовых
+описаний.<span style="mso-spacerun: yes">  </span>Короткому
+
+<p><span
+style="mso-spacerun: yes">    </span>действительному числу здесь соответствует
+оператор DD; длинному
+
+<p><span
+style="mso-spacerun: yes">    </span>действительному числу соответствует
+оператор DQ; а временному
+
+<p><span
+style="mso-spacerun: yes">    </span>действительному чисоу - оператор DT.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>К сожалению, Макроассемблер фирмы IBM не
+обслуживает числа с
+
+<p><span
+style="mso-spacerun: yes">    </span>плавающей точкой процессора 8087.<span
+style="mso-spacerun: yes">  </span>Если вы укажите действительное
+
+<p><span
+style="mso-spacerun: yes">    </span>число в качестве операнда оператора DD или
+DQ, то в качестве данных
+
+<p><span
+style="mso-spacerun: yes">    </span>получите запутанный набор нулей и
+единиц.<span style="mso-spacerun: yes">  </span>Этот формат плавающих
+
+<p><span
+style="mso-spacerun: yes">    </span>чисел соответствует формату, используемому
+внутри интерпретатора
+
+<p><span
+style="mso-spacerun: yes">    </span>языка Бейсик, и не является форматом ИИЭР,
+используемым в
+
+<p><span
+style="mso-spacerun: yes">    </span>сопроцессоре 8087.<span style='mso-tab-count:
+1'>  </span>Поэтому программа для сопроцессора 8087 должна
+
+<p><span
+style="mso-spacerun: yes">    </span>использовать несколько иной метод
+порождения действительных чисел.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Существует два метода, которые можно
+использовать для
+
+<p><span
+style="mso-spacerun: yes">    </span>построения действительных чисел.<span
+style="mso-spacerun: yes">  </span>Первый метод - ручное
+
+<p><span
+style="mso-spacerun: yes">    </span>ассемблирование.<span style="mso-spacerun:
+yes">  </span>Вы выписываете действительное число в праивльном
+
+<p><span
+style="mso-spacerun: yes">    </span>формате с помощью бумаги и ручки.<span
+style="mso-spacerun: yes">  </span>Эта операция содержит:
+
+<p><span
+style="mso-spacerun: yes">    </span>тщательный анализ числа, преобразование
+десятичного числа в
+
+<p><span
+style="mso-spacerun: yes">    </span>двоичную форму, разделение порядка и
+мантиссы, смещение порядка, и
+
+<p><span
+style="mso-spacerun: yes">    </span>наконец, преобразование результата в
+двоичную или шестнадцатеричную
+
+<p><span
+style="mso-spacerun: yes">    </span>систему.<span style="mso-spacerun: yes"> 
+</span>Это реальный метод, но он требует изрядного опыта и
+
+<p><span
+style="mso-spacerun: yes">    </span>огромных затрат времени программиста.<span
+style="mso-spacerun: yes">  </span>Второй метод порожления
+
+<p><span
+style="mso-spacerun: yes">    </span>действительных чисел - косвенный метод,
+требующий большого
+
+<p><span
+style="mso-spacerun: yes">    </span>количества машинного времени, но гораздо
+меньших затрат времени
+
+<p><span
+style="mso-spacerun: yes">    </span>программиста.<span style="mso-spacerun:
+yes">  </span>Здесь вы записываете действительное число в виде
+
+<p><span
+style="mso-spacerun: yes">    </span>произведения ил частного двух или более
+целых.<span style="mso-spacerun: yes">  </span>Ассемблер может
+
+<p><span
+style="mso-spacerun: yes">    </span>непосредственно порождать целые числа с
+помощью команд DW, DD или
+
+<p><span
+style="mso-spacerun: yes">    </span>DQ.<span style="mso-spacerun: yes"> 
+</span>Сразу же после инициализации микросхемы 8087 программа может
+
+<p><span
+style="mso-spacerun: yes">    </span>построить необходимые ей действительные
+числа, выполняя необходимые
+
+<p><span
+style="mso-spacerun: yes">    </span>умножения и деления.<span
+style="mso-spacerun: yes">  </span>Например, в программе нужна константа с
+
+<p><span
+style="mso-spacerun: yes">    </span>плавающей точкой 1.234*105.<span
+style="mso-spacerun: yes">  </span>Сформировать такую константу в целом
+
+<p><span
+style="mso-spacerun: yes">    </span>представлении программист сможет легко,
+используя следующий оператор
+
+<p><span
+style='mso-tab-count:1'>      </span>DD 123400
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Заметим, что число слишком велико для
+представления оператором
+
+<p><span
+style="mso-spacerun: yes">    </span>DW, но удовлетворяет ограничениям
+32-битовых целых чисел.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Но предположим, что нужно построить число
+1.234*10**-5, которое
+
+<p><span
+style="mso-spacerun: yes">    </span>очень мало.<span style="mso-spacerun:
+yes">  </span>В этом случае в программе потребуется два целых числа:
+
+<p><span
+style="mso-spacerun: yes">    </span>одно целое число соответствует значению
+мантиссы, а другое
+
+
+<p><span
+style="mso-spacerun: yes">    </span>соответствует десяти в степени
+порядка.<span style="mso-spacerun: yes">  </span>Можно воспользоваться
+
+<p><span
+style="mso-spacerun: yes">    </span>следующими определениями
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>DW<span style="mso-spacerun: yes">  
+</span>1234
+
+<p><span
+style='mso-tab-count:1'>      </span>DD<span style="mso-spacerun: yes">  
+</span>100000000
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>чтобы построить необходимое число.<span
+style="mso-spacerun: yes">  </span>Программист делит дробную
+
+<p><span
+style="mso-spacerun: yes">    </span>часть числа 1234 на значение 10**8 и
+получает нужное число.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>При использовании такого подхода возникают
+сложности в работе с
+
+<p><span
+style="mso-spacerun: yes">    </span>очень большими или малыми числами.<span
+style='mso-tab-count:1'>    </span>Эти числа требуют представления
+
+<p><span
+style="mso-spacerun: yes">    </span>степеней десяти, которые по значению много
+больше любых
+
+<p><span
+style="mso-spacerun: yes">    </span>представимых целых чисел.<span
+style="mso-spacerun: yes">  </span>Далее приводится пример, который строит
+
+<p><span
+style="mso-spacerun: yes">    </span>действительный формат каждой третьей
+степени десяти и может помочь
+
+<p><span
+style="mso-spacerun: yes">    </span>в таком случае.<span style="mso-spacerun:
+yes">  </span>Отложим рассмотрение этой программы до тех пор,
+
+<p><span
+style="mso-spacerun: yes">    </span>пока не изучим необходимые для нее
+команды.<span style="mso-spacerun: yes">  </span>С помощью таких
+
+<p><span
+style="mso-spacerun: yes">    </span>действителтных представлений степеней 10
+записать числа от 1036 до
+
+<p><span
+style="mso-spacerun: yes">    </span>10-24 будет достаточно легко.<span
+style="mso-spacerun: yes">  </span>Программа может разбить число на
+
+<p><span
+style="mso-spacerun: yes">    </span>целую часть и степень десяти, а умножение
+и деление дадут верное
+
+<p><span
+style="mso-spacerun: yes">    </span>значение.<span style="mso-spacerun: yes"> 
+</span>Микросхема 8087 также допускает и другие способы
+
+<p><span
+style="mso-spacerun: yes">    </span>выполнения таких операций масштабирования,
+но методы, используюшие
+
+<p><span
+style="mso-spacerun: yes">    </span>целые числа и степени 10, наиболее просты,
+особенно для людей,
+
+<p><span
+style="mso-spacerun: yes">    </span>работающих с сопроцессором 8087 впервые.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+</body>
+</html>

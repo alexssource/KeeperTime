@@ -1,0 +1,510 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body background="../bgrwhite.gif">
+
+<p><div align="center"><b><font size="+1"><i>	
+<a name="9-2">Самотестирование при включении питания</a></i></font></b></div></p>
+
+<p><span
+style='mso-tab-count:1'>      </span>IBM PC выполняет процедуру самопроверки
+после каждого сброса
+
+<p><span
+style="mso-spacerun: yes">    </span>системы, включая момент, когда появляется
+питание. Такая проверка
+
+<p><span
+style="mso-spacerun: yes">    </span>преследует две цели: она выполняет быструю
+проверку основных
+
+<p><span
+style="mso-spacerun: yes">    </span>элементов системы и инициализирует
+основные аппаратные компоненты.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Как системный тест, процедура POST
+образует первую часть
+
+<p><span
+style="mso-spacerun: yes">    </span>трехуровнего диагностического пакета фирмы
+IBM для ее персональной
+
+<p><span
+style="mso-spacerun: yes">    </span>ЭВМ. Процедура POST выполняется всякий раз
+при включении системы.
+
+<p><span
+style="mso-spacerun: yes">    </span>Эта быстрая проверка тестирует работу
+системы и обнаруживает ошибку
+
+<p><span
+style="mso-spacerun: yes">    </span>до того, как она повлияет на выполнение
+программы. Программы,
+
+<p><span
+style="mso-spacerun: yes">    </span>обеспечивающие второй уровень диагностики
+приходит вместе с каждой
+
+<p><span
+style="mso-spacerun: yes">    </span>машиной в составе руководства по работе на
+IBM PC; эта дискета (или
+
+<p><span
+style="mso-spacerun: yes">    </span>кассета) содержит программу диагностики,
+она проверяет оьдельно
+
+<p><span
+style="mso-spacerun: yes">    </span>каждый компонент машины. Эта
+диагностическая программа определяет,
+
+<p><span
+style="mso-spacerun: yes">    </span>какую часть машины покуптель должен
+вернуть для обслуживания, если
+
+<p><span
+style="mso-spacerun: yes">    </span>найдена ошибка. Наконец, фирма IBM
+поставляет усовершенствованное
+
+<p><span
+style="mso-spacerun: yes"> </span><span style="mso-spacerun: yes">  
+</span>диагностическое средство. Это средство, доступное за дополнительную
+
+<p><span
+style="mso-spacerun: yes">    </span>плату, определяет, какой из сменных узлов
+не работает. Это
+
+<p><span
+style="mso-spacerun: yes">    </span>диагностическое средство создано для
+обслуживающего персонала,
+
+<p><span
+style="mso-spacerun: yes">    </span>работающего на таких машинах. Правда вы
+можете купить для себя и
+
+<p><span
+style="mso-spacerun: yes">    </span>усовершенствованные диагностические тесты.
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:1'>      </span>Начало процедуры POST, возможно, будет
+трудно найти из-за того,
+
+<p><span
+style="mso-spacerun: yes">    </span>что оно находится в самом конце листинга.
+Когда микропроцессор 8088
+
+<p><span
+style="mso-spacerun: yes">    </span>сбрасывается (или когда включается
+питание), он начинает работу с
+
+<p><span
+style="mso-spacerun: yes">    </span>адреса 0FFFF:0000H. Эта ячейка находится
+всего в 16 байтах от
+
+<p><span
+style="mso-spacerun: yes">    </span>самого конца адресного пространства
+микропроцессора 8088. Этого
+
+<p><span
+style="mso-spacerun: yes">    </span>места хватает для команды перехода на
+настоящую программу POST. Как
+
+<p><span
+style="mso-spacerun: yes">    </span>вы видите, команда FAR JMP передает
+управление на метку START,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая и есть начало процедуры POST.
+Фирма IBM использует
+
+<p><span
+style="mso-spacerun: yes">    </span>оставшиеся байты в конце памяти под дату;
+эта дата - момент выпуска
+
+<p><span
+style="mso-spacerun: yes">    </span>ПЗУ в серию.
+
+<p><span
+style='mso-tab-count:1'>      </span>Способ запуска процедуры POST также
+объясняет, почему фирма IBM
+
+<p><span
+style="mso-spacerun: yes">    </span>расположила ПЗУ в верхних адресах памяти.
+Именно здесь
+
+<p><span
+style="mso-spacerun: yes">    </span>микропроцессор начинает выполнение
+программы после сброса.
+
+<p><span
+style="mso-spacerun: yes">    </span>Системное ПЗУ, содержащее программу
+инициализации машины, должно
+
+<p><span
+style="mso-spacerun: yes">    </span>иметь некоторую информацию по адресу
+0FFFFH:0000H. Так что есть
+
+<p><span
+style="mso-spacerun: yes">    </span>смысл помещать все ПЗУ в конце памяти.
+Также, есть смысл поместить
+
+<p><span
+style="mso-spacerun: yes">    </span>ОЗУ в нижних адресах, оставив в нем
+векторы прерываний. Возможность
+
+<p><span
+style="mso-spacerun: yes">    </span>модификации кодов в этих векторах в
+большой степени увеличивает
+
+<p><span
+style="mso-spacerun: yes">    </span>универсальность программы BIOS.
+
+<p><span
+style='mso-tab-count:1'>      </span>Вообще процедура POST состоит из
+неинтересных кодов. Многие
+
+<p><span
+style="mso-spacerun: yes">    </span>последовательности команд не имеют
+никакого смысла. Если вы
+
+<p><span
+style="mso-spacerun: yes">    </span>посмотрите на начальную последовательность
+команд, то увидите, что
+
+<p><span
+style="mso-spacerun: yes">    </span>они не делают ничего - если с
+микропроцессором ничего не случилось.
+
+<p><span
+style="mso-spacerun: yes">    </span>Если вас не интересует написание
+диагностических программ нет
+
+<p><span
+style="mso-spacerun: yes">    </span>смысла изучать технику процедуры POST.
+Отметим некоторые действия
+
+<p><span
+style="mso-spacerun: yes">    </span>процедуры POST, чтобы показать область
+проверки ошибок. Процедура
+
+<p><span
+style="mso-spacerun: yes">    </span>POST проверяет все ПЗУ системной платы,
+считая контрольную сумму.
+
+<p><span
+style="mso-spacerun: yes">    </span>Этот тест складывает все байты модулей
+ПЗУ. При сложении перенос из
+
+<p><span
+style="mso-spacerun: yes">    </span>8-битового результата игнорируется. Если
+окончательный результат
+
+<p><span
+style="mso-spacerun: yes">    </span>нулевой, ПЗУ прошло проверку. Конечно,
+перед тем, как запустить ПЗУ
+
+<p><span
+style="mso-spacerun: yes">    </span>в серию, фирма IBM обеспечила, чтобы сумма
+каждого ПЗУ была равна
+
+<p><span
+style="mso-spacerun: yes">    </span>нулю. Если ПЗУ плохое, этот тест находит
+ошибку.
+
+<p><span
+style='mso-tab-count:1'>      </span>Процедура POST также проверяет всю
+оперативную память в
+
+<p><span
+style="mso-spacerun: yes">    </span>системе. Переключатели не системной плате
+сообщают процедуре POST,
+
+<p><span
+style="mso-spacerun: yes">    </span>сколько у системы есть памяти в наличии.
+Каждый бит памяти
+
+<p><span
+style="mso-spacerun: yes">    </span>проверяется, может ли он быть установлен в
+единицу и сброшен в
+
+<p><span
+style="mso-spacerun: yes">    </span>нуль. По окончании теста процедура POST
+записывает нули по всем
+
+<p><span
+style="mso-spacerun: yes">    </span>адресам памяти. Это означает, что если вы
+написали программу,
+
+<p><span
+style="mso-spacerun: yes">    </span>которая будет работать сразу же после
+процедуры POST, содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>всей памяти окажется нулевым. Но
+надеяться, что некоторая другая
+
+<p><span
+style="mso-spacerun: yes">    </span>программа инициализирует поля данных вашей
+программы - плохой стиль
+
+<p><span
+style="mso-spacerun: yes">    </span>программирования. чтобы быть в этом
+уверенным, лучше делать это
+
+<p><span
+style="mso-spacerun: yes">    </span>самому.
+
+<p><span
+style='mso-tab-count:1'>      </span>Последнее, что можно сказать про процедуру
+POST - то, что она
+
+<p><span
+style='mso-tab-count:2'>            </span>Аппаратные прерывания
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Номер
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>прерывания<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">      </span>Использование в ROM BIOS
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>2<span
+style='mso-tab-count:1'>   </span>02H<span style='mso-tab-count:2'>         </span>Ошибка
+четности в памяти
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>5<span
+style='mso-tab-count:1'>   </span>05H<span style='mso-tab-count:2'>         </span>Печать
+экрана
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>8<span
+style='mso-tab-count:1'>   </span>08H<span style='mso-tab-count:2'>         </span>Текущее
+время
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  </span>9<span
+style='mso-tab-count:1'>   </span>09H<span style='mso-tab-count:2'>         </span>Клавиатура
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>14<span
+style='mso-tab-count:1'>   </span>OEH<span style='mso-tab-count:2'>         </span>Дискета
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span><span style="mso-spacerun: yes">    
+</span>Драйверы BIOS
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Номер
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>прерывания<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">      </span>Использование в ROM BIOS
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>16<span
+style='mso-tab-count:1'>   </span>10H<span style='mso-tab-count:2'>         </span>Видео
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>17<span
+style='mso-tab-count:1'>   </span>11H<span style='mso-tab-count:2'>         </span>Проверка
+оборудования
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>18<span
+style='mso-tab-count:1'>   </span>12H<span style='mso-tab-count:2'>         </span>Размер
+памяти
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>19<span
+style='mso-tab-count:1'>   </span>13H<span style='mso-tab-count:2'>         </span>Дискета
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>20<span
+style='mso-tab-count:1'>   </span>14H<span style='mso-tab-count:2'>         </span>Асинхронные
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>21<span
+style='mso-tab-count:1'>   </span>15H<span style='mso-tab-count:2'>         </span>Кассета
+стриммера
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>22<span
+style='mso-tab-count:1'>   </span>16H<span style='mso-tab-count:2'>         </span>Клавиатура
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>23<span
+style='mso-tab-count:1'>   </span>17H<span style='mso-tab-count:2'>         </span>Принтер
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>24<span
+style='mso-tab-count:1'>   </span>18H<span style='mso-tab-count:2'>         </span>Точка
+входа Бэйсика для кассеты
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>25<span
+style='mso-tab-count:1'>   </span>19H<span style='mso-tab-count:2'>         </span>Точка
+входа в процедуру первичной
+
+<p><span
+style='mso-tab-count:4'>                        </span>загрузки
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>26<span
+style='mso-tab-count:1'>   </span>1AH<span style='mso-tab-count:2'>         </span>Текущее
+время
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Процедуры управляемые пользователем
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Номер
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>прерывания<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">      </span>Использование в ROM BIOS
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>27<span
+style='mso-tab-count:1'>   </span>1BH<span style='mso-tab-count:2'>         </span>Прерывание
+клавиатуры
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>28<span
+style='mso-tab-count:1'>   </span>1CH<span style='mso-tab-count:2'>         </span>Квантование
+времени
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Блоки параметров BIOS
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>Номер
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun:
+yes"> </span>прерывания<span style='mso-tab-count:2'>       </span><span
+style="mso-spacerun: yes">      </span>Использование в ROM BIOS
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>29<span
+style='mso-tab-count:1'>   </span>1DH<span style='mso-tab-count:2'>         </span>Параметры
+видеомонитора
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>30<span
+style='mso-tab-count:1'>   </span>1EH<span style='mso-tab-count:2'>         </span>Параметры
+дисковода
+
+<p><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span>31<span
+style='mso-tab-count:1'>   </span>1FH<span style='mso-tab-count:2'>         </span>Графические
+символы видеомонитора
+
+<p><span
+style='mso-tab-count:1'>      </span>---------------------------------------------------------
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]>
+
+<p><span
+style='mso-tab-count:2'>            </span>Фиг. 9.1 Векторы прерываний,
+используемые
+
+<p><span
+style='mso-tab-count:3'>                  </span>ROM BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>инициализирует векторы прерываний для
+BIOS. Программы получают
+
+<p><span
+style="mso-spacerun: yes">    </span>доступ к BIOS с помощью векторов
+прерывания. Сами по себе эти
+
+<p><span
+style="mso-spacerun: yes">    </span>подпрограммы находятся в модуле ПЗУ, в том
+же, что и процедура
+
+<p><span
+style="mso-spacerun: yes">    </span>POST. Перед тем, как процедура POST
+передаст управление
+
+<p><span
+style="mso-spacerun: yes">    </span>операционной системе, она делает так,
+чтобы каждая входная точка
+
+<p><span
+style="mso-spacerun: yes">    </span>BIOS была записана в соответствующий
+вектор прерывания. BIOS
+
+<p><span
+style="mso-spacerun: yes">    </span>использует векторы прерываний для
+прерываний от 2 до 01FH.
+
+<p><span
+style="mso-spacerun: yes">    </span>Техническое описание содержит листинг
+векторов прерывания, в
+
+<p><span
+style="mso-spacerun: yes">    </span>котором показаны номера прерываний и
+первоначальное содержимое
+
+<p><span
+style="mso-spacerun: yes">    </span>векторов. На Фиг.9.1 изображена часть этой
+таблицы, которая будет
+
+<p><span
+style="mso-spacerun: yes">    </span>использоваться в описании BIOS.
+
+<p><div align="center"><a href="index.html"><img src="../soder.gif" width=120 height=31 border=0 alt=""></a></div></p>
+
+</body>
+</html>
