@@ -1,6 +1,0 @@
-ORG 100h
-
-MOV AH, 02h
-MOV DL, 41h
-INT 21h
-INT 20h
